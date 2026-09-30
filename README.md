@@ -9,14 +9,14 @@ Codec của CVPR chính là "mode A" trong bài dự thi CLIC.
 | Thư mục | Nội dung |
 |---|---|
 | `plans/` | Kế hoạch CVPR và CLIC (nguồn chuẩn cho quyết định, mốc thời gian, rủi ro) |
-| `src/ratflow/` | Package dùng chung. Hiện có `eval/metrics.py`: **mọi con số trong paper và trong phân tích CLIC đều phải đi qua module này** |
+| `src/ratflow/` | Package dùng chung:<br>• `eval/metrics.py`: **mọi con số trong paper và trong phân tích CLIC đều phải đi qua module này**<br>• `nn/`: DC-AE và SANA DiT viết lại bằng torch thuần, không cần diffusers, nạp được weights của diffusers (`.safetensors`) hoặc `.pt` (dùng cho decoder CLIC)<br>• `entropy/`: rANS bằng numpy, bảng CDF số nguyên, mạng số nguyên `QConv2d` (train bằng fake-quant, suy luận chính xác từng bit), `GaussianConditional`, `DiscretePrior` |
 | `experiments/` | `toy_gaussian/`, `quant_noise/` (go/no-go 1), `ceiling/` (trần AE), `clic_b/` (nhánh B của CLIC), `determinism/` (A0) |
 | `clic/` | Phần riêng của CLIC. Hiện có `l4/` (giả lập server trên L4). Sau này thêm `submission/`, `encoder/`, `tools/` |
 | `notebooks/` | Notebook Kaggle **được sinh tự động** bằng `python notebooks/build.py`. Không sửa tay |
 | `paper/` | `proofs/` (appendix LaTeX), `figures/` (script vẽ hình, style figures4papers) |
 | `results/` | Kết quả chạy trên Kaggle. Chỉ commit `summary.md`, csv, json; zip, recon, npz và crops bị bỏ qua |
 | `refs/` | `code_notes.md`, `README.md` (URL và commit của các repo đối thủ và devkit CLIC). Các bản clone nằm trong `refs/repos/`, không commit |
-| `tests/` | `python tests/test_metrics.py` hoặc `pytest`, chạy trên CPU, không cần torch |
+| `tests/` | `python tests/test_metrics.py` và `python tests/test_entropy.py` (hoặc `pytest`), chạy trên CPU, không cần torch. Phần cần torch được kiểm bằng `notebooks/parity.ipynb` |
 
 ## Quy trình
 

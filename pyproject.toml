@@ -7,7 +7,8 @@ dependencies = ["numpy", "pillow"]
 
 [project.optional-dependencies]
 eval = ["torch", "lpips", "piq", "torchmetrics", "torch-fidelity", "easyocr"]
-ae = ["diffusers", "accelerate"]
+ae = ["safetensors", "huggingface_hub"]
+parity = ["diffusers", "accelerate"]
 dev = ["pytest"]
 
 [build-system]

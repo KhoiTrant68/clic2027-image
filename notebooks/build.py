@@ -15,7 +15,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 OUT = REPO / "notebooks"
-PKG = ["src/ratflow/__init__.py", "src/ratflow/eval/__init__.py", "src/ratflow/eval/metrics.py"]
+PKG = sorted(str(p.relative_to(REPO)).replace("\\", "/") for p in (REPO / "src/ratflow").rglob("*.py"))
 KAGGLE_T4 = "Accelerator = **GPU T4 x1**, Internet = **On**"
 COMMIT_RUN = "Chạy bằng **Save Version → Save & Run All (Commit)** để notebook chạy nền; mỗi bước tự bỏ qua phần đã làm, nên hết giờ thì chạy lại là tiếp tục."
 
@@ -123,6 +123,22 @@ SPECS = {
             ("code", "from IPython.display import Markdown, display\n"
                      "display(Markdown(open('ceiling_out/summary.md', encoding='utf-8').read()))"),
             ("code", "!cd ceiling_out && zip -q ../ceiling_results.zip *.csv *.json *.md && ls -la ../ceiling_results.zip"),
+        ]),
+    "parity": dict(
+        title="Parity: ratflow.nn / ratflow.entropy so với diffusers, và CPU so với GPU",
+        intro=f"**Cài đặt:** {KAGGLE_T4}. Mất khoảng 20–30 phút (tải DC-AE, SANA 0.6B và 1.6B).\n\n"
+              "Kiểm tra: DC-AE (thường và theo tile) và SANA DiT viết lại bằng torch thuần phải khớp diffusers; "
+              "h_s số nguyên phải khớp từng bit giữa CPU và GPU; nén/giải nén y và z phải khớp hoàn toàn.\n\n"
+              "**Kết quả:** `parity_results.zip`, đặt vào `results/parity/`.",
+        files=PKG + ["experiments/parity/parity.py"],
+        cells=[
+            ("code", "!pip install -q -U diffusers accelerate safetensors huggingface_hub\n"
+                     "!nvidia-smi --query-gpu=name --format=csv"),
+            ("code", "P = 'experiments/parity/parity.py'\n!python {P} dcae"),
+            ("code", "!python {P} dit"),
+            ("code", "!python {P} entropy"),
+            ("code", "!python {P} summary"),
+            ("code", "!cd parity_out && zip -q ../parity_results.zip * && ls -la ../parity_results.zip"),
         ]),
 }
 
