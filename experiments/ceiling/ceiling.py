@@ -13,15 +13,18 @@ python ceiling.py all
 from __future__ import annotations
 
 import argparse
-import csv
 import json
-import math
 import subprocess
+import sys
 import zipfile
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))  # repo checkout without `pip install -e .`
+from ratflow.eval.metrics import (  # noqa: E402
+    Perceptual, device, fid_kid, images, load, read_csv, save, to_tensor, write_csv,
+)
 
 DATASETS = {
     "kodak": [f"http://r0k.us/graphics/kodak/kodak/kodim{i:02d}.png" for i in range(1, 25)],
@@ -36,40 +39,6 @@ CFGS = {  # name -> (repo, subfolder, class, spatial multiple)
     "sdvae": [("stabilityai/sd-turbo", "vae", "AutoencoderKL", 8),
               ("stabilityai/sd-vae-ft-ema", None, "AutoencoderKL", 8)],
 }
-TILE = 512
-
-
-# ---------------------------------------------------------------- utils
-def load(p):
-    return np.asarray(Image.open(p).convert("RGB"))
-
-
-def images(d: Path):
-    return sorted(p for p in d.rglob("*") if p.suffix.lower() in (".png", ".jpg", ".jpeg")
-                  and not p.name.startswith("._") and "__MACOSX" not in p.parts)
-
-
-def write_csv(rows, path):
-    keys = list(dict.fromkeys(k for r in rows for k in r))
-    with open(path, "w", newline="") as f:
-        w = csv.DictWriter(f, keys)
-        w.writeheader()
-        w.writerows(rows)
-
-
-def read_csv(path):
-    with open(path) as f:
-        return list(csv.DictReader(f))
-
-
-def dev():
-    import torch
-    return "cuda" if torch.cuda.is_available() else "cpu"
-
-
-def to_t(a, d):
-    import torch
-    return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(d)
 
 
 # ---------------------------------------------------------------- download
@@ -108,7 +77,7 @@ def load_vae(cfg):
 
 def recon(args):
     import torch
-    d = dev()
+    d = device()
     info = {}
     for cfg in CFGS:
         vae, mult, repo = load_vae(cfg)
@@ -122,15 +91,14 @@ def recon(args):
                     continue
                 x = load(p)
                 H, W = x.shape[:2]
-                t = to_t(x, d).mul(2).sub(1)
+                t = to_tensor(x, d).mul(2).sub(1)
                 t = torch.nn.functional.pad(t, (0, (-W) % mult, 0, (-H) % mult), mode="reflect")
                 with torch.no_grad():
                     z = vae.encode(t)
                     z = z.latent if cfg == "dcae" else z.latent_dist.mode()
                     y = vae.decode(z).sample
                 y = y[..., :H, :W].clamp(-1, 1).add(1).mul(127.5).round().byte()[0].permute(1, 2, 0).cpu().numpy()
-                dst.parent.mkdir(parents=True, exist_ok=True)
-                Image.fromarray(y).save(dst)
+                save(y, dst)
             print(cfg, ds, "done")
         del vae
         torch.cuda.empty_cache()
@@ -139,27 +107,8 @@ def recon(args):
 
 
 # ---------------------------------------------------------------- per-image metrics
-def tiled(fn, a, b, d):
-    H, W = a.shape[:2]
-    tot = wsum = 0.0
-    for y in range(0, H, TILE):
-        for x in range(0, W, TILE):
-            pa, pb = a[y:y + TILE, x:x + TILE], b[y:y + TILE, x:x + TILE]
-            if min(pa.shape[:2]) < 64:
-                continue
-            n = pa.shape[0] * pa.shape[1]
-            tot += float(fn(to_t(pa, d), to_t(pb, d))) * n
-            wsum += n
-    return tot / wsum
-
-
 def metrics(args):
-    import lpips
-    import piq
-    import torch
-    d = dev()
-    lp = lpips.LPIPS(net="alex", verbose=False).to(d)
-    dists = piq.DISTS().to(d)
+    perc = Perceptual(device())
     for ds in DATASETS:
         path = args.out / f"metrics_{ds}.csv"
         if path.exists():
@@ -171,34 +120,14 @@ def metrics(args):
                 q = args.out / "recon" / ds / cfg / f"{p.stem}.png"
                 if not q.exists():
                     continue
-                y = load(q)
-                mse = float(((x.astype(np.float64) - y) ** 2).mean())
-                with torch.no_grad():
-                    ms = float(piq.multi_scale_ssim(to_t(x, d), to_t(y, d), data_range=1.0)) \
-                        if min(x.shape[:2]) >= 161 else float("nan")
-                    rows.append(dict(
-                        dataset=ds, name=p.stem, cfg=cfg, H=x.shape[0], W=x.shape[1], mse=mse,
-                        psnr=10 * math.log10(255 ** 2 / max(mse, 1e-10)), msssim=ms,
-                        lpips=tiled(lambda a, b: lp(a * 2 - 1, b * 2 - 1).mean(), x, y, d),
-                        dists=tiled(lambda a, b: dists(a, b), x, y, d)))
+                rows.append(dict(dataset=ds, name=p.stem, cfg=cfg, H=x.shape[0], W=x.shape[1],
+                                 **perc.all(x, load(q))))
         write_csv(rows, path)
         print(ds, len(rows), "rows")
 
 
 # ---------------------------------------------------------------- FID / KID (HiFiC patch protocol)
-def patches(a, size=256):
-    H, W = a.shape[:2]
-    for off in (0, size // 2):
-        for y in range(off, H - size + 1, size):
-            for x in range(off, W - size + 1, size):
-                yield a[y:y + size, x:x + size]
-
-
 def fid(args):
-    import torch
-    from torchmetrics.image.fid import FrechetInceptionDistance
-    from torchmetrics.image.kid import KernelInceptionDistance
-    d = dev()
     path = args.out / "fid.json"
     res = json.load(open(path)) if path.exists() else {}
     for ds in FID_SETS:
@@ -206,26 +135,9 @@ def fid(args):
             key = f"{ds}/{cfg}"
             if key in res:
                 continue
-            f = FrechetInceptionDistance(feature=2048, normalize=False).to(d)
-            k = KernelInceptionDistance(subset_size=1000, normalize=False).to(d)
-            n = 0
-
-            def push(batch, real):
-                t = torch.from_numpy(np.stack(batch)).permute(0, 3, 1, 2).to(d)  # uint8 NCHW
-                f.update(t, real=real)
-                k.update(t, real=real)
-
-            for p in images(args.data / ds):
-                q = args.out / "recon" / ds / cfg / f"{p.stem}.png"
-                if not q.exists():
-                    continue
-                pr, pf = list(patches(load(p))), list(patches(load(q)))
-                for i in range(0, len(pr), 64):
-                    push(pr[i:i + 64], True)
-                    push(pf[i:i + 64], False)
-                n += len(pr)
-            km, ks = k.compute()
-            res[key] = dict(fid=float(f.compute()), kid=float(km), kid_std=float(ks), n_patches=n)
+            pairs = ((load(p), load(q)) for p in images(args.data / ds)
+                     if (q := args.out / "recon" / ds / cfg / f"{p.stem}.png").exists())
+            res[key] = fid_kid(pairs, device())
             print(key, res[key])
             json.dump(res, open(path, "w"), indent=1)
 
@@ -255,7 +167,7 @@ def summary(args):
                      f"| {row['fid']:.2f} | {row['kid'] * 1e3:.2f} |")
     write_csv(rows_out, args.out / "ceiling_summary.csv")  # -> horizontal lines on the RD plots
     L += ["", "`ceiling_summary.csv` dùng để vẽ đường trần nằm ngang trên các RD plot.",
-          "Khi đánh giá codec của mình và các baseline, **dùng lại đúng các hàm `tiled` và `fid` ở đây**, để số liệu so sánh được với nhau."]
+          "Khi đánh giá codec của mình và các baseline, **dùng lại đúng `ratflow.eval.metrics`** (`Perceptual.all`, `fid_kid`), để số liệu so sánh được với nhau."]
     (args.out / "summary.md").write_text("\n".join(L), encoding="utf-8")
     print("\n".join(L))
 

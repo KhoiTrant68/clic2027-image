@@ -29,7 +29,7 @@ COUPLING_STYLE = {
     "independent": dict(color=PALETTE["neutral_dark"], label="Independent"),
 }
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 OUT = Path(__file__).resolve().parent / "out"
 
 

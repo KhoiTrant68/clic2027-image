@@ -10,11 +10,11 @@ from scipy.special import ndtr
 
 from pubstyle import PALETTE, REPO, apply_publication_style, finalize_figure, plt
 
-CACHE = REPO / "figures/data/dither_rate.json"
+CACHE = REPO / "paper/figures/data/dither_rate.json"
 
 
 def compute():
-    sys.path.insert(0, str(REPO / "toy_gaussian"))
+    sys.path.insert(0, str(REPO / "experiments/toy_gaussian"))
     import toy_dp as T  # noqa: E402
 
     s = np.array([1.0])

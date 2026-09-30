@@ -12,8 +12,8 @@ from scipy.special import ndtri
 
 from pubstyle import COUPLING_STYLE, PALETTE, REPO, apply_publication_style, finalize_figure, legend_panel, missing, plt
 
-SAMPLES = REPO / "toy_gaussian/results/d64_delta2_samples.npz"
-RES_A = REPO / "toy_gaussian/results_A"
+SAMPLES = REPO / "experiments/toy_gaussian/results/d64_delta2_samples.npz"
+RES_A = REPO / "experiments/toy_gaussian/results_A"
 SIGMA = np.arange(1, 65) ** -0.5
 GROUPS = {"high variance\n(coords 1-8)": slice(0, 8), "mid variance\n(9-32)": slice(8, 32), "low variance\n(33-64)": slice(32, 64)}
 

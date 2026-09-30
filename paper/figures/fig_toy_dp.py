@@ -10,8 +10,8 @@ from matplotlib.lines import Line2D
 
 from pubstyle import COUPLING_STYLE, PALETTE, REPO, apply_publication_style, finalize_figure, legend_panel, missing, plt
 
-SRC_A = REPO / "toy_gaussian/results/d2_delta4.json"
-SRC_B = REPO / "toy_gaussian/results_C/C_corr2d.json"
+SRC_A = REPO / "experiments/toy_gaussian/results/d2_delta4.json"
+SRC_B = REPO / "experiments/toy_gaussian/results_C/C_corr2d.json"
 
 
 def load_a():

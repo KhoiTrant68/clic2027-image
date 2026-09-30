@@ -17,7 +17,7 @@ Kế hoạch có hai nhánh:
 | Phần cứng | L4 24GB, 2 CPU, RAM 12GB, giới hạn 5 giờ cho mỗi lần nộp, không có mạng | FAQ, devkit |
 | Luật tốc độ | 25% bài nộp giải mã chậm nhất mỗi track bị loại khỏi giải | FAQ |
 | Decoder | Tối đa 4GB, file zip có script `decode` ở thư mục gốc. Server tự giải nén `bs.zip` và ghi ảnh vào `images/<tên gốc>.png` | devkit README |
-| Môi trường | `nvidia/cuda:12.9.0-runtime-ubuntu24.04`, Python 3.12, **torch 2.6.0**, triton 3.2.0, numpy 1.26.4, **range-coder 1.1**. Không có diffusers hay compressai | `refs/clic-devkit/docker/` |
+| Môi trường | `nvidia/cuda:12.9.0-runtime-ubuntu24.04`, Python 3.12, **torch 2.6.0**, triton 3.2.0, numpy 1.26.4, **range-coder 1.1**. Không có diffusers hay compressai | `refs/repos/clic-devkit/docker/` |
 | **Luật đóng băng** | Decoder dùng ở vòng test phải **có hash giống hệt** một decoder đã nộp ở vòng validation. Weights và code decoder phải chốt trước 01/03 | devkit README |
 | Biến thể | Tối đa 3 biến thể chạy song song, phải khai báo từ giai đoạn validation | FAQ |
 | Dữ liệu | Tập validation 2027 chính là tập test 2025: 30 ảnh (Unsplash, game, màn hình), 116 MB | /tasks |
@@ -37,14 +37,14 @@ Kế hoạch có hai nhánh:
 
 **Mục đích:** biết ngay sai lệch float giữa các thiết bị lớn đến đâu, để thiết kế hyperprior S1 của bản CVPR theo hướng thân thiện với số nguyên ngay từ đầu.
 
-- [ ] Viết `clic2027/determinism/probe.py`:
+- [ ] Viết `experiments/determinism/probe.py`:
   - Dùng một hyperprior kiểu Ballé-2018 (khởi tạo ngẫu nhiên là đủ) trên latent DC-AE thật.
   - Tính `scales = h_s(ẑ)` rồi lượng tử hóa thành chỉ số trong bảng scale 64 mức (như CompressAI).
   - Lưu `ẑ` và `scale_idx` ra file.
 - [ ] Chạy trên CPU (local), Kaggle T4, Kaggle P100, và Colab L4 nếu có. Dùng torch 2.6.0 cho giống server.
 - [ ] Viết `compare.py` để đếm số phần tử có `scale_idx` khác nhau giữa từng cặp thiết bị.
 - **Kết quả mong đợi:** nếu có bất kỳ phần tử nào khác nhau (gần như chắc chắn sẽ có trên 1 ảnh 2K), thì phương án entropy model bằng số nguyên (A2) là bắt buộc.
-- **Kết quả lần 1 (29/9, Kaggle T4 + CPU của host; lưu ở `determinism/out_T4_v1/`):**
+- **Kết quả lần 1 (29/9, Kaggle T4 + CPU của host; lưu ở `results/determinism/T4_v1/`):**
 
   | Phép so sánh | Kết quả |
   |---|---|
@@ -55,7 +55,7 @@ Kế hoạch có hai nhánh:
   | So sánh giữa torch 2.10 và 2.6 | Không dùng được: do lỗi của probe (NEP 50 của numpy 2 làm weights lệch nhau), đã sửa. Cần chạy lại |
 
   → **Kết luận: A2 (mạng số nguyên) là bắt buộc. Cách tính "exact integer trong float64" đã được kiểm chứng giữa GPU và CPU.**
-- **Kết quả lần 2 (29/9, đã sửa probe, vẫn là T4 + CPU; lưu ở `determinism/out/`):**
+- **Kết quả lần 2 (29/9, đã sửa probe, vẫn là T4 + CPU; lưu ở `results/determinism/T4_v2/`):**
   - **`intsim` khớp 100% trên cả 10 cặp so sánh**, gồm cả GPU so với CPU và torch 2.10 so với 2.6.
   - Float khớp khi **cùng thiết bị, khác phiên bản torch** (T4 2.10 = T4 2.6, CPU = CPU). Nhưng **lệch khi khác thiết bị**: float32 lệch 79 chỉ số, bf16 lệch 1,114, trên 7.9 triệu.
   - Hệ quả: nếu encode trên L4 thuê, dùng float trong image `clic-gpu`, thì *có thể* khớp với server. Đây chỉ là phương án tạm, cần kiểm chứng trên hai máy L4 khác nhau.
@@ -63,18 +63,18 @@ Kế hoạch có hai nhánh:
 
 ### A1. Khung decoder và lần nộp đầu tiên (17/11 → 01/12)
 
-- [ ] Tạo cấu trúc `clic2027/`:
+- [ ] Tạo cấu trúc `clic/` trong repo chung. Từ 30/9 đã gộp repo: code codec nằm ở `src/ratflow/`, và được vendor vào zip decoder lúc đóng gói.
   ```
-  clic2027/
+  clic/
     submission/          # nội dung zip decoder
       decode             # bash: python3 decode.py
       decode.py          # giải nén bs.zip, parse container, gọi codec, ghi PNG
-      clicc/             # code codec vendored (DiT tối giản + DC-AE decoder + entropy), chỉ phụ thuộc torch
-      weights/           # safetensors fp16/bf16
+      (ratflow/)         # copy src/ratflow lúc pack (DiT tối giản + DC-AE decoder + entropy), chỉ phụ thuộc torch
+      weights/           # safetensors fp16/bf16 (không commit)
     encoder/             # chạy trên máy mình: encode, chọn rate, tìm seed
     tools/               # budget.py, pack.py, check_submission.py, local_eval.py
-    determinism/
-    analysis/            # nhánh B
+    l4/                  # đã có: setup_l4.sh, run_like_server.sh
+  experiments/determinism/, experiments/clic_b/   # A0 và nhánh B (đã có)
   ```
 - [ ] **Định dạng container** (một file duy nhất trong `bs.zip` để bớt overhead của zip):
   - Header toàn cục: magic, version, số ảnh, bảng tên ảnh đã nén bằng zlib.
@@ -208,32 +208,32 @@ Nhánh này trùng với rủi ro *"Trần chất lượng của DC-AE f32"* tro
 
 ### B1. Kiểm kê tập validation (0.5 ngày)
 
-- [ ] Tải `clic2025_image_test.zip` (116 MB) từ trang CLIC vào `clic2027/data/valid/`.
-- [ ] Viết `analysis/inventory.py` để tạo bảng CSV cho từng ảnh:
+- [ ] Tải `clic2025_image_test.zip` (116 MB) từ trang CLIC vào `data/clic_valid/` (thư mục `data/` ở gốc repo, không commit).
+- [ ] Viết bước `inventory` trong `experiments/clic_b/b_analysis.py` để tạo bảng CSV cho từng ảnh:
   - tên, H×W, số pixel
   - số màu khác nhau, tỉ lệ pixel thuộc cạnh sắc
   - có chữ hay không (kiểm tra bằng OCR)
   - nhãn **natural / game / screen**: tự động gợi ý, bạn xác nhận lại bằng mắt
-- [ ] Ghi ngân sách byte cho 3 mức (dùng chung với `tools/budget.py`), và tỉ lệ ngân sách rơi vào nhóm game/screen nếu chia đều.
+- [ ] Ghi ngân sách byte cho 3 mức (sau này dùng chung với `clic/tools/budget.py`), và tỉ lệ ngân sách rơi vào nhóm game/screen nếu chia đều.
 
 ### B2. Đo trần và mức hỏng (1 ngày, GPU Kaggle)
 
-Chạy `analysis/ceiling.py` trên từng ảnh với các cấu hình sau:
+Chạy các bước `recon` và `metrics` của `experiments/clic_b/b_analysis.py` trên từng ảnh với các cấu hình sau:
 
 | Cấu hình | Ý nghĩa |
 |---|---|
 | **DC-AE f32c32 tự mã hóa rồi giải mã** (không lượng tử) | Trần tuyệt đối của đường ống SANA |
 | SD-VAE f8 (của StableCodec) tự mã hóa rồi giải mã | So sánh với trần VAE 8× |
-| DC-AE + lượng tử proxy (từ `../ratflow-codec/quant_noise`) ở 0.075/0.15/0.3 bpp | Ước lượng thô của codec mình khi chưa train |
+| DC-AE + lượng tử proxy (từ `experiments/quant_noise`) ở 0.075/0.15/0.3 bpp | Ước lượng thô của codec mình khi chưa train |
 | VTM (devkit baseline, bitstream ở cùng mức bpp) | Mốc 1405 Elo |
-| StableCodec / AEIC (có checkpoint trong `../ratflow-codec/refs/repos`) ở mức gần 0.075 nhất | Đối thủ kiểu generative |
+| StableCodec / AEIC (có checkpoint trong `refs/repos`) ở mức gần 0.075 nhất | Đối thủ kiểu generative |
 
 **Chỉ số đo:**
 - Toàn ảnh: PSNR, MS-SSIM, LPIPS, DISTS.
 - Vùng chữ (bounding box từ OCR trên ảnh gốc): **CER của OCR** trên ảnh tái tạo so với ảnh gốc, PSNR và SSIM của cạnh trong vùng chữ.
 - Game: LPIPS trên các crop nhiều chi tiết (HUD, UI).
 
-**Kết quả xuất ra:** `analysis/results/ceiling.csv`, và một lưới crop 256×256 (gốc | DC-AE | f8 | VTM | StableCodec) cho mỗi ảnh screen/game. Hình vẽ theo phong cách figures4papers.
+**Kết quả xuất ra:** `results/clic_b/b_results/metrics.csv`, và một lưới crop 256×256 (gốc | DC-AE | f8 | VTM | StableCodec) cho mỗi ảnh screen/game. Hình vẽ theo phong cách figures4papers.
 
 ### B3. Điểm quyết định (sau B2)
 
@@ -252,7 +252,7 @@ Chạy `analysis/ceiling.py` trên từng ảnh với các cấu hình sau:
 | Tải dữ liệu, chạy trên Kaggle, xác nhận nhãn nội dung, xem lưới crop | Bạn |
 | Công cụ: `easyocr` hoặc `tesseract` cho OCR, `piq` hoặc `pyiqa` cho LPIPS/DISTS | – |
 
-### B5. Kết quả lần 1 (29/9, Kaggle T4; lưu ở `analysis/b_results/`)
+### B5. Kết quả lần 1 (29/9, Kaggle T4; lưu ở `results/clic_b/b_results/`)
 
 **Dữ liệu:**
 - 30 ảnh, tổng 86,245,376 pixel.
@@ -297,7 +297,7 @@ Chạy `analysis/ceiling.py` trên từng ảnh với các cấu hình sau:
 - [x] Build VTM có SCC trên Kaggle (CPU). Encode 4 ảnh screen và 3 ảnh natural đại diện ở 0.075/0.15/0.3, tìm QP theo ngân sách. Cách này thay proxy x265 bằng mốc thật và đánh giá được mode SCC.
 - [x] Đo trần khi thêm residual: DC-AE + residual lý tưởng (ví dụ x265 hoặc VTM trên phần dư `x − x̂_DCAE` với ngân sách còn lại). Mục đích là ước lượng xem lớp tăng cường lấy lại được bao nhiêu dB và bao nhiêu CER.
 
-### B7. Kết quả B6 (30/9, Kaggle; lưu ở `analysis/b6_results/`)
+### B7. Kết quả B6 (30/9, Kaggle; lưu ở `results/clic_b/b6_results/`)
 
 **Thiết lập:** VTM 23.8. `dcae+res` = trần DC-AE, cộng phần dư `x − x̂` được mã hóa bằng VTM 4:4:4, giả định base tốn 0.03 bpp.
 
@@ -391,9 +391,9 @@ Chạy `analysis/ceiling.py` trên từng ảnh với các cấu hình sau:
 **Lợi ích phụ:** nếu A0 cho thấy float **khớp** giữa hai máy L4 khác nhau, thì có thể encode trên L4 trong `clic-gpu` làm phương án tạm cho các lần nộp sớm, trong lúc chờ A2 (entropy bằng số nguyên). A2 vẫn là giải pháp cuối cùng.
 
 Script:
-- `clic2027/l4/setup_l4.sh`: cài Docker, NVIDIA toolkit, build `clic-gpu`.
-- `clic2027/l4/run_like_server.sh`: chạy decoder giống server và đo thời gian.
-- `clic2027/determinism/probe.py` và `compare.py`: kiểm tra A0.
+- `clic/l4/setup_l4.sh`: cài Docker, NVIDIA toolkit, build `clic-gpu`.
+- `clic/l4/run_like_server.sh`: chạy decoder giống server và đo thời gian.
+- `experiments/determinism/probe.py` và `compare.py`: kiểm tra A0.
 
 Lưu ý: torch trên máy Windows bị Application Control chặn, nên mọi thứ chạy trên L4 hoặc Kaggle.
 

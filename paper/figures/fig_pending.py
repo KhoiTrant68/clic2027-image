@@ -12,9 +12,9 @@ import numpy as np
 
 from pubstyle import PALETTE, REPO, apply_publication_style, finalize_figure, legend_panel, missing, plt
 
-RES_B = REPO / "toy_gaussian/results_B"
-GONOGO = REPO / "quant_noise/runs/gonogo1/results.json"
-QSTAT = REPO / "quant_noise/runs/kodak/quant_noise_stats.json"
+RES_B = REPO / "experiments/toy_gaussian/results_B"
+GONOGO = REPO / "experiments/quant_noise/runs/gonogo1/results.json"
+QSTAT = REPO / "experiments/quant_noise/runs/kodak/quant_noise_stats.json"
 
 
 def fig_toyB(res_dir=RES_B):

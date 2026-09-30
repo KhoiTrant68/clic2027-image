@@ -14,11 +14,11 @@ python b_analysis.py all --data data/valid --out b_out
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 import math
 import shutil
 import subprocess
+import sys
 import tempfile
 import zipfile
 from pathlib import Path
@@ -26,61 +26,16 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))  # repo checkout without `pip install -e .`
+from ratflow.eval.metrics import (  # noqa: E402  (load/save/... re-exported for b6_vtm_residual.py)
+    Perceptual, box_xyxy, cer, device, images, load, ocr_reader, read_boxes, read_csv, region_psnr, save, write_csv,
+)
+
 DATA_URL = "https://dhldkwazkze5h.cloudfront.net/data/clic2025_image_test.zip"
 RATES = [0.075, 0.15, 0.3]
 DCAE_ID = ("Efficient-Large-Model/Sana_1600M_1024px_diffusers", "vae")
 SDVAE_IDS = [("stabilityai/sd-turbo", "vae"), ("stabilityai/sd-vae-ft-ema", None)]  # first = StableCodec's VAE
-TILE = 512  # tile size for LPIPS/DISTS
-
-
-# ---------------------------------------------------------------- utils
-def load(p) -> np.ndarray:
-    return np.asarray(Image.open(p).convert("RGB"))
-
-
-def save(a, p):
-    Path(p).parent.mkdir(parents=True, exist_ok=True)
-    Image.fromarray(a).save(p)
-
-
-def images(data: Path):
-    return sorted(data.rglob("*.png"))
-
-
-def write_csv(rows, path):
-    keys = list(dict.fromkeys(k for r in rows for k in r))
-    with open(path, "w", newline="") as f:
-        w = csv.DictWriter(f, keys)
-        w.writeheader()
-        w.writerows(rows)
-
-
-def read_csv(path):
-    with open(path) as f:
-        return list(csv.DictReader(f))
-
-
-def edit_distance(a: str, b: str) -> int:
-    prev = list(range(len(b) + 1))
-    for i, ca in enumerate(a, 1):
-        cur = [i]
-        for j, cb in enumerate(b, 1):
-            cur.append(min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (ca != cb)))
-        prev = cur
-    return prev[-1]
-
-
-def get_reader():
-    import easyocr
-    import torch
-    return easyocr.Reader(["en"], gpu=torch.cuda.is_available(), verbose=False)
-
-
-def box_xyxy(bbox, H, W, pad=4):
-    xs = [p[0] for p in bbox]
-    ys = [p[1] for p in bbox]
-    return (max(0, int(min(xs)) - pad), max(0, int(min(ys)) - pad),
-            min(W, int(max(xs)) + pad), min(H, int(max(ys)) + pad))
+get_reader = ocr_reader
 
 
 # ---------------------------------------------------------------- download
@@ -229,66 +184,27 @@ def configs(out: Path):
     return sorted(d.name for d in (out / "recon").iterdir() if d.is_dir())
 
 
-def tiled(fn, a, b, dev):
-    import torch
-    H, W = a.shape[:2]
-    tot, wsum = 0.0, 0
-    for y in range(0, H, TILE):
-        for x in range(0, W, TILE):
-            pa, pb = a[y:y + TILE, x:x + TILE], b[y:y + TILE, x:x + TILE]
-            if min(pa.shape[:2]) < 64:
-                continue
-            ta = torch.from_numpy(pa).permute(2, 0, 1)[None].float().div(255).to(dev)
-            tb = torch.from_numpy(pb).permute(2, 0, 1)[None].float().div(255).to(dev)
-            n = pa.shape[0] * pa.shape[1]
-            with torch.no_grad():
-                tot += float(fn(ta, tb)) * n
-            wsum += n
-    return tot / wsum
-
-
 def metrics(args):
-    import lpips
-    import piq
-    import torch
-
-    dev = "cuda" if torch.cuda.is_available() else "cpu"
-    lp = lpips.LPIPS(net="alex", verbose=False).to(dev)
-    dists = piq.DISTS().to(dev)
+    perc = Perceptual(device())
     reader = get_reader()
     boxes = json.load(open(args.out / "budgets.json"))["boxes"]
     rows = []
     for p in images(args.data):
         x = load(p)
-        H, W = x.shape[:2]
         bx = [b for b, _ in boxes.get(p.stem, [])]
-        mask = np.zeros((H, W), bool)
-        for x0, y0, x1, y1 in bx:
-            mask[y0:y1, x0:x1] = True
         # OCR of the original, per box (same crop protocol as for the reconstructions)
-        ref_txt = ["".join(t for _, t, _ in reader.readtext(x[y0:y1, x0:x1])) for x0, y0, x1, y1 in bx]
+        ref_txt = read_boxes(reader, x, bx)
         for cfg in configs(args.out):
             q = args.out / "recon" / cfg / f"{p.stem}.png"
             if not q.exists():
                 continue
             y = load(q)
-            mse = float(((x.astype(np.float64) - y) ** 2).mean())
-            ta = torch.from_numpy(x).permute(2, 0, 1)[None].float().div(255).to(dev)
-            tb = torch.from_numpy(y).permute(2, 0, 1)[None].float().div(255).to(dev)
-            with torch.no_grad():
-                msssim = float(piq.multi_scale_ssim(ta, tb, data_range=1.0))
-            del ta, tb
-            row = dict(name=p.stem, cfg=cfg, mse=mse, psnr=10 * math.log10(255 ** 2 / max(mse, 1e-10)),
-                       msssim=msssim,
-                       lpips=tiled(lambda a, b: lp(a * 2 - 1, b * 2 - 1).mean(), x, y, dev),
-                       dists=tiled(lambda a, b: dists(a, b), x, y, dev))
-            if mask.any():
-                tm = float(((x[mask].astype(np.float64) - y[mask]) ** 2).mean())
-                row["text_psnr"] = 10 * math.log10(255 ** 2 / max(tm, 1e-10))
-                hyp = ["".join(t for _, t, _ in reader.readtext(y[y0:y1, x0:x1])) for x0, y0, x1, y1 in bx]
+            row = dict(name=p.stem, cfg=cfg, **perc.all(x, y))
+            if bx:
+                row["text_psnr"] = region_psnr(x, y, bx)
                 n_ch = sum(len(r) for r in ref_txt)
                 if n_ch:
-                    row["ocr_cer"] = sum(edit_distance(r, h) for r, h in zip(ref_txt, hyp)) / n_ch
+                    row["ocr_cer"] = cer(ref_txt, read_boxes(reader, y, bx))
                     row["ocr_chars"] = n_ch
             rows.append(row)
             print({k: (round(v, 4) if isinstance(v, float) else v) for k, v in row.items()})
