@@ -155,7 +155,8 @@ def build(name, spec, rev):
                        "language_info": {"name": "python"}},
           "nbformat": 4, "nbformat_minor": 5}
     path = OUT / f"{name}.ipynb"
-    path.write_text(json.dumps(nb, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    with open(path, "w", encoding="utf-8", newline="\n") as f:  # LF on Windows too (.gitattributes)
+        f.write(json.dumps(nb, ensure_ascii=False, indent=1) + "\n")
     print("wrote", path.relative_to(REPO))
 
 
