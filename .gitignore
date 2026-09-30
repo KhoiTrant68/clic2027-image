@@ -1,0 +1,22 @@
+# cloned third-party repos (each has its own .git); see refs/README.md for URLs
+refs/repos/
+
+# data, big experiment outputs
+/data/
+*.zip
+**/recon/
+**/latents/
+results/**/crops/
+results/**/*.npz
+
+# python / notebooks
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

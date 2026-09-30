@@ -1,0 +1,81 @@
+{
+  "args": {
+    "train": "None",
+    "test": "[]",
+    "synthetic": "True",
+    "out": "runs\\gonogo1_smoke",
+    "bpp": "[0.01, 0.02, 0.03, 0.05]",
+    "device": "cpu",
+    "steps": "300",
+    "batch": "64",
+    "crop": "16",
+    "width": "128",
+    "blocks": "8",
+    "lr": "0.0002",
+    "n_draws": "1",
+    "threshold": "0.05",
+    "seed": "0"
+  },
+  "rates": [
+    {
+      "target_bpp": 0.01,
+      "delta": 5.262709801038155,
+      "bpp_nodither": 0.010000062713439268,
+      "bpp_dither_marginal_upper_bound": 0.02376786747202567
+    },
+    {
+      "target_bpp": 0.02,
+      "delta": 3.27148858674534,
+      "bpp_nodither": 0.019999937635680025,
+      "bpp_dither_marginal_upper_bound": 0.03238278999117973
+    },
+    {
+      "target_bpp": 0.03,
+      "delta": 2.2971280302538553,
+      "bpp_nodither": 0.03000003007482799,
+      "bpp_dither_marginal_upper_bound": 0.04021548359792223
+    },
+    {
+      "target_bpp": 0.05,
+      "delta": 1.2716641360731944,
+      "bpp_nodither": 0.049999934654022055,
+      "bpp_dither_marginal_upper_bound": 0.056466967743187456
+    }
+  ],
+  "tests": {
+    "synthetic_test": {
+      "per_delta": {
+        "5.262709801038155": {
+          "raw_dither": 2.3127965132395425,
+          "raw_nodither": 1.3305747906366985,
+          "exact": 1.0989689826965332,
+          "gaussian": 1.1111988027890523,
+          "nodither": 1.0183385014533997
+        },
+        "3.27148858674534": {
+          "raw_dither": 0.8929910163084666,
+          "raw_nodither": 0.7391520241896311,
+          "exact": 0.6969684759775797,
+          "gaussian": 0.7006950775782267,
+          "nodither": 0.5865663389364878
+        },
+        "2.2971280302538553": {
+          "raw_dither": 0.43881197770436603,
+          "raw_nodither": 0.41869177917639416,
+          "exact": 0.5176282723744711,
+          "gaussian": 0.520639548699061,
+          "nodither": 0.34950515627861023
+        },
+        "1.2716641360731944": {
+          "raw_dither": 0.13498889158169428,
+          "raw_nodither": 0.1347211425503095,
+          "exact": 0.26776134471098584,
+          "gaussian": 0.28112801412741345,
+          "nodither": 0.12543884788950285
+        }
+      },
+      "wins": 0,
+      "pass": false
+    }
+  }
+}

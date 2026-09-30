@@ -1,0 +1,33 @@
+[d64_delta2] theory: {'D_star': 2.7824951431455034, 'W2': 1.1232806508878668, 'W': 1.0598493529213795, 'rate_bits': 19.08227524181159}  |  MC: {'D_star_mc': 2.782630623053519, 'W2_mc_paired': 1.1183083434972059}  |  W2 floor 1.9332
+  training natural ...
+    [natural] step 1000/6000 loss 1.7815
+    [natural] step 2000/6000 loss 1.7906
+    [natural] step 3000/6000 loss 1.8284
+    [natural] step 4000/6000 loss 1.7745
+    [natural] step 5000/6000 loss 1.8294
+    [natural] step 6000/6000 loss 1.7556
+  natural: euler1: D=2.7911 P=1.6463 Plb=1.0200, ode: D=3.6337 P=1.9319 Plb=0.7773, ode_t0.25: D=2.7911 P=1.6436 Plb=1.0118, ode_t0.5: D=2.8791 P=1.6892 Plb=0.8871, ode_t0.75: D=3.1402 P=1.7833 Plb=0.7824
+  training independent ...
+    [independent] step 1000/6000 loss 4.5340
+    [independent] step 2000/6000 loss 4.7312
+    [independent] step 3000/6000 loss 4.7766
+    [independent] step 4000/6000 loss 4.6192
+    [independent] step 5000/6000 loss 4.6359
+    [independent] step 6000/6000 loss 4.4801
+  independent: euler1: D=4.5327 P=2.0989 Plb=2.0027, ode: D=3.6702 P=1.9499 Plb=0.7885, ode_t0.25: D=2.8374 P=1.6681 Plb=1.1756, ode_t0.5: D=2.8762 P=1.7055 Plb=1.0729, ode_t0.75: D=3.0472 P=1.7720 Plb=0.8600
+  training minibatch_ot ...
+    [minibatch_ot] step 1000/6000 loss 1.7515
+    [minibatch_ot] step 2000/6000 loss 1.7669
+    [minibatch_ot] step 3000/6000 loss 1.8350
+    [minibatch_ot] step 4000/6000 loss 1.7924
+    [minibatch_ot] step 5000/6000 loss 1.7593
+    [minibatch_ot] step 6000/6000 loss 1.7171
+  minibatch_ot: euler1: D=2.8094 P=1.6082 Plb=1.0886, ode: D=3.6591 P=1.9484 Plb=0.7979, ode_t0.25: D=2.7863 P=1.6326 Plb=1.0315, ode_t0.5: D=2.8590 P=1.6764 Plb=0.9026, ode_t0.75: D=3.1249 P=1.7802 Plb=0.7911
+  training exact_ot ...
+    [exact_ot] step 1000/6000 loss 0.2726
+    [exact_ot] step 2000/6000 loss 0.2586
+    [exact_ot] step 3000/6000 loss 0.2606
+    [exact_ot] step 4000/6000 loss 0.2374
+    [exact_ot] step 5000/6000 loss 0.2288
+    [exact_ot] step 6000/6000 loss 0.2193
+  exact_ot: euler1: D=3.3610 P=1.8326 Plb=0.7271, ode: D=3.6486 P=1.9235 Plb=0.7266, ode_t0.25: D=2.8275 P=1.6580 Plb=0.9273, ode_t0.5: D=2.9793 P=1.7166 Plb=0.8022, ode_t0.75: D=3.2513 P=1.8062 Plb=0.7272
