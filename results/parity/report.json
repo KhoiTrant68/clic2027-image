@@ -19,11 +19,40 @@
   "rel": 0.0,
   "bit_exact": true
  },
- "dcae/decode_2048x1360_fp32_s": 6.88040033976237,
+ "dcae/decode_2048x1360_fp32_s": 6.7401754061381025,
+ "dcae/fp16": {
+  "decode_s": 4.594344059626262,
+  "max_abs": 0.17338776588439941,
+  "rel": 0.010034739971160889,
+  "bit_exact": false,
+  "finite": true
+ },
  "dit/0.6B_float32": {
   "max_abs": 0.0,
   "rel": 0.0,
   "bit_exact": true
  },
- "entropy/acc_bound_log2": 35.25574481936111
+ "dit/1.6B_float16": {
+  "max_abs": 0.0,
+  "rel": 0.0,
+  "bit_exact": true
+ },
+ "entropy/acc_bound_log2": 35.25574481936111,
+ "entropy/hs_int_cpu_vs_gpu": {
+  "max_abs": 0.0,
+  "rel": 0.0,
+  "bit_exact": true
+ },
+ "entropy/hs_float_vs_int": {
+  "max_abs": 0.0,
+  "rel": 0.0,
+  "bit_exact": true
+ },
+ "entropy/roundtrip": {
+  "ok": true,
+  "bytes_y": 426534,
+  "bytes_z": 34600,
+  "ideal_bytes_y": 425664.25,
+  "n_y": 1966080
+ }
 }

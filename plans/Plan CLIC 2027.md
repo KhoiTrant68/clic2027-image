@@ -155,6 +155,12 @@ Kế hoạch có hai nhánh:
   - **Decoder DC-AE là nút cổ chai, không phải DiT.**
   - Hướng xử lý: dùng fp16/bf16 (Tensor Core của L4 nhanh hơn fp32 nhiều lần); tile lớn hơn để bớt phần chồng lấn; thử dùng thẳng `torch.compile` trong submission. Nếu vẫn chậm, thì distill một decoder nhỏ hơn, hoặc cho lớp residual gánh phần chi tiết.
   - Đo lại trên L4 thật ngay khi thuê được máy.
+- **Lần đo thứ hai (01/10, parity bản 3, T4):**
+  - fp32: 6.74 s. fp16: **4.59 s**, tức chỉ nhanh hơn 1.5 lần.
+  - fp16 có sai lệch tương đối 1.0% so với fp32 (lớn nhất 0.17 trên thang [-1, 1]), không có NaN/Inf.
+  - Nhanh lên ít như vậy nghĩa là thời gian không nằm ở các phép conv. Nghi phạm là vòng lặp Python khi trộn các tile (64 phép gán từng hàng/cột cho mỗi đường nối) và phần attention phải ép lên fp32.
+  - **Việc đầu tiên của A4 là profile `DCAE._tiled_decode`.** Hướng xử lý: trộn tile bằng phép tính vector hóa với mask, tile lớn hơn (hoặc không chia tile khi VRAM 24 GB đủ chỗ), rồi thử bf16 trên L4.
+  - Chất lượng fp16 cần kiểm tra lại bằng PSNR/LPIPS trên ảnh thật, không dùng ảnh nhiễu ngẫu nhiên.
 
 - [ ] **Ước lượng ngân sách thời gian** trên Colab L4 cho 30 ảnh ~2K:
 
