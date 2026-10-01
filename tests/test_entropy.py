@@ -54,7 +54,7 @@ def test_values_roundtrip_with_escapes_and_rate():
     f = (CDF[t, q2 + k + 1] - CDF[t, q2 + k]).astype(np.float64)
     ideal_bytes = -np.log2(f / tables.TOTAL).sum() / 8
     real = len(coding.encode_values(q2, t, CDF, HALF))
-    assert real < ideal_bytes * 1.01 + 4 * rans.N_LANES + 16, (real, ideal_bytes)
+    assert real < ideal_bytes * 1.01 + 4 * rans.lanes_for(q2.size) + 16, (real, ideal_bytes)
 
 
 def test_corruption_detected():

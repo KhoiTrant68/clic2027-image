@@ -27,12 +27,16 @@ def ste(x_q: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
 
 
 class QConv2d(nn.Conv2d):
+    """Integer conv. With n_cond > 0 it also has a per-condition bias (e.g. one per rate level),
+    selected by `cond` (LongTensor (B,)); the bias stays an integer, so decoding stays exact."""
+
     def __init__(self, cin, cout, k, stride=1, *, in_frac: int, out_frac: int | None = None, act: str | None = "relu",
-                 w_frac: int = 7, w_max: int = 127, a_bits: int = 16, groups: int = 1):
+                 w_frac: int = 7, w_max: int = 127, a_bits: int = 16, groups: int = 1, n_cond: int = 0):
         super().__init__(cin, cout, k, stride, padding=k // 2, groups=groups, bias=True)
         self.in_frac, self.w_frac, self.w_max, self.a_bits, self.act = in_frac, w_frac, w_max, a_bits, act
         self.out_frac = out_frac if act else w_frac + in_frac
         assert act in (None, "relu") and self.w_frac + self.in_frac >= self.out_frac
+        self.cond_bias = nn.Parameter(torch.zeros(n_cond, cout)) if n_cond else None
 
     @property
     def acc_frac(self) -> int:
@@ -41,13 +45,18 @@ class QConv2d(nn.Conv2d):
     def _wq(self):
         return torch.clamp(torch.round(self.weight * 2 ** self.w_frac), -self.w_max, self.w_max)
 
-    def _bq(self):
-        return torch.round(self.bias * 2 ** self.acc_frac)
+    def _bias(self, cond, batch):
+        b = self.bias.expand(batch, -1)
+        if self.cond_bias is not None:
+            assert cond is not None, "this layer needs a condition index"
+            b = b + self.cond_bias[cond.to(self.cond_bias.device)]
+        return b  # (B, cout), float
 
-    def forward(self, x):  # float in/out, quantisers with STE
+    def forward(self, x, cond=None):  # float in/out, quantisers with STE
         w = ste(self._wq() / 2 ** self.w_frac, self.weight)
-        b = ste(self._bq() / 2 ** self.acc_frac, self.bias)
-        y = F.conv2d(x, w, b, self.stride, self.padding, 1, self.groups)
+        b = self._bias(cond, x.shape[0])
+        b = ste(torch.round(b * 2 ** self.acc_frac) / 2 ** self.acc_frac, b)
+        y = F.conv2d(x, w, None, self.stride, self.padding, 1, self.groups) + b[:, :, None, None]
         if self.act is None:
             return y
         y = F.relu(y)
@@ -55,11 +64,11 @@ class QConv2d(nn.Conv2d):
         return ste(q, y)
 
     @torch.no_grad()
-    def forward_int(self, x_int: torch.Tensor) -> torch.Tensor:  # float64 tensors holding integers
-        w = self._wq().to(torch.float64)
-        b = self._bq().to(torch.float64)
-        acc = F.conv2d(x_int.to(torch.float64), w.to(x_int.device), b.to(x_int.device),
-                       self.stride, self.padding, 1, self.groups)
+    def forward_int(self, x_int: torch.Tensor, cond=None) -> torch.Tensor:  # float64 tensors holding integers
+        dev = x_int.device
+        w = self._wq().to(torch.float64).to(dev)
+        b = torch.round(self._bias(cond, x_int.shape[0]).double() * 2 ** self.acc_frac).to(dev)
+        acc = F.conv2d(x_int.to(torch.float64), w, None, self.stride, self.padding, 1, self.groups) + b[:, :, None, None]
         if self.act is None:
             return acc
         shift = self.acc_frac - self.out_frac
@@ -69,16 +78,23 @@ class QConv2d(nn.Conv2d):
 class Up2(nn.Module):
     """Nearest-neighbour x2 upsampling (exact on integers)."""
 
-    def forward(self, x):
+    def forward(self, x, cond=None):
         return F.interpolate(x, scale_factor=2, mode="nearest")
 
     forward_int = forward
 
 
 class IntSequential(nn.Sequential):
-    def forward_int(self, x_int: torch.Tensor) -> torch.Tensor:
+    """Sequential that passes an optional condition index to every layer."""
+
+    def forward(self, x, cond=None):
         for m in self:
-            x_int = m.forward_int(x_int)
+            x = m(x, cond)
+        return x
+
+    def forward_int(self, x_int: torch.Tensor, cond=None) -> torch.Tensor:
+        for m in self:
+            x_int = m.forward_int(x_int, cond)
         return x_int
 
     @property

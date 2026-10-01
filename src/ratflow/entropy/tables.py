@@ -41,19 +41,24 @@ def _phi(x: np.ndarray) -> np.ndarray:
     return 0.5 * np.vectorize(math.erfc)(-x / math.sqrt(2.0))
 
 
-def gaussian_tables(scales=None):
-    """Discretised zero-mean Gaussians, one table per scale. Returns (cdf, half)."""
+def gaussian_tables(scales=None, n_offsets: int = 1):
+    """Discretised Gaussians. Table t = scale_idx * n_offsets + offset_idx models v = q - floor(center)
+    with the Gaussian centred at o = (offset_idx + 0.5) / n_offsets in [0, 1) (o = 0 if n_offsets == 1,
+    i.e. zero-mean tables). Returns (cdf, half)."""
     scales = scale_table() if scales is None else np.asarray(scales, np.float64)
-    half = np.minimum(np.ceil(TAIL_SIGMAS * scales).astype(np.int64), HALF_MAX)
+    offs = np.zeros(1) if n_offsets == 1 else (np.arange(n_offsets) + 0.5) / n_offsets
+    half_s = np.minimum(np.ceil(TAIL_SIGMAS * scales).astype(np.int64) + (n_offsets > 1), HALF_MAX)
+    half = np.repeat(half_s, len(offs))
     width = int(2 * half.max() + 2)
-    cdf = np.full((len(scales), width + 1), TOTAL, np.uint32)
+    cdf = np.full((len(half), width + 1), TOTAL, np.uint32)
     cdf[:, 0] = 0
-    for t, (s, k) in enumerate(zip(scales, half)):
+    for i, (s, k) in enumerate(zip(scales, half_s)):
         v = np.arange(-k, k + 1, dtype=np.float64)
-        p = _phi((v + 0.5) / s) - _phi((v - 0.5) / s)
-        tail = 2 * _phi(-(k + 0.5) / s)
-        f = quantize_pmf(np.append(p, max(tail, 1e-12)))
-        cdf[t, 1:f.size + 1] = np.cumsum(f)
+        for j, o in enumerate(offs):
+            p = _phi((v + 0.5 - o) / s) - _phi((v - 0.5 - o) / s)
+            tail = _phi((-k - 0.5 - o) / s) + (1.0 - _phi((k + 0.5 - o) / s))
+            f = quantize_pmf(np.append(p, max(tail, 1e-12)))
+            cdf[i * len(offs) + j, 1:f.size + 1] = np.cumsum(f)
     return cdf, half
 
 

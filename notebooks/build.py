@@ -140,6 +140,49 @@ SPECS = {
             ("code", "!python {P} summary"),
             ("code", "!cd parity_out && zip -q ../parity_results.zip * && ls -la ../parity_results.zip"),
         ]),
+    "s1_cache": dict(
+        title="CVPR S1 bước 1: cache latent DC-AE cho dữ liệu train",
+        intro=f"**Cài đặt:** {KAGGLE_T4}. {COMMIT_RUN}\n\n"
+              "Tải DIV2K train (800 ảnh, 3.5 GB) rồi encode toàn ảnh bằng DC-AE (fp16, theo tile), mỗi ảnh lưu một file `.npy` "
+              "trong `latents/` (~140 MB). Mất khoảng 30–60 phút.\n\n"
+              "**Thêm dữ liệu (không bắt buộc):** gắn dataset Flickr2K hoặc LSDIR của Kaggle vào notebook (Add Input), "
+              "rồi điền đường dẫn vào `EXTRA_DIRS` ở cell dưới.\n\n"
+              "**Kết quả:** thư mục `latents/` trong Output. Ở notebook `s1_train`, chọn **Add Input → Notebook Output** để dùng nó.",
+        files=PKG + ["experiments/s1/cache_latents.py"],
+        cells=[
+            ("code", "!pip install -q -U safetensors huggingface_hub\n!nvidia-smi --query-gpu=name --format=csv"),
+            ("code", "EXTRA_DIRS = []  # ví dụ: ['/kaggle/input/flickr2k/Flickr2K_HR']\n"
+                     "extra = ' '.join(EXTRA_DIRS)\n"
+                     "!python experiments/s1/cache_latents.py --download-div2k --images {extra} --out latents --dtype fp16"),
+            ("code", "!rm -rf data  # giữ Output gọn: chỉ để lại latents/\n!du -sh latents; ls latents | wc -l"),
+        ]),
+    "s1_train": dict(
+        title="CVPR S1 bước 2: selftest, train codec latent đa rate, eval trên Kodak",
+        intro=f"**Cài đặt:** {KAGGLE_T4}. **Add Input → Notebook Output** của `s1_cache`. {COMMIT_RUN}\n\n"
+              "1. `selftest`: model ngẫu nhiên, nén trên GPU và giải nén trên CPU. Phải ra **PASS** thì notebook mới chạy tiếp.\n"
+              "2. `train`: tối đa 9.5 giờ, tự lưu `s1_out/last.pt` mỗi 5k bước. Nếu bị ngắt, chạy lại sẽ tiếp tục từ checkpoint "
+              "(nhớ gắn Output của lần trước làm Input và chép `last.pt` vào `s1_out/`).\n"
+              "3. `eval`: 24 ảnh Kodak × 8 mức rate, bitstream thật, so với trần DC-AE.\n\n"
+              "**Kết quả:** `s1_results.zip` (log, summary, csv và checkpoint), đặt vào `results/s1/`.",
+        files=PKG + ["experiments/s1/train_s1.py", "experiments/s1/eval_s1.py"],
+        cells=[
+            ("code", "!pip install -q -U safetensors huggingface_hub lpips piq\n!nvidia-smi --query-gpu=name --format=csv"),
+            ("code", "import glob, os, json\n"
+                     "cands = [os.path.dirname(p) for p in glob.glob('/kaggle/input/**/latents/index.json', recursive=True)]\n"
+                     "LATENTS = cands[0] if cands else 'latents'\n"
+                     "print('latents:', LATENTS, len(glob.glob(LATENTS + '/*.npy')), 'files')\n"
+                     "prev = glob.glob('/kaggle/input/**/s1_out/last.pt', recursive=True)  # resume from a previous run\n"
+                     "if prev and not os.path.exists('s1_out/last.pt'):\n"
+                     "    os.makedirs('s1_out', exist_ok=True); os.system(f'cp {prev[0]} s1_out/last.pt'); print('resume from', prev[0])"),
+            ("code", "!python experiments/s1/train_s1.py selftest --out s1_out\n"
+                     "assert json.load(open('s1_out/selftest.json'))['ok'], 'SELFTEST FAIL: dừng lại, gửi log cho Claude'"),
+            ("code", "!python experiments/s1/train_s1.py train --latents {LATENTS} --out s1_out --hours 9.5"),
+            ("code", "!python experiments/s1/eval_s1.py --ckpt s1_out/last.pt --dataset kodak --out s1_eval"),
+            ("code", "from IPython.display import Markdown, display\n"
+                     "display(Markdown(open('s1_eval/summary.md', encoding='utf-8').read()))"),
+            ("code", "!zip -qr s1_results.zip s1_out/log.json s1_out/selftest.json s1_out/last.pt s1_eval/*.md s1_eval/*.json s1_eval/*.csv "
+                     "&& ls -la s1_results.zip"),
+        ]),
 }
 
 

@@ -3,6 +3,7 @@
 - DiscretePrior: learned per-channel pmf for the hyper-latent z (factorised, integer tables).
 - ScaleMeanHead: turns the integer accumulator of an IntSequential into (scale index, dyadic mean).
 - GaussianConditional: rate for training; compress/decompress y given (scale index, mean).
+- DitheredGaussian: the same with shared subtractive dither (Proposition 1) in the bitstream.
 
 CDF tables are module buffers. They are built from floats when the module is created or when
 `update_tables()` runs, and must then be loaded from the SAME checkpoint on the encoder and the
@@ -17,7 +18,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from . import coding, tables
+from . import coding, dither, tables
 from .intnet import ste
 
 LN2 = math.log(2.0)
@@ -39,11 +40,13 @@ class _Tables(nn.Module):
         super()._load_from_state_dict(*args, **kwargs)
         self._inv = None
 
+    use_inverse = True  # inverse table: 128 KB per table; off -> binary-search decoding
+
     def np_tables(self):
         cdf, half = _np(self.cdf).astype(np.uint32), _np(self.sym_half)
-        if self._inv is None:
+        if self.use_inverse and self._inv is None:
             self._inv = tables.inverse(cdf)
-        return cdf, half, self._inv
+        return cdf, half, self._inv if self.use_inverse else None
 
 
 class DiscretePrior(_Tables):
@@ -148,3 +151,48 @@ class GaussianConditional(_Tables):
         q = coding.decode_values(blob, _np(idx), cdf, half, inv).reshape(tuple(idx.shape))
         y_int = q * (1 << mu_frac) + _np(mu_int)
         return torch.from_numpy(y_int / 2 ** mu_frac).float(), torch.from_numpy(y_int)
+
+
+def gaussian_bits(y_tilde: torch.Tensor, sigma: torch.Tensor, mu: torch.Tensor) -> torch.Tensor:
+    """-log2 P(bin around y_tilde) for N(mu, sigma^2). With subtractive dither and y_tilde = q - u this is
+    the exact code length of q given u, not an approximation (Prop. 1 / universal quantisation)."""
+    v = (y_tilde - mu).abs()
+    s = sigma.clamp_min(tables.SCALE_MIN)
+    c = lambda x: 0.5 * torch.erfc(-x / math.sqrt(2.0))  # noqa: E731
+    return -torch.log2((c((0.5 - v) / s) - c((-0.5 - v) / s)).clamp_min(1e-9))
+
+
+class DitheredGaussian(_Tables):
+    """y_r (already divided by the quantisation step) coded as q = round(y_r + u), decoded as y_r_hat = q - u,
+    with u the shared dither of `entropy.dither`. Tables are indexed by (scale index, frac(mu + u))."""
+
+    use_inverse = False
+
+    def __init__(self, n_offsets: int = 16):
+        super().__init__()
+        self.n_offsets = n_offsets
+        self._set_tables(*tables.gaussian_tables(n_offsets=n_offsets))
+
+    @staticmethod
+    def quantize(y_r: torch.Tensor) -> torch.Tensor:
+        """Training/eval forward with real (random) dither: returns q - u with straight-through gradient."""
+        u = torch.rand_like(y_r) - 0.5
+        return ste(torch.round(y_r + u) - u, y_r)
+
+    def _layout(self, idx, mu_int, mu_frac, seed):
+        u16 = dither.dither_u16(int(np.prod(idx.shape)), seed)
+        t, base = dither.table_and_base(dither.centre_c17(_np(mu_int).ravel(), u16, mu_frac), _np(idx).ravel(),
+                                        self.n_offsets)
+        return u16, t, base
+
+    def compress(self, y_r: torch.Tensor, idx: torch.Tensor, mu_int: torch.Tensor, mu_frac: int, seed: int) -> bytes:
+        cdf, half, _ = self.np_tables()
+        u16, t, base = self._layout(idx, mu_int, mu_frac, seed)
+        q = np.round(_np(y_r).astype(np.float64).ravel() + dither.u_float(u16)).astype(np.int64)
+        return coding.encode_values(q - base, t, cdf, half)
+
+    def decompress(self, blob: bytes, idx: torch.Tensor, mu_int: torch.Tensor, mu_frac: int, seed: int) -> torch.Tensor:
+        cdf, half, inv = self.np_tables()
+        u16, t, base = self._layout(idx, mu_int, mu_frac, seed)
+        q = coding.decode_values(blob, t, cdf, half, inv) + base
+        return torch.from_numpy((q - dither.u_float(u16)).reshape(tuple(idx.shape))).float()
