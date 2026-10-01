@@ -236,6 +236,23 @@ Lý thuyết chạy song song với thí nghiệm ngay từ tuần 1; hai mốc 
 
 - **T1 (28/9–4/10):** dựng repo, cache latent; toy Gaussian; đo phân phối sai số lượng tử; viết sạch Mệnh đề 1–2. *Tiến độ 27/9:* toy vòng 1 xong; bản nháp LaTeX của Mệnh đề 1–2, Định lý 3 và Định lý 4 (phần dễ) xong. Toy vòng 2: chạy A và B trên A6000 ngày 28–29/9, C trên CPU; phân tích ngày 30/9–1/10; chốt dữ liệu go/no-go 1 ngày 2–3/10. Script đo sai số lượng tử đã viết, mặc định dùng DC-AE của SANA; còn phải chạy trên Kodak/CLIC. **Việc mới cho go/no-go 1:** so sánh denoiser dùng mô hình nhiễu chính xác với denoiser giả định Gaussian trên latent DC-AE. Train nhỏ, khoảng 1 GPU-giờ trên Kaggle. Backbone đổi sang SANA (27/9).
 - **T2 (5–11/10):** *(thêm 30/9)* **trước khi train S1, chạy `notebooks/parity.ipynb`**: DC-AE/SANA viết lại bằng torch thuần (`src/ratflow/nn`) phải khớp diffusers, entropy số nguyên (`src/ratflow/entropy`) phải khớp từng bit giữa CPU và GPU. S1 dùng `QConv2d`/`ScaleMeanHead`/`GaussianConditional`/`DiscretePrior`, nên bpp đo trên bitstream thật và decoder dùng lại được cho CLIC. Sau đó train S1 *(parity đạt 9/9 ngày 01/10; code S1 viết xong ngày 01/10: `src/ratflow/codec/latent_codec.py`, `experiments/s1/`, notebook `s1_cache` rồi `s1_train`. Thiết kế: g_a/g_s ResBlock N=192, y stride 2 (M=128), hyperprior Z=96 với h_s số nguyên có bias theo rate, 8 mức rate qua gain vector, **subtractive dither nằm trong bitstream** (Prop. 1), rate khi train là độ dài mã chính xác của q khi biết u, bảng chọn theo scale × 16 mức phần lẻ của tâm; λ ∈ [0.03, 4] cần chỉnh lại sau lần chạy đầu để phủ 0.01–0.05 bpp (CVPR) và tới 0.3 bpp (CLIC))*; chạy lại StableCodec/AEIC (dùng checkpoint có sẵn); đo throughput thật để chốt ngân sách compute; chứng minh Định lý 3. *(Thêm 30/9)* Đo trần DC-AE và trần f8 trên Kodak/CLIC2020/DIV2K-val bằng notebook `notebooks/ceiling.ipynb` (script `experiments/ceiling/ceiling.py`; notebook đã làm sẵn ngày 30/9, ~1.5–2.5 giờ trên Kaggle T4, có cả FID/KID trên patch), để có đường trần cho các RD plot.
+- **Kết quả S1 lần 1 (02/10, Kaggle T4, DIV2K 800 ảnh, 200k bước trong ~2.5 giờ; `results/s1/`):**
+  - **Bitstream đúng như thiết kế:** selftest đạt. ŷ do decoder dựng lại khớp từng bit với ŷ mà encoder dự kiến; số byte thật lệch số ước lượng lúc train dưới 0.5%.
+  - **Đã hội tụ:** bpp và MSE gần như không đổi từ khoảng 100k bước.
+  - **Kodak, bitstream thật:**
+
+    | Mức rate | r0 | r1 | r2 | r3 | r4 | r5 | r6 | r7 |
+    |---|---|---|---|---|---|---|---|---|
+    | bpp | 0.0155 | 0.0204 | 0.0342 | 0.0531 | 0.0710 | 0.0885 | 0.1057 | 0.1215 |
+    | MSE latent | 0.367 | 0.286 | 0.169 | 0.087 | 0.045 | 0.023 | 0.011 | 0.006 |
+    | PSNR (dB) | 17.83 | 18.57 | 19.62 | 20.71 | 21.70 | 22.45 | 22.99 | 23.29 |
+    | LPIPS | 0.523 | 0.449 | 0.309 | 0.206 | 0.152 | 0.122 | 0.105 | 0.098 |
+
+    Trần DC-AE trên Kodak: 23.66 dB, LPIPS 0.091.
+  - **Bão hòa sớm:** từ khoảng 0.1 bpp, S1 đã sát trần DC-AE, nên thêm bit cho latent gần như vô ích. Điều này xác nhận nhánh residual là bắt buộc cho CLIC ở 0.15/0.3 bpp.
+  - **Dải rate chưa phủ đúng:** mức thấp nhất mới tới 0.0155 bpp, trong khi CVPR cần xuống 0.01. Ba mức trên cùng lại phí vì đã bão hòa.
+  - **Thời gian (Kodak):** encode S1 mất 0.05 s/ảnh, decode S1 mất 0.40 s/ảnh (rANS numpy + h_s số nguyên trên CPU). Với CVPR thì chấp nhận được; với CLIC cần tối ưu (ghi vào A4).
+  - **Việc tiếp:** train lại S1 với λ = geomspace(0.015, 0.6, 8), ước tính phủ khoảng 0.010–0.08 bpp (rẻ: ~2.5 giờ T4). Phải xong trước khi bắt đầu S2, vì S2 train trên đầu ra của S1. Cân nhắc thêm Flickr2K, vì bpp trên Kodak cao hơn bpp lúc train ~20% ở r0.
 - **T3–T4 (12–25/10):** train S2 với coupling tự nhiên cộng nhiễu khởi đầu (hệ số c chọn theo toy A5–A7); ablation 1–3 trên SANA; Định lý 4 phần dễ + thử phần mở.
 - **T5–T6 (26/10–8/11):** S3 α-Flow cộng GAN DINOv2; ablation 4–6; eval đầy đủ + BD-rate; bắt đầu viết từ 2/11.
 - **T7 (9–16/11):** đăng ký abstract 10/11; hoàn thiện paper, appendix chứng minh; nộp 16/11 (AoE, tức khoảng 19:00 ngày 17/11 giờ Việt Nam). Supplementary trước 23/11.

@@ -1,0 +1,17 @@
+{
+ "ok": true,
+ "0": {
+  "bytes": 16458,
+  "est_bytes": 16489.27734375,
+  "shape_ok": true,
+  "decode_equals_encoder_view": true,
+  "cpu_vs_dev_max_abs": 9.08970832824707e-07
+ },
+ "7": {
+  "bytes": 47233,
+  "est_bytes": 47480.8125,
+  "shape_ok": true,
+  "decode_equals_encoder_view": true,
+  "cpu_vs_dev_max_abs": 1.7508864402770996e-07
+ }
+}
