@@ -28,11 +28,11 @@ def _np(t: torch.Tensor) -> np.ndarray:
 
 
 class _Tables(nn.Module):
-    """Holds (cdf, half) as persistent buffers and a lazily built inverse table."""
+    """Holds (cdf, sym_half) as persistent buffers and a lazily built inverse table."""
 
     def _set_tables(self, cdf: np.ndarray, half: np.ndarray):
         self.register_buffer("cdf", torch.from_numpy(cdf.astype(np.int64)), persistent=True)
-        self.register_buffer("half", torch.from_numpy(half.astype(np.int64)), persistent=True)
+        self.register_buffer("sym_half", torch.from_numpy(half.astype(np.int64)), persistent=True)  # not "half": nn.Module.half()
         self._inv = None
 
     def _load_from_state_dict(self, *args, **kwargs):  # tables come from the checkpoint: drop the cache
@@ -40,7 +40,7 @@ class _Tables(nn.Module):
         self._inv = None
 
     def np_tables(self):
-        cdf, half = _np(self.cdf).astype(np.uint32), _np(self.half)
+        cdf, half = _np(self.cdf).astype(np.uint32), _np(self.sym_half)
         if self._inv is None:
             self._inv = tables.inverse(cdf)
         return cdf, half, self._inv

@@ -157,7 +157,7 @@ class SanaDiT(nn.Module):
         d = resolve(repo_or_dir, subfolder)
         with torch.device("meta"):  # no random init / no fp32 copy of the weights in RAM
             m = cls(load_config(d))
-        m.load_state_dict(load_state_dict(d), strict=True, assign=True)
+        m.load_state_dict(rename_legacy_keys(load_state_dict(d)), strict=True, assign=True)
         return m.to(dtype).eval()
 
     def forward(self, x, t, context, context_mask=None):
@@ -176,6 +176,25 @@ class SanaDiT(nn.Module):
         x = self.proj_out(self.norm_out(x) * (1 + scale) + shift)
         x = x.reshape(B, H, W, p, p, -1).permute(0, 5, 1, 3, 2, 4)
         return x.reshape(B, -1, H * p, W * p)
+
+
+LEGACY_KEYS = (  # original-SANA names still used by some Hub checkpoints (e.g. Sana_1600M_1024px_diffusers)
+    ("adaln_single.", "time_embed."),
+    ("pos_embed.proj.", "patch_embed.proj."),
+    (".ff.inverted_conv.conv.", ".ff.conv_inverted."),
+    (".ff.depth_conv.conv.", ".ff.conv_depth."),
+    (".ff.point_conv.conv.", ".ff.conv_point."),
+)
+
+
+def rename_legacy_keys(sd: dict) -> dict:
+    out = {}
+    for k, v in sd.items():
+        for old, new in LEGACY_KEYS:
+            if old in k:
+                k = k.replace(old, new)
+        out[k] = v
+    return out
 
 
 def expand_in_channels(dit: SanaDiT, extra: int) -> SanaDiT:
