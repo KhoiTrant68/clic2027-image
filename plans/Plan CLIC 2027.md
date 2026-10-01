@@ -150,6 +150,11 @@ Kế hoạch có hai nhánh:
 ### A4. Tốc độ và kích thước (05/01 → 31/01)
 
 - **Chỉ tiêu:** giải mã 30 ảnh trong **≤ 20 s trên L4**, tính cả thời gian nạp model. Các đội GPU năm 2025 cần 21–29 s, và phải lọt khỏi nhóm 25% chậm nhất.
+- ⚠️ **Số đo đầu tiên (30/9, parity trên Kaggle T4):**
+  - Decoder DC-AE fp32 theo tile mất **6.9 s cho một ảnh 2048×1360**. Chỉ tiêu là khoảng 0.5 s mỗi ảnh cho toàn bộ pipeline, tức chậm hơn **gấp ~14 lần**.
+  - **Decoder DC-AE là nút cổ chai, không phải DiT.**
+  - Hướng xử lý: dùng fp16/bf16 (Tensor Core của L4 nhanh hơn fp32 nhiều lần); tile lớn hơn để bớt phần chồng lấn; thử dùng thẳng `torch.compile` trong submission. Nếu vẫn chậm, thì distill một decoder nhỏ hơn, hoặc cho lớp residual gánh phần chi tiết.
+  - Đo lại trên L4 thật ngay khi thuê được máy.
 
 - [ ] **Ước lượng ngân sách thời gian** trên Colab L4 cho 30 ảnh ~2K:
 

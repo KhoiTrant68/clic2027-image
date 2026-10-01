@@ -1,0 +1,29 @@
+{
+ "dcae/encode": {
+  "max_abs": 0.0,
+  "rel": 0.0,
+  "bit_exact": true
+ },
+ "dcae/decode": {
+  "max_abs": 0.0,
+  "rel": 0.0,
+  "bit_exact": true
+ },
+ "dcae/tiled_encode": {
+  "max_abs": 0.0,
+  "rel": 0.0,
+  "bit_exact": true
+ },
+ "dcae/tiled_decode": {
+  "max_abs": 0.0,
+  "rel": 0.0,
+  "bit_exact": true
+ },
+ "dcae/decode_2048x1360_fp32_s": 6.88040033976237,
+ "dit/0.6B_float32": {
+  "max_abs": 0.0,
+  "rel": 0.0,
+  "bit_exact": true
+ },
+ "entropy/acc_bound_log2": 35.25574481936111
+}

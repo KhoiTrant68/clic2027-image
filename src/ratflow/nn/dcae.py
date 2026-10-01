@@ -210,8 +210,9 @@ class DCAE(nn.Module):
     @classmethod
     def from_pretrained(cls, repo_or_dir: str, subfolder: str | None = "vae", dtype=torch.float32):
         d = resolve(repo_or_dir, subfolder)
-        m = cls(load_config(d))
-        m.load_state_dict(load_state_dict(d), strict=True)
+        with torch.device("meta"):  # no random init / no fp32 copy of the weights in RAM
+            m = cls(load_config(d))
+        m.load_state_dict(load_state_dict(d), strict=True, assign=True)
         return m.to(dtype).eval()
 
     def enable_tiling(self, on: bool = True):

@@ -11,10 +11,12 @@ python parity.py all
 from __future__ import annotations
 
 import argparse
+import contextlib
 import gc
 import json
 import sys
 import time
+import traceback
 from pathlib import Path
 
 import numpy as np
@@ -47,6 +49,19 @@ def save(out, key, val):
     print(key, json.dumps(val))
 
 
+@contextlib.contextmanager
+def guarded(out, key):
+    """Record the traceback under `key` instead of aborting, so later checks still run."""
+    try:
+        yield
+    except Exception:  # noqa: BLE001
+        save(out, key, {"error": traceback.format_exc()[-3000:]})
+    finally:
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
+
 def kodak_tensor():
     import urllib.request
     from io import BytesIO
@@ -58,6 +73,11 @@ def kodak_tensor():
 
 # ---------------------------------------------------------------- DC-AE
 def dcae(args):
+    with guarded(args.out, "dcae/error"):
+        _dcae(args)
+
+
+def _dcae(args):
     from diffusers import AutoencoderDC
     ref = AutoencoderDC.from_pretrained(SANA["1.6B"], subfolder="vae", torch_dtype=torch.float32).to(DEV).eval()
     ours = DCAE.from_pretrained(SANA["1.6B"], "vae").to(DEV)
@@ -80,6 +100,16 @@ def dcae(args):
                 ours.decode(zr)
             torch.cuda.synchronize()
             save(args.out, "dcae/decode_2048x1360_fp32_s", (time.time() - t0) / 3)
+            with guarded(args.out, "dcae/fp16"):
+                y32 = ours.decode(zr)
+                h = ours.half()
+                torch.cuda.synchronize()
+                t0 = time.time()
+                for _ in range(3):
+                    y16 = h.decode(zr.half())
+                torch.cuda.synchronize()
+                save(args.out, "dcae/fp16", dict(decode_s=(time.time() - t0) / 3, **diff(y16, y32),
+                                                 finite=bool(torch.isfinite(y16).all())))
     del ref, ours
     gc.collect()
     torch.cuda.empty_cache()
@@ -89,25 +119,30 @@ def dcae(args):
 def dit(args):
     from diffusers import SanaTransformer2DModel
     for name, dtype in (("0.6B", torch.float32), ("1.6B", torch.float16)):
-        torch.manual_seed(0)
-        x = torch.randn(2, 32, 32, 32, device=DEV, dtype=dtype)
-        t = torch.tensor([999.0, 250.0], device=DEV)
-        ctx = torch.randn(2, 20, 2304, device=DEV, dtype=dtype)
-        mask = torch.ones(2, 20, device=DEV)
-        mask[1, 12:] = 0
-        ref = SanaTransformer2DModel.from_pretrained(SANA[name], subfolder="transformer", torch_dtype=dtype).to(DEV).eval()
-        with torch.no_grad():
-            yr = ref(x, encoder_hidden_states=ctx, timestep=t, encoder_attention_mask=mask).sample.cpu()
-        del ref
-        gc.collect()
-        torch.cuda.empty_cache()
-        ours = SanaDiT.from_pretrained(SANA[name], "transformer", dtype=dtype).to(DEV)
-        with torch.no_grad():
-            yo = ours(x, t, ctx, mask).cpu()
-        save(args.out, f"dit/{name}_{str(dtype).split('.')[-1]}", diff(yo, yr))
-        del ours
-        gc.collect()
-        torch.cuda.empty_cache()
+        with guarded(args.out, f"dit/{name}_{str(dtype).split('.')[-1]}"):
+            _dit_one(args, SanaTransformer2DModel, name, dtype)
+
+
+def _dit_one(args, SanaTransformer2DModel, name, dtype):
+    torch.manual_seed(0)
+    x = torch.randn(2, 32, 32, 32, device=DEV, dtype=dtype)
+    t = torch.tensor([999.0, 250.0], device=DEV)
+    ctx = torch.randn(2, 20, 2304, device=DEV, dtype=dtype)
+    mask = torch.ones(2, 20, device=DEV)
+    mask[1, 12:] = 0
+    ref = SanaTransformer2DModel.from_pretrained(SANA[name], subfolder="transformer", torch_dtype=dtype).to(DEV).eval()
+    with torch.no_grad():
+        yr = ref(x, encoder_hidden_states=ctx, timestep=t, encoder_attention_mask=mask).sample.cpu()
+    del ref
+    gc.collect()
+    torch.cuda.empty_cache()
+    ours = SanaDiT.from_pretrained(SANA[name], "transformer", dtype=dtype).to(DEV)
+    with torch.no_grad():
+        yo = ours(x, t, ctx, mask).cpu()
+    save(args.out, f"dit/{name}_{str(dtype).split('.')[-1]}", diff(yo, yr))
+    del ours
+    gc.collect()
+    torch.cuda.empty_cache()
 
 
 # ---------------------------------------------------------------- entropy
@@ -122,6 +157,11 @@ def make_hs(M=320, N=192, mu_frac=4):
 
 
 def entropy(args):
+    with guarded(args.out, "entropy/error"):
+        _entropy(args)
+
+
+def _entropy(args):
     torch.manual_seed(0)
     M, N, mu_frac = 320, 192, 4
     hs, head = make_hs(M, N, mu_frac)
@@ -154,7 +194,8 @@ def entropy(args):
     yb = gcond.compress(y.float(), idx_e, mu_e, mu_frac)
     z_dec = prior.decompress(zb, tuple(z.shape))
     y_dec, _ = gcond.decompress(yb, idx_d, mu_d, mu_frac)
-    y_ref = torch.round(y - mu_e.double() / 2 ** mu_frac) + mu_e.double() / 2 ** mu_frac
+    y32 = y.float().double()  # the encoder sees float32 y
+    y_ref = torch.round(y32 - mu_e.double() / 2 ** mu_frac) + mu_e.double() / 2 ** mu_frac
     ok = torch.equal(z_dec, z) and torch.equal(y_dec.double(), y_ref)
     _, bits = GaussianConditional.bits(y.float(), sigma.float(), mu_e.float() / 2 ** mu_frac, training=False)
     save(args.out, "entropy/roundtrip", dict(ok=bool(ok), bytes_y=len(yb), bytes_z=len(zb),
@@ -182,6 +223,9 @@ def summary(args):
     for key, field, thr, desc in CHECKS:
         if key not in rep:
             L.append(f"| {desc} (`{key}`) | – | – | CHƯA CHẠY |")
+            continue
+        if "error" in rep[key]:
+            L.append(f"| {desc} (`{key}`) | lỗi | – | **ERROR** (xem cuối file) |")
             continue
         v = rep[key][field]
         ok = (v == thr) if isinstance(thr, bool) else (v <= thr)

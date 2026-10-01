@@ -155,10 +155,9 @@ class SanaDiT(nn.Module):
     @classmethod
     def from_pretrained(cls, repo_or_dir: str, subfolder: str | None = "transformer", dtype=torch.float32):
         d = resolve(repo_or_dir, subfolder)
-        m = cls(load_config(d))
-        sd = load_state_dict(d)
-        # diffusers keeps the modulated norm under norm_out.norm (no params since elementwise_affine=False)
-        m.load_state_dict(sd, strict=True)
+        with torch.device("meta"):  # no random init / no fp32 copy of the weights in RAM
+            m = cls(load_config(d))
+        m.load_state_dict(load_state_dict(d), strict=True, assign=True)
         return m.to(dtype).eval()
 
     def forward(self, x, t, context, context_mask=None):
