@@ -147,10 +147,19 @@ SPECS = {
               "trong `latents/` (~140 MB). Mất khoảng 30–60 phút.\n\n"
               "**Thêm dữ liệu (không bắt buộc):** gắn dataset Flickr2K hoặc LSDIR của Kaggle vào notebook (Add Input), "
               "rồi điền đường dẫn vào `EXTRA_DIRS` ở cell dưới.\n\n"
-              "**Kết quả:** thư mục `latents/` trong Output. Ở notebook `s1_train`, chọn **Add Input → Notebook Output** để dùng nó.",
+              "**Kết quả:** thư mục `latents/` trong Output. Ở notebook `s1_train`, chọn **Add Input → Notebook Output** để dùng nó.\n\n"
+              "**Nếu lần trước bị ngắt:** gắn Output của lần đó làm Input; notebook chép các latent đã có và chỉ encode phần còn thiếu.",
         files=PKG + ["experiments/s1/cache_latents.py"],
         cells=[
             ("code", "!pip install -q -U safetensors huggingface_hub\n!nvidia-smi --query-gpu=name --format=csv"),
+            ("code", "import glob, os, shutil, torch\n"
+                     "assert torch.cuda.is_available(), 'Chưa bật GPU (hoặc hết hạn mức GPU tuần này): trên CPU mất ~4 phút/ảnh'\n"
+                     "os.makedirs('latents', exist_ok=True)\n"
+                     "prev = glob.glob('/kaggle/input/**/latents/*.npy', recursive=True)  # resume a cut-off run\n"
+                     "for p in prev:\n"
+                     "    if not os.path.exists('latents/' + os.path.basename(p)):\n"
+                     "        shutil.copy(p, 'latents/')\n"
+                     "print('resumed', len(prev), 'latents')"),
             ("code", "EXTRA_DIRS = []  # ví dụ: ['/kaggle/input/flickr2k/Flickr2K_HR']\n"
                      "extra = ' '.join(EXTRA_DIRS)\n"
                      "!python experiments/s1/cache_latents.py --download-div2k --images {extra} --out latents --dtype fp16"),
@@ -168,7 +177,7 @@ SPECS = {
         cells=[
             ("code", "!pip install -q -U safetensors huggingface_hub lpips piq\n!nvidia-smi --query-gpu=name --format=csv"),
             ("code", "import glob, os, json\n"
-                     "cands = [os.path.dirname(p) for p in glob.glob('/kaggle/input/**/latents/index.json', recursive=True)]\n"
+                     "cands = sorted({os.path.dirname(p) for p in glob.glob('/kaggle/input/**/latents/*.npy', recursive=True)})\n"
                      "LATENTS = cands[0] if cands else 'latents'\n"
                      "print('latents:', LATENTS, len(glob.glob(LATENTS + '/*.npy')), 'files')\n"
                      "prev = glob.glob('/kaggle/input/**/s1_out/last.pt', recursive=True)  # resume from a previous run\n"
@@ -196,7 +205,7 @@ SPECS = {
         cells=[
             ("code", "!pip install -q -U safetensors huggingface_hub scipy\n!nvidia-smi --query-gpu=name --format=csv"),
             ("code", "import glob, os\n"
-                     "cands = [os.path.dirname(p) for p in glob.glob('/kaggle/input/**/latents/index.json', recursive=True)]\n"
+                     "cands = sorted({os.path.dirname(p) for p in glob.glob('/kaggle/input/**/latents/*.npy', recursive=True)})\n"
                      "assert cands, 'Chưa gắn Output của s1_cache làm Input'\n"
                      "CACHE = cands[0]; print('cache:', CACHE, len(glob.glob(CACHE + '/*.npy')), 'files')\n"
                      "Q = 'experiments/quant_noise'"),

@@ -48,6 +48,7 @@ def main():
     ap.add_argument("--out", type=Path, default=Path("latents"))
     ap.add_argument("--dtype", choices=["fp32", "fp16"], default="fp16")
     ap.add_argument("--min-side", type=int, default=256, help="skip images smaller than this")
+    ap.add_argument("--allow-cpu", action="store_true", help="CPU encoding takes minutes per 2K image")
     args = ap.parse_args()
 
     dirs = [Path(d) for d in args.images]
@@ -58,9 +59,14 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
 
     dev = device()
+    if dev != "cuda" and not args.allow_cpu:
+        sys.exit("No GPU: enable the GPU accelerator (or check the weekly Kaggle GPU quota). "
+                 "CPU encoding is ~4 min per 2K image; pass --allow-cpu to run anyway.")
     dtype = torch.float16 if args.dtype == "fp16" and dev == "cuda" else torch.float32
     ae = DCAE.from_pretrained(AE_REPO, "vae", dtype=dtype).to(dev).enable_tiling()
-    meta = dict(ae_repo=AE_REPO, scaling_factor=ae.scaling_factor, dtype=str(dtype), f=ae.f, files={})
+    idx_path = args.out / "index.json"
+    old = json.loads(idx_path.read_text()).get("files", {}) if idx_path.exists() else {}
+    meta = dict(ae_repo=AE_REPO, scaling_factor=ae.scaling_factor, dtype=str(dtype), f=ae.f, files=dict(old))
     t0, done = time.time(), 0
     for i, p in enumerate(files):
         key = f"{p.parent.name}__{p.stem}"
@@ -78,11 +84,10 @@ def main():
         np.save(dst, z[0].float().cpu().numpy().astype(np.float16))
         meta["files"][key] = [int(z.shape[2]), int(z.shape[3])]
         done += 1
-        if done % 50 == 0:
-            print(f"{i + 1}/{len(files)}  {done / (time.time() - t0):.2f} img/s", flush=True)
-    old = json.loads((args.out / "index.json").read_text()) if (args.out / "index.json").exists() else {"files": {}}
-    meta["files"] = {**old.get("files", {}), **meta["files"]}
-    (args.out / "index.json").write_text(json.dumps(meta, indent=1))
+        if done in (1, 5) or done % 25 == 0:  # early rate check + incremental index (a cut-off run stays usable)
+            print(f"{i + 1}/{len(files)}  {(time.time() - t0) / done:.2f} s/img on {dev}", flush=True)
+            idx_path.write_text(json.dumps(meta, indent=1))
+    idx_path.write_text(json.dumps(meta, indent=1))
     print("cached", len(meta["files"]), "latents in", args.out)
 
 
