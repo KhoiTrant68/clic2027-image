@@ -183,6 +183,32 @@ SPECS = {
             ("code", "!zip -qr s1_results.zip s1_out/log.json s1_out/selftest.json s1_out/last.pt s1_eval/*.md s1_eval/*.json s1_eval/*.csv "
                      "&& ls -la s1_results.zip"),
         ]),
+    "gonogo1": dict(
+        title="CVPR go/no-go 1 (hạn 04/10): decoder biết mô hình nhiễu chính xác có thắng decoder giả định Gaussian?",
+        intro=f"**Cài đặt:** {KAGGLE_T4}. **Add Input → Notebook Output** của `s1_cache` (dùng lại latent DIV2K, không encode lại). "
+              f"{COMMIT_RUN}\n\n"
+              "Tiêu chí (đã duyệt 27/9): trên latent DC-AE thật, mã hóa bằng bộ mã giả lập KLT 2×2 có subtractive dither ở 4 mức 0.01–0.05 bpp. "
+              "Cùng một CNN khử nhiễu, train với **nhiễu chính xác** (đều, có dither) phải có MSE latent thấp hơn bản train với **giả định Gaussian** "
+              "(kiểu OSCAR) **≥ 5% ở ≥ 2/4 mức rate**, trên Kodak và CLIC2020 professional valid. Mất khoảng 1–1.5 giờ.\n\n"
+              "**Kết quả:** `gonogo1_results.zip`, đặt vào `results/gonogo1/`.",
+        files=PKG + ["experiments/quant_noise/measure_quant_noise.py", "experiments/quant_noise/denoiser_gonogo.py",
+                     "experiments/quant_noise/prepare_gonogo_latents.py"],
+        cells=[
+            ("code", "!pip install -q -U safetensors huggingface_hub scipy\n!nvidia-smi --query-gpu=name --format=csv"),
+            ("code", "import glob, os\n"
+                     "cands = [os.path.dirname(p) for p in glob.glob('/kaggle/input/**/latents/index.json', recursive=True)]\n"
+                     "assert cands, 'Chưa gắn Output của s1_cache làm Input'\n"
+                     "CACHE = cands[0]; print('cache:', CACHE, len(glob.glob(CACHE + '/*.npy')), 'files')\n"
+                     "Q = 'experiments/quant_noise'"),
+            ("code", "!python {Q}/prepare_gonogo_latents.py --from-cache {CACHE} --out runs/div2k\n"
+                     "!python {Q}/prepare_gonogo_latents.py --kodak --out runs/kodak\n"
+                     "!python {Q}/prepare_gonogo_latents.py --clic-valid --out runs/clic2020_valid"),
+            ("code", "!cd {Q} && python denoiser_gonogo.py --train ../../runs/div2k --test ../../runs/kodak ../../runs/clic2020_valid "
+                     "--out ../../runs/gonogo1 --device cuda"),
+            ("code", "from IPython.display import Markdown, display\n"
+                     "display(Markdown(open('runs/gonogo1/summary.md', encoding='utf-8').read()))"),
+            ("code", "!cd runs/gonogo1 && zip -q ../../gonogo1_results.zip * && ls -la ../../gonogo1_results.zip"),
+        ]),
 }
 
 
