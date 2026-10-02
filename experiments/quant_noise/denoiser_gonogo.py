@@ -143,6 +143,7 @@ def train_arm(arm, latents, klt, deltas, args, device):
         with torch.no_grad():
             zh = channel(z, klt, ld.exp(), train_channel, gen)
         loss = F.mse_loss(model(zh, ld), z)
+        model.last_losses = (getattr(model, "last_losses", []) + [loss.item()])[-500:]
         opt.zero_grad(set_to_none=True)
         loss.backward()
         opt.step()
@@ -192,6 +193,8 @@ def main():
     ap.add_argument("--n_draws", type=int, default=4)
     ap.add_argument("--threshold", type=float, default=0.05)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--holdout", type=int, default=8, help="training images held out as an in-distribution test set")
+    ap.add_argument("--min-train", type=int, default=200, help="refuse to run with fewer training images (memorisation)")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     device = torch.device(args.device)
@@ -206,6 +209,13 @@ def main():
     crop_ok = [z for z in train_lat if z.shape[1] >= args.crop and z.shape[2] >= args.crop]
     assert crop_ok, "no training latent is large enough for --crop"
     train_lat = crop_ok
+    if not args.synthetic:
+        assert len(train_lat) - args.holdout >= args.min_train, (
+            f"only {len(train_lat)} training latents: a 2.4M-parameter denoiser memorises them and does worse than "
+            f"identity on new images; need >= {args.min_train + args.holdout} (or lower --min-train for a smoke run)")
+    if args.holdout:
+        tests = {"train_holdout": (train_lat[-args.holdout:], down), **tests}
+        train_lat = train_lat[:-args.holdout]
 
     # transform coder + step sizes, fitted on TRAIN latents only
     tc = TransformCoder(train_lat, 2, "pca")
@@ -231,7 +241,10 @@ def main():
     lines = ["# Go/no-go 1 (a): exact noise model vs Gaussian assumption", "",
              f"Train latents: {len(train_lat)}; threshold: exact must beat gaussian by ≥ {args.threshold:.0%} "
              "latent MSE at ≥ 2 of the rates (per test set).", ""]
+    lines += ["Final train loss (mean of last 500 steps): " + ", ".join(
+        f"{a} {np.mean(getattr(m, 'last_losses', [float('nan')])):.4f}" for a, m in models.items()), ""]
     for name, (lat, _) in tests.items():
+        invalid = 0
         lat = [z[:, : z.shape[1] // 2 * 2, : z.shape[2] // 2 * 2] for z in lat]
         ev = evaluate(models, lat, klt, deltas, args, device)
         wins = 0
@@ -241,12 +254,16 @@ def main():
         for info, delta in zip(rate_info, deltas):
             e = ev[delta]
             gain = 1 - e["exact"] / e["gaussian"]
-            wins += gain >= args.threshold
+            valid = e["exact"] < e["raw_dither"]
+            invalid += not valid
+            wins += (gain >= args.threshold) and valid
             lines.append(f"| {info['target_bpp']:.3f} | {delta:.3f} | {e['raw_dither']:.4f} | {e['exact']:.4f} | "
                          f"{e['gaussian']:.4f} | {gain:+.1%} | {e['raw_nodither']:.4f} | {e['nodither']:.4f} |")
         passed = wins >= 2
-        lines += ["", f"**{name}: {wins}/{len(deltas)} rates reach the threshold -> {'PASS' if passed else 'FAIL'}**", ""]
-        results["tests"][name] = {"per_delta": {str(k): v for k, v in ev.items()}, "wins": int(wins), "pass": bool(passed)}
+        verdict = "INVALID (denoiser worse than its input)" if invalid >= 2 else ("PASS" if passed else "FAIL")
+        lines += ["", f"**{name}: {wins}/{len(deltas)} valid rates reach the threshold -> {verdict}**", ""]
+        results["tests"][name] = {"per_delta": {str(k): v for k, v in ev.items()}, "wins": int(wins), "pass": bool(passed),
+                                  "invalid_rates": int(invalid), "verdict": verdict}
     lines += ["Note: the no-dither arm uses the same Δ, so its true rate is lower than the dithered arms'; "
               "compare it only together with the rate table in results.json."]
     (args.out / "results.json").write_text(json.dumps(results, indent=2))
