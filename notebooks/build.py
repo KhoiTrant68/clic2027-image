@@ -236,10 +236,23 @@ def cell(kind, src):
     return c
 
 
+NET_CHECK = (  # fail in seconds instead of minutes of pip retries when Kaggle's Internet toggle is off
+    "import socket\n"
+    "for host in ('pypi.org', 'huggingface.co'):\n"
+    "    try:\n"
+    "        socket.create_connection((host, 443), timeout=5).close()\n"
+    "    except OSError:\n"
+    "        raise RuntimeError(f'Không có Internet ({host}): bật Settings → Internet → On '\n"
+    "                           '(Kaggle yêu cầu tài khoản đã xác minh số điện thoại)')\n"
+    "print('Internet OK')"
+)
+
+
 def build(name, spec, rev):
     dirs = sorted({str(Path(f).parent).replace("\\", "/") for f in spec["files"]})
     cells = [cell("md", f"# {spec['title']}\n\n{spec['intro']}\n\n"
                         f"*Sinh bởi `notebooks/build.py` từ commit `{rev}` của repo; đừng sửa tay notebook này.*"),
+             cell("code", NET_CHECK),
              cell("code", "!mkdir -p " + " ".join(dirs))]
     for f in spec["files"]:
         cells.append(cell("code", f"%%writefile {f}\n" + (REPO / f).read_text(encoding="utf-8")))
