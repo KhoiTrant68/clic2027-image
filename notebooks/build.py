@@ -212,8 +212,14 @@ SPECS = {
             ("code", "!python {Q}/prepare_gonogo_latents.py --from-cache {CACHE} --out runs/div2k\n"
                      "!python {Q}/prepare_gonogo_latents.py --kodak --out runs/kodak\n"
                      "!python {Q}/prepare_gonogo_latents.py --clic-valid --out runs/clic2020_valid"),
-            ("code", "!cd {Q} && python denoiser_gonogo.py --train ../../runs/div2k --test ../../runs/kodak ../../runs/clic2020_valid "
-                     "--out ../../runs/gonogo1 --device cuda"),
+            ("code", "import torch\n"
+                     "if torch.cuda.is_available():\n"
+                     "    RUN = '--device cuda'  # full config (20k steps, width 128): numbers for the paper\n"
+                     "else:  # no GPU: smaller net and fewer steps, a PRELIMINARY decision only\n"
+                     "    RUN = '--device cpu --steps 4000 --width 64 --blocks 6 --batch 32 --n_draws 2'\n"
+                     "    print('KHÔNG có GPU: chạy cấu hình rút gọn trên CPU; kết quả chỉ là sơ bộ, chạy lại trên GPU sau')\n"
+                     "!cd {Q} && python denoiser_gonogo.py --train ../../runs/div2k --test ../../runs/kodak ../../runs/clic2020_valid "
+                     "--out ../../runs/gonogo1 {RUN}"),
             ("code", "from IPython.display import Markdown, display\n"
                      "display(Markdown(open('runs/gonogo1/summary.md', encoding='utf-8').read()))"),
             ("code", "!cd runs/gonogo1 && zip -q ../../gonogo1_results.zip * && ls -la ../../gonogo1_results.zip"),
