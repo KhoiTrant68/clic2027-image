@@ -49,11 +49,14 @@ def main():
     ap.add_argument("--dtype", choices=["fp32", "fp16"], default="fp16")
     ap.add_argument("--min-side", type=int, default=256, help="skip images smaller than this")
     ap.add_argument("--allow-cpu", action="store_true", help="CPU encoding takes minutes per 2K image")
+    ap.add_argument("--download-only", action="store_true")
     args = ap.parse_args()
 
     dirs = [Path(d) for d in args.images]
     if args.download_div2k:
         dirs.append(download_div2k(args.data))
+    if args.download_only:
+        return
     files = [p for d in dirs for p in images(d)]
     assert files, "no images"
     args.out.mkdir(parents=True, exist_ok=True)

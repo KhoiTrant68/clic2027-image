@@ -1,0 +1,303 @@
+"""One entry point for every GPU job: Kaggle or a rented machine, resumable, one results zip.
+
+    python experiments/pipeline.py                     # default stages
+    python experiments/pipeline.py gonogo1 s1          # only some stages (dependencies run if not done)
+    python experiments/pipeline.py --hours 11 --dry-run
+
+Stages (in order): check, data, cache, gonogo1, s1, s1_eval, [ceiling], [parity], pack
+  check     GPU + Internet + packages (installs missing pip packages)
+  data      DIV2K train HR (800 images) into <work>/data
+  cache     DC-AE latents of the training images into <work>/latents (resumes; reuses latents found in inputs)
+  gonogo1   go/no-go 1: exact-noise vs Gaussian-assumption denoiser (refuses < 208 training latents)
+  s1        S1 selftest, then training (resumes from <work>/s1/last.pt); time-boxed by --hours
+  s1_eval   Kodak, real bitstreams, vs the DC-AE ceiling
+  ceiling   (optional) DC-AE / SD-VAE ceilings on Kodak, CLIC2020, DIV2K-val incl. FID/KID
+  parity    (optional) ratflow.nn / ratflow.entropy vs diffusers and CPU vs GPU
+  pack      <work>/results.zip with every summary (+ the S1 checkpoint)
+
+State lives in <work>/state.json; finished stages are skipped on re-runs. On Kaggle, attach the previous
+run's output as Input and the work directory is restored automatically.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import shutil
+import socket
+import subprocess
+import sys
+import time
+import zipfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+KAGGLE = Path("/kaggle/working").exists()
+DEFAULT_STAGES = ["check", "data", "cache", "gonogo1", "s1", "s1_eval", "pack"]
+ALL_STAGES = ["check", "data", "cache", "gonogo1", "s1", "s1_eval", "ceiling", "parity", "pack"]
+NEEDS = {"cache": ["data"], "gonogo1": ["cache"], "s1": ["cache"], "s1_eval": ["s1"]}  # deps run if not done
+PIP = {"safetensors": "safetensors", "huggingface_hub": "huggingface_hub", "scipy": "scipy", "lpips": "lpips",
+       "piq": "piq", "torchmetrics": "torchmetrics", "torch_fidelity": "torch-fidelity", "PIL": "pillow"}
+MIN_TRAIN_LATENTS = 208  # gonogo1: 200 train + 8 holdout
+
+
+class Pipeline:
+    def __init__(self, a):
+        self.a = a
+        self.work = Path(a.work)
+        self.work.mkdir(parents=True, exist_ok=True)
+        self.t0 = time.time()
+        self.state_path = self.work / "state.json"
+        self.state = json.loads(self.state_path.read_text()) if self.state_path.exists() else {}
+        self.log = open(self.work / "pipeline.log", "a", encoding="utf-8")
+        self.commit = (ROOT / ".commit").read_text().strip() if (ROOT / ".commit").exists() else _git_rev()
+
+    # ---------------------------------------------------------------- helpers
+    def say(self, *msg):
+        line = f"[{time.strftime('%H:%M:%S')} +{(time.time() - self.t0) / 60:5.1f}m] " + " ".join(map(str, msg))
+        print(line, flush=True)
+        self.log.write(line + "\n")
+        self.log.flush()
+
+    def run(self, *cmd, cwd=None):
+        cmd = [str(c) for c in cmd]
+        self.say("$", " ".join(cmd))
+        if self.a.dry_run:
+            return
+        env = dict(os.environ, PYTHONUNBUFFERED="1")
+        p = subprocess.Popen(cmd, cwd=cwd or ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, env=env)
+        for line in p.stdout:
+            print(line, end="", flush=True)
+            self.log.write(line)
+        if p.wait():
+            raise RuntimeError(f"command failed ({p.returncode}): {' '.join(cmd)}")
+
+    def py(self, script, *args):
+        self.run(sys.executable, ROOT / script, *args)
+
+    def hours_left(self):
+        return self.a.hours - (time.time() - self.t0) / 3600
+
+    def done(self, stage):
+        return self.state.get(stage, {}).get("done", False)
+
+    def mark(self, stage, **info):
+        self.state[stage] = dict(done=True, seconds=round(time.time() - self._stage_t0), commit=self.commit, **info)
+        if not self.a.dry_run:
+            self.state_path.write_text(json.dumps(self.state, indent=1))
+
+    def inputs(self):
+        roots = [Path(p) for p in self.a.inputs] + ([Path("/kaggle/input")] if KAGGLE else [])
+        return [r for r in roots if r.exists()]
+
+    # ---------------------------------------------------------------- restore a previous run
+    def restore(self):
+        for r in self.inputs():
+            for st in sorted(r.rglob("state.json")):
+                prev = st.parent
+                if prev.resolve() == self.work.resolve() or not (prev / "pipeline.log").exists():
+                    continue
+                self.say("restoring previous work dir from", prev)
+                if not self.a.dry_run:
+                    shutil.copytree(prev, self.work, dirs_exist_ok=True,
+                                    ignore=shutil.ignore_patterns("data", "results.zip"))
+                    self.state = json.loads(self.state_path.read_text())
+                return
+
+    # ---------------------------------------------------------------- stages
+    def check(self):
+        missing = []
+        for mod, pkg in PIP.items():
+            try:
+                __import__(mod)
+            except ImportError:
+                missing.append(pkg)
+        net = all(_reachable(h) for h in ("pypi.org", "huggingface.co"))
+        if not net:
+            raise SystemExit("No Internet (pypi.org / huggingface.co unreachable). On Kaggle: Settings -> Internet -> On "
+                             "(needs a phone-verified account).")
+        if missing:
+            self.run(sys.executable, "-m", "pip", "install", "-q", *missing)
+        import torch
+        gpu = torch.cuda.get_device_name(0) if torch.cuda.is_available() else None
+        self.say("torch", torch.__version__, "| GPU:", gpu, "| work:", self.work)
+        if not gpu and not self.a.allow_cpu:
+            raise SystemExit("No GPU. On Kaggle: Settings -> Accelerator -> GPU (and check the weekly quota). "
+                             "--allow-cpu runs anyway (hours per stage).")
+        return dict(gpu=gpu, torch=torch.__version__)
+
+    def _gather_latents(self):
+        lat = self.work / "latents"
+        lat.mkdir(parents=True, exist_ok=True)
+        for r in self.inputs():  # reuse latents from attached inputs (e.g. an earlier s1_cache output)
+            for f in r.rglob("latents/*.npy"):
+                if not (lat / f.name).exists() and not self.a.dry_run:
+                    shutil.copy(f, lat / f.name)
+        return len(list(lat.glob("DIV2K_train_HR__*.npy")))
+
+    def data(self):
+        have = self._gather_latents()
+        if have >= 800:
+            return dict(div2k_latents=have, downloaded=False)
+        self.py("experiments/s1/cache_latents.py", "--download-div2k", "--download-only", "--data", self.work / "data")
+        return dict(div2k_latents=have, downloaded=True)
+
+    def cache(self):
+        lat = self.work / "latents"
+        self._gather_latents()
+        dirs = [d for d in [self.work / "data" / "DIV2K_train_HR", *map(Path, self.a.extra_images)] if d.exists()]
+        if dirs:
+            self.py("experiments/s1/cache_latents.py", "--images", *dirs, "--out", lat, "--dtype", "fp16",
+                    *(["--allow-cpu"] if self.a.allow_cpu else []))
+        n = len(list(lat.glob("*.npy")))
+        self.say("latents:", n)
+        if n < MIN_TRAIN_LATENTS and not self.a.dry_run:
+            raise SystemExit(f"only {n} latents cached; need >= {MIN_TRAIN_LATENTS}")
+        if not self.a.keep_images and not self.a.dry_run:
+            shutil.rmtree(self.work / "data", ignore_errors=True)  # keep Kaggle outputs small
+        return dict(latents=n)
+
+    def gonogo1(self):
+        g = self.work / "gonogo1"
+        q = "experiments/quant_noise"
+        self.py(f"{q}/prepare_gonogo_latents.py", "--from-cache", self.work / "latents", "--out", g / "div2k")
+        self.py(f"{q}/prepare_gonogo_latents.py", "--kodak", "--data", g / "img", "--out", g / "kodak")
+        self.py(f"{q}/prepare_gonogo_latents.py", "--clic-valid", "--data", g / "img", "--out", g / "clic2020_valid")
+        dev = ["--device", "cuda"] if self.state.get("check", {}).get("gpu") else \
+              ["--device", "cpu", "--steps", "4000", "--width", "64", "--blocks", "6", "--batch", "32", "--n_draws", "2"]
+        self.py(f"{q}/denoiser_gonogo.py", "--train", g / "div2k", "--test", g / "kodak", g / "clic2020_valid",
+                "--out", g / "result", *dev)
+        shutil.rmtree(g / "img", ignore_errors=True)
+        res = json.loads((g / "result" / "results.json").read_text()) if (g / "result" / "results.json").exists() else {}
+        return dict(verdicts={k: v.get("verdict", v.get("pass")) for k, v in res.get("tests", {}).items()})
+
+    def s1(self):
+        out = self.work / "s1"
+        self.py("experiments/s1/train_s1.py", "selftest", "--out", out)
+        if not self.a.dry_run and not json.loads((out / "selftest.json").read_text())["ok"]:
+            raise SystemExit("S1 selftest FAILED: the bitstream is not bit-exact; see pipeline.log")
+        hours = max(0.25, self.hours_left() - self.a.reserve_hours)
+        self.py("experiments/s1/train_s1.py", "train", "--latents", self.work / "latents", "--out", out,
+                "--hours", f"{hours:.2f}", *self.a.s1_args)
+        log = json.loads((out / "log.json").read_text()) if (out / "log.json").exists() else {}
+        steps = log.get("log", [{}])[-1].get("step") if log.get("log") else None
+        if steps is None or steps < self.a.s1_min_steps:
+            self.say(f"S1 stopped at step {steps} (time budget): evaluating this checkpoint; re-run to resume")
+            return dict(steps=steps, _incomplete=True)
+        return dict(steps=steps)
+
+    def s1_eval(self):
+        self.py("experiments/s1/eval_s1.py", "--ckpt", self.work / "s1" / "last.pt", "--dataset", "kodak",
+                "--data", self.work / "eval_img", "--out", self.work / "s1_eval")
+        shutil.rmtree(self.work / "eval_img", ignore_errors=True)
+        return {}
+
+    def ceiling(self):
+        self.py("experiments/ceiling/ceiling.py", "all", "--data", self.work / "ceiling_data",
+                "--out", self.work / "ceiling")
+        shutil.rmtree(self.work / "ceiling_data", ignore_errors=True)
+        return {}
+
+    def parity(self):
+        self.run(sys.executable, "-m", "pip", "install", "-q", "diffusers", "accelerate")
+        self.py("experiments/parity/parity.py", "all", "--out", self.work / "parity")
+        return {}
+
+    def pack(self):
+        z = self.work / "results.zip"
+        keep = [p for p in self.work.rglob("*") if p.is_file() and (
+            p.suffix in (".md", ".json", ".csv", ".log") or (p.name == "last.pt" and self.a.pack_ckpt))
+            and "latents" not in p.parts and "data" not in p.parts and p.name != "results.zip"]
+        if not self.a.dry_run:
+            with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as f:
+                for p in keep:
+                    f.write(p, p.relative_to(self.work))
+            if KAGGLE:
+                shutil.copy(z, "/kaggle/working/results.zip")
+        self.say("packed", len(keep), "files ->", z)
+        return dict(files=len(keep))
+
+    # ---------------------------------------------------------------- driver
+    def main(self):
+        self.say(f"ratflow pipeline @ {self.commit} | stages {self.a.stages} | budget {self.a.hours} h")
+        self.restore()
+        order = []
+        for s in self.a.stages:
+            for dep in NEEDS.get(s, []) + [s]:
+                if dep not in order:
+                    order.append(dep)
+        order = [s for s in ALL_STAGES if s in order]
+        for s in order:
+            if s not in ("check", "pack") and self.done(s) and s not in self.a.redo:
+                self.say(f"== {s}: already done, skipping")
+                continue
+            if s == "s1_eval" and not self.a.dry_run and not (self.work / "s1" / "last.pt").exists():
+                self.say("== s1_eval: no S1 checkpoint yet, skipping")
+                continue
+            if self.hours_left() < 0.1 and s != "pack":
+                self.say(f"== {s}: out of time budget, stopping (re-run to continue)")
+                break
+            self.say(f"== {s}")
+            self._stage_t0 = time.time()
+            try:
+                info = getattr(self, s)() or {}
+            except (Exception, SystemExit) as e:  # noqa: BLE001  record, pack what exists, re-raise
+                self.state[s] = dict(done=False, error=str(e)[-2000:], commit=self.commit)
+                self.state_path.write_text(json.dumps(self.state, indent=1))
+                self.say(f"== {s}: FAILED: {e}")
+                self._stage_t0 = time.time()
+                self.pack()
+                raise
+            if info.pop("_incomplete", False):
+                self.state[s] = dict(done=False, seconds=round(time.time() - self._stage_t0), commit=self.commit, **info)
+                self.state_path.write_text(json.dumps(self.state, indent=1))
+                self.say(f"== {s}: incomplete", info)
+                continue
+            self.mark(s, **info)
+            self.say(f"== {s}: done", info)
+        if "pack" not in order:
+            self._stage_t0 = time.time()
+            self.pack()
+
+
+def _reachable(host):
+    try:
+        socket.create_connection((host, 443), timeout=5).close()
+        return True
+    except OSError:
+        return False
+
+
+def _git_rev():
+    try:
+        return subprocess.run(["git", "-C", str(ROOT), "describe", "--always", "--dirty"],
+                              capture_output=True, text=True).stdout.strip() or "unknown"
+    except OSError:
+        return "unknown"
+
+
+def parse(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("stages", nargs="*", help=f"subset of {ALL_STAGES} (default: {DEFAULT_STAGES})")
+    ap.add_argument("--work", default="/kaggle/working/work" if KAGGLE else "work")
+    ap.add_argument("--hours", type=float, default=11.3 if KAGGLE else 24.0, help="total wall-clock budget")
+    ap.add_argument("--reserve-hours", type=float, default=0.75, help="kept for s1_eval + pack after training")
+    ap.add_argument("--inputs", nargs="*", default=[], help="dirs searched for a previous work dir / latents")
+    ap.add_argument("--extra-images", nargs="*", default=[], help="more training image dirs (Flickr2K, LSDIR)")
+    ap.add_argument("--s1-args", nargs=argparse.REMAINDER, default=[], help="passed to train_s1.py train (put last)")
+    ap.add_argument("--s1-min-steps", type=int, default=150_000, help="S1 counts as done only after this many steps")
+    ap.add_argument("--redo", nargs="*", default=[], help="stages to run again even if done")
+    ap.add_argument("--keep-images", action="store_true")
+    ap.add_argument("--pack-ckpt", action="store_true", default=True)
+    ap.add_argument("--allow-cpu", action="store_true")
+    ap.add_argument("--dry-run", action="store_true", help="print the commands only")
+    a = ap.parse_args(argv)
+    a.stages = a.stages or DEFAULT_STAGES
+    bad = [x for x in a.stages + a.redo if x not in ALL_STAGES]
+    if bad:
+        ap.error(f"unknown stage(s) {bad}; choose from {ALL_STAGES}")
+    return a
+
+
+if __name__ == "__main__":
+    Pipeline(parse()).main()

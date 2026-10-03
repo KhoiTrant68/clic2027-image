@@ -24,3 +24,6 @@ desktop.ini
 # checkpoints (keep them as Kaggle outputs / local files)
 *.pt
 *.pt.tmp
+
+# bundled single-file runner (tools/bundle.py)
+dist/
