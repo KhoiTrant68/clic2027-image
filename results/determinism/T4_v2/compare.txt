@@ -1,0 +1,93 @@
+out/T4_sys_run1.npz {'tag': 'T4_sys_run1', 'device': 'cuda', 'torch': '2.10.0+cu128', 'cuda': '12.8', 'cudnn': 91002, 'numpy': '2.0.2', 'python': '3.12.13', 'gpu': 'Tesla T4'}
+out/T4_sys_run2.npz {'tag': 'T4_sys_run2', 'device': 'cuda', 'torch': '2.10.0+cu128', 'cuda': '12.8', 'cudnn': 91002, 'numpy': '2.0.2', 'python': '3.12.13', 'gpu': 'Tesla T4'}
+out/T4_t26.npz {'tag': 'T4_t26', 'device': 'cuda', 'torch': '2.6.0+cu124', 'cuda': '12.4', 'cudnn': 90100, 'numpy': '1.26.4', 'python': '3.12.13', 'gpu': 'Tesla T4'}
+out/T4host_sys_cpu.npz {'tag': 'T4host_sys_cpu', 'device': 'cpu', 'torch': '2.10.0+cu128', 'cuda': '12.8', 'cudnn': 91002, 'numpy': '2.0.2', 'python': '3.12.13', 'gpu': 'x86_64'}
+out/T4host_t26_cpu.npz {'tag': 'T4host_t26_cpu', 'device': 'cpu', 'torch': '2.6.0+cu124', 'cuda': '12.4', 'cudnn': 90100, 'numpy': '1.26.4', 'python': '3.12.13', 'gpu': 'x86_64'}
+
+key                      pair                                       idx mismatch       max rel dscale
+s0_bf16_idx              T4_sys_run1.npz vs T4_sys_run2.npz              0/1966080           0.00e+00
+s0_float32_idx           T4_sys_run1.npz vs T4_sys_run2.npz              0/1966080           0.00e+00
+s0_float32tf_idx         T4_sys_run1.npz vs T4_sys_run2.npz              0/1966080           0.00e+00
+s0_intsim_idx            T4_sys_run1.npz vs T4_sys_run2.npz              0/1966080                   
+s1_bf16_idx              T4_sys_run1.npz vs T4_sys_run2.npz              0/7864320           0.00e+00
+s1_float32_idx           T4_sys_run1.npz vs T4_sys_run2.npz              0/7864320           0.00e+00
+s1_float32tf_idx         T4_sys_run1.npz vs T4_sys_run2.npz              0/7864320           0.00e+00
+s1_intsim_idx            T4_sys_run1.npz vs T4_sys_run2.npz              0/7864320                   
+s0_bf16_idx              T4_sys_run1.npz vs T4_t26.npz                   0/1966080           0.00e+00
+s0_float32_idx           T4_sys_run1.npz vs T4_t26.npz                  12/1966080           9.94e-06
+s0_float32tf_idx         T4_sys_run1.npz vs T4_t26.npz                  12/1966080           9.94e-06
+s0_intsim_idx            T4_sys_run1.npz vs T4_t26.npz                   0/1966080                   
+s1_bf16_idx              T4_sys_run1.npz vs T4_t26.npz                   0/7864320           0.00e+00
+s1_float32_idx           T4_sys_run1.npz vs T4_t26.npz                   0/7864320           0.00e+00
+s1_float32tf_idx         T4_sys_run1.npz vs T4_t26.npz                   0/7864320           0.00e+00
+s1_intsim_idx            T4_sys_run1.npz vs T4_t26.npz                   0/7864320                   
+s0_bf16_idx              T4_sys_run1.npz vs T4host_sys_cpu.npz         126/1966080           7.87e-03
+s0_float32_idx           T4_sys_run1.npz vs T4host_sys_cpu.npz          11/1966080           1.09e-05
+s0_float32tf_idx         T4_sys_run1.npz vs T4host_sys_cpu.npz          11/1966080           1.09e-05
+s0_intsim_idx            T4_sys_run1.npz vs T4host_sys_cpu.npz           0/1966080                   
+s1_bf16_idx              T4_sys_run1.npz vs T4host_sys_cpu.npz        1114/7864320           7.87e-03
+s1_float32_idx           T4_sys_run1.npz vs T4host_sys_cpu.npz          79/7864320           1.52e-05
+s1_float32tf_idx         T4_sys_run1.npz vs T4host_sys_cpu.npz          79/7864320           1.52e-05
+s1_intsim_idx            T4_sys_run1.npz vs T4host_sys_cpu.npz           0/7864320                   
+s0_bf16_idx              T4_sys_run1.npz vs T4host_t26_cpu.npz         126/1966080           7.87e-03
+s0_float32_idx           T4_sys_run1.npz vs T4host_t26_cpu.npz          11/1966080           1.09e-05
+s0_float32tf_idx         T4_sys_run1.npz vs T4host_t26_cpu.npz          11/1966080           1.09e-05
+s0_intsim_idx            T4_sys_run1.npz vs T4host_t26_cpu.npz           0/1966080                   
+s1_bf16_idx              T4_sys_run1.npz vs T4host_t26_cpu.npz        1114/7864320           7.87e-03
+s1_float32_idx           T4_sys_run1.npz vs T4host_t26_cpu.npz          79/7864320           1.52e-05
+s1_float32tf_idx         T4_sys_run1.npz vs T4host_t26_cpu.npz          79/7864320           1.52e-05
+s1_intsim_idx            T4_sys_run1.npz vs T4host_t26_cpu.npz           0/7864320                   
+s0_bf16_idx              T4_sys_run2.npz vs T4_t26.npz                   0/1966080           0.00e+00
+s0_float32_idx           T4_sys_run2.npz vs T4_t26.npz                  12/1966080           9.94e-06
+s0_float32tf_idx         T4_sys_run2.npz vs T4_t26.npz                  12/1966080           9.94e-06
+s0_intsim_idx            T4_sys_run2.npz vs T4_t26.npz                   0/1966080                   
+s1_bf16_idx              T4_sys_run2.npz vs T4_t26.npz                   0/7864320           0.00e+00
+s1_float32_idx           T4_sys_run2.npz vs T4_t26.npz                   0/7864320           0.00e+00
+s1_float32tf_idx         T4_sys_run2.npz vs T4_t26.npz                   0/7864320           0.00e+00
+s1_intsim_idx            T4_sys_run2.npz vs T4_t26.npz                   0/7864320                   
+s0_bf16_idx              T4_sys_run2.npz vs T4host_sys_cpu.npz         126/1966080           7.87e-03
+s0_float32_idx           T4_sys_run2.npz vs T4host_sys_cpu.npz          11/1966080           1.09e-05
+s0_float32tf_idx         T4_sys_run2.npz vs T4host_sys_cpu.npz          11/1966080           1.09e-05
+s0_intsim_idx            T4_sys_run2.npz vs T4host_sys_cpu.npz           0/1966080                   
+s1_bf16_idx              T4_sys_run2.npz vs T4host_sys_cpu.npz        1114/7864320           7.87e-03
+s1_float32_idx           T4_sys_run2.npz vs T4host_sys_cpu.npz          79/7864320           1.52e-05
+s1_float32tf_idx         T4_sys_run2.npz vs T4host_sys_cpu.npz          79/7864320           1.52e-05
+s1_intsim_idx            T4_sys_run2.npz vs T4host_sys_cpu.npz           0/7864320                   
+s0_bf16_idx              T4_sys_run2.npz vs T4host_t26_cpu.npz         126/1966080           7.87e-03
+s0_float32_idx           T4_sys_run2.npz vs T4host_t26_cpu.npz          11/1966080           1.09e-05
+s0_float32tf_idx         T4_sys_run2.npz vs T4host_t26_cpu.npz          11/1966080           1.09e-05
+s0_intsim_idx            T4_sys_run2.npz vs T4host_t26_cpu.npz           0/1966080                   
+s1_bf16_idx              T4_sys_run2.npz vs T4host_t26_cpu.npz        1114/7864320           7.87e-03
+s1_float32_idx           T4_sys_run2.npz vs T4host_t26_cpu.npz          79/7864320           1.52e-05
+s1_float32tf_idx         T4_sys_run2.npz vs T4host_t26_cpu.npz          79/7864320           1.52e-05
+s1_intsim_idx            T4_sys_run2.npz vs T4host_t26_cpu.npz           0/7864320                   
+s0_bf16_idx              T4_t26.npz vs T4host_sys_cpu.npz              126/1966080           7.87e-03
+s0_float32_idx           T4_t26.npz vs T4host_sys_cpu.npz               11/1966080           9.22e-06
+s0_float32tf_idx         T4_t26.npz vs T4host_sys_cpu.npz               11/1966080           9.22e-06
+s0_intsim_idx            T4_t26.npz vs T4host_sys_cpu.npz                0/1966080                   
+s1_bf16_idx              T4_t26.npz vs T4host_sys_cpu.npz             1114/7864320           7.87e-03
+s1_float32_idx           T4_t26.npz vs T4host_sys_cpu.npz               79/7864320           1.52e-05
+s1_float32tf_idx         T4_t26.npz vs T4host_sys_cpu.npz               79/7864320           1.52e-05
+s1_intsim_idx            T4_t26.npz vs T4host_sys_cpu.npz                0/7864320                   
+s0_bf16_idx              T4_t26.npz vs T4host_t26_cpu.npz              126/1966080           7.87e-03
+s0_float32_idx           T4_t26.npz vs T4host_t26_cpu.npz               11/1966080           9.22e-06
+s0_float32tf_idx         T4_t26.npz vs T4host_t26_cpu.npz               11/1966080           9.22e-06
+s0_intsim_idx            T4_t26.npz vs T4host_t26_cpu.npz                0/1966080                   
+s1_bf16_idx              T4_t26.npz vs T4host_t26_cpu.npz             1114/7864320           7.87e-03
+s1_float32_idx           T4_t26.npz vs T4host_t26_cpu.npz               79/7864320           1.52e-05
+s1_float32tf_idx         T4_t26.npz vs T4host_t26_cpu.npz               79/7864320           1.52e-05
+s1_intsim_idx            T4_t26.npz vs T4host_t26_cpu.npz                0/7864320                   
+s0_bf16_idx              T4host_sys_cpu.npz vs T4host_t26_cpu.npz        0/1966080           0.00e+00
+s0_float32_idx           T4host_sys_cpu.npz vs T4host_t26_cpu.npz        0/1966080           0.00e+00
+s0_float32tf_idx         T4host_sys_cpu.npz vs T4host_t26_cpu.npz        0/1966080           0.00e+00
+s0_intsim_idx            T4host_sys_cpu.npz vs T4host_t26_cpu.npz        0/1966080                   
+s1_bf16_idx              T4host_sys_cpu.npz vs T4host_t26_cpu.npz        0/7864320           0.00e+00
+s1_float32_idx           T4host_sys_cpu.npz vs T4host_t26_cpu.npz        0/7864320           0.00e+00
+s1_float32tf_idx         T4host_sys_cpu.npz vs T4host_t26_cpu.npz        0/7864320           0.00e+00
+s1_intsim_idx            T4host_sys_cpu.npz vs T4host_t26_cpu.npz        0/7864320                   
+
+Verdict (worst case over all pairs and sizes):
+  bf16_idx         BROKEN: 1114 mismatched indices
+  float32_idx      BROKEN: 79 mismatched indices
+  float32tf_idx    BROKEN: 79 mismatched indices
+  intsim_idx       OK (bit-exact)

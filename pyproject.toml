@@ -1,0 +1,22 @@
+[project]
+name = "ratflow"
+version = "0.1.0"
+description = "Rate-as-Time flow-bridge image codec (CVPR 2027) and its CLIC 2027 submission"
+requires-python = ">=3.10"
+dependencies = ["numpy", "pillow"]
+
+[project.optional-dependencies]
+eval = ["torch", "lpips", "piq", "torchmetrics", "torch-fidelity", "easyocr"]
+ae = ["safetensors", "huggingface_hub"]
+parity = ["diffusers", "accelerate"]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
