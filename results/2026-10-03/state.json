@@ -1,0 +1,43 @@
+{
+ "check": {
+  "done": true,
+  "seconds": 36,
+  "commit": "622f60c",
+  "gpu": "Tesla T4",
+  "torch": "2.11.0+cu128"
+ },
+ "data": {
+  "done": true,
+  "seconds": 130,
+  "commit": "622f60c",
+  "div2k_latents": 0,
+  "downloaded": true
+ },
+ "cache": {
+  "done": true,
+  "seconds": 1646,
+  "commit": "622f60c",
+  "latents": 800
+ },
+ "gonogo1": {
+  "done": true,
+  "seconds": 2767,
+  "commit": "622f60c",
+  "verdicts": {
+   "train_holdout": "FAIL",
+   "kodak": "FAIL",
+   "clic2020_valid": "FAIL"
+  }
+ },
+ "s1": {
+  "done": true,
+  "seconds": 8510,
+  "commit": "622f60c",
+  "steps": 200000
+ },
+ "s1_eval": {
+  "done": true,
+  "seconds": 372,
+  "commit": "622f60c"
+ }
+}

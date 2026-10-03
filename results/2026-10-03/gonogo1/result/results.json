@@ -1,0 +1,157 @@
+{
+  "args": {
+    "train": "/kaggle/working/work/gonogo1/div2k",
+    "test": "[PosixPath('/kaggle/working/work/gonogo1/kodak'), PosixPath('/kaggle/working/work/gonogo1/clic2020_valid')]",
+    "synthetic": "False",
+    "out": "/kaggle/working/work/gonogo1/result",
+    "bpp": "[0.01, 0.02, 0.03, 0.05]",
+    "device": "cuda",
+    "steps": "20000",
+    "batch": "64",
+    "crop": "16",
+    "width": "128",
+    "blocks": "8",
+    "lr": "0.0002",
+    "n_draws": "4",
+    "threshold": "0.05",
+    "seed": "0",
+    "holdout": "8",
+    "min_train": "200"
+  },
+  "rates": [
+    {
+      "target_bpp": 0.01,
+      "delta": 3.0124908108048016,
+      "bpp_nodither": 0.010000000636434981,
+      "bpp_dither_marginal_upper_bound": 0.026758654143034417
+    },
+    {
+      "target_bpp": 0.02,
+      "delta": 2.136489942559799,
+      "bpp_nodither": 0.019999999206417,
+      "bpp_dither_marginal_upper_bound": 0.03356187751093213
+    },
+    {
+      "target_bpp": 0.03,
+      "delta": 1.6291397413128053,
+      "bpp_nodither": 0.029999999457052503,
+      "bpp_dither_marginal_upper_bound": 0.03987771850595087
+    },
+    {
+      "target_bpp": 0.05,
+      "delta": 0.9839727419845021,
+      "bpp_nodither": 0.05000000066822298,
+      "bpp_dither_marginal_upper_bound": 0.05438058118444026
+    }
+  ],
+  "tests": {
+    "train_holdout": {
+      "per_delta": {
+        "3.0124908108048016": {
+          "raw_dither": 0.7563566695898771,
+          "raw_nodither": 0.3840985018759966,
+          "exact": 0.22886544559150934,
+          "gaussian": 0.2292673964984715,
+          "nodither": 0.291099114343524
+        },
+        "2.136489942559799": {
+          "raw_dither": 0.3802556749433279,
+          "raw_nodither": 0.26608906686306,
+          "exact": 0.1616163074504584,
+          "gaussian": 0.1619884236715734,
+          "nodither": 0.18906230852007866
+        },
+        "1.6291397413128053": {
+          "raw_dither": 0.2211633874103427,
+          "raw_nodither": 0.18188002333045006,
+          "exact": 0.11758269579149783,
+          "gaussian": 0.11783060012385249,
+          "nodither": 0.12893906235694885
+        },
+        "0.9839727419845021": {
+          "raw_dither": 0.08075572527013719,
+          "raw_nodither": 0.07667894195765257,
+          "exact": 0.058348380494862795,
+          "gaussian": 0.05844177771359682,
+          "nodither": 0.06002751225605607
+        }
+      },
+      "wins": 0,
+      "pass": false,
+      "invalid_rates": 0,
+      "verdict": "FAIL"
+    },
+    "kodak": {
+      "per_delta": {
+        "3.0124908108048016": {
+          "raw_dither": 0.7554655596613884,
+          "raw_nodither": 0.39190031463901204,
+          "exact": 0.2283708949883779,
+          "gaussian": 0.22879174491390586,
+          "nodither": 0.29371422591308755
+        },
+        "2.136489942559799": {
+          "raw_dither": 0.3800984596212705,
+          "raw_nodither": 0.2778877584884564,
+          "exact": 0.16295016029228768,
+          "gaussian": 0.16331517215197286,
+          "nodither": 0.1926057500143846
+        },
+        "1.6291397413128053": {
+          "raw_dither": 0.22107614654426774,
+          "raw_nodither": 0.1912190200140079,
+          "exact": 0.11903779751931627,
+          "gaussian": 0.11933253356255591,
+          "nodither": 0.13081429402033487
+        },
+        "0.9839727419845021": {
+          "raw_dither": 0.08066811008999746,
+          "raw_nodither": 0.07908478565514088,
+          "exact": 0.05963064757330964,
+          "gaussian": 0.0597711659114187,
+          "nodither": 0.06037010718137026
+        }
+      },
+      "wins": 0,
+      "pass": false,
+      "invalid_rates": 0,
+      "verdict": "FAIL"
+    },
+    "clic2020_valid": {
+      "per_delta": {
+        "3.0124908108048016": {
+          "raw_dither": 0.7565898451863265,
+          "raw_nodither": 0.33499266716038306,
+          "exact": 0.1980486338185828,
+          "gaussian": 0.1981738296496432,
+          "nodither": 0.2555809951410061
+        },
+        "2.136489942559799": {
+          "raw_dither": 0.3804199671963366,
+          "raw_nodither": 0.24563035405263667,
+          "exact": 0.14444948505701088,
+          "gaussian": 0.14463995179025138,
+          "nodither": 0.17562155425548553
+        },
+        "1.6291397413128053": {
+          "raw_dither": 0.22108713137667355,
+          "raw_nodither": 0.1753716247110832,
+          "exact": 0.10776668609824122,
+          "gaussian": 0.10796991635749979,
+          "nodither": 0.12280721562664683
+        },
+        "0.9839727419845021": {
+          "raw_dither": 0.08067903744919998,
+          "raw_nodither": 0.07706338167190552,
+          "exact": 0.055888253718432854,
+          "gaussian": 0.05600984119696588,
+          "nodither": 0.05786782512214125
+        }
+      },
+      "wins": 0,
+      "pass": false,
+      "invalid_rates": 0,
+      "verdict": "FAIL"
+    }
+  }
+}
