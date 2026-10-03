@@ -20,10 +20,13 @@ Codec của CVPR chính là "mode A" trong bài dự thi CLIC.
 
 ## Quy trình
 
-1. Sửa code trong `src/` hoặc `experiments/`.
-2. Chạy `python tests/test_metrics.py`.
-3. Chạy `python notebooks/build.py`. Notebook ghi lại commit hash, nên **commit trước khi build**.
-4. Upload notebook lên Kaggle và chạy.
-5. Đặt zip kết quả vào `results/<exp>/`, giải nén rồi commit `summary.md` và các csv.
+**Mọi việc cần GPU đều chạy qua một script:** `experiments/pipeline.py`, đóng gói thành một file `dist/ratflow_run.py` bằng `python tools/bundle.py`.
 
-Máy local không chạy được torch (Windows Smart App Control chặn DLL), nên mọi thứ cần torch đều chạy trên Kaggle hoặc L4.
+1. Sửa code trong `src/` hoặc `experiments/`, chạy `python tests/test_*.py`, rồi commit.
+2. `python tools/bundle.py` tạo `dist/ratflow_run.py` (và `dist/ratflow_run.ipynb`, notebook một cell dành cho Kaggle).
+3. Chạy `python ratflow_run.py [stages] [--hours H]` trên Kaggle (bật GPU và Internet) hoặc trên máy GPU thuê.
+   - Chạy lại thì tự tiếp tục. Trên Kaggle, gắn Output của lần trước làm Input.
+   - `--dry-run` chỉ in ra các lệnh sẽ chạy.
+4. Đặt `results.zip` vào `results/<ngày>/`, giải nén, rồi commit `summary.md` và các file csv/json.
+
+`notebooks/` (sinh bởi `notebooks/build.py`) là cách cũ, chỉ giữ lại để đối chiếu.
