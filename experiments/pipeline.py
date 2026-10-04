@@ -4,7 +4,7 @@
     python experiments/pipeline.py gonogo1 s1          # only some stages (dependencies run if not done)
     python experiments/pipeline.py --hours 11 --dry-run
 
-Stages (in order): check, data, cache, gonogo1, s1, s1_eval, [ceiling], [parity], [qhat], pack
+Stages (in order): check, data, cache, gonogo1, s1, s1_eval, [ceiling], [parity], [qhat], [bakeoff], pack
   check     GPU + Internet + packages (installs missing pip packages)
   data      DIV2K train HR (800 images) into <work>/data
   cache     DC-AE latents of the training images into <work>/latents (resumes; reuses latents found in inputs)
@@ -14,6 +14,8 @@ Stages (in order): check, data, cache, gonogo1, s1, s1_eval, [ceiling], [parity]
   ceiling   (optional) DC-AE / SD-VAE ceilings on Kodak, CLIC2020, DIV2K-val incl. FID/KID
   parity    (optional) ratflow.nn / ratflow.entropy vs diffusers and CPU vs GPU
   qhat      (optional, CLIC) Q-hat v0: metrics on sampled CLIC perceptual ratings + Bradley-Terry fit
+  bakeoff   (optional, CLIC) base candidates on the 30 validation images at 0.075/0.15/0.3 bpp, corpus budget,
+            Q-hat allocation (builds VTM 23.8; uses --s1-ckpt and work/qhat/qhat_v0.json when present)
   pack      <work>/results.zip with every summary (+ the S1 checkpoint)
 
 State lives in <work>/state.json; finished stages are skipped on re-runs. On Kaggle, attach the previous
@@ -36,8 +38,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 KAGGLE = Path("/kaggle/working").exists()
 DEFAULT_STAGES = ["check", "data", "cache", "gonogo1", "s1", "s1_eval", "pack"]
-ALL_STAGES = ["check", "data", "cache", "gonogo1", "s1", "s1_eval", "ceiling", "parity", "qhat", "pack"]
-NEEDS = {"qhat": ["check"], "cache": ["data"], "gonogo1": ["cache"], "s1": ["cache"], "s1_eval": ["s1"]}  # deps run if not done
+ALL_STAGES = ["check", "data", "cache", "gonogo1", "s1", "s1_eval", "ceiling", "parity", "qhat", "bakeoff", "pack"]
+NEEDS = {"qhat": ["check"], "bakeoff": ["check"], "cache": ["data"], "gonogo1": ["cache"], "s1": ["cache"], "s1_eval": ["s1"]}  # deps run if not done
 PIP = {"safetensors": "safetensors", "huggingface_hub": "huggingface_hub", "scipy": "scipy", "lpips": "lpips",
        "piq": "piq", "torchmetrics": "torchmetrics", "torch_fidelity": "torch-fidelity", "PIL": "pillow"}
 MIN_TRAIN_LATENTS = 208  # gonogo1: 200 train + 8 holdout
@@ -211,11 +213,40 @@ class Pipeline:
         fit = json.loads((self.work / "qhat" / "fit.json").read_text()) if not self.a.dry_run else {}
         return dict(cross_2024=fit.get("cross", {}).get("acc"))
 
+    def _find(self, *patterns):
+        """First file matching one of the patterns under the work dir or the inputs (in pattern order)."""
+        for pat in patterns:
+            for r in [self.work] + self.inputs():
+                hits = sorted(r.rglob(pat))
+                if hits:
+                    return hits[0]
+        return None
+
+    def build_vtm(self):
+        vtm = self.work / "vtm"
+        if not list(vtm.glob("bin/**/EncoderApp*")):
+            self.run("bash", "-c", "set -e; cd '%s'; [ -d vtm ] || git clone -q --depth 1 --branch VTM-23.8 "
+                     "https://vcgit.hhi.fraunhofer.de/jvet/VVCSoftware_VTM.git vtm; cd vtm; mkdir -p build; cd build; "
+                     "cmake .. -DCMAKE_BUILD_TYPE=Release > /dev/null; make -j$(nproc) EncoderApp 2>&1 | tail -2" % self.work)
+        return vtm
+
+    def bakeoff(self):
+        args = shlex.split(self.a.bakeoff_args)
+        cands = args[args.index("--cands") + 1:] if "--cands" in args else []
+        if not cands or {"vtm420", "vtmscc", "s1res"} & set(cands):
+            args += ["--vtm", self.build_vtm()]
+        ckpt = self.a.s1_ckpt or self._find("s1_out/last.pt")  # run 1 (lambdas 0.03..4) covers the CLIC rates
+        qhat = self._find("qhat/qhat_v0.json", "qhat_v0.json")
+        self.say("bakeoff: S1 checkpoint", ckpt, "| Q-hat", qhat)
+        self.py("experiments/bakeoff/bakeoff.py", "all", "--out", self.work / "bakeoff",
+                *(["--s1-ckpt", ckpt] if ckpt else []), *(["--qhat", qhat] if qhat else []), *args)
+        return dict(s1_ckpt=str(ckpt), qhat=str(qhat))
+
     def pack(self):
         z = self.work / "results.zip"
         keep = [p for p in self.work.rglob("*") if p.is_file() and (
-            p.suffix in (".md", ".json", ".csv", ".log") or (p.name == "last.pt" and self.a.pack_ckpt))
-            and "latents" not in p.parts and "data" not in p.parts and p.name != "results.zip"]
+            p.suffix in (".md", ".json", ".csv", ".log", ".jpg") or (p.name == "last.pt" and self.a.pack_ckpt))
+            and not {"latents", "data", "vtm", "recon", "valid"} & set(p.parts) and p.name != "results.zip"]
         if not self.a.dry_run:
             with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as f:
                 for p in keep:
@@ -294,6 +325,8 @@ def parse(argv=None):
     ap.add_argument("--extra-images", nargs="*", default=[], help="more training image dirs (Flickr2K, LSDIR)")
     ap.add_argument("--s1-args", nargs=argparse.REMAINDER, default=[], help="passed to train_s1.py train (put last)")
     ap.add_argument("--qhat-args", default="", help='one string passed to qhat.py, e.g. --qhat-args="--n 2024t=8000"')
+    ap.add_argument("--bakeoff-args", default="", help='one string passed to bakeoff.py, e.g. --bakeoff-args="--cands msillm mbt"')
+    ap.add_argument("--s1-ckpt", default=None, help="S1 checkpoint for bakeoff (default: s1_out/last.pt in the inputs)")
     ap.add_argument("--s1-min-steps", type=int, default=150_000, help="S1 counts as done only after this many steps")
     ap.add_argument("--redo", nargs="*", default=[], help="stages to run again even if done")
     ap.add_argument("--keep-images", action="store_true")

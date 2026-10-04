@@ -10,7 +10,7 @@ Codec của CVPR chính là "mode A" trong bài dự thi CLIC.
 |---|---|
 | `plans/` | Kế hoạch CVPR và CLIC (nguồn chuẩn cho quyết định, mốc thời gian, rủi ro) |
 | `src/ratflow/` | Package dùng chung:<br>• `eval/metrics.py`: **mọi con số trong paper và trong phân tích CLIC đều phải đi qua module này**<br>• `nn/`: DC-AE và SANA DiT viết lại bằng torch thuần, không cần diffusers, nạp được weights của diffusers (`.safetensors`) hoặc `.pt` (dùng cho decoder CLIC)<br>• `codec/latent_codec.py`: **S1**, codec đa rate trên latent DC-AE, có subtractive dither trong bitstream<br>• `entropy/`: rANS bằng numpy, dither tất định (`dither.py`), bảng CDF số nguyên, mạng số nguyên `QConv2d` (train bằng fake-quant, suy luận chính xác từng bit), `GaussianConditional`, `DiscretePrior` |
-| `experiments/` | `s1/` (cache latent, train, eval S1), `parity/`, `toy_gaussian/`, `quant_noise/` (go/no-go 1), `ceiling/` (trần AE), `clic_b/` (nhánh B của CLIC), `determinism/` (A0) |
+| `experiments/` | `s1/` (cache latent, train, eval S1), `parity/`, `toy_gaussian/`, `quant_noise/` (go/no-go 1), `ceiling/` (trần AE), `clic_b/` (nhánh B của CLIC), `determinism/` (A0), `qhat/` (Q̂: thước đo thay người chấm, fit trên dữ liệu chấm theo cặp của CLIC), `bakeoff/` (so sánh base C0–C3 trên 30 ảnh validation, chia bit theo Q̂) |
 | `clic/` | Phần riêng của CLIC. Hiện có `l4/` (giả lập server trên L4). Sau này thêm `submission/`, `encoder/`, `tools/` |
 | `notebooks/` | Notebook Kaggle **được sinh tự động** bằng `python notebooks/build.py`. Không sửa tay |
 | `paper/` | `proofs/` (appendix LaTeX), `figures/` (script vẽ hình, style figures4papers) |
@@ -30,3 +30,16 @@ Codec của CVPR chính là "mode A" trong bài dự thi CLIC.
 4. Đặt `results.zip` vào `results/<ngày>/`, giải nén, rồi commit `summary.md` và các file csv/json.
 
 `notebooks/` (sinh bởi `notebooks/build.py`) là cách cũ, chỉ giữ lại để đối chiếu.
+
+## CLIC: Q̂ và so sánh base (plan v2, tuần 1–3)
+
+Một lần chạy trên Kaggle (GPU T4 + Internet), tự tiếp tục khi chạy lại:
+
+```
+python ratflow_run.py qhat bakeoff --hours 11.5
+```
+
+- **Input cần gắn:** checkpoint S1 lần 1 (`s1_out/last.pt`, λ 0.03–4, phủ 0.02–0.12 bpp). Lần 2 (`s1/last.pt`) chỉ tới 0.067 bpp nên không dùng.
+- `qhat`: lấy mẫu khoảng 16k câu hỏi từ dữ liệu chấm CLIC 2021/2022/2024, đọc crop thẳng từ zip trên mạng (không tải 46–135 GiB), fit Bradley–Terry. Ra `qhat/summary.md` và `qhat/qhat_v0.json`.
+- `bakeoff`: build VTM 23.8, tạo điểm vận hành cho VTM 4:2:0, VTM-SCC, DC-AE+S1+residual VTM, MS-ILLM, mbt2018-mean; chia bit cho cả bộ ảnh theo Q̂ (quy hoạch động, đúng ngân sách byte). Ra `bakeoff/summary.md` và `bakeoff/crops/*.jpg`.
+- Chỉ chạy một phần: `--bakeoff-args="--cands msillm mbt"`; đổi cỡ mẫu Q̂: `--qhat-args="--n 2024t=8000"`.
