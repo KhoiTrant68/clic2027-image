@@ -77,7 +77,10 @@ def main():
           "nbformat": 4, "nbformat_minor": 5}
     with open(DIST / "ratflow_run.ipynb", "w", encoding="utf-8", newline="\n") as f:
         json.dump(nb, f, ensure_ascii=False, indent=1)
-    print(f"{len(files)} files, commit {commit}: {DIST / 'ratflow_run.py'} ({len(src) / 1e3:.0f} kB), ratflow_run.ipynb")
+    import clic_notebook
+    extra = clic_notebook.write(DIST, src, commit)
+    print(f"{len(files)} files, commit {commit}: {DIST / 'ratflow_run.py'} ({len(src) / 1e3:.0f} kB), ratflow_run.ipynb, "
+          + ", ".join(extra))
 
 
 if __name__ == "__main__":

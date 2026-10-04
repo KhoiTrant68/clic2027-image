@@ -222,6 +222,23 @@ class Pipeline:
                     return hits[0]
         return None
 
+    def _s1_ckpt_for_clic(self):
+        """S1 checkpoint that reaches the CLIC rates: the one whose sibling log.json has the largest lambda
+        (run 1, lambdas 0.03..4, covers 0.02..0.12 bpp; run 2 stops at 0.067 bpp). Any directory layout."""
+        best = None
+        for r in [self.work] + self.inputs():
+            for ck in r.rglob("last.pt"):
+                log = ck.parent / "log.json"
+                try:
+                    lam = max(json.loads(log.read_text())["lambdas"]) if log.exists() else 0.0
+                except (ValueError, KeyError):
+                    lam = 0.0
+                if best is None or lam > best[0]:
+                    best = (lam, ck)
+        if best and best[0] < 2:
+            self.say(f"WARNING: best S1 checkpoint {best[1]} has max lambda {best[0]}: it will not reach 0.075 bpp")
+        return best[1] if best else None
+
     def build_vtm(self):
         vtm = self.work / "vtm"
         if not list(vtm.glob("bin/**/EncoderApp*")):
@@ -235,7 +252,7 @@ class Pipeline:
         cands = args[args.index("--cands") + 1:] if "--cands" in args else []
         if not cands or {"vtm420", "vtmscc", "s1res"} & set(cands):
             args += ["--vtm", self.build_vtm()]
-        ckpt = self.a.s1_ckpt or self._find("s1_out/last.pt")  # run 1 (lambdas 0.03..4) covers the CLIC rates
+        ckpt = self.a.s1_ckpt or self._s1_ckpt_for_clic()
         qhat = self._find("qhat/qhat_v0.json", "qhat_v0.json")
         self.say("bakeoff: S1 checkpoint", ckpt, "| Q-hat", qhat)
         self.py("experiments/bakeoff/bakeoff.py", "all", "--out", self.work / "bakeoff",
