@@ -4,7 +4,7 @@
     python experiments/pipeline.py gonogo1 s1          # only some stages (dependencies run if not done)
     python experiments/pipeline.py --hours 11 --dry-run
 
-Stages (in order): check, data, cache, gonogo1, s1, s1_eval, [ceiling], [parity], pack
+Stages (in order): check, data, cache, gonogo1, s1, s1_eval, [ceiling], [parity], [qhat], pack
   check     GPU + Internet + packages (installs missing pip packages)
   data      DIV2K train HR (800 images) into <work>/data
   cache     DC-AE latents of the training images into <work>/latents (resumes; reuses latents found in inputs)
@@ -13,6 +13,7 @@ Stages (in order): check, data, cache, gonogo1, s1, s1_eval, [ceiling], [parity]
   s1_eval   Kodak, real bitstreams, vs the DC-AE ceiling
   ceiling   (optional) DC-AE / SD-VAE ceilings on Kodak, CLIC2020, DIV2K-val incl. FID/KID
   parity    (optional) ratflow.nn / ratflow.entropy vs diffusers and CPU vs GPU
+  qhat      (optional, CLIC) Q-hat v0: metrics on sampled CLIC perceptual ratings + Bradley-Terry fit
   pack      <work>/results.zip with every summary (+ the S1 checkpoint)
 
 State lives in <work>/state.json; finished stages are skipped on re-runs. On Kaggle, attach the previous
@@ -23,6 +24,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shlex
 import shutil
 import socket
 import subprocess
@@ -34,8 +36,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 KAGGLE = Path("/kaggle/working").exists()
 DEFAULT_STAGES = ["check", "data", "cache", "gonogo1", "s1", "s1_eval", "pack"]
-ALL_STAGES = ["check", "data", "cache", "gonogo1", "s1", "s1_eval", "ceiling", "parity", "pack"]
-NEEDS = {"cache": ["data"], "gonogo1": ["cache"], "s1": ["cache"], "s1_eval": ["s1"]}  # deps run if not done
+ALL_STAGES = ["check", "data", "cache", "gonogo1", "s1", "s1_eval", "ceiling", "parity", "qhat", "pack"]
+NEEDS = {"qhat": ["check"], "cache": ["data"], "gonogo1": ["cache"], "s1": ["cache"], "s1_eval": ["s1"]}  # deps run if not done
 PIP = {"safetensors": "safetensors", "huggingface_hub": "huggingface_hub", "scipy": "scipy", "lpips": "lpips",
        "piq": "piq", "torchmetrics": "torchmetrics", "torch_fidelity": "torch-fidelity", "PIL": "pillow"}
 MIN_TRAIN_LATENTS = 208  # gonogo1: 200 train + 8 holdout
@@ -203,6 +205,12 @@ class Pipeline:
         self.py("experiments/parity/parity.py", "all", "--out", self.work / "parity")
         return {}
 
+    def qhat(self):
+        self.py("experiments/qhat/qhat.py", "all", "--out", self.work / "qhat", *shlex.split(self.a.qhat_args),
+                *(["--allow-cpu"] if self.a.allow_cpu else []))
+        fit = json.loads((self.work / "qhat" / "fit.json").read_text()) if not self.a.dry_run else {}
+        return dict(cross_2024=fit.get("cross", {}).get("acc"))
+
     def pack(self):
         z = self.work / "results.zip"
         keep = [p for p in self.work.rglob("*") if p.is_file() and (
@@ -285,6 +293,7 @@ def parse(argv=None):
     ap.add_argument("--inputs", nargs="*", default=[], help="dirs searched for a previous work dir / latents")
     ap.add_argument("--extra-images", nargs="*", default=[], help="more training image dirs (Flickr2K, LSDIR)")
     ap.add_argument("--s1-args", nargs=argparse.REMAINDER, default=[], help="passed to train_s1.py train (put last)")
+    ap.add_argument("--qhat-args", default="", help='one string passed to qhat.py, e.g. --qhat-args="--n 2024t=8000"')
     ap.add_argument("--s1-min-steps", type=int, default=150_000, help="S1 counts as done only after this many steps")
     ap.add_argument("--redo", nargs="*", default=[], help="stages to run again even if done")
     ap.add_argument("--keep-images", action="store_true")

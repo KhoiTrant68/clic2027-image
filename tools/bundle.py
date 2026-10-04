@@ -22,7 +22,7 @@ DIST = REPO / "dist"
 INCLUDE = ["src/ratflow/**/*.py", "experiments/pipeline.py", "experiments/s1/*.py",
            "experiments/quant_noise/measure_quant_noise.py", "experiments/quant_noise/denoiser_gonogo.py",
            "experiments/quant_noise/prepare_gonogo_latents.py", "experiments/ceiling/ceiling.py",
-           "experiments/parity/parity.py"]
+           "experiments/parity/parity.py", "experiments/qhat/*.py"]
 
 LAUNCHER = '''#!/usr/bin/env python3
 """ratflow pipeline (CVPR 2027 / CLIC 2027), bundled from commit {commit}. One file: copy it anywhere and run
