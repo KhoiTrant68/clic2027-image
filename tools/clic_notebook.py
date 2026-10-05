@@ -1,7 +1,7 @@
 """CLIC week 1-3 runners, written by tools/bundle.py next to ratflow_run.py:
 
-    dist/clic_qhat_bakeoff.ipynb   Kaggle notebook: settings, preflight checks, run, results shown inline
-    dist/run_clic.sh               the same on a rented GPU machine (L4 etc.)
+    <out>/clic_qhat_bakeoff.ipynb  Kaggle notebook: settings, preflight checks, run, results shown inline
+    <out>/run_clic.sh              the same on a rented GPU machine (L4 etc.)
 """
 from __future__ import annotations
 

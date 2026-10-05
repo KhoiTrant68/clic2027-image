@@ -1,4 +1,5 @@
-"""Bundle the repo code into ONE file: dist/ratflow_run.py (and the same as a one-cell notebook).
+"""Bundle the repo code into ONE file, ratflow_run.py, plus one-cell notebooks, written OUTSIDE the repo
+(default ../ratflow-artifacts/run).
 
     python tools/bundle.py
 
@@ -18,7 +19,8 @@ import zipfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-DIST = REPO / "dist"
+# Build output lives OUTSIDE the repo (default: <repo>/../ratflow-artifacts/run); override with --out.
+DEFAULT_OUT = REPO.parent / "ratflow-artifacts" / "run"
 INCLUDE = ["src/ratflow/**/*.py", "experiments/pipeline.py", "experiments/s1/*.py",
            "experiments/quant_noise/measure_quant_noise.py", "experiments/quant_noise/denoiser_gonogo.py",
            "experiments/quant_noise/prepare_gonogo_latents.py", "experiments/ceiling/ceiling.py",
@@ -56,6 +58,10 @@ if __name__ == "__main__":
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", type=Path, default=DEFAULT_OUT, help="output directory (outside the repo)")
+    DIST = ap.parse_args().out
     commit = subprocess.run(["git", "-C", str(REPO), "describe", "--always", "--dirty"],
                             capture_output=True, text=True).stdout.strip()
     files = sorted({p for pat in INCLUDE for p in REPO.glob(pat) if "__pycache__" not in p.parts})
@@ -64,7 +70,7 @@ def main():
         for f in files:
             z.write(f, f.relative_to(REPO).as_posix())
     payload = base64.b64encode(buf.getvalue()).decode()
-    DIST.mkdir(exist_ok=True)
+    DIST.mkdir(parents=True, exist_ok=True)
     src = LAUNCHER.format(commit=commit, payload=payload)
     with open(DIST / "ratflow_run.py", "w", encoding="utf-8", newline="\n") as f:
         f.write(src)

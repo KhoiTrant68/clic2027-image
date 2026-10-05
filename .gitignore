@@ -25,5 +25,3 @@ desktop.ini
 *.pt
 *.pt.tmp
 
-# bundled single-file runner (tools/bundle.py)
-dist/
