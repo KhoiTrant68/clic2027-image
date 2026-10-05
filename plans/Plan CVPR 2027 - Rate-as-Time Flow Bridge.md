@@ -2,6 +2,12 @@
 
 Sep 27, 2026 · @Khoi Tran Minh
 
+> **Trạng thái 05/10/2026: TẠM DỪNG.**
+> - Ngày 03/10 đã chốt **CLIC 2027 là mục tiêu duy nhất**; bài CVPR bị bỏ hoặc hoãn (xem `plans/Plan CLIC 2027 v2 - tap trung de thang.md`).
+> - **Go/no-go 1 đã có kết quả hợp lệ và là FAIL** (chi tiết ở bảng mốc, mục Timeline): denoiser biết mô hình nhiễu chính xác chỉ hơn denoiser giả định Gaussian **+0.1–0.2%** MSE latent (ngưỡng 5%), trên cả Kodak, CLIC2020-valid và holdout DIV2K. Câu chuyện "quantization noise is not diffusion noise" **không có bằng chứng thực nghiệm** ở mức latent DC-AE.
+> - **Nếu quay lại CVPR / ICCV**, đi theo nhánh dự phòng đã ghi sẵn: trọng tâm là **lý thuyết D–P + decoder nhẹ**. Vẫn giữ Mệnh đề 1–2, Định lý 3 và Định lý 4 phần dễ, các toy Gaussian, S1 và hạ tầng (`src/ratflow`). Bỏ story về nhiễu lượng tử.
+> - **S1 lần 2** (λ 0.015–0.6, 800 ảnh DIV2K, `results/2026-10-03/`): Kodak 0.0133–0.067 bpp, PSNR 17.4–21.2 dB, LPIPS 0.58–0.17. Checkpoint nằm ở `../ratflow-artifacts/results/2026-10-03/s1/last.pt`.
+
 Mục tiêu: nộp CVPR 2027 trước Nov 16, 2026 với một codec ảnh dưới 0.05 bpp dùng flow bridge một bước, kèm lý thuyết distortion–perception.
 
 ## Mục tiêu & đóng góp
@@ -230,6 +236,7 @@ Lý thuyết chạy song song với thí nghiệm ngay từ tuần 1; hai mốc 
 | --- | --- | --- |
 | Go/no-go 1 (4/10) | *(tiêu chí đổi 27/9)* **(a)** Trên latent DC-AE thật (Kodak + CLIC, transform coder proxy KLT 2×2, 4 mức 0.01–0.05 bpp), một denoiser nhỏ được train với **mô hình nhiễu chính xác** (subtractive dither, nhiễu đều đã biết) đạt MSE latent thấp hơn **≥ 5%** so với cùng kiến trúc được train với **giả định Gaussian** kiểu OSCAR (ŷ = y + N(0, Δ²/12)), ở cùng rate, tại ít nhất 2/4 mức bpp. **VÀ (b)** toy Gaussian cho thấy decode một bước với OT coupling sát đường D–P (đã đạt ở d = 2, xem kết quả vòng 1 và C) | Đổi trọng tâm sang Lý thuyết D–P + decoder nhẹ (Mệnh đề 2, Định lý 3–4 vẫn giữ), bỏ story "quantization noise" |
 | ↳ *Lần chạy 1 (03/10, T4, cấu hình đầy đủ; `results/gonogo1/`)* | **CHƯA HỢP LỆ, không tính.** exact hơn gaussian +6.7–32.8% ở cả 4/4 mức trên Kodak và CLIC2020-valid, nhưng **mọi denoiser đều tệ hơn đầu vào của chính nó** (Kodak 0.05 bpp: exact 0.099 so với raw 0.011; ở mọi rate đều cộng thêm khoảng 0.09 MSE). Nguyên nhân gần như chắc chắn: chỉ có **39 latent train** (cache dở), nên mạng 2.4M tham số học thuộc dữ liệu. Script đã sửa: tách 8 ảnh train làm holdout, yêu cầu ≥ 200 ảnh train, chỉ tính một mức rate khi exact < raw, và in ra loss train | Chạy lại với cache đủ 800 ảnh (phiên bản output `s1_cache` mà S1 lần 1 đã dùng). **Mốc 4/10 lùi tới khi có GPU** |
+| ↳ *Lần chạy 3 (03/10, T4, pipeline commit 622f60c; `results/2026-10-03/gonogo1/`)* | **HỢP LỆ → FAIL.** Train trên 792 latent DIV2K (cache đủ 800, holdout 8). Mọi denoiser đều tốt hơn đầu vào (Kodak 0.01 bpp: raw 0.756 → exact 0.228), nên đây là phép so sánh hợp lệ. Nhưng **exact so với gaussian chỉ hơn +0.1–0.2%** ở cả 4 mức, trên train-holdout, Kodak và CLIC2020-valid; loss train cuối gần như bằng nhau (0.1350 so với 0.1353). Nghĩa là với latent DC-AE, decoder biết mô hình nhiễu chính xác gần như không lợi gì so với giả định Gaussian. Bản no-dither kém hơn ở cùng Δ, nhưng rate của nó thấp hơn nên không so trực tiếp được | **Theo tiêu chí đã duyệt:** đổi trọng tâm sang lý thuyết D–P + decoder nhẹ, bỏ story về nhiễu lượng tử. Trên thực tế đã tạm dừng CVPR (03/10) để làm CLIC |
 | Go/no-go 2 (25/10) | S2 nhiều bước vượt OSCAR về LPIPS hoặc DISTS ở ít nhất 2/4 mức bpp | Nộp bản "bridge nhiều bước + lý thuyết"; S3 một bước dời sang bản nộp ICCV 2027 |
 | *(thêm 30/9)* Kiểm tra trần, cùng lúc với go/no-go 2 | LPIPS/DISTS của S2 ở 0.05 bpp cách trần DC-AE **> 15%**, và không thua StableCodec chỉ ở mức bpp cao nhất → trần chưa phải nút thắt, **không làm S1.5** | Bật S1.5 (residual): ~3–4 ngày, lấy thời gian từ ablation 4–6 hoặc từ S3 |
 
