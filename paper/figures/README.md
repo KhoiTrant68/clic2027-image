@@ -22,3 +22,15 @@ uv run --no-project --with numpy,scipy,matplotlib,torch python make_all.py
 | `fig_quantstat` | Thống kê sai số lượng tử theo bpp (kurtosis, corr, tương quan kênh, phụ thuộc nội dung) | `experiments/quant_noise/runs/kodak/` | chờ Kaggle |
 
 Khi có kết quả từ Kaggle, copy các thư mục `results_A`, `results_B`, `runs/gonogo1` và `runs/kodak` về đúng đường dẫn trên rồi chạy `make_all.py`.
+
+## Sơ đồ drawio (`drawio/`)
+
+Mở bằng draw.io (diagrams.net). Các file được sinh bằng script, nên sửa script rồi sinh lại, đừng sửa tay:
+
+| file | nội dung | sinh bằng |
+|---|---|---|
+| `1_kien_truc.drawio` | kiến trúc tổng thể | `python drawio/make_drawio.py drawio` |
+| `2_pipeline_ma_hoa_giai_ma.drawio` | pipeline mã hóa và giải mã | như trên |
+| `3_huan_luyen.drawio` | các giai đoạn huấn luyện | như trên |
+| `4_lo_trinh.drawio` | lộ trình | như trên |
+| `5_codec_c1_chi_tiet.drawio` | codec C1 (DC-AE + S1) theo từng lớp | `python drawio/make_codec_c1.py drawio` |

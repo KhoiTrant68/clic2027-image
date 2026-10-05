@@ -207,7 +207,7 @@ ws.cell(row=sp + 1, column=3).comment = Comment("Mục tiêu 20 giây cho 30 ả
 note(ws, r - 1, "fp16 chỉ nhanh hơn 1.5 lần → chỗ chậm có lẽ là vòng lặp Python khi ghép các mảnh ảnh, không phải phép tính chính. Việc đầu tiên: đo xem chậm ở đâu.", 6)
 
 # 4. Approach ---------------------------------------------------------------------
-ws = sheet("Cách làm", "Các phần của hệ thống", "Ảnh sơ đồ chi tiết: figures/drawio/1_kien_truc.drawio và 2_pipeline_ma_hoa_giai_ma.drawio", [26, 50, 46, 22])
+ws = sheet("Cách làm", "Các phần của hệ thống", "Ảnh sơ đồ chi tiết: paper/figures/drawio/1_kien_truc.drawio và 2_pipeline_ma_hoa_giai_ma.drawio", [26, 50, 46, 22])
 r = table(ws, 4, ["Phần", "Làm gì", "Vì sao", "Trạng thái"], [
     ("Encoder (máy của em)", "Chọn cách nén cho từng ảnh, chia bit giữa các ảnh, thử nhiều seed và chọn kết quả đẹp nhất", "Encoder không bị khóa, sửa được cả sau 01/03", "Chưa làm"),
     ("Mã hóa xác suất bằng số nguyên", "Đọc/ghi bitstream bằng phép tính số nguyên trên CPU", "Để máy chủ giải mã ra đúng từng bit", "Đã có (rANS + mạng int8)"),
