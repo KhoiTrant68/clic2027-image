@@ -12,7 +12,7 @@ Candidates (each gives several operating points per image; the allocator picks o
 
 Steps (all resume: existing points/metrics are skipped):
   prepare   30 images (CLIC 2025 test = CLIC 2027 validation), budgets
-  points    reconstructions + exact byte counts + decode timings     -> points.csv, recon/<cand>/<key>/<img>.png
+  points    reconstructions + exact byte counts + decode timings     -> points/<cand>.csv, recon/<cand>/<key>/<img>.png
   metrics   PSNR, MS-SSIM, LPIPS, DISTS, Q-hat features per point     -> metrics.csv
   allocate  per candidate and rate: one point per image, total bytes <= budget, maximise sum of Q-hat
             (Lagrangian sweep; falls back to -LPIPS without a Q-hat model)        -> allocation.csv
@@ -88,13 +88,21 @@ def inputs(a):
 
 # ---------------------------------------------------------------- points: bookkeeping
 class Points:
-    """points.csv: one row per (cand, key, name) with bytes and timings; recon PNGs next to it."""
+    """points/<cand>.csv: one row per (cand, key, name) with bytes and timings; recon PNGs under recon/<cand>/.
+    One file per candidate, so runs that each produce different candidates (e.g. a CPU-only session for
+    vtm420 and another for vtmscc) merge by copying their work dirs together. A legacy points.csv is read too."""
 
     def __init__(self, out: Path):
-        self.path = out / "points.csv"
-        self.rows = M.read_csv(self.path) if self.path.exists() else []
-        self.have = {(r["cand"], r["key"], r["name"]) for r in self.rows}
         self.out = out
+        self.dir = out / "points"
+        self.rows, seen = [], set()
+        for f in [out / "points.csv", *sorted(self.dir.glob("*.csv"))]:
+            for r in (M.read_csv(f) if f.exists() else []):
+                k = (r["cand"], r["key"], r["name"])
+                if k not in seen:
+                    seen.add(k)
+                    self.rows.append(r)
+        self.have = seen
 
     def recon(self, cand, key, name):
         return self.out / "recon" / cand / key / f"{name}.png"
@@ -102,7 +110,8 @@ class Points:
     def add(self, row):
         self.rows.append(row)
         self.have.add((row["cand"], row["key"], row["name"]))
-        M.write_csv(self.rows, self.path)
+        self.dir.mkdir(parents=True, exist_ok=True)
+        M.write_csv([r for r in self.rows if r["cand"] == row["cand"]], self.dir / f"{row['cand']}.csv")
 
     def todo(self, cand, keys, names):
         return [(k, n) for k in keys for n in names if (cand, k, n) not in self.have]
@@ -244,7 +253,21 @@ def points_s1res(a, P, names):
 
 # ---------------------------------------------------------------- C2 / C3: learned codecs with entropy coding
 def _pip(*pkgs):
-    subprocess.run([sys.executable, "-m", "pip", "install", "-q", *pkgs], check=True)
+    """Install without touching the already-imported stack: an unpinned `pip install compressai` downgraded
+    numpy 2 -> 1.26 on Kaggle and broke every later import (numpy.dtype size changed, torch_geometric)."""
+    import importlib.metadata as md
+    pins = []
+    for dist in ("numpy", "torch", "torchvision", "scipy", "pillow"):
+        try:
+            pins.append(f"{dist}=={md.version(dist)}")
+        except md.PackageNotFoundError:
+            pass
+    with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as f:
+        f.write(chr(10).join(pins))
+    r = subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-c", f.name, *pkgs])
+    if r.returncode:  # the pins conflict with the package's own pins: install it alone, keep the stack
+        print(f"pip: {pkgs} conflict with the installed stack; installing with --no-deps", flush=True)
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--no-deps", *pkgs], check=True)
 
 
 def _learned(a, P, names, cand, models, load):
@@ -559,7 +582,10 @@ def main(argv=None):
     ap.add_argument("--workers", type=int, default=os.cpu_count())
     a = ap.parse_args(argv)
     a.data = a.data or a.out / "valid"
-    for s in STEPS if a.step == "all" else [a.step]:
+    steps = STEPS if a.step == "all" else [a.step]
+    if steps[0] != "prepare" and not (a.data.exists() and inputs(a)):
+        steps = ["prepare"] + steps  # a single later step (e.g. points in a CPU session) still needs the images
+    for s in steps:
         print(f"===== {s}", flush=True)
         globals()[s](a)
 

@@ -31,6 +31,7 @@ import shutil
 import socket
 import subprocess
 import sys
+import threading
 import time
 import zipfile
 from pathlib import Path
@@ -43,6 +44,10 @@ NEEDS = {"qhat": ["check"], "bakeoff": ["check"], "cache": ["data"], "gonogo1": 
 PIP = {"safetensors": "safetensors", "huggingface_hub": "huggingface_hub", "scipy": "scipy", "lpips": "lpips",
        "piq": "piq", "torchmetrics": "torchmetrics", "torch_fidelity": "torch-fidelity", "PIL": "pillow"}
 MIN_TRAIN_LATENTS = 208  # gonogo1: 200 train + 8 holdout
+
+
+class StageTimeout(Exception):
+    """The --hours budget ran out while a stage was running; its partial outputs are kept."""
 
 
 class Pipeline:
@@ -64,17 +69,39 @@ class Pipeline:
         self.log.flush()
 
     def run(self, *cmd, cwd=None):
+        """Run a child process with live output. It is stopped when the wall-clock budget (--hours) runs out, so
+        the pipeline can still pack and exit normally before Kaggle's hard 12 h limit kills everything."""
         cmd = [str(c) for c in cmd]
         self.say("$", " ".join(cmd))
         if self.a.dry_run:
             return
         env = dict(os.environ, PYTHONUNBUFFERED="1")
         p = subprocess.Popen(cmd, cwd=cwd or ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, env=env)
-        for line in p.stdout:
-            print(line, end="", flush=True)
-            self.log.write(line)
-        if p.wait():
-            raise RuntimeError(f"command failed ({p.returncode}): {' '.join(cmd)}")
+        expired = threading.Event()
+
+        def stop():
+            expired.set()
+            self.say("time budget reached: stopping", cmd[1] if len(cmd) > 1 else cmd[0])
+            p.terminate()
+            try:
+                p.wait(60)
+            except subprocess.TimeoutExpired:
+                p.kill()
+
+        timer = threading.Timer(max(1.0, self.hours_left() * 3600), stop)
+        timer.daemon = True
+        timer.start()
+        try:
+            for line in p.stdout:
+                print(line, end="", flush=True)
+                self.log.write(line)
+            rc = p.wait()
+        finally:
+            timer.cancel()
+        if expired.is_set():
+            raise StageTimeout(" ".join(cmd))
+        if rc:
+            raise RuntimeError(f"command failed ({rc}): {' '.join(cmd)}")
 
     def py(self, script, *args):
         self.run(sys.executable, ROOT / script, *args)
@@ -96,17 +123,26 @@ class Pipeline:
 
     # ---------------------------------------------------------------- restore a previous run
     def restore(self):
+        """Merge every previous work dir found in the inputs (oldest first), so a chain of runs
+        (e.g. a GPU run, then a CPU-only VTM run) continues where each left off."""
+        prevs = []
         for r in self.inputs():
-            for st in sorted(r.rglob("state.json")):
+            for st in r.rglob("state.json"):
                 prev = st.parent
-                if prev.resolve() == self.work.resolve() or not (prev / "pipeline.log").exists():
-                    continue
-                self.say("restoring previous work dir from", prev)
-                if not self.a.dry_run:
-                    shutil.copytree(prev, self.work, dirs_exist_ok=True,
-                                    ignore=shutil.ignore_patterns("data", "results.zip"))
-                    self.state = json.loads(self.state_path.read_text())
-                return
+                if prev.resolve() != self.work.resolve() and (prev / "pipeline.log").exists():
+                    prevs.append(prev)
+        for prev in sorted(prevs, key=lambda d: (d / "state.json").stat().st_mtime):
+            self.say("restoring previous work dir from", prev)
+            if self.a.dry_run:
+                continue
+            old = json.loads((prev / "state.json").read_text())
+            shutil.copytree(prev, self.work, dirs_exist_ok=True,
+                            ignore=shutil.ignore_patterns("data", "results.zip", "state.json", "pipeline.log"))
+            for k, v in old.items():
+                if v.get("done") or k not in self.state:
+                    self.state[k] = v
+        if prevs and not self.a.dry_run:
+            self.state_path.write_text(json.dumps(self.state, indent=1))
 
     # ---------------------------------------------------------------- stages
     def check(self):
@@ -255,9 +291,12 @@ class Pipeline:
         ckpt = self.a.s1_ckpt or self._s1_ckpt_for_clic()
         qhat = self._find("qhat/qhat_v0.json", "qhat_v0.json")
         self.say("bakeoff: S1 checkpoint", ckpt, "| Q-hat", qhat)
-        self.py("experiments/bakeoff/bakeoff.py", "all", "--out", self.work / "bakeoff",
+        self.py("experiments/bakeoff/bakeoff.py", self.a.bakeoff_step, "--out", self.work / "bakeoff",
                 *(["--s1-ckpt", ckpt] if ckpt else []), *(["--qhat", qhat] if qhat else []), *args)
-        return dict(s1_ckpt=str(ckpt), qhat=str(qhat))
+        info = dict(s1_ckpt=str(ckpt), qhat=str(qhat), step=self.a.bakeoff_step, cands=cands or "all")
+        if self.a.bakeoff_step != "all" or cands:  # a partial run (one step / some candidates) is not "done"
+            info["_incomplete"] = True
+        return info
 
     def pack(self):
         z = self.work / "results.zip"
@@ -297,6 +336,13 @@ class Pipeline:
             self._stage_t0 = time.time()
             try:
                 info = getattr(self, s)() or {}
+            except StageTimeout:
+                self.state[s] = dict(done=False, timed_out=True, seconds=round(time.time() - self._stage_t0),
+                                     commit=self.commit)
+                self.state_path.write_text(json.dumps(self.state, indent=1))
+                self.say(f"== {s}: stopped by the time budget; partial results kept. Re-run with this output "
+                         "attached as Input to continue.")
+                break
             except (Exception, SystemExit) as e:  # noqa: BLE001  record, pack what exists, re-raise
                 self.state[s] = dict(done=False, error=str(e)[-2000:], commit=self.commit)
                 self.state_path.write_text(json.dumps(self.state, indent=1))
@@ -336,12 +382,15 @@ def parse(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("stages", nargs="*", help=f"subset of {ALL_STAGES} (default: {DEFAULT_STAGES})")
     ap.add_argument("--work", default="/kaggle/working/work" if KAGGLE else "work")
-    ap.add_argument("--hours", type=float, default=11.3 if KAGGLE else 24.0, help="total wall-clock budget")
+    ap.add_argument("--hours", type=float, default=11.0 if KAGGLE else 24.0,
+                    help="total wall-clock budget; running stages are stopped when it runs out (Kaggle kills at 12 h)")
     ap.add_argument("--reserve-hours", type=float, default=0.75, help="kept for s1_eval + pack after training")
     ap.add_argument("--inputs", nargs="*", default=[], help="dirs searched for a previous work dir / latents")
     ap.add_argument("--extra-images", nargs="*", default=[], help="more training image dirs (Flickr2K, LSDIR)")
     ap.add_argument("--s1-args", nargs=argparse.REMAINDER, default=[], help="passed to train_s1.py train (put last)")
     ap.add_argument("--qhat-args", default="", help='one string passed to qhat.py, e.g. --qhat-args="--n 2024t=8000"')
+    ap.add_argument("--bakeoff-step", default="all", choices=["prepare", "points", "metrics", "allocate", "summary", "all"],
+                    help="e.g. 'points' with --bakeoff-args='--cands vtm420' in a CPU-only session (no GPU quota)")
     ap.add_argument("--bakeoff-args", default="", help='one string passed to bakeoff.py, e.g. --bakeoff-args="--cands msillm mbt"')
     ap.add_argument("--s1-ckpt", default=None, help="S1 checkpoint for bakeoff (default: s1_out/last.pt in the inputs)")
     ap.add_argument("--s1-min-steps", type=int, default=150_000, help="S1 counts as done only after this many steps")

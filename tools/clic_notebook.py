@@ -30,7 +30,7 @@ Gửi `results.zip` cho Claude để phân tích.
 """
 
 CONFIG = """# ---- Cấu hình: chỉ cần sửa ô này ----
-HOURS = 11.5            # giới hạn thời gian của cả lần chạy (Kaggle tối đa 12 giờ)
+HOURS = 11.0            # giới hạn của cả lần chạy; hết giờ thì dừng gọn, đóng gói, Kaggle vẫn lưu Output (Kaggle giết ở 12 giờ)
 STAGES = "qhat bakeoff"  # chỉ chạy một phần: "qhat" hoặc "bakeoff"
 QHAT_ARGS = ""          # ví dụ "--n 2024t=8000 2022t=2000" để đổi cỡ mẫu
 BAKEOFF_ARGS = ""       # ví dụ "--cands msillm mbt" để chạy nhanh các codec học được trước (~30 phút)
