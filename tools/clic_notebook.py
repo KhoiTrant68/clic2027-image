@@ -34,6 +34,9 @@ HOURS = 11.0            # giới hạn của cả lần chạy; hết giờ thì
 STAGES = "qhat bakeoff"  # chỉ chạy một phần: "qhat" hoặc "bakeoff"
 QHAT_ARGS = ""          # ví dụ "--n 2024t=8000 2022t=2000" để đổi cỡ mẫu
 BAKEOFF_ARGS = ""       # ví dụ "--cands msillm mbt" để chạy nhanh các codec học được trước (~30 phút)
+BAKEOFF_STEP = "all"    # "points" = chỉ tạo điểm nén (dùng cho phiên CPU chạy VTM)
+CPU_ONLY = False        # True = phiên KHÔNG bật GPU (không tốn hạn mức GPU), chỉ hợp với VTM:
+                        #   STAGES="bakeoff", BAKEOFF_STEP="points", BAKEOFF_ARGS="--cands vtm420" (phiên khác: vtmscc)
 """
 
 PREFLIGHT = """# Kiểm tra trước khi chạy: GPU, Internet, checkpoint S1, lần chạy trước
@@ -72,6 +75,10 @@ if QHAT_ARGS:
     cmd.append("--qhat-args=" + QHAT_ARGS)
 if BAKEOFF_ARGS:
     cmd.append("--bakeoff-args=" + BAKEOFF_ARGS)
+if BAKEOFF_STEP != "all":
+    cmd += ["--bakeoff-step", BAKEOFF_STEP]
+if CPU_ONLY:
+    cmd.append("--allow-cpu")
 line = " ".join(shlex.quote(c) for c in cmd)
 print(line)
 get_ipython().system(line)
