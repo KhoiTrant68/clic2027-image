@@ -45,8 +45,8 @@ python ratflow_run.py qhat bakeoff --hours 11.5
 ## Dữ liệu và artifact lớn (ngoài repo)
 
 `../ratflow-artifacts/` chứa những thứ không đưa vào git:
-- `data/`: ảnh DIV2K và latent.
-- `results/`: các zip từ Kaggle, ảnh recon, npz, và **checkpoint S1**:
+- (ảnh DIV2K và latent không giữ lại: pipeline tự tải và cache lại khi cần)
+- `results/`: các zip từ Kaggle, ảnh recon của nhánh B, và **checkpoint S1** (không có bản sao nào khác, nên sao lưu):
   - `results/s1/s1_out/last.pt`: lần 1, λ 0.03–4, dùng cho bake-off CLIC.
   - `results/2026-10-03/s1/last.pt`: lần 2, λ 0.015–0.6.
 - `run/`: output của `tools/bundle.py`.
