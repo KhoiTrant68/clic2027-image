@@ -24,7 +24,7 @@ Steps (all resume: existing points/metrics are skipped):
             (Lagrangian sweep; falls back to -LPIPS without a Q-hat model)        -> allocation.csv
   summary   tables per rate (all / natural / screen) + crop sheets    -> summary.md, crops/*.jpg
 
-    python bakeoff.py all --out work/bakeoff --vtm vtm --s1-ckpt s1_out/last.pt --qhat work/qhat/qhat_v0.json
+    python bakeoff.py all --out work/bakeoff --vtm vtm --s1-ckpt s1_out/last.pt --qhat work/qhat/qhat_v1.json
 """
 from __future__ import annotations
 
@@ -594,6 +594,7 @@ def load_qhat(path):
 
 
 def qhat_score(model, f):
+    """Linear utility of a Q-hat model; KeyError if f lacks one of its features (e.g. wd3 in an old run)."""
     from qhat import transform
     return sum(w * transform(k, float(f[k])) for k, w in zip(model["features"], model["weights"]))
 
@@ -655,11 +656,18 @@ def allocate(a):
     def score(m):
         return qhat_score(q, m) if q else -float(m["lpips_alex"])
 
-    by_cand = {}
+    by_cand, lacking = {}, {}
     for r in P.rows:
         k = (r["cand"], r["key"], r["name"])
         if k in met:
-            by_cand.setdefault(r["cand"], {}).setdefault(r["name"], []).append((int(r["bytes"]), score(met[k]), r["key"]))
+            try:
+                sc = score(met[k])
+            except (KeyError, ValueError):  # metrics computed before the model's features existed
+                lacking[r["cand"]] = lacking.get(r["cand"], 0) + 1
+                continue
+            by_cand.setdefault(r["cand"], {}).setdefault(r["name"], []).append((int(r["bytes"]), sc, r["key"]))
+    for cand, n in lacking.items():
+        print(f"allocate: {n} {cand} points lack features of {q.get('version') if q else 'the model'}; skipped", flush=True)
     by_cand["mix"] = {n: [(b, s, f"{c}/{k}") for c, d in by_cand.items() for b, s, k in d.get(n, [])] for n in names}
     out = []
     for cand, options in by_cand.items():
@@ -675,7 +683,7 @@ def allocate(a):
                 c, k = key.split("/", 1) if cand == "mix" else (cand, key)
                 out.append(dict(cand=cand, rate=rate, name=n, point_cand=c, key=k, bytes=b, score=s))
     M.write_csv(out, a.out / "allocation.csv")
-    (a.out / "allocation_meta.json").write_text(json.dumps(dict(objective="qhat_v0" if q else "-lpips_alex",
+    (a.out / "allocation_meta.json").write_text(json.dumps(dict(objective=q.get("version", "qhat") if q else "-lpips_alex",
                                                                 qhat=str(a.qhat) if q else None), indent=1))
 
 
@@ -791,7 +799,7 @@ def main(argv=None):
     ap.add_argument("--vtm", default="vtm", help="VTM 23.8 checkout with bin/ built")
     ap.add_argument("--s1-ckpt", default=None, help="S1 checkpoint (run 1, lambdas 0.03..4: covers 0.02..0.12 bpp)")
     ap.add_argument("--s1-res-levels", type=int, nargs="+", default=[2, 3])
-    ap.add_argument("--qhat", default=None, help="qhat_v0.json; without it the allocator maximises -LPIPS")
+    ap.add_argument("--qhat", default=None, help="qhat_v1.json (or v0); without it the allocator maximises -LPIPS")
     ap.add_argument("--workers", type=int, default=os.cpu_count())
     ap.add_argument("--qps", type=int, nargs="+", default=VTM_QPS, help="VTM QP grid for vtm420 / vtmscc")
     ap.add_argument("--only", nargs="+", default=None,

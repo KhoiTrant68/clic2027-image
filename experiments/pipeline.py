@@ -13,7 +13,7 @@ Stages (in order): check, [data], [cache], [s1], [s1_eval], [parity], qhat, bake
   parity    (optional) clic27.nn / clic27.entropy vs diffusers and CPU vs GPU
   qhat      Q-hat v0: metrics on sampled CLIC perceptual ratings + Bradley-Terry fit
   bakeoff   base candidates on the 30 validation images at 0.075/0.15/0.3 bpp, corpus budget,
-            Q-hat allocation (builds VTM 23.8; uses --s1-ckpt and work/qhat/qhat_v0.json when present)
+            Q-hat allocation (builds VTM 23.8; uses --s1-ckpt and qhat_v1.json, else qhat_v0.json, when present)
   pack      <work>/results.zip with every summary (+ the S1 checkpoint)
 
 State lives in <work>/state.json; finished stages are skipped on re-runs. On Kaggle, attach the previous
@@ -271,7 +271,7 @@ class Pipeline:
         if not cands or {"vtm420", "vtmscc", "s1res"} & set(cands):
             args += ["--vtm", self.build_vtm()]
         ckpt = self.a.s1_ckpt or self._s1_ckpt_for_clic()
-        qhat = self._find("qhat/qhat_v0.json", "qhat_v0.json")
+        qhat = self._find("qhat/qhat_v1.json", "qhat_v1.json", "qhat/qhat_v0.json", "qhat_v0.json")
         self.say("bakeoff: S1 checkpoint", ckpt, "| Q-hat", qhat)
         self.py("experiments/bakeoff/bakeoff.py", self.a.bakeoff_step, "--out", self.work / "bakeoff",
                 *(["--s1-ckpt", ckpt] if ckpt else []), *(["--qhat", qhat] if qhat else []), *args)
