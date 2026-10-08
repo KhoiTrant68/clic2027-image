@@ -285,7 +285,11 @@ class Pipeline:
 
     def bakeoff(self):
         args = shlex.split(self.a.bakeoff_args)
-        cands = args[args.index("--cands") + 1:] if "--cands" in args else []
+        cands = []
+        for v in (args[args.index("--cands") + 1:] if "--cands" in args else []):
+            if v.startswith("--"):
+                break
+            cands.append(v)
         if not cands or {"vtm420", "vtmscc", "s1res"} & set(cands):
             args += ["--vtm", self.build_vtm()]
         ckpt = self.a.s1_ckpt or self._s1_ckpt_for_clic()

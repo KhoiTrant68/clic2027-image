@@ -8,12 +8,15 @@ Candidates (each gives several operating points per image; the allocator picks o
   msillm   C2  MS-ILLM (Muckley et al. 2023), public checkpoints 0.035 .. 0.45 bpp (CC-BY-NC weights)
   mbt      C3  mbt2018-mean from the CompressAI zoo, MSE, qualities 1..4 (fast learned-MSE anchor; Cheng2020
               is left out because its autoregressive context model decodes a 2K image in minutes)
+  codlite  C5  CoD-Lite (2026), pixel-space one-step diffusion codec, public MIT checkpoints 0.0156 .. 0.5 bpp
+  turbo    C4  probe: MS-ILLM q1..q3 reconstruction refined by SD-Turbo img2img (1 step, strength 0.15 / 0.3)
   mix          per-image choice over the union of all candidates (what mode switching could buy)
 
 Steps (all resume: existing points/metrics are skipped):
   prepare   30 images (CLIC 2025 test = CLIC 2027 validation), budgets
   points    reconstructions + exact byte counts + decode timings     -> points/<cand>.csv, recon/<cand>/<key>/<img>.png
-  metrics   PSNR, MS-SSIM, LPIPS, DISTS, Q-hat features per point     -> metrics.csv
+            + the metrics of each point as soon as it exists (recon/ is not packed, so they must not be split)
+  metrics   PSNR, MS-SSIM, LPIPS, DISTS, Q-hat features per point     -> metrics.csv  (catch-up for older runs)
   allocate  per candidate and rate: one point per image, total bytes <= budget, maximise sum of Q-hat
             (Lagrangian sweep; falls back to -LPIPS without a Q-hat model)        -> allocation.csv
   summary   tables per rate (all / natural / screen) + crop sheets    -> summary.md, crops/*.jpg
@@ -45,15 +48,19 @@ from ratflow.eval import metrics as M  # noqa: E402
 
 DATA_URL = "https://dhldkwazkze5h.cloudfront.net/data/clic2025_image_test.zip"
 RATES = [0.075, 0.15, 0.3]
-CANDS = ["vtm420", "vtmscc", "s1res", "msillm", "mbt"]
+CANDS = ["vtm420", "vtmscc", "s1res", "msillm", "mbt", "codlite", "turbo"]
 LABELS = {"ebfd571f": "screen", "bb7344a2": "screen", "86127fbd": "screen", "2a760bf1": "screen",
           "937476dd": "texture"}  # by eye in branch B; every other image is natural
-VTM_QPS = [26, 30, 34, 38, 42, 46, 50]
+VTM_QPS = [34, 37, 40, 43, 46, 50]  # 2026-10-06 run: vtm420 qp26/30 = 0.80/0.52 bpp corpus (useless), qp34 0.33, qp50 0.029
 RES_QPS = [32, 37, 42, 47]
 S1_LEVELS = [1, 2, 3, 4, 5]  # run-1 checkpoint on Kodak: 0.020, 0.034, 0.053, 0.071, 0.089 bpp
 MSILLM = {1: "msillm_quality_1", 2: "msillm_quality_2", 3: "msillm_quality_3", 4: "msillm_quality_4",
           5: "msillm_quality_5"}
 MBT_Q = [1, 2, 3, 4]
+CODLITE = ["0_0156", "0_0312", "0_1250", "0_5000"]  # public checkpoints in the CLIC range (fixed-length VQ, bpp exact)
+GENCODEC_COMMIT = "9b39a94d078fa2864e8246c2e4031cafaf756b84"
+TURBO_BASE = [1, 2, 3]  # MS-ILLM qualities refined by SD-Turbo (0.043 / 0.080 / 0.150 bpp on these images)
+TURBO_STRENGTH = [0.15, 0.3]
 AE_REPO = "Efficient-Large-Model/Sana_1600M_1024px_diffusers"
 HEADER_BYTES = 4  # per image: candidate/point id + flags; H and W are known to the decoder from the stream
 
@@ -86,35 +93,89 @@ def inputs(a):
     return {p.stem: p for p in files}
 
 
+def selected(a):
+    """Image names to produce points for: --only takes labels (screen, texture, natural) or name prefixes."""
+    names = sorted(inputs(a))
+    if not a.only:
+        return names
+    return [n for n in names if label(n) in a.only or any(n.startswith(p) for p in a.only)]
+
+
 # ---------------------------------------------------------------- points: bookkeeping
 class Points:
     """points/<cand>.csv: one row per (cand, key, name) with bytes and timings; recon PNGs under recon/<cand>/.
     One file per candidate, so runs that each produce different candidates (e.g. a CPU-only session for
-    vtm420 and another for vtmscc) merge by copying their work dirs together. A legacy points.csv is read too."""
+    vtm420 and another for vtmscc) merge by copying their work dirs together. A legacy points.csv is read too.
+    results.zip does not carry recon/, so a restored point without its recon and without metrics is forgotten
+    (it is produced again); with a scorer, every new point gets its metrics right away."""
 
-    def __init__(self, out: Path):
-        self.out = out
+    def __init__(self, out: Path, scorer=None):
+        self.out, self.scorer = out, scorer
         self.dir = out / "points"
-        self.rows, seen = [], set()
+        scored = metric_keys(out)
+        self.rows, seen, lost = [], set(), {}
         for f in [out / "points.csv", *sorted(self.dir.glob("*.csv"))]:
             for r in (M.read_csv(f) if f.exists() else []):
                 k = (r["cand"], r["key"], r["name"])
-                if k not in seen:
-                    seen.add(k)
-                    self.rows.append(r)
+                if k in seen:
+                    continue
+                if k not in scored and not self.recon(*k).exists():
+                    lost[r["cand"]] = lost.get(r["cand"], 0) + 1
+                    continue
+                seen.add(k)
+                self.rows.append(r)
         self.have = seen
+        for cand, n in lost.items():
+            print(f"points: {n} {cand} points have neither recon nor metrics (lost with the previous session); "
+                  "they will be produced again", flush=True)
+            self._write(cand)
 
     def recon(self, cand, key, name):
         return self.out / "recon" / cand / key / f"{name}.png"
 
+    def _write(self, cand):
+        self.dir.mkdir(parents=True, exist_ok=True)
+        M.write_csv([r for r in self.rows if r["cand"] == cand], self.dir / f"{cand}.csv")
+
     def add(self, row):
         self.rows.append(row)
         self.have.add((row["cand"], row["key"], row["name"]))
-        self.dir.mkdir(parents=True, exist_ok=True)
-        M.write_csv([r for r in self.rows if r["cand"] == row["cand"]], self.dir / f"{row['cand']}.csv")
+        self._write(row["cand"])
+        if self.scorer:
+            self.scorer(self, row)
 
     def todo(self, cand, keys, names):
         return [(k, n) for k in keys for n in names if (cand, k, n) not in self.have]
+
+
+def metric_keys(out):
+    path = out / "metrics.csv"
+    return {(r["cand"], r["key"], r["name"]) for r in M.read_csv(path)} if path.exists() else set()
+
+
+class Scorer:
+    """Appends one metrics.csv row per point (PSNR, MS-SSIM, LPIPS, DISTS, Q-hat features). Called as each point is
+    produced, so a session stopped by the time budget never leaves points whose recon is gone but metrics missing."""
+
+    def __init__(self, a):
+        self.a, self.path, self.feat = a, a.out / "metrics.csv", None
+        self.rows = M.read_csv(self.path) if self.path.exists() else []
+        self.have = {(r["cand"], r["key"], r["name"]) for r in self.rows}
+
+    def __call__(self, P, r):
+        k = (r["cand"], r["key"], r["name"])
+        if k in self.have:
+            return
+        if self.feat is None:
+            from qhat import Features
+            self.feat = Features(M.device())
+        x = M.load(inputs(self.a)[r["name"]])
+        y = M.load(P.recon(*k))
+        f = self.feat(x, y)
+        f["mse"] = M.mse(x, y)
+        self.rows.append(dict(cand=r["cand"], key=r["key"], name=r["name"], **f))
+        self.have.add(k)
+        M.write_csv(self.rows, self.path)
 
 
 def to_u8(t):
@@ -190,7 +251,8 @@ def points_vtm(a, P, names):
     for cand in ("vtm420", "vtmscc"):
         if cand in a.cands:
             jobs += [(cand, f"qp{q}", n, cand, q, None, 0) for q, n in
-                     ((int(k[2:]), n) for k, n in P.todo(cand, [f"qp{q}" for q in VTM_QPS], names))]
+                     ((int(k[2:]), n) for k, n in P.todo(cand, [f"qp{q}" for q in a.qps], names))]
+    jobs.sort(key=lambda j: -j[4])  # high QPs first: they are fast, so a time-out leaves the most points
     if jobs:
         _run_vtm_jobs(a, P, jobs)
 
@@ -297,30 +359,142 @@ def _learned(a, P, names, cand, models, load):
         torch.cuda.empty_cache() if torch.cuda.is_available() else None
 
 
-def points_msillm(a, P, names):
+def _msillm_load(hub_name):
     import torch
     try:
         import compressai  # noqa: F401
         import fvcore  # noqa: F401
     except ImportError:
         _pip("compressai", "fvcore")
+    m = torch.hub.load("facebookresearch/NeuralCompression", hub_name, trust_repo=True)
+    m = m.to(M.device()).eval()
+    m.update()
+    m.update_tensor_devices("compress")  # entropy coding on CPU, transforms on GPU
 
-    def load(hub_name):
-        m = torch.hub.load("facebookresearch/NeuralCompression", hub_name, trust_repo=True)
-        m = m.to(M.device()).eval()
-        m.update()
-        m.update_tensor_devices("compress")  # entropy coding on CPU, transforms on GPU
+    def comp(t):
+        c = m.compress(t, force_cpu=False)
+        n = sum(len(s) for s in c.latent_strings) + sum(len(s) for s in c.hyper_latent_strings)
+        return n, c
 
-        def comp(t):
-            c = m.compress(t, force_cpu=False)
-            n = sum(len(s) for s in c.latent_strings) + sum(len(s) for s in c.hyper_latent_strings)
-            return n, c
+    n_params = sum(p.numel() for p in m.decoder.parameters()) + sum(p.numel() for p in m.hyper_synthesis_mean.parameters()) \
+        + sum(p.numel() for p in m.hyper_synthesis_scale.parameters())
+    return m, comp, lambda c: m.decompress(c, force_cpu=False), n_params
 
-        n_params = sum(p.numel() for p in m.decoder.parameters()) + sum(p.numel() for p in m.hyper_synthesis_mean.parameters()) \
-            + sum(p.numel() for p in m.hyper_synthesis_scale.parameters())
-        return m, comp, lambda c: m.decompress(c, force_cpu=False), n_params
 
-    _learned(a, P, names, "msillm", {f"q{q}": n for q, n in MSILLM.items()}, load)
+def points_msillm(a, P, names):
+    _learned(a, P, names, "msillm", {f"q{q}": n for q, n in MSILLM.items()}, _msillm_load)
+
+
+# ---------------------------------------------------------------- C4 / C5: one-step diffusion
+def points_codlite(a, P, names):
+    """CoD-Lite (Jia et al. 2026, microsoft/GenCodec, MIT code + weights): pixel-space one-step diffusion decoder on
+    VQ indices sent at a fixed length (no entropy coding), so bytes = ceil(h/ds * w/ds * bits / 8)."""
+    import torch
+    from huggingface_hub import hf_hub_download
+    src = a.out.parent / "GenCodec"
+    if not (src / "CoD_Lite").exists():
+        subprocess.run(["git", "clone", "-q", "https://github.com/microsoft/GenCodec.git", str(src)], check=True)
+        subprocess.run(["git", "-C", str(src), "checkout", "-q", GENCODEC_COMMIT], check=True)
+    sys.path.insert(0, str(src / "CoD_Lite"))
+    import yaml
+    from cod.utils.test_utils import instantiate_class
+    dev = M.device()
+    # bf16 as trained on Ampere+; the T4 has no bf16, run fp32 there (fp16 risks overflow in a bf16-trained net)
+    dtype = torch.bfloat16 if torch.cuda.is_available() and torch.cuda.is_bf16_supported() \
+        and torch.cuda.get_device_capability()[0] >= 8 else None
+    for key in CODLITE:
+        todo = [n for k, n in P.todo("codlite", [key], names)]
+        if not todo:
+            continue
+        cfg = yaml.safe_load(Path(hf_hub_download("zhaoyangjia/CoD_Lite", f"CoD_Lite_bpp_{key}.yaml")).read_text())
+        net = instantiate_class(cfg["model"]["net"])
+        sd = torch.load(hf_hub_download("zhaoyangjia/CoD_Lite", f"CoD_Lite_bpp_{key}.pt"), map_location="cpu")
+        sd = sd.get("state_dict", sd.get("module", sd))
+        miss, extra = net.load_state_dict({k[4:]: v for k, v in sd.items() if k.startswith("net.")}, strict=False)
+        if miss or extra:
+            print(f"codlite {key}: {len(miss)} missing / {len(extra)} unexpected keys, e.g. {(miss + extra)[:4]}", flush=True)
+        net = net.to(dev).eval()  # eval() folds the t=0 modulation into the blocks
+        enc = getattr(getattr(net, "y_embedder", None), "encoder", None)  # None in the released CoD-Lite nets
+        n_params = sum(p.numel() for p in net.parameters()) - (sum(p.numel() for p in enc.parameters()) if enc is not None else 0)
+        for name in todo:
+            x = M.load(inputs(a)[name])
+            H, W = x.shape[:2]
+            ph, pw = (-H) % 64, (-W) % 64
+            t = torch.from_numpy(np.ascontiguousarray(x)).permute(2, 0, 1)[None].float().div(255).to(dev)
+            t = torch.nn.functional.pad(t, (0, pw, 0, ph), mode="reflect")
+            with torch.no_grad(), torch.autocast("cuda", dtype=dtype, enabled=dtype is not None):
+                bits = net.compress(t)
+                sync()
+                t0 = time.time()
+                cond = net.decompress(bits, H + ph, W + pw, dev)
+                y = net.inference(y=torch.zeros((1, 3, H + ph, W + pw), device=dev, dtype=cond.dtype), cond=cond)
+                sync()
+                t_dec = time.time() - t0
+            # CoD's fp2uint8: the net outputs [-1, 1]
+            rec = y[0, :, :H, :W].float().clamp(-1, 1).add(1).mul(127.5).round().byte().permute(1, 2, 0).cpu().numpy()
+            M.save(rec, P.recon("codlite", key, name))
+            P.add(dict(cand="codlite", key=key, name=name, bytes=len(bits) + HEADER_BYTES, bytes_base=len(bits),
+                       bytes_res=0, t_dec=t_dec, note=f"decoder_params={n_params}"))
+            print(f"codlite {key} {name[:8]} {len(bits)} B  dec {t_dec:.2f}s", flush=True)
+        del net
+        torch.cuda.empty_cache() if torch.cuda.is_available() else None
+
+
+def points_turbo(a, P, names):
+    """C4 probe, no training: MS-ILLM reconstruction -> SD-Turbo img2img, one step at a low strength, empty prompt.
+    Same bytes as the MS-ILLM point. Tells whether a one-step diffusion refiner on top of the best base is worth
+    training; SD-Turbo works through the SD 2.1 VAE (24.7 dB ceiling on these images), so only the low rates matter."""
+    import torch
+    try:
+        import diffusers  # noqa: F401
+    except ImportError:
+        _pip("diffusers", "accelerate")
+    from diffusers import AutoPipelineForImage2Image
+    from PIL import Image
+    dev = M.device()
+    keys = [f"q{q}s{int(s * 100)}" for q in TURBO_BASE for s in TURBO_STRENGTH]
+    todo = P.todo("turbo", keys, names)
+    if not todo:
+        return
+    pipe = AutoPipelineForImage2Image.from_pretrained("stabilityai/sd-turbo", torch_dtype=torch.float16,
+                                                      variant="fp16").to(dev)
+    pipe.set_progress_bar_config(disable=True)
+    pipe.vae.enable_tiling()
+    n_turbo = sum(p.numel() for p in pipe.unet.parameters()) + sum(p.numel() for p in pipe.vae.parameters())
+    for q in TURBO_BASE:
+        mine = [(k, n) for k, n in todo if k.startswith(f"q{q}s")]
+        if not mine:
+            continue
+        model, comp, decomp, n_ms = _msillm_load(MSILLM[q])
+        for name in sorted({n for _, n in mine}):
+            x = M.load(inputs(a)[name])
+            H, W = x.shape[:2]
+            with torch.no_grad():
+                nbytes, state = comp(M.to_tensor(x, dev))
+                sync()
+                t0 = time.time()
+                base = to_u8(decomp(state))[:H, :W]
+                sync()
+                t_base = time.time() - t0
+            ph, pw = (-H) % 64, (-W) % 64
+            img = Image.fromarray(np.pad(base, ((0, ph), (0, pw), (0, 0)), mode="reflect"))
+            for s in TURBO_STRENGTH:
+                key = f"q{q}s{int(s * 100)}"
+                if (key, name) not in mine:
+                    continue
+                sync()
+                t0 = time.time()
+                out = pipe("", image=img, num_inference_steps=math.ceil(1 / s), strength=s, guidance_scale=0.0,
+                           generator=torch.Generator(dev).manual_seed(0)).images[0]
+                sync()
+                t_dec = t_base + time.time() - t0
+                M.save(np.asarray(out)[:H, :W], P.recon("turbo", key, name))
+                P.add(dict(cand="turbo", key=key, name=name, bytes=nbytes + HEADER_BYTES, bytes_base=nbytes, bytes_res=0,
+                           t_dec=t_dec, note=f"decoder_params={n_ms + n_turbo}"))
+                print(f"turbo {key} {name[:8]} {nbytes} B  dec {t_dec:.2f}s", flush=True)
+        del model
+    del pipe
+    torch.cuda.empty_cache() if torch.cuda.is_available() else None
 
 
 def points_mbt(a, P, names):
@@ -349,13 +523,16 @@ def points_mbt(a, P, names):
 
 
 def points(a):
-    P = Points(a.out)
-    names = sorted(inputs(a))
-    for cand, fn in (("msillm", points_msillm), ("mbt", points_mbt), ("s1res", points_s1res)):
+    P = Points(a.out, Scorer(a))
+    names = selected(a)
+    for cand, fn in (("msillm", points_msillm), ("mbt", points_mbt), ("codlite", points_codlite), ("turbo", points_turbo),
+                     ("s1res", points_s1res)):
         if cand in a.cands:
             try:
                 fn(a, P, names)
             except Exception as e:  # noqa: BLE001  one broken candidate must not stop the others
+                import traceback
+                traceback.print_exc()
                 print(f"== {cand} FAILED: {e}", flush=True)
     if {"vtm420", "vtmscc"} & set(a.cands):
         points_vtm(a, P, names)
@@ -374,26 +551,14 @@ def qhat_score(model, f):
 
 
 def metrics(a):
-    from qhat import Features
+    """Points made before metrics were computed inline (or by an older version of this script)."""
+    S = Scorer(a)
     P = Points(a.out)
-    path = a.out / "metrics.csv"
-    rows = M.read_csv(path) if path.exists() else []
-    have = {(r["cand"], r["key"], r["name"]) for r in rows}
-    todo = [r for r in P.rows if (r["cand"], r["key"], r["name"]) not in have]
-    if not todo:
-        return
-    feat = Features(M.device())
-    src = inputs(a)
-    for i, r in enumerate(sorted(todo, key=lambda r: r["name"])):
-        x = M.load(src[r["name"]])
-        y = M.load(P.recon(r["cand"], r["key"], r["name"]))
-        f = feat(x, y)
-        f["mse"] = M.mse(x, y)
-        rows.append(dict(cand=r["cand"], key=r["key"], name=r["name"], **f))
+    todo = [r for r in P.rows if (r["cand"], r["key"], r["name"]) not in S.have]
+    for i, r in enumerate(todo):
+        S(P, r)
         if i % 20 == 0:
-            M.write_csv(rows, path)
             print(f"metrics {i + 1}/{len(todo)}", flush=True)
-    M.write_csv(rows, path)
 
 
 # ---------------------------------------------------------------- allocation
@@ -580,6 +745,9 @@ def main(argv=None):
     ap.add_argument("--s1-res-levels", type=int, nargs="+", default=[2, 3])
     ap.add_argument("--qhat", default=None, help="qhat_v0.json; without it the allocator maximises -LPIPS")
     ap.add_argument("--workers", type=int, default=os.cpu_count())
+    ap.add_argument("--qps", type=int, nargs="+", default=VTM_QPS, help="VTM QP grid for vtm420 / vtmscc")
+    ap.add_argument("--only", nargs="+", default=None,
+                    help="points for these images only: labels (screen, texture, natural) or name prefixes")
     a = ap.parse_args(argv)
     a.data = a.data or a.out / "valid"
     steps = STEPS if a.step == "all" else [a.step]
