@@ -400,6 +400,7 @@ def points_codlite(a, P, names):
     if not (src / "CoD_Lite").exists():
         subprocess.run(["git", "clone", "-q", "https://github.com/microsoft/GenCodec.git", str(src)], check=True)
         subprocess.run(["git", "-C", str(src), "checkout", "-q", GENCODEC_COMMIT], check=True)
+    _pip("einops", "omegaconf", "timm", "peft", "lightning", "jsonargparse[signatures]", "pyyaml")  # Kaggle has most
     sys.path.insert(0, str(src / "CoD_Lite"))
     import yaml
     from cod.utils.test_utils import instantiate_class
@@ -507,7 +508,7 @@ def points_coolchic(a, P, names):
     cc_encode.py / cc_decode.py, so bytes are the real .cool bitstream. t_dec is the wall time of cc_decode.py
     (includes Python start-up and imports, so it overstates the decoder itself); t_enc goes to the note."""
     import shutil
-    src = a.out.parent / "Cool-Chic"
+    src = (a.out.parent / "Cool-Chic").resolve()  # cc_encode.py runs with cwd = src: every path must be absolute
     if not (src / "cc_encode.py").exists():
         subprocess.run(["git", "clone", "-q", "https://github.com/Orange-OpenSource/Cool-Chic.git", str(src)], check=True)
         subprocess.run(["git", "-C", str(src), "checkout", "-q", COOLCHIC_COMMIT], check=True)
@@ -517,10 +518,10 @@ def points_coolchic(a, P, names):
         for lm in a.coolchic_lambdas:
             key = f"{'wd' if tune == 'wasserstein' else 'mse'}{lm:g}"
             for _, name in P.todo("coolchic", [key], names):
-                work = Path(tempfile.mkdtemp(prefix="coolchic_"))
+                work = Path(tempfile.mkdtemp(prefix="coolchic_")).resolve()
                 bs = work / "x.cool"
                 t0 = time.time()
-                r = subprocess.run([sys.executable, str(src / "cc_encode.py"), "--input", str(imgs[name]),
+                r = subprocess.run([sys.executable, str(src / "cc_encode.py"), "--input", str(Path(imgs[name]).resolve()),
                                     "--output", str(bs), "--workdir", str(work), "--lmbda", str(lm), "--tune", tune,
                                     "--n_itr", str(a.coolchic_itr)], cwd=src, capture_output=True, text=True)
                 t_enc = time.time() - t0
@@ -528,7 +529,7 @@ def points_coolchic(a, P, names):
                     print(f"coolchic {key} {name[:8]} encode FAILED:", (r.stdout + r.stderr)[-2000:], flush=True)
                     shutil.rmtree(work, ignore_errors=True)
                     continue
-                rec = P.recon("coolchic", key, name)
+                rec = P.recon("coolchic", key, name).resolve()
                 rec.parent.mkdir(parents=True, exist_ok=True)
                 t0 = time.time()
                 subprocess.run([sys.executable, str(src / "cc_decode.py"), "-i", str(bs), "-o", str(rec)], cwd=src,
@@ -584,8 +585,10 @@ def points(a):
 
 # ---------------------------------------------------------------- metrics + Q-hat
 def load_qhat(path):
-    if not path or not Path(path).exists():
+    if not path:
         return None
+    if not Path(path).exists():  # a given but missing model must not silently turn the objective into -LPIPS
+        raise SystemExit(f"--qhat {path} does not exist (cwd {Path.cwd()})")
     return json.loads(Path(path).read_text())
 
 

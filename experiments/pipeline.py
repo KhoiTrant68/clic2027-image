@@ -51,7 +51,7 @@ class StageTimeout(Exception):
 class Pipeline:
     def __init__(self, a):
         self.a = a
-        self.work = Path(a.work)
+        self.work = Path(a.work).resolve()  # absolute: the stage scripts run with cwd = repo root
         self.work.mkdir(parents=True, exist_ok=True)
         self.t0 = time.time()
         self.state_path = self.work / "state.json"
@@ -116,7 +116,7 @@ class Pipeline:
             self.state_path.write_text(json.dumps(self.state, indent=1))
 
     def inputs(self):
-        roots = [Path(p) for p in self.a.inputs] + ([Path("/kaggle/input")] if KAGGLE else [])
+        roots = [Path(p).resolve() for p in self.a.inputs] + ([Path("/kaggle/input")] if KAGGLE else [])
         return [r for r in roots if r.exists()]
 
     # ---------------------------------------------------------------- restore a previous run
