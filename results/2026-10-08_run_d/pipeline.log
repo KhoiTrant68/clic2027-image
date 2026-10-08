@@ -1,0 +1,265 @@
+[19:37:00 +  0.0m] ratflow pipeline @ efba80e-dirty | stages ['bakeoff'] | budget 11.0 h
+[19:37:00 +  0.0m] restoring previous work dir from /kaggle/input/datasets/magnus68/ratflow-sessiona
+[19:37:00 +  0.0m] == check
+[19:37:31 +  0.5m] $ /usr/bin/python3 -m pip install -q lpips piq torch-fidelity
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 53.8/53.8 kB 1.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.9/106.9 kB 2.9 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.6/85.6 kB 2.8 MB/s eta 0:00:00
+[19:37:36 +  0.6m] torch 2.11.0+cpu | GPU: None | work: /kaggle/working/work
+[19:37:36 +  0.6m] == check: done {'gpu': None, 'torch': '2.11.0+cpu'}
+[19:37:36 +  0.6m] == bakeoff
+[19:37:36 +  0.6m] $ bash -c set -e; cd '/kaggle/working/work'; [ -d vtm ] || git clone -q --depth 1 --branch VTM-23.8 https://vcgit.hhi.fraunhofer.de/jvet/VVCSoftware_VTM.git vtm; cd vtm; mkdir -p build; cd build; cmake .. -DCMAKE_BUILD_TYPE=Release > /dev/null; make -j$(nproc) EncoderApp 2>&1 | tail -2
+Note: switching to 'e0683790fd035558d1b75f70656b073820aa48d6'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+CMake Deprecation Warning at CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+[100%] Linking CXX executable /kaggle/working/work/vtm/bin/umake/gcc-13.3/x86_64/release/EncoderApp
+[100%] Built target EncoderApp
+[19:41:20 +  4.3m] bakeoff: S1 checkpoint None | Q-hat /kaggle/working/work/qhat/qhat_v0.json
+[19:41:20 +  4.3m] $ /usr/bin/python3 /kaggle/working/ratflow_repo/experiments/bakeoff/bakeoff.py points --out /kaggle/working/work/bakeoff --qhat /kaggle/working/work/qhat/qhat_v0.json --cands vtm420 --vtm /kaggle/working/work/vtm
+===== prepare
+30 images, 86245376 pixels, budgets {'0.075': 808550, '0.15': 1617100, '0.3': 3234201}
+===== points
+points: 4 mbt points have neither recon nor metrics (lost with the previous session); they will be produced again
+points: 9 msillm points have neither recon nor metrics (lost with the previous session); they will be produced again
+points: 26 s1res points have neither recon nor metrics (lost with the previous session); they will be produced again
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/alexnet-owt-7be5be79.pth" to /root/.cache/torch/hub/checkpoints/alexnet-owt-7be5be79.pth
+
+  0%|          | 0.00/233M [00:00<?, ?B/s]
+  2%|▏         | 4.62M/233M [00:00<00:04, 48.5MB/s]
+  5%|▍         | 11.4M/233M [00:00<00:03, 61.4MB/s]
+  9%|▉         | 21.5M/233M [00:00<00:02, 81.8MB/s]
+ 14%|█▎        | 32.0M/233M [00:00<00:02, 92.8MB/s]
+ 18%|█▊        | 40.9M/233M [00:00<00:02, 83.6MB/s]
+ 22%|██▏       | 51.4M/233M [00:00<00:02, 91.9MB/s]
+ 26%|██▌       | 60.4M/233M [00:00<00:02, 79.9MB/s]
+ 29%|██▉       | 68.4M/233M [00:00<00:02, 74.1MB/s]
+ 32%|███▏      | 75.8M/233M [00:01<00:02, 66.4MB/s]
+ 36%|███▌      | 83.6M/233M [00:01<00:02, 70.3MB/s]
+ 39%|███▉      | 90.6M/233M [00:01<00:02, 69.2MB/s]
+ 45%|████▌     | 105M/233M [00:01<00:01, 92.1MB/s] 
+ 52%|█████▏    | 122M/233M [00:01<00:01, 113MB/s] 
+ 57%|█████▋    | 133M/233M [00:01<00:01, 102MB/s]
+ 61%|██████▏   | 143M/233M [00:01<00:00, 100MB/s]
+ 66%|██████▌   | 153M/233M [00:01<00:00, 100MB/s]
+ 70%|██████▉   | 163M/233M [00:01<00:00, 93.5MB/s]
+ 75%|███████▍  | 174M/233M [00:02<00:00, 99.2MB/s]
+ 79%|███████▉  | 184M/233M [00:02<00:00, 99.7MB/s]
+ 83%|████████▎ | 194M/233M [00:02<00:00, 98.4MB/s]
+ 88%|████████▊ | 204M/233M [00:02<00:00, 102MB/s] 
+ 92%|█████████▏| 214M/233M [00:02<00:00, 98.7MB/s]
+ 96%|█████████▌| 224M/233M [00:02<00:00, 94.1MB/s]
+100%|██████████| 233M/233M [00:02<00:00, 91.0MB/s]
+Downloading: "https://github.com/photosynthesis-team/piq/releases/download/v0.4.1/dists_weights.pt" to /root/.cache/torch/hub/checkpoints/dists_weights.pt
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/vgg16-397923af.pth" to /root/.cache/torch/hub/checkpoints/vgg16-397923af.pth
+/kaggle/working/ratflow_repo/src/ratflow/eval/metrics.py:67: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+[1/180] vtm420 qp50 0369d229 2734 B
+[2/180] vtm420 qp50 0d154749 4705 B
+[3/180] vtm420 qp50 1b4ad095 2716 B
+[4/180] vtm420 qp50 1cba10ad 1993 B
+[5/180] vtm420 qp50 07b9f93f 7462 B
+[6/180] vtm420 qp50 2a760bf1 1635 B
+[7/180] vtm420 qp50 4ebc0e6c 3047 B
+[8/180] vtm420 qp50 2397c73f 9163 B
+[9/180] vtm420 qp50 2684452d 8613 B
+[10/180] vtm420 qp50 50d13125 1067 B
+[11/180] vtm420 qp50 02809272 21280 B
+[12/180] vtm420 qp50 58104815 11831 B
+[13/180] vtm420 qp50 8426ed22 1665 B
+[14/180] vtm420 qp50 608cb09e 15823 B
+[15/180] vtm420 qp50 50fe4c3d 17304 B
+[16/180] vtm420 qp50 a2a946cc 8399 B
+[17/180] vtm420 qp50 79b1bb29 14567 B
+[18/180] vtm420 qp50 86127fbd 12356 B
+[19/180] vtm420 qp50 bb7344a2 4164 B
+[20/180] vtm420 qp50 c9510efb 7889 B
+[21/180] vtm420 qp50 937476dd 30131 B
+[22/180] vtm420 qp50 a365e654 17519 B
+[23/180] vtm420 qp50 b0b3744c 17109 B
+[24/180] vtm420 qp50 e0d8e29c 1593 B
+[25/180] vtm420 qp50 d0208a1e 15122 B
+[26/180] vtm420 qp50 f67f11de 1358 B
+[27/180] vtm420 qp50 da52c4f6 28223 B
+[28/180] vtm420 qp50 ff32adfa 8899 B
+[29/180] vtm420 qp50 eda6d427 14616 B
+[30/180] vtm420 qp50 ebfd571f 19551 B
+[31/180] vtm420 qp46 0369d229 4494 B
+[32/180] vtm420 qp46 0d154749 10232 B
+[33/180] vtm420 qp46 1b4ad095 6122 B
+[34/180] vtm420 qp46 1cba10ad 3276 B
+[35/180] vtm420 qp46 07b9f93f 16178 B
+[36/180] vtm420 qp46 2a760bf1 2398 B
+[37/180] vtm420 qp46 2684452d 15761 B
+[38/180] vtm420 qp46 4ebc0e6c 6846 B
+[39/180] vtm420 qp46 2397c73f 18635 B
+[40/180] vtm420 qp46 50d13125 2355 B
+[41/180] vtm420 qp46 02809272 41164 B
+[42/180] vtm420 qp46 58104815 24728 B
+[43/180] vtm420 qp46 8426ed22 2716 B
+[44/180] vtm420 qp46 608cb09e 30886 B
+[45/180] vtm420 qp46 50fe4c3d 31446 B
+[46/180] vtm420 qp46 79b1bb29 28800 B
+[47/180] vtm420 qp46 a2a946cc 15793 B
+[48/180] vtm420 qp46 86127fbd 24932 B
+[49/180] vtm420 qp46 bb7344a2 8023 B
+[50/180] vtm420 qp46 937476dd 87608 B
+[51/180] vtm420 qp46 c9510efb 12683 B
+[52/180] vtm420 qp46 a365e654 36629 B
+[53/180] vtm420 qp46 e0d8e29c 3468 B
+[54/180] vtm420 qp46 b0b3744c 39451 B
+[55/180] vtm420 qp46 ebfd571f 45020 B
+[56/180] vtm420 qp46 d0208a1e 38482 B
+[57/180] vtm420 qp46 da52c4f6 50571 B
+[58/180] vtm420 qp46 f67f11de 2025 B
+[59/180] vtm420 qp46 eda6d427 28526 B
+[60/180] vtm420 qp46 ff32adfa 14609 B
+[61/180] vtm420 qp43 0369d229 6882 B
+[62/180] vtm420 qp43 0d154749 17493 B
+[63/180] vtm420 qp43 1b4ad095 12115 B
+[64/180] vtm420 qp43 1cba10ad 4986 B
+[65/180] vtm420 qp43 07b9f93f 29117 B
+[66/180] vtm420 qp43 2a760bf1 3174 B
+[67/180] vtm420 qp43 2684452d 23767 B
+[68/180] vtm420 qp43 4ebc0e6c 11572 B
+[69/180] vtm420 qp43 02809272 63253 B
+[70/180] vtm420 qp43 2397c73f 30037 B
+[71/180] vtm420 qp43 50d13125 4795 B
+[72/180] vtm420 qp43 58104815 41965 B
+[73/180] vtm420 qp43 8426ed22 4060 B
+[74/180] vtm420 qp43 79b1bb29 46647 B
+[75/180] vtm420 qp43 50fe4c3d 49039 B
+[76/180] vtm420 qp43 608cb09e 48120 B
+[77/180] vtm420 qp43 a2a946cc 24464 B
+[78/180] vtm420 qp43 86127fbd 39510 B
+[79/180] vtm420 qp43 bb7344a2 11996 B
+[80/180] vtm420 qp43 a365e654 61241 B
+[81/180] vtm420 qp43 937476dd 163939 B
+[82/180] vtm420 qp43 c9510efb 17890 B
+[83/180] vtm420 qp43 e0d8e29c 8643 B
+[84/180] vtm420 qp43 b0b3744c 67600 B
+[85/180] vtm420 qp43 ebfd571f 66254 B
+[86/180] vtm420 qp43 f67f11de 2843 B
+[87/180] vtm420 qp43 da52c4f6 75210 B
+[88/180] vtm420 qp43 ff32adfa 20811 B
+[89/180] vtm420 qp43 d0208a1e 72851 B
+[90/180] vtm420 qp43 eda6d427 45293 B
+[91/180] vtm420 qp40 0369d229 10919 B
+[92/180] vtm420 qp40 0d154749 28730 B
+[93/180] vtm420 qp40 1b4ad095 24181 B
+[94/180] vtm420 qp40 1cba10ad 7597 B
+[95/180] vtm420 qp40 07b9f93f 51625 B
+[96/180] vtm420 qp40 2a760bf1 4127 B
+[97/180] vtm420 qp40 02809272 92874 B
+[98/180] vtm420 qp40 2684452d 34983 B
+[99/180] vtm420 qp40 4ebc0e6c 18155 B
+[100/180] vtm420 qp40 50d13125 9054 B
+[101/180] vtm420 qp40 2397c73f 45507 B
+[102/180] vtm420 qp40 79b1bb29 68634 B
+[103/180] vtm420 qp40 8426ed22 6145 B
+[104/180] vtm420 qp40 58104815 69320 B
+[105/180] vtm420 qp40 50fe4c3d 74290 B
+[106/180] vtm420 qp40 608cb09e 69387 B
+[107/180] vtm420 qp40 a2a946cc 34928 B
+[108/180] vtm420 qp40 86127fbd 60771 B
+[109/180] vtm420 qp40 bb7344a2 17076 B
+[110/180] vtm420 qp40 a365e654 97756 B
+[111/180] vtm420 qp40 937476dd 261796 B
+[112/180] vtm420 qp40 c9510efb 23547 B
+[113/180] vtm420 qp40 e0d8e29c 18318 B
+[114/180] vtm420 qp40 b0b3744c 103523 B
+[115/180] vtm420 qp40 ebfd571f 88700 B
+[116/180] vtm420 qp40 f67f11de 4070 B
+[117/180] vtm420 qp40 da52c4f6 105739 B
+[118/180] vtm420 qp40 ff32adfa 28059 B
+[119/180] vtm420 qp40 eda6d427 69333 B
+[120/180] vtm420 qp40 d0208a1e 126853 B
+[121/180] vtm420 qp37 0369d229 17509 B
+[122/180] vtm420 qp37 1b4ad095 45055 B
+[123/180] vtm420 qp37 0d154749 47137 B
+[124/180] vtm420 qp37 07b9f93f 86366 B
+[125/180] vtm420 qp37 1cba10ad 11817 B
+[126/180] vtm420 qp37 2a760bf1 5799 B
+[127/180] vtm420 qp37 02809272 132624 B
+[128/180] vtm420 qp37 50d13125 15841 B
+[129/180] vtm420 qp37 4ebc0e6c 28526 B
+[130/180] vtm420 qp37 2684452d 51097 B
+[131/180] vtm420 qp37 2397c73f 67092 B
+[132/180] vtm420 qp37 79b1bb29 99005 B
+[133/180] vtm420 qp37 50fe4c3d 112010 B
+[134/180] vtm420 qp37 8426ed22 9577 B
+[135/180] vtm420 qp37 58104815 113876 B
+[136/180] vtm420 qp37 608cb09e 100244 B
+[137/180] vtm420 qp37 a2a946cc 49984 B
+[138/180] vtm420 qp37 86127fbd 89718 B
+[139/180] vtm420 qp37 bb7344a2 23527 B
+[140/180] vtm420 qp37 937476dd 377151 B
+[141/180] vtm420 qp37 c9510efb 31606 B
+[142/180] vtm420 qp37 a365e654 150809 B
+[143/180] vtm420 qp37 e0d8e29c 33622 B
+[144/180] vtm420 qp37 b0b3744c 153696 B
+[145/180] vtm420 qp37 ebfd571f 113855 B
+[146/180] vtm420 qp37 f67f11de 6051 B
+[147/180] vtm420 qp37 da52c4f6 146623 B
+[148/180] vtm420 qp37 ff32adfa 39160 B
+[149/180] vtm420 qp37 d0208a1e 205414 B
+[150/180] vtm420 qp37 eda6d427 105490 B
+[151/180] vtm420 qp34 0369d229 28122 B
+[152/180] vtm420 qp34 07b9f93f 132961 B
+[153/180] vtm420 qp34 1b4ad095 75254 B
+[154/180] vtm420 qp34 0d154749 76503 B
+[155/180] vtm420 qp34 02809272 184016 B
+[156/180] vtm420 qp34 2a760bf1 8186 B
+[157/180] vtm420 qp34 1cba10ad 18592 B
+[158/180] vtm420 qp34 50d13125 24664 B
+[159/180] vtm420 qp34 4ebc0e6c 44398 B
+[160/180] vtm420 qp34 2397c73f 94632 B
+[161/180] vtm420 qp34 2684452d 74683 B
+[162/180] vtm420 qp34 79b1bb29 138337 B
+[163/180] vtm420 qp34 50fe4c3d 165499 B
+[164/180] vtm420 qp34 8426ed22 15137 B
+[165/180] vtm420 qp34 608cb09e 141723 B
+[166/180] vtm420 qp34 58104815 180119 B
+[167/180] vtm420 qp34 a2a946cc 69734 B
+[168/180] vtm420 qp34 86127fbd 130846 B
+[169/180] vtm420 qp34 bb7344a2 31754 B
+[170/180] vtm420 qp34 c9510efb 42306 B
+[171/180] vtm420 qp34 937476dd 513958 B
+[172/180] vtm420 qp34 a365e654 221613 B
+[173/180] vtm420 qp34 b0b3744c 216624 B
+[174/180] vtm420 qp34 e0d8e29c 54312 B
+[175/180] vtm420 qp34 ebfd571f 140992 B
+[176/180] vtm420 qp34 f67f11de 9643 B
+[177/180] vtm420 qp34 da52c4f6 200013 B
+[178/180] vtm420 qp34 d0208a1e 306824 B
+[179/180] vtm420 qp34 ff32adfa 54786 B
+[180/180] vtm420 qp34 eda6d427 159573 B
+[03:41:05 +484.1m] == bakeoff: incomplete {'s1_ckpt': 'None', 'qhat': '/kaggle/working/work/qhat/qhat_v0.json', 'step': 'points', 'cands': ['vtm420']}

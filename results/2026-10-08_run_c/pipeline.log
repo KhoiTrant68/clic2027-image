@@ -1,0 +1,118 @@
+[19:36:48 +  0.0m] ratflow pipeline @ efba80e-dirty | stages ['bakeoff'] | budget 11.0 h
+[19:36:48 +  0.0m] restoring previous work dir from /kaggle/input/datasets/magnus68/ratflow-sessiona
+[19:36:48 +  0.0m] == check
+[19:37:24 +  0.6m] $ /usr/bin/python3 -m pip install -q lpips piq torch-fidelity
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 53.8/53.8 kB 1.4 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.9/106.9 kB 2.5 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.6/85.6 kB 2.0 MB/s eta 0:00:00
+[19:37:30 +  0.7m] torch 2.11.0+cpu | GPU: None | work: /kaggle/working/work
+[19:37:30 +  0.7m] == check: done {'gpu': None, 'torch': '2.11.0+cpu'}
+[19:37:30 +  0.7m] == bakeoff
+[19:37:30 +  0.7m] $ bash -c set -e; cd '/kaggle/working/work'; [ -d vtm ] || git clone -q --depth 1 --branch VTM-23.8 https://vcgit.hhi.fraunhofer.de/jvet/VVCSoftware_VTM.git vtm; cd vtm; mkdir -p build; cd build; cmake .. -DCMAKE_BUILD_TYPE=Release > /dev/null; make -j$(nproc) EncoderApp 2>&1 | tail -2
+Note: switching to 'e0683790fd035558d1b75f70656b073820aa48d6'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+CMake Deprecation Warning at CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+[100%] Linking CXX executable /kaggle/working/work/vtm/bin/umake/gcc-13.3/x86_64/release/EncoderApp
+[100%] Built target EncoderApp
+[19:41:37 +  4.8m] bakeoff: S1 checkpoint None | Q-hat /kaggle/working/work/qhat/qhat_v0.json
+[19:41:37 +  4.8m] $ /usr/bin/python3 /kaggle/working/ratflow_repo/experiments/bakeoff/bakeoff.py points --out /kaggle/working/work/bakeoff --qhat /kaggle/working/work/qhat/qhat_v0.json --cands vtmscc --only screen texture --vtm /kaggle/working/work/vtm
+===== prepare
+30 images, 86245376 pixels, budgets {'0.075': 808550, '0.15': 1617100, '0.3': 3234201}
+===== points
+points: 4 mbt points have neither recon nor metrics (lost with the previous session); they will be produced again
+points: 9 msillm points have neither recon nor metrics (lost with the previous session); they will be produced again
+points: 26 s1res points have neither recon nor metrics (lost with the previous session); they will be produced again
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/alexnet-owt-7be5be79.pth" to /root/.cache/torch/hub/checkpoints/alexnet-owt-7be5be79.pth
+
+  0%|          | 0.00/233M [00:00<?, ?B/s]
+  2%|▏         | 4.25M/233M [00:00<00:05, 43.4MB/s]
+  4%|▍         | 9.88M/233M [00:00<00:04, 51.4MB/s]
+  7%|▋         | 16.8M/233M [00:00<00:03, 60.6MB/s]
+ 11%|█         | 25.8M/233M [00:00<00:02, 73.5MB/s]
+ 14%|█▍        | 32.9M/233M [00:00<00:03, 63.5MB/s]
+ 19%|█▊        | 43.5M/233M [00:00<00:02, 78.1MB/s]
+ 22%|██▏       | 52.0M/233M [00:00<00:02, 81.3MB/s]
+ 27%|██▋       | 62.1M/233M [00:00<00:02, 88.8MB/s]
+ 31%|███       | 72.6M/233M [00:00<00:01, 95.1MB/s]
+ 35%|███▌      | 81.9M/233M [00:01<00:01, 91.2MB/s]
+ 39%|███▉      | 90.8M/233M [00:01<00:01, 87.7MB/s]
+ 43%|████▎     | 99.4M/233M [00:01<00:01, 88.5MB/s]
+ 46%|████▋     | 108M/233M [00:01<00:01, 73.9MB/s] 
+ 50%|█████     | 118M/233M [00:01<00:01, 80.6MB/s]
+ 55%|█████▍    | 127M/233M [00:01<00:01, 85.6MB/s]
+ 58%|█████▊    | 136M/233M [00:01<00:01, 74.8MB/s]
+ 62%|██████▏   | 144M/233M [00:01<00:01, 77.3MB/s]
+ 66%|██████▌   | 153M/233M [00:02<00:01, 82.9MB/s]
+ 70%|██████▉   | 162M/233M [00:02<00:00, 86.6MB/s]
+ 74%|███████▎  | 172M/233M [00:02<00:00, 89.0MB/s]
+ 77%|███████▋  | 180M/233M [00:02<00:00, 90.0MB/s]
+ 81%|████████▏ | 190M/233M [00:02<00:00, 92.0MB/s]
+ 85%|████████▌ | 199M/233M [00:02<00:00, 92.2MB/s]
+ 89%|████████▉ | 208M/233M [00:02<00:00, 93.8MB/s]
+ 93%|█████████▎| 218M/233M [00:02<00:00, 95.5MB/s]
+ 98%|█████████▊| 228M/233M [00:02<00:00, 98.6MB/s]
+100%|██████████| 233M/233M [00:02<00:00, 84.5MB/s]
+Downloading: "https://github.com/photosynthesis-team/piq/releases/download/v0.4.1/dists_weights.pt" to /root/.cache/torch/hub/checkpoints/dists_weights.pt
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/vgg16-397923af.pth" to /root/.cache/torch/hub/checkpoints/vgg16-397923af.pth
+/kaggle/working/ratflow_repo/src/ratflow/eval/metrics.py:67: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+[1/30] vtmscc qp50 2a760bf1 1491 B
+[2/30] vtmscc qp50 bb7344a2 3994 B
+[3/30] vtmscc qp46 2a760bf1 2232 B
+[4/30] vtmscc qp50 86127fbd 12133 B
+[5/30] vtmscc qp50 ebfd571f 16161 B
+[6/30] vtmscc qp50 937476dd 25415 B
+[7/30] vtmscc qp46 bb7344a2 7324 B
+[8/30] vtmscc qp46 86127fbd 23582 B
+[9/30] vtmscc qp43 2a760bf1 3030 B
+[10/30] vtmscc qp46 937476dd 86795 B
+[11/30] vtmscc qp46 ebfd571f 34039 B
+[12/30] vtmscc qp43 bb7344a2 11072 B
+[13/30] vtmscc qp43 86127fbd 36960 B
+[14/30] vtmscc qp40 2a760bf1 4192 B
+[15/30] vtmscc qp43 937476dd 163681 B
+[16/30] vtmscc qp40 bb7344a2 16122 B
+[17/30] vtmscc qp43 ebfd571f 49845 B
+[18/30] vtmscc qp37 2a760bf1 5864 B
+[19/30] vtmscc qp40 86127fbd 57611 B
+[20/30] vtmscc qp40 937476dd 261368 B
+[21/30] vtmscc qp40 ebfd571f 67996 B
+[22/30] vtmscc qp37 bb7344a2 23059 B
+[23/30] vtmscc qp34 2a760bf1 8451 B
+[24/30] vtmscc qp37 86127fbd 86735 B
+[25/30] vtmscc qp37 937476dd 377178 B
+[26/30] vtmscc qp37 ebfd571f 89012 B
+[27/30] vtmscc qp34 bb7344a2 31910 B
+[28/30] vtmscc qp34 86127fbd 130029 B
+[29/30] vtmscc qp34 ebfd571f 112531 B
+[30/30] vtmscc qp34 937476dd 513982 B
+[22:11:41 +154.9m] == bakeoff: incomplete {'s1_ckpt': 'None', 'qhat': '/kaggle/working/work/qhat/qhat_v0.json', 'step': 'points', 'cands': ['vtmscc']}

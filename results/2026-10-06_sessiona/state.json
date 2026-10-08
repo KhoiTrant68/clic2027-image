@@ -1,0 +1,21 @@
+{
+ "check": {
+  "done": true,
+  "seconds": 29,
+  "commit": "137158d",
+  "gpu": "Tesla T4",
+  "torch": "2.11.0+cu128"
+ },
+ "qhat": {
+  "done": true,
+  "seconds": 6685,
+  "commit": "137158d",
+  "cross_2024": 0.8123333333333334
+ },
+ "bakeoff": {
+  "done": false,
+  "timed_out": true,
+  "seconds": 32887,
+  "commit": "137158d"
+ }
+}

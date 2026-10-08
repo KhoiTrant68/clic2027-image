@@ -1,0 +1,254 @@
+[15:13:53 +  0.0m] ratflow pipeline @ 137158d | stages ['bakeoff'] | budget 11.0 h
+[15:13:53 +  0.0m] == check
+[15:14:24 +  0.5m] $ /usr/bin/python3 -m pip install -q lpips piq torch-fidelity
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 53.8/53.8 kB 1.4 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.9/106.9 kB 2.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.6/85.6 kB 2.5 MB/s eta 0:00:00
+[15:14:30 +  0.6m] torch 2.11.0+cpu | GPU: None | work: /kaggle/working/work
+[15:14:30 +  0.6m] == check: done {'gpu': None, 'torch': '2.11.0+cpu'}
+[15:14:30 +  0.6m] == bakeoff
+[15:14:30 +  0.6m] $ bash -c set -e; cd '/kaggle/working/work'; [ -d vtm ] || git clone -q --depth 1 --branch VTM-23.8 https://vcgit.hhi.fraunhofer.de/jvet/VVCSoftware_VTM.git vtm; cd vtm; mkdir -p build; cd build; cmake .. -DCMAKE_BUILD_TYPE=Release > /dev/null; make -j$(nproc) EncoderApp 2>&1 | tail -2
+Note: switching to 'e0683790fd035558d1b75f70656b073820aa48d6'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+CMake Deprecation Warning at CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+[100%] Linking CXX executable /kaggle/working/work/vtm/bin/umake/gcc-13.3/x86_64/release/EncoderApp
+[100%] Built target EncoderApp
+[15:18:18 +  4.4m] bakeoff: S1 checkpoint None | Q-hat None
+[15:18:18 +  4.4m] $ /usr/bin/python3 /kaggle/working/ratflow_repo/experiments/bakeoff/bakeoff.py points --out /kaggle/working/work/bakeoff --cands vtm420 --vtm /kaggle/working/work/vtm
+===== prepare
+30 images, 86245376 pixels, budgets {'0.075': 808550, '0.15': 1617100, '0.3': 3234201}
+===== points
+[1/210] vtm420 qp26 0369d229 93155 B
+[2/210] vtm420 qp26 07b9f93f 310312 B
+[3/210] vtm420 qp26 02809272 390955 B
+[4/210] vtm420 qp26 1b4ad095 212155 B
+[5/210] vtm420 qp26 1cba10ad 58188 B
+[6/210] vtm420 qp26 2a760bf1 17378 B
+[7/210] vtm420 qp26 0d154749 383596 B
+[8/210] vtm420 qp26 50d13125 56304 B
+[9/210] vtm420 qp26 2397c73f 210023 B
+[10/210] vtm420 qp26 2684452d 189401 B
+[11/210] vtm420 qp26 4ebc0e6c 207230 B
+[12/210] vtm420 qp26 50fe4c3d 399292 B
+[13/210] vtm420 qp26 79b1bb29 307002 B
+[14/210] vtm420 qp26 8426ed22 48067 B
+[15/210] vtm420 qp26 58104815 506588 B
+[16/210] vtm420 qp26 608cb09e 384834 B
+[17/210] vtm420 qp26 a2a946cc 158738 B
+[18/210] vtm420 qp26 86127fbd 327436 B
+[19/210] vtm420 qp26 bb7344a2 64086 B
+[20/210] vtm420 qp26 937476dd 1020342 B
+[21/210] vtm420 qp26 c9510efb 93159 B
+[22/210] vtm420 qp26 b0b3744c 462617 B
+[23/210] vtm420 qp26 a365e654 507101 B
+[24/210] vtm420 qp26 e0d8e29c 140063 B
+[25/210] vtm420 qp26 ebfd571f 219015 B
+[26/210] vtm420 qp26 f67f11de 52007 B
+[27/210] vtm420 qp26 d0208a1e 683669 B
+[28/210] vtm420 qp26 da52c4f6 433262 B
+[29/210] vtm420 qp26 ff32adfa 134257 B
+[30/210] vtm420 qp30 0369d229 52179 B
+[31/210] vtm420 qp30 02809272 273912 B
+[32/210] vtm420 qp26 eda6d427 501871 B
+[33/210] vtm420 qp30 07b9f93f 211542 B
+[34/210] vtm420 qp30 1cba10ad 33261 B
+[35/210] vtm420 qp30 1b4ad095 133928 B
+[36/210] vtm420 qp30 2a760bf1 12439 B
+[37/210] vtm420 qp30 0d154749 154648 B
+[38/210] vtm420 qp30 50d13125 39264 B
+[39/210] vtm420 qp30 2397c73f 143898 B
+[40/210] vtm420 qp30 2684452d 120419 B
+[41/210] vtm420 qp30 4ebc0e6c 83625 B
+[42/210] vtm420 qp30 50fe4c3d 264494 B
+[43/210] vtm420 qp30 79b1bb29 208407 B
+[44/210] vtm420 qp30 58104815 311902 B
+[45/210] vtm420 qp30 8426ed22 27434 B
+[46/210] vtm420 qp30 608cb09e 223665 B
+[47/210] vtm420 qp30 a2a946cc 106189 B
+[48/210] vtm420 qp30 86127fbd 212837 B
+[49/210] vtm420 qp30 bb7344a2 45747 B
+[50/210] vtm420 qp30 c9510efb 62047 B
+[51/210] vtm420 qp30 937476dd 750441 B
+[52/210] vtm420 qp30 a365e654 346419 B
+[53/210] vtm420 qp30 b0b3744c 323975 B
+[54/210] vtm420 qp30 e0d8e29c 91473 B
+[55/210] vtm420 qp30 ebfd571f 179066 B
+[56/210] vtm420 qp30 f67f11de 19982 B
+[57/210] vtm420 qp30 da52c4f6 295950 B
+[58/210] vtm420 qp30 ff32adfa 85491 B
+[59/210] vtm420 qp30 d0208a1e 478191 B
+[60/210] vtm420 qp34 0369d229 28122 B
+[61/210] vtm420 qp30 eda6d427 276842 B
+[62/210] vtm420 qp34 07b9f93f 132961 B
+[63/210] vtm420 qp34 02809272 184016 B
+[64/210] vtm420 qp34 1cba10ad 18592 B
+[65/210] vtm420 qp34 1b4ad095 75254 B
+[66/210] vtm420 qp34 0d154749 76503 B
+[67/210] vtm420 qp34 2a760bf1 8186 B
+[68/210] vtm420 qp34 50d13125 24664 B
+[69/210] vtm420 qp34 2397c73f 94632 B
+[70/210] vtm420 qp34 2684452d 74683 B
+[71/210] vtm420 qp34 4ebc0e6c 44398 B
+[72/210] vtm420 qp34 79b1bb29 138337 B
+[73/210] vtm420 qp34 50fe4c3d 165499 B
+[74/210] vtm420 qp34 8426ed22 15137 B
+[75/210] vtm420 qp34 58104815 180119 B
+[76/210] vtm420 qp34 608cb09e 141723 B
+[77/210] vtm420 qp34 a2a946cc 69734 B
+[78/210] vtm420 qp34 86127fbd 130846 B
+[79/210] vtm420 qp34 bb7344a2 31754 B
+[80/210] vtm420 qp34 937476dd 513958 B
+[81/210] vtm420 qp34 c9510efb 42306 B
+[82/210] vtm420 qp34 a365e654 221613 B
+[83/210] vtm420 qp34 b0b3744c 216624 B
+[84/210] vtm420 qp34 e0d8e29c 54312 B
+[85/210] vtm420 qp34 ebfd571f 140992 B
+[86/210] vtm420 qp34 f67f11de 9643 B
+[87/210] vtm420 qp34 da52c4f6 200013 B
+[88/210] vtm420 qp34 ff32adfa 54786 B
+[89/210] vtm420 qp34 d0208a1e 306824 B
+[90/210] vtm420 qp38 0369d229 14788 B
+[91/210] vtm420 qp34 eda6d427 159573 B
+[92/210] vtm420 qp38 1b4ad095 37047 B
+[93/210] vtm420 qp38 07b9f93f 73377 B
+[94/210] vtm420 qp38 0d154749 40324 B
+[95/210] vtm420 qp38 02809272 117918 B
+[96/210] vtm420 qp38 1cba10ad 10208 B
+[97/210] vtm420 qp38 2a760bf1 5193 B
+[98/210] vtm420 qp38 50d13125 13202 B
+[99/210] vtm420 qp38 4ebc0e6c 24466 B
+[100/210] vtm420 qp38 2684452d 44832 B
+[101/210] vtm420 qp38 2397c73f 59159 B
+[102/210] vtm420 qp38 50fe4c3d 97713 B
+[103/210] vtm420 qp38 79b1bb29 87733 B
+[104/210] vtm420 qp38 8426ed22 8299 B
+[105/210] vtm420 qp38 58104815 97032 B
+[106/210] vtm420 qp38 608cb09e 88292 B
+[107/210] vtm420 qp38 a2a946cc 44331 B
+[108/210] vtm420 qp38 86127fbd 78941 B
+[109/210] vtm420 qp38 bb7344a2 21455 B
+[110/210] vtm420 qp38 937476dd 336981 B
+[111/210] vtm420 qp38 c9510efb 28508 B
+[112/210] vtm420 qp38 a365e654 131191 B
+[113/210] vtm420 qp38 e0d8e29c 27896 B
+[114/210] vtm420 qp38 b0b3744c 134949 B
+[115/210] vtm420 qp38 ebfd571f 105677 B
+[116/210] vtm420 qp38 f67f11de 5285 B
+[117/210] vtm420 qp38 da52c4f6 131438 B
+[118/210] vtm420 qp38 ff32adfa 34849 B
+[119/210] vtm420 qp38 eda6d427 91810 B
+[120/210] vtm420 qp42 0369d229 7873 B
+[121/210] vtm420 qp38 d0208a1e 176661 B
+[122/210] vtm420 qp42 0d154749 20742 B
+[123/210] vtm420 qp42 1b4ad095 15459 B
+[124/210] vtm420 qp42 1cba10ad 5604 B
+[125/210] vtm420 qp42 07b9f93f 35424 B
+[126/210] vtm420 qp42 2a760bf1 3479 B
+[127/210] vtm420 qp42 02809272 72086 B
+[128/210] vtm420 qp42 4ebc0e6c 13425 B
+[129/210] vtm420 qp42 2684452d 26864 B
+[130/210] vtm420 qp42 50d13125 5874 B
+[131/210] vtm420 qp42 2397c73f 34700 B
+[132/210] vtm420 qp42 58104815 49671 B
+[133/210] vtm420 qp42 79b1bb29 52931 B
+[134/210] vtm420 qp42 8426ed22 4634 B
+[135/210] vtm420 qp42 608cb09e 54087 B
+[136/210] vtm420 qp42 50fe4c3d 56115 B
+[137/210] vtm420 qp42 a2a946cc 27494 B
+[138/210] vtm420 qp42 86127fbd 45948 B
+[139/210] vtm420 qp42 bb7344a2 13407 B
+[140/210] vtm420 qp42 a365e654 71831 B
+[141/210] vtm420 qp42 937476dd 194955 B
+[142/210] vtm420 qp42 c9510efb 19519 B
+[143/210] vtm420 qp42 e0d8e29c 11279 B
+[144/210] vtm420 qp42 b0b3744c 77571 B
+[145/210] vtm420 qp42 ebfd571f 73200 B
+[146/210] vtm420 qp42 f67f11de 3192 B
+[147/210] vtm420 qp42 da52c4f6 84118 B
+[148/210] vtm420 qp42 ff32adfa 22647 B
+[149/210] vtm420 qp42 eda6d427 52329 B
+[150/210] vtm420 qp42 d0208a1e 88532 B
+[151/210] vtm420 qp46 0369d229 4494 B
+[152/210] vtm420 qp46 1b4ad095 6122 B
+[153/210] vtm420 qp46 0d154749 10232 B
+[154/210] vtm420 qp46 1cba10ad 3276 B
+[155/210] vtm420 qp46 07b9f93f 16178 B
+[156/210] vtm420 qp46 2a760bf1 2398 B
+[157/210] vtm420 qp46 4ebc0e6c 6846 B
+[158/210] vtm420 qp46 2684452d 15761 B
+[159/210] vtm420 qp46 2397c73f 18635 B
+[160/210] vtm420 qp46 50d13125 2355 B
+[161/210] vtm420 qp46 02809272 41164 B
+[162/210] vtm420 qp46 58104815 24728 B
+[163/210] vtm420 qp46 8426ed22 2716 B
+[164/210] vtm420 qp46 50fe4c3d 31446 B
+[165/210] vtm420 qp46 608cb09e 30886 B
+[166/210] vtm420 qp46 79b1bb29 28800 B
+[167/210] vtm420 qp46 a2a946cc 15793 B
+[168/210] vtm420 qp46 86127fbd 24932 B
+[169/210] vtm420 qp46 bb7344a2 8023 B
+[170/210] vtm420 qp46 937476dd 87608 B
+[171/210] vtm420 qp46 c9510efb 12683 B
+[172/210] vtm420 qp46 a365e654 36629 B
+[173/210] vtm420 qp46 e0d8e29c 3468 B
+[174/210] vtm420 qp46 b0b3744c 39451 B
+[175/210] vtm420 qp46 ebfd571f 45020 B
+[176/210] vtm420 qp46 f67f11de 2025 B
+[177/210] vtm420 qp46 d0208a1e 38482 B
+[178/210] vtm420 qp46 da52c4f6 50571 B
+[179/210] vtm420 qp50 0369d229 2734 B
+[180/210] vtm420 qp46 eda6d427 28526 B
+[181/210] vtm420 qp50 0d154749 4705 B
+[182/210] vtm420 qp46 ff32adfa 14609 B
+[183/210] vtm420 qp50 1b4ad095 2716 B
+[184/210] vtm420 qp50 1cba10ad 1993 B
+[185/210] vtm420 qp50 07b9f93f 7462 B
+[186/210] vtm420 qp50 2a760bf1 1635 B
+[187/210] vtm420 qp50 4ebc0e6c 3047 B
+[188/210] vtm420 qp50 2397c73f 9163 B
+[189/210] vtm420 qp50 50d13125 1067 B
+[190/210] vtm420 qp50 2684452d 8613 B
+[191/210] vtm420 qp50 02809272 21280 B
+[192/210] vtm420 qp50 58104815 11831 B
+[193/210] vtm420 qp50 8426ed22 1665 B
+[194/210] vtm420 qp50 608cb09e 15823 B
+[195/210] vtm420 qp50 50fe4c3d 17304 B
+[196/210] vtm420 qp50 79b1bb29 14567 B
+[197/210] vtm420 qp50 a2a946cc 8399 B
+[198/210] vtm420 qp50 86127fbd 12356 B
+[199/210] vtm420 qp50 bb7344a2 4164 B
+[200/210] vtm420 qp50 937476dd 30131 B
+[201/210] vtm420 qp50 c9510efb 7889 B
+[202/210] vtm420 qp50 a365e654 17519 B
+[203/210] vtm420 qp50 e0d8e29c 1593 B
+[204/210] vtm420 qp50 b0b3744c 17109 B
+[205/210] vtm420 qp50 d0208a1e 15122 B
+[206/210] vtm420 qp50 f67f11de 1358 B
+[207/210] vtm420 qp50 da52c4f6 28223 B
+[208/210] vtm420 qp50 ff32adfa 8899 B
+[209/210] vtm420 qp50 eda6d427 14616 B
+[210/210] vtm420 qp50 ebfd571f 19551 B
+[01:23:56 +610.0m] == bakeoff: incomplete {'s1_ckpt': 'None', 'qhat': 'None', 'step': 'points', 'cands': ['vtm420']}

@@ -1,0 +1,20 @@
+{
+ "check": {
+  "done": true,
+  "seconds": 37,
+  "commit": "137158d",
+  "gpu": null,
+  "torch": "2.11.0+cpu"
+ },
+ "bakeoff": {
+  "done": false,
+  "seconds": 36566,
+  "commit": "137158d",
+  "s1_ckpt": "None",
+  "qhat": "None",
+  "step": "points",
+  "cands": [
+   "vtm420"
+  ]
+ }
+}

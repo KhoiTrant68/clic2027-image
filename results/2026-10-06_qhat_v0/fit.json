@@ -1,0 +1,114 @@
+{
+ "table": [
+  {
+   "set": "2021t",
+   "n": 1500,
+   "sign_psnr": 0.504,
+   "sign_msssim": 0.49733333333333335,
+   "sign_lpips_alex": 0.75,
+   "sign_lpips_vgg": 0.728,
+   "sign_dists": 0.744,
+   "sign_clipiqa": 0.6326666666666667,
+   "qhat_cv": 0.7533333333333333
+  },
+  {
+   "set": "2021v",
+   "n": 2000,
+   "sign_psnr": 0.583,
+   "sign_msssim": 0.624,
+   "sign_lpips_alex": 0.7375,
+   "sign_lpips_vgg": 0.7535,
+   "sign_dists": 0.7535,
+   "sign_clipiqa": 0.592,
+   "qhat_cv": 0.77
+  },
+  {
+   "set": "2022t",
+   "n": 1500,
+   "sign_psnr": 0.642,
+   "sign_msssim": 0.7126666666666667,
+   "sign_lpips_alex": 0.768,
+   "sign_lpips_vgg": 0.772,
+   "sign_dists": 0.7693333333333333,
+   "sign_clipiqa": 0.6726666666666666,
+   "qhat_cv": 0.7953333333333333
+  },
+  {
+   "set": "2024t",
+   "n": 3000,
+   "sign_psnr": 0.705,
+   "sign_msssim": 0.7606666666666667,
+   "sign_lpips_alex": 0.807,
+   "sign_lpips_vgg": 0.8083333333333333,
+   "sign_dists": 0.8013333333333333,
+   "sign_clipiqa": 0.65,
+   "qhat_cv": 0.837
+  },
+  {
+   "set": "all",
+   "n": 8000,
+   "sign_psnr": 0.625,
+   "sign_msssim": 0.668125,
+   "sign_lpips_alex": 0.771625,
+   "sign_lpips_vgg": 0.77275,
+   "sign_dists": 0.772625,
+   "sign_clipiqa": 0.6365,
+   "qhat_cv": 0.78775
+  }
+ ],
+ "cross": {
+  "train": [
+   "2021t",
+   "2021v",
+   "2022t"
+  ],
+  "test": "2024t",
+  "acc": 0.8123333333333334
+ },
+ "meta": {
+  "2021v": {
+   "rows": 5220,
+   "sanity": {
+    "n": 0,
+    "picked_original": NaN
+   },
+   "duplicates": {
+    "pairs": 757,
+    "agreement": 0.7767503302509907
+   }
+  },
+  "2021t": {
+   "rows": 122107,
+   "sanity": {
+    "n": 0,
+    "picked_original": NaN
+   },
+   "duplicates": {
+    "pairs": 5319,
+    "agreement": 0.7200601616845271
+   }
+  },
+  "2022t": {
+   "rows": 57300,
+   "sanity": {
+    "n": 1303,
+    "picked_original": 0.9240214888718342
+   },
+   "duplicates": {
+    "pairs": 0,
+    "agreement": NaN
+   }
+  },
+  "2024t": {
+   "rows": 24806,
+   "sanity": {
+    "n": 1325,
+    "picked_original": 0.969811320754717
+   },
+   "duplicates": {
+    "pairs": 1,
+    "agreement": 0.0
+   }
+  }
+ }
+}

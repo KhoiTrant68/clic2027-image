@@ -1,0 +1,909 @@
+[02:02:00 +  0.0m] ratflow pipeline @ efba80e-dirty | stages ['bakeoff'] | budget 4.0 h
+[02:02:00 +  0.0m] restoring previous work dir from /kaggle/input/datasets/magnus68/ratflow-sessiona
+[02:02:00 +  0.0m] == check
+[02:02:31 +  0.5m] $ /usr/bin/python3 -m pip install -q lpips piq torch-fidelity
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 53.8/53.8 kB 1.9 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.9/106.9 kB 3.5 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.6/85.6 kB 4.5 MB/s eta 0:00:00
+[02:02:36 +  0.6m] torch 2.11.0+cu128 | GPU: Tesla T4 | work: /kaggle/working/work
+[02:02:36 +  0.6m] == check: done {'gpu': 'Tesla T4', 'torch': '2.11.0+cu128'}
+[02:02:36 +  0.6m] == bakeoff
+[02:02:36 +  0.6m] bakeoff: S1 checkpoint None | Q-hat /kaggle/working/work/qhat/qhat_v0.json
+[02:02:36 +  0.6m] $ /usr/bin/python3 /kaggle/working/ratflow_repo/experiments/bakeoff/bakeoff.py all --out /kaggle/working/work/bakeoff --qhat /kaggle/working/work/qhat/qhat_v0.json --cands msillm mbt codlite turbo
+===== prepare
+30 images, 86245376 pixels, budgets {'0.075': 808550, '0.15': 1617100, '0.3': 3234201}
+===== points
+points: 4 mbt points have neither recon nor metrics (lost with the previous session); they will be produced again
+points: 9 msillm points have neither recon nor metrics (lost with the previous session); they will be produced again
+points: 26 s1res points have neither recon nor metrics (lost with the previous session); they will be produced again
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 183.8/183.8 kB 4.8 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.2/50.2 kB 2.3 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 183.8/183.8 kB 9.9 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 163.9/163.9 kB 5.8 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.4/64.4 kB 1.1 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.2/42.2 kB 872.4 kB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 33.9 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.6/129.6 kB 8.3 MB/s eta 0:00:00
+Downloading: "https://github.com/facebookresearch/NeuralCompression/zipball/main" to /root/.cache/torch/hub/main.zip
+/root/.cache/torch/hub/facebookresearch_NeuralCompression_main/neuralcompression/__init__.py:21: UserWarning: Could not retrieve neuralcompression version!
+  warnings.warn("Could not retrieve neuralcompression version!")
+/usr/local/lib/python3.13/dist-packages/compressai/models/video/google.py:353: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @amp.autocast(enabled=False)
+Downloading: "https://dl.fbaipublicfiles.com/NeuralCompression/2023-muckley-msillm/msillm_target_0.035bpp.ckpt" to /root/.cache/torch/hub/checkpoints/msillm_target_0.035bpp.ckpt
+
+  0%|          | 0.00/692M [00:00<?, ?B/s]
+  1%|          | 4.12M/692M [00:00<00:16, 42.8MB/s]
+  1%|▏         | 9.12M/692M [00:00<00:15, 47.3MB/s]
+  3%|▎         | 18.1M/692M [00:00<00:10, 68.3MB/s]
+  4%|▎         | 24.8M/692M [00:00<00:13, 50.4MB/s]
+  5%|▍         | 32.0M/692M [00:00<00:12, 53.8MB/s]
+  6%|▌         | 40.0M/692M [00:00<00:13, 51.4MB/s]
+  7%|▋         | 48.0M/692M [00:00<00:14, 48.1MB/s]
+  8%|▊         | 55.5M/692M [00:01<00:12, 54.0MB/s]
+  9%|▉         | 61.1M/692M [00:01<00:14, 45.2MB/s]
+ 10%|▉         | 65.9M/692M [00:01<00:16, 40.6MB/s]
+ 10%|█         | 72.0M/692M [00:01<00:15, 42.5MB/s]
+ 12%|█▏        | 80.0M/692M [00:01<00:14, 45.4MB/s]
+ 13%|█▎        | 88.0M/692M [00:01<00:13, 47.4MB/s]
+ 14%|█▎        | 94.5M/692M [00:02<00:13, 47.9MB/s]
+ 14%|█▍        | 99.2M/692M [00:02<00:19, 31.9MB/s]
+ 15%|█▌        | 104M/692M [00:02<00:19, 31.7MB/s] 
+ 16%|█▌        | 110M/692M [00:02<00:16, 37.3MB/s]
+ 17%|█▋        | 114M/692M [00:02<00:16, 35.7MB/s]
+ 17%|█▋        | 119M/692M [00:02<00:18, 33.0MB/s]
+ 18%|█▊        | 123M/692M [00:03<00:21, 28.4MB/s]
+ 18%|█▊        | 128M/692M [00:03<00:19, 29.7MB/s]
+ 20%|█▉        | 136M/692M [00:03<00:17, 33.6MB/s]
+ 21%|██        | 144M/692M [00:03<00:15, 36.4MB/s]
+ 22%|██▏       | 151M/692M [00:03<00:13, 43.3MB/s]
+ 22%|██▏       | 156M/692M [00:04<00:14, 38.2MB/s]
+ 23%|██▎       | 160M/692M [00:04<00:17, 31.1MB/s]
+ 24%|██▍       | 168M/692M [00:04<00:17, 32.3MB/s]
+ 25%|██▌       | 176M/692M [00:04<00:15, 34.7MB/s]
+ 26%|██▋       | 183M/692M [00:04<00:12, 41.5MB/s]
+ 27%|██▋       | 188M/692M [00:05<00:14, 36.1MB/s]
+ 28%|██▊       | 192M/692M [00:05<00:14, 35.9MB/s]
+ 29%|██▉       | 200M/692M [00:05<00:12, 41.3MB/s]
+ 30%|██▉       | 206M/692M [00:05<00:11, 45.2MB/s]
+ 30%|███       | 210M/692M [00:05<00:13, 37.2MB/s]
+ 31%|███       | 215M/692M [00:05<00:12, 39.1MB/s]
+ 32%|███▏      | 219M/692M [00:05<00:13, 37.6MB/s]
+ 32%|███▏      | 224M/692M [00:05<00:12, 38.8MB/s]
+ 33%|███▎      | 230M/692M [00:06<00:11, 43.4MB/s]
+ 34%|███▍      | 235M/692M [00:06<00:14, 33.6MB/s]
+ 35%|███▍      | 240M/692M [00:06<00:15, 30.6MB/s]
+ 36%|███▌      | 248M/692M [00:06<00:12, 37.1MB/s]
+ 37%|███▋      | 256M/692M [00:06<00:11, 41.0MB/s]
+ 38%|███▊      | 264M/692M [00:06<00:09, 46.4MB/s]
+ 39%|███▉      | 270M/692M [00:07<00:08, 49.4MB/s]
+ 40%|███▉      | 275M/692M [00:07<00:09, 45.0MB/s]
+ 40%|████      | 280M/692M [00:07<00:10, 41.8MB/s]
+ 41%|████      | 284M/692M [00:07<00:10, 40.1MB/s]
+ 42%|████▏     | 288M/692M [00:07<00:10, 39.9MB/s]
+ 43%|████▎     | 296M/692M [00:07<00:09, 44.8MB/s]
+ 44%|████▍     | 303M/692M [00:07<00:07, 52.4MB/s]
+ 45%|████▍     | 309M/692M [00:08<00:09, 41.4MB/s]
+ 45%|████▌     | 313M/692M [00:08<00:13, 28.7MB/s]
+ 46%|████▌     | 320M/692M [00:08<00:10, 35.6MB/s]
+ 47%|████▋     | 326M/692M [00:08<00:09, 39.4MB/s]
+ 48%|████▊     | 331M/692M [00:08<00:13, 28.0MB/s]
+ 49%|████▊     | 336M/692M [00:09<00:13, 27.1MB/s]
+ 50%|████▉     | 344M/692M [00:09<00:11, 30.6MB/s]
+ 50%|█████     | 347M/692M [00:09<00:14, 24.6MB/s]
+ 51%|█████     | 352M/692M [00:09<00:15, 22.8MB/s]
+ 52%|█████▏    | 358M/692M [00:10<00:13, 26.8MB/s]
+ 52%|█████▏    | 361M/692M [00:10<00:13, 25.3MB/s]
+ 53%|█████▎    | 368M/692M [00:10<00:10, 32.3MB/s]
+ 54%|█████▎    | 371M/692M [00:10<00:11, 30.3MB/s]
+ 54%|█████▍    | 376M/692M [00:10<00:10, 32.5MB/s]
+ 55%|█████▌    | 384M/692M [00:10<00:08, 39.7MB/s]
+ 56%|█████▋    | 390M/692M [00:10<00:06, 45.9MB/s]
+ 57%|█████▋    | 395M/692M [00:11<00:08, 34.9MB/s]
+ 58%|█████▊    | 401M/692M [00:11<00:07, 39.7MB/s]
+ 59%|█████▉    | 408M/692M [00:11<00:08, 34.9MB/s]
+ 60%|██████    | 416M/692M [00:11<00:07, 39.6MB/s]
+ 61%|██████    | 424M/692M [00:11<00:06, 44.9MB/s]
+ 62%|██████▏   | 432M/692M [00:11<00:05, 49.3MB/s]
+ 64%|██████▎   | 440M/692M [00:12<00:05, 49.1MB/s]
+ 64%|██████▍   | 446M/692M [00:12<00:06, 41.8MB/s]
+ 65%|██████▌   | 451M/692M [00:12<00:06, 40.8MB/s]
+ 66%|██████▌   | 456M/692M [00:12<00:05, 43.6MB/s]
+ 67%|██████▋   | 464M/692M [00:12<00:05, 46.1MB/s]
+ 68%|██████▊   | 472M/692M [00:12<00:05, 42.8MB/s]
+ 69%|██████▉   | 476M/692M [00:13<00:05, 40.9MB/s]
+ 69%|██████▉   | 480M/692M [00:13<00:05, 38.4MB/s]
+ 70%|███████   | 488M/692M [00:13<00:05, 40.3MB/s]
+ 72%|███████▏  | 496M/692M [00:13<00:04, 44.2MB/s]
+ 73%|███████▎  | 504M/692M [00:13<00:03, 49.4MB/s]
+ 74%|███████▍  | 512M/692M [00:13<00:03, 52.9MB/s]
+ 75%|███████▌  | 520M/692M [00:13<00:03, 51.8MB/s]
+ 76%|███████▋  | 528M/692M [00:14<00:03, 52.3MB/s]
+ 77%|███████▋  | 536M/692M [00:14<00:03, 52.0MB/s]
+ 79%|███████▊  | 544M/692M [00:14<00:03, 42.4MB/s]
+ 79%|███████▉  | 548M/692M [00:14<00:03, 39.9MB/s]
+ 80%|███████▉  | 552M/692M [00:14<00:04, 32.7MB/s]
+ 81%|████████  | 560M/692M [00:15<00:04, 31.8MB/s]
+ 82%|████████▏ | 564M/692M [00:15<00:04, 33.0MB/s]
+ 82%|████████▏ | 568M/692M [00:15<00:04, 30.4MB/s]
+ 83%|████████▎ | 575M/692M [00:15<00:03, 36.1MB/s]
+ 84%|████████▎ | 578M/692M [00:15<00:03, 30.5MB/s]
+ 84%|████████▍ | 584M/692M [00:15<00:03, 29.9MB/s]
+ 85%|████████▌ | 590M/692M [00:16<00:03, 35.7MB/s]
+ 86%|████████▌ | 594M/692M [00:16<00:03, 30.1MB/s]
+ 87%|████████▋ | 600M/692M [00:16<00:03, 31.0MB/s]
+ 88%|████████▊ | 607M/692M [00:16<00:02, 38.4MB/s]
+ 88%|████████▊ | 611M/692M [00:16<00:02, 34.7MB/s]
+ 89%|████████▉ | 616M/692M [00:16<00:02, 36.3MB/s]
+ 90%|████████▉ | 622M/692M [00:16<00:01, 43.1MB/s]
+ 91%|█████████ | 627M/692M [00:17<00:01, 38.6MB/s]
+ 91%|█████████▏| 632M/692M [00:17<00:01, 36.5MB/s]
+ 92%|█████████▏| 640M/692M [00:17<00:01, 36.5MB/s]
+ 94%|█████████▎| 648M/692M [00:17<00:01, 44.6MB/s]
+ 95%|█████████▍| 656M/692M [00:17<00:00, 49.7MB/s]
+ 96%|█████████▌| 664M/692M [00:17<00:00, 54.4MB/s]
+ 97%|█████████▋| 672M/692M [00:18<00:00, 56.1MB/s]
+ 98%|█████████▊| 680M/692M [00:18<00:00, 57.5MB/s]
+ 99%|█████████▉| 688M/692M [00:18<00:00, 61.2MB/s]
+100%|██████████| 692M/692M [00:18<00:00, 39.4MB/s]
+/kaggle/working/ratflow_repo/src/ratflow/eval/metrics.py:67: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/alexnet-owt-7be5be79.pth" to /root/.cache/torch/hub/checkpoints/alexnet-owt-7be5be79.pth
+
+  0%|          | 0.00/233M [00:00<?, ?B/s]
+  6%|▌         | 13.0M/233M [00:00<00:01, 136MB/s]
+ 15%|█▍        | 34.9M/233M [00:00<00:01, 191MB/s]
+ 26%|██▌       | 59.5M/233M [00:00<00:00, 221MB/s]
+ 36%|███▌      | 83.9M/233M [00:00<00:00, 235MB/s]
+ 46%|████▋     | 108M/233M [00:00<00:00, 242MB/s] 
+ 57%|█████▋    | 132M/233M [00:00<00:00, 246MB/s]
+ 67%|██████▋   | 156M/233M [00:00<00:00, 244MB/s]
+ 77%|███████▋  | 179M/233M [00:00<00:00, 234MB/s]
+ 86%|████████▋ | 202M/233M [00:00<00:00, 234MB/s]
+ 96%|█████████▋| 225M/233M [00:01<00:00, 236MB/s]
+100%|██████████| 233M/233M [00:01<00:00, 233MB/s]
+Downloading: "https://github.com/photosynthesis-team/piq/releases/download/v0.4.1/dists_weights.pt" to /root/.cache/torch/hub/checkpoints/dists_weights.pt
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/vgg16-397923af.pth" to /root/.cache/torch/hub/checkpoints/vgg16-397923af.pth
+msillm q1 ff32adfa 15700 B  dec 1.67s
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+Downloading: "https://dl.fbaipublicfiles.com/NeuralCompression/2023-muckley-msillm/msillm_target_0.07bpp.ckpt" to /root/.cache/torch/hub/checkpoints/msillm_target_0.07bpp.ckpt
+
+  0%|          | 0.00/692M [00:00<?, ?B/s]
+  1%|          | 4.38M/692M [00:00<00:16, 44.6MB/s]
+  1%|▏         | 9.88M/692M [00:00<00:13, 52.1MB/s]
+  2%|▏         | 16.1M/692M [00:00<00:13, 52.4MB/s]
+  3%|▎         | 24.1M/692M [00:00<00:15, 45.9MB/s]
+  5%|▍         | 32.1M/692M [00:00<00:14, 48.4MB/s]
+  6%|▌         | 40.1M/692M [00:00<00:13, 50.2MB/s]
+  7%|▋         | 48.1M/692M [00:01<00:13, 51.3MB/s]
+  8%|▊         | 56.1M/692M [00:01<00:13, 50.4MB/s]
+  9%|▉         | 64.1M/692M [00:01<00:13, 47.4MB/s]
+ 10%|█         | 72.1M/692M [00:01<00:13, 49.6MB/s]
+ 12%|█▏        | 80.1M/692M [00:01<00:12, 49.6MB/s]
+ 13%|█▎        | 88.1M/692M [00:01<00:12, 50.9MB/s]
+ 14%|█▍        | 96.1M/692M [00:02<00:11, 52.1MB/s]
+ 15%|█▌        | 104M/692M [00:02<00:11, 54.1MB/s] 
+ 16%|█▌        | 112M/692M [00:02<00:11, 53.4MB/s]
+ 17%|█▋        | 120M/692M [00:02<00:12, 49.8MB/s]
+ 19%|█▊        | 128M/692M [00:02<00:11, 51.0MB/s]
+ 20%|█▉        | 136M/692M [00:02<00:11, 50.4MB/s]
+ 21%|██        | 144M/692M [00:02<00:11, 50.5MB/s]
+ 22%|██▏       | 152M/692M [00:03<00:11, 51.0MB/s]
+ 23%|██▎       | 160M/692M [00:03<00:11, 49.5MB/s]
+ 24%|██▍       | 168M/692M [00:03<00:11, 49.0MB/s]
+ 25%|██▌       | 176M/692M [00:03<00:10, 49.6MB/s]
+ 27%|██▋       | 184M/692M [00:03<00:10, 51.4MB/s]
+ 28%|██▊       | 192M/692M [00:04<00:10, 49.9MB/s]
+ 29%|██▉       | 200M/692M [00:04<00:11, 44.8MB/s]
+ 30%|███       | 208M/692M [00:04<00:10, 47.7MB/s]
+ 31%|███       | 213M/692M [00:04<00:10, 46.4MB/s]
+ 31%|███▏      | 217M/692M [00:04<00:13, 36.9MB/s]
+ 32%|███▏      | 224M/692M [00:04<00:12, 38.0MB/s]
+ 34%|███▎      | 232M/692M [00:05<00:11, 41.6MB/s]
+ 35%|███▍      | 240M/692M [00:05<00:10, 46.5MB/s]
+ 36%|███▌      | 248M/692M [00:05<00:09, 47.7MB/s]
+ 37%|███▋      | 256M/692M [00:05<00:09, 48.4MB/s]
+ 38%|███▊      | 264M/692M [00:05<00:09, 49.8MB/s]
+ 39%|███▉      | 272M/692M [00:05<00:09, 48.7MB/s]
+ 40%|████      | 280M/692M [00:06<00:09, 46.5MB/s]
+ 42%|████▏     | 288M/692M [00:06<00:08, 47.8MB/s]
+ 43%|████▎     | 296M/692M [00:06<00:08, 49.6MB/s]
+ 44%|████▍     | 304M/692M [00:06<00:07, 53.7MB/s]
+ 45%|████▌     | 312M/692M [00:06<00:07, 53.3MB/s]
+ 46%|████▌     | 320M/692M [00:06<00:07, 50.0MB/s]
+ 47%|████▋     | 328M/692M [00:07<00:07, 50.2MB/s]
+ 49%|████▊     | 336M/692M [00:07<00:07, 49.5MB/s]
+ 50%|████▉     | 344M/692M [00:07<00:08, 45.6MB/s]
+ 51%|█████     | 352M/692M [00:07<00:07, 45.1MB/s]
+ 52%|█████▏    | 360M/692M [00:07<00:06, 50.3MB/s]
+ 53%|█████▎    | 365M/692M [00:07<00:07, 47.2MB/s]
+ 53%|█████▎    | 370M/692M [00:08<00:08, 40.9MB/s]
+ 54%|█████▍    | 376M/692M [00:08<00:07, 42.0MB/s]
+ 55%|█████▌    | 382M/692M [00:08<00:07, 43.6MB/s]
+ 56%|█████▌    | 387M/692M [00:08<00:07, 42.0MB/s]
+ 57%|█████▋    | 392M/692M [00:08<00:08, 39.1MB/s]
+ 58%|█████▊    | 400M/692M [00:08<00:07, 41.3MB/s]
+ 59%|█████▉    | 408M/692M [00:08<00:06, 46.0MB/s]
+ 60%|██████    | 416M/692M [00:09<00:06, 42.9MB/s]
+ 61%|██████▏   | 424M/692M [00:09<00:06, 44.0MB/s]
+ 62%|██████▏   | 432M/692M [00:09<00:06, 44.5MB/s]
+ 64%|██████▎   | 440M/692M [00:09<00:05, 47.2MB/s]
+ 65%|██████▍   | 448M/692M [00:09<00:05, 50.8MB/s]
+ 66%|██████▌   | 456M/692M [00:10<00:05, 47.2MB/s]
+ 67%|██████▋   | 464M/692M [00:10<00:05, 45.9MB/s]
+ 68%|██████▊   | 472M/692M [00:10<00:05, 45.0MB/s]
+ 69%|██████▉   | 480M/692M [00:10<00:04, 47.7MB/s]
+ 71%|███████   | 488M/692M [00:10<00:04, 46.1MB/s]
+ 72%|███████▏  | 496M/692M [00:10<00:04, 44.1MB/s]
+ 73%|███████▎  | 504M/692M [00:11<00:04, 45.3MB/s]
+ 74%|███████▍  | 512M/692M [00:11<00:04, 46.6MB/s]
+ 75%|███████▌  | 520M/692M [00:11<00:03, 46.5MB/s]
+ 76%|███████▋  | 528M/692M [00:11<00:03, 45.1MB/s]
+ 77%|███████▋  | 536M/692M [00:11<00:03, 44.1MB/s]
+ 79%|███████▊  | 544M/692M [00:12<00:03, 44.6MB/s]
+ 80%|███████▉  | 552M/692M [00:12<00:03, 43.4MB/s]
+ 81%|████████  | 560M/692M [00:12<00:03, 43.8MB/s]
+ 82%|████████▏ | 568M/692M [00:12<00:02, 46.2MB/s]
+ 83%|████████▎ | 576M/692M [00:12<00:02, 47.8MB/s]
+ 84%|████████▍ | 584M/692M [00:12<00:02, 48.2MB/s]
+ 86%|████████▌ | 592M/692M [00:13<00:02, 49.0MB/s]
+ 87%|████████▋ | 600M/692M [00:13<00:01, 49.0MB/s]
+ 88%|████████▊ | 608M/692M [00:13<00:01, 51.4MB/s]
+ 89%|████████▉ | 616M/692M [00:13<00:01, 48.7MB/s]
+ 90%|█████████ | 624M/692M [00:13<00:01, 48.6MB/s]
+ 91%|█████████▏| 632M/692M [00:13<00:01, 50.2MB/s]
+ 92%|█████████▏| 640M/692M [00:14<00:01, 49.5MB/s]
+ 94%|█████████▎| 648M/692M [00:14<00:00, 51.3MB/s]
+ 95%|█████████▍| 656M/692M [00:14<00:00, 48.2MB/s]
+ 96%|█████████▌| 664M/692M [00:14<00:00, 47.2MB/s]
+ 97%|█████████▋| 672M/692M [00:14<00:00, 51.0MB/s]
+ 98%|█████████▊| 680M/692M [00:14<00:00, 54.1MB/s]
+ 99%|█████████▉| 688M/692M [00:15<00:00, 55.6MB/s]
+100%|██████████| 692M/692M [00:15<00:00, 48.0MB/s]
+msillm q2 f67f11de 13496 B  dec 2.02s
+msillm q2 ff32adfa 26540 B  dec 1.63s
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+Downloading: "https://dl.fbaipublicfiles.com/NeuralCompression/2023-muckley-msillm/msillm_target_0.14bpp.ckpt" to /root/.cache/torch/hub/checkpoints/msillm_target_0.14bpp.ckpt
+
+  0%|          | 0.00/692M [00:00<?, ?B/s]
+  1%|          | 8.00M/692M [00:00<00:13, 52.9MB/s]
+  2%|▏         | 16.0M/692M [00:00<00:11, 61.3MB/s]
+  3%|▎         | 24.0M/692M [00:00<00:11, 59.9MB/s]
+  5%|▍         | 32.0M/692M [00:00<00:11, 59.8MB/s]
+  6%|▌         | 40.0M/692M [00:00<00:11, 62.1MB/s]
+  7%|▋         | 48.4M/692M [00:00<00:09, 69.1MB/s]
+  8%|▊         | 56.0M/692M [00:00<00:09, 69.2MB/s]
+  9%|▉         | 64.0M/692M [00:01<00:10, 60.5MB/s]
+ 10%|█         | 72.0M/692M [00:01<00:10, 61.1MB/s]
+ 12%|█▏        | 80.0M/692M [00:01<00:10, 63.1MB/s]
+ 13%|█▎        | 88.0M/692M [00:01<00:09, 64.2MB/s]
+ 14%|█▍        | 96.0M/692M [00:01<00:09, 67.7MB/s]
+ 15%|█▌        | 104M/692M [00:01<00:09, 63.9MB/s] 
+ 16%|█▌        | 112M/692M [00:01<00:11, 54.0MB/s]
+ 17%|█▋        | 120M/692M [00:02<00:11, 53.0MB/s]
+ 18%|█▊        | 128M/692M [00:02<00:11, 51.9MB/s]
+ 20%|█▉        | 136M/692M [00:02<00:10, 55.2MB/s]
+ 21%|██        | 144M/692M [00:02<00:09, 57.9MB/s]
+ 22%|██▏       | 152M/692M [00:02<00:09, 57.2MB/s]
+ 23%|██▎       | 160M/692M [00:02<00:09, 56.3MB/s]
+ 24%|██▍       | 168M/692M [00:02<00:09, 58.1MB/s]
+ 25%|██▌       | 176M/692M [00:03<00:08, 62.9MB/s]
+ 27%|██▋       | 184M/692M [00:03<00:08, 60.6MB/s]
+ 28%|██▊       | 192M/692M [00:03<00:08, 62.7MB/s]
+ 29%|██▉       | 200M/692M [00:03<00:09, 56.7MB/s]
+ 30%|███       | 208M/692M [00:03<00:09, 55.7MB/s]
+ 31%|███       | 216M/692M [00:03<00:08, 55.8MB/s]
+ 32%|███▏      | 224M/692M [00:04<00:09, 53.3MB/s]
+ 34%|███▎      | 232M/692M [00:04<00:08, 55.4MB/s]
+ 35%|███▍      | 240M/692M [00:04<00:08, 58.0MB/s]
+ 36%|███▌      | 248M/692M [00:04<00:07, 59.5MB/s]
+ 37%|███▋      | 256M/692M [00:04<00:08, 54.6MB/s]
+ 38%|███▊      | 264M/692M [00:04<00:08, 54.8MB/s]
+ 39%|███▉      | 272M/692M [00:04<00:07, 55.5MB/s]
+ 40%|████      | 280M/692M [00:05<00:07, 58.9MB/s]
+ 42%|████▏     | 288M/692M [00:05<00:07, 60.5MB/s]
+ 43%|████▎     | 296M/692M [00:05<00:06, 60.7MB/s]
+ 44%|████▍     | 304M/692M [00:05<00:06, 62.4MB/s]
+ 45%|████▌     | 312M/692M [00:05<00:06, 59.9MB/s]
+ 46%|████▌     | 320M/692M [00:05<00:06, 58.9MB/s]
+ 47%|████▋     | 328M/692M [00:05<00:06, 61.7MB/s]
+ 49%|████▊     | 336M/692M [00:06<00:06, 54.2MB/s]
+ 50%|████▉     | 344M/692M [00:06<00:06, 56.2MB/s]
+ 51%|█████     | 352M/692M [00:06<00:06, 53.6MB/s]
+ 52%|█████▏    | 360M/692M [00:06<00:05, 58.6MB/s]
+ 53%|█████▎    | 368M/692M [00:06<00:06, 56.3MB/s]
+ 54%|█████▍    | 376M/692M [00:06<00:05, 57.9MB/s]
+ 56%|█████▌    | 385M/692M [00:06<00:04, 66.5MB/s]
+ 57%|█████▋    | 392M/692M [00:06<00:04, 66.0MB/s]
+ 58%|█████▊    | 400M/692M [00:07<00:04, 62.6MB/s]
+ 59%|█████▉    | 408M/692M [00:07<00:05, 59.5MB/s]
+ 60%|██████    | 416M/692M [00:07<00:04, 60.1MB/s]
+ 61%|██████    | 424M/692M [00:07<00:04, 60.7MB/s]
+ 62%|██████▏   | 432M/692M [00:07<00:04, 66.4MB/s]
+ 64%|██████▎   | 440M/692M [00:07<00:04, 61.8MB/s]
+ 65%|██████▍   | 448M/692M [00:07<00:04, 57.1MB/s]
+ 66%|██████▌   | 456M/692M [00:08<00:05, 48.8MB/s]
+ 67%|██████▋   | 464M/692M [00:08<00:04, 52.3MB/s]
+ 68%|██████▊   | 472M/692M [00:08<00:04, 51.7MB/s]
+ 69%|██████▉   | 480M/692M [00:08<00:04, 54.7MB/s]
+ 70%|███████   | 488M/692M [00:08<00:04, 53.0MB/s]
+ 72%|███████▏  | 496M/692M [00:08<00:03, 52.8MB/s]
+ 73%|███████▎  | 504M/692M [00:09<00:03, 54.9MB/s]
+ 74%|███████▍  | 512M/692M [00:09<00:03, 52.9MB/s]
+ 75%|███████▌  | 520M/692M [00:09<00:03, 51.9MB/s]
+ 76%|███████▋  | 528M/692M [00:09<00:03, 55.9MB/s]
+ 77%|███████▋  | 536M/692M [00:09<00:03, 53.6MB/s]
+ 78%|███████▊  | 542M/692M [00:09<00:03, 46.8MB/s]
+ 79%|███████▉  | 547M/692M [00:10<00:03, 40.1MB/s]
+ 80%|███████▉  | 552M/692M [00:10<00:03, 40.4MB/s]
+ 81%|████████  | 560M/692M [00:10<00:02, 47.9MB/s]
+ 82%|████████▏ | 568M/692M [00:10<00:02, 47.2MB/s]
+ 83%|████████▎ | 576M/692M [00:10<00:02, 50.6MB/s]
+ 84%|████████▍ | 584M/692M [00:10<00:02, 48.2MB/s]
+ 86%|████████▌ | 592M/692M [00:10<00:02, 52.4MB/s]
+ 87%|████████▋ | 600M/692M [00:11<00:01, 51.2MB/s]
+ 88%|████████▊ | 608M/692M [00:11<00:01, 54.1MB/s]
+ 89%|████████▉ | 616M/692M [00:11<00:01, 54.7MB/s]
+ 90%|█████████ | 624M/692M [00:11<00:01, 47.6MB/s]
+ 91%|█████████▏| 632M/692M [00:11<00:01, 48.9MB/s]
+ 92%|█████████▏| 640M/692M [00:11<00:01, 51.9MB/s]
+ 94%|█████████▎| 648M/692M [00:12<00:00, 54.8MB/s]
+ 95%|█████████▍| 656M/692M [00:12<00:00, 60.2MB/s]
+ 96%|█████████▌| 664M/692M [00:12<00:00, 64.9MB/s]
+ 97%|█████████▋| 672M/692M [00:12<00:00, 65.7MB/s]
+ 98%|█████████▊| 680M/692M [00:12<00:00, 67.9MB/s]
+ 99%|█████████▉| 688M/692M [00:12<00:00, 73.3MB/s]
+100%|██████████| 692M/692M [00:12<00:00, 57.2MB/s]
+msillm q3 f67f11de 25692 B  dec 2.12s
+msillm q3 ff32adfa 45632 B  dec 1.64s
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+Downloading: "https://dl.fbaipublicfiles.com/NeuralCompression/2023-muckley-msillm/msillm_target_0.3bpp.ckpt" to /root/.cache/torch/hub/checkpoints/msillm_target_0.3bpp.ckpt
+
+  0%|          | 0.00/692M [00:00<?, ?B/s]
+  1%|          | 8.12M/692M [00:00<00:15, 45.1MB/s]
+  2%|▏         | 16.1M/692M [00:00<00:14, 49.9MB/s]
+  3%|▎         | 24.1M/692M [00:00<00:13, 53.2MB/s]
+  5%|▍         | 32.1M/692M [00:00<00:15, 46.0MB/s]
+  6%|▌         | 40.1M/692M [00:00<00:15, 45.5MB/s]
+  7%|▋         | 48.1M/692M [00:01<00:14, 48.0MB/s]
+  8%|▊         | 56.1M/692M [00:01<00:13, 50.5MB/s]
+  9%|▉         | 64.1M/692M [00:01<00:13, 48.0MB/s]
+ 10%|█         | 72.1M/692M [00:01<00:14, 45.7MB/s]
+ 11%|█         | 76.6M/692M [00:01<00:14, 44.5MB/s]
+ 12%|█▏        | 81.0M/692M [00:01<00:16, 40.1MB/s]
+ 13%|█▎        | 88.1M/692M [00:02<00:14, 42.9MB/s]
+ 14%|█▍        | 96.1M/692M [00:02<00:12, 48.3MB/s]
+ 15%|█▌        | 104M/692M [00:02<00:12, 49.8MB/s] 
+ 16%|█▌        | 112M/692M [00:02<00:12, 47.4MB/s]
+ 17%|█▋        | 120M/692M [00:02<00:13, 44.9MB/s]
+ 19%|█▊        | 128M/692M [00:02<00:13, 45.5MB/s]
+ 20%|█▉        | 136M/692M [00:03<00:11, 49.4MB/s]
+ 21%|██        | 144M/692M [00:03<00:11, 50.1MB/s]
+ 22%|██▏       | 152M/692M [00:03<00:10, 52.5MB/s]
+ 23%|██▎       | 160M/692M [00:03<00:11, 48.3MB/s]
+ 24%|██▍       | 168M/692M [00:03<00:12, 45.6MB/s]
+ 25%|██▌       | 176M/692M [00:03<00:12, 42.8MB/s]
+ 27%|██▋       | 184M/692M [00:04<00:12, 42.7MB/s]
+ 28%|██▊       | 192M/692M [00:04<00:12, 41.9MB/s]
+ 29%|██▉       | 200M/692M [00:04<00:11, 45.9MB/s]
+ 30%|███       | 208M/692M [00:04<00:10, 46.7MB/s]
+ 31%|███       | 216M/692M [00:04<00:11, 42.7MB/s]
+ 32%|███▏      | 224M/692M [00:05<00:10, 46.0MB/s]
+ 34%|███▎      | 232M/692M [00:05<00:10, 46.6MB/s]
+ 35%|███▍      | 240M/692M [00:05<00:09, 49.4MB/s]
+ 36%|███▌      | 248M/692M [00:05<00:09, 51.4MB/s]
+ 37%|███▋      | 256M/692M [00:05<00:08, 52.3MB/s]
+ 38%|███▊      | 264M/692M [00:05<00:09, 48.9MB/s]
+ 39%|███▉      | 272M/692M [00:06<00:08, 49.9MB/s]
+ 40%|████      | 280M/692M [00:06<00:09, 46.7MB/s]
+ 42%|████▏     | 288M/692M [00:06<00:08, 48.4MB/s]
+ 43%|████▎     | 296M/692M [00:06<00:08, 48.0MB/s]
+ 44%|████▍     | 304M/692M [00:06<00:08, 50.4MB/s]
+ 45%|████▌     | 312M/692M [00:07<00:09, 43.6MB/s]
+ 46%|████▌     | 320M/692M [00:07<00:09, 42.7MB/s]
+ 47%|████▋     | 328M/692M [00:07<00:08, 46.6MB/s]
+ 49%|████▊     | 336M/692M [00:07<00:07, 48.4MB/s]
+ 50%|████▉     | 344M/692M [00:07<00:07, 48.0MB/s]
+ 51%|█████     | 352M/692M [00:07<00:07, 48.6MB/s]
+ 52%|█████▏    | 360M/692M [00:08<00:07, 46.8MB/s]
+ 53%|█████▎    | 368M/692M [00:08<00:07, 43.5MB/s]
+ 54%|█████▍    | 372M/692M [00:08<00:07, 42.9MB/s]
+ 54%|█████▍    | 377M/692M [00:08<00:08, 36.9MB/s]
+ 55%|█████▌    | 384M/692M [00:08<00:08, 39.0MB/s]
+ 57%|█████▋    | 392M/692M [00:08<00:06, 45.8MB/s]
+ 58%|█████▊    | 400M/692M [00:09<00:06, 49.7MB/s]
+ 59%|█████▊    | 406M/692M [00:09<00:05, 51.4MB/s]
+ 60%|██████    | 416M/692M [00:09<00:05, 49.2MB/s]
+ 61%|██████▏   | 424M/692M [00:09<00:05, 49.3MB/s]
+ 62%|██████▏   | 431M/692M [00:09<00:05, 54.7MB/s]
+ 63%|██████▎   | 437M/692M [00:09<00:04, 54.2MB/s]
+ 64%|██████▍   | 442M/692M [00:09<00:05, 44.5MB/s]
+ 65%|██████▍   | 448M/692M [00:10<00:05, 43.9MB/s]
+ 66%|██████▌   | 456M/692M [00:10<00:05, 48.9MB/s]
+ 67%|██████▋   | 464M/692M [00:10<00:04, 49.3MB/s]
+ 68%|██████▊   | 472M/692M [00:10<00:04, 48.1MB/s]
+ 69%|██████▉   | 480M/692M [00:10<00:04, 45.5MB/s]
+ 71%|███████   | 488M/692M [00:10<00:04, 47.2MB/s]
+ 72%|███████▏  | 496M/692M [00:11<00:03, 51.9MB/s]
+ 73%|███████▎  | 504M/692M [00:11<00:03, 51.5MB/s]
+ 74%|███████▍  | 512M/692M [00:11<00:03, 51.5MB/s]
+ 75%|███████▌  | 520M/692M [00:11<00:03, 51.5MB/s]
+ 76%|███████▌  | 526M/692M [00:11<00:03, 47.4MB/s]
+ 77%|███████▋  | 531M/692M [00:11<00:03, 43.5MB/s]
+ 77%|███████▋  | 536M/692M [00:12<00:03, 41.4MB/s]
+ 79%|███████▊  | 544M/692M [00:12<00:03, 46.2MB/s]
+ 80%|███████▉  | 552M/692M [00:12<00:03, 44.9MB/s]
+ 81%|████████  | 560M/692M [00:12<00:02, 47.0MB/s]
+ 82%|████████▏ | 568M/692M [00:12<00:02, 45.4MB/s]
+ 83%|████████▎ | 576M/692M [00:12<00:02, 45.5MB/s]
+ 84%|████████▍ | 584M/692M [00:13<00:02, 48.4MB/s]
+ 86%|████████▌ | 592M/692M [00:13<00:02, 49.4MB/s]
+ 86%|████████▌ | 597M/692M [00:13<00:02, 40.4MB/s]
+ 87%|████████▋ | 601M/692M [00:15<00:11, 8.34MB/s]
+ 93%|█████████▎| 644M/692M [00:15<00:01, 31.4MB/s]
+ 95%|█████████▌| 658M/692M [00:15<00:00, 35.7MB/s]
+ 97%|█████████▋| 670M/692M [00:16<00:00, 40.9MB/s]
+ 98%|█████████▊| 681M/692M [00:16<00:00, 41.8MB/s]
+100%|█████████▉| 690M/692M [00:16<00:00, 45.1MB/s]
+100%|██████████| 692M/692M [00:16<00:00, 44.0MB/s]
+msillm q4 f67f11de 55208 B  dec 2.08s
+msillm q4 ff32adfa 87276 B  dec 1.70s
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+Downloading: "https://dl.fbaipublicfiles.com/NeuralCompression/2023-muckley-msillm/msillm_target_0.45bpp.ckpt" to /root/.cache/torch/hub/checkpoints/msillm_target_0.45bpp.ckpt
+
+  0%|          | 0.00/692M [00:00<?, ?B/s]
+  1%|          | 5.12M/692M [00:00<00:13, 53.0MB/s]
+  2%|▏         | 10.6M/692M [00:00<00:12, 55.6MB/s]
+  2%|▏         | 16.0M/692M [00:00<00:13, 51.2MB/s]
+  3%|▎         | 24.0M/692M [00:00<00:13, 51.0MB/s]
+  5%|▍         | 32.0M/692M [00:00<00:12, 57.2MB/s]
+  6%|▌         | 40.0M/692M [00:00<00:11, 59.7MB/s]
+  7%|▋         | 48.0M/692M [00:00<00:10, 64.6MB/s]
+  8%|▊         | 56.0M/692M [00:00<00:09, 66.9MB/s]
+  9%|▉         | 64.0M/692M [00:01<00:11, 58.2MB/s]
+ 10%|█         | 72.0M/692M [00:01<00:10, 62.7MB/s]
+ 11%|█▏        | 78.4M/692M [00:01<00:10, 58.6MB/s]
+ 12%|█▏        | 84.2M/692M [00:01<00:11, 56.8MB/s]
+ 14%|█▎        | 94.6M/692M [00:01<00:08, 70.0MB/s]
+ 15%|█▍        | 102M/692M [00:01<00:09, 67.7MB/s] 
+ 16%|█▌        | 108M/692M [00:01<00:09, 61.9MB/s]
+ 17%|█▋        | 114M/692M [00:01<00:10, 59.3MB/s]
+ 17%|█▋        | 120M/692M [00:02<00:10, 59.2MB/s]
+ 18%|█▊        | 128M/692M [00:02<00:09, 59.5MB/s]
+ 20%|█▉        | 136M/692M [00:02<00:09, 63.5MB/s]
+ 21%|██        | 144M/692M [00:02<00:09, 63.7MB/s]
+ 22%|██▏       | 152M/692M [00:02<00:08, 67.0MB/s]
+ 23%|██▎       | 160M/692M [00:02<00:07, 70.5MB/s]
+ 24%|██▍       | 168M/692M [00:02<00:08, 65.8MB/s]
+ 25%|██▌       | 176M/692M [00:02<00:08, 61.8MB/s]
+ 27%|██▋       | 184M/692M [00:03<00:09, 54.2MB/s]
+ 28%|██▊       | 192M/692M [00:03<00:09, 57.4MB/s]
+ 29%|██▊       | 198M/692M [00:03<00:09, 52.1MB/s]
+ 30%|███       | 208M/692M [00:03<00:08, 61.5MB/s]
+ 31%|███       | 216M/692M [00:03<00:08, 61.4MB/s]
+ 32%|███▏      | 224M/692M [00:03<00:07, 61.4MB/s]
+ 34%|███▎      | 232M/692M [00:04<00:08, 57.6MB/s]
+ 35%|███▍      | 240M/692M [00:04<00:07, 60.5MB/s]
+ 36%|███▌      | 248M/692M [00:04<00:07, 64.3MB/s]
+ 37%|███▋      | 256M/692M [00:04<00:07, 57.4MB/s]
+ 38%|███▊      | 264M/692M [00:04<00:07, 62.8MB/s]
+ 39%|███▉      | 270M/692M [00:04<00:07, 62.6MB/s]
+ 40%|███▉      | 276M/692M [00:04<00:06, 62.7MB/s]
+ 41%|████      | 283M/692M [00:04<00:08, 52.1MB/s]
+ 42%|████▏     | 288M/692M [00:05<00:09, 45.9MB/s]
+ 42%|████▏     | 293M/692M [00:05<00:09, 44.0MB/s]
+ 43%|████▎     | 297M/692M [00:05<00:10, 38.7MB/s]
+ 44%|████▍     | 304M/692M [00:05<00:10, 38.9MB/s]
+ 45%|████▌     | 312M/692M [00:05<00:09, 43.2MB/s]
+ 46%|████▌     | 320M/692M [00:05<00:08, 45.5MB/s]
+ 47%|████▋     | 328M/692M [00:06<00:08, 42.9MB/s]
+ 49%|████▊     | 336M/692M [00:06<00:07, 50.7MB/s]
+ 50%|████▉     | 344M/692M [00:06<00:06, 52.7MB/s]
+ 51%|█████     | 352M/692M [00:06<00:07, 49.4MB/s]
+ 52%|█████▏    | 360M/692M [00:06<00:06, 51.3MB/s]
+ 53%|█████▎    | 368M/692M [00:06<00:06, 51.3MB/s]
+ 54%|█████▍    | 376M/692M [00:07<00:06, 53.1MB/s]
+ 55%|█████▌    | 384M/692M [00:07<00:05, 59.3MB/s]
+ 57%|█████▋    | 392M/692M [00:07<00:04, 63.1MB/s]
+ 58%|█████▊    | 400M/692M [00:07<00:04, 67.8MB/s]
+ 59%|█████▉    | 408M/692M [00:07<00:04, 66.9MB/s]
+ 60%|██████    | 416M/692M [00:07<00:04, 62.5MB/s]
+ 61%|██████    | 424M/692M [00:07<00:04, 60.1MB/s]
+ 62%|██████▏   | 432M/692M [00:07<00:04, 61.6MB/s]
+ 64%|██████▎   | 440M/692M [00:08<00:04, 53.8MB/s]
+ 65%|██████▍   | 448M/692M [00:08<00:04, 53.2MB/s]
+ 66%|██████▌   | 456M/692M [00:08<00:04, 56.3MB/s]
+ 67%|██████▋   | 464M/692M [00:08<00:03, 61.6MB/s]
+ 68%|██████▊   | 472M/692M [00:08<00:03, 58.9MB/s]
+ 69%|██████▉   | 480M/692M [00:08<00:03, 64.0MB/s]
+ 70%|███████   | 488M/692M [00:08<00:03, 60.8MB/s]
+ 72%|███████▏  | 496M/692M [00:09<00:03, 62.3MB/s]
+ 73%|███████▎  | 504M/692M [00:09<00:02, 67.3MB/s]
+ 74%|███████▍  | 512M/692M [00:09<00:02, 65.4MB/s]
+ 75%|███████▌  | 520M/692M [00:09<00:02, 65.4MB/s]
+ 76%|███████▋  | 528M/692M [00:09<00:02, 60.1MB/s]
+ 77%|███████▋  | 536M/692M [00:09<00:02, 59.1MB/s]
+ 79%|███████▊  | 544M/692M [00:09<00:02, 63.4MB/s]
+ 80%|███████▉  | 552M/692M [00:09<00:02, 63.7MB/s]
+ 81%|████████▏ | 563M/692M [00:10<00:01, 76.4MB/s]
+ 82%|████████▏ | 571M/692M [00:10<00:01, 76.8MB/s]
+ 84%|████████▎ | 578M/692M [00:10<00:02, 46.7MB/s]
+ 84%|████████▍ | 584M/692M [00:10<00:02, 43.6MB/s]
+ 86%|████████▌ | 592M/692M [00:10<00:02, 44.8MB/s]
+ 87%|████████▋ | 600M/692M [00:10<00:01, 51.5MB/s]
+ 88%|████████▊ | 608M/692M [00:11<00:01, 58.3MB/s]
+ 89%|████████▉ | 616M/692M [00:11<00:01, 61.0MB/s]
+ 90%|█████████ | 624M/692M [00:11<00:01, 54.8MB/s]
+ 91%|█████████ | 631M/692M [00:11<00:01, 59.5MB/s]
+ 92%|█████████▏| 638M/692M [00:11<00:00, 58.8MB/s]
+ 93%|█████████▎| 644M/692M [00:11<00:01, 49.0MB/s]
+ 94%|█████████▎| 649M/692M [00:12<00:01, 37.8MB/s]
+ 95%|█████████▍| 656M/692M [00:12<00:00, 44.7MB/s]
+ 96%|█████████▌| 664M/692M [00:12<00:00, 48.7MB/s]
+ 97%|█████████▋| 672M/692M [00:12<00:00, 55.6MB/s]
+ 98%|█████████▊| 678M/692M [00:12<00:00, 57.6MB/s]
+ 99%|█████████▉| 684M/692M [00:12<00:00, 50.1MB/s]
+100%|█████████▉| 690M/692M [00:12<00:00, 47.9MB/s]
+100%|██████████| 692M/692M [00:12<00:00, 56.7MB/s]
+msillm q5 f67f11de 76344 B  dec 2.02s
+msillm q5 ff32adfa 120556 B  dec 1.69s
+Downloading: "https://compressai.s3.amazonaws.com/models/v1/mbt2018-mean-1-e522738d.pth.tar" to /root/.cache/torch/hub/checkpoints/mbt2018-mean-1-e522738d.pth.tar
+
+  0%|          | 0.00/27.6M [00:00<?, ?B/s]
+  2%|▏         | 640k/27.6M [00:00<00:04, 5.74MB/s]
+ 39%|███▉      | 10.8M/27.6M [00:00<00:00, 61.4MB/s]
+ 62%|██████▏   | 17.0M/27.6M [00:00<00:00, 54.2MB/s]
+100%|██████████| 27.6M/27.6M [00:00<00:00, 68.8MB/s]
+mbt q1 ff32adfa 35180 B  dec 0.74s
+Downloading: "https://compressai.s3.amazonaws.com/models/v1/mbt2018-mean-2-e54a039d.pth.tar" to /root/.cache/torch/hub/checkpoints/mbt2018-mean-2-e54a039d.pth.tar
+
+  0%|          | 0.00/27.6M [00:00<?, ?B/s]
+  2%|▏         | 512k/27.6M [00:00<00:06, 4.59MB/s]
+ 15%|█▍        | 4.12M/27.6M [00:00<00:01, 21.4MB/s]
+ 57%|█████▋    | 15.8M/27.6M [00:00<00:00, 59.9MB/s]
+ 91%|█████████ | 25.0M/27.6M [00:00<00:00, 71.2MB/s]
+100%|██████████| 27.6M/27.6M [00:00<00:00, 60.6MB/s]
+mbt q2 ff32adfa 46536 B  dec 0.70s
+Downloading: "https://compressai.s3.amazonaws.com/models/v1/mbt2018-mean-3-723404a8.pth.tar" to /root/.cache/torch/hub/checkpoints/mbt2018-mean-3-723404a8.pth.tar
+
+  0%|          | 0.00/27.6M [00:00<?, ?B/s]
+  2%|▏         | 512k/27.6M [00:00<00:06, 4.43MB/s]
+ 17%|█▋        | 4.75M/27.6M [00:00<00:00, 26.4MB/s]
+ 45%|████▌     | 12.5M/27.6M [00:00<00:00, 47.1MB/s]
+ 70%|██████▉   | 19.2M/27.6M [00:00<00:00, 52.2MB/s]
+ 95%|█████████▍| 26.1M/27.6M [00:00<00:00, 55.2MB/s]
+100%|██████████| 27.6M/27.6M [00:00<00:00, 48.5MB/s]
+mbt q3 ff32adfa 63944 B  dec 0.70s
+Downloading: "https://compressai.s3.amazonaws.com/models/v1/mbt2018-mean-4-6dba02a3.pth.tar" to /root/.cache/torch/hub/checkpoints/mbt2018-mean-4-6dba02a3.pth.tar
+
+  0%|          | 0.00/27.6M [00:00<?, ?B/s]
+  2%|▏         | 640k/27.6M [00:00<00:05, 5.46MB/s]
+ 27%|██▋       | 7.38M/27.6M [00:00<00:00, 40.8MB/s]
+ 53%|█████▎    | 14.8M/27.6M [00:00<00:00, 56.8MB/s]
+ 79%|███████▉  | 21.9M/27.6M [00:00<00:00, 60.0MB/s]
+100%|██████████| 27.6M/27.6M [00:00<00:00, 56.4MB/s]
+mbt q4 ff32adfa 89192 B  dec 0.71s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Traceback (most recent call last):
+  File "/kaggle/working/ratflow_repo/experiments/bakeoff/bakeoff.py", line 531, in points
+    fn(a, P, names)
+    ~~^^^^^^^^^^^^^
+  File "/kaggle/working/ratflow_repo/experiments/bakeoff/bakeoff.py", line 417, in points_codlite
+    n_params = sum(p.numel() for p in net.parameters()) - sum(p.numel() for p in net.y_embedder.encoder.parameters())
+                                      ^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parameters'
+== codlite FAILED: 'NoneType' object has no attribute 'parameters'
+[transformers] `Siglip2ImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Siglip2ImageProcessor` instead.
+/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/diffusers/utils/deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]
+Fetching 12 files:  17%|█▋        | 2/12 [00:00<00:00, 18.33it/s]
+Fetching 12 files:  75%|███████▌  | 9/12 [00:00<00:00, 41.06it/s]
+Fetching 12 files: 100%|██████████| 12/12 [00:08<00:00,  1.38it/s]
+
+Loading pipeline components...:   0%|          | 0/5 [00:00<?, ?it/s]
+
+Loading weights:   0%|          | 0/372 [00:00<?, ?it/s][A
+
+Loading weights:  70%|██████▉   | 259/372 [00:00<00:00, 2564.21it/s][A
+Loading weights: 100%|██████████| 372/372 [00:00<00:00, 2643.16it/s]
+
+Loading pipeline components...:  20%|██        | 1/5 [00:08<00:32,  8.20s/it]
+Loading pipeline components...:  40%|████      | 2/5 [00:09<00:12,  4.12s/it]
+Loading pipeline components...:  60%|██████    | 3/5 [00:09<00:04,  2.29s/it]
+Loading pipeline components...: 100%|██████████| 5/5 [00:09<00:00,  1.03s/it]
+Loading pipeline components...: 100%|██████████| 5/5 [00:09<00:00,  1.94s/it]
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.StableDiffusionImg2ImgPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+turbo q1s15 02809272 26676 B  dec 10.48s
+turbo q1s30 02809272 26676 B  dec 10.29s
+turbo q1s15 0369d229 7820 B  dec 10.55s
+turbo q1s30 0369d229 7820 B  dec 10.77s
+turbo q1s15 07b9f93f 11752 B  dec 10.92s
+turbo q1s30 07b9f93f 11752 B  dec 10.91s
+turbo q1s15 0d154749 11808 B  dec 10.83s
+turbo q1s30 0d154749 11808 B  dec 10.94s
+turbo q1s15 1b4ad095 7808 B  dec 8.93s
+turbo q1s30 1b4ad095 7808 B  dec 8.91s
+turbo q1s15 1cba10ad 7388 B  dec 13.49s
+turbo q1s30 1cba10ad 7388 B  dec 13.34s
+turbo q1s15 2397c73f 13664 B  dec 10.86s
+turbo q1s30 2397c73f 13664 B  dec 10.93s
+turbo q1s15 2684452d 13508 B  dec 10.93s
+turbo q1s30 2684452d 13508 B  dec 10.98s
+turbo q1s15 2a760bf1 4708 B  dec 6.84s
+turbo q1s30 2a760bf1 4708 B  dec 6.81s
+turbo q1s15 4ebc0e6c 9388 B  dec 10.94s
+turbo q1s30 4ebc0e6c 9388 B  dec 10.99s
+turbo q1s15 50d13125 4572 B  dec 10.88s
+turbo q1s30 50d13125 4572 B  dec 10.92s
+turbo q1s15 50fe4c3d 24288 B  dec 10.44s
+turbo q1s30 50fe4c3d 24288 B  dec 10.45s
+turbo q1s15 58104815 18200 B  dec 11.38s
+turbo q1s30 58104815 18200 B  dec 11.44s
+turbo q1s15 608cb09e 24364 B  dec 13.29s
+turbo q1s30 608cb09e 24364 B  dec 13.31s
+turbo q1s15 79b1bb29 17424 B  dec 9.68s
+turbo q1s30 79b1bb29 17424 B  dec 9.64s
+turbo q1s15 8426ed22 8224 B  dec 17.29s
+turbo q1s30 8426ed22 8224 B  dec 17.36s
+turbo q1s15 86127fbd 17428 B  dec 7.22s
+turbo q1s30 86127fbd 17428 B  dec 7.21s
+turbo q1s15 937476dd 37336 B  dec 11.89s
+turbo q1s30 937476dd 37336 B  dec 11.88s
+turbo q1s15 a2a946cc 14596 B  dec 10.87s
+turbo q1s30 a2a946cc 14596 B  dec 10.88s
+turbo q1s15 a365e654 19976 B  dec 10.84s
+turbo q1s30 a365e654 19976 B  dec 10.89s
+turbo q1s15 b0b3744c 19788 B  dec 10.88s
+turbo q1s30 b0b3744c 19788 B  dec 10.85s
+turbo q1s15 bb7344a2 7352 B  dec 7.06s
+turbo q1s30 bb7344a2 7352 B  dec 7.02s
+turbo q1s15 c9510efb 13276 B  dec 10.58s
+turbo q1s30 c9510efb 13276 B  dec 10.57s
+turbo q1s15 d0208a1e 18376 B  dec 10.58s
+turbo q1s30 d0208a1e 18376 B  dec 10.62s
+turbo q1s15 da52c4f6 33260 B  dec 10.53s
+turbo q1s30 da52c4f6 33260 B  dec 10.72s
+turbo q1s15 e0d8e29c 6228 B  dec 10.95s
+turbo q1s30 e0d8e29c 6228 B  dec 11.06s
+turbo q1s15 ebfd571f 20848 B  dec 17.28s
+turbo q1s30 ebfd571f 20848 B  dec 17.08s
+turbo q1s15 eda6d427 21476 B  dec 13.15s
+turbo q1s30 eda6d427 21476 B  dec 13.32s
+turbo q1s15 f67f11de 6556 B  dec 13.29s
+turbo q1s30 f67f11de 6556 B  dec 13.36s
+turbo q1s15 ff32adfa 15700 B  dec 10.86s
+turbo q1s30 ff32adfa 15700 B  dec 10.88s
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+turbo q2s15 02809272 45012 B  dec 10.86s
+turbo q2s30 02809272 45012 B  dec 11.00s
+turbo q2s15 0369d229 14484 B  dec 10.99s
+turbo q2s30 0369d229 14484 B  dec 10.93s
+turbo q2s15 07b9f93f 22216 B  dec 10.84s
+turbo q2s30 07b9f93f 22216 B  dec 10.82s
+turbo q2s15 0d154749 23644 B  dec 10.83s
+turbo q2s30 0d154749 23644 B  dec 10.85s
+turbo q2s15 1b4ad095 15876 B  dec 8.90s
+turbo q2s30 1b4ad095 15876 B  dec 8.92s
+turbo q2s15 1cba10ad 14484 B  dec 13.14s
+turbo q2s30 1cba10ad 14484 B  dec 13.00s
+turbo q2s15 2397c73f 24464 B  dec 10.93s
+turbo q2s30 2397c73f 24464 B  dec 10.93s
+turbo q2s15 2684452d 24788 B  dec 10.96s
+turbo q2s30 2684452d 24788 B  dec 10.94s
+turbo q2s15 2a760bf1 7860 B  dec 6.73s
+turbo q2s30 2a760bf1 7860 B  dec 6.73s
+turbo q2s15 4ebc0e6c 19280 B  dec 10.95s
+turbo q2s30 4ebc0e6c 19280 B  dec 10.95s
+turbo q2s15 50d13125 8004 B  dec 10.85s
+turbo q2s30 50d13125 8004 B  dec 10.81s
+turbo q2s15 50fe4c3d 40284 B  dec 10.37s
+turbo q2s30 50fe4c3d 40284 B  dec 10.33s
+turbo q2s15 58104815 34704 B  dec 11.39s
+turbo q2s30 58104815 34704 B  dec 11.46s
+turbo q2s15 608cb09e 42404 B  dec 13.08s
+turbo q2s30 608cb09e 42404 B  dec 13.07s
+turbo q2s15 79b1bb29 30164 B  dec 9.66s
+turbo q2s30 79b1bb29 30164 B  dec 9.65s
+turbo q2s15 8426ed22 17960 B  dec 17.32s
+turbo q2s30 8426ed22 17960 B  dec 17.36s
+turbo q2s15 86127fbd 30716 B  dec 7.20s
+turbo q2s30 86127fbd 30716 B  dec 7.22s
+turbo q2s15 937476dd 68732 B  dec 11.94s
+turbo q2s30 937476dd 68732 B  dec 11.98s
+turbo q2s15 a2a946cc 25320 B  dec 10.94s
+turbo q2s30 a2a946cc 25320 B  dec 10.88s
+turbo q2s15 a365e654 37072 B  dec 10.82s
+turbo q2s30 a365e654 37072 B  dec 10.80s
+turbo q2s15 b0b3744c 36308 B  dec 10.85s
+turbo q2s30 b0b3744c 36308 B  dec 10.90s
+turbo q2s15 bb7344a2 12688 B  dec 7.14s
+turbo q2s30 bb7344a2 12688 B  dec 7.17s
+turbo q2s15 c9510efb 22320 B  dec 10.85s
+turbo q2s30 c9510efb 22320 B  dec 10.82s
+turbo q2s15 d0208a1e 38120 B  dec 10.87s
+turbo q2s30 d0208a1e 38120 B  dec 10.91s
+turbo q2s15 da52c4f6 53252 B  dec 10.87s
+turbo q2s30 da52c4f6 53252 B  dec 10.88s
+turbo q2s15 e0d8e29c 12848 B  dec 10.86s
+turbo q2s30 e0d8e29c 12848 B  dec 10.90s
+turbo q2s15 ebfd571f 35712 B  dec 17.27s
+turbo q2s30 ebfd571f 35712 B  dec 17.31s
+turbo q2s15 eda6d427 37776 B  dec 12.92s
+turbo q2s30 eda6d427 37776 B  dec 12.90s
+turbo q2s15 f67f11de 13496 B  dec 13.02s
+turbo q2s30 f67f11de 13496 B  dec 13.12s
+turbo q2s15 ff32adfa 26540 B  dec 10.90s
+turbo q2s30 ff32adfa 26540 B  dec 10.91s
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+turbo q3s15 02809272 78280 B  dec 10.88s
+turbo q3s30 02809272 78280 B  dec 11.02s
+turbo q3s15 0369d229 27624 B  dec 10.98s
+turbo q3s30 0369d229 27624 B  dec 10.96s
+turbo q3s15 07b9f93f 44140 B  dec 10.89s
+turbo q3s30 07b9f93f 44140 B  dec 10.85s
+turbo q3s15 0d154749 48756 B  dec 10.89s
+turbo q3s30 0d154749 48756 B  dec 10.93s
+turbo q3s15 1b4ad095 33748 B  dec 8.91s
+turbo q3s30 1b4ad095 33748 B  dec 8.92s
+turbo q3s15 1cba10ad 29904 B  dec 13.06s
+turbo q3s30 1cba10ad 29904 B  dec 13.05s
+turbo q3s15 2397c73f 45132 B  dec 10.89s
+turbo q3s30 2397c73f 45132 B  dec 10.95s
+turbo q3s15 2684452d 46840 B  dec 10.92s
+turbo q3s30 2684452d 46840 B  dec 10.98s
+turbo q3s15 2a760bf1 13136 B  dec 6.73s
+turbo q3s30 2a760bf1 13136 B  dec 6.73s
+turbo q3s15 4ebc0e6c 38504 B  dec 10.94s
+turbo q3s30 4ebc0e6c 38504 B  dec 11.00s
+turbo q3s15 50d13125 14900 B  dec 10.85s
+turbo q3s30 50d13125 14900 B  dec 10.90s
+turbo q3s15 50fe4c3d 71036 B  dec 10.42s
+turbo q3s30 50fe4c3d 71036 B  dec 10.46s
+turbo q3s15 58104815 66756 B  dec 11.41s
+turbo q3s30 58104815 66756 B  dec 11.46s
+turbo q3s15 608cb09e 74648 B  dec 13.10s
+turbo q3s30 608cb09e 74648 B  dec 13.08s
+turbo q3s15 79b1bb29 54436 B  dec 9.56s
+turbo q3s30 79b1bb29 54436 B  dec 9.60s
+turbo q3s15 8426ed22 38908 B  dec 17.37s
+turbo q3s30 8426ed22 38908 B  dec 17.31s
+turbo q3s15 86127fbd 54856 B  dec 7.17s
+turbo q3s30 86127fbd 54856 B  dec 7.17s
+turbo q3s15 937476dd 146064 B  dec 11.88s
+turbo q3s30 937476dd 146064 B  dec 11.93s
+turbo q3s15 a2a946cc 44960 B  dec 10.92s
+turbo q3s30 a2a946cc 44960 B  dec 10.95s
+turbo q3s15 a365e654 73144 B  dec 10.87s
+turbo q3s30 a365e654 73144 B  dec 10.94s
+turbo q3s15 b0b3744c 69652 B  dec 10.91s
+turbo q3s30 b0b3744c 69652 B  dec 10.92s
+turbo q3s15 bb7344a2 22396 B  dec 7.15s
+turbo q3s30 bb7344a2 22396 B  dec 7.13s
+turbo q3s15 c9510efb 38196 B  dec 10.88s
+turbo q3s30 c9510efb 38196 B  dec 10.91s
+turbo q3s15 d0208a1e 78968 B  dec 10.98s
+turbo q3s30 d0208a1e 78968 B  dec 11.04s
+turbo q3s15 da52c4f6 88368 B  dec 10.85s
+turbo q3s30 da52c4f6 88368 B  dec 10.92s
+turbo q3s15 e0d8e29c 29060 B  dec 10.89s
+turbo q3s30 e0d8e29c 29060 B  dec 10.94s
+turbo q3s15 ebfd571f 63180 B  dec 17.31s
+turbo q3s30 ebfd571f 63180 B  dec 17.21s
+turbo q3s15 eda6d427 70132 B  dec 12.89s
+turbo q3s30 eda6d427 70132 B  dec 12.92s
+turbo q3s15 f67f11de 25692 B  dec 13.07s
+turbo q3s30 f67f11de 25692 B  dec 13.06s
+turbo q3s15 ff32adfa 45632 B  dec 10.93s
+turbo q3s30 ff32adfa 45632 B  dec 10.95s
+===== metrics
+===== allocate
+allocate: mbt cannot reach 0.075 bpp (cheapest points exceed the budget)
+allocate: s1res misses images, skipped
+===== summary
+crop sheet failed: [Errno 2] No such file or directory: '/kaggle/working/work/bakeoff/recon/msillm/q2/02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7.png'
+crop sheet failed: [Errno 2] No such file or directory: '/kaggle/working/work/bakeoff/recon/msillm/q3/02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7.png'
+crop sheet failed: [Errno 2] No such file or directory: '/kaggle/working/work/bakeoff/recon/msillm/q4/02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7.png'
+# So sánh base trên 30 ảnh validation CLIC 2027
+
+Ngân sách cả bộ ảnh (byte): {'0.075': 808550, '0.15': 1617100, '0.3': 3234201}. Mỗi ảnh chọn một điểm vận hành sao cho tổng byte ≤ ngân sách và tổng mục tiêu lớn nhất; mục tiêu: **qhat_v0**.
+
+Q̂ là tiện ích tuyến tính của Q̂ v0 (cao hơn = người chấm thích hơn; chênh 1.0 ≈ odds 2.7 lần). `t_dec`: giây/ảnh trên GPU của lần chạy này (không gồm VTM). `mix`: mỗi ảnh được chọn mode tốt nhất.
+
+## 0.075 bpp — all
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| msillm | 30 | 0.0749 | 25.15 | 0.9143 | 0.0943 | 0.0938 | -0.451 | 1.95 |
+| turbo | 30 | 0.0749 | 22.22 | 0.8422 | 0.1972 | 0.1492 | -1.609 | 11.13 |
+| mix | 30 | 0.0749 | 23.63 | 0.9022 | 0.0947 | 0.0913 | -0.419 | 2.23 |
+
+## 0.075 bpp — natural
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| msillm | 25 | 0.0707 | 25.64 | 0.9135 | 0.0988 | 0.0952 | -0.592 | 1.98 |
+| turbo | 25 | 0.0723 | 22.71 | 0.8439 | 0.2001 | 0.1508 | -1.675 | 11.34 |
+| mix | 25 | 0.0735 | 25.82 | 0.9170 | 0.0948 | 0.0932 | -0.544 | 2.00 |
+
+## 0.075 bpp — screen
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| msillm | 4 | 0.0990 | 28.12 | 0.9759 | 0.0347 | 0.0554 | 1.208 | 1.73 |
+| turbo | 4 | 0.0873 | 23.02 | 0.9161 | 0.1052 | 0.1147 | -0.392 | 9.58 |
+| mix | 4 | 0.0990 | 28.12 | 0.9759 | 0.0347 | 0.0554 | 1.208 | 1.73 |
+
+## 0.15 bpp — all
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| msillm | 30 | 0.1499 | 27.16 | 0.9485 | 0.0581 | 0.0610 | 0.544 | 1.98 |
+| mbt | 30 | 0.1499 | 27.52 | 0.9494 | 0.2612 | 0.1678 | -2.082 | 0.76 |
+| turbo | 30 | 0.1463 | 22.13 | 0.8475 | 0.1779 | 0.1402 | -1.331 | 11.15 |
+| mix | 30 | 0.1498 | 26.66 | 0.9437 | 0.0592 | 0.0600 | 0.547 | 2.22 |
+
+## 0.15 bpp — natural
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| msillm | 25 | 0.1397 | 27.46 | 0.9446 | 0.0628 | 0.0636 | 0.359 | 2.02 |
+| mbt | 25 | 0.1325 | 28.15 | 0.9461 | 0.2864 | 0.1811 | -2.482 | 0.77 |
+| turbo | 25 | 0.1402 | 22.60 | 0.8491 | 0.1824 | 0.1409 | -1.387 | 11.37 |
+| mix | 25 | 0.1396 | 26.84 | 0.9388 | 0.0641 | 0.0624 | 0.362 | 2.30 |
+
+## 0.15 bpp — screen
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| msillm | 4 | 0.1545 | 29.69 | 0.9808 | 0.0253 | 0.0425 | 1.866 | 1.74 |
+| mbt | 4 | 0.1440 | 28.62 | 0.9774 | 0.1261 | 0.1062 | 0.072 | 0.67 |
+| turbo | 4 | 0.1206 | 23.09 | 0.9169 | 0.1017 | 0.1109 | -0.285 | 9.59 |
+| mix | 4 | 0.1545 | 29.69 | 0.9808 | 0.0253 | 0.0425 | 1.866 | 1.74 |
+
+## 0.3 bpp — all
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| msillm | 30 | 0.2997 | 29.41 | 0.9731 | 0.0335 | 0.0362 | 1.383 | 1.99 |
+| mbt | 30 | 0.2989 | 29.51 | 0.9701 | 0.1815 | 0.1214 | -0.634 | 0.76 |
+| turbo | 30 | 0.1463 | 22.13 | 0.8475 | 0.1779 | 0.1402 | -1.331 | 11.15 |
+| mix | 30 | 0.2997 | 29.41 | 0.9731 | 0.0335 | 0.0362 | 1.383 | 1.99 |
+
+## 0.3 bpp — natural
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| msillm | 25 | 0.2919 | 29.77 | 0.9710 | 0.0365 | 0.0380 | 1.232 | 2.03 |
+| mbt | 25 | 0.2919 | 30.54 | 0.9691 | 0.1983 | 0.1307 | -0.931 | 0.77 |
+| turbo | 25 | 0.1402 | 22.60 | 0.8491 | 0.1824 | 0.1409 | -1.387 | 11.37 |
+| mix | 25 | 0.2919 | 29.77 | 0.9710 | 0.0365 | 0.0380 | 1.232 | 2.03 |
+
+## 0.3 bpp — screen
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| msillm | 4 | 0.2592 | 32.28 | 0.9907 | 0.0133 | 0.0269 | 2.439 | 1.73 |
+| mbt | 4 | 0.2644 | 33.01 | 0.9888 | 0.0788 | 0.0740 | 1.242 | 0.67 |
+| turbo | 4 | 0.1206 | 23.09 | 0.9169 | 0.1017 | 0.1109 | -0.285 | 9.59 |
+| mix | 4 | 0.2592 | 32.28 | 0.9907 | 0.0133 | 0.0269 | 2.439 | 1.73 |
+
+## Ảnh nào được `mix` giao cho base nào
+
+| rate | vtm420 | vtmscc | s1res | msillm | mbt | codlite | turbo |
+|---|---|---|---|---|---|---|---|
+| 0.075 | 0 | 0 | 1 | 29 | 0 | 0 | 0 |
+| 0.15 | 0 | 0 | 1 | 29 | 0 | 0 | 0 |
+| 0.3 | 0 | 0 | 0 | 30 | 0 | 0 | 0 |
+
+Kích thước decoder (fp32): mbt 18 MB, msillm 673 MB, s1res 681 MB, turbo 4471 MB
+[02:51:42 + 49.7m] == bakeoff: incomplete {'s1_ckpt': 'None', 'qhat': '/kaggle/working/work/qhat/qhat_v0.json', 'step': 'all', 'cands': ['msillm', 'mbt', 'codlite', 'turbo']}

@@ -1,0 +1,3392 @@
+[14:41:56 +  0.0m] ratflow pipeline @ 137158d | stages ['qhat', 'bakeoff'] | budget 11.0 h
+[14:41:56 +  0.0m] == check
+[14:42:20 +  0.4m] $ /usr/bin/python3 -m pip install -q lpips piq torch-fidelity
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 53.8/53.8 kB 2.3 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.9/106.9 kB 3.5 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.6/85.6 kB 4.6 MB/s eta 0:00:00
+[14:42:25 +  0.5m] torch 2.11.0+cu128 | GPU: Tesla T4 | work: /kaggle/working/work
+[14:42:25 +  0.5m] == check: done {'gpu': 'Tesla T4', 'torch': '2.11.0+cu128'}
+[14:42:25 +  0.5m] == qhat
+[14:42:25 +  0.5m] $ /usr/bin/python3 /kaggle/working/ratflow_repo/experiments/qhat/qhat.py all --out /kaggle/working/work/qhat --n 2021v=2000 2021t=1500 2022t=1500 2024t=3000
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/alexnet-owt-7be5be79.pth" to /root/.cache/torch/hub/checkpoints/alexnet-owt-7be5be79.pth
+
+  0%|          | 0.00/233M [00:00<?, ?B/s]
+  8%|▊         | 18.9M/233M [00:00<00:01, 198MB/s]
+ 17%|█▋        | 39.0M/233M [00:00<00:00, 205MB/s]
+ 26%|██▌       | 59.6M/233M [00:00<00:00, 210MB/s]
+ 34%|███▍      | 80.4M/233M [00:00<00:00, 212MB/s]
+ 43%|████▎     | 101M/233M [00:00<00:00, 214MB/s] 
+ 52%|█████▏    | 122M/233M [00:00<00:00, 216MB/s]
+ 61%|██████    | 143M/233M [00:00<00:00, 205MB/s]
+ 70%|██████▉   | 162M/233M [00:00<00:00, 197MB/s]
+ 78%|███████▊  | 182M/233M [00:00<00:00, 192MB/s]
+ 86%|████████▌ | 200M/233M [00:01<00:00, 182MB/s]
+ 93%|█████████▎| 218M/233M [00:01<00:00, 182MB/s]
+100%|██████████| 233M/233M [00:01<00:00, 195MB/s]
+Downloading: "https://github.com/photosynthesis-team/piq/releases/download/v0.4.1/dists_weights.pt" to /root/.cache/torch/hub/checkpoints/dists_weights.pt
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/vgg16-397923af.pth" to /root/.cache/torch/hub/checkpoints/vgg16-397923af.pth
+== 2021v: 5220 rows, sample 2000, 2000 to do
+/kaggle/working/ratflow_repo/src/ratflow/eval/metrics.py:67: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+  2021v 200/2000  1.2 rows/s  4 MB/s
+  2021v 400/2000  1.2 rows/s  4 MB/s
+  2021v 600/2000  1.2 rows/s  3 MB/s
+  2021v 800/2000  1.2 rows/s  3 MB/s
+  2021v 1000/2000  1.2 rows/s  3 MB/s
+  2021v 1200/2000  1.2 rows/s  3 MB/s
+  2021v 1400/2000  1.2 rows/s  3 MB/s
+  2021v 1600/2000  1.2 rows/s  3 MB/s
+  2021v 1800/2000  1.2 rows/s  3 MB/s
+  2021v 2000/2000  1.2 rows/s  3 MB/s
+== 2021t: 122107 rows, sample 1500, 1500 to do
+  2021t 200/1500  1.2 rows/s  4 MB/s
+  2021t 400/1500  1.2 rows/s  4 MB/s
+  2021t 600/1500  1.2 rows/s  4 MB/s
+  2021t 800/1500  1.2 rows/s  4 MB/s
+  2021t 1000/1500  1.2 rows/s  4 MB/s
+  2021t 1200/1500  1.2 rows/s  4 MB/s
+  2021t 1400/1500  1.2 rows/s  4 MB/s
+== 2022t: 57300 rows, sample 1500, 1500 to do
+  2022t 200/1500  1.2 rows/s  4 MB/s
+  2022t 400/1500  1.2 rows/s  4 MB/s
+  2022t 600/1500  1.2 rows/s  3 MB/s
+  2022t 800/1500  1.2 rows/s  3 MB/s
+  2022t 1000/1500  1.2 rows/s  3 MB/s
+  2022t 1200/1500  1.2 rows/s  3 MB/s
+  2022t 1400/1500  1.2 rows/s  3 MB/s
+== 2024t: 24806 rows, sample 3000, 3000 to do
+  2024t 200/3000  1.2 rows/s  3 MB/s
+  2024t 400/3000  1.2 rows/s  3 MB/s
+  2024t 600/3000  1.2 rows/s  3 MB/s
+  2024t 800/3000  1.2 rows/s  3 MB/s
+  2024t 1000/3000  1.2 rows/s  3 MB/s
+  2024t 1200/3000  1.2 rows/s  3 MB/s
+  2024t 1400/3000  1.2 rows/s  3 MB/s
+  2024t 1600/3000  1.2 rows/s  3 MB/s
+  2024t 1800/3000  1.2 rows/s  3 MB/s
+  2024t 2000/3000  1.2 rows/s  3 MB/s
+  2024t 2200/3000  1.2 rows/s  3 MB/s
+  2024t 2400/3000  1.2 rows/s  3 MB/s
+  2024t 2600/3000  1.2 rows/s  2 MB/s
+  2024t 2800/3000  1.2 rows/s  2 MB/s
+  2024t 3000/3000  1.2 rows/s  2 MB/s
+# Q̂ v0: dự đoán lựa chọn của người chấm CLIC
+
+8000 câu hỏi có đủ thước đo; thước đo: psnr, msssim, lpips_alex, lpips_vgg, dists, clipiqa.
+
+Độ chính xác (tỉ lệ đoán đúng ảnh được chọn). `sign_*`: chỉ dựa vào dấu hiệu số của một thước đo; `qhat_cv`: hồi quy logistic trên mọi thước đo, kiểm định chéo 5 phần.
+
+| tập | n | sign_psnr | sign_msssim | sign_lpips_alex | sign_lpips_vgg | sign_dists | sign_clipiqa | **qhat_cv** |
+|---|---|---|---|---|---|---|---|---|
+| 2021t | 1500 | 0.504 | 0.497 | 0.750 | 0.728 | 0.744 | 0.633 | **0.753** |
+| 2021v | 2000 | 0.583 | 0.624 | 0.738 | 0.753 | 0.753 | 0.592 | **0.770** |
+| 2022t | 1500 | 0.642 | 0.713 | 0.768 | 0.772 | 0.769 | 0.673 | **0.795** |
+| 2024t | 3000 | 0.705 | 0.761 | 0.807 | 0.808 | 0.801 | 0.650 | **0.837** |
+| all | 8000 | 0.625 | 0.668 | 0.772 | 0.773 | 0.773 | 0.636 | **0.788** |
+
+**Train trên 2021t, 2021v, 2022t, test trên 2024t: 0.812** (con số đáng tin nhất cho CLIC 2027).
+
+| tập | số câu | chọn đúng ảnh gốc (câu kiểm tra) | câu hỏi lặp lại: tỉ lệ hai người đồng ý |
+|---|---|---|---|
+| 2021v | 5220 | nan (n=0) | 0.777 (n=757) |
+| 2021t | 122107 | nan (n=0) | 0.720 (n=5319) |
+| 2022t | 57300 | 0.924 (n=1303) | nan (n=0) |
+| 2024t | 24806 | 0.970 (n=1325) | 0.000 (n=1) |
+
+Tỉ lệ đồng ý giữa hai người chấm là trần thực tế của mọi Q̂.
+
+Trọng số chuẩn hóa (độ lớn so sánh được giữa các thước đo):
+
+| thước đo | trọng số |
+|---|---|
+| psnr | -0.572 |
+| msssim | +0.920 |
+| lpips_alex | +0.256 |
+| lpips_vgg | +0.265 |
+| dists | +0.916 |
+| clipiqa | +0.341 |
+
+Bias (thiên lệch vị trí A/B): +0.096. Model: `qhat_v0.json`.
+[16:33:49 +111.9m] == qhat: done {'cross_2024': 0.8123333333333334}
+[16:33:49 +111.9m] == bakeoff
+[16:33:49 +111.9m] $ bash -c set -e; cd '/kaggle/working/work'; [ -d vtm ] || git clone -q --depth 1 --branch VTM-23.8 https://vcgit.hhi.fraunhofer.de/jvet/VVCSoftware_VTM.git vtm; cd vtm; mkdir -p build; cd build; cmake .. -DCMAKE_BUILD_TYPE=Release > /dev/null; make -j$(nproc) EncoderApp 2>&1 | tail -2
+Note: switching to 'e0683790fd035558d1b75f70656b073820aa48d6'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+CMake Deprecation Warning at CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+[100%] Linking CXX executable /kaggle/working/work/vtm/bin/umake/gcc-13.3/x86_64/release/EncoderApp
+[100%] Built target EncoderApp
+[16:37:03 +115.1m] bakeoff: S1 checkpoint /kaggle/input/notebooks/magnus68/s1-train/s1_out/last.pt | Q-hat /kaggle/working/work/qhat/qhat_v0.json
+[16:37:03 +115.1m] $ /usr/bin/python3 /kaggle/working/ratflow_repo/experiments/bakeoff/bakeoff.py all --out /kaggle/working/work/bakeoff --s1-ckpt /kaggle/input/notebooks/magnus68/s1-train/s1_out/last.pt --qhat /kaggle/working/work/qhat/qhat_v0.json --cands msillm mbt s1res --vtm /kaggle/working/work/vtm
+===== prepare
+30 images, 86245376 pixels, budgets {'0.075': 808550, '0.15': 1617100, '0.3': 3234201}
+===== points
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 183.8/183.8 kB 9.0 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.2/50.2 kB 2.5 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 183.8/183.8 kB 6.3 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 163.9/163.9 kB 7.7 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.4/64.4 kB 754.9 kB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.2/42.2 kB 1.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 49.1 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.6/129.6 kB 7.2 MB/s eta 0:00:00
+Downloading: "https://github.com/facebookresearch/NeuralCompression/zipball/main" to /root/.cache/torch/hub/main.zip
+/root/.cache/torch/hub/facebookresearch_NeuralCompression_main/neuralcompression/__init__.py:21: UserWarning: Could not retrieve neuralcompression version!
+  warnings.warn("Could not retrieve neuralcompression version!")
+/usr/local/lib/python3.13/dist-packages/compressai/models/video/google.py:353: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @amp.autocast(enabled=False)
+Downloading: "https://dl.fbaipublicfiles.com/NeuralCompression/2023-muckley-msillm/msillm_target_0.035bpp.ckpt" to /root/.cache/torch/hub/checkpoints/msillm_target_0.035bpp.ckpt
+
+  0%|          | 0.00/692M [00:00<?, ?B/s]
+  5%|▍         | 33.1M/692M [00:00<00:01, 346MB/s]
+ 10%|▉         | 66.2M/692M [00:00<00:02, 297MB/s]
+ 14%|█▎        | 95.1M/692M [00:00<00:02, 288MB/s]
+ 18%|█▊        | 125M/692M [00:00<00:02, 296MB/s] 
+ 22%|██▏       | 154M/692M [00:00<00:01, 296MB/s]
+ 26%|██▋       | 182M/692M [00:00<00:02, 253MB/s]
+ 30%|███       | 209M/692M [00:00<00:01, 262MB/s]
+ 34%|███▍      | 235M/692M [00:00<00:01, 262MB/s]
+ 39%|███▉      | 269M/692M [00:00<00:01, 290MB/s]
+ 44%|████▎     | 301M/692M [00:01<00:01, 303MB/s]
+ 48%|████▊     | 335M/692M [00:01<00:01, 319MB/s]
+ 53%|█████▎    | 366M/692M [00:01<00:01, 319MB/s]
+ 57%|█████▋    | 397M/692M [00:01<00:01, 304MB/s]
+ 62%|██████▏   | 426M/692M [00:01<00:00, 289MB/s]
+ 66%|██████▌   | 458M/692M [00:01<00:00, 301MB/s]
+ 72%|███████▏  | 496M/692M [00:01<00:00, 327MB/s]
+ 76%|███████▌  | 527M/692M [00:01<00:00, 318MB/s]
+ 81%|████████▏ | 563M/692M [00:01<00:00, 335MB/s]
+ 86%|████████▌ | 595M/692M [00:02<00:00, 328MB/s]
+ 91%|█████████ | 627M/692M [00:02<00:00, 321MB/s]
+ 95%|█████████▌| 660M/692M [00:02<00:00, 328MB/s]
+100%|█████████▉| 691M/692M [00:02<00:00, 326MB/s]
+100%|██████████| 692M/692M [00:02<00:00, 306MB/s]
+/kaggle/working/ratflow_repo/src/ratflow/eval/metrics.py:67: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+msillm q1 02809272 26676 B  dec 1.84s
+msillm q1 0369d229 7820 B  dec 1.82s
+msillm q1 07b9f93f 11752 B  dec 1.72s
+msillm q1 0d154749 11808 B  dec 1.83s
+msillm q1 1b4ad095 7808 B  dec 1.54s
+msillm q1 1cba10ad 7388 B  dec 2.17s
+msillm q1 2397c73f 13664 B  dec 1.94s
+msillm q1 2684452d 13508 B  dec 1.83s
+msillm q1 2a760bf1 4708 B  dec 1.22s
+msillm q1 4ebc0e6c 9388 B  dec 1.81s
+msillm q1 50d13125 4572 B  dec 1.79s
+msillm q1 50fe4c3d 24288 B  dec 1.72s
+msillm q1 58104815 18200 B  dec 1.87s
+msillm q1 608cb09e 24364 B  dec 2.22s
+msillm q1 79b1bb29 17424 B  dec 1.65s
+msillm q1 8426ed22 8224 B  dec 2.70s
+msillm q1 86127fbd 17428 B  dec 1.31s
+msillm q1 937476dd 37336 B  dec 2.01s
+msillm q1 a2a946cc 14596 B  dec 1.89s
+msillm q1 a365e654 19976 B  dec 1.88s
+msillm q1 b0b3744c 19788 B  dec 1.81s
+msillm q1 bb7344a2 7352 B  dec 1.36s
+msillm q1 c9510efb 13276 B  dec 1.77s
+msillm q1 d0208a1e 18376 B  dec 1.87s
+msillm q1 da52c4f6 33260 B  dec 1.85s
+msillm q1 e0d8e29c 6228 B  dec 1.93s
+msillm q1 ebfd571f 20848 B  dec 2.68s
+msillm q1 eda6d427 21476 B  dec 2.27s
+msillm q1 f67f11de 6556 B  dec 2.30s
+msillm q1 ff32adfa 15700 B  dec 1.89s
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+Downloading: "https://dl.fbaipublicfiles.com/NeuralCompression/2023-muckley-msillm/msillm_target_0.07bpp.ckpt" to /root/.cache/torch/hub/checkpoints/msillm_target_0.07bpp.ckpt
+
+  0%|          | 0.00/692M [00:00<?, ?B/s]
+  5%|▌         | 35.2M/692M [00:00<00:01, 369MB/s]
+ 10%|█         | 70.5M/692M [00:00<00:01, 351MB/s]
+ 16%|█▌        | 108M/692M [00:00<00:01, 371MB/s] 
+ 21%|██▏       | 149M/692M [00:00<00:01, 391MB/s]
+ 27%|██▋       | 186M/692M [00:00<00:01, 358MB/s]
+ 32%|███▏      | 221M/692M [00:00<00:01, 346MB/s]
+ 38%|███▊      | 261M/692M [00:00<00:01, 369MB/s]
+ 43%|████▎     | 296M/692M [00:00<00:01, 367MB/s]
+ 48%|████▊     | 332M/692M [00:00<00:01, 351MB/s]
+ 53%|█████▎    | 367M/692M [00:01<00:00, 356MB/s]
+ 58%|█████▊    | 401M/692M [00:01<00:00, 336MB/s]
+ 63%|██████▎   | 434M/692M [00:01<00:00, 336MB/s]
+ 68%|██████▊   | 469M/692M [00:01<00:00, 347MB/s]
+ 73%|███████▎  | 503M/692M [00:01<00:00, 320MB/s]
+ 78%|███████▊  | 539M/692M [00:01<00:00, 337MB/s]
+ 83%|████████▎ | 575M/692M [00:01<00:00, 348MB/s]
+ 88%|████████▊ | 609M/692M [00:01<00:00, 351MB/s]
+ 93%|█████████▎| 643M/692M [00:01<00:00, 324MB/s]
+ 97%|█████████▋| 674M/692M [00:02<00:00, 308MB/s]
+100%|██████████| 692M/692M [00:02<00:00, 340MB/s]
+msillm q2 02809272 45012 B  dec 1.95s
+msillm q2 0369d229 14484 B  dec 1.90s
+msillm q2 07b9f93f 22216 B  dec 1.85s
+msillm q2 0d154749 23644 B  dec 1.95s
+msillm q2 1b4ad095 15876 B  dec 1.64s
+msillm q2 1cba10ad 14484 B  dec 2.33s
+msillm q2 2397c73f 24464 B  dec 2.02s
+msillm q2 2684452d 24788 B  dec 1.96s
+msillm q2 2a760bf1 7860 B  dec 1.36s
+msillm q2 4ebc0e6c 19280 B  dec 1.99s
+msillm q2 50d13125 8004 B  dec 1.99s
+msillm q2 50fe4c3d 40284 B  dec 1.92s
+msillm q2 58104815 34704 B  dec 2.17s
+msillm q2 608cb09e 42404 B  dec 2.40s
+msillm q2 79b1bb29 30164 B  dec 1.82s
+msillm q2 8426ed22 17960 B  dec 2.83s
+msillm q2 86127fbd 30716 B  dec 1.38s
+msillm q2 937476dd 68732 B  dec 2.08s
+msillm q2 a2a946cc 25320 B  dec 1.91s
+msillm q2 a365e654 37072 B  dec 1.87s
+msillm q2 b0b3744c 36308 B  dec 1.86s
+msillm q2 bb7344a2 12688 B  dec 1.34s
+msillm q2 c9510efb 22320 B  dec 1.88s
+msillm q2 d0208a1e 38120 B  dec 1.95s
+msillm q2 da52c4f6 53252 B  dec 1.92s
+msillm q2 e0d8e29c 12848 B  dec 1.98s
+msillm q2 ebfd571f 35712 B  dec 2.88s
+msillm q2 eda6d427 37776 B  dec 2.40s
+msillm q2 f67f11de 13496 B  dec 2.38s
+msillm q2 ff32adfa 26540 B  dec 1.91s
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+Downloading: "https://dl.fbaipublicfiles.com/NeuralCompression/2023-muckley-msillm/msillm_target_0.14bpp.ckpt" to /root/.cache/torch/hub/checkpoints/msillm_target_0.14bpp.ckpt
+
+  0%|          | 0.00/692M [00:00<?, ?B/s]
+  5%|▍         | 33.9M/692M [00:00<00:01, 354MB/s]
+ 10%|█         | 69.6M/692M [00:00<00:01, 365MB/s]
+ 15%|█▌        | 106M/692M [00:00<00:01, 371MB/s] 
+ 21%|██        | 145M/692M [00:00<00:01, 387MB/s]
+ 26%|██▋       | 182M/692M [00:00<00:01, 378MB/s]
+ 32%|███▏      | 218M/692M [00:00<00:01, 375MB/s]
+ 37%|███▋      | 256M/692M [00:00<00:01, 379MB/s]
+ 42%|████▏     | 292M/692M [00:00<00:01, 368MB/s]
+ 47%|████▋     | 329M/692M [00:00<00:01, 373MB/s]
+ 53%|█████▎    | 368M/692M [00:01<00:00, 383MB/s]
+ 59%|█████▊    | 405M/692M [00:01<00:00, 387MB/s]
+ 64%|██████▍   | 442M/692M [00:01<00:00, 361MB/s]
+ 69%|██████▉   | 477M/692M [00:01<00:00, 332MB/s]
+ 74%|███████▎  | 509M/692M [00:01<00:00, 323MB/s]
+ 79%|███████▊  | 545M/692M [00:01<00:00, 337MB/s]
+ 83%|████████▎ | 578M/692M [00:01<00:00, 339MB/s]
+ 89%|████████▊ | 613M/692M [00:01<00:00, 347MB/s]
+ 93%|█████████▎| 646M/692M [00:01<00:00, 347MB/s]
+ 99%|█████████▉| 685M/692M [00:01<00:00, 363MB/s]
+100%|██████████| 692M/692M [00:02<00:00, 360MB/s]
+msillm q3 02809272 78280 B  dec 1.98s
+msillm q3 0369d229 27624 B  dec 1.95s
+msillm q3 07b9f93f 44140 B  dec 1.89s
+msillm q3 0d154749 48756 B  dec 1.94s
+msillm q3 1b4ad095 33748 B  dec 1.68s
+msillm q3 1cba10ad 29904 B  dec 2.35s
+msillm q3 2397c73f 45132 B  dec 1.96s
+msillm q3 2684452d 46840 B  dec 1.96s
+msillm q3 2a760bf1 13136 B  dec 1.32s
+msillm q3 4ebc0e6c 38504 B  dec 2.02s
+msillm q3 50d13125 14900 B  dec 1.94s
+msillm q3 50fe4c3d 71036 B  dec 1.87s
+msillm q3 58104815 66756 B  dec 2.05s
+msillm q3 608cb09e 74648 B  dec 2.40s
+msillm q3 79b1bb29 54436 B  dec 1.74s
+msillm q3 8426ed22 38908 B  dec 2.84s
+msillm q3 86127fbd 54856 B  dec 1.38s
+msillm q3 937476dd 146064 B  dec 2.10s
+msillm q3 a2a946cc 44960 B  dec 2.01s
+msillm q3 a365e654 73144 B  dec 1.89s
+msillm q3 b0b3744c 69652 B  dec 1.96s
+msillm q3 bb7344a2 22396 B  dec 1.36s
+msillm q3 c9510efb 38196 B  dec 1.98s
+msillm q3 d0208a1e 78968 B  dec 1.99s
+msillm q3 da52c4f6 88368 B  dec 1.99s
+msillm q3 e0d8e29c 29060 B  dec 1.98s
+msillm q3 ebfd571f 63180 B  dec 2.88s
+msillm q3 eda6d427 70132 B  dec 2.43s
+msillm q3 f67f11de 25692 B  dec 2.37s
+msillm q3 ff32adfa 45632 B  dec 1.94s
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+Downloading: "https://dl.fbaipublicfiles.com/NeuralCompression/2023-muckley-msillm/msillm_target_0.3bpp.ckpt" to /root/.cache/torch/hub/checkpoints/msillm_target_0.3bpp.ckpt
+
+  0%|          | 0.00/692M [00:00<?, ?B/s]
+  0%|          | 128k/692M [00:00<12:52, 939kB/s]
+  0%|          | 384k/692M [00:00<07:02, 1.72MB/s]
+  0%|          | 1.50M/692M [00:00<02:07, 5.69MB/s]
+  1%|          | 3.75M/692M [00:00<00:59, 12.2MB/s]
+  1%|          | 5.38M/692M [00:00<00:52, 13.7MB/s]
+  1%|▏         | 8.75M/692M [00:00<00:37, 19.1MB/s]
+  2%|▏         | 11.2M/692M [00:00<00:35, 20.0MB/s]
+  2%|▏         | 13.8M/692M [00:00<00:34, 20.5MB/s]
+  2%|▏         | 16.4M/692M [00:01<00:33, 21.0MB/s]
+  3%|▎         | 18.4M/692M [00:01<00:38, 18.4MB/s]
+  3%|▎         | 21.6M/692M [00:01<00:31, 22.1MB/s]
+  3%|▎         | 24.1M/692M [00:01<00:31, 22.6MB/s]
+  4%|▍         | 26.4M/692M [00:01<00:32, 21.4MB/s]
+  4%|▍         | 28.5M/692M [00:01<00:35, 19.7MB/s]
+  4%|▍         | 30.5M/692M [00:01<00:36, 18.8MB/s]
+  5%|▍         | 32.4M/692M [00:01<00:38, 18.0MB/s]
+  5%|▍         | 34.1M/692M [00:02<00:39, 17.3MB/s]
+  5%|▌         | 35.9M/692M [00:02<00:42, 16.3MB/s]
+  5%|▌         | 37.5M/692M [00:02<00:44, 15.5MB/s]
+  6%|▌         | 39.0M/692M [00:02<00:46, 14.6MB/s]
+  6%|▌         | 40.5M/692M [00:02<00:48, 14.0MB/s]
+  6%|▌         | 41.9M/692M [00:02<00:50, 13.4MB/s]
+  6%|▌         | 43.2M/692M [00:02<00:52, 12.9MB/s]
+  6%|▋         | 44.5M/692M [00:02<00:54, 12.5MB/s]
+  7%|▋         | 45.8M/692M [00:03<00:54, 12.4MB/s]
+  7%|▋         | 47.2M/692M [00:03<00:54, 12.5MB/s]
+  7%|▋         | 48.8M/692M [00:03<00:53, 12.6MB/s]
+  7%|▋         | 50.1M/692M [00:03<00:54, 12.3MB/s]
+  7%|▋         | 51.4M/692M [00:03<00:59, 11.2MB/s]
+  8%|▊         | 52.5M/692M [00:03<01:02, 10.8MB/s]
+  8%|▊         | 53.6M/692M [00:03<01:04, 10.4MB/s]
+  8%|▊         | 54.6M/692M [00:03<01:07, 9.88MB/s]
+  8%|▊         | 55.6M/692M [00:04<01:08, 9.70MB/s]
+  8%|▊         | 56.6M/692M [00:04<01:09, 9.65MB/s]
+  8%|▊         | 57.8M/692M [00:04<01:09, 9.57MB/s]
+  9%|▊         | 58.9M/692M [00:04<01:09, 9.59MB/s]
+  9%|▊         | 60.0M/692M [00:04<01:09, 9.60MB/s]
+  9%|▉         | 61.1M/692M [00:04<01:09, 9.52MB/s]
+  9%|▉         | 62.2M/692M [00:04<01:07, 9.72MB/s]
+  9%|▉         | 63.5M/692M [00:04<01:07, 9.83MB/s]
+  9%|▉         | 64.6M/692M [00:04<01:07, 9.82MB/s]
+ 10%|▉         | 65.9M/692M [00:05<01:05, 9.97MB/s]
+ 10%|▉         | 67.0M/692M [00:05<01:05, 9.97MB/s]
+ 10%|▉         | 68.2M/692M [00:05<01:05, 10.0MB/s]
+ 10%|█         | 69.4M/692M [00:05<01:07, 9.74MB/s]
+ 10%|█         | 70.4M/692M [00:05<01:11, 9.15MB/s]
+ 10%|█         | 71.4M/692M [00:05<01:13, 8.83MB/s]
+ 10%|█         | 72.2M/692M [00:05<01:17, 8.43MB/s]
+ 11%|█         | 73.1M/692M [00:05<01:19, 8.16MB/s]
+ 11%|█         | 74.0M/692M [00:06<01:21, 7.97MB/s]
+ 11%|█         | 74.9M/692M [00:06<01:22, 7.85MB/s]
+ 11%|█         | 75.6M/692M [00:06<01:25, 7.60MB/s]
+ 11%|█         | 76.4M/692M [00:06<01:25, 7.54MB/s]
+ 11%|█         | 77.1M/692M [00:06<01:30, 7.13MB/s]
+ 11%|█▏        | 78.0M/692M [00:06<01:31, 7.07MB/s]
+ 11%|█▏        | 78.8M/692M [00:06<01:35, 6.74MB/s]
+ 11%|█▏        | 79.5M/692M [00:06<01:37, 6.57MB/s]
+ 12%|█▏        | 80.2M/692M [00:07<01:39, 6.47MB/s]
+ 12%|█▏        | 80.9M/692M [00:07<01:43, 6.21MB/s]
+ 12%|█▏        | 81.5M/692M [00:07<01:47, 5.98MB/s]
+ 12%|█▏        | 82.1M/692M [00:07<01:48, 5.90MB/s]
+ 12%|█▏        | 82.8M/692M [00:07<01:47, 5.93MB/s]
+ 12%|█▏        | 83.5M/692M [00:07<01:45, 6.04MB/s]
+ 12%|█▏        | 84.2M/692M [00:07<01:45, 6.06MB/s]
+ 12%|█▏        | 85.0M/692M [00:07<01:43, 6.15MB/s]
+ 12%|█▏        | 85.8M/692M [00:08<01:43, 6.17MB/s]
+ 12%|█▏        | 86.5M/692M [00:08<01:41, 6.27MB/s]
+ 13%|█▎        | 87.2M/692M [00:08<01:40, 6.30MB/s]
+ 13%|█▎        | 88.0M/692M [00:08<01:39, 6.37MB/s]
+ 13%|█▎        | 88.8M/692M [00:08<01:38, 6.40MB/s]
+ 13%|█▎        | 89.5M/692M [00:08<01:37, 6.45MB/s]
+ 13%|█▎        | 90.2M/692M [00:08<01:37, 6.45MB/s]
+ 13%|█▎        | 91.0M/692M [00:08<01:36, 6.51MB/s]
+ 13%|█▎        | 91.8M/692M [00:09<01:35, 6.57MB/s]
+ 13%|█▎        | 92.5M/692M [00:09<01:41, 6.18MB/s]
+ 13%|█▎        | 93.1M/692M [00:09<01:46, 5.90MB/s]
+ 14%|█▎        | 93.8M/692M [00:09<01:49, 5.71MB/s]
+ 14%|█▎        | 94.4M/692M [00:09<01:59, 5.24MB/s]
+ 14%|█▎        | 95.0M/692M [00:09<02:05, 4.97MB/s]
+ 14%|█▍        | 95.5M/692M [00:09<02:12, 4.73MB/s]
+ 14%|█▍        | 96.0M/692M [00:10<02:30, 4.16MB/s]
+ 14%|█▍        | 96.5M/692M [00:10<02:31, 4.12MB/s]
+ 14%|█▍        | 97.0M/692M [00:10<02:42, 3.84MB/s]
+ 14%|█▍        | 97.5M/692M [00:10<02:41, 3.86MB/s]
+ 14%|█▍        | 97.9M/692M [00:10<02:47, 3.72MB/s]
+ 14%|█▍        | 98.4M/692M [00:10<02:40, 3.88MB/s]
+ 14%|█▍        | 98.8M/692M [00:10<02:46, 3.73MB/s]
+ 14%|█▍        | 99.2M/692M [00:10<02:41, 3.86MB/s]
+ 14%|█▍        | 99.8M/692M [00:11<02:38, 3.92MB/s]
+ 14%|█▍        | 100M/692M [00:11<02:42, 3.82MB/s] 
+ 15%|█▍        | 101M/692M [00:11<02:37, 3.94MB/s]
+ 15%|█▍        | 101M/692M [00:11<02:33, 4.04MB/s]
+ 15%|█▍        | 102M/692M [00:11<02:32, 4.06MB/s]
+ 15%|█▍        | 102M/692M [00:11<02:34, 4.01MB/s]
+ 15%|█▍        | 103M/692M [00:11<02:30, 4.10MB/s]
+ 15%|█▍        | 103M/692M [00:11<02:28, 4.16MB/s]
+ 15%|█▍        | 104M/692M [00:12<02:29, 4.14MB/s]
+ 15%|█▌        | 104M/692M [00:12<02:27, 4.19MB/s]
+ 15%|█▌        | 105M/692M [00:12<02:26, 4.21MB/s]
+ 15%|█▌        | 105M/692M [00:12<02:36, 3.93MB/s]
+ 15%|█▌        | 106M/692M [00:12<02:32, 4.02MB/s]
+ 15%|█▌        | 106M/692M [00:12<02:29, 4.10MB/s]
+ 15%|█▌        | 107M/692M [00:12<02:28, 4.14MB/s]
+ 15%|█▌        | 107M/692M [00:12<02:26, 4.18MB/s]
+ 16%|█▌        | 108M/692M [00:13<02:26, 4.18MB/s]
+ 16%|█▌        | 108M/692M [00:13<02:27, 4.16MB/s]
+ 16%|█▌        | 109M/692M [00:13<02:27, 4.15MB/s]
+ 16%|█▌        | 109M/692M [00:13<02:26, 4.18MB/s]
+ 16%|█▌        | 110M/692M [00:13<02:29, 4.08MB/s]
+ 16%|█▌        | 110M/692M [00:13<02:27, 4.13MB/s]
+ 16%|█▌        | 111M/692M [00:13<02:26, 4.16MB/s]
+ 16%|█▌        | 111M/692M [00:13<02:26, 4.16MB/s]
+ 16%|█▌        | 112M/692M [00:14<02:45, 3.68MB/s]
+ 16%|█▌        | 112M/692M [00:14<02:51, 3.55MB/s]
+ 16%|█▌        | 112M/692M [00:14<02:56, 3.44MB/s]
+ 16%|█▋        | 113M/692M [00:14<03:00, 3.37MB/s]
+ 16%|█▋        | 113M/692M [00:14<02:59, 3.38MB/s]
+ 16%|█▋        | 114M/692M [00:14<02:53, 3.49MB/s]
+ 16%|█▋        | 114M/692M [00:14<02:58, 3.41MB/s]
+ 17%|█▋        | 114M/692M [00:14<02:52, 3.50MB/s]
+ 17%|█▋        | 115M/692M [00:15<02:49, 3.58MB/s]
+ 17%|█▋        | 115M/692M [00:15<02:52, 3.50MB/s]
+ 17%|█▋        | 115M/692M [00:15<02:48, 3.58MB/s]
+ 17%|█▋        | 116M/692M [00:15<02:44, 3.67MB/s]
+ 17%|█▋        | 116M/692M [00:15<02:43, 3.70MB/s]
+ 17%|█▋        | 116M/692M [00:15<02:42, 3.72MB/s]
+ 17%|█▋        | 117M/692M [00:15<02:40, 3.75MB/s]
+ 17%|█▋        | 118M/692M [00:15<02:33, 3.92MB/s]
+ 17%|█▋        | 118M/692M [00:15<02:35, 3.86MB/s]
+ 17%|█▋        | 118M/692M [00:16<02:35, 3.86MB/s]
+ 17%|█▋        | 119M/692M [00:16<02:31, 3.97MB/s]
+ 17%|█▋        | 119M/692M [00:16<02:27, 4.07MB/s]
+ 17%|█▋        | 120M/692M [00:16<02:32, 3.92MB/s]
+ 17%|█▋        | 120M/692M [00:16<02:43, 3.68MB/s]
+ 17%|█▋        | 121M/692M [00:16<02:56, 3.39MB/s]
+ 17%|█▋        | 121M/692M [00:16<03:05, 3.22MB/s]
+ 18%|█▊        | 122M/692M [00:17<03:07, 3.19MB/s]
+ 18%|█▊        | 122M/692M [00:17<03:06, 3.20MB/s]
+ 18%|█▊        | 122M/692M [00:17<03:08, 3.17MB/s]
+ 18%|█▊        | 123M/692M [00:17<03:08, 3.16MB/s]
+ 18%|█▊        | 123M/692M [00:17<03:07, 3.19MB/s]
+ 18%|█▊        | 123M/692M [00:17<03:07, 3.18MB/s]
+ 18%|█▊        | 124M/692M [00:17<03:05, 3.22MB/s]
+ 18%|█▊        | 124M/692M [00:17<03:01, 3.27MB/s]
+ 18%|█▊        | 124M/692M [00:18<03:01, 3.28MB/s]
+ 18%|█▊        | 125M/692M [00:18<03:10, 3.12MB/s]
+ 18%|█▊        | 125M/692M [00:18<03:29, 2.84MB/s]
+ 18%|█▊        | 126M/692M [00:18<03:33, 2.78MB/s]
+ 18%|█▊        | 126M/692M [00:18<03:46, 2.63MB/s]
+ 18%|█▊        | 126M/692M [00:18<03:47, 2.61MB/s]
+ 18%|█▊        | 127M/692M [00:18<03:47, 2.61MB/s]
+ 18%|█▊        | 127M/692M [00:19<03:40, 2.68MB/s]
+ 18%|█▊        | 128M/692M [00:19<03:45, 2.63MB/s]
+ 18%|█▊        | 128M/692M [00:19<03:43, 2.65MB/s]
+ 19%|█▊        | 128M/692M [00:19<03:40, 2.68MB/s]
+ 19%|█▊        | 129M/692M [00:19<03:41, 2.67MB/s]
+ 19%|█▊        | 129M/692M [00:19<03:56, 2.50MB/s]
+ 19%|█▊        | 129M/692M [00:20<03:52, 2.53MB/s]
+ 19%|█▊        | 130M/692M [00:20<04:08, 2.37MB/s]
+ 19%|█▉        | 130M/692M [00:20<04:18, 2.28MB/s]
+ 19%|█▉        | 130M/692M [00:20<04:46, 2.06MB/s]
+ 19%|█▉        | 130M/692M [00:20<05:19, 1.84MB/s]
+ 19%|█▉        | 131M/692M [00:20<05:30, 1.78MB/s]
+ 19%|█▉        | 131M/692M [00:20<05:39, 1.73MB/s]
+ 19%|█▉        | 131M/692M [00:21<05:52, 1.67MB/s]
+ 19%|█▉        | 131M/692M [00:21<05:51, 1.67MB/s]
+ 19%|█▉        | 132M/692M [00:21<05:53, 1.66MB/s]
+ 19%|█▉        | 132M/692M [00:21<05:48, 1.68MB/s]
+ 19%|█▉        | 132M/692M [00:21<05:49, 1.68MB/s]
+ 19%|█▉        | 132M/692M [00:21<05:48, 1.69MB/s]
+ 19%|█▉        | 133M/692M [00:22<05:45, 1.70MB/s]
+ 19%|█▉        | 133M/692M [00:22<05:41, 1.72MB/s]
+ 19%|█▉        | 133M/692M [00:22<05:41, 1.72MB/s]
+ 19%|█▉        | 133M/692M [00:22<05:25, 1.80MB/s]
+ 19%|█▉        | 134M/692M [00:22<05:28, 1.78MB/s]
+ 19%|█▉        | 134M/692M [00:22<05:32, 1.76MB/s]
+ 19%|█▉        | 134M/692M [00:22<05:25, 1.80MB/s]
+ 19%|█▉        | 134M/692M [00:23<06:03, 1.61MB/s]
+ 19%|█▉        | 135M/692M [00:23<06:17, 1.55MB/s]
+ 19%|█▉        | 135M/692M [00:23<06:17, 1.55MB/s]
+ 20%|█▉        | 135M/692M [00:23<06:18, 1.54MB/s]
+ 20%|█▉        | 135M/692M [00:23<06:08, 1.58MB/s]
+ 20%|█▉        | 136M/692M [00:24<06:31, 1.49MB/s]
+ 20%|█▉        | 136M/692M [00:24<06:55, 1.40MB/s]
+ 20%|█▉        | 136M/692M [00:24<07:41, 1.26MB/s]
+ 20%|█▉        | 136M/692M [00:24<08:22, 1.16MB/s]
+ 20%|█▉        | 136M/692M [00:24<09:02, 1.07MB/s]
+ 20%|█▉        | 136M/692M [00:25<10:37, 914kB/s] 
+ 20%|█▉        | 137M/692M [00:25<11:25, 850kB/s]
+ 20%|█▉        | 137M/692M [00:25<11:48, 822kB/s]
+ 20%|█▉        | 137M/692M [00:25<11:52, 818kB/s]
+ 20%|█▉        | 137M/692M [00:25<12:04, 804kB/s]
+ 20%|█▉        | 137M/692M [00:25<12:20, 786kB/s]
+ 20%|█▉        | 137M/692M [00:26<12:50, 756kB/s]
+ 20%|█▉        | 137M/692M [00:26<13:34, 714kB/s]
+ 20%|█▉        | 138M/692M [00:26<13:42, 708kB/s]
+ 20%|█▉        | 138M/692M [00:26<13:38, 710kB/s]
+ 20%|█▉        | 138M/692M [00:26<13:35, 713kB/s]
+ 20%|█▉        | 138M/692M [00:27<13:21, 726kB/s]
+ 20%|█▉        | 138M/692M [00:27<13:11, 735kB/s]
+ 20%|█▉        | 138M/692M [00:27<12:26, 779kB/s]
+ 20%|█▉        | 138M/692M [00:27<12:59, 745kB/s]
+ 20%|█▉        | 138M/692M [00:27<13:08, 736kB/s]
+ 20%|██        | 138M/692M [00:27<13:58, 693kB/s]
+ 20%|██        | 139M/692M [00:28<13:53, 697kB/s]
+ 20%|██        | 139M/692M [00:28<13:24, 722kB/s]
+ 20%|██        | 139M/692M [00:28<13:03, 741kB/s]
+ 20%|██        | 139M/692M [00:28<13:04, 739kB/s]
+ 20%|██        | 139M/692M [00:28<12:49, 754kB/s]
+ 20%|██        | 139M/692M [00:28<12:11, 793kB/s]
+ 20%|██        | 139M/692M [00:29<12:05, 799kB/s]
+ 20%|██        | 140M/692M [00:29<11:40, 828kB/s]
+ 20%|██        | 140M/692M [00:29<11:14, 859kB/s]
+ 20%|██        | 140M/692M [00:29<11:25, 845kB/s]
+ 20%|██        | 140M/692M [00:29<10:42, 902kB/s]
+ 20%|██        | 140M/692M [00:29<10:21, 932kB/s]
+ 20%|██        | 140M/692M [00:29<11:01, 875kB/s]
+ 20%|██        | 140M/692M [00:30<10:24, 926kB/s]
+ 20%|██        | 140M/692M [00:30<11:01, 875kB/s]
+ 20%|██        | 141M/692M [00:30<10:55, 882kB/s]
+ 20%|██        | 141M/692M [00:30<11:09, 864kB/s]
+ 20%|██        | 141M/692M [00:30<10:43, 899kB/s]
+ 20%|██        | 141M/692M [00:30<10:53, 885kB/s]
+ 20%|██        | 141M/692M [00:31<10:48, 891kB/s]
+ 20%|██        | 141M/692M [00:31<10:17, 935kB/s]
+ 20%|██        | 141M/692M [00:31<10:05, 955kB/s]
+ 20%|██        | 142M/692M [00:31<09:47, 984kB/s]
+ 20%|██        | 142M/692M [00:31<09:41, 994kB/s]
+ 20%|██        | 142M/692M [00:31<09:40, 994kB/s]
+ 20%|██        | 142M/692M [00:31<09:29, 1.01MB/s]
+ 21%|██        | 142M/692M [00:32<09:19, 1.03MB/s]
+ 21%|██        | 142M/692M [00:32<09:03, 1.06MB/s]
+ 21%|██        | 142M/692M [00:32<08:51, 1.08MB/s]
+ 21%|██        | 142M/692M [00:32<08:53, 1.08MB/s]
+ 21%|██        | 142M/692M [00:32<08:46, 1.09MB/s]
+ 21%|██        | 143M/692M [00:32<08:28, 1.13MB/s]
+ 21%|██        | 143M/692M [00:32<08:08, 1.18MB/s]
+ 21%|██        | 143M/692M [00:32<08:13, 1.17MB/s]
+ 21%|██        | 143M/692M [00:33<07:46, 1.24MB/s]
+ 21%|██        | 143M/692M [00:33<07:50, 1.22MB/s]
+ 21%|██        | 144M/692M [00:33<07:24, 1.29MB/s]
+ 21%|██        | 144M/692M [00:33<07:17, 1.31MB/s]
+ 21%|██        | 144M/692M [00:33<07:09, 1.34MB/s]
+ 21%|██        | 144M/692M [00:33<06:55, 1.38MB/s]
+ 21%|██        | 145M/692M [00:34<06:50, 1.40MB/s]
+ 21%|██        | 145M/692M [00:34<06:34, 1.46MB/s]
+ 21%|██        | 145M/692M [00:34<06:17, 1.52MB/s]
+ 21%|██        | 145M/692M [00:34<06:17, 1.52MB/s]
+ 21%|██        | 146M/692M [00:34<06:15, 1.53MB/s]
+ 21%|██        | 146M/692M [00:34<06:02, 1.58MB/s]
+ 21%|██        | 146M/692M [00:35<05:57, 1.60MB/s]
+ 21%|██        | 146M/692M [00:35<05:46, 1.65MB/s]
+ 21%|██        | 147M/692M [00:35<05:45, 1.66MB/s]
+ 21%|██        | 147M/692M [00:35<05:35, 1.70MB/s]
+ 21%|██▏       | 147M/692M [00:35<05:27, 1.75MB/s]
+ 21%|██▏       | 147M/692M [00:35<05:25, 1.76MB/s]
+ 21%|██▏       | 148M/692M [00:35<05:18, 1.79MB/s]
+ 21%|██▏       | 148M/692M [00:36<05:08, 1.85MB/s]
+ 21%|██▏       | 148M/692M [00:36<05:20, 1.78MB/s]
+ 21%|██▏       | 148M/692M [00:36<05:45, 1.65MB/s]
+ 21%|██▏       | 149M/692M [00:36<06:01, 1.58MB/s]
+ 22%|██▏       | 149M/692M [00:36<05:56, 1.60MB/s]
+ 22%|██▏       | 149M/692M [00:37<06:30, 1.46MB/s]
+ 22%|██▏       | 149M/692M [00:37<07:08, 1.33MB/s]
+ 22%|██▏       | 150M/692M [00:37<07:39, 1.24MB/s]
+ 22%|██▏       | 150M/692M [00:37<08:15, 1.15MB/s]
+ 22%|██▏       | 150M/692M [00:37<08:36, 1.10MB/s]
+ 22%|██▏       | 150M/692M [00:37<09:06, 1.04MB/s]
+ 22%|██▏       | 150M/692M [00:38<09:24, 1.01MB/s]
+ 22%|██▏       | 150M/692M [00:38<09:44, 972kB/s] 
+ 22%|██▏       | 150M/692M [00:38<09:44, 973kB/s]
+ 22%|██▏       | 150M/692M [00:38<09:29, 998kB/s]
+ 22%|██▏       | 151M/692M [00:38<09:27, 1.00MB/s]
+ 22%|██▏       | 151M/692M [00:38<09:18, 1.02MB/s]
+ 22%|██▏       | 151M/692M [00:38<09:11, 1.03MB/s]
+ 22%|██▏       | 151M/692M [00:38<09:01, 1.05MB/s]
+ 22%|██▏       | 151M/692M [00:39<08:56, 1.06MB/s]
+ 22%|██▏       | 151M/692M [00:39<08:44, 1.08MB/s]
+ 22%|██▏       | 151M/692M [00:39<08:23, 1.13MB/s]
+ 22%|██▏       | 152M/692M [00:39<08:35, 1.10MB/s]
+ 22%|██▏       | 152M/692M [00:39<08:06, 1.17MB/s]
+ 22%|██▏       | 152M/692M [00:39<07:37, 1.24MB/s]
+ 22%|██▏       | 152M/692M [00:39<07:47, 1.21MB/s]
+ 22%|██▏       | 152M/692M [00:40<07:28, 1.26MB/s]
+ 22%|██▏       | 153M/692M [00:40<07:11, 1.31MB/s]
+ 22%|██▏       | 153M/692M [00:40<07:16, 1.29MB/s]
+ 22%|██▏       | 153M/692M [00:40<07:05, 1.33MB/s]
+ 22%|██▏       | 153M/692M [00:40<06:39, 1.42MB/s]
+ 22%|██▏       | 154M/692M [00:40<06:38, 1.42MB/s]
+ 22%|██▏       | 154M/692M [00:41<06:26, 1.46MB/s]
+ 22%|██▏       | 154M/692M [00:41<06:23, 1.47MB/s]
+ 22%|██▏       | 154M/692M [00:41<06:04, 1.55MB/s]
+ 22%|██▏       | 154M/692M [00:41<06:03, 1.55MB/s]
+ 22%|██▏       | 155M/692M [00:41<06:00, 1.56MB/s]
+ 22%|██▏       | 155M/692M [00:41<05:56, 1.58MB/s]
+ 22%|██▏       | 155M/692M [00:42<05:43, 1.64MB/s]
+ 22%|██▏       | 156M/692M [00:42<05:28, 1.71MB/s]
+ 22%|██▏       | 156M/692M [00:42<05:25, 1.73MB/s]
+ 23%|██▎       | 156M/692M [00:42<05:44, 1.63MB/s]
+ 23%|██▎       | 156M/692M [00:42<06:01, 1.56MB/s]
+ 23%|██▎       | 156M/692M [00:42<06:10, 1.52MB/s]
+ 23%|██▎       | 157M/692M [00:43<06:18, 1.49MB/s]
+ 23%|██▎       | 157M/692M [00:43<06:21, 1.47MB/s]
+ 23%|██▎       | 157M/692M [00:43<06:07, 1.53MB/s]
+ 23%|██▎       | 158M/692M [00:43<06:01, 1.55MB/s]
+ 23%|██▎       | 158M/692M [00:43<06:02, 1.55MB/s]
+ 23%|██▎       | 158M/692M [00:43<05:54, 1.58MB/s]
+ 23%|██▎       | 158M/692M [00:44<05:44, 1.63MB/s]
+ 23%|██▎       | 158M/692M [00:44<05:41, 1.64MB/s]
+ 23%|██▎       | 159M/692M [00:44<05:36, 1.66MB/s]
+ 23%|██▎       | 159M/692M [00:44<05:25, 1.72MB/s]
+ 23%|██▎       | 159M/692M [00:44<05:31, 1.69MB/s]
+ 23%|██▎       | 160M/692M [00:44<05:13, 1.78MB/s]
+ 23%|██▎       | 160M/692M [00:45<05:15, 1.77MB/s]
+ 23%|██▎       | 160M/692M [00:45<05:16, 1.77MB/s]
+ 23%|██▎       | 160M/692M [00:45<05:08, 1.81MB/s]
+ 23%|██▎       | 160M/692M [00:45<05:06, 1.82MB/s]
+ 23%|██▎       | 161M/692M [00:45<05:10, 1.79MB/s]
+ 23%|██▎       | 161M/692M [00:45<05:03, 1.84MB/s]
+ 23%|██▎       | 161M/692M [00:45<05:01, 1.84MB/s]
+ 23%|██▎       | 162M/692M [00:46<04:53, 1.90MB/s]
+ 23%|██▎       | 162M/692M [00:46<05:00, 1.85MB/s]
+ 23%|██▎       | 162M/692M [00:46<04:47, 1.93MB/s]
+ 23%|██▎       | 162M/692M [00:46<04:44, 1.95MB/s]
+ 23%|██▎       | 162M/692M [00:46<04:44, 1.96MB/s]
+ 24%|██▎       | 163M/692M [00:46<04:36, 2.01MB/s]
+ 24%|██▎       | 163M/692M [00:46<04:31, 2.05MB/s]
+ 24%|██▎       | 163M/692M [00:46<04:27, 2.08MB/s]
+ 24%|██▎       | 164M/692M [00:47<04:29, 2.06MB/s]
+ 24%|██▎       | 164M/692M [00:47<04:21, 2.12MB/s]
+ 24%|██▎       | 164M/692M [00:47<04:46, 1.93MB/s]
+ 24%|██▎       | 164M/692M [00:47<05:02, 1.83MB/s]
+ 24%|██▍       | 164M/692M [00:47<05:09, 1.79MB/s]
+ 24%|██▍       | 165M/692M [00:47<05:15, 1.75MB/s]
+ 24%|██▍       | 165M/692M [00:47<05:17, 1.74MB/s]
+ 24%|██▍       | 165M/692M [00:48<05:07, 1.80MB/s]
+ 24%|██▍       | 166M/692M [00:48<05:08, 1.79MB/s]
+ 24%|██▍       | 166M/692M [00:48<05:01, 1.83MB/s]
+ 24%|██▍       | 166M/692M [00:48<04:57, 1.85MB/s]
+ 24%|██▍       | 166M/692M [00:48<04:47, 1.92MB/s]
+ 24%|██▍       | 166M/692M [00:48<04:40, 1.97MB/s]
+ 24%|██▍       | 167M/692M [00:48<04:36, 1.99MB/s]
+ 24%|██▍       | 167M/692M [00:49<04:35, 2.00MB/s]
+ 24%|██▍       | 167M/692M [00:49<04:34, 2.01MB/s]
+ 24%|██▍       | 168M/692M [00:49<04:28, 2.05MB/s]
+ 24%|██▍       | 168M/692M [00:49<04:26, 2.07MB/s]
+ 24%|██▍       | 168M/692M [00:49<04:23, 2.08MB/s]
+ 24%|██▍       | 168M/692M [00:49<04:21, 2.10MB/s]
+ 24%|██▍       | 168M/692M [00:49<04:19, 2.12MB/s]
+ 24%|██▍       | 169M/692M [00:49<04:18, 2.13MB/s]
+ 24%|██▍       | 169M/692M [00:49<04:12, 2.18MB/s]
+ 24%|██▍       | 169M/692M [00:50<04:12, 2.18MB/s]
+ 24%|██▍       | 170M/692M [00:50<04:11, 2.18MB/s]
+ 25%|██▍       | 170M/692M [00:50<04:10, 2.19MB/s]
+ 25%|██▍       | 170M/692M [00:50<04:16, 2.13MB/s]
+ 25%|██▍       | 170M/692M [00:50<04:49, 1.89MB/s]
+ 25%|██▍       | 170M/692M [00:50<05:04, 1.80MB/s]
+ 25%|██▍       | 171M/692M [00:50<05:28, 1.66MB/s]
+ 25%|██▍       | 171M/692M [00:51<06:09, 1.48MB/s]
+ 25%|██▍       | 171M/692M [00:51<06:24, 1.42MB/s]
+ 25%|██▍       | 172M/692M [00:51<06:27, 1.41MB/s]
+ 25%|██▍       | 172M/692M [00:51<06:57, 1.31MB/s]
+ 25%|██▍       | 172M/692M [00:52<07:26, 1.22MB/s]
+ 25%|██▍       | 172M/692M [00:52<07:36, 1.19MB/s]
+ 25%|██▍       | 172M/692M [00:52<07:47, 1.17MB/s]
+ 25%|██▍       | 172M/692M [00:52<07:56, 1.14MB/s]
+ 25%|██▍       | 172M/692M [00:52<08:05, 1.12MB/s]
+ 25%|██▍       | 173M/692M [00:52<08:11, 1.11MB/s]
+ 25%|██▍       | 173M/692M [00:52<08:14, 1.10MB/s]
+ 25%|██▍       | 173M/692M [00:52<08:07, 1.12MB/s]
+ 25%|██▍       | 173M/692M [00:53<07:59, 1.14MB/s]
+ 25%|██▌       | 173M/692M [00:53<07:49, 1.16MB/s]
+ 25%|██▌       | 173M/692M [00:53<07:42, 1.18MB/s]
+ 25%|██▌       | 173M/692M [00:53<07:43, 1.17MB/s]
+ 25%|██▌       | 174M/692M [00:53<07:31, 1.20MB/s]
+ 25%|██▌       | 174M/692M [00:53<07:23, 1.23MB/s]
+ 25%|██▌       | 174M/692M [00:53<07:05, 1.28MB/s]
+ 25%|██▌       | 174M/692M [00:53<07:04, 1.28MB/s]
+ 25%|██▌       | 174M/692M [00:54<06:54, 1.31MB/s]
+ 25%|██▌       | 175M/692M [00:54<06:42, 1.35MB/s]
+ 25%|██▌       | 175M/692M [00:54<06:29, 1.39MB/s]
+ 25%|██▌       | 175M/692M [00:54<06:18, 1.43MB/s]
+ 25%|██▌       | 175M/692M [00:54<06:15, 1.44MB/s]
+ 25%|██▌       | 176M/692M [00:55<05:59, 1.51MB/s]
+ 25%|██▌       | 176M/692M [00:55<05:59, 1.51MB/s]
+ 25%|██▌       | 176M/692M [00:55<05:55, 1.52MB/s]
+ 25%|██▌       | 176M/692M [00:55<05:41, 1.58MB/s]
+ 26%|██▌       | 177M/692M [00:55<05:36, 1.61MB/s]
+ 26%|██▌       | 177M/692M [00:55<05:28, 1.64MB/s]
+ 26%|██▌       | 177M/692M [00:55<05:22, 1.67MB/s]
+ 26%|██▌       | 177M/692M [00:56<05:20, 1.68MB/s]
+ 26%|██▌       | 178M/692M [00:56<05:19, 1.69MB/s]
+ 26%|██▌       | 178M/692M [00:56<05:02, 1.78MB/s]
+ 26%|██▌       | 178M/692M [00:56<05:04, 1.77MB/s]
+ 26%|██▌       | 178M/692M [00:56<04:49, 1.86MB/s]
+ 26%|██▌       | 179M/692M [00:56<04:51, 1.85MB/s]
+ 26%|██▌       | 179M/692M [00:56<04:45, 1.89MB/s]
+ 26%|██▌       | 179M/692M [00:57<04:45, 1.89MB/s]
+ 26%|██▌       | 179M/692M [00:57<04:40, 1.92MB/s]
+ 26%|██▌       | 180M/692M [00:57<04:34, 1.96MB/s]
+ 26%|██▌       | 180M/692M [00:57<04:29, 2.00MB/s]
+ 26%|██▌       | 180M/692M [00:57<04:24, 2.03MB/s]
+ 26%|██▌       | 180M/692M [00:57<04:19, 2.07MB/s]
+ 26%|██▌       | 181M/692M [00:57<04:17, 2.08MB/s]
+ 26%|██▌       | 181M/692M [00:57<04:15, 2.10MB/s]
+ 26%|██▌       | 181M/692M [00:58<04:14, 2.11MB/s]
+ 26%|██▌       | 181M/692M [00:58<04:13, 2.11MB/s]
+ 26%|██▌       | 182M/692M [00:58<04:12, 2.12MB/s]
+ 26%|██▋       | 182M/692M [00:58<04:12, 2.12MB/s]
+ 26%|██▋       | 182M/692M [00:58<04:04, 2.19MB/s]
+ 26%|██▋       | 182M/692M [00:58<03:54, 2.28MB/s]
+ 26%|██▋       | 183M/692M [00:58<04:35, 1.94MB/s]
+ 26%|██▋       | 183M/692M [00:59<04:13, 2.11MB/s]
+ 26%|██▋       | 183M/692M [00:59<04:27, 2.00MB/s]
+ 27%|██▋       | 184M/692M [00:59<04:35, 1.94MB/s]
+ 27%|██▋       | 184M/692M [00:59<04:39, 1.91MB/s]
+ 27%|██▋       | 184M/692M [00:59<04:35, 1.93MB/s]
+ 27%|██▋       | 184M/692M [00:59<04:41, 1.89MB/s]
+ 27%|██▋       | 184M/692M [00:59<04:39, 1.91MB/s]
+ 27%|██▋       | 185M/692M [01:00<04:31, 1.96MB/s]
+ 27%|██▋       | 185M/692M [01:00<04:55, 1.80MB/s]
+ 27%|██▋       | 185M/692M [01:00<04:33, 1.94MB/s]
+ 27%|██▋       | 186M/692M [01:00<04:58, 1.78MB/s]
+ 27%|██▋       | 186M/692M [01:00<05:16, 1.68MB/s]
+ 27%|██▋       | 186M/692M [01:00<05:17, 1.67MB/s]
+ 27%|██▋       | 186M/692M [01:00<05:18, 1.67MB/s]
+ 27%|██▋       | 186M/692M [01:01<05:17, 1.67MB/s]
+ 27%|██▋       | 187M/692M [01:01<05:16, 1.68MB/s]
+ 27%|██▋       | 187M/692M [01:01<05:33, 1.59MB/s]
+ 27%|██▋       | 187M/692M [01:01<06:20, 1.39MB/s]
+ 27%|██▋       | 188M/692M [01:01<07:00, 1.26MB/s]
+ 27%|██▋       | 188M/692M [01:02<07:43, 1.14MB/s]
+ 27%|██▋       | 188M/692M [01:02<08:34, 1.03MB/s]
+ 27%|██▋       | 188M/692M [01:02<08:30, 1.04MB/s]
+ 27%|██▋       | 188M/692M [01:02<10:20, 852kB/s] 
+ 27%|██▋       | 188M/692M [01:02<10:40, 826kB/s]
+ 27%|██▋       | 188M/692M [01:03<12:15, 719kB/s]
+ 27%|██▋       | 188M/692M [01:03<13:05, 672kB/s]
+ 27%|██▋       | 189M/692M [01:03<13:16, 663kB/s]
+ 27%|██▋       | 189M/692M [01:03<13:17, 662kB/s]
+ 27%|██▋       | 189M/692M [01:04<13:02, 675kB/s]
+ 27%|██▋       | 189M/692M [01:04<12:38, 696kB/s]
+ 27%|██▋       | 189M/692M [01:04<12:30, 703kB/s]
+ 27%|██▋       | 189M/692M [01:04<11:53, 739kB/s]
+ 27%|██▋       | 189M/692M [01:04<11:33, 761kB/s]
+ 27%|██▋       | 190M/692M [01:04<12:21, 711kB/s]
+ 27%|██▋       | 190M/692M [01:05<13:03, 673kB/s]
+ 27%|██▋       | 190M/692M [01:05<12:53, 681kB/s]
+ 27%|██▋       | 190M/692M [01:05<12:46, 688kB/s]
+ 27%|██▋       | 190M/692M [01:05<12:05, 726kB/s]
+ 27%|██▋       | 190M/692M [01:05<11:44, 747kB/s]
+ 27%|██▋       | 190M/692M [01:06<11:40, 751kB/s]
+ 27%|██▋       | 190M/692M [01:06<11:16, 778kB/s]
+ 28%|██▊       | 190M/692M [01:06<10:59, 798kB/s]
+ 28%|██▊       | 191M/692M [01:06<10:45, 815kB/s]
+ 28%|██▊       | 191M/692M [01:06<10:29, 836kB/s]
+ 28%|██▊       | 191M/692M [01:06<10:03, 872kB/s]
+ 28%|██▊       | 191M/692M [01:06<09:58, 878kB/s]
+ 28%|██▊       | 191M/692M [01:07<09:41, 904kB/s]
+ 28%|██▊       | 191M/692M [01:07<09:14, 947kB/s]
+ 28%|██▊       | 191M/692M [01:07<09:09, 957kB/s]
+ 28%|██▊       | 192M/692M [01:07<08:50, 990kB/s]
+ 28%|██▊       | 192M/692M [01:07<08:38, 1.01MB/s]
+ 28%|██▊       | 192M/692M [01:07<08:13, 1.06MB/s]
+ 28%|██▊       | 192M/692M [01:07<08:05, 1.08MB/s]
+ 28%|██▊       | 192M/692M [01:07<07:42, 1.13MB/s]
+ 28%|██▊       | 192M/692M [01:07<07:37, 1.15MB/s]
+ 28%|██▊       | 192M/692M [01:08<07:34, 1.15MB/s]
+ 28%|██▊       | 192M/692M [01:08<07:30, 1.16MB/s]
+ 28%|██▊       | 192M/692M [01:08<07:30, 1.16MB/s]
+ 28%|██▊       | 193M/692M [01:08<07:10, 1.22MB/s]
+ 28%|██▊       | 193M/692M [01:08<07:02, 1.24MB/s]
+ 28%|██▊       | 193M/692M [01:08<06:44, 1.29MB/s]
+ 28%|██▊       | 193M/692M [01:08<06:33, 1.33MB/s]
+ 28%|██▊       | 194M/692M [01:09<06:23, 1.37MB/s]
+ 28%|██▊       | 194M/692M [01:09<06:13, 1.40MB/s]
+ 28%|██▊       | 194M/692M [01:09<06:07, 1.42MB/s]
+ 28%|██▊       | 194M/692M [01:09<05:52, 1.48MB/s]
+ 28%|██▊       | 195M/692M [01:09<05:49, 1.49MB/s]
+ 28%|██▊       | 195M/692M [01:10<05:48, 1.49MB/s]
+ 28%|██▊       | 195M/692M [01:10<05:42, 1.52MB/s]
+ 28%|██▊       | 195M/692M [01:10<05:25, 1.60MB/s]
+ 28%|██▊       | 196M/692M [01:10<05:23, 1.61MB/s]
+ 28%|██▊       | 196M/692M [01:10<05:12, 1.67MB/s]
+ 28%|██▊       | 196M/692M [01:10<05:14, 1.66MB/s]
+ 28%|██▊       | 196M/692M [01:10<05:03, 1.72MB/s]
+ 28%|██▊       | 197M/692M [01:11<04:56, 1.75MB/s]
+ 28%|██▊       | 197M/692M [01:11<04:55, 1.76MB/s]
+ 28%|██▊       | 197M/692M [01:11<04:49, 1.79MB/s]
+ 29%|██▊       | 197M/692M [01:11<04:38, 1.86MB/s]
+ 29%|██▊       | 198M/692M [01:11<04:34, 1.89MB/s]
+ 29%|██▊       | 198M/692M [01:11<04:39, 1.85MB/s]
+ 29%|██▊       | 198M/692M [01:11<04:36, 1.88MB/s]
+ 29%|██▊       | 198M/692M [01:12<04:27, 1.94MB/s]
+ 29%|██▊       | 199M/692M [01:12<04:25, 1.95MB/s]
+ 29%|██▊       | 199M/692M [01:12<04:18, 2.00MB/s]
+ 29%|██▉       | 199M/692M [01:12<04:15, 2.03MB/s]
+ 29%|██▉       | 199M/692M [01:12<04:16, 2.02MB/s]
+ 29%|██▉       | 200M/692M [01:12<04:11, 2.05MB/s]
+ 29%|██▉       | 200M/692M [01:12<04:04, 2.11MB/s]
+ 29%|██▉       | 200M/692M [01:12<04:03, 2.12MB/s]
+ 29%|██▉       | 200M/692M [01:13<04:02, 2.13MB/s]
+ 29%|██▉       | 201M/692M [01:13<04:02, 2.13MB/s]
+ 29%|██▉       | 201M/692M [01:13<03:55, 2.19MB/s]
+ 29%|██▉       | 201M/692M [01:13<03:57, 2.17MB/s]
+ 29%|██▉       | 201M/692M [01:13<03:45, 2.28MB/s]
+ 29%|██▉       | 202M/692M [01:13<03:38, 2.35MB/s]
+ 29%|██▉       | 202M/692M [01:13<03:32, 2.42MB/s]
+ 29%|██▉       | 202M/692M [01:13<03:21, 2.55MB/s]
+ 29%|██▉       | 202M/692M [01:13<03:20, 2.56MB/s]
+ 29%|██▉       | 203M/692M [01:14<03:06, 2.75MB/s]
+ 29%|██▉       | 203M/692M [01:14<02:59, 2.85MB/s]
+ 29%|██▉       | 204M/692M [01:14<02:52, 2.96MB/s]
+ 29%|██▉       | 204M/692M [01:14<02:46, 3.08MB/s]
+ 30%|██▉       | 204M/692M [01:14<02:44, 3.11MB/s]
+ 30%|██▉       | 205M/692M [01:14<02:35, 3.28MB/s]
+ 30%|██▉       | 205M/692M [01:14<02:30, 3.39MB/s]
+ 30%|██▉       | 206M/692M [01:14<02:20, 3.63MB/s]
+ 30%|██▉       | 206M/692M [01:15<02:13, 3.82MB/s]
+ 30%|██▉       | 207M/692M [01:15<02:07, 3.98MB/s]
+ 30%|██▉       | 207M/692M [01:15<02:04, 4.09MB/s]
+ 30%|███       | 208M/692M [01:15<02:01, 4.20MB/s]
+ 30%|███       | 208M/692M [01:15<01:54, 4.43MB/s]
+ 30%|███       | 209M/692M [01:15<01:51, 4.56MB/s]
+ 30%|███       | 210M/692M [01:15<01:46, 4.77MB/s]
+ 30%|███       | 210M/692M [01:15<01:41, 4.97MB/s]
+ 30%|███       | 211M/692M [01:16<01:47, 4.69MB/s]
+ 31%|███       | 211M/692M [01:16<01:41, 4.96MB/s]
+ 31%|███       | 212M/692M [01:16<01:46, 4.73MB/s]
+ 31%|███       | 212M/692M [01:16<01:49, 4.60MB/s]
+ 31%|███       | 213M/692M [01:16<01:50, 4.54MB/s]
+ 31%|███       | 213M/692M [01:16<01:52, 4.47MB/s]
+ 31%|███       | 214M/692M [01:16<01:49, 4.58MB/s]
+ 31%|███       | 214M/692M [01:16<01:48, 4.61MB/s]
+ 31%|███       | 215M/692M [01:17<01:49, 4.58MB/s]
+ 31%|███       | 215M/692M [01:17<01:47, 4.67MB/s]
+ 31%|███       | 216M/692M [01:17<01:46, 4.71MB/s]
+ 31%|███▏      | 217M/692M [01:17<01:42, 4.84MB/s]
+ 31%|███▏      | 217M/692M [01:17<01:41, 4.92MB/s]
+ 31%|███▏      | 218M/692M [01:17<01:42, 4.85MB/s]
+ 32%|███▏      | 218M/692M [01:17<01:39, 4.98MB/s]
+ 32%|███▏      | 219M/692M [01:17<01:37, 5.09MB/s]
+ 32%|███▏      | 220M/692M [01:17<01:36, 5.11MB/s]
+ 32%|███▏      | 220M/692M [01:18<01:35, 5.20MB/s]
+ 32%|███▏      | 221M/692M [01:18<01:34, 5.26MB/s]
+ 32%|███▏      | 221M/692M [01:18<01:33, 5.28MB/s]
+ 32%|███▏      | 222M/692M [01:18<01:32, 5.30MB/s]
+ 32%|███▏      | 223M/692M [01:18<01:32, 5.31MB/s]
+ 32%|███▏      | 223M/692M [01:18<01:31, 5.38MB/s]
+ 32%|███▏      | 224M/692M [01:18<01:31, 5.37MB/s]
+ 32%|███▏      | 225M/692M [01:18<01:30, 5.43MB/s]
+ 33%|███▎      | 225M/692M [01:19<01:26, 5.64MB/s]
+ 33%|███▎      | 226M/692M [01:19<01:27, 5.57MB/s]
+ 33%|███▎      | 227M/692M [01:19<01:27, 5.56MB/s]
+ 33%|███▎      | 227M/692M [01:19<01:26, 5.67MB/s]
+ 33%|███▎      | 228M/692M [01:19<01:32, 5.28MB/s]
+ 33%|███▎      | 228M/692M [01:19<01:34, 5.17MB/s]
+ 33%|███▎      | 229M/692M [01:19<01:38, 4.92MB/s]
+ 33%|███▎      | 230M/692M [01:20<01:56, 4.16MB/s]
+ 33%|███▎      | 230M/692M [01:20<01:56, 4.17MB/s]
+ 33%|███▎      | 230M/692M [01:20<02:27, 3.29MB/s]
+ 33%|███▎      | 231M/692M [01:20<02:44, 2.95MB/s]
+ 33%|███▎      | 231M/692M [01:20<02:57, 2.73MB/s]
+ 33%|███▎      | 232M/692M [01:20<03:05, 2.60MB/s]
+ 34%|███▎      | 232M/692M [01:21<03:25, 2.35MB/s]
+ 34%|███▎      | 232M/692M [01:21<03:44, 2.15MB/s]
+ 34%|███▎      | 232M/692M [01:21<03:59, 2.01MB/s]
+ 34%|███▎      | 233M/692M [01:21<03:54, 2.05MB/s]
+ 34%|███▎      | 233M/692M [01:21<04:32, 1.77MB/s]
+ 34%|███▎      | 233M/692M [01:21<04:59, 1.61MB/s]
+ 34%|███▎      | 234M/692M [01:22<05:16, 1.52MB/s]
+ 34%|███▍      | 234M/692M [01:22<05:22, 1.49MB/s]
+ 34%|███▍      | 234M/692M [01:22<05:26, 1.47MB/s]
+ 34%|███▍      | 234M/692M [01:22<05:29, 1.46MB/s]
+ 34%|███▍      | 234M/692M [01:22<05:30, 1.45MB/s]
+ 34%|███▍      | 235M/692M [01:23<05:28, 1.46MB/s]
+ 34%|███▍      | 235M/692M [01:23<05:21, 1.49MB/s]
+ 34%|███▍      | 235M/692M [01:23<05:22, 1.49MB/s]
+ 34%|███▍      | 236M/692M [01:23<05:09, 1.55MB/s]
+ 34%|███▍      | 236M/692M [01:23<05:10, 1.54MB/s]
+ 34%|███▍      | 236M/692M [01:23<05:06, 1.56MB/s]
+ 34%|███▍      | 236M/692M [01:24<04:57, 1.61MB/s]
+ 34%|███▍      | 236M/692M [01:24<05:11, 1.54MB/s]
+ 34%|███▍      | 237M/692M [01:24<05:09, 1.54MB/s]
+ 34%|███▍      | 237M/692M [01:24<05:25, 1.47MB/s]
+ 34%|███▍      | 237M/692M [01:24<05:28, 1.45MB/s]
+ 34%|███▍      | 238M/692M [01:24<05:28, 1.45MB/s]
+ 34%|███▍      | 238M/692M [01:25<05:31, 1.44MB/s]
+ 34%|███▍      | 238M/692M [01:25<05:31, 1.44MB/s]
+ 34%|███▍      | 238M/692M [01:25<05:22, 1.48MB/s]
+ 34%|███▍      | 238M/692M [01:25<05:20, 1.48MB/s]
+ 34%|███▍      | 239M/692M [01:25<05:07, 1.55MB/s]
+ 35%|███▍      | 239M/692M [01:26<04:57, 1.60MB/s]
+ 35%|███▍      | 239M/692M [01:26<04:52, 1.62MB/s]
+ 35%|███▍      | 240M/692M [01:26<04:50, 1.64MB/s]
+ 35%|███▍      | 240M/692M [01:26<04:59, 1.58MB/s]
+ 35%|███▍      | 240M/692M [01:26<04:41, 1.69MB/s]
+ 35%|███▍      | 240M/692M [01:26<04:50, 1.63MB/s]
+ 35%|███▍      | 240M/692M [01:26<04:34, 1.72MB/s]
+ 35%|███▍      | 241M/692M [01:27<04:46, 1.66MB/s]
+ 35%|███▍      | 241M/692M [01:27<04:30, 1.75MB/s]
+ 35%|███▍      | 241M/692M [01:27<04:28, 1.76MB/s]
+ 35%|███▍      | 242M/692M [01:27<04:31, 1.74MB/s]
+ 35%|███▍      | 242M/692M [01:27<04:21, 1.81MB/s]
+ 35%|███▍      | 242M/692M [01:27<04:36, 1.71MB/s]
+ 35%|███▍      | 242M/692M [01:28<04:56, 1.59MB/s]
+ 35%|███▌      | 242M/692M [01:28<05:05, 1.54MB/s]
+ 35%|███▌      | 243M/692M [01:28<05:11, 1.52MB/s]
+ 35%|███▌      | 243M/692M [01:28<05:14, 1.50MB/s]
+ 35%|███▌      | 243M/692M [01:28<05:02, 1.56MB/s]
+ 35%|███▌      | 244M/692M [01:28<04:58, 1.58MB/s]
+ 35%|███▌      | 244M/692M [01:29<04:49, 1.63MB/s]
+ 35%|███▌      | 244M/692M [01:29<04:47, 1.63MB/s]
+ 35%|███▌      | 244M/692M [01:29<04:40, 1.67MB/s]
+ 35%|███▌      | 244M/692M [01:29<04:42, 1.66MB/s]
+ 35%|███▌      | 245M/692M [01:29<04:29, 1.74MB/s]
+ 35%|███▌      | 245M/692M [01:29<04:21, 1.79MB/s]
+ 35%|███▌      | 245M/692M [01:29<04:27, 1.76MB/s]
+ 35%|███▌      | 246M/692M [01:30<04:18, 1.81MB/s]
+ 35%|███▌      | 246M/692M [01:30<04:14, 1.84MB/s]
+ 36%|███▌      | 246M/692M [01:30<04:21, 1.79MB/s]
+ 36%|███▌      | 246M/692M [01:30<04:19, 1.80MB/s]
+ 36%|███▌      | 246M/692M [01:30<04:39, 1.67MB/s]
+ 36%|███▌      | 247M/692M [01:30<04:53, 1.59MB/s]
+ 36%|███▌      | 247M/692M [01:31<05:01, 1.55MB/s]
+ 36%|███▌      | 247M/692M [01:31<05:02, 1.54MB/s]
+ 36%|███▌      | 248M/692M [01:31<05:08, 1.51MB/s]
+ 36%|███▌      | 248M/692M [01:31<04:47, 1.62MB/s]
+ 36%|███▌      | 248M/692M [01:31<04:53, 1.59MB/s]
+ 36%|███▌      | 248M/692M [01:31<04:35, 1.69MB/s]
+ 36%|███▌      | 248M/692M [01:32<04:47, 1.62MB/s]
+ 36%|███▌      | 249M/692M [01:32<04:30, 1.72MB/s]
+ 36%|███▌      | 249M/692M [01:32<04:23, 1.76MB/s]
+ 36%|███▌      | 249M/692M [01:32<04:29, 1.72MB/s]
+ 36%|███▌      | 250M/692M [01:32<04:19, 1.79MB/s]
+ 36%|███▌      | 250M/692M [01:32<04:17, 1.80MB/s]
+ 36%|███▌      | 250M/692M [01:32<04:21, 1.77MB/s]
+ 36%|███▌      | 250M/692M [01:33<04:15, 1.82MB/s]
+ 36%|███▌      | 250M/692M [01:33<04:13, 1.83MB/s]
+ 36%|███▌      | 251M/692M [01:33<04:20, 1.78MB/s]
+ 36%|███▋      | 251M/692M [01:33<04:19, 1.79MB/s]
+ 36%|███▋      | 251M/692M [01:33<04:47, 1.61MB/s]
+ 36%|███▋      | 252M/692M [01:33<04:55, 1.56MB/s]
+ 36%|███▋      | 252M/692M [01:34<05:01, 1.53MB/s]
+ 36%|███▋      | 252M/692M [01:34<05:11, 1.48MB/s]
+ 36%|███▋      | 252M/692M [01:34<05:50, 1.32MB/s]
+ 36%|███▋      | 252M/692M [01:34<06:49, 1.13MB/s]
+ 36%|███▋      | 253M/692M [01:34<07:21, 1.04MB/s]
+ 37%|███▋      | 253M/692M [01:35<07:26, 1.03MB/s]
+ 37%|███▋      | 253M/692M [01:35<07:36, 1.01MB/s]
+ 37%|███▋      | 253M/692M [01:35<07:57, 964kB/s] 
+ 37%|███▋      | 253M/692M [01:35<07:46, 988kB/s]
+ 37%|███▋      | 253M/692M [01:35<07:37, 1.01MB/s]
+ 37%|███▋      | 253M/692M [01:35<07:40, 1.00MB/s]
+ 37%|███▋      | 254M/692M [01:35<07:31, 1.02MB/s]
+ 37%|███▋      | 254M/692M [01:35<07:26, 1.03MB/s]
+ 37%|███▋      | 254M/692M [01:36<07:25, 1.03MB/s]
+ 37%|███▋      | 254M/692M [01:36<08:07, 944kB/s] 
+ 37%|███▋      | 254M/692M [01:36<08:03, 950kB/s]
+ 37%|███▋      | 254M/692M [01:36<08:36, 890kB/s]
+ 37%|███▋      | 254M/692M [01:36<08:10, 937kB/s]
+ 37%|███▋      | 254M/692M [01:36<08:04, 948kB/s]
+ 37%|███▋      | 254M/692M [01:36<07:51, 973kB/s]
+ 37%|███▋      | 255M/692M [01:37<07:55, 965kB/s]
+ 37%|███▋      | 255M/692M [01:37<08:12, 931kB/s]
+ 37%|███▋      | 255M/692M [01:37<09:00, 849kB/s]
+ 37%|███▋      | 255M/692M [01:37<08:21, 914kB/s]
+ 37%|███▋      | 255M/692M [01:37<08:56, 854kB/s]
+ 37%|███▋      | 255M/692M [01:38<09:14, 827kB/s]
+ 37%|███▋      | 256M/692M [01:38<08:52, 860kB/s]
+ 37%|███▋      | 256M/692M [01:38<09:19, 819kB/s]
+ 37%|███▋      | 256M/692M [01:38<08:49, 864kB/s]
+ 37%|███▋      | 256M/692M [01:38<08:21, 913kB/s]
+ 37%|███▋      | 256M/692M [01:38<08:44, 873kB/s]
+ 37%|███▋      | 256M/692M [01:38<08:26, 903kB/s]
+ 37%|███▋      | 256M/692M [01:39<08:07, 938kB/s]
+ 37%|███▋      | 256M/692M [01:39<07:51, 969kB/s]
+ 37%|███▋      | 256M/692M [01:39<07:38, 998kB/s]
+ 37%|███▋      | 257M/692M [01:39<07:29, 1.02MB/s]
+ 37%|███▋      | 257M/692M [01:39<07:20, 1.04MB/s]
+ 37%|███▋      | 257M/692M [01:39<07:09, 1.06MB/s]
+ 37%|███▋      | 257M/692M [01:39<06:58, 1.09MB/s]
+ 37%|███▋      | 257M/692M [01:39<06:29, 1.17MB/s]
+ 37%|███▋      | 257M/692M [01:40<06:39, 1.14MB/s]
+ 37%|███▋      | 258M/692M [01:40<06:32, 1.16MB/s]
+ 37%|███▋      | 258M/692M [01:40<06:14, 1.22MB/s]
+ 37%|███▋      | 258M/692M [01:40<06:14, 1.22MB/s]
+ 37%|███▋      | 258M/692M [01:40<06:06, 1.24MB/s]
+ 37%|███▋      | 258M/692M [01:40<06:05, 1.25MB/s]
+ 37%|███▋      | 258M/692M [01:41<06:13, 1.22MB/s]
+ 37%|███▋      | 259M/692M [01:41<06:52, 1.10MB/s]
+ 37%|███▋      | 259M/692M [01:41<07:35, 999kB/s] 
+ 37%|███▋      | 259M/692M [01:41<08:13, 921kB/s]
+ 37%|███▋      | 259M/692M [01:42<09:00, 841kB/s]
+ 37%|███▋      | 259M/692M [01:42<09:51, 767kB/s]
+ 37%|███▋      | 260M/692M [01:42<10:14, 739kB/s]
+ 37%|███▋      | 260M/692M [01:42<11:19, 668kB/s]
+ 38%|███▊      | 260M/692M [01:43<16:09, 468kB/s]
+ 38%|███▊      | 260M/692M [01:43<18:21, 412kB/s]
+ 38%|███▊      | 260M/692M [01:43<18:54, 400kB/s]
+ 38%|███▊      | 260M/692M [01:44<20:01, 377kB/s]
+ 38%|███▊      | 260M/692M [01:44<20:08, 375kB/s]
+ 38%|███▊      | 260M/692M [01:45<21:38, 349kB/s]
+ 38%|███▊      | 260M/692M [01:45<21:39, 349kB/s]
+ 38%|███▊      | 261M/692M [01:45<20:45, 364kB/s]
+ 38%|███▊      | 261M/692M [01:46<19:34, 385kB/s]
+ 38%|███▊      | 261M/692M [01:46<17:58, 419kB/s]
+ 38%|███▊      | 261M/692M [01:46<16:13, 464kB/s]
+ 38%|███▊      | 261M/692M [01:46<15:08, 498kB/s]
+ 38%|███▊      | 261M/692M [01:47<13:48, 546kB/s]
+ 38%|███▊      | 261M/692M [01:47<12:51, 586kB/s]
+ 38%|███▊      | 262M/692M [01:47<12:08, 620kB/s]
+ 38%|███▊      | 262M/692M [01:47<11:41, 644kB/s]
+ 38%|███▊      | 262M/692M [01:47<10:53, 691kB/s]
+ 38%|███▊      | 262M/692M [01:47<10:17, 731kB/s]
+ 38%|███▊      | 262M/692M [01:48<09:52, 762kB/s]
+ 38%|███▊      | 262M/692M [01:48<09:31, 790kB/s]
+ 38%|███▊      | 262M/692M [01:48<08:48, 854kB/s]
+ 38%|███▊      | 262M/692M [01:48<08:48, 853kB/s]
+ 38%|███▊      | 262M/692M [01:48<08:42, 863kB/s]
+ 38%|███▊      | 263M/692M [01:48<08:14, 912kB/s]
+ 38%|███▊      | 263M/692M [01:48<07:54, 949kB/s]
+ 38%|███▊      | 263M/692M [01:49<07:40, 978kB/s]
+ 38%|███▊      | 263M/692M [01:49<07:27, 1.01MB/s]
+ 38%|███▊      | 263M/692M [01:49<07:15, 1.03MB/s]
+ 38%|███▊      | 263M/692M [01:49<07:10, 1.05MB/s]
+ 38%|███▊      | 263M/692M [01:49<06:49, 1.10MB/s]
+ 38%|███▊      | 264M/692M [01:49<06:47, 1.10MB/s]
+ 38%|███▊      | 264M/692M [01:49<06:26, 1.16MB/s]
+ 38%|███▊      | 264M/692M [01:50<06:21, 1.18MB/s]
+ 38%|███▊      | 264M/692M [01:50<05:59, 1.25MB/s]
+ 38%|███▊      | 264M/692M [01:50<05:55, 1.26MB/s]
+ 38%|███▊      | 265M/692M [01:50<05:55, 1.26MB/s]
+ 38%|███▊      | 265M/692M [01:50<05:41, 1.31MB/s]
+ 38%|███▊      | 265M/692M [01:50<05:31, 1.35MB/s]
+ 38%|███▊      | 265M/692M [01:51<05:26, 1.37MB/s]
+ 38%|███▊      | 266M/692M [01:51<05:05, 1.47MB/s]
+ 38%|███▊      | 266M/692M [01:51<05:39, 1.32MB/s]
+ 38%|███▊      | 266M/692M [01:51<05:23, 1.38MB/s]
+ 38%|███▊      | 266M/692M [01:51<05:46, 1.29MB/s]
+ 39%|███▊      | 267M/692M [01:52<05:42, 1.31MB/s]
+ 39%|███▊      | 267M/692M [01:52<05:43, 1.30MB/s]
+ 39%|███▊      | 267M/692M [01:52<05:50, 1.27MB/s]
+ 39%|███▊      | 267M/692M [01:52<05:38, 1.32MB/s]
+ 39%|███▊      | 268M/692M [01:52<05:30, 1.35MB/s]
+ 39%|███▊      | 268M/692M [01:53<05:10, 1.44MB/s]
+ 39%|███▊      | 268M/692M [01:53<05:09, 1.44MB/s]
+ 39%|███▉      | 268M/692M [01:53<04:57, 1.50MB/s]
+ 39%|███▉      | 269M/692M [01:53<04:57, 1.49MB/s]
+ 39%|███▉      | 269M/692M [01:53<05:00, 1.48MB/s]
+ 39%|███▉      | 269M/692M [01:53<05:03, 1.46MB/s]
+ 39%|███▉      | 269M/692M [01:54<04:49, 1.53MB/s]
+ 39%|███▉      | 270M/692M [01:54<04:42, 1.57MB/s]
+ 39%|███▉      | 270M/692M [01:54<04:49, 1.53MB/s]
+ 39%|███▉      | 270M/692M [01:54<04:36, 1.60MB/s]
+ 39%|███▉      | 270M/692M [01:54<04:34, 1.61MB/s]
+ 39%|███▉      | 271M/692M [01:54<04:27, 1.65MB/s]
+ 39%|███▉      | 271M/692M [01:54<04:24, 1.67MB/s]
+ 39%|███▉      | 271M/692M [01:55<04:11, 1.75MB/s]
+ 39%|███▉      | 271M/692M [01:55<04:22, 1.68MB/s]
+ 39%|███▉      | 272M/692M [01:55<04:07, 1.78MB/s]
+ 39%|███▉      | 272M/692M [01:55<03:59, 1.84MB/s]
+ 39%|███▉      | 272M/692M [01:55<04:13, 1.74MB/s]
+ 39%|███▉      | 272M/692M [01:55<04:00, 1.83MB/s]
+ 39%|███▉      | 273M/692M [01:55<03:50, 1.91MB/s]
+ 39%|███▉      | 273M/692M [01:56<03:47, 1.94MB/s]
+ 39%|███▉      | 273M/692M [01:56<03:49, 1.92MB/s]
+ 39%|███▉      | 273M/692M [01:56<03:47, 1.93MB/s]
+ 40%|███▉      | 274M/692M [01:56<03:50, 1.91MB/s]
+ 40%|███▉      | 274M/692M [01:56<03:42, 1.97MB/s]
+ 40%|███▉      | 274M/692M [01:56<03:37, 2.02MB/s]
+ 40%|███▉      | 274M/692M [01:56<03:33, 2.05MB/s]
+ 40%|███▉      | 275M/692M [01:56<03:29, 2.09MB/s]
+ 40%|███▉      | 275M/692M [01:57<03:28, 2.10MB/s]
+ 40%|███▉      | 275M/692M [01:57<03:26, 2.12MB/s]
+ 40%|███▉      | 275M/692M [01:57<03:16, 2.22MB/s]
+ 40%|███▉      | 276M/692M [01:57<03:18, 2.20MB/s]
+ 40%|███▉      | 276M/692M [01:57<03:12, 2.26MB/s]
+ 40%|███▉      | 276M/692M [01:57<03:05, 2.36MB/s]
+ 40%|███▉      | 276M/692M [01:57<03:10, 2.29MB/s]
+ 40%|███▉      | 277M/692M [01:57<03:11, 2.28MB/s]
+ 40%|███▉      | 277M/692M [01:58<03:12, 2.27MB/s]
+ 40%|████      | 277M/692M [01:58<03:07, 2.33MB/s]
+ 40%|████      | 278M/692M [01:58<02:58, 2.44MB/s]
+ 40%|████      | 278M/692M [01:58<03:01, 2.39MB/s]
+ 40%|████      | 278M/692M [01:58<03:05, 2.34MB/s]
+ 40%|████      | 278M/692M [01:58<02:55, 2.47MB/s]
+ 40%|████      | 279M/692M [01:58<02:57, 2.45MB/s]
+ 40%|████      | 279M/692M [01:58<03:00, 2.40MB/s]
+ 40%|████      | 279M/692M [01:59<02:47, 2.59MB/s]
+ 40%|████      | 280M/692M [01:59<02:53, 2.50MB/s]
+ 40%|████      | 280M/692M [01:59<02:52, 2.51MB/s]
+ 40%|████      | 280M/692M [01:59<02:48, 2.56MB/s]
+ 41%|████      | 280M/692M [01:59<02:42, 2.66MB/s]
+ 41%|████      | 281M/692M [01:59<02:48, 2.56MB/s]
+ 41%|████      | 281M/692M [01:59<02:40, 2.68MB/s]
+ 41%|████      | 282M/692M [01:59<02:39, 2.70MB/s]
+ 41%|████      | 282M/692M [02:00<02:41, 2.66MB/s]
+ 41%|████      | 282M/692M [02:00<02:36, 2.75MB/s]
+ 41%|████      | 283M/692M [02:00<02:30, 2.85MB/s]
+ 41%|████      | 283M/692M [02:00<02:33, 2.79MB/s]
+ 41%|████      | 284M/692M [02:00<02:27, 2.90MB/s]
+ 41%|████      | 284M/692M [02:00<02:29, 2.86MB/s]
+ 41%|████      | 284M/692M [02:00<02:24, 2.96MB/s]
+ 41%|████      | 285M/692M [02:01<02:15, 3.15MB/s]
+ 41%|████      | 285M/692M [02:01<02:13, 3.19MB/s]
+ 41%|████      | 285M/692M [02:01<02:10, 3.27MB/s]
+ 41%|████▏     | 286M/692M [02:01<02:08, 3.33MB/s]
+ 41%|████▏     | 286M/692M [02:01<02:00, 3.55MB/s]
+ 41%|████▏     | 287M/692M [02:01<02:15, 3.14MB/s]
+ 41%|████▏     | 287M/692M [02:01<01:58, 3.58MB/s]
+ 42%|████▏     | 288M/692M [02:01<02:05, 3.39MB/s]
+ 42%|████▏     | 288M/692M [02:02<02:07, 3.33MB/s]
+ 42%|████▏     | 288M/692M [02:02<02:13, 3.17MB/s]
+ 42%|████▏     | 289M/692M [02:02<02:13, 3.18MB/s]
+ 42%|████▏     | 289M/692M [02:02<02:12, 3.19MB/s]
+ 42%|████▏     | 290M/692M [02:02<02:11, 3.21MB/s]
+ 42%|████▏     | 290M/692M [02:02<02:06, 3.33MB/s]
+ 42%|████▏     | 290M/692M [02:02<02:07, 3.30MB/s]
+ 42%|████▏     | 291M/692M [02:02<02:07, 3.30MB/s]
+ 42%|████▏     | 291M/692M [02:03<02:03, 3.42MB/s]
+ 42%|████▏     | 291M/692M [02:03<02:01, 3.47MB/s]
+ 42%|████▏     | 292M/692M [02:03<02:00, 3.49MB/s]
+ 42%|████▏     | 292M/692M [02:03<01:58, 3.55MB/s]
+ 42%|████▏     | 292M/692M [02:03<01:58, 3.53MB/s]
+ 42%|████▏     | 293M/692M [02:03<01:58, 3.54MB/s]
+ 42%|████▏     | 294M/692M [02:03<01:53, 3.68MB/s]
+ 42%|████▏     | 294M/692M [02:03<01:55, 3.62MB/s]
+ 43%|████▎     | 294M/692M [02:03<01:52, 3.71MB/s]
+ 43%|████▎     | 295M/692M [02:04<01:49, 3.81MB/s]
+ 43%|████▎     | 295M/692M [02:04<01:50, 3.77MB/s]
+ 43%|████▎     | 296M/692M [02:04<02:02, 3.40MB/s]
+ 43%|████▎     | 296M/692M [02:04<01:57, 3.55MB/s]
+ 43%|████▎     | 296M/692M [02:04<02:06, 3.29MB/s]
+ 43%|████▎     | 297M/692M [02:04<02:11, 3.16MB/s]
+ 43%|████▎     | 297M/692M [02:04<02:11, 3.15MB/s]
+ 43%|████▎     | 298M/692M [02:05<02:17, 3.01MB/s]
+ 43%|████▎     | 298M/692M [02:05<02:15, 3.06MB/s]
+ 43%|████▎     | 298M/692M [02:05<02:14, 3.07MB/s]
+ 43%|████▎     | 299M/692M [02:05<02:20, 2.94MB/s]
+ 43%|████▎     | 299M/692M [02:05<02:17, 2.99MB/s]
+ 43%|████▎     | 300M/692M [02:05<02:16, 3.03MB/s]
+ 43%|████▎     | 300M/692M [02:05<02:13, 3.07MB/s]
+ 43%|████▎     | 300M/692M [02:05<02:11, 3.12MB/s]
+ 43%|████▎     | 301M/692M [02:06<02:10, 3.15MB/s]
+ 43%|████▎     | 301M/692M [02:06<02:09, 3.17MB/s]
+ 44%|████▎     | 301M/692M [02:06<02:08, 3.18MB/s]
+ 44%|████▎     | 302M/692M [02:06<02:08, 3.20MB/s]
+ 44%|████▎     | 302M/692M [02:06<02:07, 3.20MB/s]
+ 44%|████▎     | 302M/692M [02:06<02:07, 3.22MB/s]
+ 44%|████▎     | 303M/692M [02:06<02:07, 3.21MB/s]
+ 44%|████▍     | 303M/692M [02:06<02:05, 3.25MB/s]
+ 44%|████▍     | 304M/692M [02:07<02:05, 3.25MB/s]
+ 44%|████▍     | 304M/692M [02:07<02:09, 3.14MB/s]
+ 44%|████▍     | 304M/692M [02:07<02:25, 2.79MB/s]
+ 44%|████▍     | 305M/692M [02:07<02:45, 2.46MB/s]
+ 44%|████▍     | 305M/692M [02:07<03:01, 2.23MB/s]
+ 44%|████▍     | 305M/692M [02:07<03:10, 2.13MB/s]
+ 44%|████▍     | 306M/692M [02:07<03:18, 2.04MB/s]
+ 44%|████▍     | 306M/692M [02:08<03:21, 2.01MB/s]
+ 44%|████▍     | 306M/692M [02:08<03:46, 1.79MB/s]
+ 44%|████▍     | 306M/692M [02:08<03:54, 1.72MB/s]
+ 44%|████▍     | 306M/692M [02:08<04:44, 1.42MB/s]
+ 44%|████▍     | 307M/692M [02:09<05:31, 1.22MB/s]
+ 44%|████▍     | 307M/692M [02:09<06:07, 1.10MB/s]
+ 44%|████▍     | 307M/692M [02:09<06:27, 1.04MB/s]
+ 44%|████▍     | 307M/692M [02:09<06:49, 987kB/s] 
+ 44%|████▍     | 307M/692M [02:09<06:57, 966kB/s]
+ 44%|████▍     | 308M/692M [02:09<07:16, 926kB/s]
+ 44%|████▍     | 308M/692M [02:10<07:03, 953kB/s]
+ 44%|████▍     | 308M/692M [02:10<07:05, 949kB/s]
+ 44%|████▍     | 308M/692M [02:10<06:54, 972kB/s]
+ 44%|████▍     | 308M/692M [02:10<07:02, 953kB/s]
+ 45%|████▍     | 308M/692M [02:10<07:02, 955kB/s]
+ 45%|████▍     | 308M/692M [02:10<06:48, 986kB/s]
+ 45%|████▍     | 308M/692M [02:10<06:38, 1.01MB/s]
+ 45%|████▍     | 308M/692M [02:10<06:21, 1.06MB/s]
+ 45%|████▍     | 309M/692M [02:11<06:05, 1.10MB/s]
+ 45%|████▍     | 309M/692M [02:11<05:55, 1.13MB/s]
+ 45%|████▍     | 309M/692M [02:11<05:55, 1.13MB/s]
+ 45%|████▍     | 309M/692M [02:11<05:50, 1.15MB/s]
+ 45%|████▍     | 309M/692M [02:11<05:55, 1.13MB/s]
+ 45%|████▍     | 309M/692M [02:11<05:37, 1.19MB/s]
+ 45%|████▍     | 310M/692M [02:11<05:22, 1.24MB/s]
+ 45%|████▍     | 310M/692M [02:12<05:24, 1.24MB/s]
+ 45%|████▍     | 310M/692M [02:12<05:08, 1.30MB/s]
+ 45%|████▍     | 310M/692M [02:12<04:58, 1.34MB/s]
+ 45%|████▍     | 310M/692M [02:12<04:51, 1.37MB/s]
+ 45%|████▍     | 311M/692M [02:12<04:48, 1.39MB/s]
+ 45%|████▍     | 311M/692M [02:13<05:03, 1.32MB/s]
+ 45%|████▍     | 311M/692M [02:13<04:59, 1.34MB/s]
+ 45%|████▍     | 312M/692M [02:13<05:17, 1.26MB/s]
+ 45%|████▌     | 312M/692M [02:13<05:20, 1.25MB/s]
+ 45%|████▌     | 312M/692M [02:13<05:42, 1.16MB/s]
+ 45%|████▌     | 312M/692M [02:14<06:17, 1.06MB/s]
+ 45%|████▌     | 312M/692M [02:14<06:53, 963kB/s] 
+ 45%|████▌     | 312M/692M [02:14<07:25, 895kB/s]
+ 45%|████▌     | 312M/692M [02:14<07:52, 842kB/s]
+ 45%|████▌     | 313M/692M [02:14<08:13, 806kB/s]
+ 45%|████▌     | 313M/692M [02:14<07:51, 844kB/s]
+ 45%|████▌     | 313M/692M [02:15<08:03, 822kB/s]
+ 45%|████▌     | 313M/692M [02:15<07:42, 861kB/s]
+ 45%|████▌     | 313M/692M [02:15<07:57, 832kB/s]
+ 45%|████▌     | 313M/692M [02:15<07:34, 874kB/s]
+ 45%|████▌     | 313M/692M [02:15<07:12, 918kB/s]
+ 45%|████▌     | 314M/692M [02:15<07:41, 860kB/s]
+ 45%|████▌     | 314M/692M [02:16<08:10, 810kB/s]
+ 45%|████▌     | 314M/692M [02:16<08:26, 784kB/s]
+ 45%|████▌     | 314M/692M [02:16<07:56, 833kB/s]
+ 45%|████▌     | 314M/692M [02:16<08:22, 790kB/s]
+ 45%|████▌     | 314M/692M [02:16<07:48, 846kB/s]
+ 45%|████▌     | 314M/692M [02:16<08:02, 822kB/s]
+ 45%|████▌     | 314M/692M [02:16<07:41, 859kB/s]
+ 45%|████▌     | 314M/692M [02:17<07:29, 882kB/s]
+ 45%|████▌     | 315M/692M [02:17<07:33, 874kB/s]
+ 45%|████▌     | 315M/692M [02:17<07:21, 897kB/s]
+ 45%|████▌     | 315M/692M [02:17<07:00, 940kB/s]
+ 45%|████▌     | 315M/692M [02:17<06:56, 951kB/s]
+ 46%|████▌     | 315M/692M [02:17<06:43, 981kB/s]
+ 46%|████▌     | 315M/692M [02:17<06:31, 1.01MB/s]
+ 46%|████▌     | 315M/692M [02:18<06:24, 1.03MB/s]
+ 46%|████▌     | 316M/692M [02:18<06:19, 1.04MB/s]
+ 46%|████▌     | 316M/692M [02:18<06:16, 1.05MB/s]
+ 46%|████▌     | 316M/692M [02:18<06:03, 1.09MB/s]
+ 46%|████▌     | 316M/692M [02:18<06:02, 1.09MB/s]
+ 46%|████▌     | 316M/692M [02:18<05:51, 1.12MB/s]
+ 46%|████▌     | 316M/692M [02:18<05:33, 1.18MB/s]
+ 46%|████▌     | 316M/692M [02:18<05:33, 1.18MB/s]
+ 46%|████▌     | 316M/692M [02:19<05:28, 1.20MB/s]
+ 46%|████▌     | 317M/692M [02:19<05:16, 1.24MB/s]
+ 46%|████▌     | 317M/692M [02:19<05:15, 1.25MB/s]
+ 46%|████▌     | 317M/692M [02:19<05:00, 1.31MB/s]
+ 46%|████▌     | 317M/692M [02:19<04:51, 1.35MB/s]
+ 46%|████▌     | 318M/692M [02:19<04:45, 1.38MB/s]
+ 46%|████▌     | 318M/692M [02:20<04:41, 1.40MB/s]
+ 46%|████▌     | 318M/692M [02:20<04:25, 1.48MB/s]
+ 46%|████▌     | 318M/692M [02:20<04:21, 1.50MB/s]
+ 46%|████▌     | 319M/692M [02:20<04:21, 1.50MB/s]
+ 46%|████▌     | 319M/692M [02:20<04:09, 1.57MB/s]
+ 46%|████▌     | 319M/692M [02:20<04:08, 1.57MB/s]
+ 46%|████▌     | 319M/692M [02:21<04:10, 1.56MB/s]
+ 46%|████▌     | 320M/692M [02:21<03:58, 1.64MB/s]
+ 46%|████▌     | 320M/692M [02:21<03:59, 1.63MB/s]
+ 46%|████▌     | 320M/692M [02:21<03:47, 1.71MB/s]
+ 46%|████▋     | 320M/692M [02:21<03:40, 1.77MB/s]
+ 46%|████▋     | 321M/692M [02:21<03:44, 1.74MB/s]
+ 46%|████▋     | 321M/692M [02:21<03:35, 1.81MB/s]
+ 46%|████▋     | 321M/692M [02:22<03:31, 1.84MB/s]
+ 46%|████▋     | 321M/692M [02:22<03:36, 1.79MB/s]
+ 46%|████▋     | 322M/692M [02:22<03:26, 1.88MB/s]
+ 46%|████▋     | 322M/692M [02:22<03:19, 1.94MB/s]
+ 47%|████▋     | 322M/692M [02:22<03:17, 1.96MB/s]
+ 47%|████▋     | 322M/692M [02:22<03:12, 2.01MB/s]
+ 47%|████▋     | 323M/692M [02:22<03:11, 2.02MB/s]
+ 47%|████▋     | 323M/692M [02:22<03:10, 2.03MB/s]
+ 47%|████▋     | 323M/692M [02:23<03:07, 2.07MB/s]
+ 47%|████▋     | 323M/692M [02:23<03:04, 2.09MB/s]
+ 47%|████▋     | 324M/692M [02:23<03:03, 2.11MB/s]
+ 47%|████▋     | 324M/692M [02:23<03:02, 2.12MB/s]
+ 47%|████▋     | 324M/692M [02:23<02:58, 2.16MB/s]
+ 47%|████▋     | 324M/692M [02:23<02:58, 2.16MB/s]
+ 47%|████▋     | 325M/692M [02:23<02:55, 2.20MB/s]
+ 47%|████▋     | 325M/692M [02:23<02:55, 2.19MB/s]
+ 47%|████▋     | 325M/692M [02:24<02:51, 2.24MB/s]
+ 47%|████▋     | 325M/692M [02:24<02:53, 2.22MB/s]
+ 47%|████▋     | 326M/692M [02:24<02:54, 2.21MB/s]
+ 47%|████▋     | 326M/692M [02:24<02:41, 2.38MB/s]
+ 47%|████▋     | 326M/692M [02:24<02:42, 2.37MB/s]
+ 47%|████▋     | 326M/692M [02:24<02:41, 2.38MB/s]
+ 47%|████▋     | 327M/692M [02:24<02:30, 2.55MB/s]
+ 47%|████▋     | 327M/692M [02:24<02:31, 2.52MB/s]
+ 47%|████▋     | 328M/692M [02:25<02:20, 2.71MB/s]
+ 47%|████▋     | 328M/692M [02:25<02:16, 2.81MB/s]
+ 47%|████▋     | 328M/692M [02:25<02:10, 2.93MB/s]
+ 47%|████▋     | 329M/692M [02:25<02:06, 3.02MB/s]
+ 48%|████▊     | 329M/692M [02:25<02:01, 3.13MB/s]
+ 48%|████▊     | 329M/692M [02:25<01:58, 3.21MB/s]
+ 48%|████▊     | 330M/692M [02:25<01:57, 3.23MB/s]
+ 48%|████▊     | 330M/692M [02:25<01:46, 3.55MB/s]
+ 48%|████▊     | 331M/692M [02:26<01:41, 3.72MB/s]
+ 48%|████▊     | 331M/692M [02:26<01:44, 3.64MB/s]
+ 48%|████▊     | 332M/692M [02:26<01:38, 3.84MB/s]
+ 48%|████▊     | 332M/692M [02:26<01:27, 4.29MB/s]
+ 48%|████▊     | 333M/692M [02:26<01:27, 4.31MB/s]
+ 48%|████▊     | 333M/692M [02:26<01:27, 4.31MB/s]
+ 48%|████▊     | 334M/692M [02:26<01:21, 4.63MB/s]
+ 48%|████▊     | 334M/692M [02:26<01:17, 4.86MB/s]
+ 48%|████▊     | 335M/692M [02:26<01:23, 4.48MB/s]
+ 48%|████▊     | 336M/692M [02:27<01:16, 4.91MB/s]
+ 49%|████▊     | 336M/692M [02:27<01:24, 4.42MB/s]
+ 49%|████▊     | 337M/692M [02:27<01:36, 3.85MB/s]
+ 49%|████▊     | 337M/692M [02:27<01:46, 3.51MB/s]
+ 49%|████▊     | 338M/692M [02:27<01:55, 3.23MB/s]
+ 49%|████▉     | 338M/692M [02:27<01:55, 3.23MB/s]
+ 49%|████▉     | 338M/692M [02:28<01:55, 3.21MB/s]
+ 49%|████▉     | 339M/692M [02:28<01:55, 3.21MB/s]
+ 49%|████▉     | 339M/692M [02:28<01:56, 3.19MB/s]
+ 49%|████▉     | 339M/692M [02:28<01:55, 3.20MB/s]
+ 49%|████▉     | 340M/692M [02:28<01:55, 3.21MB/s]
+ 49%|████▉     | 340M/692M [02:28<01:54, 3.22MB/s]
+ 49%|████▉     | 340M/692M [02:28<01:54, 3.23MB/s]
+ 49%|████▉     | 341M/692M [02:28<01:54, 3.23MB/s]
+ 49%|████▉     | 341M/692M [02:28<01:53, 3.24MB/s]
+ 49%|████▉     | 342M/692M [02:29<01:53, 3.25MB/s]
+ 49%|████▉     | 342M/692M [02:29<01:53, 3.23MB/s]
+ 49%|████▉     | 342M/692M [02:29<01:51, 3.28MB/s]
+ 50%|████▉     | 343M/692M [02:29<01:52, 3.27MB/s]
+ 50%|████▉     | 343M/692M [02:29<01:52, 3.26MB/s]
+ 50%|████▉     | 344M/692M [02:29<01:52, 3.26MB/s]
+ 50%|████▉     | 344M/692M [02:29<01:45, 3.45MB/s]
+ 50%|████▉     | 344M/692M [02:29<01:47, 3.39MB/s]
+ 50%|████▉     | 345M/692M [02:30<01:48, 3.36MB/s]
+ 50%|████▉     | 345M/692M [02:30<01:49, 3.32MB/s]
+ 50%|████▉     | 346M/692M [02:30<01:47, 3.37MB/s]
+ 50%|████▉     | 346M/692M [02:30<01:48, 3.34MB/s]
+ 50%|█████     | 346M/692M [02:30<01:49, 3.32MB/s]
+ 50%|█████     | 347M/692M [02:30<01:43, 3.51MB/s]
+ 50%|█████     | 347M/692M [02:30<01:44, 3.47MB/s]
+ 50%|█████     | 348M/692M [02:30<01:44, 3.45MB/s]
+ 50%|█████     | 348M/692M [02:31<01:40, 3.61MB/s]
+ 50%|█████     | 348M/692M [02:31<01:42, 3.51MB/s]
+ 50%|█████     | 349M/692M [02:31<01:42, 3.52MB/s]
+ 50%|█████     | 349M/692M [02:31<01:38, 3.65MB/s]
+ 50%|█████     | 350M/692M [02:31<01:44, 3.45MB/s]
+ 51%|█████     | 350M/692M [02:31<01:48, 3.31MB/s]
+ 51%|█████     | 350M/692M [02:31<02:00, 2.98MB/s]
+ 51%|█████     | 351M/692M [02:31<01:59, 3.00MB/s]
+ 51%|█████     | 351M/692M [02:32<02:00, 2.97MB/s]
+ 51%|█████     | 352M/692M [02:32<02:06, 2.83MB/s]
+ 51%|█████     | 352M/692M [02:32<02:02, 2.92MB/s]
+ 51%|█████     | 352M/692M [02:32<02:00, 2.95MB/s]
+ 51%|█████     | 353M/692M [02:32<01:57, 3.02MB/s]
+ 51%|█████     | 353M/692M [02:32<01:55, 3.08MB/s]
+ 51%|█████     | 353M/692M [02:32<01:53, 3.13MB/s]
+ 51%|█████     | 354M/692M [02:33<01:52, 3.16MB/s]
+ 51%|█████     | 354M/692M [02:33<01:51, 3.18MB/s]
+ 51%|█████     | 354M/692M [02:33<01:50, 3.20MB/s]
+ 51%|█████▏    | 355M/692M [02:33<01:47, 3.28MB/s]
+ 51%|█████▏    | 355M/692M [02:33<01:47, 3.28MB/s]
+ 51%|█████▏    | 356M/692M [02:33<01:47, 3.28MB/s]
+ 51%|█████▏    | 356M/692M [02:33<01:41, 3.46MB/s]
+ 51%|█████▏    | 356M/692M [02:33<01:42, 3.42MB/s]
+ 52%|█████▏    | 357M/692M [02:33<01:42, 3.43MB/s]
+ 52%|█████▏    | 357M/692M [02:34<01:44, 3.38MB/s]
+ 52%|█████▏    | 358M/692M [02:34<01:37, 3.58MB/s]
+ 52%|█████▏    | 358M/692M [02:34<01:38, 3.54MB/s]
+ 52%|█████▏    | 358M/692M [02:34<01:41, 3.46MB/s]
+ 52%|█████▏    | 359M/692M [02:34<01:35, 3.65MB/s]
+ 52%|█████▏    | 359M/692M [02:34<01:37, 3.58MB/s]
+ 52%|█████▏    | 360M/692M [02:34<01:39, 3.49MB/s]
+ 52%|█████▏    | 360M/692M [02:34<01:34, 3.67MB/s]
+ 52%|█████▏    | 361M/692M [02:35<01:50, 3.14MB/s]
+ 52%|█████▏    | 361M/692M [02:35<01:32, 3.74MB/s]
+ 52%|█████▏    | 362M/692M [02:35<01:30, 3.81MB/s]
+ 52%|█████▏    | 362M/692M [02:35<01:33, 3.71MB/s]
+ 52%|█████▏    | 362M/692M [02:35<01:37, 3.56MB/s]
+ 52%|█████▏    | 363M/692M [02:35<01:33, 3.69MB/s]
+ 52%|█████▏    | 363M/692M [02:35<01:34, 3.64MB/s]
+ 53%|█████▎    | 364M/692M [02:36<01:31, 3.75MB/s]
+ 53%|█████▎    | 364M/692M [02:36<01:33, 3.68MB/s]
+ 53%|█████▎    | 365M/692M [02:36<01:36, 3.56MB/s]
+ 53%|█████▎    | 365M/692M [02:36<01:32, 3.69MB/s]
+ 53%|█████▎    | 366M/692M [02:36<01:34, 3.64MB/s]
+ 53%|█████▎    | 366M/692M [02:36<01:31, 3.75MB/s]
+ 53%|█████▎    | 366M/692M [02:36<01:33, 3.67MB/s]
+ 53%|█████▎    | 367M/692M [02:36<01:36, 3.55MB/s]
+ 53%|█████▎    | 367M/692M [02:36<01:32, 3.69MB/s]
+ 53%|█████▎    | 368M/692M [02:37<01:33, 3.63MB/s]
+ 53%|█████▎    | 368M/692M [02:37<01:30, 3.75MB/s]
+ 53%|█████▎    | 368M/692M [02:37<01:32, 3.66MB/s]
+ 53%|█████▎    | 369M/692M [02:37<01:35, 3.55MB/s]
+ 53%|█████▎    | 369M/692M [02:37<01:30, 3.76MB/s]
+ 53%|█████▎    | 370M/692M [02:37<01:33, 3.62MB/s]
+ 53%|█████▎    | 370M/692M [02:37<01:28, 3.81MB/s]
+ 54%|█████▎    | 371M/692M [02:37<01:32, 3.65MB/s]
+ 54%|█████▎    | 371M/692M [02:38<01:27, 3.84MB/s]
+ 54%|█████▎    | 372M/692M [02:38<01:26, 3.89MB/s]
+ 54%|█████▎    | 372M/692M [02:38<01:28, 3.79MB/s]
+ 54%|█████▍    | 372M/692M [02:38<01:25, 3.94MB/s]
+ 54%|█████▍    | 373M/692M [02:38<01:29, 3.74MB/s]
+ 54%|█████▍    | 373M/692M [02:38<01:25, 3.90MB/s]
+ 54%|█████▍    | 374M/692M [02:38<01:23, 4.00MB/s]
+ 54%|█████▍    | 374M/692M [02:38<01:22, 4.05MB/s]
+ 54%|█████▍    | 375M/692M [02:39<01:21, 4.11MB/s]
+ 54%|█████▍    | 375M/692M [02:39<01:21, 4.06MB/s]
+ 54%|█████▍    | 376M/692M [02:39<01:22, 4.04MB/s]
+ 54%|█████▍    | 376M/692M [02:39<01:20, 4.10MB/s]
+ 54%|█████▍    | 377M/692M [02:39<01:20, 4.11MB/s]
+ 55%|█████▍    | 377M/692M [02:39<01:24, 3.93MB/s]
+ 55%|█████▍    | 378M/692M [02:39<01:21, 4.03MB/s]
+ 55%|█████▍    | 378M/692M [02:39<01:20, 4.10MB/s]
+ 55%|█████▍    | 379M/692M [02:40<01:19, 4.16MB/s]
+ 55%|█████▍    | 379M/692M [02:40<01:18, 4.18MB/s]
+ 55%|█████▍    | 380M/692M [02:40<01:17, 4.25MB/s]
+ 55%|█████▍    | 380M/692M [02:40<01:17, 4.24MB/s]
+ 55%|█████▌    | 381M/692M [02:40<01:16, 4.28MB/s]
+ 55%|█████▌    | 381M/692M [02:40<01:16, 4.29MB/s]
+ 55%|█████▌    | 382M/692M [02:40<01:20, 4.06MB/s]
+ 55%|█████▌    | 382M/692M [02:40<01:16, 4.27MB/s]
+ 55%|█████▌    | 383M/692M [02:41<01:26, 3.75MB/s]
+ 55%|█████▌    | 383M/692M [02:41<01:29, 3.61MB/s]
+ 55%|█████▌    | 384M/692M [02:41<01:31, 3.54MB/s]
+ 55%|█████▌    | 384M/692M [02:41<01:27, 3.69MB/s]
+ 56%|█████▌    | 384M/692M [02:41<01:30, 3.55MB/s]
+ 56%|█████▌    | 385M/692M [02:41<01:31, 3.53MB/s]
+ 56%|█████▌    | 385M/692M [02:41<01:27, 3.67MB/s]
+ 56%|█████▌    | 386M/692M [02:41<01:30, 3.56MB/s]
+ 56%|█████▌    | 386M/692M [02:42<01:24, 3.78MB/s]
+ 56%|█████▌    | 387M/692M [02:42<01:27, 3.64MB/s]
+ 56%|█████▌    | 387M/692M [02:42<01:23, 3.82MB/s]
+ 56%|█████▌    | 388M/692M [02:42<01:20, 3.96MB/s]
+ 56%|█████▌    | 388M/692M [02:42<01:18, 4.04MB/s]
+ 56%|█████▌    | 389M/692M [02:42<01:19, 4.03MB/s]
+ 56%|█████▌    | 389M/692M [02:42<01:20, 3.95MB/s]
+ 56%|█████▋    | 390M/692M [02:42<01:18, 4.03MB/s]
+ 56%|█████▋    | 390M/692M [02:43<01:17, 4.08MB/s]
+ 56%|█████▋    | 391M/692M [02:43<01:16, 4.16MB/s]
+ 56%|█████▋    | 391M/692M [02:43<01:15, 4.20MB/s]
+ 57%|█████▋    | 392M/692M [02:43<01:14, 4.23MB/s]
+ 57%|█████▋    | 392M/692M [02:43<01:18, 4.01MB/s]
+ 57%|█████▋    | 393M/692M [02:43<01:16, 4.10MB/s]
+ 57%|█████▋    | 393M/692M [02:43<01:11, 4.37MB/s]
+ 57%|█████▋    | 394M/692M [02:43<01:12, 4.32MB/s]
+ 57%|█████▋    | 394M/692M [02:44<01:12, 4.34MB/s]
+ 57%|█████▋    | 395M/692M [02:44<01:11, 4.34MB/s]
+ 57%|█████▋    | 395M/692M [02:44<01:12, 4.31MB/s]
+ 57%|█████▋    | 396M/692M [02:44<01:11, 4.36MB/s]
+ 57%|█████▋    | 396M/692M [02:44<01:11, 4.36MB/s]
+ 57%|█████▋    | 397M/692M [02:44<01:11, 4.34MB/s]
+ 57%|█████▋    | 397M/692M [02:44<01:10, 4.37MB/s]
+ 57%|█████▋    | 398M/692M [02:44<01:10, 4.36MB/s]
+ 58%|█████▊    | 398M/692M [02:45<01:10, 4.36MB/s]
+ 58%|█████▊    | 399M/692M [02:45<01:10, 4.36MB/s]
+ 58%|█████▊    | 399M/692M [02:45<01:07, 4.53MB/s]
+ 58%|█████▊    | 400M/692M [02:45<01:08, 4.47MB/s]
+ 58%|█████▊    | 400M/692M [02:45<01:08, 4.44MB/s]
+ 58%|█████▊    | 401M/692M [02:45<01:08, 4.45MB/s]
+ 58%|█████▊    | 401M/692M [02:45<01:08, 4.42MB/s]
+ 58%|█████▊    | 402M/692M [02:45<01:09, 4.39MB/s]
+ 58%|█████▊    | 402M/692M [02:46<01:09, 4.39MB/s]
+ 58%|█████▊    | 403M/692M [02:46<01:09, 4.40MB/s]
+ 58%|█████▊    | 404M/692M [02:46<01:06, 4.55MB/s]
+ 58%|█████▊    | 404M/692M [02:46<01:07, 4.48MB/s]
+ 58%|█████▊    | 404M/692M [02:46<01:07, 4.45MB/s]
+ 58%|█████▊    | 405M/692M [02:46<01:09, 4.37MB/s]
+ 59%|█████▊    | 406M/692M [02:46<01:09, 4.36MB/s]
+ 59%|█████▊    | 406M/692M [02:46<01:08, 4.37MB/s]
+ 59%|█████▊    | 406M/692M [02:47<01:08, 4.41MB/s]
+ 59%|█████▉    | 407M/692M [02:47<01:07, 4.45MB/s]
+ 59%|█████▉    | 408M/692M [02:47<01:04, 4.65MB/s]
+ 59%|█████▉    | 408M/692M [02:47<01:05, 4.55MB/s]
+ 59%|█████▉    | 408M/692M [02:47<01:06, 4.50MB/s]
+ 59%|█████▉    | 409M/692M [02:47<01:05, 4.52MB/s]
+ 59%|█████▉    | 410M/692M [02:47<01:04, 4.60MB/s]
+ 59%|█████▉    | 410M/692M [02:47<01:05, 4.51MB/s]
+ 59%|█████▉    | 410M/692M [02:47<01:06, 4.44MB/s]
+ 59%|█████▉    | 411M/692M [02:48<01:06, 4.40MB/s]
+ 59%|█████▉    | 412M/692M [02:48<01:07, 4.38MB/s]
+ 60%|█████▉    | 412M/692M [02:48<01:06, 4.44MB/s]
+ 60%|█████▉    | 412M/692M [02:48<01:05, 4.51MB/s]
+ 60%|█████▉    | 413M/692M [02:48<01:02, 4.68MB/s]
+ 60%|█████▉    | 414M/692M [02:48<01:02, 4.69MB/s]
+ 60%|█████▉    | 414M/692M [02:48<01:01, 4.71MB/s]
+ 60%|█████▉    | 414M/692M [02:48<01:03, 4.61MB/s]
+ 60%|█████▉    | 415M/692M [02:48<01:04, 4.52MB/s]
+ 60%|██████    | 416M/692M [02:49<01:02, 4.64MB/s]
+ 60%|██████    | 416M/692M [02:49<01:00, 4.78MB/s]
+ 60%|██████    | 417M/692M [02:49<01:02, 4.66MB/s]
+ 60%|██████    | 417M/692M [02:49<01:00, 4.76MB/s]
+ 60%|██████    | 418M/692M [02:49<01:00, 4.76MB/s]
+ 60%|██████    | 418M/692M [02:49<00:59, 4.80MB/s]
+ 61%|██████    | 419M/692M [02:49<00:59, 4.80MB/s]
+ 61%|██████    | 420M/692M [02:49<00:59, 4.80MB/s]
+ 61%|██████    | 420M/692M [02:50<00:58, 4.84MB/s]
+ 61%|██████    | 421M/692M [02:50<00:57, 4.99MB/s]
+ 61%|██████    | 421M/692M [02:50<00:58, 4.89MB/s]
+ 61%|██████    | 422M/692M [02:50<00:56, 5.03MB/s]
+ 61%|██████    | 422M/692M [02:50<00:55, 5.11MB/s]
+ 61%|██████    | 423M/692M [02:50<00:55, 5.10MB/s]
+ 61%|██████    | 424M/692M [02:50<00:54, 5.19MB/s]
+ 61%|██████▏   | 424M/692M [02:50<00:52, 5.31MB/s]
+ 61%|██████▏   | 425M/692M [02:51<00:52, 5.34MB/s]
+ 61%|██████▏   | 426M/692M [02:51<00:51, 5.47MB/s]
+ 62%|██████▏   | 426M/692M [02:51<00:50, 5.58MB/s]
+ 62%|██████▏   | 427M/692M [02:51<00:50, 5.51MB/s]
+ 62%|██████▏   | 428M/692M [02:51<00:48, 5.73MB/s]
+ 62%|██████▏   | 428M/692M [02:51<00:48, 5.70MB/s]
+ 62%|██████▏   | 429M/692M [02:51<00:46, 5.91MB/s]
+ 62%|██████▏   | 430M/692M [02:51<00:45, 6.01MB/s]
+ 62%|██████▏   | 430M/692M [02:52<00:45, 6.09MB/s]
+ 62%|██████▏   | 431M/692M [02:52<00:43, 6.24MB/s]
+ 62%|██████▏   | 432M/692M [02:52<00:43, 6.31MB/s]
+ 63%|██████▎   | 433M/692M [02:52<00:42, 6.44MB/s]
+ 63%|██████▎   | 434M/692M [02:52<00:42, 6.45MB/s]
+ 63%|██████▎   | 434M/692M [02:52<00:40, 6.69MB/s]
+ 63%|██████▎   | 435M/692M [02:52<00:42, 6.35MB/s]
+ 63%|██████▎   | 436M/692M [02:52<00:44, 6.04MB/s]
+ 63%|██████▎   | 436M/692M [02:53<00:46, 5.80MB/s]
+ 63%|██████▎   | 437M/692M [02:53<00:47, 5.68MB/s]
+ 63%|██████▎   | 438M/692M [02:53<00:47, 5.59MB/s]
+ 63%|██████▎   | 438M/692M [02:53<00:48, 5.52MB/s]
+ 63%|██████▎   | 439M/692M [02:53<00:48, 5.49MB/s]
+ 63%|██████▎   | 440M/692M [02:53<00:48, 5.45MB/s]
+ 64%|██████▎   | 440M/692M [02:53<00:46, 5.64MB/s]
+ 64%|██████▎   | 441M/692M [02:53<00:46, 5.62MB/s]
+ 64%|██████▍   | 442M/692M [02:53<00:45, 5.82MB/s]
+ 64%|██████▍   | 442M/692M [02:54<00:44, 5.95MB/s]
+ 64%|██████▍   | 443M/692M [02:54<00:47, 5.53MB/s]
+ 64%|██████▍   | 443M/692M [02:54<00:47, 5.47MB/s]
+ 64%|██████▍   | 444M/692M [02:54<00:50, 5.18MB/s]
+ 64%|██████▍   | 444M/692M [02:54<00:52, 4.93MB/s]
+ 64%|██████▍   | 445M/692M [02:54<00:54, 4.76MB/s]
+ 64%|██████▍   | 446M/692M [02:54<00:54, 4.74MB/s]
+ 64%|██████▍   | 446M/692M [02:54<00:55, 4.69MB/s]
+ 64%|██████▍   | 446M/692M [02:55<00:54, 4.77MB/s]
+ 65%|██████▍   | 447M/692M [02:55<00:53, 4.77MB/s]
+ 65%|██████▍   | 448M/692M [02:55<00:53, 4.78MB/s]
+ 65%|██████▍   | 448M/692M [02:55<00:54, 4.66MB/s]
+ 65%|██████▍   | 448M/692M [02:55<00:55, 4.64MB/s]
+ 65%|██████▍   | 449M/692M [02:55<01:01, 4.14MB/s]
+ 65%|██████▍   | 450M/692M [02:55<01:04, 3.96MB/s]
+ 65%|██████▍   | 450M/692M [02:55<01:05, 3.85MB/s]
+ 65%|██████▌   | 450M/692M [02:56<01:07, 3.78MB/s]
+ 65%|██████▌   | 451M/692M [02:56<01:07, 3.73MB/s]
+ 65%|██████▌   | 451M/692M [02:56<01:08, 3.68MB/s]
+ 65%|██████▌   | 452M/692M [02:56<01:07, 3.76MB/s]
+ 65%|██████▌   | 452M/692M [02:56<01:06, 3.79MB/s]
+ 65%|██████▌   | 452M/692M [02:56<01:06, 3.76MB/s]
+ 65%|██████▌   | 453M/692M [02:56<01:06, 3.80MB/s]
+ 65%|██████▌   | 453M/692M [02:56<01:05, 3.84MB/s]
+ 66%|██████▌   | 454M/692M [02:56<01:05, 3.80MB/s]
+ 66%|██████▌   | 454M/692M [02:57<01:06, 3.74MB/s]
+ 66%|██████▌   | 454M/692M [02:57<01:04, 3.87MB/s]
+ 66%|██████▌   | 455M/692M [02:57<01:03, 3.90MB/s]
+ 66%|██████▌   | 455M/692M [02:57<01:04, 3.86MB/s]
+ 66%|██████▌   | 456M/692M [02:57<01:02, 3.99MB/s]
+ 66%|██████▌   | 456M/692M [02:57<01:01, 4.03MB/s]
+ 66%|██████▌   | 457M/692M [02:57<01:01, 4.00MB/s]
+ 66%|██████▌   | 457M/692M [02:57<01:00, 4.05MB/s]
+ 66%|██████▌   | 458M/692M [02:58<00:59, 4.10MB/s]
+ 66%|██████▌   | 458M/692M [02:58<01:00, 4.09MB/s]
+ 66%|██████▋   | 459M/692M [02:58<01:03, 3.88MB/s]
+ 66%|██████▋   | 459M/692M [02:58<01:02, 3.94MB/s]
+ 66%|██████▋   | 460M/692M [02:58<01:01, 3.96MB/s]
+ 66%|██████▋   | 460M/692M [02:58<00:59, 4.06MB/s]
+ 67%|██████▋   | 461M/692M [02:58<00:58, 4.13MB/s]
+ 67%|██████▋   | 461M/692M [02:58<00:58, 4.16MB/s]
+ 67%|██████▋   | 462M/692M [02:59<00:58, 4.15MB/s]
+ 67%|██████▋   | 462M/692M [02:59<00:57, 4.16MB/s]
+ 67%|██████▋   | 463M/692M [02:59<00:58, 4.15MB/s]
+ 67%|██████▋   | 463M/692M [02:59<00:57, 4.14MB/s]
+ 67%|██████▋   | 464M/692M [02:59<00:57, 4.14MB/s]
+ 67%|██████▋   | 464M/692M [02:59<00:57, 4.18MB/s]
+ 67%|██████▋   | 465M/692M [02:59<00:57, 4.18MB/s]
+ 67%|██████▋   | 465M/692M [03:00<00:58, 4.05MB/s]
+ 67%|██████▋   | 466M/692M [03:00<01:00, 3.89MB/s]
+ 67%|██████▋   | 466M/692M [03:00<01:03, 3.75MB/s]
+ 67%|██████▋   | 467M/692M [03:00<01:05, 3.59MB/s]
+ 67%|██████▋   | 467M/692M [03:00<01:07, 3.48MB/s]
+ 68%|██████▊   | 467M/692M [03:00<01:09, 3.41MB/s]
+ 68%|██████▊   | 468M/692M [03:00<01:10, 3.36MB/s]
+ 68%|██████▊   | 468M/692M [03:00<01:08, 3.44MB/s]
+ 68%|██████▊   | 468M/692M [03:00<01:06, 3.52MB/s]
+ 68%|██████▊   | 469M/692M [03:01<01:07, 3.45MB/s]
+ 68%|██████▊   | 469M/692M [03:01<01:16, 3.07MB/s]
+ 68%|██████▊   | 470M/692M [03:01<01:19, 2.94MB/s]
+ 68%|██████▊   | 470M/692M [03:01<01:23, 2.80MB/s]
+ 68%|██████▊   | 470M/692M [03:01<01:23, 2.79MB/s]
+ 68%|██████▊   | 471M/692M [03:01<01:21, 2.84MB/s]
+ 68%|██████▊   | 471M/692M [03:02<01:29, 2.59MB/s]
+ 68%|██████▊   | 472M/692M [03:02<01:39, 2.32MB/s]
+ 68%|██████▊   | 472M/692M [03:02<01:41, 2.27MB/s]
+ 68%|██████▊   | 472M/692M [03:02<01:47, 2.15MB/s]
+ 68%|██████▊   | 472M/692M [03:02<01:59, 1.93MB/s]
+ 68%|██████▊   | 472M/692M [03:02<02:07, 1.81MB/s]
+ 68%|██████▊   | 473M/692M [03:02<02:09, 1.78MB/s]
+ 68%|██████▊   | 473M/692M [03:03<02:15, 1.70MB/s]
+ 68%|██████▊   | 473M/692M [03:03<02:17, 1.68MB/s]
+ 68%|██████▊   | 474M/692M [03:03<02:15, 1.70MB/s]
+ 68%|██████▊   | 474M/692M [03:03<02:15, 1.69MB/s]
+ 68%|██████▊   | 474M/692M [03:03<02:23, 1.60MB/s]
+ 68%|██████▊   | 474M/692M [03:04<02:28, 1.54MB/s]
+ 69%|██████▊   | 474M/692M [03:04<02:37, 1.45MB/s]
+ 69%|██████▊   | 475M/692M [03:04<02:43, 1.40MB/s]
+ 69%|██████▊   | 475M/692M [03:04<02:45, 1.37MB/s]
+ 69%|██████▊   | 475M/692M [03:04<02:43, 1.39MB/s]
+ 69%|██████▊   | 476M/692M [03:04<02:43, 1.39MB/s]
+ 69%|██████▊   | 476M/692M [03:05<02:42, 1.40MB/s]
+ 69%|██████▉   | 476M/692M [03:05<02:40, 1.41MB/s]
+ 69%|██████▉   | 476M/692M [03:05<02:38, 1.43MB/s]
+ 69%|██████▉   | 476M/692M [03:05<02:37, 1.44MB/s]
+ 69%|██████▉   | 477M/692M [03:05<02:29, 1.51MB/s]
+ 69%|██████▉   | 477M/692M [03:06<02:31, 1.49MB/s]
+ 69%|██████▉   | 477M/692M [03:06<02:29, 1.51MB/s]
+ 69%|██████▉   | 478M/692M [03:06<02:22, 1.58MB/s]
+ 69%|██████▉   | 478M/692M [03:06<02:22, 1.58MB/s]
+ 69%|██████▉   | 478M/692M [03:06<02:23, 1.56MB/s]
+ 69%|██████▉   | 478M/692M [03:06<02:36, 1.43MB/s]
+ 69%|██████▉   | 478M/692M [03:07<02:37, 1.43MB/s]
+ 69%|██████▉   | 479M/692M [03:07<02:43, 1.37MB/s]
+ 69%|██████▉   | 479M/692M [03:07<02:34, 1.45MB/s]
+ 69%|██████▉   | 479M/692M [03:07<02:35, 1.43MB/s]
+ 69%|██████▉   | 480M/692M [03:07<02:31, 1.48MB/s]
+ 69%|██████▉   | 480M/692M [03:07<02:30, 1.48MB/s]
+ 69%|██████▉   | 480M/692M [03:08<02:31, 1.47MB/s]
+ 69%|██████▉   | 480M/692M [03:08<02:23, 1.54MB/s]
+ 69%|██████▉   | 480M/692M [03:08<02:22, 1.56MB/s]
+ 69%|██████▉   | 481M/692M [03:08<02:17, 1.61MB/s]
+ 69%|██████▉   | 481M/692M [03:08<02:20, 1.58MB/s]
+ 70%|██████▉   | 481M/692M [03:08<02:11, 1.69MB/s]
+ 70%|██████▉   | 482M/692M [03:09<02:16, 1.62MB/s]
+ 70%|██████▉   | 482M/692M [03:09<02:10, 1.69MB/s]
+ 70%|██████▉   | 482M/692M [03:09<02:13, 1.65MB/s]
+ 70%|██████▉   | 482M/692M [03:09<02:09, 1.70MB/s]
+ 70%|██████▉   | 482M/692M [03:09<02:11, 1.67MB/s]
+ 70%|██████▉   | 483M/692M [03:09<02:04, 1.77MB/s]
+ 70%|██████▉   | 483M/692M [03:10<02:09, 1.69MB/s]
+ 70%|██████▉   | 483M/692M [03:10<02:04, 1.77MB/s]
+ 70%|██████▉   | 484M/692M [03:10<01:58, 1.85MB/s]
+ 70%|██████▉   | 484M/692M [03:10<01:57, 1.86MB/s]
+ 70%|██████▉   | 484M/692M [03:10<02:02, 1.78MB/s]
+ 70%|██████▉   | 484M/692M [03:10<01:57, 1.85MB/s]
+ 70%|██████▉   | 484M/692M [03:10<01:54, 1.91MB/s]
+ 70%|███████   | 485M/692M [03:10<01:51, 1.96MB/s]
+ 70%|███████   | 485M/692M [03:11<01:48, 2.01MB/s]
+ 70%|███████   | 485M/692M [03:11<01:49, 1.99MB/s]
+ 70%|███████   | 486M/692M [03:11<01:58, 1.84MB/s]
+ 70%|███████   | 486M/692M [03:11<02:10, 1.66MB/s]
+ 70%|███████   | 486M/692M [03:11<02:32, 1.42MB/s]
+ 70%|███████   | 486M/692M [03:12<02:49, 1.28MB/s]
+ 70%|███████   | 486M/692M [03:12<03:04, 1.17MB/s]
+ 70%|███████   | 487M/692M [03:12<03:07, 1.15MB/s]
+ 70%|███████   | 487M/692M [03:12<03:05, 1.16MB/s]
+ 70%|███████   | 487M/692M [03:12<03:03, 1.18MB/s]
+ 70%|███████   | 487M/692M [03:12<03:28, 1.03MB/s]
+ 70%|███████   | 487M/692M [03:13<03:14, 1.11MB/s]
+ 70%|███████   | 487M/692M [03:13<03:23, 1.06MB/s]
+ 70%|███████   | 488M/692M [03:13<03:26, 1.04MB/s]
+ 70%|███████   | 488M/692M [03:13<03:30, 1.02MB/s]
+ 70%|███████   | 488M/692M [03:13<03:33, 1.01MB/s]
+ 70%|███████   | 488M/692M [03:13<03:32, 1.01MB/s]
+ 70%|███████   | 488M/692M [03:13<03:33, 1.00MB/s]
+ 71%|███████   | 488M/692M [03:14<03:30, 1.02MB/s]
+ 71%|███████   | 488M/692M [03:14<03:25, 1.04MB/s]
+ 71%|███████   | 488M/692M [03:14<03:41, 965kB/s] 
+ 71%|███████   | 488M/692M [03:14<03:46, 946kB/s]
+ 71%|███████   | 489M/692M [03:14<03:57, 900kB/s]
+ 71%|███████   | 489M/692M [03:14<03:58, 896kB/s]
+ 71%|███████   | 489M/692M [03:14<03:54, 910kB/s]
+ 71%|███████   | 489M/692M [03:15<03:55, 905kB/s]
+ 71%|███████   | 489M/692M [03:15<03:48, 931kB/s]
+ 71%|███████   | 489M/692M [03:15<03:48, 934kB/s]
+ 71%|███████   | 489M/692M [03:15<03:38, 973kB/s]
+ 71%|███████   | 490M/692M [03:15<03:32, 1.00MB/s]
+ 71%|███████   | 490M/692M [03:15<03:32, 1.00MB/s]
+ 71%|███████   | 490M/692M [03:15<03:29, 1.01MB/s]
+ 71%|███████   | 490M/692M [03:15<03:26, 1.03MB/s]
+ 71%|███████   | 490M/692M [03:16<03:19, 1.06MB/s]
+ 71%|███████   | 490M/692M [03:16<03:18, 1.07MB/s]
+ 71%|███████   | 490M/692M [03:16<03:18, 1.07MB/s]
+ 71%|███████   | 490M/692M [03:16<03:19, 1.06MB/s]
+ 71%|███████   | 490M/692M [03:16<03:30, 1.01MB/s]
+ 71%|███████   | 491M/692M [03:16<03:42, 951kB/s] 
+ 71%|███████   | 491M/692M [03:16<03:37, 972kB/s]
+ 71%|███████   | 491M/692M [03:16<03:39, 963kB/s]
+ 71%|███████   | 491M/692M [03:17<03:46, 932kB/s]
+ 71%|███████   | 491M/692M [03:17<03:38, 964kB/s]
+ 71%|███████   | 491M/692M [03:17<03:33, 989kB/s]
+ 71%|███████   | 491M/692M [03:17<03:28, 1.01MB/s]
+ 71%|███████   | 492M/692M [03:17<03:24, 1.03MB/s]
+ 71%|███████   | 492M/692M [03:17<03:34, 983kB/s] 
+ 71%|███████   | 492M/692M [03:17<03:48, 920kB/s]
+ 71%|███████   | 492M/692M [03:18<04:06, 852kB/s]
+ 71%|███████   | 492M/692M [03:18<03:59, 876kB/s]
+ 71%|███████   | 492M/692M [03:18<04:12, 830kB/s]
+ 71%|███████   | 492M/692M [03:18<04:22, 798kB/s]
+ 71%|███████   | 492M/692M [03:18<04:37, 754kB/s]
+ 71%|███████   | 492M/692M [03:19<05:05, 685kB/s]
+ 71%|███████   | 493M/692M [03:19<05:02, 691kB/s]
+ 71%|███████   | 493M/692M [03:19<05:00, 697kB/s]
+ 71%|███████   | 493M/692M [03:19<05:01, 694kB/s]
+ 71%|███████   | 493M/692M [03:19<05:27, 639kB/s]
+ 71%|███████   | 493M/692M [03:20<05:20, 653kB/s]
+ 71%|███████   | 493M/692M [03:20<05:15, 661kB/s]
+ 71%|███████▏  | 493M/692M [03:20<05:13, 665kB/s]
+ 71%|███████▏  | 494M/692M [03:20<05:07, 677kB/s]
+ 71%|███████▏  | 494M/692M [03:20<05:19, 652kB/s]
+ 71%|███████▏  | 494M/692M [03:20<04:46, 726kB/s]
+ 71%|███████▏  | 494M/692M [03:21<04:42, 737kB/s]
+ 71%|███████▏  | 494M/692M [03:21<04:21, 794kB/s]
+ 71%|███████▏  | 494M/692M [03:21<04:24, 786kB/s]
+ 71%|███████▏  | 494M/692M [03:21<04:08, 836kB/s]
+ 71%|███████▏  | 494M/692M [03:21<04:14, 814kB/s]
+ 71%|███████▏  | 494M/692M [03:21<03:56, 876kB/s]
+ 71%|███████▏  | 495M/692M [03:21<03:44, 922kB/s]
+ 71%|███████▏  | 495M/692M [03:22<03:35, 964kB/s]
+ 71%|███████▏  | 495M/692M [03:22<03:32, 974kB/s]
+ 71%|███████▏  | 495M/692M [03:22<03:27, 996kB/s]
+ 72%|███████▏  | 495M/692M [03:22<03:23, 1.01MB/s]
+ 72%|███████▏  | 495M/692M [03:22<03:16, 1.05MB/s]
+ 72%|███████▏  | 495M/692M [03:22<03:15, 1.05MB/s]
+ 72%|███████▏  | 496M/692M [03:22<03:22, 1.02MB/s]
+ 72%|███████▏  | 496M/692M [03:23<03:42, 928kB/s] 
+ 72%|███████▏  | 496M/692M [03:23<03:39, 939kB/s]
+ 72%|███████▏  | 496M/692M [03:23<03:52, 888kB/s]
+ 72%|███████▏  | 496M/692M [03:23<03:44, 917kB/s]
+ 72%|███████▏  | 496M/692M [03:23<03:36, 952kB/s]
+ 72%|███████▏  | 496M/692M [03:23<03:29, 983kB/s]
+ 72%|███████▏  | 496M/692M [03:23<03:24, 1.00MB/s]
+ 72%|███████▏  | 496M/692M [03:24<03:51, 888kB/s] 
+ 72%|███████▏  | 497M/692M [03:24<03:41, 927kB/s]
+ 72%|███████▏  | 497M/692M [03:24<03:59, 856kB/s]
+ 72%|███████▏  | 497M/692M [03:24<03:56, 868kB/s]
+ 72%|███████▏  | 497M/692M [03:24<04:07, 826kB/s]
+ 72%|███████▏  | 497M/692M [03:24<04:20, 787kB/s]
+ 72%|███████▏  | 497M/692M [03:24<04:10, 818kB/s]
+ 72%|███████▏  | 497M/692M [03:25<04:44, 719kB/s]
+ 72%|███████▏  | 498M/692M [03:25<04:45, 716kB/s]
+ 72%|███████▏  | 498M/692M [03:25<05:19, 639kB/s]
+ 72%|███████▏  | 498M/692M [03:25<05:35, 608kB/s]
+ 72%|███████▏  | 498M/692M [03:26<05:50, 582kB/s]
+ 72%|███████▏  | 498M/692M [03:26<05:37, 604kB/s]
+ 72%|███████▏  | 498M/692M [03:26<05:47, 586kB/s]
+ 72%|███████▏  | 498M/692M [03:26<05:56, 571kB/s]
+ 72%|███████▏  | 498M/692M [03:27<06:04, 558kB/s]
+ 72%|███████▏  | 498M/692M [03:27<06:09, 550kB/s]
+ 72%|███████▏  | 499M/692M [03:27<05:48, 582kB/s]
+ 72%|███████▏  | 499M/692M [03:27<05:54, 572kB/s]
+ 72%|███████▏  | 499M/692M [03:27<05:37, 601kB/s]
+ 72%|███████▏  | 499M/692M [03:28<05:22, 629kB/s]
+ 72%|███████▏  | 499M/692M [03:28<05:11, 651kB/s]
+ 72%|███████▏  | 499M/692M [03:28<05:02, 669kB/s]
+ 72%|███████▏  | 499M/692M [03:28<04:54, 687kB/s]
+ 72%|███████▏  | 500M/692M [03:28<04:29, 751kB/s]
+ 72%|███████▏  | 500M/692M [03:29<04:32, 742kB/s]
+ 72%|███████▏  | 500M/692M [03:29<04:09, 810kB/s]
+ 72%|███████▏  | 500M/692M [03:29<04:44, 710kB/s]
+ 72%|███████▏  | 500M/692M [03:29<04:16, 787kB/s]
+ 72%|███████▏  | 500M/692M [03:29<04:25, 759kB/s]
+ 72%|███████▏  | 500M/692M [03:29<04:15, 789kB/s]
+ 72%|███████▏  | 500M/692M [03:30<04:15, 787kB/s]
+ 72%|███████▏  | 500M/692M [03:30<04:20, 773kB/s]
+ 72%|███████▏  | 501M/692M [03:30<04:03, 826kB/s]
+ 72%|███████▏  | 501M/692M [03:30<04:10, 801kB/s]
+ 72%|███████▏  | 501M/692M [03:30<03:54, 855kB/s]
+ 72%|███████▏  | 501M/692M [03:30<03:50, 869kB/s]
+ 72%|███████▏  | 501M/692M [03:30<03:55, 852kB/s]
+ 72%|███████▏  | 501M/692M [03:31<03:41, 905kB/s]
+ 72%|███████▏  | 501M/692M [03:31<03:37, 922kB/s]
+ 72%|███████▏  | 502M/692M [03:31<03:27, 963kB/s]
+ 72%|███████▏  | 502M/692M [03:31<03:28, 961kB/s]
+ 72%|███████▏  | 502M/692M [03:31<03:22, 989kB/s]
+ 72%|███████▏  | 502M/692M [03:31<03:17, 1.01MB/s]
+ 73%|███████▎  | 502M/692M [03:31<03:13, 1.03MB/s]
+ 73%|███████▎  | 502M/692M [03:31<03:06, 1.07MB/s]
+ 73%|███████▎  | 502M/692M [03:32<03:06, 1.07MB/s]
+ 73%|███████▎  | 502M/692M [03:32<03:01, 1.09MB/s]
+ 73%|███████▎  | 502M/692M [03:32<03:30, 944kB/s] 
+ 73%|███████▎  | 503M/692M [03:32<03:19, 996kB/s]
+ 73%|███████▎  | 503M/692M [03:32<03:17, 1.00MB/s]
+ 73%|███████▎  | 503M/692M [03:32<03:17, 1.01MB/s]
+ 73%|███████▎  | 503M/692M [03:32<03:15, 1.01MB/s]
+ 73%|███████▎  | 503M/692M [03:33<03:12, 1.03MB/s]
+ 73%|███████▎  | 503M/692M [03:33<03:11, 1.04MB/s]
+ 73%|███████▎  | 504M/692M [03:33<03:09, 1.04MB/s]
+ 73%|███████▎  | 504M/692M [03:33<03:08, 1.05MB/s]
+ 73%|███████▎  | 504M/692M [03:33<03:06, 1.06MB/s]
+ 73%|███████▎  | 504M/692M [03:33<03:02, 1.08MB/s]
+ 73%|███████▎  | 504M/692M [03:33<03:04, 1.07MB/s]
+ 73%|███████▎  | 504M/692M [03:33<03:02, 1.08MB/s]
+ 73%|███████▎  | 504M/692M [03:34<03:01, 1.09MB/s]
+ 73%|███████▎  | 504M/692M [03:34<03:09, 1.04MB/s]
+ 73%|███████▎  | 504M/692M [03:34<03:05, 1.06MB/s]
+ 73%|███████▎  | 505M/692M [03:34<03:16, 1.00MB/s]
+ 73%|███████▎  | 505M/692M [03:34<03:29, 938kB/s] 
+ 73%|███████▎  | 505M/692M [03:34<03:27, 948kB/s]
+ 73%|███████▎  | 505M/692M [03:34<03:27, 948kB/s]
+ 73%|███████▎  | 505M/692M [03:35<03:38, 897kB/s]
+ 73%|███████▎  | 505M/692M [03:35<03:31, 928kB/s]
+ 73%|███████▎  | 505M/692M [03:35<03:28, 939kB/s]
+ 73%|███████▎  | 506M/692M [03:35<03:21, 970kB/s]
+ 73%|███████▎  | 506M/692M [03:35<03:16, 994kB/s]
+ 73%|███████▎  | 506M/692M [03:35<03:12, 1.01MB/s]
+ 73%|███████▎  | 506M/692M [03:35<03:10, 1.03MB/s]
+ 73%|███████▎  | 506M/692M [03:35<03:04, 1.06MB/s]
+ 73%|███████▎  | 506M/692M [03:36<03:04, 1.06MB/s]
+ 73%|███████▎  | 506M/692M [03:36<03:00, 1.08MB/s]
+ 73%|███████▎  | 506M/692M [03:36<02:58, 1.10MB/s]
+ 73%|███████▎  | 507M/692M [03:36<02:47, 1.16MB/s]
+ 73%|███████▎  | 507M/692M [03:36<02:45, 1.17MB/s]
+ 73%|███████▎  | 507M/692M [03:36<02:48, 1.15MB/s]
+ 73%|███████▎  | 507M/692M [03:36<02:37, 1.23MB/s]
+ 73%|███████▎  | 507M/692M [03:37<02:30, 1.29MB/s]
+ 73%|███████▎  | 508M/692M [03:37<02:32, 1.27MB/s]
+ 73%|███████▎  | 508M/692M [03:37<02:25, 1.33MB/s]
+ 73%|███████▎  | 508M/692M [03:37<02:14, 1.44MB/s]
+ 73%|███████▎  | 508M/692M [03:37<02:14, 1.43MB/s]
+ 73%|███████▎  | 508M/692M [03:37<02:13, 1.45MB/s]
+ 73%|███████▎  | 509M/692M [03:38<02:10, 1.48MB/s]
+ 74%|███████▎  | 509M/692M [03:38<02:13, 1.44MB/s]
+ 74%|███████▎  | 509M/692M [03:38<02:25, 1.32MB/s]
+ 74%|███████▎  | 510M/692M [03:38<02:41, 1.19MB/s]
+ 74%|███████▎  | 510M/692M [03:39<02:42, 1.18MB/s]
+ 74%|███████▎  | 510M/692M [03:39<02:46, 1.15MB/s]
+ 74%|███████▎  | 510M/692M [03:39<02:54, 1.09MB/s]
+ 74%|███████▎  | 510M/692M [03:39<02:56, 1.08MB/s]
+ 74%|███████▎  | 510M/692M [03:39<03:13, 987kB/s] 
+ 74%|███████▎  | 510M/692M [03:39<03:30, 906kB/s]
+ 74%|███████▎  | 510M/692M [03:39<03:45, 844kB/s]
+ 74%|███████▍  | 511M/692M [03:40<03:56, 806kB/s]
+ 74%|███████▍  | 511M/692M [03:40<03:49, 828kB/s]
+ 74%|███████▍  | 511M/692M [03:40<03:52, 817kB/s]
+ 74%|███████▍  | 511M/692M [03:40<03:45, 843kB/s]
+ 74%|███████▍  | 511M/692M [03:40<03:45, 843kB/s]
+ 74%|███████▍  | 511M/692M [03:40<03:35, 881kB/s]
+ 74%|███████▍  | 511M/692M [03:41<03:32, 891kB/s]
+ 74%|███████▍  | 512M/692M [03:41<03:24, 926kB/s]
+ 74%|███████▍  | 512M/692M [03:41<03:17, 961kB/s]
+ 74%|███████▍  | 512M/692M [03:41<03:20, 946kB/s]
+ 74%|███████▍  | 512M/692M [03:41<03:13, 976kB/s]
+ 74%|███████▍  | 512M/692M [03:41<03:10, 993kB/s]
+ 74%|███████▍  | 512M/692M [03:41<03:32, 891kB/s]
+ 74%|███████▍  | 512M/692M [03:42<03:38, 864kB/s]
+ 74%|███████▍  | 512M/692M [03:42<03:37, 868kB/s]
+ 74%|███████▍  | 512M/692M [03:42<03:32, 886kB/s]
+ 74%|███████▍  | 513M/692M [03:42<03:28, 902kB/s]
+ 74%|███████▍  | 513M/692M [03:42<03:20, 940kB/s]
+ 74%|███████▍  | 513M/692M [03:42<03:22, 929kB/s]
+ 74%|███████▍  | 513M/692M [03:42<03:22, 929kB/s]
+ 74%|███████▍  | 513M/692M [03:42<03:14, 967kB/s]
+ 74%|███████▍  | 513M/692M [03:43<03:07, 1.00MB/s]
+ 74%|███████▍  | 513M/692M [03:43<03:04, 1.02MB/s]
+ 74%|███████▍  | 514M/692M [03:43<03:00, 1.04MB/s]
+ 74%|███████▍  | 514M/692M [03:43<02:58, 1.05MB/s]
+ 74%|███████▍  | 514M/692M [03:43<02:57, 1.06MB/s]
+ 74%|███████▍  | 514M/692M [03:43<02:58, 1.05MB/s]
+ 74%|███████▍  | 514M/692M [03:43<02:59, 1.04MB/s]
+ 74%|███████▍  | 514M/692M [03:43<02:48, 1.11MB/s]
+ 74%|███████▍  | 514M/692M [03:44<02:43, 1.14MB/s]
+ 74%|███████▍  | 514M/692M [03:44<02:44, 1.13MB/s]
+ 74%|███████▍  | 514M/692M [03:44<02:42, 1.15MB/s]
+ 74%|███████▍  | 515M/692M [03:44<02:31, 1.23MB/s]
+ 74%|███████▍  | 515M/692M [03:44<02:54, 1.07MB/s]
+ 74%|███████▍  | 515M/692M [03:44<02:57, 1.05MB/s]
+ 74%|███████▍  | 515M/692M [03:44<02:57, 1.05MB/s]
+ 74%|███████▍  | 515M/692M [03:45<03:22, 916kB/s] 
+ 74%|███████▍  | 515M/692M [03:45<03:39, 846kB/s]
+ 74%|███████▍  | 516M/692M [03:45<03:49, 810kB/s]
+ 74%|███████▍  | 516M/692M [03:45<03:56, 784kB/s]
+ 74%|███████▍  | 516M/692M [03:45<03:52, 795kB/s]
+ 75%|███████▍  | 516M/692M [03:45<03:46, 818kB/s]
+ 75%|███████▍  | 516M/692M [03:46<03:45, 821kB/s]
+ 75%|███████▍  | 516M/692M [03:46<03:37, 850kB/s]
+ 75%|███████▍  | 516M/692M [03:46<03:29, 882kB/s]
+ 75%|███████▍  | 516M/692M [03:46<03:18, 929kB/s]
+ 75%|███████▍  | 516M/692M [03:46<03:23, 906kB/s]
+ 75%|███████▍  | 517M/692M [03:46<03:24, 900kB/s]
+ 75%|███████▍  | 517M/692M [03:46<03:10, 968kB/s]
+ 75%|███████▍  | 517M/692M [03:47<03:04, 995kB/s]
+ 75%|███████▍  | 517M/692M [03:47<03:01, 1.01MB/s]
+ 75%|███████▍  | 517M/692M [03:47<02:52, 1.06MB/s]
+ 75%|███████▍  | 517M/692M [03:47<02:52, 1.06MB/s]
+ 75%|███████▍  | 518M/692M [03:47<02:39, 1.15MB/s]
+ 75%|███████▍  | 518M/692M [03:47<02:40, 1.14MB/s]
+ 75%|███████▍  | 518M/692M [03:47<02:37, 1.16MB/s]
+ 75%|███████▍  | 518M/692M [03:47<02:34, 1.19MB/s]
+ 75%|███████▍  | 518M/692M [03:48<02:31, 1.20MB/s]
+ 75%|███████▍  | 518M/692M [03:48<02:23, 1.27MB/s]
+ 75%|███████▍  | 518M/692M [03:48<02:24, 1.26MB/s]
+ 75%|███████▍  | 519M/692M [03:48<02:17, 1.32MB/s]
+ 75%|███████▍  | 519M/692M [03:48<02:13, 1.36MB/s]
+ 75%|███████▍  | 519M/692M [03:48<02:11, 1.38MB/s]
+ 75%|███████▌  | 520M/692M [03:49<02:09, 1.40MB/s]
+ 75%|███████▌  | 520M/692M [03:49<02:04, 1.45MB/s]
+ 75%|███████▌  | 520M/692M [03:49<02:00, 1.49MB/s]
+ 75%|███████▌  | 520M/692M [03:49<02:00, 1.50MB/s]
+ 75%|███████▌  | 520M/692M [03:49<01:56, 1.55MB/s]
+ 75%|███████▌  | 521M/692M [03:49<01:54, 1.58MB/s]
+ 75%|███████▌  | 521M/692M [03:50<01:56, 1.54MB/s]
+ 75%|███████▌  | 521M/692M [03:50<02:00, 1.49MB/s]
+ 75%|███████▌  | 522M/692M [03:50<02:07, 1.41MB/s]
+ 75%|███████▌  | 522M/692M [03:50<02:09, 1.38MB/s]
+ 75%|███████▌  | 522M/692M [03:50<02:08, 1.39MB/s]
+ 75%|███████▌  | 522M/692M [03:51<02:04, 1.43MB/s]
+ 75%|███████▌  | 522M/692M [03:51<02:00, 1.48MB/s]
+ 76%|███████▌  | 523M/692M [03:51<02:01, 1.47MB/s]
+ 76%|███████▌  | 523M/692M [03:51<01:56, 1.52MB/s]
+ 76%|███████▌  | 523M/692M [03:51<01:55, 1.54MB/s]
+ 76%|███████▌  | 524M/692M [03:51<01:52, 1.58MB/s]
+ 76%|███████▌  | 524M/692M [03:52<01:50, 1.59MB/s]
+ 76%|███████▌  | 524M/692M [03:52<01:48, 1.62MB/s]
+ 76%|███████▌  | 524M/692M [03:52<01:47, 1.65MB/s]
+ 76%|███████▌  | 524M/692M [03:52<01:45, 1.66MB/s]
+ 76%|███████▌  | 525M/692M [03:52<01:45, 1.67MB/s]
+ 76%|███████▌  | 525M/692M [03:52<01:43, 1.69MB/s]
+ 76%|███████▌  | 525M/692M [03:53<01:43, 1.69MB/s]
+ 76%|███████▌  | 526M/692M [03:53<01:41, 1.72MB/s]
+ 76%|███████▌  | 526M/692M [03:53<01:41, 1.71MB/s]
+ 76%|███████▌  | 526M/692M [03:53<01:39, 1.75MB/s]
+ 76%|███████▌  | 526M/692M [03:53<01:36, 1.81MB/s]
+ 76%|███████▌  | 526M/692M [03:53<01:37, 1.79MB/s]
+ 76%|███████▌  | 527M/692M [03:53<01:36, 1.81MB/s]
+ 76%|███████▌  | 527M/692M [03:54<01:33, 1.85MB/s]
+ 76%|███████▌  | 527M/692M [03:54<01:29, 1.92MB/s]
+ 76%|███████▌  | 528M/692M [03:54<01:30, 1.90MB/s]
+ 76%|███████▌  | 528M/692M [03:54<01:30, 1.91MB/s]
+ 76%|███████▋  | 528M/692M [03:54<01:27, 1.97MB/s]
+ 76%|███████▋  | 528M/692M [03:54<01:25, 2.02MB/s]
+ 76%|███████▋  | 528M/692M [03:54<01:23, 2.06MB/s]
+ 76%|███████▋  | 529M/692M [03:54<01:22, 2.08MB/s]
+ 76%|███████▋  | 529M/692M [03:55<01:21, 2.10MB/s]
+ 76%|███████▋  | 529M/692M [03:55<01:21, 2.11MB/s]
+ 76%|███████▋  | 530M/692M [03:55<01:20, 2.13MB/s]
+ 77%|███████▋  | 530M/692M [03:55<01:19, 2.13MB/s]
+ 77%|███████▋  | 530M/692M [03:55<01:19, 2.15MB/s]
+ 77%|███████▋  | 530M/692M [03:55<01:16, 2.23MB/s]
+ 77%|███████▋  | 530M/692M [03:55<01:17, 2.20MB/s]
+ 77%|███████▋  | 531M/692M [03:55<01:13, 2.30MB/s]
+ 77%|███████▋  | 531M/692M [03:55<01:14, 2.28MB/s]
+ 77%|███████▋  | 531M/692M [03:56<01:13, 2.30MB/s]
+ 77%|███████▋  | 532M/692M [03:56<01:13, 2.31MB/s]
+ 77%|███████▋  | 532M/692M [03:56<01:11, 2.36MB/s]
+ 77%|███████▋  | 532M/692M [03:56<01:10, 2.40MB/s]
+ 77%|███████▋  | 532M/692M [03:56<01:10, 2.38MB/s]
+ 77%|███████▋  | 532M/692M [03:56<01:09, 2.41MB/s]
+ 77%|███████▋  | 533M/692M [03:56<01:08, 2.44MB/s]
+ 77%|███████▋  | 533M/692M [03:56<01:08, 2.44MB/s]
+ 77%|███████▋  | 533M/692M [03:56<01:07, 2.48MB/s]
+ 77%|███████▋  | 534M/692M [03:57<01:18, 2.11MB/s]
+ 77%|███████▋  | 534M/692M [03:57<01:12, 2.28MB/s]
+ 77%|███████▋  | 534M/692M [03:57<01:18, 2.12MB/s]
+ 77%|███████▋  | 534M/692M [03:57<01:18, 2.10MB/s]
+ 77%|███████▋  | 535M/692M [03:57<01:20, 2.06MB/s]
+ 77%|███████▋  | 535M/692M [03:57<01:19, 2.07MB/s]
+ 77%|███████▋  | 535M/692M [03:57<01:18, 2.09MB/s]
+ 77%|███████▋  | 535M/692M [03:58<01:18, 2.11MB/s]
+ 77%|███████▋  | 536M/692M [03:58<01:16, 2.14MB/s]
+ 77%|███████▋  | 536M/692M [03:58<01:14, 2.21MB/s]
+ 77%|███████▋  | 536M/692M [03:58<01:14, 2.19MB/s]
+ 77%|███████▋  | 536M/692M [03:58<01:11, 2.27MB/s]
+ 78%|███████▊  | 537M/692M [03:58<01:10, 2.32MB/s]
+ 78%|███████▊  | 537M/692M [03:58<01:09, 2.34MB/s]
+ 78%|███████▊  | 537M/692M [03:58<01:10, 2.30MB/s]
+ 78%|███████▊  | 537M/692M [03:58<01:09, 2.34MB/s]
+ 78%|███████▊  | 538M/692M [03:59<01:07, 2.39MB/s]
+ 78%|███████▊  | 538M/692M [03:59<01:16, 2.11MB/s]
+ 78%|███████▊  | 538M/692M [03:59<01:13, 2.19MB/s]
+ 78%|███████▊  | 538M/692M [03:59<01:16, 2.10MB/s]
+ 78%|███████▊  | 539M/692M [03:59<01:20, 2.00MB/s]
+ 78%|███████▊  | 539M/692M [03:59<01:22, 1.96MB/s]
+ 78%|███████▊  | 539M/692M [03:59<01:22, 1.95MB/s]
+ 78%|███████▊  | 540M/692M [04:00<01:20, 1.98MB/s]
+ 78%|███████▊  | 540M/692M [04:00<01:20, 1.99MB/s]
+ 78%|███████▊  | 540M/692M [04:00<01:21, 1.97MB/s]
+ 78%|███████▊  | 540M/692M [04:00<01:21, 1.96MB/s]
+ 78%|███████▊  | 540M/692M [04:00<01:20, 1.98MB/s]
+ 78%|███████▊  | 541M/692M [04:00<01:18, 2.03MB/s]
+ 78%|███████▊  | 541M/692M [04:00<01:19, 2.00MB/s]
+ 78%|███████▊  | 541M/692M [04:00<01:17, 2.04MB/s]
+ 78%|███████▊  | 542M/692M [04:01<01:16, 2.06MB/s]
+ 78%|███████▊  | 542M/692M [04:01<01:15, 2.08MB/s]
+ 78%|███████▊  | 542M/692M [04:01<01:14, 2.11MB/s]
+ 78%|███████▊  | 542M/692M [04:01<01:14, 2.12MB/s]
+ 78%|███████▊  | 542M/692M [04:01<01:13, 2.13MB/s]
+ 78%|███████▊  | 543M/692M [04:01<01:13, 2.13MB/s]
+ 78%|███████▊  | 543M/692M [04:01<01:13, 2.14MB/s]
+ 78%|███████▊  | 543M/692M [04:01<01:10, 2.23MB/s]
+ 79%|███████▊  | 544M/692M [04:02<01:10, 2.21MB/s]
+ 79%|███████▊  | 544M/692M [04:02<01:10, 2.22MB/s]
+ 79%|███████▊  | 544M/692M [04:02<01:07, 2.30MB/s]
+ 79%|███████▊  | 544M/692M [04:02<01:06, 2.35MB/s]
+ 79%|███████▊  | 544M/692M [04:02<01:07, 2.31MB/s]
+ 79%|███████▊  | 545M/692M [04:02<01:08, 2.26MB/s]
+ 79%|███████▊  | 545M/692M [04:02<01:04, 2.39MB/s]
+ 79%|███████▉  | 546M/692M [04:02<01:03, 2.44MB/s]
+ 79%|███████▉  | 546M/692M [04:03<01:05, 2.36MB/s]
+ 79%|███████▉  | 546M/692M [04:03<01:03, 2.41MB/s]
+ 79%|███████▉  | 546M/692M [04:03<01:10, 2.16MB/s]
+ 79%|███████▉  | 547M/692M [04:03<01:08, 2.22MB/s]
+ 79%|███████▉  | 547M/692M [04:03<01:10, 2.16MB/s]
+ 79%|███████▉  | 547M/692M [04:03<01:10, 2.16MB/s]
+ 79%|███████▉  | 547M/692M [04:03<01:13, 2.08MB/s]
+ 79%|███████▉  | 548M/692M [04:03<01:14, 2.04MB/s]
+ 79%|███████▉  | 548M/692M [04:04<01:14, 2.02MB/s]
+ 79%|███████▉  | 548M/692M [04:04<01:13, 2.05MB/s]
+ 79%|███████▉  | 548M/692M [04:04<01:10, 2.13MB/s]
+ 79%|███████▉  | 549M/692M [04:04<01:10, 2.15MB/s]
+ 79%|███████▉  | 549M/692M [04:04<01:08, 2.20MB/s]
+ 79%|███████▉  | 549M/692M [04:04<01:08, 2.19MB/s]
+ 79%|███████▉  | 549M/692M [04:04<01:08, 2.20MB/s]
+ 79%|███████▉  | 550M/692M [04:04<01:06, 2.24MB/s]
+ 79%|███████▉  | 550M/692M [04:05<01:05, 2.27MB/s]
+ 79%|███████▉  | 550M/692M [04:05<01:04, 2.32MB/s]
+ 79%|███████▉  | 550M/692M [04:05<01:02, 2.37MB/s]
+ 80%|███████▉  | 551M/692M [04:05<01:03, 2.33MB/s]
+ 80%|███████▉  | 551M/692M [04:05<01:02, 2.38MB/s]
+ 80%|███████▉  | 551M/692M [04:05<01:00, 2.44MB/s]
+ 80%|███████▉  | 551M/692M [04:05<01:00, 2.46MB/s]
+ 80%|███████▉  | 552M/692M [04:05<01:02, 2.37MB/s]
+ 80%|███████▉  | 552M/692M [04:05<01:00, 2.45MB/s]
+ 80%|███████▉  | 552M/692M [04:06<01:00, 2.45MB/s]
+ 80%|███████▉  | 553M/692M [04:06<00:58, 2.49MB/s]
+ 80%|███████▉  | 553M/692M [04:06<00:58, 2.50MB/s]
+ 80%|███████▉  | 553M/692M [04:06<00:57, 2.53MB/s]
+ 80%|███████▉  | 553M/692M [04:06<00:58, 2.49MB/s]
+ 80%|███████▉  | 554M/692M [04:06<00:57, 2.52MB/s]
+ 80%|███████▉  | 554M/692M [04:06<00:58, 2.48MB/s]
+ 80%|████████  | 554M/692M [04:06<00:57, 2.51MB/s]
+ 80%|████████  | 554M/692M [04:07<00:57, 2.53MB/s]
+ 80%|████████  | 555M/692M [04:07<00:56, 2.54MB/s]
+ 80%|████████  | 555M/692M [04:07<00:56, 2.54MB/s]
+ 80%|████████  | 555M/692M [04:07<00:56, 2.52MB/s]
+ 80%|████████  | 556M/692M [04:07<00:56, 2.54MB/s]
+ 80%|████████  | 556M/692M [04:07<00:55, 2.58MB/s]
+ 80%|████████  | 556M/692M [04:07<00:55, 2.59MB/s]
+ 80%|████████  | 557M/692M [04:07<00:54, 2.59MB/s]
+ 80%|████████  | 557M/692M [04:07<00:54, 2.59MB/s]
+ 80%|████████  | 557M/692M [04:08<00:52, 2.70MB/s]
+ 81%|████████  | 558M/692M [04:08<00:52, 2.67MB/s]
+ 81%|████████  | 558M/692M [04:08<00:52, 2.69MB/s]
+ 81%|████████  | 558M/692M [04:08<00:53, 2.61MB/s]
+ 81%|████████  | 559M/692M [04:08<00:53, 2.61MB/s]
+ 81%|████████  | 559M/692M [04:08<00:49, 2.82MB/s]
+ 81%|████████  | 559M/692M [04:08<00:48, 2.88MB/s]
+ 81%|████████  | 560M/692M [04:09<00:48, 2.85MB/s]
+ 81%|████████  | 560M/692M [04:09<00:49, 2.82MB/s]
+ 81%|████████  | 560M/692M [04:09<00:47, 2.90MB/s]
+ 81%|████████  | 561M/692M [04:09<00:47, 2.91MB/s]
+ 81%|████████  | 561M/692M [04:09<00:46, 2.95MB/s]
+ 81%|████████  | 562M/692M [04:09<00:46, 2.92MB/s]
+ 81%|████████  | 562M/692M [04:09<00:45, 2.99MB/s]
+ 81%|████████  | 562M/692M [04:09<00:44, 3.04MB/s]
+ 81%|████████▏ | 563M/692M [04:10<00:44, 3.05MB/s]
+ 81%|████████▏ | 563M/692M [04:10<00:44, 3.02MB/s]
+ 81%|████████▏ | 564M/692M [04:10<00:44, 3.07MB/s]
+ 81%|████████▏ | 564M/692M [04:10<00:43, 3.08MB/s]
+ 81%|████████▏ | 564M/692M [04:10<00:43, 3.12MB/s]
+ 82%|████████▏ | 565M/692M [04:10<00:42, 3.14MB/s]
+ 82%|████████▏ | 565M/692M [04:10<00:44, 3.02MB/s]
+ 82%|████████▏ | 565M/692M [04:11<00:48, 2.77MB/s]
+ 82%|████████▏ | 566M/692M [04:11<00:49, 2.70MB/s]
+ 82%|████████▏ | 566M/692M [04:11<00:50, 2.63MB/s]
+ 82%|████████▏ | 566M/692M [04:11<00:50, 2.63MB/s]
+ 82%|████████▏ | 567M/692M [04:11<00:50, 2.62MB/s]
+ 82%|████████▏ | 567M/692M [04:11<00:50, 2.62MB/s]
+ 82%|████████▏ | 568M/692M [04:11<00:47, 2.73MB/s]
+ 82%|████████▏ | 568M/692M [04:12<00:47, 2.72MB/s]
+ 82%|████████▏ | 568M/692M [04:12<00:46, 2.80MB/s]
+ 82%|████████▏ | 569M/692M [04:12<00:46, 2.79MB/s]
+ 82%|████████▏ | 569M/692M [04:12<00:45, 2.87MB/s]
+ 82%|████████▏ | 570M/692M [04:12<00:43, 2.96MB/s]
+ 82%|████████▏ | 570M/692M [04:12<00:46, 2.78MB/s]
+ 82%|████████▏ | 570M/692M [04:12<00:50, 2.55MB/s]
+ 82%|████████▏ | 570M/692M [04:13<00:51, 2.46MB/s]
+ 82%|████████▏ | 571M/692M [04:13<00:52, 2.41MB/s]
+ 82%|████████▏ | 571M/692M [04:13<00:58, 2.18MB/s]
+ 83%|████████▎ | 571M/692M [04:13<00:56, 2.23MB/s]
+ 83%|████████▎ | 572M/692M [04:13<01:02, 2.02MB/s]
+ 83%|████████▎ | 572M/692M [04:13<01:03, 1.98MB/s]
+ 83%|████████▎ | 572M/692M [04:13<01:05, 1.92MB/s]
+ 83%|████████▎ | 572M/692M [04:14<01:07, 1.86MB/s]
+ 83%|████████▎ | 572M/692M [04:14<01:09, 1.81MB/s]
+ 83%|████████▎ | 573M/692M [04:14<01:06, 1.89MB/s]
+ 83%|████████▎ | 573M/692M [04:14<01:07, 1.85MB/s]
+ 83%|████████▎ | 573M/692M [04:14<01:13, 1.70MB/s]
+ 83%|████████▎ | 574M/692M [04:14<01:17, 1.61MB/s]
+ 83%|████████▎ | 574M/692M [04:15<01:19, 1.56MB/s]
+ 83%|████████▎ | 574M/692M [04:15<01:21, 1.52MB/s]
+ 83%|████████▎ | 574M/692M [04:15<01:22, 1.50MB/s]
+ 83%|████████▎ | 574M/692M [04:15<01:21, 1.51MB/s]
+ 83%|████████▎ | 575M/692M [04:15<01:21, 1.51MB/s]
+ 83%|████████▎ | 575M/692M [04:15<01:18, 1.56MB/s]
+ 83%|████████▎ | 575M/692M [04:16<01:19, 1.54MB/s]
+ 83%|████████▎ | 576M/692M [04:16<01:18, 1.56MB/s]
+ 83%|████████▎ | 576M/692M [04:16<01:16, 1.59MB/s]
+ 83%|████████▎ | 576M/692M [04:16<01:15, 1.62MB/s]
+ 83%|████████▎ | 576M/692M [04:16<01:13, 1.65MB/s]
+ 83%|████████▎ | 576M/692M [04:16<01:12, 1.67MB/s]
+ 83%|████████▎ | 577M/692M [04:16<01:11, 1.68MB/s]
+ 83%|████████▎ | 577M/692M [04:17<01:10, 1.73MB/s]
+ 83%|████████▎ | 577M/692M [04:17<01:07, 1.78MB/s]
+ 83%|████████▎ | 578M/692M [04:17<01:07, 1.77MB/s]
+ 83%|████████▎ | 578M/692M [04:17<01:06, 1.81MB/s]
+ 83%|████████▎ | 578M/692M [04:17<01:04, 1.86MB/s]
+ 84%|████████▎ | 578M/692M [04:17<01:02, 1.90MB/s]
+ 84%|████████▎ | 578M/692M [04:17<01:01, 1.94MB/s]
+ 84%|████████▎ | 579M/692M [04:18<01:03, 1.89MB/s]
+ 84%|████████▎ | 579M/692M [04:18<01:05, 1.81MB/s]
+ 84%|████████▎ | 579M/692M [04:18<01:09, 1.70MB/s]
+ 84%|████████▎ | 580M/692M [04:18<01:12, 1.63MB/s]
+ 84%|████████▎ | 580M/692M [04:18<01:11, 1.66MB/s]
+ 84%|████████▍ | 580M/692M [04:18<01:11, 1.65MB/s]
+ 84%|████████▍ | 580M/692M [04:19<01:09, 1.70MB/s]
+ 84%|████████▍ | 580M/692M [04:19<01:10, 1.67MB/s]
+ 84%|████████▍ | 581M/692M [04:19<01:07, 1.73MB/s]
+ 84%|████████▍ | 581M/692M [04:19<01:06, 1.76MB/s]
+ 84%|████████▍ | 581M/692M [04:19<01:05, 1.78MB/s]
+ 84%|████████▍ | 582M/692M [04:19<01:03, 1.82MB/s]
+ 84%|████████▍ | 582M/692M [04:19<01:01, 1.88MB/s]
+ 84%|████████▍ | 582M/692M [04:20<01:01, 1.87MB/s]
+ 84%|████████▍ | 582M/692M [04:20<01:00, 1.91MB/s]
+ 84%|████████▍ | 582M/692M [04:20<01:00, 1.92MB/s]
+ 84%|████████▍ | 583M/692M [04:20<00:59, 1.92MB/s]
+ 84%|████████▍ | 583M/692M [04:20<00:58, 1.96MB/s]
+ 84%|████████▍ | 583M/692M [04:20<00:57, 2.00MB/s]
+ 84%|████████▍ | 584M/692M [04:20<00:57, 1.98MB/s]
+ 84%|████████▍ | 584M/692M [04:20<00:56, 2.02MB/s]
+ 84%|████████▍ | 584M/692M [04:21<00:56, 2.01MB/s]
+ 84%|████████▍ | 584M/692M [04:21<00:56, 1.99MB/s]
+ 84%|████████▍ | 584M/692M [04:21<00:55, 2.03MB/s]
+ 84%|████████▍ | 585M/692M [04:21<00:54, 2.05MB/s]
+ 84%|████████▍ | 585M/692M [04:21<00:55, 2.04MB/s]
+ 85%|████████▍ | 585M/692M [04:21<00:54, 2.04MB/s]
+ 85%|████████▍ | 586M/692M [04:21<00:54, 2.07MB/s]
+ 85%|████████▍ | 586M/692M [04:21<00:53, 2.10MB/s]
+ 85%|████████▍ | 586M/692M [04:22<00:52, 2.11MB/s]
+ 85%|████████▍ | 586M/692M [04:22<00:51, 2.15MB/s]
+ 85%|████████▍ | 586M/692M [04:22<00:51, 2.16MB/s]
+ 85%|████████▍ | 587M/692M [04:22<00:50, 2.19MB/s]
+ 85%|████████▍ | 587M/692M [04:22<00:52, 2.11MB/s]
+ 85%|████████▍ | 587M/692M [04:22<00:55, 1.99MB/s]
+ 85%|████████▍ | 588M/692M [04:22<00:58, 1.88MB/s]
+ 85%|████████▍ | 588M/692M [04:23<00:59, 1.84MB/s]
+ 85%|████████▍ | 588M/692M [04:23<01:00, 1.81MB/s]
+ 85%|████████▍ | 588M/692M [04:23<00:59, 1.82MB/s]
+ 85%|████████▌ | 588M/692M [04:23<00:59, 1.83MB/s]
+ 85%|████████▌ | 589M/692M [04:23<00:59, 1.82MB/s]
+ 85%|████████▌ | 589M/692M [04:23<01:01, 1.76MB/s]
+ 85%|████████▌ | 589M/692M [04:23<01:06, 1.63MB/s]
+ 85%|████████▌ | 590M/692M [04:24<01:08, 1.58MB/s]
+ 85%|████████▌ | 590M/692M [04:24<01:08, 1.58MB/s]
+ 85%|████████▌ | 590M/692M [04:24<01:09, 1.55MB/s]
+ 85%|████████▌ | 590M/692M [04:24<01:09, 1.54MB/s]
+ 85%|████████▌ | 590M/692M [04:24<01:08, 1.57MB/s]
+ 85%|████████▌ | 591M/692M [04:24<01:06, 1.60MB/s]
+ 85%|████████▌ | 591M/692M [04:25<01:05, 1.63MB/s]
+ 85%|████████▌ | 591M/692M [04:25<01:05, 1.63MB/s]
+ 85%|████████▌ | 592M/692M [04:25<01:05, 1.62MB/s]
+ 85%|████████▌ | 592M/692M [04:25<01:02, 1.69MB/s]
+ 86%|████████▌ | 592M/692M [04:25<01:03, 1.66MB/s]
+ 86%|████████▌ | 592M/692M [04:25<01:00, 1.74MB/s]
+ 86%|████████▌ | 592M/692M [04:26<00:59, 1.75MB/s]
+ 86%|████████▌ | 593M/692M [04:26<00:59, 1.77MB/s]
+ 86%|████████▌ | 593M/692M [04:26<00:57, 1.83MB/s]
+ 86%|████████▌ | 593M/692M [04:26<00:55, 1.86MB/s]
+ 86%|████████▌ | 594M/692M [04:26<00:55, 1.87MB/s]
+ 86%|████████▌ | 594M/692M [04:26<00:55, 1.86MB/s]
+ 86%|████████▌ | 594M/692M [04:26<00:53, 1.93MB/s]
+ 86%|████████▌ | 594M/692M [04:27<00:53, 1.93MB/s]
+ 86%|████████▌ | 594M/692M [04:27<00:51, 1.98MB/s]
+ 86%|████████▌ | 595M/692M [04:27<00:52, 1.97MB/s]
+ 86%|████████▌ | 595M/692M [04:27<00:50, 2.02MB/s]
+ 86%|████████▌ | 595M/692M [04:27<00:49, 2.05MB/s]
+ 86%|████████▌ | 596M/692M [04:27<00:49, 2.07MB/s]
+ 86%|████████▌ | 596M/692M [04:27<00:48, 2.10MB/s]
+ 86%|████████▌ | 596M/692M [04:27<00:48, 2.09MB/s]
+ 86%|████████▌ | 596M/692M [04:28<00:47, 2.13MB/s]
+ 86%|████████▌ | 596M/692M [04:28<00:46, 2.18MB/s]
+ 86%|████████▌ | 597M/692M [04:28<00:46, 2.18MB/s]
+ 86%|████████▌ | 597M/692M [04:28<00:44, 2.25MB/s]
+ 86%|████████▋ | 597M/692M [04:28<00:44, 2.23MB/s]
+ 86%|████████▋ | 598M/692M [04:28<00:43, 2.28MB/s]
+ 86%|████████▋ | 598M/692M [04:28<00:44, 2.24MB/s]
+ 86%|████████▋ | 598M/692M [04:28<00:42, 2.32MB/s]
+ 86%|████████▋ | 598M/692M [04:28<00:42, 2.30MB/s]
+ 86%|████████▋ | 598M/692M [04:29<00:42, 2.34MB/s]
+ 86%|████████▋ | 599M/692M [04:29<00:41, 2.38MB/s]
+ 87%|████████▋ | 599M/692M [04:29<00:40, 2.43MB/s]
+ 87%|████████▋ | 599M/692M [04:29<00:40, 2.43MB/s]
+ 87%|████████▋ | 600M/692M [04:29<00:39, 2.48MB/s]
+ 87%|████████▋ | 600M/692M [04:29<00:38, 2.51MB/s]
+ 87%|████████▋ | 600M/692M [04:29<00:38, 2.51MB/s]
+ 87%|████████▋ | 600M/692M [04:29<00:38, 2.51MB/s]
+ 87%|████████▋ | 601M/692M [04:29<00:37, 2.53MB/s]
+ 87%|████████▋ | 601M/692M [04:30<00:36, 2.59MB/s]
+ 87%|████████▋ | 602M/692M [04:30<00:36, 2.63MB/s]
+ 87%|████████▋ | 602M/692M [04:30<00:36, 2.62MB/s]
+ 87%|████████▋ | 602M/692M [04:30<00:36, 2.59MB/s]
+ 87%|████████▋ | 602M/692M [04:30<00:40, 2.32MB/s]
+ 87%|████████▋ | 602M/692M [04:30<00:41, 2.26MB/s]
+ 87%|████████▋ | 603M/692M [04:30<00:43, 2.15MB/s]
+ 87%|████████▋ | 603M/692M [04:30<00:43, 2.15MB/s]
+ 87%|████████▋ | 603M/692M [04:31<00:43, 2.15MB/s]
+ 87%|████████▋ | 604M/692M [04:31<00:41, 2.23MB/s]
+ 87%|████████▋ | 604M/692M [04:31<00:41, 2.25MB/s]
+ 87%|████████▋ | 604M/692M [04:31<00:40, 2.28MB/s]
+ 87%|████████▋ | 604M/692M [04:31<00:39, 2.31MB/s]
+ 87%|████████▋ | 604M/692M [04:31<00:40, 2.27MB/s]
+ 87%|████████▋ | 605M/692M [04:31<00:38, 2.38MB/s]
+ 87%|████████▋ | 605M/692M [04:32<00:41, 2.19MB/s]
+ 87%|████████▋ | 606M/692M [04:32<00:41, 2.19MB/s]
+ 87%|████████▋ | 606M/692M [04:32<00:48, 1.87MB/s]
+ 88%|████████▊ | 606M/692M [04:32<00:55, 1.64MB/s]
+ 88%|████████▊ | 606M/692M [04:32<00:59, 1.53MB/s]
+ 88%|████████▊ | 606M/692M [04:32<01:00, 1.49MB/s]
+ 88%|████████▊ | 607M/692M [04:33<01:01, 1.45MB/s]
+ 88%|████████▊ | 607M/692M [04:33<01:01, 1.45MB/s]
+ 88%|████████▊ | 607M/692M [04:33<01:00, 1.47MB/s]
+ 88%|████████▊ | 608M/692M [04:33<01:01, 1.45MB/s]
+ 88%|████████▊ | 608M/692M [04:33<01:00, 1.47MB/s]
+ 88%|████████▊ | 608M/692M [04:34<00:58, 1.52MB/s]
+ 88%|████████▊ | 608M/692M [04:34<00:57, 1.53MB/s]
+ 88%|████████▊ | 608M/692M [04:34<00:57, 1.53MB/s]
+ 88%|████████▊ | 609M/692M [04:34<00:54, 1.60MB/s]
+ 88%|████████▊ | 609M/692M [04:34<00:54, 1.62MB/s]
+ 88%|████████▊ | 609M/692M [04:34<00:52, 1.67MB/s]
+ 88%|████████▊ | 610M/692M [04:34<00:52, 1.66MB/s]
+ 88%|████████▊ | 610M/692M [04:35<00:50, 1.73MB/s]
+ 88%|████████▊ | 610M/692M [04:35<00:49, 1.74MB/s]
+ 88%|████████▊ | 610M/692M [04:35<00:49, 1.73MB/s]
+ 88%|████████▊ | 610M/692M [04:35<00:47, 1.82MB/s]
+ 88%|████████▊ | 611M/692M [04:35<00:47, 1.82MB/s]
+ 88%|████████▊ | 611M/692M [04:35<00:46, 1.82MB/s]
+ 88%|████████▊ | 611M/692M [04:35<00:45, 1.86MB/s]
+ 88%|████████▊ | 612M/692M [04:36<00:43, 1.93MB/s]
+ 88%|████████▊ | 612M/692M [04:36<00:42, 1.97MB/s]
+ 88%|████████▊ | 612M/692M [04:36<00:41, 2.01MB/s]
+ 88%|████████▊ | 612M/692M [04:36<00:42, 1.97MB/s]
+ 88%|████████▊ | 612M/692M [04:36<00:41, 2.02MB/s]
+ 89%|████████▊ | 613M/692M [04:36<00:40, 2.06MB/s]
+ 89%|████████▊ | 613M/692M [04:36<00:45, 1.81MB/s]
+ 89%|████████▊ | 613M/692M [04:37<00:42, 1.93MB/s]
+ 89%|████████▊ | 614M/692M [04:37<00:44, 1.84MB/s]
+ 89%|████████▊ | 614M/692M [04:37<00:46, 1.76MB/s]
+ 89%|████████▊ | 614M/692M [04:37<00:45, 1.79MB/s]
+ 89%|████████▊ | 614M/692M [04:37<00:47, 1.70MB/s]
+ 89%|████████▉ | 615M/692M [04:37<00:45, 1.78MB/s]
+ 89%|████████▉ | 615M/692M [04:37<00:43, 1.86MB/s]
+ 89%|████████▉ | 615M/692M [04:38<00:44, 1.83MB/s]
+ 89%|████████▉ | 615M/692M [04:38<00:44, 1.82MB/s]
+ 89%|████████▉ | 616M/692M [04:38<00:42, 1.88MB/s]
+ 89%|████████▉ | 616M/692M [04:38<00:41, 1.95MB/s]
+ 89%|████████▉ | 616M/692M [04:38<00:39, 2.01MB/s]
+ 89%|████████▉ | 616M/692M [04:38<00:39, 2.04MB/s]
+ 89%|████████▉ | 617M/692M [04:38<00:38, 2.08MB/s]
+ 89%|████████▉ | 617M/692M [04:38<00:37, 2.10MB/s]
+ 89%|████████▉ | 617M/692M [04:39<00:37, 2.11MB/s]
+ 89%|████████▉ | 617M/692M [04:39<00:39, 2.00MB/s]
+ 89%|████████▉ | 618M/692M [04:39<00:38, 2.04MB/s]
+ 89%|████████▉ | 618M/692M [04:39<00:37, 2.07MB/s]
+ 89%|████████▉ | 618M/692M [04:39<00:37, 2.09MB/s]
+ 89%|████████▉ | 618M/692M [04:39<00:36, 2.10MB/s]
+ 89%|████████▉ | 619M/692M [04:39<00:36, 2.12MB/s]
+ 89%|████████▉ | 619M/692M [04:40<00:36, 2.12MB/s]
+ 89%|████████▉ | 619M/692M [04:40<00:36, 2.11MB/s]
+ 89%|████████▉ | 619M/692M [04:40<00:37, 2.05MB/s]
+ 89%|████████▉ | 620M/692M [04:40<00:36, 2.09MB/s]
+ 90%|████████▉ | 620M/692M [04:40<00:36, 2.10MB/s]
+ 90%|████████▉ | 620M/692M [04:40<00:33, 2.22MB/s]
+ 90%|████████▉ | 620M/692M [04:40<00:38, 1.98MB/s]
+ 90%|████████▉ | 621M/692M [04:40<00:37, 2.02MB/s]
+ 90%|████████▉ | 621M/692M [04:41<00:39, 1.89MB/s]
+ 90%|████████▉ | 621M/692M [04:41<00:40, 1.84MB/s]
+ 90%|████████▉ | 622M/692M [04:41<00:39, 1.88MB/s]
+ 90%|████████▉ | 622M/692M [04:41<00:40, 1.83MB/s]
+ 90%|████████▉ | 622M/692M [04:41<00:40, 1.83MB/s]
+ 90%|████████▉ | 622M/692M [04:41<00:39, 1.88MB/s]
+ 90%|████████▉ | 622M/692M [04:41<00:37, 1.94MB/s]
+ 90%|████████▉ | 623M/692M [04:42<00:38, 1.90MB/s]
+ 90%|████████▉ | 623M/692M [04:42<00:37, 1.95MB/s]
+ 90%|█████████ | 623M/692M [04:42<00:36, 2.00MB/s]
+ 90%|█████████ | 624M/692M [04:42<00:35, 2.03MB/s]
+ 90%|█████████ | 624M/692M [04:42<00:34, 2.06MB/s]
+ 90%|█████████ | 624M/692M [04:42<00:34, 2.09MB/s]
+ 90%|█████████ | 624M/692M [04:42<00:33, 2.11MB/s]
+ 90%|█████████ | 624M/692M [04:42<00:34, 2.08MB/s]
+ 90%|█████████ | 625M/692M [04:43<00:33, 2.12MB/s]
+ 90%|█████████ | 625M/692M [04:43<00:32, 2.17MB/s]
+ 90%|█████████ | 625M/692M [04:43<00:32, 2.16MB/s]
+ 90%|█████████ | 626M/692M [04:43<00:31, 2.19MB/s]
+ 90%|█████████ | 626M/692M [04:43<00:31, 2.19MB/s]
+ 90%|█████████ | 626M/692M [04:43<00:31, 2.22MB/s]
+ 90%|█████████ | 626M/692M [04:43<00:31, 2.22MB/s]
+ 90%|█████████ | 626M/692M [04:43<00:31, 2.22MB/s]
+ 91%|█████████ | 627M/692M [04:44<00:31, 2.20MB/s]
+ 91%|█████████ | 627M/692M [04:44<00:30, 2.23MB/s]
+ 91%|█████████ | 627M/692M [04:44<00:30, 2.24MB/s]
+ 91%|█████████ | 628M/692M [04:44<00:30, 2.26MB/s]
+ 91%|█████████ | 628M/692M [04:44<00:29, 2.29MB/s]
+ 91%|█████████ | 628M/692M [04:44<00:29, 2.28MB/s]
+ 91%|█████████ | 628M/692M [04:44<00:28, 2.32MB/s]
+ 91%|█████████ | 628M/692M [04:44<00:29, 2.30MB/s]
+ 91%|█████████ | 629M/692M [04:44<00:28, 2.32MB/s]
+ 91%|█████████ | 629M/692M [04:45<00:28, 2.34MB/s]
+ 91%|█████████ | 629M/692M [04:45<00:27, 2.39MB/s]
+ 91%|█████████ | 630M/692M [04:45<00:27, 2.40MB/s]
+ 91%|█████████ | 630M/692M [04:45<00:27, 2.36MB/s]
+ 91%|█████████ | 630M/692M [04:45<00:27, 2.39MB/s]
+ 91%|█████████ | 630M/692M [04:45<00:25, 2.51MB/s]
+ 91%|█████████ | 631M/692M [04:45<00:26, 2.43MB/s]
+ 91%|█████████ | 631M/692M [04:45<00:26, 2.47MB/s]
+ 91%|█████████ | 631M/692M [04:45<00:27, 2.31MB/s]
+ 91%|█████████ | 631M/692M [04:46<00:27, 2.34MB/s]
+ 91%|█████████ | 632M/692M [04:46<00:29, 2.19MB/s]
+ 91%|█████████▏| 632M/692M [04:46<00:30, 2.09MB/s]
+ 91%|█████████▏| 632M/692M [04:46<00:30, 2.07MB/s]
+ 91%|█████████▏| 632M/692M [04:46<00:34, 1.83MB/s]
+ 91%|█████████▏| 633M/692M [04:46<00:32, 1.91MB/s]
+ 91%|█████████▏| 633M/692M [04:46<00:35, 1.78MB/s]
+ 91%|█████████▏| 633M/692M [04:47<00:36, 1.69MB/s]
+ 91%|█████████▏| 633M/692M [04:47<00:36, 1.70MB/s]
+ 92%|█████████▏| 634M/692M [04:47<00:37, 1.66MB/s]
+ 92%|█████████▏| 634M/692M [04:47<00:36, 1.67MB/s]
+ 92%|█████████▏| 634M/692M [04:47<00:37, 1.65MB/s]
+ 92%|█████████▏| 634M/692M [04:47<00:38, 1.57MB/s]
+ 92%|█████████▏| 635M/692M [04:48<00:39, 1.52MB/s]
+ 92%|█████████▏| 635M/692M [04:48<00:41, 1.44MB/s]
+ 92%|█████████▏| 635M/692M [04:48<00:43, 1.39MB/s]
+ 92%|█████████▏| 635M/692M [04:48<00:43, 1.39MB/s]
+ 92%|█████████▏| 636M/692M [04:48<00:43, 1.37MB/s]
+ 92%|█████████▏| 636M/692M [04:49<00:43, 1.38MB/s]
+ 92%|█████████▏| 636M/692M [04:49<00:42, 1.39MB/s]
+ 92%|█████████▏| 636M/692M [04:49<00:41, 1.40MB/s]
+ 92%|█████████▏| 637M/692M [04:49<00:40, 1.44MB/s]
+ 92%|█████████▏| 637M/692M [04:49<00:39, 1.46MB/s]
+ 92%|█████████▏| 637M/692M [04:50<00:38, 1.52MB/s]
+ 92%|█████████▏| 637M/692M [04:50<00:37, 1.52MB/s]
+ 92%|█████████▏| 638M/692M [04:50<00:37, 1.55MB/s]
+ 92%|█████████▏| 638M/692M [04:50<00:36, 1.57MB/s]
+ 92%|█████████▏| 638M/692M [04:50<00:35, 1.61MB/s]
+ 92%|█████████▏| 638M/692M [04:50<00:36, 1.54MB/s]
+ 92%|█████████▏| 639M/692M [04:51<00:37, 1.52MB/s]
+ 92%|█████████▏| 639M/692M [04:51<00:38, 1.47MB/s]
+ 92%|█████████▏| 639M/692M [04:51<00:38, 1.45MB/s]
+ 92%|█████████▏| 639M/692M [04:51<00:42, 1.32MB/s]
+ 92%|█████████▏| 640M/692M [04:51<00:44, 1.23MB/s]
+ 92%|█████████▏| 640M/692M [04:52<00:45, 1.20MB/s]
+ 92%|█████████▏| 640M/692M [04:52<00:46, 1.17MB/s]
+ 92%|█████████▏| 640M/692M [04:52<00:47, 1.16MB/s]
+ 92%|█████████▏| 640M/692M [04:52<00:48, 1.14MB/s]
+ 92%|█████████▏| 640M/692M [04:52<00:46, 1.17MB/s]
+ 92%|█████████▏| 640M/692M [04:52<00:46, 1.16MB/s]
+ 93%|█████████▎| 641M/692M [04:52<00:45, 1.19MB/s]
+ 93%|█████████▎| 641M/692M [04:52<00:44, 1.21MB/s]
+ 93%|█████████▎| 641M/692M [04:53<00:45, 1.19MB/s]
+ 93%|█████████▎| 641M/692M [04:53<00:46, 1.16MB/s]
+ 93%|█████████▎| 641M/692M [04:53<00:48, 1.11MB/s]
+ 93%|█████████▎| 641M/692M [04:53<00:50, 1.06MB/s]
+ 93%|█████████▎| 641M/692M [04:53<00:51, 1.04MB/s]
+ 93%|█████████▎| 642M/692M [04:53<00:50, 1.05MB/s]
+ 93%|█████████▎| 642M/692M [04:53<00:50, 1.06MB/s]
+ 93%|█████████▎| 642M/692M [04:53<00:49, 1.06MB/s]
+ 93%|█████████▎| 642M/692M [04:54<00:48, 1.08MB/s]
+ 93%|█████████▎| 642M/692M [04:54<00:46, 1.13MB/s]
+ 93%|█████████▎| 642M/692M [04:54<00:46, 1.13MB/s]
+ 93%|█████████▎| 642M/692M [04:54<00:47, 1.11MB/s]
+ 93%|█████████▎| 642M/692M [04:54<00:47, 1.10MB/s]
+ 93%|█████████▎| 643M/692M [04:54<00:43, 1.21MB/s]
+ 93%|█████████▎| 643M/692M [04:54<00:43, 1.19MB/s]
+ 93%|█████████▎| 643M/692M [04:54<00:44, 1.15MB/s]
+ 93%|█████████▎| 643M/692M [04:55<00:41, 1.25MB/s]
+ 93%|█████████▎| 643M/692M [04:55<00:42, 1.21MB/s]
+ 93%|█████████▎| 644M/692M [04:55<00:39, 1.29MB/s]
+ 93%|█████████▎| 644M/692M [04:55<00:38, 1.32MB/s]
+ 93%|█████████▎| 644M/692M [04:55<00:39, 1.28MB/s]
+ 93%|█████████▎| 644M/692M [04:55<00:38, 1.33MB/s]
+ 93%|█████████▎| 644M/692M [04:56<00:37, 1.35MB/s]
+ 93%|█████████▎| 645M/692M [04:56<00:34, 1.44MB/s]
+ 93%|█████████▎| 645M/692M [04:56<00:34, 1.46MB/s]
+ 93%|█████████▎| 645M/692M [04:56<00:33, 1.49MB/s]
+ 93%|█████████▎| 645M/692M [04:56<00:33, 1.48MB/s]
+ 93%|█████████▎| 646M/692M [04:56<00:32, 1.52MB/s]
+ 93%|█████████▎| 646M/692M [04:57<00:30, 1.58MB/s]
+ 93%|█████████▎| 646M/692M [04:57<00:31, 1.56MB/s]
+ 93%|█████████▎| 646M/692M [04:57<00:28, 1.66MB/s]
+ 93%|█████████▎| 647M/692M [04:57<00:29, 1.62MB/s]
+ 93%|█████████▎| 647M/692M [04:57<00:27, 1.73MB/s]
+ 93%|█████████▎| 647M/692M [04:57<00:27, 1.74MB/s]
+ 94%|█████████▎| 647M/692M [04:57<00:27, 1.73MB/s]
+ 94%|█████████▎| 648M/692M [04:58<00:25, 1.83MB/s]
+ 94%|█████████▎| 648M/692M [04:58<00:24, 1.88MB/s]
+ 94%|█████████▎| 648M/692M [04:58<00:25, 1.84MB/s]
+ 94%|█████████▎| 648M/692M [04:58<00:25, 1.84MB/s]
+ 94%|█████████▎| 649M/692M [04:58<00:23, 1.92MB/s]
+ 94%|█████████▎| 649M/692M [04:58<00:23, 1.97MB/s]
+ 94%|█████████▍| 649M/692M [04:58<00:23, 1.97MB/s]
+ 94%|█████████▍| 649M/692M [04:59<00:27, 1.61MB/s]
+ 94%|█████████▍| 650M/692M [04:59<00:32, 1.39MB/s]
+ 94%|█████████▍| 650M/692M [04:59<00:34, 1.28MB/s]
+ 94%|█████████▍| 650M/692M [04:59<00:35, 1.25MB/s]
+ 94%|█████████▍| 650M/692M [05:00<00:35, 1.24MB/s]
+ 94%|█████████▍| 650M/692M [05:00<00:36, 1.21MB/s]
+ 94%|█████████▍| 651M/692M [05:00<00:36, 1.20MB/s]
+ 94%|█████████▍| 651M/692M [05:00<00:34, 1.25MB/s]
+ 94%|█████████▍| 651M/692M [05:00<00:35, 1.23MB/s]
+ 94%|█████████▍| 651M/692M [05:00<00:33, 1.28MB/s]
+ 94%|█████████▍| 651M/692M [05:00<00:34, 1.25MB/s]
+ 94%|█████████▍| 652M/692M [05:01<00:32, 1.31MB/s]
+ 94%|█████████▍| 652M/692M [05:01<00:31, 1.35MB/s]
+ 94%|█████████▍| 652M/692M [05:01<00:30, 1.38MB/s]
+ 94%|█████████▍| 652M/692M [05:01<00:29, 1.40MB/s]
+ 94%|█████████▍| 653M/692M [05:01<00:28, 1.47MB/s]
+ 94%|█████████▍| 653M/692M [05:01<00:27, 1.50MB/s]
+ 94%|█████████▍| 653M/692M [05:02<00:27, 1.52MB/s]
+ 94%|█████████▍| 653M/692M [05:02<00:27, 1.51MB/s]
+ 94%|█████████▍| 654M/692M [05:02<00:24, 1.63MB/s]
+ 94%|█████████▍| 654M/692M [05:02<00:25, 1.57MB/s]
+ 94%|█████████▍| 654M/692M [05:02<00:24, 1.65MB/s]
+ 95%|█████████▍| 654M/692M [05:02<00:24, 1.64MB/s]
+ 95%|█████████▍| 655M/692M [05:03<00:22, 1.73MB/s]
+ 95%|█████████▍| 655M/692M [05:03<00:22, 1.74MB/s]
+ 95%|█████████▍| 655M/692M [05:03<00:22, 1.73MB/s]
+ 95%|█████████▍| 655M/692M [05:03<00:21, 1.82MB/s]
+ 95%|█████████▍| 656M/692M [05:03<00:20, 1.84MB/s]
+ 95%|█████████▍| 656M/692M [05:03<00:21, 1.78MB/s]
+ 95%|█████████▍| 656M/692M [05:03<00:20, 1.84MB/s]
+ 95%|█████████▍| 656M/692M [05:04<00:19, 1.91MB/s]
+ 95%|█████████▍| 657M/692M [05:04<00:19, 1.97MB/s]
+ 95%|█████████▍| 657M/692M [05:04<00:19, 1.95MB/s]
+ 95%|█████████▍| 657M/692M [05:04<00:18, 1.99MB/s]
+ 95%|█████████▍| 657M/692M [05:04<00:18, 1.98MB/s]
+ 95%|█████████▍| 658M/692M [05:04<00:18, 2.02MB/s]
+ 95%|█████████▌| 658M/692M [05:04<00:17, 2.06MB/s]
+ 95%|█████████▌| 658M/692M [05:04<00:17, 2.08MB/s]
+ 95%|█████████▌| 658M/692M [05:05<00:17, 2.09MB/s]
+ 95%|█████████▌| 659M/692M [05:05<00:16, 2.13MB/s]
+ 95%|█████████▌| 659M/692M [05:05<00:16, 2.07MB/s]
+ 95%|█████████▌| 659M/692M [05:05<00:18, 1.86MB/s]
+ 95%|█████████▌| 659M/692M [05:05<00:19, 1.77MB/s]
+ 95%|█████████▌| 660M/692M [05:05<00:19, 1.80MB/s]
+ 95%|█████████▌| 660M/692M [05:05<00:18, 1.84MB/s]
+ 95%|█████████▌| 660M/692M [05:06<00:18, 1.78MB/s]
+ 95%|█████████▌| 660M/692M [05:06<00:18, 1.86MB/s]
+ 95%|█████████▌| 661M/692M [05:06<00:17, 1.86MB/s]
+ 95%|█████████▌| 661M/692M [05:06<00:17, 1.94MB/s]
+ 95%|█████████▌| 661M/692M [05:06<00:17, 1.88MB/s]
+ 96%|█████████▌| 661M/692M [05:06<00:16, 1.95MB/s]
+ 96%|█████████▌| 662M/692M [05:06<00:16, 1.97MB/s]
+ 96%|█████████▌| 662M/692M [05:07<00:16, 1.88MB/s]
+ 96%|█████████▌| 662M/692M [05:07<00:18, 1.74MB/s]
+ 96%|█████████▌| 662M/692M [05:07<00:18, 1.68MB/s]
+ 96%|█████████▌| 663M/692M [05:07<00:19, 1.64MB/s]
+ 96%|█████████▌| 663M/692M [05:07<00:18, 1.65MB/s]
+ 96%|█████████▌| 663M/692M [05:07<00:18, 1.67MB/s]
+ 96%|█████████▌| 663M/692M [05:08<00:18, 1.67MB/s]
+ 96%|█████████▌| 664M/692M [05:08<00:17, 1.70MB/s]
+ 96%|█████████▌| 664M/692M [05:08<00:17, 1.69MB/s]
+ 96%|█████████▌| 664M/692M [05:08<00:17, 1.71MB/s]
+ 96%|█████████▌| 664M/692M [05:08<00:17, 1.72MB/s]
+ 96%|█████████▌| 665M/692M [05:08<00:16, 1.71MB/s]
+ 96%|█████████▌| 665M/692M [05:08<00:16, 1.79MB/s]
+ 96%|█████████▌| 665M/692M [05:09<00:15, 1.80MB/s]
+ 96%|█████████▌| 665M/692M [05:09<00:15, 1.78MB/s]
+ 96%|█████████▌| 666M/692M [05:09<00:15, 1.87MB/s]
+ 96%|█████████▌| 666M/692M [05:09<00:14, 1.91MB/s]
+ 96%|█████████▌| 666M/692M [05:09<00:14, 1.87MB/s]
+ 96%|█████████▌| 666M/692M [05:09<00:14, 1.92MB/s]
+ 96%|█████████▋| 667M/692M [05:09<00:13, 1.97MB/s]
+ 96%|█████████▋| 667M/692M [05:09<00:13, 1.93MB/s]
+ 96%|█████████▋| 667M/692M [05:10<00:13, 1.98MB/s]
+ 96%|█████████▋| 667M/692M [05:10<00:12, 2.03MB/s]
+ 96%|█████████▋| 668M/692M [05:10<00:12, 2.06MB/s]
+ 96%|█████████▋| 668M/692M [05:10<00:14, 1.81MB/s]
+ 97%|█████████▋| 668M/692M [05:10<00:13, 1.90MB/s]
+ 97%|█████████▋| 668M/692M [05:10<00:15, 1.63MB/s]
+ 97%|█████████▋| 669M/692M [05:11<00:16, 1.48MB/s]
+ 97%|█████████▋| 669M/692M [05:11<00:18, 1.36MB/s]
+ 97%|█████████▋| 669M/692M [05:11<00:17, 1.35MB/s]
+ 97%|█████████▋| 670M/692M [05:11<00:18, 1.32MB/s]
+ 97%|█████████▋| 670M/692M [05:12<00:18, 1.30MB/s]
+ 97%|█████████▋| 670M/692M [05:12<00:17, 1.34MB/s]
+ 97%|█████████▋| 670M/692M [05:12<00:16, 1.36MB/s]
+ 97%|█████████▋| 670M/692M [05:12<00:16, 1.38MB/s]
+ 97%|█████████▋| 671M/692M [05:12<00:16, 1.39MB/s]
+ 97%|█████████▋| 671M/692M [05:12<00:16, 1.40MB/s]
+ 97%|█████████▋| 671M/692M [05:13<00:15, 1.47MB/s]
+ 97%|█████████▋| 672M/692M [05:13<00:15, 1.45MB/s]
+ 97%|█████████▋| 672M/692M [05:13<00:14, 1.52MB/s]
+ 97%|█████████▋| 672M/692M [05:13<00:13, 1.56MB/s]
+ 97%|█████████▋| 672M/692M [05:13<00:13, 1.60MB/s]
+ 97%|█████████▋| 672M/692M [05:13<00:13, 1.57MB/s]
+ 97%|█████████▋| 673M/692M [05:14<00:12, 1.68MB/s]
+ 97%|█████████▋| 673M/692M [05:14<00:11, 1.70MB/s]
+ 97%|█████████▋| 673M/692M [05:14<00:11, 1.70MB/s]
+ 97%|█████████▋| 674M/692M [05:14<00:11, 1.71MB/s]
+ 97%|█████████▋| 674M/692M [05:14<00:10, 1.81MB/s]
+ 97%|█████████▋| 674M/692M [05:14<00:11, 1.67MB/s]
+ 97%|█████████▋| 674M/692M [05:15<00:11, 1.58MB/s]
+ 97%|█████████▋| 674M/692M [05:15<00:12, 1.54MB/s]
+ 97%|█████████▋| 675M/692M [05:15<00:12, 1.50MB/s]
+ 97%|█████████▋| 675M/692M [05:15<00:11, 1.56MB/s]
+ 98%|█████████▊| 675M/692M [05:15<00:11, 1.52MB/s]
+ 98%|█████████▊| 676M/692M [05:15<00:11, 1.47MB/s]
+ 98%|█████████▊| 676M/692M [05:16<00:12, 1.39MB/s]
+ 98%|█████████▊| 676M/692M [05:16<00:12, 1.33MB/s]
+ 98%|█████████▊| 676M/692M [05:16<00:13, 1.22MB/s]
+ 98%|█████████▊| 676M/692M [05:16<00:14, 1.15MB/s]
+ 98%|█████████▊| 676M/692M [05:16<00:15, 1.07MB/s]
+ 98%|█████████▊| 677M/692M [05:17<00:15, 1.07MB/s]
+ 98%|█████████▊| 677M/692M [05:17<00:15, 1.06MB/s]
+ 98%|█████████▊| 677M/692M [05:17<00:15, 1.06MB/s]
+ 98%|█████████▊| 677M/692M [05:17<00:15, 1.06MB/s]
+ 98%|█████████▊| 677M/692M [05:17<00:14, 1.07MB/s]
+ 98%|█████████▊| 677M/692M [05:17<00:14, 1.07MB/s]
+ 98%|█████████▊| 677M/692M [05:17<00:14, 1.07MB/s]
+ 98%|█████████▊| 678M/692M [05:17<00:14, 1.08MB/s]
+ 98%|█████████▊| 678M/692M [05:17<00:14, 1.08MB/s]
+ 98%|█████████▊| 678M/692M [05:18<00:13, 1.15MB/s]
+ 98%|█████████▊| 678M/692M [05:18<00:12, 1.18MB/s]
+ 98%|█████████▊| 678M/692M [05:18<00:12, 1.18MB/s]
+ 98%|█████████▊| 678M/692M [05:18<00:11, 1.26MB/s]
+ 98%|█████████▊| 678M/692M [05:18<00:11, 1.22MB/s]
+ 98%|█████████▊| 679M/692M [05:18<00:11, 1.28MB/s]
+ 98%|█████████▊| 679M/692M [05:19<00:10, 1.33MB/s]
+ 98%|█████████▊| 679M/692M [05:19<00:10, 1.36MB/s]
+ 98%|█████████▊| 680M/692M [05:19<00:09, 1.39MB/s]
+ 98%|█████████▊| 680M/692M [05:19<00:09, 1.41MB/s]
+ 98%|█████████▊| 680M/692M [05:19<00:09, 1.43MB/s]
+ 98%|█████████▊| 680M/692M [05:19<00:08, 1.50MB/s]
+ 98%|█████████▊| 680M/692M [05:20<00:08, 1.54MB/s]
+ 98%|█████████▊| 681M/692M [05:20<00:07, 1.53MB/s]
+ 98%|█████████▊| 681M/692M [05:20<00:07, 1.57MB/s]
+ 98%|█████████▊| 681M/692M [05:20<00:07, 1.59MB/s]
+ 98%|█████████▊| 682M/692M [05:20<00:06, 1.65MB/s]
+ 98%|█████████▊| 682M/692M [05:20<00:06, 1.66MB/s]
+ 99%|█████████▊| 682M/692M [05:21<00:06, 1.68MB/s]
+ 99%|█████████▊| 682M/692M [05:21<00:06, 1.69MB/s]
+ 99%|█████████▊| 682M/692M [05:21<00:05, 1.78MB/s]
+ 99%|█████████▊| 683M/692M [05:21<00:05, 1.79MB/s]
+ 99%|█████████▊| 683M/692M [05:21<00:05, 1.88MB/s]
+ 99%|█████████▊| 683M/692M [05:21<00:05, 1.82MB/s]
+ 99%|█████████▊| 684M/692M [05:21<00:04, 1.89MB/s]
+ 99%|█████████▉| 684M/692M [05:22<00:04, 1.94MB/s]
+ 99%|█████████▉| 684M/692M [05:22<00:04, 1.93MB/s]
+ 99%|█████████▉| 684M/692M [05:22<00:04, 1.98MB/s]
+ 99%|█████████▉| 684M/692M [05:22<00:04, 2.03MB/s]
+ 99%|█████████▉| 685M/692M [05:22<00:03, 2.07MB/s]
+ 99%|█████████▉| 685M/692M [05:22<00:03, 2.09MB/s]
+ 99%|█████████▉| 685M/692M [05:22<00:03, 2.10MB/s]
+ 99%|█████████▉| 686M/692M [05:22<00:03, 2.12MB/s]
+ 99%|█████████▉| 686M/692M [05:23<00:03, 2.12MB/s]
+ 99%|█████████▉| 686M/692M [05:23<00:03, 2.12MB/s]
+ 99%|█████████▉| 686M/692M [05:23<00:02, 2.14MB/s]
+ 99%|█████████▉| 686M/692M [05:23<00:02, 2.13MB/s]
+ 99%|█████████▉| 687M/692M [05:23<00:02, 2.23MB/s]
+ 99%|█████████▉| 687M/692M [05:23<00:02, 2.24MB/s]
+ 99%|█████████▉| 687M/692M [05:23<00:02, 2.24MB/s]
+ 99%|█████████▉| 688M/692M [05:23<00:02, 2.22MB/s]
+ 99%|█████████▉| 688M/692M [05:24<00:02, 2.34MB/s]
+ 99%|█████████▉| 688M/692M [05:24<00:01, 2.40MB/s]
+ 99%|█████████▉| 688M/692M [05:24<00:01, 2.20MB/s]
+ 99%|█████████▉| 689M/692M [05:24<00:01, 2.01MB/s]
+ 99%|█████████▉| 689M/692M [05:24<00:01, 1.95MB/s]
+100%|█████████▉| 689M/692M [05:24<00:01, 1.99MB/s]
+100%|█████████▉| 689M/692M [05:24<00:01, 1.92MB/s]
+100%|█████████▉| 690M/692M [05:24<00:01, 1.95MB/s]
+100%|█████████▉| 690M/692M [05:25<00:01, 1.99MB/s]
+100%|█████████▉| 690M/692M [05:25<00:01, 2.02MB/s]
+100%|█████████▉| 690M/692M [05:25<00:01, 2.06MB/s]
+100%|█████████▉| 691M/692M [05:25<00:00, 2.08MB/s]
+100%|█████████▉| 691M/692M [05:25<00:00, 2.10MB/s]
+100%|█████████▉| 691M/692M [05:25<00:00, 2.12MB/s]
+100%|█████████▉| 691M/692M [05:25<00:00, 2.13MB/s]
+100%|█████████▉| 692M/692M [05:25<00:00, 2.18MB/s]
+100%|█████████▉| 692M/692M [05:26<00:00, 2.18MB/s]
+100%|█████████▉| 692M/692M [05:26<00:00, 2.17MB/s]
+100%|██████████| 692M/692M [05:26<00:00, 2.23MB/s]
+msillm q4 02809272 135140 B  dec 2.01s
+msillm q4 0369d229 55632 B  dec 2.02s
+msillm q4 07b9f93f 82304 B  dec 2.01s
+msillm q4 0d154749 103120 B  dec 2.10s
+msillm q4 1b4ad095 71772 B  dec 1.76s
+msillm q4 1cba10ad 61460 B  dec 2.42s
+msillm q4 2397c73f 82348 B  dec 2.03s
+msillm q4 2684452d 93000 B  dec 2.00s
+msillm q4 2a760bf1 23628 B  dec 1.31s
+msillm q4 4ebc0e6c 75992 B  dec 1.94s
+msillm q4 50d13125 25844 B  dec 1.89s
+msillm q4 50fe4c3d 127972 B  dec 1.82s
+msillm q4 58104815 129420 B  dec 2.08s
+msillm q4 608cb09e 137364 B  dec 2.34s
+msillm q4 79b1bb29 96660 B  dec 1.73s
+msillm q4 8426ed22 79968 B  dec 2.80s
+msillm q4 86127fbd 98484 B  dec 1.39s
+msillm q4 937476dd 239936 B  dec 2.16s
+msillm q4 a2a946cc 83288 B  dec 1.98s
+msillm q4 a365e654 134652 B  dec 2.01s
+msillm q4 b0b3744c 118368 B  dec 1.96s
+msillm q4 bb7344a2 39824 B  dec 1.43s
+msillm q4 c9510efb 70904 B  dec 1.97s
+msillm q4 d0208a1e 142964 B  dec 2.02s
+msillm q4 da52c4f6 147180 B  dec 1.93s
+msillm q4 e0d8e29c 58980 B  dec 1.96s
+msillm q4 ebfd571f 98552 B  dec 2.80s
+msillm q4 eda6d427 134632 B  dec 2.33s
+msillm q4 f67f11de 55208 B  dec 2.33s
+msillm q4 ff32adfa 87276 B  dec 1.86s
+Using cache found in /root/.cache/torch/hub/facebookresearch_NeuralCompression_main
+Downloading: "https://dl.fbaipublicfiles.com/NeuralCompression/2023-muckley-msillm/msillm_target_0.45bpp.ckpt" to /root/.cache/torch/hub/checkpoints/msillm_target_0.45bpp.ckpt
+
+  0%|          | 0.00/692M [00:00<?, ?B/s]
+  0%|          | 128k/692M [00:00<10:08, 1.19MB/s]
+  0%|          | 384k/692M [00:00<06:22, 1.90MB/s]
+  0%|          | 1.50M/692M [00:00<01:58, 6.14MB/s]
+  1%|          | 6.00M/692M [00:00<00:34, 21.1MB/s]
+  1%|          | 8.12M/692M [00:00<00:34, 20.9MB/s]
+  2%|▏         | 15.8M/692M [00:00<00:18, 37.5MB/s]
+  3%|▎         | 19.9M/692M [00:00<00:18, 37.9MB/s]
+  4%|▎         | 25.1M/692M [00:00<00:16, 42.9MB/s]
+  5%|▍         | 31.8M/692M [00:00<00:14, 48.9MB/s]
+  5%|▌         | 36.5M/692M [00:01<00:16, 42.7MB/s]
+  6%|▌         | 40.8M/692M [00:01<00:18, 37.6MB/s]
+  7%|▋         | 47.8M/692M [00:01<00:15, 44.6MB/s]
+  8%|▊         | 52.2M/692M [00:01<00:15, 42.7MB/s]
+  8%|▊         | 56.5M/692M [00:01<00:17, 37.9MB/s]
+  9%|▉         | 63.6M/692M [00:01<00:14, 44.8MB/s]
+ 10%|▉         | 68.1M/692M [00:01<00:17, 37.5MB/s]
+ 10%|█         | 72.1M/692M [00:02<00:17, 36.6MB/s]
+ 12%|█▏        | 79.8M/692M [00:02<00:14, 45.1MB/s]
+ 12%|█▏        | 84.4M/692M [00:02<00:14, 44.0MB/s]
+ 13%|█▎        | 88.8M/692M [00:02<00:15, 41.8MB/s]
+ 14%|█▍        | 95.8M/692M [00:02<00:13, 47.8MB/s]
+ 15%|█▍        | 100M/692M [00:02<00:13, 45.2MB/s] 
+ 15%|█▌        | 105M/692M [00:02<00:13, 44.7MB/s]
+ 16%|█▌        | 112M/692M [00:02<00:12, 50.0MB/s]
+ 17%|█▋        | 117M/692M [00:03<00:13, 45.9MB/s]
+ 17%|█▋        | 121M/692M [00:03<00:14, 41.1MB/s]
+ 18%|█▊        | 128M/692M [00:03<00:12, 46.3MB/s]
+ 19%|█▉        | 132M/692M [00:03<00:13, 42.4MB/s]
+ 20%|█▉        | 136M/692M [00:03<00:15, 37.1MB/s]
+ 21%|██        | 144M/692M [00:03<00:12, 44.4MB/s]
+ 21%|██▏       | 148M/692M [00:03<00:12, 44.5MB/s]
+ 22%|██▏       | 153M/692M [00:03<00:12, 43.9MB/s]
+ 23%|██▎       | 160M/692M [00:04<00:11, 49.4MB/s]
+ 24%|██▍       | 164M/692M [00:04<00:11, 47.8MB/s]
+ 24%|██▍       | 169M/692M [00:04<00:13, 42.1MB/s]
+ 25%|██▌       | 176M/692M [00:04<00:11, 47.5MB/s]
+ 26%|██▌       | 181M/692M [00:04<00:12, 44.6MB/s]
+ 27%|██▋       | 185M/692M [00:04<00:12, 44.0MB/s]
+ 28%|██▊       | 192M/692M [00:04<00:10, 49.0MB/s]
+ 28%|██▊       | 196M/692M [00:04<00:11, 46.1MB/s]
+ 29%|██▉       | 201M/692M [00:05<00:11, 43.7MB/s]
+ 30%|███       | 208M/692M [00:05<00:10, 49.0MB/s]
+ 31%|███       | 212M/692M [00:05<00:10, 46.1MB/s]
+ 32%|███▏      | 220M/692M [00:05<00:09, 51.6MB/s]
+ 32%|███▏      | 224M/692M [00:05<00:11, 41.3MB/s]
+ 33%|███▎      | 232M/692M [00:05<00:10, 47.7MB/s]
+ 34%|███▍      | 237M/692M [00:05<00:10, 46.0MB/s]
+ 35%|███▍      | 241M/692M [00:05<00:10, 44.7MB/s]
+ 36%|███▌      | 248M/692M [00:06<00:09, 48.8MB/s]
+ 36%|███▋      | 253M/692M [00:06<00:09, 47.8MB/s]
+ 37%|███▋      | 257M/692M [00:06<00:09, 48.0MB/s]
+ 38%|███▊      | 264M/692M [00:06<00:08, 51.5MB/s]
+ 39%|███▉      | 269M/692M [00:06<00:09, 47.7MB/s]
+ 39%|███▉      | 273M/692M [00:06<00:10, 41.9MB/s]
+ 40%|████      | 280M/692M [00:06<00:09, 46.5MB/s]
+ 41%|████      | 284M/692M [00:06<00:09, 46.8MB/s]
+ 42%|████▏     | 289M/692M [00:07<00:09, 42.4MB/s]
+ 43%|████▎     | 296M/692M [00:07<00:08, 47.7MB/s]
+ 43%|████▎     | 301M/692M [00:07<00:08, 49.2MB/s]
+ 44%|████▍     | 306M/692M [00:07<00:08, 46.8MB/s]
+ 45%|████▌     | 312M/692M [00:07<00:07, 50.1MB/s]
+ 46%|████▌     | 317M/692M [00:07<00:08, 46.6MB/s]
+ 46%|████▋     | 322M/692M [00:07<00:08, 47.7MB/s]
+ 47%|████▋     | 328M/692M [00:07<00:07, 50.9MB/s]
+ 48%|████▊     | 333M/692M [00:08<00:09, 39.5MB/s]
+ 49%|████▊     | 337M/692M [00:08<00:09, 40.4MB/s]
+ 50%|████▉     | 344M/692M [00:08<00:07, 46.3MB/s]
+ 50%|█████     | 348M/692M [00:08<00:08, 43.1MB/s]
+ 51%|█████     | 353M/692M [00:08<00:08, 40.3MB/s]
+ 52%|█████▏    | 360M/692M [00:08<00:07, 46.5MB/s]
+ 53%|█████▎    | 367M/692M [00:08<00:06, 50.1MB/s]
+ 54%|█████▍    | 372M/692M [00:08<00:06, 48.2MB/s]
+ 55%|█████▍    | 379M/692M [00:09<00:05, 54.8MB/s]
+ 56%|█████▌    | 385M/692M [00:09<00:07, 42.5MB/s]
+ 57%|█████▋    | 392M/692M [00:09<00:06, 48.0MB/s]
+ 57%|█████▋    | 397M/692M [00:09<00:06, 45.3MB/s]
+ 58%|█████▊    | 402M/692M [00:09<00:07, 41.7MB/s]
+ 59%|█████▉    | 408M/692M [00:09<00:06, 46.1MB/s]
+ 60%|█████▉    | 412M/692M [00:09<00:06, 43.7MB/s]
+ 60%|██████    | 417M/692M [00:10<00:07, 40.6MB/s]
+ 61%|██████    | 424M/692M [00:10<00:06, 46.9MB/s]
+ 62%|██████▏   | 430M/692M [00:10<00:05, 52.6MB/s]
+ 63%|██████▎   | 436M/692M [00:10<00:05, 49.1MB/s]
+ 64%|██████▎   | 440M/692M [00:10<00:06, 43.5MB/s]
+ 65%|██████▍   | 448M/692M [00:10<00:05, 47.5MB/s]
+ 65%|██████▌   | 452M/692M [00:10<00:05, 43.7MB/s]
+ 66%|██████▌   | 457M/692M [00:10<00:06, 40.4MB/s]
+ 67%|██████▋   | 464M/692M [00:11<00:05, 46.1MB/s]
+ 68%|██████▊   | 468M/692M [00:11<00:06, 38.5MB/s]
+ 69%|██████▊   | 475M/692M [00:11<00:05, 44.9MB/s]
+ 69%|██████▉   | 480M/692M [00:11<00:04, 46.1MB/s]
+ 70%|██████▉   | 484M/692M [00:11<00:05, 41.8MB/s]
+ 71%|███████   | 492M/692M [00:11<00:04, 47.6MB/s]
+ 72%|███████▏  | 496M/692M [00:11<00:04, 43.7MB/s]
+ 73%|███████▎  | 504M/692M [00:11<00:03, 49.8MB/s]
+ 73%|███████▎  | 509M/692M [00:12<00:04, 46.8MB/s]
+ 74%|███████▍  | 513M/692M [00:12<00:04, 40.5MB/s]
+ 75%|███████▌  | 519M/692M [00:12<00:04, 43.9MB/s]
+ 76%|███████▌  | 524M/692M [00:12<00:04, 42.3MB/s]
+ 76%|███████▋  | 528M/692M [00:12<00:04, 39.1MB/s]
+ 77%|███████▋  | 536M/692M [00:12<00:03, 46.9MB/s]
+ 78%|███████▊  | 540M/692M [00:12<00:03, 46.7MB/s]
+ 79%|███████▊  | 545M/692M [00:13<00:03, 39.1MB/s]
+ 80%|███████▉  | 552M/692M [00:13<00:03, 44.9MB/s]
+ 80%|████████  | 556M/692M [00:13<00:03, 36.1MB/s]
+ 81%|████████▏ | 563M/692M [00:13<00:03, 43.0MB/s]
+ 82%|████████▏ | 568M/692M [00:13<00:02, 44.6MB/s]
+ 83%|████████▎ | 572M/692M [00:13<00:02, 44.5MB/s]
+ 83%|████████▎ | 577M/692M [00:13<00:02, 41.9MB/s]
+ 84%|████████▍ | 584M/692M [00:13<00:02, 47.4MB/s]
+ 85%|████████▌ | 588M/692M [00:14<00:02, 46.1MB/s]
+ 86%|████████▌ | 593M/692M [00:14<00:02, 42.8MB/s]
+ 87%|████████▋ | 600M/692M [00:14<00:02, 48.0MB/s]
+ 87%|████████▋ | 604M/692M [00:14<00:01, 47.6MB/s]
+ 88%|████████▊ | 612M/692M [00:14<00:01, 51.8MB/s]
+ 89%|████████▉ | 616M/692M [00:14<00:01, 44.5MB/s]
+ 90%|█████████ | 624M/692M [00:14<00:01, 50.3MB/s]
+ 91%|█████████ | 629M/692M [00:14<00:01, 45.7MB/s]
+ 91%|█████████▏| 633M/692M [00:15<00:01, 40.9MB/s]
+ 92%|█████████▏| 640M/692M [00:15<00:01, 45.9MB/s]
+ 93%|█████████▎| 644M/692M [00:15<00:01, 43.4MB/s]
+ 94%|█████████▎| 649M/692M [00:15<00:01, 43.2MB/s]
+ 95%|█████████▍| 656M/692M [00:15<00:00, 48.8MB/s]
+ 95%|█████████▌| 660M/692M [00:15<00:00, 36.8MB/s]
+ 96%|█████████▌| 664M/692M [00:15<00:00, 35.8MB/s]
+ 97%|█████████▋| 672M/692M [00:16<00:00, 43.2MB/s]
+ 98%|█████████▊| 676M/692M [00:16<00:00, 39.1MB/s]
+ 99%|█████████▊| 684M/692M [00:16<00:00, 44.7MB/s]
+ 99%|█████████▉| 688M/692M [00:16<00:00, 45.0MB/s]
+100%|██████████| 692M/692M [00:16<00:00, 44.1MB/s]
+msillm q5 02809272 194512 B  dec 2.03s
+msillm q5 0369d229 77044 B  dec 1.96s
+msillm q5 07b9f93f 121640 B  dec 1.95s
+msillm q5 0d154749 153548 B  dec 2.00s
+msillm q5 1b4ad095 103200 B  dec 1.69s
+msillm q5 1cba10ad 80824 B  dec 2.39s
+msillm q5 2397c73f 116088 B  dec 2.04s
+msillm q5 2684452d 134168 B  dec 2.05s
+msillm q5 2a760bf1 29684 B  dec 1.36s
+msillm q5 4ebc0e6c 108880 B  dec 2.02s
+msillm q5 50d13125 35336 B  dec 1.98s
+msillm q5 50fe4c3d 190120 B  dec 1.85s
+msillm q5 58104815 196564 B  dec 2.09s
+msillm q5 608cb09e 202916 B  dec 2.33s
+msillm q5 79b1bb29 142476 B  dec 1.73s
+msillm q5 8426ed22 99692 B  dec 2.77s
+msillm q5 86127fbd 146888 B  dec 1.38s
+msillm q5 937476dd 348488 B  dec 2.10s
+msillm q5 a2a946cc 118156 B  dec 1.94s
+msillm q5 a365e654 203036 B  dec 1.93s
+msillm q5 b0b3744c 168884 B  dec 1.91s
+msillm q5 bb7344a2 55068 B  dec 1.38s
+msillm q5 c9510efb 94256 B  dec 1.94s
+msillm q5 d0208a1e 216484 B  dec 2.10s
+msillm q5 da52c4f6 214172 B  dec 1.99s
+msillm q5 e0d8e29c 81648 B  dec 2.03s
+msillm q5 ebfd571f 138900 B  dec 2.89s
+msillm q5 eda6d427 207276 B  dec 2.37s
+msillm q5 f67f11de 76344 B  dec 2.36s
+msillm q5 ff32adfa 120556 B  dec 1.97s
+Downloading: "https://compressai.s3.amazonaws.com/models/v1/mbt2018-mean-1-e522738d.pth.tar" to /root/.cache/torch/hub/checkpoints/mbt2018-mean-1-e522738d.pth.tar
+
+  0%|          | 0.00/27.6M [00:00<?, ?B/s]
+  0%|          | 128k/27.6M [00:00<00:26, 1.07MB/s]
+  1%|▏         | 384k/27.6M [00:00<00:16, 1.71MB/s]
+  4%|▍         | 1.12M/27.6M [00:00<00:07, 3.88MB/s]
+ 15%|█▌        | 4.25M/27.6M [00:00<00:01, 13.0MB/s]
+ 36%|███▌      | 9.88M/27.6M [00:00<00:00, 25.3MB/s]
+ 61%|██████    | 16.9M/27.6M [00:00<00:00, 36.8MB/s]
+ 89%|████████▊ | 24.5M/27.6M [00:00<00:00, 45.5MB/s]
+100%|██████████| 27.6M/27.6M [00:00<00:00, 31.0MB/s]
+mbt q1 02809272 74704 B  dec 0.74s
+mbt q1 0369d229 16108 B  dec 0.72s
+mbt q1 07b9f93f 37472 B  dec 0.74s
+mbt q1 0d154749 25916 B  dec 0.74s
+mbt q1 1b4ad095 18292 B  dec 0.62s
+mbt q1 1cba10ad 9784 B  dec 0.85s
+mbt q1 2397c73f 37136 B  dec 0.73s
+mbt q1 2684452d 33796 B  dec 0.74s
+mbt q1 2a760bf1 9184 B  dec 0.50s
+mbt q1 4ebc0e6c 20192 B  dec 0.72s
+mbt q1 50d13125 10820 B  dec 0.72s
+mbt q1 50fe4c3d 70172 B  dec 0.68s
+mbt q1 58104815 54604 B  dec 0.77s
+mbt q1 608cb09e 66084 B  dec 0.87s
+mbt q1 79b1bb29 60108 B  dec 0.65s
+mbt q1 8426ed22 8992 B  dec 1.07s
+mbt q1 86127fbd 51132 B  dec 0.54s
+mbt q1 937476dd 224756 B  dec 0.81s
+mbt q1 a2a946cc 35816 B  dec 0.75s
+mbt q1 a365e654 71744 B  dec 0.76s
+mbt q1 b0b3744c 70420 B  dec 0.78s
+mbt q1 bb7344a2 17992 B  dec 0.54s
+mbt q1 c9510efb 26116 B  dec 0.76s
+mbt q1 d0208a1e 78532 B  dec 0.75s
+mbt q1 da52c4f6 85212 B  dec 0.77s
+mbt q1 e0d8e29c 13952 B  dec 0.75s
+mbt q1 ebfd571f 78856 B  dec 1.09s
+mbt q1 eda6d427 63812 B  dec 0.85s
+mbt q1 f67f11de 9064 B  dec 0.88s
+mbt q1 ff32adfa 35180 B  dec 0.76s
+Downloading: "https://compressai.s3.amazonaws.com/models/v1/mbt2018-mean-2-e54a039d.pth.tar" to /root/.cache/torch/hub/checkpoints/mbt2018-mean-2-e54a039d.pth.tar
+
+  0%|          | 0.00/27.6M [00:00<?, ?B/s]
+  0%|          | 128k/27.6M [00:00<00:39, 728kB/s]
+  2%|▏         | 512k/27.6M [00:00<00:14, 1.97MB/s]
+  6%|▌         | 1.62M/27.6M [00:00<00:05, 5.21MB/s]
+ 14%|█▎        | 3.75M/27.6M [00:00<00:02, 10.2MB/s]
+ 18%|█▊        | 4.88M/27.6M [00:00<00:02, 9.89MB/s]
+ 43%|████▎     | 11.9M/27.6M [00:00<00:00, 26.7MB/s]
+ 62%|██████▏   | 17.0M/27.6M [00:00<00:00, 32.6MB/s]
+ 77%|███████▋  | 21.4M/27.6M [00:01<00:00, 34.4MB/s]
+ 94%|█████████▎| 25.9M/27.6M [00:01<00:00, 36.0MB/s]
+100%|██████████| 27.6M/27.6M [00:01<00:00, 25.1MB/s]
+mbt q2 02809272 110232 B  dec 0.75s
+mbt q2 0369d229 22004 B  dec 0.74s
+mbt q2 07b9f93f 61736 B  dec 0.75s
+mbt q2 0d154749 41896 B  dec 0.75s
+mbt q2 1b4ad095 33480 B  dec 0.62s
+mbt q2 1cba10ad 14852 B  dec 0.89s
+mbt q2 2397c73f 56300 B  dec 0.80s
+mbt q2 2684452d 50500 B  dec 0.73s
+mbt q2 2a760bf1 9728 B  dec 0.50s
+mbt q2 4ebc0e6c 30084 B  dec 0.75s
+mbt q2 50d13125 16512 B  dec 0.73s
+mbt q2 50fe4c3d 104508 B  dec 0.68s
+mbt q2 58104815 88980 B  dec 0.78s
+mbt q2 608cb09e 96384 B  dec 0.87s
+mbt q2 79b1bb29 93180 B  dec 0.65s
+mbt q2 8426ed22 13640 B  dec 1.06s
+mbt q2 86127fbd 77872 B  dec 0.54s
+mbt q2 937476dd 345500 B  dec 0.82s
+mbt q2 a2a946cc 51792 B  dec 0.74s
+mbt q2 a365e654 115804 B  dec 0.76s
+mbt q2 b0b3744c 109856 B  dec 0.74s
+mbt q2 bb7344a2 26072 B  dec 0.53s
+mbt q2 c9510efb 34976 B  dec 0.75s
+mbt q2 d0208a1e 136840 B  dec 0.75s
+mbt q2 da52c4f6 123548 B  dec 0.75s
+mbt q2 e0d8e29c 26036 B  dec 0.76s
+mbt q2 ebfd571f 111136 B  dec 1.08s
+mbt q2 eda6d427 99016 B  dec 0.87s
+mbt q2 f67f11de 13448 B  dec 0.87s
+mbt q2 ff32adfa 46536 B  dec 0.75s
+Downloading: "https://compressai.s3.amazonaws.com/models/v1/mbt2018-mean-3-723404a8.pth.tar" to /root/.cache/torch/hub/checkpoints/mbt2018-mean-3-723404a8.pth.tar
+
+  0%|          | 0.00/27.6M [00:00<?, ?B/s]
+  0%|          | 128k/27.6M [00:00<00:26, 1.10MB/s]
+  1%|▏         | 384k/27.6M [00:00<00:16, 1.75MB/s]
+  5%|▍         | 1.38M/27.6M [00:00<00:05, 4.99MB/s]
+ 17%|█▋        | 4.75M/27.6M [00:00<00:01, 14.5MB/s]
+ 31%|███       | 8.62M/27.6M [00:00<00:00, 21.8MB/s]
+ 48%|████▊     | 13.2M/27.6M [00:00<00:00, 28.3MB/s]
+ 65%|██████▍   | 17.9M/27.6M [00:00<00:00, 32.3MB/s]
+ 81%|████████▏ | 22.5M/27.6M [00:00<00:00, 35.0MB/s]
+ 98%|█████████▊| 27.1M/27.6M [00:01<00:00, 36.8MB/s]
+100%|██████████| 27.6M/27.6M [00:01<00:00, 26.9MB/s]
+mbt q3 02809272 158156 B  dec 0.75s
+mbt q3 0369d229 33240 B  dec 0.75s
+mbt q3 07b9f93f 98288 B  dec 0.75s
+mbt q3 0d154749 66856 B  dec 0.74s
+mbt q3 1b4ad095 57392 B  dec 0.62s
+mbt q3 1cba10ad 22664 B  dec 0.86s
+mbt q3 2397c73f 81912 B  dec 0.74s
+mbt q3 2684452d 75124 B  dec 0.74s
+mbt q3 2a760bf1 14252 B  dec 0.50s
+mbt q3 4ebc0e6c 44756 B  dec 0.72s
+mbt q3 50d13125 27820 B  dec 0.73s
+mbt q3 50fe4c3d 151452 B  dec 0.69s
+mbt q3 58104815 139912 B  dec 0.79s
+mbt q3 608cb09e 139452 B  dec 0.86s
+mbt q3 79b1bb29 139432 B  dec 0.66s
+mbt q3 8426ed22 20164 B  dec 1.05s
+mbt q3 86127fbd 115352 B  dec 0.54s
+mbt q3 937476dd 437568 B  dec 0.86s
+mbt q3 a2a946cc 73760 B  dec 0.78s
+mbt q3 a365e654 180496 B  dec 0.79s
+mbt q3 b0b3744c 167516 B  dec 0.76s
+mbt q3 bb7344a2 35732 B  dec 0.54s
+mbt q3 c9510efb 47080 B  dec 0.74s
+mbt q3 d0208a1e 218988 B  dec 0.77s
+mbt q3 da52c4f6 172116 B  dec 0.75s
+mbt q3 e0d8e29c 43220 B  dec 0.75s
+mbt q3 ebfd571f 155132 B  dec 1.08s
+mbt q3 eda6d427 151608 B  dec 0.88s
+mbt q3 f67f11de 19444 B  dec 0.86s
+mbt q3 ff32adfa 63944 B  dec 0.75s
+Downloading: "https://compressai.s3.amazonaws.com/models/v1/mbt2018-mean-4-6dba02a3.pth.tar" to /root/.cache/torch/hub/checkpoints/mbt2018-mean-4-6dba02a3.pth.tar
+
+  0%|          | 0.00/27.6M [00:00<?, ?B/s]
+  0%|          | 128k/27.6M [00:00<00:26, 1.09MB/s]
+  1%|▏         | 384k/27.6M [00:00<00:16, 1.73MB/s]
+  5%|▍         | 1.25M/27.6M [00:00<00:06, 4.43MB/s]
+ 18%|█▊        | 5.00M/27.6M [00:00<00:01, 15.6MB/s]
+ 40%|████      | 11.1M/27.6M [00:00<00:00, 28.9MB/s]
+ 68%|██████▊   | 18.9M/27.6M [00:00<00:00, 41.1MB/s]
+ 94%|█████████▎| 25.9M/27.6M [00:00<00:00, 40.4MB/s]
+100%|██████████| 27.6M/27.6M [00:00<00:00, 31.4MB/s]
+mbt q4 02809272 221072 B  dec 0.77s
+mbt q4 0369d229 51564 B  dec 0.75s
+mbt q4 07b9f93f 150528 B  dec 0.75s
+mbt q4 0d154749 109624 B  dec 0.75s
+mbt q4 1b4ad095 92620 B  dec 0.63s
+mbt q4 1cba10ad 35308 B  dec 0.86s
+mbt q4 2397c73f 116016 B  dec 0.73s
+mbt q4 2684452d 109512 B  dec 0.75s
+mbt q4 2a760bf1 17680 B  dec 0.50s
+mbt q4 4ebc0e6c 68760 B  dec 0.74s
+mbt q4 50d13125 37648 B  dec 0.74s
+mbt q4 50fe4c3d 218816 B  dec 0.69s
+mbt q4 58104815 214532 B  dec 0.78s
+mbt q4 608cb09e 201020 B  dec 0.88s
+mbt q4 79b1bb29 198496 B  dec 0.68s
+mbt q4 8426ed22 30024 B  dec 1.12s
+mbt q4 86127fbd 167448 B  dec 0.56s
+mbt q4 937476dd 696228 B  dec 0.83s
+mbt q4 a2a946cc 103476 B  dec 0.74s
+mbt q4 a365e654 265364 B  dec 0.76s
+mbt q4 b0b3744c 235604 B  dec 0.75s
+mbt q4 bb7344a2 48672 B  dec 0.54s
+mbt q4 c9510efb 63880 B  dec 0.74s
+mbt q4 d0208a1e 328492 B  dec 0.77s
+mbt q4 da52c4f6 237812 B  dec 0.76s
+mbt q4 e0d8e29c 66684 B  dec 0.75s
+mbt q4 ebfd571f 199144 B  dec 1.08s
+mbt q4 eda6d427 230880 B  dec 0.88s
+mbt q4 f67f11de 32168 B  dec 0.86s
+mbt q4 ff32adfa 89192 B  dec 0.75s
+
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 3 files:  67%|██████▋   | 2/3 [00:04<00:02,  2.47s/it]
+Fetching 3 files: 100%|██████████| 3/3 [00:05<00:00,  1.53s/it]
+Fetching 3 files: 100%|██████████| 3/3 [00:05<00:00,  1.72s/it]
+s1res s1L1 02809272 12096 B  dec 9.51s
+s1res s1L1 0369d229 11582 B  dec 9.49s
+s1res s1L1 07b9f93f 11440 B  dec 8.31s
+s1res s1L1 0d154749 10021 B  dec 8.75s
+s1res s1L1 1b4ad095 8320 B  dec 8.16s
+s1res s1L1 1cba10ad 12029 B  dec 10.82s
+s1res s1L1 2397c73f 10641 B  dec 8.64s
+s1res s1L1 2684452d 11639 B  dec 8.59s
+s1res s1L1 2a760bf1 7254 B  dec 5.93s
+s1res s1L1 4ebc0e6c 10109 B  dec 9.15s
+s1res s1L1 50d13125 10400 B  dec 9.05s
+s1res s1L1 50fe4c3d 13832 B  dec 8.13s
+s1res s1L1 58104815 11002 B  dec 9.49s
+s1res s1L1 608cb09e 14856 B  dec 10.60s
+/kaggle/working/ratflow_repo/src/ratflow/entropy/models.py:119: UserWarning: torch.searchsorted(): input value tensor is non-contiguous, this will lower the performance due to extra data copy when converting non-contiguous tensor to contiguous, please use contiguous input value tensor if possible. This message will only appear once per program. (Triggered internally at /pytorch/aten/src/ATen/native/BucketizationUtils.h:32.)
+  idx = torch.bucketize(a_s, self.thr.to(a_s.device).to(torch.float64), right=True)
+s1res s1L1 79b1bb29 10638 B  dec 8.17s
+s1res s1L1 8426ed22 11951 B  dec 12.84s
+s1res s1L1 86127fbd 7513 B  dec 6.45s
+s1res s1L1 937476dd 11783 B  dec 10.01s
+s1res s1L1 a2a946cc 11813 B  dec 9.08s
+s1res s1L1 a365e654 11850 B  dec 8.78s
+s1res s1L1 b0b3744c 10820 B  dec 8.66s
+s1res s1L1 bb7344a2 7155 B  dec 6.55s
+s1res s1L1 c9510efb 12805 B  dec 8.87s
+s1res s1L1 d0208a1e 10125 B  dec 9.10s
+s1res s1L1 da52c4f6 13614 B  dec 8.87s
+s1res s1L1 e0d8e29c 8698 B  dec 8.82s
+s1res s1L1 ebfd571f 18130 B  dec 12.84s
+s1res s1L1 eda6d427 14365 B  dec 10.43s
+s1res s1L1 f67f11de 10968 B  dec 10.38s
+s1res s1L1 ff32adfa 13350 B  dec 8.84s
+s1res s1L2 02809272 23749 B  dec 8.88s
+s1res s1L2 0369d229 19360 B  dec 8.93s
+s1res s1L2 07b9f93f 19853 B  dec 8.86s
+s1res s1L2 0d154749 19128 B  dec 8.89s
+s1res s1L2 1b4ad095 13557 B  dec 7.68s
+s1res s1L2 1cba10ad 20548 B  dec 10.50s
+s1res s1L2 2397c73f 19553 B  dec 8.90s
+s1res s1L2 2684452d 20761 B  dec 8.98s
+s1res s1L2 2a760bf1 11622 B  dec 6.00s
+s1res s1L2 4ebc0e6c 17540 B  dec 8.90s
+s1res s1L2 50d13125 15868 B  dec 8.86s
+s1res s1L2 50fe4c3d 25909 B  dec 8.31s
+s1res s1L2 58104815 20527 B  dec 9.51s
+s1res s1L2 608cb09e 29410 B  dec 10.39s
+s1res s1L2 79b1bb29 19301 B  dec 8.04s
+s1res s1L2 8426ed22 20541 B  dec 12.94s
+s1res s1L2 86127fbd 13760 B  dec 6.51s
+s1res s1L2 937476dd 20802 B  dec 9.81s
+s1res s1L2 a2a946cc 22027 B  dec 8.92s
+s1res s1L2 a365e654 21584 B  dec 8.83s
+s1res s1L2 b0b3744c 19651 B  dec 8.86s
+s1res s1L2 bb7344a2 11796 B  dec 6.66s
+s1res s1L2 c9510efb 22914 B  dec 8.84s
+s1res s1L2 d0208a1e 18146 B  dec 8.90s
+s1res s1L2 da52c4f6 28779 B  dec 8.85s
+s1res s1L2 e0d8e29c 14926 B  dec 8.90s
+s1res s1L2 ebfd571f 28589 B  dec 12.86s
+s1res s1L2 eda6d427 26702 B  dec 10.37s
+s1res s1L2 f67f11de 17608 B  dec 10.34s
+s1res s1L2 ff32adfa 23819 B  dec 8.78s
+s1res s1L3 02809272 40542 B  dec 8.92s
+s1res s1L3 0369d229 31629 B  dec 8.93s
+s1res s1L3 07b9f93f 31766 B  dec 8.86s
+s1res s1L3 0d154749 32904 B  dec 8.85s
+s1res s1L3 1b4ad095 22718 B  dec 7.67s
+s1res s1L3 1cba10ad 34335 B  dec 10.45s
+s1res s1L3 2397c73f 32339 B  dec 8.95s
+s1res s1L3 2684452d 34112 B  dec 8.94s
+s1res s1L3 2a760bf1 18219 B  dec 6.02s
+s1res s1L3 4ebc0e6c 28625 B  dec 8.90s
+s1res s1L3 50d13125 23872 B  dec 8.82s
+s1res s1L3 50fe4c3d 42592 B  dec 8.31s
+s1res s1L3 58104815 34810 B  dec 9.49s
+s1res s1L3 608cb09e 50538 B  dec 10.42s
+s1res s1L3 79b1bb29 31088 B  dec 8.06s
+s1res s1L3 8426ed22 34344 B  dec 12.91s
+s1res s1L3 86127fbd 23078 B  dec 6.57s
+s1res s1L3 937476dd 33156 B  dec 9.85s
+s1res s1L3 a2a946cc 36963 B  dec 8.90s
+s1res s1L3 a365e654 36696 B  dec 8.84s
+s1res s1L3 b0b3744c 33110 B  dec 8.83s
+s1res s1L3 bb7344a2 18247 B  dec 6.60s
+s1res s1L3 c9510efb 37912 B  dec 8.78s
+s1res s1L3 d0208a1e 30895 B  dec 8.93s
+s1res s1L3 da52c4f6 49167 B  dec 8.89s
+s1res s1L3 e0d8e29c 25083 B  dec 8.88s
+s1res s1L3 ebfd571f 44706 B  dec 12.85s
+s1res s1L3 eda6d427 44985 B  dec 10.40s
+s1res s1L3 f67f11de 28101 B  dec 10.35s
+s1res s1L3 ff32adfa 39622 B  dec 8.79s
+s1res s1L4 02809272 56544 B  dec 8.94s
+s1res s1L4 0369d229 44960 B  dec 8.91s
+s1res s1L4 07b9f93f 44220 B  dec 8.80s
+s1res s1L4 0d154749 45603 B  dec 8.86s
+s1res s1L4 1b4ad095 32161 B  dec 7.65s
+s1res s1L4 1cba10ad 47491 B  dec 10.45s
+s1res s1L4 2397c73f 45799 B  dec 8.92s
+s1res s1L4 2684452d 47441 B  dec 8.98s
+s1res s1L4 2a760bf1 25713 B  dec 6.04s
+s1res s1L4 4ebc0e6c 40359 B  dec 8.88s
+s1res s1L4 50d13125 34264 B  dec 8.79s
+s1res s1L4 50fe4c3d 59307 B  dec 8.30s
+s1res s1L4 58104815 47972 B  dec 9.45s
+s1res s1L4 608cb09e 68206 B  dec 10.40s
+s1res s1L4 79b1bb29 42711 B  dec 8.04s
+s1res s1L4 8426ed22 48892 B  dec 12.88s
+s1res s1L4 86127fbd 31014 B  dec 6.53s
+s1res s1L4 937476dd 47020 B  dec 9.84s
+s1res s1L4 a2a946cc 51769 B  dec 8.93s
+s1res s1L4 a365e654 51712 B  dec 8.87s
+s1res s1L4 b0b3744c 45304 B  dec 8.82s
+s1res s1L4 bb7344a2 25334 B  dec 6.63s
+s1res s1L4 c9510efb 53640 B  dec 8.82s
+s1res s1L4 d0208a1e 42503 B  dec 8.94s
+s1res s1L4 da52c4f6 64982 B  dec 8.92s
+s1res s1L4 e0d8e29c 36189 B  dec 8.87s
+s1res s1L4 ebfd571f 62454 B  dec 12.78s
+s1res s1L4 eda6d427 63558 B  dec 10.39s
+s1res s1L4 f67f11de 39572 B  dec 10.37s
+s1res s1L4 ff32adfa 55948 B  dec 8.83s
+s1res s1L5 02809272 74020 B  dec 8.96s
+s1res s1L5 0369d229 62117 B  dec 8.87s
+s1res s1L5 07b9f93f 58303 B  dec 8.86s
+s1res s1L5 0d154749 59025 B  dec 8.93s
+s1res s1L5 1b4ad095 40295 B  dec 7.76s
+s1res s1L5 1cba10ad 61491 B  dec 10.51s
+s1res s1L5 2397c73f 60467 B  dec 8.88s
+s1res s1L5 2684452d 61996 B  dec 8.86s
+s1res s1L5 2a760bf1 34473 B  dec 6.05s
+s1res s1L5 4ebc0e6c 53029 B  dec 8.96s
+s1res s1L5 50d13125 47819 B  dec 8.90s
+s1res s1L5 50fe4c3d 77107 B  dec 8.26s
+s1res s1L5 58104815 62097 B  dec 9.40s
+s1res s1L5 608cb09e 85629 B  dec 10.33s
+s1res s1L5 79b1bb29 55040 B  dec 8.07s
+s1res s1L5 8426ed22 64509 B  dec 12.97s
+s1res s1L5 86127fbd 38573 B  dec 6.52s
+s1res s1L5 937476dd 64875 B  dec 9.85s
+s1res s1L5 a2a946cc 67229 B  dec 8.91s
+s1res s1L5 a365e654 67579 B  dec 8.82s
+s1res s1L5 b0b3744c 58826 B  dec 8.86s
+s1res s1L5 bb7344a2 33732 B  dec 6.65s
+s1res s1L5 c9510efb 71079 B  dec 8.84s
+s1res s1L5 d0208a1e 53659 B  dec 8.94s
+s1res s1L5 da52c4f6 78764 B  dec 8.95s
+s1res s1L5 e0d8e29c 49329 B  dec 8.90s
+s1res s1L5 ebfd571f 83383 B  dec 12.83s
+s1res s1L5 eda6d427 84978 B  dec 10.39s
+s1res s1L5 f67f11de 53529 B  dec 10.40s
+s1res s1L5 ff32adfa 74468 B  dec 8.87s
+[1/240] s1res s1L2+qp32 0369d229 37975 B
+[2/240] s1res s1L2+qp32 0d154749 55664 B
+[3/240] s1res s1L2+qp32 1cba10ad 32158 B
+[4/240] s1res s1L2+qp32 1b4ad095 46660 B
+[5/240] s1res s1L2+qp32 07b9f93f 103124 B
+[6/240] s1res s1L2+qp32 2a760bf1 17752 B
+[7/240] s1res s1L2+qp32 4ebc0e6c 42557 B
+[8/240] s1res s1L2+qp32 02809272 176034 B
+[9/240] s1res s1L2+qp32 2397c73f 89233 B
+[10/240] s1res s1L2+qp32 50d13125 25619 B
+[11/240] s1res s1L2+qp32 2684452d 82403 B
+[12/240] s1res s1L2+qp32 58104815 125299 B
+[13/240] s1res s1L2+qp32 79b1bb29 166140 B
+[14/240] s1res s1L2+qp32 8426ed22 28017 B
+[15/240] s1res s1L2+qp32 608cb09e 154609 B
+[16/240] s1res s1L2+qp32 50fe4c3d 156682 B
+[17/240] s1res s1L2+qp32 a2a946cc 82030 B
+[18/240] s1res s1L2+qp32 86127fbd 98456 B
+[19/240] s1res s1L2+qp32 bb7344a2 35141 B
+[20/240] s1res s1L2+qp32 c9510efb 58200 B
+[21/240] s1res s1L2+qp32 a365e654 181566 B
+[22/240] s1res s1L2+qp32 937476dd 374718 B
+[23/240] s1res s1L2+qp32 b0b3744c 220658 B
+[24/240] s1res s1L2+qp32 e0d8e29c 31882 B
+[25/240] s1res s1L2+qp32 ebfd571f 132971 B
+[26/240] s1res s1L2+qp32 f67f11de 25600 B
+[27/240] s1res s1L2+qp32 da52c4f6 198195 B
+[28/240] s1res s1L2+qp32 ff32adfa 73816 B
+[29/240] s1res s1L2+qp37 0369d229 26908 B
+[30/240] s1res s1L2+qp32 d0208a1e 193850 B
+[31/240] s1res s1L2+qp32 eda6d427 143520 B
+[32/240] s1res s1L2+qp37 0d154749 30326 B
+[33/240] s1res s1L2+qp37 1cba10ad 24900 B
+[34/240] s1res s1L2+qp37 1b4ad095 22460 B
+[35/240] s1res s1L2+qp37 07b9f93f 49559 B
+[36/240] s1res s1L2+qp37 2a760bf1 14973 B
+[37/240] s1res s1L2+qp37 2397c73f 49542 B
+[38/240] s1res s1L2+qp37 02809272 96244 B
+[39/240] s1res s1L2+qp37 4ebc0e6c 26893 B
+[40/240] s1res s1L2+qp37 2684452d 46632 B
+[41/240] s1res s1L2+qp37 50d13125 19194 B
+[42/240] s1res s1L2+qp37 58104815 59798 B
+[43/240] s1res s1L2+qp37 8426ed22 23829 B
+[44/240] s1res s1L2+qp37 50fe4c3d 82312 B
+[45/240] s1res s1L2+qp37 608cb09e 85211 B
+[46/240] s1res s1L2+qp37 79b1bb29 80919 B
+[47/240] s1res s1L2+qp37 86127fbd 44238 B
+[48/240] s1res s1L2+qp37 a2a946cc 49068 B
+[49/240] s1res s1L2+qp37 bb7344a2 22702 B
+[50/240] s1res s1L2+qp37 c9510efb 40719 B
+[51/240] s1res s1L2+qp37 a365e654 88122 B
+[52/240] s1res s1L2+qp37 937476dd 182254 B
+[53/240] s1res s1L2+qp37 b0b3744c 101087 B
+[54/240] s1res s1L2+qp37 e0d8e29c 19357 B
+[55/240] s1res s1L2+qp37 ebfd571f 80166 B
+[56/240] s1res s1L2+qp37 d0208a1e 72202 B
+[57/240] s1res s1L2+qp37 f67f11de 21051 B
+[58/240] s1res s1L2+qp37 da52c4f6 108981 B
+[59/240] s1res s1L2+qp42 0369d229 22527 B
+[60/240] s1res s1L2+qp37 eda6d427 74610 B
+[61/240] s1res s1L2+qp37 ff32adfa 47996 B
+[62/240] s1res s1L2+qp42 0d154749 22066 B
+[63/240] s1res s1L2+qp42 07b9f93f 29308 B
+[64/240] s1res s1L2+qp42 1b4ad095 15967 B
+[65/240] s1res s1L2+qp42 1cba10ad 22433 B
+[66/240] s1res s1L2+qp42 2a760bf1 13393 B
+[67/240] s1res s1L2+qp42 02809272 52951 B
+[68/240] s1res s1L2+qp42 4ebc0e6c 20477 B
+[69/240] s1res s1L2+qp42 50d13125 17187 B
+[70/240] s1res s1L2+qp42 2397c73f 30422 B
+[71/240] s1res s1L2+qp42 2684452d 29965 B
+[72/240] s1res s1L2+qp42 58104815 31868 B
+[73/240] s1res s1L2+qp42 8426ed22 22109 B
+[74/240] s1res s1L2+qp42 50fe4c3d 47774 B
+[75/240] s1res s1L2+qp42 608cb09e 51188 B
+[76/240] s1res s1L2+qp42 86127fbd 22900 B
+[77/240] s1res s1L2+qp42 79b1bb29 41362 B
+[78/240] s1res s1L2+qp42 a2a946cc 32709 B
+[79/240] s1res s1L2+qp42 bb7344a2 16138 B
+[80/240] s1res s1L2+qp42 c9510efb 30877 B
+[81/240] s1res s1L2+qp42 a365e654 44939 B
+[82/240] s1res s1L2+qp42 937476dd 61252 B
+[83/240] s1res s1L2+qp42 e0d8e29c 16416 B
+[84/240] s1res s1L2+qp42 b0b3744c 46083 B
+[85/240] s1res s1L2+qp42 d0208a1e 30870 B
+[86/240] s1res s1L2+qp42 f67f11de 19152 B
+[87/240] s1res s1L2+qp42 ff32adfa 34915 B
+[88/240] s1res s1L2+qp42 ebfd571f 45923 B
+[89/240] s1res s1L2+qp47 0369d229 20651 B
+[90/240] s1res s1L2+qp42 da52c4f6 61577 B
+[91/240] s1res s1L2+qp42 eda6d427 44083 B
+[92/240] s1res s1L2+qp47 1b4ad095 14406 B
+[93/240] s1res s1L2+qp47 0d154749 20168 B
+[94/240] s1res s1L2+qp47 07b9f93f 22507 B
+[95/240] s1res s1L2+qp47 1cba10ad 21441 B
+[96/240] s1res s1L2+qp47 2a760bf1 12333 B
+[97/240] s1res s1L2+qp47 2397c73f 22299 B
+[98/240] s1res s1L2+qp47 02809272 32732 B
+[99/240] s1res s1L2+qp47 50d13125 16518 B
+[100/240] s1res s1L2+qp47 4ebc0e6c 18542 B
+[101/240] s1res s1L2+qp47 2684452d 23733 B
+[102/240] s1res s1L2+qp47 58104815 23159 B
+[103/240] s1res s1L2+qp47 8426ed22 21236 B
+[104/240] s1res s1L2+qp47 608cb09e 35754 B
+[105/240] s1res s1L2+qp47 50fe4c3d 32934 B
+[106/240] s1res s1L2+qp47 79b1bb29 25361 B
+[107/240] s1res s1L2+qp47 86127fbd 16280 B
+[108/240] s1res s1L2+qp47 a2a946cc 25400 B
+[109/240] s1res s1L2+qp47 bb7344a2 13054 B
+[110/240] s1res s1L2+qp47 a365e654 27387 B
+[111/240] s1res s1L2+qp47 c9510efb 26047 B
+[112/240] s1res s1L2+qp47 937476dd 31369 B
+[113/240] s1res s1L2+qp47 b0b3744c 25613 B
+[114/240] s1res s1L2+qp47 e0d8e29c 15672 B
+[115/240] s1res s1L2+qp47 d0208a1e 20641 B
+[116/240] s1res s1L2+qp47 f67f11de 18296 B
+[117/240] s1res s1L2+qp47 ff32adfa 28220 B
+[118/240] s1res s1L2+qp47 da52c4f6 37908 B
+[119/240] s1res s1L2+qp47 ebfd571f 32423 B
+[120/240] s1res s1L2+qp47 eda6d427 31763 B
+[121/240] s1res s1L3+qp32 0369d229 47639 B
+[122/240] s1res s1L3+qp32 0d154749 65461 B
+[123/240] s1res s1L3+qp32 1cba10ad 43121 B
+[124/240] s1res s1L3+qp32 1b4ad095 53397 B
+[125/240] s1res s1L3+qp32 07b9f93f 111357 B
+[126/240] s1res s1L3+qp32 2a760bf1 23894 B
+[127/240] s1res s1L3+qp32 4ebc0e6c 50489 B
+[128/240] s1res s1L3+qp32 50d13125 33928 B
+[129/240] s1res s1L3+qp32 2397c73f 100273 B
+[130/240] s1res s1L3+qp32 2684452d 91167 B
+[131/240] s1res s1L3+qp32 02809272 181903 B
+[132/240] s1res s1L3+qp32 58104815 133241 B
+[133/240] s1res s1L3+qp32 79b1bb29 170661 B
+[134/240] s1res s1L3+qp32 8426ed22 40587 B
+[135/240] s1res s1L3+qp32 608cb09e 171184 B
+[136/240] s1res s1L3+qp32 50fe4c3d 162287 B
+[137/240] s1res s1L3+qp32 a2a946cc 93729 B
+[138/240] s1res s1L3+qp32 86127fbd 101878 B
+[139/240] s1res s1L3+qp32 bb7344a2 40996 B
+[140/240] s1res s1L3+qp32 c9510efb 68533 B
+[141/240] s1res s1L3+qp32 a365e654 187007 B
+[142/240] s1res s1L3+qp32 937476dd 374124 B
+[143/240] s1res s1L3+qp32 b0b3744c 232651 B
+[144/240] s1res s1L3+qp32 e0d8e29c 43205 B
+[145/240] s1res s1L3+qp32 ebfd571f 147043 B
+[146/240] s1res s1L3+qp32 f67f11de 35235 B
+[147/240] s1res s1L3+qp32 da52c4f6 211677 B
+[148/240] s1res s1L3+qp32 ff32adfa 82793 B
+[149/240] s1res s1L3+qp32 d0208a1e 200230 B
+[150/240] s1res s1L3+qp37 0369d229 37523 B
+[151/240] s1res s1L3+qp37 0d154749 41259 B
+[152/240] s1res s1L3+qp32 eda6d427 153397 B
+[153/240] s1res s1L3+qp37 1cba10ad 37303 B
+[154/240] s1res s1L3+qp37 1b4ad095 30181 B
+[155/240] s1res s1L3+qp37 07b9f93f 59040 B
+[156/240] s1res s1L3+qp37 2a760bf1 21182 B
+[157/240] s1res s1L3+qp37 4ebc0e6c 36051 B
+[158/240] s1res s1L3+qp37 2397c73f 60681 B
+[159/240] s1res s1L3+qp37 02809272 103369 B
+[160/240] s1res s1L3+qp37 50d13125 27353 B
+[161/240] s1res s1L3+qp37 2684452d 56928 B
+[162/240] s1res s1L3+qp37 58104815 69643 B
+[163/240] s1res s1L3+qp37 8426ed22 36778 B
+[164/240] s1res s1L3+qp37 50fe4c3d 91712 B
+[165/240] s1res s1L3+qp37 608cb09e 101219 B
+[166/240] s1res s1L3+qp37 79b1bb29 88701 B
+[167/240] s1res s1L3+qp37 86127fbd 50181 B
+[168/240] s1res s1L3+qp37 a2a946cc 61243 B
+[169/240] s1res s1L3+qp37 bb7344a2 28324 B
+[170/240] s1res s1L3+qp37 c9510efb 51941 B
+[171/240] s1res s1L3+qp37 a365e654 96611 B
+[172/240] s1res s1L3+qp37 937476dd 183435 B
+[173/240] s1res s1L3+qp37 b0b3744c 112559 B
+[174/240] s1res s1L3+qp37 e0d8e29c 29053 B
+[175/240] s1res s1L3+qp37 d0208a1e 81608 B
+[176/240] s1res s1L3+qp37 f67f11de 30630 B
+[177/240] s1res s1L3+qp37 ebfd571f 95502 B
+[178/240] s1res s1L3+qp37 da52c4f6 122808 B
+[179/240] s1res s1L3+qp42 0369d229 33721 B
+[180/240] s1res s1L3+qp37 eda6d427 88157 B
+[181/240] s1res s1L3+qp42 0d154749 34877 B
+[182/240] s1res s1L3+qp37 ff32adfa 58584 B
+[183/240] s1res s1L3+qp42 1b4ad095 24434 B
+[184/240] s1res s1L3+qp42 1cba10ad 35514 B
+[185/240] s1res s1L3+qp42 07b9f93f 39176 B
+[186/240] s1res s1L3+qp42 2a760bf1 19632 B
+[187/240] s1res s1L3+qp42 4ebc0e6c 30483 B
+[188/240] s1res s1L3+qp42 02809272 62193 B
+[189/240] s1res s1L3+qp42 50d13125 24822 B
+[190/240] s1res s1L3+qp42 2684452d 41505 B
+[191/240] s1res s1L3+qp42 2397c73f 41695 B
+[192/240] s1res s1L3+qp42 58104815 42529 B
+[193/240] s1res s1L3+qp42 8426ed22 35395 B
+[194/240] s1res s1L3+qp42 50fe4c3d 58626 B
+[195/240] s1res s1L3+qp42 608cb09e 67464 B
+[196/240] s1res s1L3+qp42 86127fbd 30130 B
+[197/240] s1res s1L3+qp42 79b1bb29 49537 B
+[198/240] s1res s1L3+qp42 a2a946cc 45432 B
+[199/240] s1res s1L3+qp42 bb7344a2 21765 B
+[200/240] s1res s1L3+qp42 c9510efb 43192 B
+[201/240] s1res s1L3+qp42 a365e654 55084 B
+[202/240] s1res s1L3+qp42 937476dd 68218 B
+[203/240] s1res s1L3+qp42 e0d8e29c 26252 B
+[204/240] s1res s1L3+qp42 b0b3744c 56600 B
+[205/240] s1res s1L3+qp42 d0208a1e 41148 B
+[206/240] s1res s1L3+qp42 f67f11de 29125 B
+[207/240] s1res s1L3+qp42 ff32adfa 47025 B
+[208/240] s1res s1L3+qp42 da52c4f6 74612 B
+[209/240] s1res s1L3+qp42 ebfd571f 60828 B
+[210/240] s1res s1L3+qp47 0369d229 32350 B
+[211/240] s1res s1L3+qp47 07b9f93f 33133 B
+[212/240] s1res s1L3+qp47 0d154749 33611 B
+[213/240] s1res s1L3+qp47 1b4ad095 23273 B
+[214/240] s1res s1L3+qp47 1cba10ad 34816 B
+[215/240] s1res s1L3+qp47 02809272 45125 B
+[216/240] s1res s1L3+qp42 eda6d427 58274 B
+[217/240] s1res s1L3+qp47 2a760bf1 18682 B
+[218/240] s1res s1L3+qp47 4ebc0e6c 29204 B
+[219/240] s1res s1L3+qp47 2397c73f 33836 B
+[220/240] s1res s1L3+qp47 50d13125 24328 B
+[221/240] s1res s1L3+qp47 2684452d 35924 B
+[222/240] s1res s1L3+qp47 58104815 36242 B
+[223/240] s1res s1L3+qp47 50fe4c3d 45917 B
+[224/240] s1res s1L3+qp47 8426ed22 34742 B
+[225/240] s1res s1L3+qp47 608cb09e 54195 B
+[226/240] s1res s1L3+qp47 79b1bb29 34942 B
+[227/240] s1res s1L3+qp47 86127fbd 24362 B
+[228/240] s1res s1L3+qp47 a2a946cc 39053 B
+[229/240] s1res s1L3+qp47 bb7344a2 19022 B
+[230/240] s1res s1L3+qp47 a365e654 40324 B
+[231/240] s1res s1L3+qp47 c9510efb 39414 B
+[232/240] s1res s1L3+qp47 b0b3744c 36809 B
+[233/240] s1res s1L3+qp47 d0208a1e 32399 B
+[234/240] s1res s1L3+qp47 937476dd 41589 B
+[235/240] s1res s1L3+qp47 e0d8e29c 25612 B
+[236/240] s1res s1L3+qp47 f67f11de 28502 B
+[237/240] s1res s1L3+qp47 da52c4f6 53717 B
+[238/240] s1res s1L3+qp47 eda6d427 47646 B
+[239/240] s1res s1L3+qp47 ebfd571f 47247 B
+[240/240] s1res s1L3+qp47 ff32adfa 41967 B
+===== metrics
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/usr/local/lib/python3.13/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+metrics 1/660
+metrics 21/660
+metrics 41/660
+metrics 61/660
+metrics 81/660
+metrics 101/660
+metrics 121/660
+metrics 141/660
+metrics 161/660
+metrics 181/660
+metrics 201/660
+metrics 221/660
+metrics 241/660
+metrics 261/660
+metrics 281/660
+metrics 301/660
+metrics 321/660
+metrics 341/660
+metrics 361/660
+metrics 381/660
+metrics 401/660
+metrics 421/660
+metrics 441/660
+metrics 461/660
+metrics 481/660
+metrics 501/660
+metrics 521/660
+metrics 541/660
+metrics 561/660
+metrics 581/660
+metrics 601/660
+metrics 621/660
+[01:41:56 +660.0m] time budget reached: stopping /kaggle/working/ratflow_repo/experiments/bakeoff/bakeoff.py
+[01:41:56 +660.0m] == bakeoff: stopped by the time budget; partial results kept. Re-run with this output attached as Input to continue.
