@@ -39,7 +39,7 @@ CPU_ONLY = False        # True = phiên KHÔNG bật GPU (không tốn hạn m�
                         #   STAGES="bakeoff", BAKEOFF_STEP="points", BAKEOFF_ARGS="--cands vtm420" (phiên khác: vtmscc)
 """
 
-PREFLIGHT = """# Kiểm tra trước khi chạy: GPU, Internet, checkpoint S1, lần chạy trước
+PREFLIGHT = """# Kiểm tra trước khi chạy: GPU, Internet, checkpoint S1, Q̂, lần chạy trước
 import json, socket
 from pathlib import Path
 
@@ -64,6 +64,12 @@ for ck in Path("/kaggle/input").rglob("last.pt"):
 if not any(lam and lam >= 2 for _, lam in found):
     print("CHƯA CÓ checkpoint S1 lần 1 (lambda max = 4). Ứng viên C1 (s1res) sẽ bị bỏ qua; các ứng viên khác vẫn chạy.\\n"
           "-> Add Input: dataset từ results/s1_results.zip")
+qhat = sorted(Path("/kaggle/input").rglob("qhat_v0.json"))
+if qhat:
+    print("Q-hat:", qhat[0])
+elif "qhat" not in STAGES.split():
+    print("CHƯA CÓ qhat_v0.json trong Input mà STAGES không có qhat: bake-off sẽ chia bit theo -LPIPS thay vì Q̂.\\n"
+          "-> Add Input: dataset từ qhat_v0.zip (thư mục results/2026-10-06_qhat_v0 của repo)")
 prev = [p.parent for p in Path("/kaggle/input").rglob("state.json")]
 print("Lần chạy trước (sẽ tiếp tục từ đây):", prev or "không có")
 """
