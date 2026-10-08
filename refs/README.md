@@ -7,6 +7,7 @@ Các repo này không được commit vào repo chính (xem `.gitignore`). Clone
 - `OSCAR`: https://github.com/jp-guo/OSCAR.git @ cb23f4e
 - `StableCodec`: https://github.com/LuizScarlet/StableCodec.git @ b19401c
 - `onedc`: https://github.com/onedc-codec/onedc.git @ df37891
+- `NeuralCompression`: https://github.com/facebookresearch/NeuralCompression.git @ 3f12280 (MS-ILLM, ứng viên C2 của bake-off)
 - `clic-devkit`: https://github.com/clic-challenge/devkit @ 7be3ffb (Docker, requirements và decoder VVC 23.8 của server CLIC)
 
 Ghi chú khi đọc code của đối thủ nằm ở `code_notes.md`.
