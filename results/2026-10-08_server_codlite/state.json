@@ -1,0 +1,20 @@
+{
+ "check": {
+  "done": true,
+  "seconds": 4,
+  "commit": "cc554ff",
+  "gpu": "NVIDIA L40",
+  "torch": "2.11.0+cu128"
+ },
+ "bakeoff": {
+  "done": false,
+  "seconds": 441,
+  "commit": "cc554ff",
+  "s1_ckpt": "None",
+  "qhat": "/mnt/home/guess03/clic/inputs/qhat_v0/qhat/qhat_v0.json",
+  "step": "all",
+  "cands": [
+   "codlite"
+  ]
+ }
+}

@@ -1,0 +1,259 @@
+[23:11:34 +  0.0m] clic27 pipeline @ cc554ff | stages ['bakeoff'] | budget 6.0 h
+[23:11:34 +  0.0m] == check
+[23:11:38 +  0.1m] torch 2.11.0+cu128 | GPU: NVIDIA L40 | work: /mnt/home/guess03/clic/work_codlite
+[23:11:38 +  0.1m] == check: done {'gpu': 'NVIDIA L40', 'torch': '2.11.0+cu128'}
+[23:11:38 +  0.1m] == bakeoff
+[23:11:38 +  0.1m] bakeoff: S1 checkpoint None | Q-hat /mnt/home/guess03/clic/inputs/qhat_v0/qhat/qhat_v0.json
+[23:11:38 +  0.1m] $ /mnt/home/guess03/clic/venv/bin/python /mnt/home/guess03/clic/clic2027-image/experiments/bakeoff/bakeoff.py all --out /mnt/home/guess03/clic/work_codlite/bakeoff --qhat /mnt/home/guess03/clic/inputs/qhat_v0/qhat/qhat_v0.json --cands codlite
+===== prepare
+30 images, 86245376 pixels, budgets {'0.075': 808550, '0.15': 1617100, '0.3': 3234201}
+===== points
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/mnt/home/guess03/clic/clic2027-image/experiments/bakeoff/bakeoff.py:430: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  t = torch.from_numpy(np.ascontiguousarray(x)).permute(2, 0, 1)[None].float().div(255).to(dev)
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/alexnet-owt-7be5be79.pth" to /mnt/home/guess03/.cache/torch/hub/checkpoints/alexnet-owt-7be5be79.pth
+
+  0%|          | 0.00/233M [00:00<?, ?B/s]
+  2%|▏         | 5.00M/233M [00:00<00:04, 51.4MB/s]
+  5%|▌         | 12.1M/233M [00:00<00:03, 64.9MB/s]
+  9%|▉         | 20.9M/233M [00:00<00:02, 76.7MB/s]
+ 13%|█▎        | 31.4M/233M [00:00<00:02, 89.8MB/s]
+ 17%|█▋        | 40.0M/233M [00:00<00:02, 85.5MB/s]
+ 21%|██        | 48.2M/233M [00:00<00:02, 73.0MB/s]
+ 24%|██▍       | 55.5M/233M [00:00<00:02, 73.6MB/s]
+ 27%|██▋       | 62.8M/233M [00:00<00:02, 70.8MB/s]
+ 30%|██▉       | 69.8M/233M [00:01<00:02, 68.1MB/s]
+ 33%|███▎      | 76.4M/233M [00:01<00:02, 62.9MB/s]
+ 36%|███▌      | 84.0M/233M [00:01<00:02, 67.3MB/s]
+ 39%|███▉      | 90.6M/233M [00:01<00:02, 67.1MB/s]
+ 42%|████▏     | 97.1M/233M [00:01<00:02, 67.0MB/s]
+ 44%|████▍     | 104M/233M [00:01<00:02, 66.2MB/s] 
+ 47%|████▋     | 110M/233M [00:01<00:01, 66.6MB/s]
+ 50%|█████     | 117M/233M [00:01<00:01, 65.8MB/s]
+ 53%|█████▎    | 123M/233M [00:01<00:01, 65.9MB/s]
+ 56%|█████▌    | 130M/233M [00:01<00:01, 64.6MB/s]
+ 58%|█████▊    | 136M/233M [00:02<00:01, 65.4MB/s]
+ 61%|██████▏   | 143M/233M [00:02<00:01, 66.8MB/s]
+ 64%|██████▍   | 149M/233M [00:02<00:01, 66.5MB/s]
+ 67%|██████▋   | 156M/233M [00:02<00:01, 65.4MB/s]
+ 70%|██████▉   | 163M/233M [00:02<00:01, 67.3MB/s]
+ 73%|███████▎  | 169M/233M [00:02<00:01, 64.8MB/s]
+ 75%|███████▌  | 175M/233M [00:02<00:00, 62.6MB/s]
+ 78%|███████▊  | 181M/233M [00:02<00:00, 61.7MB/s]
+ 80%|████████  | 187M/233M [00:02<00:00, 61.2MB/s]
+ 83%|████████▎ | 193M/233M [00:03<00:01, 37.0MB/s]
+ 87%|████████▋ | 202M/233M [00:03<00:00, 47.8MB/s]
+ 89%|████████▉ | 208M/233M [00:03<00:00, 51.3MB/s]
+ 92%|█████████▏| 215M/233M [00:03<00:00, 56.7MB/s]
+ 97%|█████████▋| 225M/233M [00:03<00:00, 67.9MB/s]
+100%|██████████| 233M/233M [00:03<00:00, 65.5MB/s]
+Downloading: "https://github.com/photosynthesis-team/piq/releases/download/v0.4.1/dists_weights.pt" to /mnt/home/guess03/.cache/torch/hub/checkpoints/dists_weights.pt
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/vgg16-397923af.pth" to /mnt/home/guess03/.cache/torch/hub/checkpoints/vgg16-397923af.pth
+codlite 0_0156 02809272 5632 B  dec 0.47s
+codlite 0_0156 0369d229 5632 B  dec 0.09s
+codlite 0_0156 07b9f93f 5632 B  dec 0.39s
+codlite 0_0156 0d154749 5632 B  dec 0.09s
+codlite 0_0156 1b4ad095 4864 B  dec 0.32s
+codlite 0_0156 1cba10ad 6656 B  dec 0.37s
+codlite 0_0156 2397c73f 5632 B  dec 0.09s
+codlite 0_0156 2684452d 5632 B  dec 0.09s
+codlite 0_0156 2a760bf1 3840 B  dec 0.31s
+codlite 0_0156 4ebc0e6c 5632 B  dec 0.09s
+codlite 0_0156 50d13125 5632 B  dec 0.10s
+codlite 0_0156 50fe4c3d 5376 B  dec 0.40s
+codlite 0_0156 58104815 5888 B  dec 0.35s
+codlite 0_0156 608cb09e 6656 B  dec 0.11s
+codlite 0_0156 79b1bb29 5120 B  dec 0.57s
+codlite 0_0156 8426ed22 8192 B  dec 0.42s
+codlite 0_0156 86127fbd 4096 B  dec 0.35s
+codlite 0_0156 937476dd 6144 B  dec 0.38s
+codlite 0_0156 a2a946cc 5632 B  dec 0.09s
+codlite 0_0156 a365e654 5632 B  dec 0.09s
+codlite 0_0156 b0b3744c 5632 B  dec 0.09s
+codlite 0_0156 bb7344a2 4096 B  dec 0.10s
+codlite 0_0156 c9510efb 5632 B  dec 0.11s
+codlite 0_0156 d0208a1e 5632 B  dec 0.09s
+codlite 0_0156 da52c4f6 5632 B  dec 0.10s
+codlite 0_0156 e0d8e29c 5632 B  dec 0.09s
+codlite 0_0156 ebfd571f 8192 B  dec 0.13s
+codlite 0_0156 eda6d427 6656 B  dec 0.12s
+codlite 0_0156 f67f11de 6656 B  dec 0.11s
+codlite 0_0156 ff32adfa 5632 B  dec 0.11s
+codlite 0_0312 02809272 11264 B  dec 0.10s
+codlite 0_0312 0369d229 11264 B  dec 0.12s
+codlite 0_0312 07b9f93f 11264 B  dec 0.09s
+codlite 0_0312 0d154749 11264 B  dec 0.10s
+codlite 0_0312 1b4ad095 9728 B  dec 0.09s
+codlite 0_0312 1cba10ad 13312 B  dec 0.11s
+codlite 0_0312 2397c73f 11264 B  dec 0.10s
+codlite 0_0312 2684452d 11264 B  dec 0.10s
+codlite 0_0312 2a760bf1 7680 B  dec 0.08s
+codlite 0_0312 4ebc0e6c 11264 B  dec 0.10s
+codlite 0_0312 50d13125 11264 B  dec 0.15s
+codlite 0_0312 50fe4c3d 10752 B  dec 0.09s
+codlite 0_0312 58104815 11776 B  dec 0.10s
+codlite 0_0312 608cb09e 13312 B  dec 0.11s
+codlite 0_0312 79b1bb29 10240 B  dec 0.09s
+codlite 0_0312 8426ed22 16384 B  dec 0.14s
+codlite 0_0312 86127fbd 8192 B  dec 0.07s
+codlite 0_0312 937476dd 12288 B  dec 0.11s
+codlite 0_0312 a2a946cc 11264 B  dec 0.14s
+codlite 0_0312 a365e654 11264 B  dec 0.10s
+codlite 0_0312 b0b3744c 11264 B  dec 0.09s
+codlite 0_0312 bb7344a2 8192 B  dec 0.07s
+codlite 0_0312 c9510efb 11264 B  dec 0.14s
+codlite 0_0312 d0208a1e 11264 B  dec 0.09s
+codlite 0_0312 da52c4f6 11264 B  dec 0.09s
+codlite 0_0312 e0d8e29c 11264 B  dec 0.09s
+codlite 0_0312 ebfd571f 16384 B  dec 0.13s
+codlite 0_0312 eda6d427 13312 B  dec 0.11s
+codlite 0_0312 f67f11de 13312 B  dec 0.11s
+codlite 0_0312 ff32adfa 11264 B  dec 0.09s
+codlite 0_1250 02809272 45056 B  dec 0.12s
+codlite 0_1250 0369d229 45056 B  dec 0.11s
+codlite 0_1250 07b9f93f 45056 B  dec 0.12s
+codlite 0_1250 0d154749 45056 B  dec 0.11s
+codlite 0_1250 1b4ad095 38912 B  dec 0.10s
+codlite 0_1250 1cba10ad 53248 B  dec 0.17s
+codlite 0_1250 2397c73f 45056 B  dec 0.12s
+codlite 0_1250 2684452d 45056 B  dec 0.11s
+codlite 0_1250 2a760bf1 30720 B  dec 0.09s
+codlite 0_1250 4ebc0e6c 45056 B  dec 0.11s
+codlite 0_1250 50d13125 45056 B  dec 0.11s
+codlite 0_1250 50fe4c3d 43008 B  dec 0.12s
+codlite 0_1250 58104815 47104 B  dec 0.12s
+codlite 0_1250 608cb09e 53248 B  dec 0.18s
+codlite 0_1250 79b1bb29 40960 B  dec 0.11s
+codlite 0_1250 8426ed22 65536 B  dec 0.16s
+codlite 0_1250 86127fbd 32768 B  dec 0.09s
+codlite 0_1250 937476dd 49152 B  dec 0.13s
+codlite 0_1250 a2a946cc 45056 B  dec 0.11s
+codlite 0_1250 a365e654 45056 B  dec 0.11s
+codlite 0_1250 b0b3744c 45056 B  dec 0.11s
+codlite 0_1250 bb7344a2 32768 B  dec 0.09s
+codlite 0_1250 c9510efb 45056 B  dec 0.11s
+codlite 0_1250 d0208a1e 45056 B  dec 0.11s
+codlite 0_1250 da52c4f6 45056 B  dec 0.11s
+codlite 0_1250 e0d8e29c 45056 B  dec 0.12s
+codlite 0_1250 ebfd571f 65536 B  dec 0.16s
+codlite 0_1250 eda6d427 53248 B  dec 0.13s
+codlite 0_1250 f67f11de 53248 B  dec 0.13s
+codlite 0_1250 ff32adfa 45056 B  dec 0.11s
+codlite 0_5000 02809272 180224 B  dec 0.21s
+codlite 0_5000 0369d229 180224 B  dec 0.21s
+codlite 0_5000 07b9f93f 180224 B  dec 0.21s
+codlite 0_5000 0d154749 180224 B  dec 0.21s
+codlite 0_5000 1b4ad095 155648 B  dec 0.19s
+codlite 0_5000 1cba10ad 212992 B  dec 0.25s
+codlite 0_5000 2397c73f 180224 B  dec 0.21s
+codlite 0_5000 2684452d 180224 B  dec 0.21s
+codlite 0_5000 2a760bf1 122880 B  dec 0.15s
+codlite 0_5000 4ebc0e6c 180224 B  dec 0.21s
+codlite 0_5000 50d13125 180224 B  dec 0.21s
+codlite 0_5000 50fe4c3d 172032 B  dec 0.21s
+codlite 0_5000 58104815 188416 B  dec 0.22s
+codlite 0_5000 608cb09e 212992 B  dec 0.24s
+codlite 0_5000 79b1bb29 163840 B  dec 0.19s
+codlite 0_5000 8426ed22 262144 B  dec 0.30s
+codlite 0_5000 86127fbd 131072 B  dec 0.16s
+codlite 0_5000 937476dd 196608 B  dec 0.23s
+codlite 0_5000 a2a946cc 180224 B  dec 0.21s
+codlite 0_5000 a365e654 180224 B  dec 0.21s
+codlite 0_5000 b0b3744c 180224 B  dec 0.21s
+codlite 0_5000 bb7344a2 131072 B  dec 0.15s
+codlite 0_5000 c9510efb 180224 B  dec 0.21s
+codlite 0_5000 d0208a1e 180224 B  dec 0.21s
+codlite 0_5000 da52c4f6 180224 B  dec 0.21s
+codlite 0_5000 e0d8e29c 180224 B  dec 0.21s
+codlite 0_5000 ebfd571f 262144 B  dec 0.42s
+codlite 0_5000 eda6d427 212992 B  dec 0.24s
+codlite 0_5000 f67f11de 212992 B  dec 0.24s
+codlite 0_5000 ff32adfa 180224 B  dec 0.21s
+===== metrics
+===== allocate
+===== summary
+# So sánh base trên 30 ảnh validation CLIC 2027
+
+Ngân sách cả bộ ảnh (byte): {'0.075': 808550, '0.15': 1617100, '0.3': 3234201}. Mỗi ảnh chọn một điểm vận hành sao cho tổng byte ≤ ngân sách và tổng mục tiêu lớn nhất; mục tiêu: **qhat_v0**.
+
+Q̂ là tiện ích tuyến tính của Q̂ v0 (cao hơn = người chấm thích hơn; chênh 1.0 ≈ odds 2.7 lần). `t_dec`: giây/ảnh trên GPU của lần chạy này (không gồm VTM). `mix`: mỗi ảnh được chọn mode tốt nhất.
+
+## 0.075 bpp — all
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| codlite | 30 | 0.0749 | 22.02 | 0.8579 | 0.1091 | 0.0934 | -0.382 | 0.12 |
+| mix | 30 | 0.0749 | 22.02 | 0.8579 | 0.1091 | 0.0934 | -0.382 | 0.12 |
+
+## 0.075 bpp — natural
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| codlite | 25 | 0.0756 | 23.04 | 0.8713 | 0.1093 | 0.0912 | -0.375 | 0.11 |
+| mix | 25 | 0.0756 | 23.04 | 0.8713 | 0.1093 | 0.0912 | -0.375 | 0.11 |
+
+## 0.075 bpp — screen
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| codlite | 4 | 0.0884 | 21.93 | 0.9380 | 0.0653 | 0.0743 | 0.540 | 0.10 |
+| mix | 4 | 0.0884 | 21.93 | 0.9380 | 0.0653 | 0.0743 | 0.540 | 0.10 |
+
+## 0.15 bpp — all
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| codlite | 30 | 0.1497 | 23.87 | 0.9206 | 0.0798 | 0.0697 | 0.285 | 0.13 |
+| mix | 30 | 0.1497 | 23.87 | 0.9206 | 0.0798 | 0.0697 | 0.285 | 0.13 |
+
+## 0.15 bpp — natural
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| codlite | 25 | 0.1432 | 24.56 | 0.9188 | 0.0822 | 0.0691 | 0.256 | 0.13 |
+| mix | 25 | 0.1432 | 24.56 | 0.9188 | 0.0822 | 0.0691 | 0.256 | 0.13 |
+
+## 0.15 bpp — screen
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| codlite | 4 | 0.0884 | 21.93 | 0.9380 | 0.0653 | 0.0743 | 0.540 | 0.10 |
+| mix | 4 | 0.0884 | 21.93 | 0.9380 | 0.0653 | 0.0743 | 0.540 | 0.10 |
+
+## 0.3 bpp — all
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| codlite | 30 | 0.2996 | 25.77 | 0.9518 | 0.0583 | 0.0536 | 0.906 | 0.16 |
+| mix | 30 | 0.2996 | 25.77 | 0.9518 | 0.0583 | 0.0536 | 0.906 | 0.16 |
+
+## 0.3 bpp — natural
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| codlite | 25 | 0.2935 | 26.78 | 0.9503 | 0.0600 | 0.0536 | 0.863 | 0.16 |
+| mix | 25 | 0.2935 | 26.78 | 0.9503 | 0.0600 | 0.0536 | 0.863 | 0.16 |
+
+## 0.3 bpp — screen
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| codlite | 4 | 0.2814 | 23.84 | 0.9748 | 0.0428 | 0.0500 | 1.409 | 0.14 |
+| mix | 4 | 0.2814 | 23.84 | 0.9748 | 0.0428 | 0.0500 | 1.409 | 0.14 |
+
+## Ảnh nào được `mix` giao cho base nào
+
+| rate | vtm420 | vtmscc | s1res | msillm | mbt | codlite | turbo | coolchic |
+|---|---|---|---|---|---|---|---|---|
+| 0.075 | 0 | 0 | 0 | 0 | 0 | 30 | 0 | 0 |
+| 0.15 | 0 | 0 | 0 | 0 | 0 | 30 | 0 | 0 |
+| 0.3 | 0 | 0 | 0 | 0 | 0 | 30 | 0 | 0 |
+
+Kích thước decoder (fp32): codlite 224 MB
+[23:19:00 +  7.4m] == bakeoff: incomplete {'s1_ckpt': 'None', 'qhat': '/mnt/home/guess03/clic/inputs/qhat_v0/qhat/qhat_v0.json', 'step': 'all', 'cands': ['codlite']}
