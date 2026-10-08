@@ -113,7 +113,7 @@ class LatentCodec(nn.Module):
 
     @torch.no_grad()
     def decompress(self, blob: bytes, device="cpu") -> torch.Tensor:
-        assert blob[0] == MAGIC and blob[1] == VERSION, "not a ratflow S1 stream"
+        assert blob[0] == MAGIC and blob[1] == VERSION, "not a clic27 S1 stream"
         pos, hdr = 2, []
         for _ in range(5):
             v, pos = rans.get_varint(blob, pos)

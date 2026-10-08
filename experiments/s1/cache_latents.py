@@ -1,7 +1,7 @@
 """Cache DC-AE f32c32 latents of whole training images (crops are taken in latent space at train time).
 
 One fp16 .npy per image, UNscaled (multiply by the DC-AE scaling factor at load time), in --out.
-Tiled encoding (512/448) exactly as in ratflow.nn.dcae / diffusers. Skips files that already exist.
+Tiled encoding (512/448) exactly as in clic27.nn.dcae / diffusers. Skips files that already exist.
 
     python cache_latents.py --images data/DIV2K_train_HR [more dirs] --out latents --dtype fp16
     python cache_latents.py --download-div2k --out latents
@@ -20,8 +20,8 @@ import numpy as np
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-from ratflow.eval.metrics import device, images, load  # noqa: E402
-from ratflow.nn.dcae import DCAE  # noqa: E402
+from clic27.eval.metrics import device, images, load  # noqa: E402
+from clic27.nn.dcae import DCAE  # noqa: E402
 
 DIV2K_TRAIN = "https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip"
 AE_REPO = "Efficient-Large-Model/Sana_1600M_1024px_diffusers"

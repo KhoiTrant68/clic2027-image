@@ -1,4 +1,4 @@
-"""Parity and determinism checks for src/ratflow/{nn,entropy} (needs torch + GPU; run on Kaggle).
+"""Parity and determinism checks for src/clic27/{nn,entropy} (needs torch + GPU; run on Kaggle).
 
   dcae      our DCAE vs diffusers AutoencoderDC: encode/decode on a Kodak image and a tiled 2048x1360 input
   dit       our SanaDiT vs diffusers SanaTransformer2DModel (0.6B fp32, 1.6B fp16) on random inputs
@@ -23,11 +23,11 @@ import numpy as np
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-from ratflow.entropy import tables  # noqa: E402
-from ratflow.entropy.intnet import IntSequential, QConv2d, Up2, check_exact_range  # noqa: E402
-from ratflow.entropy.models import DiscretePrior, GaussianConditional, ScaleMeanHead  # noqa: E402
-from ratflow.nn.dcae import DCAE  # noqa: E402
-from ratflow.nn.sana import SanaDiT  # noqa: E402
+from clic27.entropy import tables  # noqa: E402
+from clic27.entropy.intnet import IntSequential, QConv2d, Up2, check_exact_range  # noqa: E402
+from clic27.entropy.models import DiscretePrior, GaussianConditional, ScaleMeanHead  # noqa: E402
+from clic27.nn.dcae import DCAE  # noqa: E402
+from clic27.nn.sana import SanaDiT  # noqa: E402
 
 SANA = {"0.6B": "Efficient-Large-Model/Sana_600M_1024px_diffusers",
         "1.6B": "Efficient-Large-Model/Sana_1600M_1024px_diffusers"}
@@ -218,7 +218,7 @@ CHECKS = [  # key, field, threshold, meaning
 
 def summary(args):
     rep = json.loads((args.out / "report.json").read_text())
-    L = ["# Parity: ratflow.nn / ratflow.entropy so với diffusers và giữa các thiết bị", "",
+    L = ["# Parity: clic27.nn / clic27.entropy so với diffusers và giữa các thiết bị", "",
          "| kiểm tra | giá trị | ngưỡng | kết quả |", "|---|---|---|---|"]
     for key, field, thr, desc in CHECKS:
         if key not in rep:

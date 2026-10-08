@@ -1,5 +1,5 @@
 [project]
-name = "ratflow"
+name = "clic27"
 version = "0.1.0"
 description = "CLIC 2027 image compression (GPU track) submission"
 requires-python = ">=3.10"

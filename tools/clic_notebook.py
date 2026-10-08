@@ -1,4 +1,4 @@
-"""CLIC week 1-3 runners, written by tools/bundle.py next to ratflow_run.py:
+"""CLIC week 1-3 runners, written by tools/bundle.py next to clic27_run.py:
 
     <out>/clic_qhat_bakeoff.ipynb  Kaggle notebook: settings, preflight checks, run, results shown inline
     <out>/run_clic.sh              the same on a rented GPU machine (L4 etc.)
@@ -70,7 +70,7 @@ print("Lần chạy trước (sẽ tiếp tục từ đây):", prev or "không c
 
 RUN = """# Chạy (log hiện trực tiếp bên dưới). Chạy lại ô này sau khi hết giờ: các bước đã xong được bỏ qua.
 import shlex, sys
-cmd = [sys.executable, "ratflow_run.py", *STAGES.split(), "--hours", str(HOURS)]
+cmd = [sys.executable, "clic27_run.py", *STAGES.split(), "--hours", str(HOURS)]
 if QHAT_ARGS:
     cmd.append("--qhat-args=" + QHAT_ARGS)
 if BAKEOFF_ARGS:
@@ -102,7 +102,7 @@ print("results.zip:", f"{z.stat().st_size / 1e6:.1f} MB -> tab Output" if z.exis
 SHELL = """#!/usr/bin/env bash
 # CLIC 2027: Q-hat v0 + base bake-off on a rented GPU machine (commit {commit}).
 #   Needs: python3 with torch + CUDA, git, cmake, g++, wget, unzip  (Ubuntu: apt install -y git cmake g++ wget unzip)
-#   Put next to this file: ratflow_run.py and s1_results.zip (results/s1_results.zip from the repo checkout)
+#   Put next to this file: clic27_run.py and s1_results.zip (results/s1_results.zip from the repo checkout)
 #
 #   bash run_clic.sh                         # everything, resumes when run again
 #   HOURS=3 EXTRA='--bakeoff-args="--cands msillm mbt"' bash run_clic.sh
@@ -110,7 +110,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 mkdir -p inputs
 if [ -f s1_results.zip ] && [ ! -d inputs/s1_results ]; then unzip -q s1_results.zip -d inputs/s1_results; fi
-eval python3 ratflow_run.py qhat bakeoff --work work --inputs inputs --hours "${{HOURS:-24}}" ${{EXTRA:-}}
+eval python3 clic27_run.py qhat bakeoff --work work --inputs inputs --hours "${{HOURS:-24}}" ${{EXTRA:-}}
 echo "Kết quả: $(pwd)/work/results.zip  (gửi file này cho Claude)"
 """
 
@@ -126,8 +126,8 @@ def _cell(kind, src, hidden=False):
 
 def write(dist: Path, launcher_src: str, commit: str):
     cells = [_cell("markdown", INTRO.format(commit=commit)), _cell("code", CONFIG), _cell("code", PREFLIGHT),
-             _cell("markdown", "Ô dưới đây chỉ ghi file `ratflow_run.py` (toàn bộ code đã đóng gói); không cần đọc."),
-             _cell("code", "%%writefile ratflow_run.py\n" + launcher_src, hidden=True),
+             _cell("markdown", "Ô dưới đây chỉ ghi file `clic27_run.py` (toàn bộ code đã đóng gói); không cần đọc."),
+             _cell("code", "%%writefile clic27_run.py\n" + launcher_src, hidden=True),
              _cell("code", RUN), _cell("code", SHOW)]
     nb = {"cells": cells, "nbformat": 4, "nbformat_minor": 5,
           "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},

@@ -160,7 +160,7 @@ def bounded(pool, fn, items, window):
 class Features:
     def __init__(self, dev):
         import lpips
-        from ratflow.eval import metrics as M
+        from clic27.eval import metrics as M
         self.M, self.dev = M, dev
         self.per = M.Perceptual(dev)
         self._vgg = lpips.LPIPS(net="vgg", verbose=False).to(dev)
@@ -188,7 +188,7 @@ class Features:
 
 
 def features(a):
-    from ratflow.eval import metrics as M
+    from clic27.eval import metrics as M
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     dev = M.device()
@@ -286,7 +286,7 @@ def accuracy(X, y, b, w):
 
 
 def fit(a):
-    from ratflow.eval import metrics as M
+    from clic27.eval import metrics as M
     out = Path(a.out)
     rows = M.read_csv(out / "features.csv")
     meta = json.loads((out / "ratings_meta.json").read_text()) if (out / "ratings_meta.json").exists() else {}

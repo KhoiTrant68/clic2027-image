@@ -65,13 +65,13 @@ Kế hoạch có hai nhánh:
 
 ### A1. Khung decoder và lần nộp đầu tiên (17/11 → 01/12)
 
-- [ ] Tạo cấu trúc `clic/` trong repo chung. Từ 30/9 đã gộp repo: code codec nằm ở `src/ratflow/`, và được vendor vào zip decoder lúc đóng gói.
+- [ ] Tạo cấu trúc `clic/` trong repo chung. Từ 30/9 đã gộp repo: code codec nằm ở `src/clic27/`, và được vendor vào zip decoder lúc đóng gói.
   ```
   clic/
     submission/          # nội dung zip decoder
       decode             # bash: python3 decode.py
       decode.py          # giải nén bs.zip, parse container, gọi codec, ghi PNG
-      (ratflow/)         # copy src/ratflow lúc pack (DiT tối giản + DC-AE decoder + entropy), chỉ phụ thuộc torch
+      (clic27/)         # copy src/clic27 lúc pack (DiT tối giản + DC-AE decoder + entropy), chỉ phụ thuộc torch
       weights/           # safetensors fp16/bf16 (không commit)
     encoder/             # chạy trên máy mình: encode, chọn rate, tìm seed
     tools/               # budget.py, pack.py, check_submission.py, local_eval.py

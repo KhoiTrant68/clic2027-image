@@ -27,7 +27,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))  # repo checkout without `pip install -e .`
-from ratflow.eval.metrics import (  # noqa: E402  (load/save/... re-exported for b6_vtm_residual.py)
+from clic27.eval.metrics import (  # noqa: E402  (load/save/... re-exported for b6_vtm_residual.py)
     Perceptual, box_xyxy, cer, device, images, load, ocr_reader, read_boxes, read_csv, region_psnr, save, write_csv,
 )
 

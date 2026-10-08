@@ -44,7 +44,7 @@ ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "clic_b"))
 sys.path.insert(0, str(ROOT / "experiments" / "qhat"))
-from ratflow.eval import metrics as M  # noqa: E402
+from clic27.eval import metrics as M  # noqa: E402
 
 DATA_URL = "https://dhldkwazkze5h.cloudfront.net/data/clic2025_image_test.zip"
 RATES = [0.075, 0.15, 0.3]
@@ -260,8 +260,8 @@ def points_vtm(a, P, names):
 # ---------------------------------------------------------------- C1: DC-AE + S1 (+ VTM residual)
 def points_s1res(a, P, names):
     import torch
-    from ratflow.codec.latent_codec import LatentCodec
-    from ratflow.nn.dcae import DCAE
+    from clic27.codec.latent_codec import LatentCodec
+    from clic27.nn.dcae import DCAE
     if not a.s1_ckpt or not Path(a.s1_ckpt).exists():
         print("s1res: no --s1-ckpt, skipping", flush=True)
         return

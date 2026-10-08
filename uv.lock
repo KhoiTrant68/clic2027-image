@@ -214,6 +214,56 @@ wheels = [
 ]
 
 [[package]]
+name = "clic27"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
+    { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "pillow" },
+]
+
+[package.optional-dependencies]
+ae = [
+    { name = "huggingface-hub" },
+    { name = "safetensors" },
+]
+dev = [
+    { name = "pytest" },
+]
+eval = [
+    { name = "easyocr" },
+    { name = "lpips" },
+    { name = "piq" },
+    { name = "torch" },
+    { name = "torch-fidelity" },
+    { name = "torchmetrics" },
+]
+parity = [
+    { name = "accelerate" },
+    { name = "diffusers" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "accelerate", marker = "extra == 'parity'" },
+    { name = "diffusers", marker = "extra == 'parity'" },
+    { name = "easyocr", marker = "extra == 'eval'" },
+    { name = "huggingface-hub", marker = "extra == 'ae'" },
+    { name = "lpips", marker = "extra == 'eval'" },
+    { name = "numpy" },
+    { name = "pillow" },
+    { name = "piq", marker = "extra == 'eval'" },
+    { name = "pytest", marker = "extra == 'dev'" },
+    { name = "safetensors", marker = "extra == 'ae'" },
+    { name = "torch", marker = "extra == 'eval'" },
+    { name = "torch-fidelity", marker = "extra == 'eval'" },
+    { name = "torchmetrics", marker = "extra == 'eval'" },
+]
+provides-extras = ["eval", "ae", "parity", "dev"]
+
+[[package]]
 name = "click"
 version = "8.5.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1572,56 +1622,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/f0/7a/1c7270340330e575b92f397352af856a8c06f230aa3e76f86b39d01b416a/pyyaml-6.0.3-cp314-cp314t-win_amd64.whl", hash = "sha256:4ad1906908f2f5ae4e5a8ddfce73c320c2a1429ec52eafd27138b7f1cbe341c9", size = 174062, upload-time = "2025-09-25T21:32:55.767Z" },
     { url = "https://files.pythonhosted.org/packages/f1/12/de94a39c2ef588c7e6455cfbe7343d3b2dc9d6b6b2f40c4c6565744c873d/pyyaml-6.0.3-cp314-cp314t-win_arm64.whl", hash = "sha256:ebc55a14a21cb14062aa4162f906cd962b28e2e9ea38f9b4391244cd8de4ae0b", size = 149341, upload-time = "2025-09-25T21:32:56.828Z" },
 ]
-
-[[package]]
-name = "ratflow"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
-    { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "pillow" },
-]
-
-[package.optional-dependencies]
-ae = [
-    { name = "huggingface-hub" },
-    { name = "safetensors" },
-]
-dev = [
-    { name = "pytest" },
-]
-eval = [
-    { name = "easyocr" },
-    { name = "lpips" },
-    { name = "piq" },
-    { name = "torch" },
-    { name = "torch-fidelity" },
-    { name = "torchmetrics" },
-]
-parity = [
-    { name = "accelerate" },
-    { name = "diffusers" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "accelerate", marker = "extra == 'parity'" },
-    { name = "diffusers", marker = "extra == 'parity'" },
-    { name = "easyocr", marker = "extra == 'eval'" },
-    { name = "huggingface-hub", marker = "extra == 'ae'" },
-    { name = "lpips", marker = "extra == 'eval'" },
-    { name = "numpy" },
-    { name = "pillow" },
-    { name = "piq", marker = "extra == 'eval'" },
-    { name = "pytest", marker = "extra == 'dev'" },
-    { name = "safetensors", marker = "extra == 'ae'" },
-    { name = "torch", marker = "extra == 'eval'" },
-    { name = "torch-fidelity", marker = "extra == 'eval'" },
-    { name = "torchmetrics", marker = "extra == 'eval'" },
-]
-provides-extras = ["eval", "ae", "parity", "dev"]
 
 [[package]]
 name = "regex"

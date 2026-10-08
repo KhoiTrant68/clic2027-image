@@ -1,6 +1,6 @@
 """End-to-end S1 evaluation with real bitstreams: image -> DC-AE -> S1 bytes -> S1 decode -> DC-AE -> image.
 
-bpp from len(bytes) (mean over images); latent MSE; PSNR pooled over pixels (CLIC style); PSNR / MS-SSIM / LPIPS / DISTS via ratflow.eval.metrics (same code as the
+bpp from len(bytes) (mean over images); latent MSE; PSNR pooled over pixels (CLIC style); PSNR / MS-SSIM / LPIPS / DISTS via clic27.eval.metrics (same code as the
 ceilings). Also reports the DC-AE ceiling of each image, so the S1 points can be read against it.
 
     python eval_s1.py --ckpt s1_out/last.pt --dataset kodak --out s1_eval
@@ -18,9 +18,9 @@ import numpy as np
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-from ratflow.codec.latent_codec import LatentCodec  # noqa: E402
-from ratflow.eval.metrics import Perceptual, device, images, load, pooled_psnr, save, write_csv  # noqa: E402
-from ratflow.nn.dcae import DCAE  # noqa: E402
+from clic27.codec.latent_codec import LatentCodec  # noqa: E402
+from clic27.eval.metrics import Perceptual, device, images, load, pooled_psnr, save, write_csv  # noqa: E402
+from clic27.nn.dcae import DCAE  # noqa: E402
 
 AE_REPO = "Efficient-Large-Model/Sana_1600M_1024px_diffusers"
 

@@ -1,4 +1,4 @@
-"""CPU/numpy-only checks for ratflow.eval.metrics (no torch needed).
+"""CPU/numpy-only checks for clic27.eval.metrics (no torch needed).
 
     pytest            # or: python tests/test_metrics.py
 """
@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from ratflow.eval import metrics as M  # noqa: E402
+from clic27.eval import metrics as M  # noqa: E402
 
 
 def test_psnr_and_pooling():

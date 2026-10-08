@@ -20,7 +20,7 @@ import numpy as np
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-from ratflow.codec.latent_codec import LatentCodec  # noqa: E402
+from clic27.codec.latent_codec import LatentCodec  # noqa: E402
 
 SCALING = 0.41407  # DC-AE f32c32 (SANA) scaling factor
 # run 1 used [0.03 .. 4.0] -> Kodak 0.0155-0.12 bpp, saturating near the DC-AE ceiling above ~0.1 bpp;
@@ -72,7 +72,7 @@ def selftest(args):
         with torch.no_grad():
             est = m(lat, torch.tensor([r], device=dev))
             # what the encoder expects the decoder to reconstruct: q - u with the shared dither, through g_s
-            from ratflow.entropy import dither
+            from clic27.entropy import dither
             x, (h, w) = m._pad(lat)
             gain = m.gain(torch.tensor([r], device=dev))
             y_r = (m.g_a(x) * gain).double().cpu().numpy()

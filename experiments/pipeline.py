@@ -10,7 +10,7 @@ Stages (in order): check, [data], [cache], [s1], [s1_eval], [parity], qhat, bake
   cache     DC-AE latents of the training images into <work>/latents (resumes; reuses latents found in inputs)
   s1        S1 selftest, then training (resumes from <work>/s1/last.pt); time-boxed by --hours
   s1_eval   Kodak, real bitstreams, vs the DC-AE ceiling
-  parity    (optional) ratflow.nn / ratflow.entropy vs diffusers and CPU vs GPU
+  parity    (optional) clic27.nn / clic27.entropy vs diffusers and CPU vs GPU
   qhat      Q-hat v0: metrics on sampled CLIC perceptual ratings + Bradley-Terry fit
   bakeoff   base candidates on the 30 validation images at 0.075/0.15/0.3 bpp, corpus budget,
             Q-hat allocation (builds VTM 23.8; uses --s1-ckpt and work/qhat/qhat_v0.json when present)
@@ -296,7 +296,7 @@ class Pipeline:
 
     # ---------------------------------------------------------------- driver
     def main(self):
-        self.say(f"ratflow pipeline @ {self.commit} | stages {self.a.stages} | budget {self.a.hours} h")
+        self.say(f"clic27 pipeline @ {self.commit} | stages {self.a.stages} | budget {self.a.hours} h")
         self.restore()
         order = []
         for s in self.a.stages:

@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from ratflow.entropy import coding, dither, tables  # noqa: E402
+from clic27.entropy import coding, dither, tables  # noqa: E402
 
 NOFF, MU_FRAC = 8, 4
 CDF, HALF = tables.gaussian_tables(n_offsets=NOFF)

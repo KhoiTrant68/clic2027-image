@@ -1,13 +1,13 @@
-"""Bundle the repo code into ONE file, ratflow_run.py, plus one-cell notebooks, written OUTSIDE the repo
-(default ../ratflow-artifacts/run).
+"""Bundle the repo code into ONE file, clic27_run.py, plus one-cell notebooks, written OUTSIDE the repo
+(default ../clic27-artifacts/run).
 
     python tools/bundle.py
 
-Running the bundle unpacks the code into ./ratflow_repo (once per commit) and starts experiments/pipeline.py
+Running the bundle unpacks the code into ./clic27_repo (once per commit) and starts experiments/pipeline.py
 with the same arguments:
 
-    python ratflow_run.py                       # default stages (check, qhat, bakeoff, pack)
-    python ratflow_run.py bakeoff --hours 3
+    python clic27_run.py                       # default stages (check, qhat, bakeoff, pack)
+    python clic27_run.py bakeoff --hours 3
 """
 from __future__ import annotations
 
@@ -19,18 +19,18 @@ import zipfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-# Build output lives OUTSIDE the repo (default: <repo>/../ratflow-artifacts/run); override with --out.
-DEFAULT_OUT = REPO.parent / "ratflow-artifacts" / "run"
-INCLUDE = ["src/ratflow/**/*.py", "experiments/pipeline.py", "experiments/s1/*.py",
+# Build output lives OUTSIDE the repo (default: <repo>/../clic27-artifacts/run); override with --out.
+DEFAULT_OUT = REPO.parent / "clic27-artifacts" / "run"
+INCLUDE = ["src/clic27/**/*.py", "experiments/pipeline.py", "experiments/s1/*.py",
            "experiments/parity/parity.py", "experiments/qhat/*.py",
            "experiments/bakeoff/*.py", "experiments/clic_b/*.py"]
 
 LAUNCHER = '''#!/usr/bin/env python3
-"""ratflow pipeline (CLIC 2027), bundled from commit {commit}. One file: copy it anywhere and run
+"""clic27 pipeline (CLIC 2027), bundled from commit {commit}. One file: copy it anywhere and run
 
-    python ratflow_run.py                    # check, qhat, bakeoff, pack
-    python ratflow_run.py bakeoff --hours 3  # only some stages
-    python ratflow_run.py --help
+    python clic27_run.py                    # check, qhat, bakeoff, pack
+    python clic27_run.py bakeoff --hours 3  # only some stages
+    python clic27_run.py --help
 
 Results: <work>/results.zip (on Kaggle also /kaggle/working/results.zip). Re-running resumes.
 """
@@ -42,7 +42,7 @@ PAYLOAD = "{payload}"
 
 
 def main():
-    root = Path(os.environ.get("RATFLOW_ROOT", "ratflow_repo")).resolve()
+    root = Path(os.environ.get("CLIC27_ROOT", "clic27_repo")).resolve()
     stamp = root / ".commit"
     if not stamp.exists() or stamp.read_text().strip() != COMMIT:
         zipfile.ZipFile(io.BytesIO(base64.b64decode(PAYLOAD))).extractall(root)
@@ -70,20 +70,20 @@ def main():
     payload = base64.b64encode(buf.getvalue()).decode()
     DIST.mkdir(parents=True, exist_ok=True)
     src = LAUNCHER.format(commit=commit, payload=payload)
-    with open(DIST / "ratflow_run.py", "w", encoding="utf-8", newline="\n") as f:
+    with open(DIST / "clic27_run.py", "w", encoding="utf-8", newline="\n") as f:
         f.write(src)
     nb = {"cells": [{"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [],
-                     "source": "%%writefile ratflow_run.py\n" + src},
+                     "source": "%%writefile clic27_run.py\n" + src},
                     {"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [],
-                     "source": "# GPU + Internet on. Change the stages/arguments here if needed.\n!python ratflow_run.py"}],
+                     "source": "# GPU + Internet on. Change the stages/arguments here if needed.\n!python clic27_run.py"}],
           "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
                        "language_info": {"name": "python"}},
           "nbformat": 4, "nbformat_minor": 5}
-    with open(DIST / "ratflow_run.ipynb", "w", encoding="utf-8", newline="\n") as f:
+    with open(DIST / "clic27_run.ipynb", "w", encoding="utf-8", newline="\n") as f:
         json.dump(nb, f, ensure_ascii=False, indent=1)
     import clic_notebook
     extra = clic_notebook.write(DIST, src, commit)
-    print(f"{len(files)} files, commit {commit}: {DIST / 'ratflow_run.py'} ({len(src) / 1e3:.0f} kB), ratflow_run.ipynb, "
+    print(f"{len(files)} files, commit {commit}: {DIST / 'clic27_run.py'} ({len(src) / 1e3:.0f} kB), clic27_run.ipynb, "
           + ", ".join(extra))
 
 

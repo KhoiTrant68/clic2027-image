@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from ratflow.entropy import coding, rans, tables  # noqa: E402
+from clic27.entropy import coding, rans, tables  # noqa: E402
 
 
 def _tables():
