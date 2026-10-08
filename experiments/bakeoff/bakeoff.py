@@ -419,8 +419,9 @@ def points_codlite(a, P, names):
         miss, extra = net.load_state_dict({k[4:]: v for k, v in sd.items() if k.startswith("net.")}, strict=False)
         if miss or extra:
             print(f"codlite {key}: {len(miss)} missing / {len(extra)} unexpected keys, e.g. {(miss + extra)[:4]}", flush=True)
-        net = net.to(dev).eval()  # eval() folds the t=0 modulation into the blocks
-        enc = getattr(getattr(net, "y_embedder", None), "encoder", None)  # None in the released CoD-Lite nets
+        net = net.to(dev)
+        net.eval()  # CoD-Lite's eval() folds the t=0 modulation into the blocks and returns None, not self
+        enc = getattr(getattr(net, "y_embedder", None), "encoder", None)
         n_params = sum(p.numel() for p in net.parameters()) - (sum(p.numel() for p in enc.parameters()) if enc is not None else 0)
         for name in todo:
             x = M.load(inputs(a)[name])
