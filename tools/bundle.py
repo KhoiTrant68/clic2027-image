@@ -6,8 +6,8 @@
 Running the bundle unpacks the code into ./ratflow_repo (once per commit) and starts experiments/pipeline.py
 with the same arguments:
 
-    python ratflow_run.py                       # default stages, see experiments/pipeline.py
-    python ratflow_run.py gonogo1 --hours 3
+    python ratflow_run.py                       # default stages (check, qhat, bakeoff, pack)
+    python ratflow_run.py bakeoff --hours 3
 """
 from __future__ import annotations
 
@@ -22,16 +22,14 @@ REPO = Path(__file__).resolve().parents[1]
 # Build output lives OUTSIDE the repo (default: <repo>/../ratflow-artifacts/run); override with --out.
 DEFAULT_OUT = REPO.parent / "ratflow-artifacts" / "run"
 INCLUDE = ["src/ratflow/**/*.py", "experiments/pipeline.py", "experiments/s1/*.py",
-           "experiments/quant_noise/measure_quant_noise.py", "experiments/quant_noise/denoiser_gonogo.py",
-           "experiments/quant_noise/prepare_gonogo_latents.py", "experiments/ceiling/ceiling.py",
            "experiments/parity/parity.py", "experiments/qhat/*.py",
            "experiments/bakeoff/*.py", "experiments/clic_b/*.py"]
 
 LAUNCHER = '''#!/usr/bin/env python3
-"""ratflow pipeline (CVPR 2027 / CLIC 2027), bundled from commit {commit}. One file: copy it anywhere and run
+"""ratflow pipeline (CLIC 2027), bundled from commit {commit}. One file: copy it anywhere and run
 
-    python ratflow_run.py                    # check, data, cache, gonogo1, s1, s1_eval, pack
-    python ratflow_run.py gonogo1 --hours 3  # only some stages
+    python ratflow_run.py                    # check, qhat, bakeoff, pack
+    python ratflow_run.py bakeoff --hours 3  # only some stages
     python ratflow_run.py --help
 
 Results: <work>/results.zip (on Kaggle also /kaggle/working/results.zip). Re-running resumes.

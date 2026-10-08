@@ -1,5 +1,5 @@
-"""Shared evaluation code: every number in the paper and in the CLIC analyses goes through here,
-so ceilings, baselines and our codec stay comparable.
+"""Shared evaluation code: every number in the CLIC analyses goes through here,
+so ceilings, baselines and candidate codecs stay comparable.
 
 Conventions
 - Images are HxWx3 uint8 numpy arrays.

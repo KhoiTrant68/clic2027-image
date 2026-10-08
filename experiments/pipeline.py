@@ -1,20 +1,18 @@
 """One entry point for every GPU job: Kaggle or a rented machine, resumable, one results zip.
 
-    python experiments/pipeline.py                     # default stages
-    python experiments/pipeline.py gonogo1 s1          # only some stages (dependencies run if not done)
+    python experiments/pipeline.py                     # default stages: check, qhat, bakeoff, pack
+    python experiments/pipeline.py s1 s1_eval          # only some stages (dependencies run if not done)
     python experiments/pipeline.py --hours 11 --dry-run
 
-Stages (in order): check, data, cache, gonogo1, s1, s1_eval, [ceiling], [parity], [qhat], [bakeoff], pack
+Stages (in order): check, [data], [cache], [s1], [s1_eval], [parity], qhat, bakeoff, pack
   check     GPU + Internet + packages (installs missing pip packages)
   data      DIV2K train HR (800 images) into <work>/data
   cache     DC-AE latents of the training images into <work>/latents (resumes; reuses latents found in inputs)
-  gonogo1   go/no-go 1: exact-noise vs Gaussian-assumption denoiser (refuses < 208 training latents)
   s1        S1 selftest, then training (resumes from <work>/s1/last.pt); time-boxed by --hours
   s1_eval   Kodak, real bitstreams, vs the DC-AE ceiling
-  ceiling   (optional) DC-AE / SD-VAE ceilings on Kodak, CLIC2020, DIV2K-val incl. FID/KID
   parity    (optional) ratflow.nn / ratflow.entropy vs diffusers and CPU vs GPU
-  qhat      (optional, CLIC) Q-hat v0: metrics on sampled CLIC perceptual ratings + Bradley-Terry fit
-  bakeoff   (optional, CLIC) base candidates on the 30 validation images at 0.075/0.15/0.3 bpp, corpus budget,
+  qhat      Q-hat v0: metrics on sampled CLIC perceptual ratings + Bradley-Terry fit
+  bakeoff   base candidates on the 30 validation images at 0.075/0.15/0.3 bpp, corpus budget,
             Q-hat allocation (builds VTM 23.8; uses --s1-ckpt and work/qhat/qhat_v0.json when present)
   pack      <work>/results.zip with every summary (+ the S1 checkpoint)
 
@@ -38,12 +36,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 KAGGLE = Path("/kaggle/working").exists()
-DEFAULT_STAGES = ["check", "data", "cache", "gonogo1", "s1", "s1_eval", "pack"]
-ALL_STAGES = ["check", "data", "cache", "gonogo1", "s1", "s1_eval", "ceiling", "parity", "qhat", "bakeoff", "pack"]
-NEEDS = {"qhat": ["check"], "bakeoff": ["check"], "cache": ["data"], "gonogo1": ["cache"], "s1": ["cache"], "s1_eval": ["s1"]}  # deps run if not done
+DEFAULT_STAGES = ["check", "qhat", "bakeoff", "pack"]
+ALL_STAGES = ["check", "data", "cache", "s1", "s1_eval", "parity", "qhat", "bakeoff", "pack"]
+NEEDS = {"qhat": ["check"], "bakeoff": ["check"], "cache": ["data"], "s1": ["cache"], "s1_eval": ["s1"]}  # deps run if not done
 PIP = {"safetensors": "safetensors", "huggingface_hub": "huggingface_hub", "scipy": "scipy", "lpips": "lpips",
        "piq": "piq", "torchmetrics": "torchmetrics", "torch_fidelity": "torch-fidelity", "PIL": "pillow"}
-MIN_TRAIN_LATENTS = 208  # gonogo1: 200 train + 8 holdout
+MIN_TRAIN_LATENTS = 208  # S1 training refuses fewer images
 
 
 class StageTimeout(Exception):
@@ -197,20 +195,6 @@ class Pipeline:
             shutil.rmtree(self.work / "data", ignore_errors=True)  # keep Kaggle outputs small
         return dict(latents=n)
 
-    def gonogo1(self):
-        g = self.work / "gonogo1"
-        q = "experiments/quant_noise"
-        self.py(f"{q}/prepare_gonogo_latents.py", "--from-cache", self.work / "latents", "--out", g / "div2k")
-        self.py(f"{q}/prepare_gonogo_latents.py", "--kodak", "--data", g / "img", "--out", g / "kodak")
-        self.py(f"{q}/prepare_gonogo_latents.py", "--clic-valid", "--data", g / "img", "--out", g / "clic2020_valid")
-        dev = ["--device", "cuda"] if self.state.get("check", {}).get("gpu") else \
-              ["--device", "cpu", "--steps", "4000", "--width", "64", "--blocks", "6", "--batch", "32", "--n_draws", "2"]
-        self.py(f"{q}/denoiser_gonogo.py", "--train", g / "div2k", "--test", g / "kodak", g / "clic2020_valid",
-                "--out", g / "result", *dev)
-        shutil.rmtree(g / "img", ignore_errors=True)
-        res = json.loads((g / "result" / "results.json").read_text()) if (g / "result" / "results.json").exists() else {}
-        return dict(verdicts={k: v.get("verdict", v.get("pass")) for k, v in res.get("tests", {}).items()})
-
     def s1(self):
         out = self.work / "s1"
         self.py("experiments/s1/train_s1.py", "selftest", "--out", out)
@@ -230,12 +214,6 @@ class Pipeline:
         self.py("experiments/s1/eval_s1.py", "--ckpt", self.work / "s1" / "last.pt", "--dataset", "kodak",
                 "--data", self.work / "eval_img", "--out", self.work / "s1_eval")
         shutil.rmtree(self.work / "eval_img", ignore_errors=True)
-        return {}
-
-    def ceiling(self):
-        self.py("experiments/ceiling/ceiling.py", "all", "--data", self.work / "ceiling_data",
-                "--out", self.work / "ceiling")
-        shutil.rmtree(self.work / "ceiling_data", ignore_errors=True)
         return {}
 
     def parity(self):

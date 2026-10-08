@@ -4,7 +4,7 @@ Cập nhật 03/10/2026. Thay thế lịch ở mục C của `plans/Plan CLIC 20
 
 ## 0. Quyết định ngày 03/10
 
-- **CLIC 2027 là mục tiêu duy nhất của repo.** Bài CVPR 2027 bị bỏ hoặc hoãn. Tháng 10–11 dành cho CLIC.
+- **CLIC 2027 là mục tiêu duy nhất của repo.** Repo không phục vụ paper nào.
 - **Compute tháng 10:** Kaggle (T4/P100), cộng một máy L4 thuê theo giờ.
 - **Tiêu chí cho mọi quyết định:** có tăng Elo ở 0.075 / 0.15 / 0.3 bpp mà vẫn qua luật tốc độ và dung lượng không. Không chọn vì có lợi cho lý thuyết hay cho một bài báo.
 
@@ -102,9 +102,3 @@ Chạy trên đúng 30 ảnh validation, ở đúng 3 mức bitrate, dùng ngân
 | Q̂ dự đoán kém (độ chính xác < 65%) | Thêm thước đo học được; tăng phần tự chấm |
 | Server validation mở muộn | Dùng `check_submission.py` trên `clic-gpu` làm phép thử thay thế |
 
-## 7. Tạm dừng (chỉ làm lại nếu base được chọn là DC-AE)
-
-- Lý thuyết cho CVPR (Định lý 4, toy Gaussian vòng 2).
-- Chạy lại go/no-go 1.
-- Bridge S2/S3 trên SANA.
-- Codec S1 vẫn giữ làm ứng viên C1.

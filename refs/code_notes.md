@@ -1,4 +1,4 @@
-# Ghi chú đọc code các paper tham khảo (27/9/2026)
+# Ghi chú đọc code các codec tham khảo (27/9/2026)
 
 Các repo được clone shallow vào `refs/repos/`. Đường dẫn file trong ghi chú này tính từ thư mục đó.
 
@@ -9,13 +9,7 @@ Các repo được clone shallow vào `refs/repos/`. Đường dẫn file trong 
 | AEIC (CVPR'26) | [LuizScarlet/AEIC](https://github.com/LuizScarlet/AEIC) | Đọc lướt: cùng họ với StableCodec |
 | DiffO (WACV'26) | [Freemasti/DiffO](https://github.com/Freemasti/DiffO) | Đọc lướt: dựa trên ResShift |
 | OneDC (NeurIPS'25) | [onedc-codec/onedc](https://github.com/onedc-codec/onedc) | Đọc lướt cấu trúc |
-| MeanFlow / iMF (PyTorch, không chính thức) | [haidog-yaqub/MeanFlow](https://github.com/haidog-yaqub/MeanFlow) | Đã đọc phần loss |
-| AlphaFlow (ICLR'26) | [snap-research/alphaflow](https://github.com/snap-research/alphaflow) | Đã đọc phần loss |
-| torchcfm (OT-CFM) | [atong01/conditional-flow-matching](https://github.com/atong01/conditional-flow-matching) | Đã đọc OT sampler |
-| Rectified Flow | [gnobitab/RectifiedFlow](https://github.com/gnobitab/RectifiedFlow) | Mới clone, chưa đọc |
 | FlowCodec, VoRTeC | chưa thấy code công bố | — |
-| Semidiscrete FM (Apple) | chưa thấy repo chính thức | — |
-| iMF chính thức (JAX, TPU) | [Lyy-iiis/imeanflow](https://github.com/Lyy-iiis/imeanflow) | Chưa clone. Hữu ích nếu chuyển sang JAX/TPU |
 
 ---
 
@@ -52,50 +46,8 @@ Các repo được clone shallow vào `refs/repos/`. Đường dẫn file trong 
 
 - Xây trên **ResShift**: một bridge có dạng x_t = x₀ + η_t(y − x₀) + κ√η_t·ε, tức nội suy từ ảnh chất lượng thấp sang ảnh chất lượng cao kèm nhiễu. Lượng tử bằng VQ (taming).
 - Decode một bước bằng `pred_xstart` ở bước đầu (`models/gaussian_diffusion.py`, khoảng dòng 831).
-- **Ý tưởng "bridge từ tín hiệu đã lượng tử" đã có trong DiffO/ResShift.** Cần trích dẫn và phân biệt: của họ là bridge Gaussian với lịch nhiễu thủ công, còn của mình dùng OT coupling, có lý thuyết D–P và mô hình nhiễu chính xác.
 
 ### OneDC
 
 - SD-1.5 + entropy model kiểu DCVC + tokenizer MaskGIT-VQGAN để distill semantic vào hyperprior. Giai đoạn 2 dùng **DMD** (`src/modules/dmd/sd_guidance.py`).
 
----
-
-## 2. Code flow một bước
-
-### MeanFlow / iMF (`MeanFlow/meanflow.py`)
-
-- Model có **hai head, (u, v)**. Mục tiêu JVP dùng **v do chính model dự đoán** (`v_c`) làm tangent, chứ không dùng velocity có điều kiện x₁ − x₀. Tức là đúng tinh thần iMF.
-  → Điều này quan trọng cho bridge của mình: theo Mệnh đề 2, velocity có điều kiện ≠ velocity marginal, và dùng v đã học làm tangent là cách xử lý đúng.
-- JVP được tính bằng `torch.autograd.functional.jvp` trong `no_grad`, **phải tắt flash-attention**. Hàm này dùng double-backward nên tốn bộ nhớ.
-- Quy ước: **t = 1 là nhiễu, t = 0 là data**, ngược với quy ước trong plan. Cần cẩn thận khi port.
-- Thời gian lấy mẫu theo phân phối logit-normal(−0.4, 1.0); dùng adaptive L2 loss.
-
-### AlphaFlow (`alphaflow/src/training/loss.py`, `_compute_mean_velocity_d`)
-
-- Khi α < 1, target **không cần JVP**: nó dùng thêm **một forward pass** tại t − dt:
-  `u_tgt = (dt·v + (t − dt − r)·u_θ(x_t − dt·v, t − dt, r)) / (t − r)`, với dt = α(t − r).
-  → **Chạy được trên XLA/TPU**, và đây là phương án thay JVP đã ghi trong bảng rủi ro. Curriculum đi từ trajectory FM (α nhỏ) sang MeanFlow.
-
-### torchcfm (`torchcfm/optimal_transport.py`)
-
-- `OTPlanSampler` dùng `pot.emd` (chính xác) hoặc `pot.sinkhorn` trên minibatch, rồi **lấy mẫu cặp từ plan có hoàn lại**. Thư viện có sẵn `SchrodingerBridgeConditionalFlowMatcher`, tức OT entropic cộng nhiễu Brown: gần với biến thể "nhiễu khởi đầu" của mình.
-
----
-
-## 3. Hệ quả cho plan
-
-1. **Backbone.** Mọi codec một bước kể trên đều dùng UNet cỡ khoảng 0.9B (SD-1.5, SD-2.1 hoặc SD-Turbo) với LoRA, và AEIC chỉ train trên ≤ 4×3090. SD3.5-medium (2.5B) nặng hơn mọi đối thủ. Với compute chưa chắc chắn (Kaggle/TRC), có hai hướng:
-   - Dùng **SANA-0.6B hoặc 1.6B** (flow matching, khớp với lý thuyết), hoặc
-   - Dùng **SD-Turbo** như StableCodec/AEIC. Hướng này dễ so sánh công bằng, nhưng SD-Turbo không phải flow nên phần lý thuyết phải "diễn giải lại".
-   → **Cần bạn quyết định.**
-2. **"Một model cho mọi bitrate" là điểm khác biệt thật.** StableCodec và AEIC cần một checkpoint cho mỗi λ; OSCAR cần một hyper-encoder cho mỗi rate cùng bảng timestep cứng.
-3. **Chưa đối thủ nào dùng dither, và chưa ai liên tục hóa rate.** Tuy vậy, nhớ rủi ro "dither tốn rate" từ toy (mục Rủi ro trong plan).
-4. **Chất lượng một bước của đối thủ đến phần lớn từ GAN (DINOv2) hoặc DMD**, không từ cấu trúc bridge. S3 chỉ với "LPIPS/DISTS nhẹ" khó thắng về FID/DISTS. Nên dự trù một GAN vision-aided trong S3 (chi phí thêm khoảng một backbone DINOv2-S).
-5. **Kiến trúc điều kiện.** StableCodec/AEIC đưa feature giàu thông tin (256–320 kênh) vào `conv_in`. Bridge của mình nên nối (concat) cả z̄ lẫn feature từ ŷ, như plan đã ghi "concat kênh".
-6. **Giao thức eval:** dùng lại `StableCodec/src/evaluate.py`, gồm pyiqa cùng `neuralcompression.update_patch_fid` và torchmetrics FID/KID. Lấy đường baseline từ `results.txt`. Nếu so với số của OSCAR phải ghi chú, vì họ resize ảnh và dùng FID full-res.
-7. **Nhận xét quan trọng về coupling, rút ra khi đối chiếu với toy B.**
-   - Ở số chiều cao, minibatch OT giữa X\* và X gần như trùng với **coupling tự nhiên**. Trong toy d = 64, chi phí ghép cặp của minibatch OT (≈ 2.85) ≈ D\* (2.78), vì X\*_i gần X_i hơn mọi X_j khác.
-   - Hệ quả: với ảnh thật, minibatch OT có thể **suy biến thành coupling tự nhiên**, và theo Mệnh đề 2, khi đó một bước Euler không làm gì cả.
-   - Đây là lý do mạnh để dùng **tham số hóa flow-map (MeanFlow/AlphaFlow)** thay vì Euler một bước, và/hoặc **nhiễu khởi đầu** (kết quả A5–A7), thay vì trông cậy vào minibatch OT.
-   - Nên đưa nhận xét này vào paper, như một phân tích vì sao OT-CFM không giúp gì trong nén ảnh.
-8. **Tránh 2 lỗi mà đối thủ mắc phải:** chuẩn hóa bằng thông tin phía encoder mà không truyền đi (OSCAR); và eval trên ảnh đã resize.

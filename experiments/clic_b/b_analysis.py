@@ -295,7 +295,7 @@ def summary(args):
         else:
             L.append("→ **Thêm mode SCC cổ điển** (VVC) cho ảnh màn hình.")
         if c4:
-            L.append("→ **Ảnh tự nhiên ở 0.15–0.3 bpp cần đường residual** (cũng ảnh hưởng tới CVPR).")
+            L.append("→ **Ảnh tự nhiên ở 0.15–0.3 bpp cần đường residual**.")
     L += ["", "*Chú ý: `label` trong inventory.csv cần được xác nhận bằng mắt. Nhãn hiện tại có thể chỉ là nhãn gợi ý tự động.*"]
     (args.out / "summary.md").write_text("\n".join(L), encoding="utf-8")
     print("\n".join(L))

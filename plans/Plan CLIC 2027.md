@@ -1,6 +1,8 @@
 # Kế hoạch CLIC 2027: Image Compression, GPU track
 
-Mục tiêu: giành hạng 1 ở track Image GPU của CLIC 2027 (https://clic2027.compression.cc/), dùng lại codec Rate-as-Time Flow Bridge của bản nộp CVPR.
+Mục tiêu: giành hạng 1 ở track Image GPU của CLIC 2027 (https://clic2027.compression.cc/).
+
+> Bản v1 (29/9). Lịch ở mục C đã được thay bằng `Plan CLIC 2027 v2 - tap trung de thang.md`; các phần kỹ thuật A1–A6 và B vẫn dùng được.
 
 Kế hoạch có hai nhánh:
 - **A. Hạ tầng decoder và entropy coding tất định**: đảm bảo nộp được, giải mã đúng bit trên server, đủ nhanh và đủ nhỏ.
@@ -33,9 +35,9 @@ Kế hoạch có hai nhánh:
 
 ## A. Hạ tầng decoder và entropy coding tất định
 
-### A0. Kiểm tra sớm độ tất định (tuần này, ~0.5 ngày, không đụng tới CVPR)
+### A0. Kiểm tra sớm độ tất định
 
-**Mục đích:** biết ngay sai lệch float giữa các thiết bị lớn đến đâu, để thiết kế hyperprior S1 của bản CVPR theo hướng thân thiện với số nguyên ngay từ đầu.
+**Mục đích:** biết ngay sai lệch float giữa các thiết bị lớn đến đâu, để thiết kế hyperprior S1 theo hướng thân thiện với số nguyên ngay từ đầu.
 
 - [ ] Viết `experiments/determinism/probe.py`:
   - Dùng một hyperprior kiểu Ballé-2018 (khởi tạo ngẫu nhiên là đủ) trên latent DC-AE thật.
@@ -129,7 +131,6 @@ Kế hoạch có hai nhánh:
 ### A3. Điều khiển rate theo ngân sách cả tập (15/12 → 10/01)
 
 - [ ] **Mỗi ảnh có thể chọn rate liên tục:**
-  - Tận dụng rate-as-time: điều kiện hóa theo `t_rate`.
   - Hoặc dùng gain vector hoặc bước lượng tử có thể co giãn (λ biến thiên).
   - Encoder tạo ra đường R(q) và Q̂(q) cho từng ảnh trên một lưới 16–32 điểm.
 - [ ] **Phân bổ bit:**
@@ -203,13 +204,11 @@ Kế hoạch có hai nhánh:
   - So các biến thể với nhau, và so với VTM và các codec perceptual mã nguồn mở (StableCodec/AEIC/MS-ILLM) ở cùng bpp.
 - [ ] **Đóng băng decoder vào 22/02** (chừa 1 tuần dự phòng). Nộp bản cuối cho cả 3 mức × 3 biến thể. Lưu hash của từng bản.
 - **02/03 → 09/03:** chỉ chạy encoder trên tập test (phân bổ rate, tìm seed, tối ưu latent). Kiểm tra bằng `check_submission.py` rồi nộp.
-- **09/03 → 16/03:** viết whitepaper trên OpenReview, tái sử dụng nội dung từ bản CVPR.
+- **09/03 → 16/03:** viết whitepaper (bắt buộc với đội nộp bài) trên OpenReview.
 
 ---
 
 ## B. Đo mức hỏng trên ảnh game/màn hình (làm ngay, ~2 ngày)
-
-Nhánh này trùng với rủi ro *"Trần chất lượng của DC-AE f32"* trong kế hoạch CVPR, nên làm một lần là dùng được cho cả hai.
 
 **Phép tính sơ bộ về trần DC-AE:**
 - Latent f32c32 có 32/1024 = 0.031 phần tử trên mỗi pixel.
@@ -235,7 +234,7 @@ Chạy các bước `recon` và `metrics` của `experiments/clic_b/b_analysis.p
 |---|---|
 | **DC-AE f32c32 tự mã hóa rồi giải mã** (không lượng tử) | Trần tuyệt đối của đường ống SANA |
 | SD-VAE f8 (của StableCodec) tự mã hóa rồi giải mã | So sánh với trần VAE 8× |
-| DC-AE + lượng tử proxy (từ `experiments/quant_noise`) ở 0.075/0.15/0.3 bpp | Ước lượng thô của codec mình khi chưa train |
+| DC-AE + lượng tử proxy ở 0.075/0.15/0.3 bpp | Ước lượng thô của codec mình khi chưa train |
 | VTM (devkit baseline, bitstream ở cùng mức bpp) | Mốc 1405 Elo |
 | StableCodec / AEIC (có checkpoint trong `refs/repos`) ở mức gần 0.075 nhất | Đối thủ kiểu generative |
 
@@ -244,16 +243,16 @@ Chạy các bước `recon` và `metrics` của `experiments/clic_b/b_analysis.p
 - Vùng chữ (bounding box từ OCR trên ảnh gốc): **CER của OCR** trên ảnh tái tạo so với ảnh gốc, PSNR và SSIM của cạnh trong vùng chữ.
 - Game: LPIPS trên các crop nhiều chi tiết (HUD, UI).
 
-**Kết quả xuất ra:** `results/clic_b/b_results/metrics.csv`, và một lưới crop 256×256 (gốc | DC-AE | f8 | VTM | StableCodec) cho mỗi ảnh screen/game. Hình vẽ theo phong cách figures4papers.
+**Kết quả xuất ra:** `results/clic_b/b_results/metrics.csv`, và một lưới crop 256×256 (gốc | DC-AE | f8 | VTM | StableCodec) cho mỗi ảnh screen/game.
 
 ### B3. Điểm quyết định (sau B2)
 
 | Điều kiện (tính trên nhóm screen/game) | Hành động |
 |---|---|
 | CER trần của DC-AE ≤ CER của VTM@0.075 và PSNR trần ≥ VTM@0.3 − 1 dB | Không cần nhánh riêng. Chỉ cần phân bổ nhiều bit hơn cho ảnh có chữ (A3) |
-| CER trần của DC-AE cao hơn rõ, nhưng trần f8 thì ổn | Thêm **nhánh residual ở pixel hoặc latent f8** cho vùng chữ/ảnh screen (giống `res` của StableCodec). Nhánh này có lợi cho cả CVPR ở mức rate cao |
+| CER trần của DC-AE cao hơn rõ, nhưng trần f8 thì ổn | Thêm **nhánh residual ở pixel hoặc latent f8** cho vùng chữ/ảnh screen (giống `res` của StableCodec). |
 | Cả DC-AE và f8 đều hỏng chữ | Thêm **mode "classic SCC"** cho ảnh screen: vendor decoder VVC có sẵn trong devkit (`VVCDecoder_23.8`), encoder dùng VTM với công cụ SCC (IBC, palette), rồi dùng mạng hậu xử lý nhẹ để làm đẹp phần không phải chữ |
-| PSNR trần DC-AE < VTM@0.3 − 2 dB trên **ảnh tự nhiên** | Ở 0.3 bpp (có thể cả 0.15) cần đường residual cho mọi ảnh. Đây là tín hiệu quan trọng cho cả CVPR |
+| PSNR trần DC-AE < VTM@0.3 − 2 dB trên **ảnh tự nhiên** | Ở 0.3 bpp (có thể cả 0.15) cần đường residual cho mọi ảnh. |
 
 ### B4. Cách chia việc
 
@@ -296,12 +295,11 @@ Chạy các bước `recon` và `metrics` của `experiments/clic_b/b_analysis.p
 4. Ảnh screen nén bằng codec cổ điển rất rẻ (`50d13125`, `2a760bf1` đạt 37–42 dB ở 0.075). Có thể **chuyển bớt bit từ ảnh screen sang ảnh tự nhiên**, vì ngân sách tính trên cả tập.
 
 **Quyết định (B3):**
-- **Bắt buộc có lớp tăng cường ở miền pixel:** base là codec flow-bridge trên DC-AE (cho độ chân thực), cộng thêm **một residual codec học được, có điều kiện theo ảnh base** (kiểu ELIC nhẹ, dùng LPIPS và GAN nhẹ), dùng phần bit còn lại.
+- **Bắt buộc có lớp tăng cường ở miền pixel:** base là codec sinh ảnh trên DC-AE (cho độ chân thực), cộng thêm **một residual codec học được, có điều kiện theo ảnh base** (kiểu ELIC nhẹ, dùng LPIPS và GAN nhẹ), dùng phần bit còn lại.
   - Encoder chia bit giữa base và residual cho từng ảnh (mở rộng A3).
   - Ở 0.075 phần lớn bit dành cho base; ở 0.3 phần lớn dành cho residual.
 - **Mode cổ điển (VVC) cho ảnh screen:** devkit đã có sẵn decoder VVC, nên chi phí kỹ thuật thấp.
   - Cần đo VTM có bật công cụ SCC trên 4 ảnh screen: lần B6.
-- **Ảnh hưởng tới CVPR:** rủi ro "trần DC-AE f32" trong kế hoạch CVPR **đã thành hiện thực** (thấp hơn f8 1.9 dB trên tập này, chữ bị hỏng). Cách giảm thiểu "nhánh residual giống `res` của StableCodec" nên được kích hoạt.
 
 ### B6. Việc tiếp theo cho nhánh B
 
@@ -352,27 +350,15 @@ Chạy các bước `recon` và `metrics` của `experiments/clic_b/b_analysis.p
    - Một residual học được và có điều kiện phải thu hẹp được khoảng cách PSNR này. Đó là mục tiêu thiết kế.
 3. **Ảnh hỗn hợp** (UI đè lên cảnh render 3D, như `86127fbd`): SCC gần như không giúp gì, còn đường lai tốt hơn về cảm nhận. Nghĩa là **encoder phải chọn mode cho từng ảnh** (A5): thử cả hai đường rồi chọn bằng Q̂, tốn 1–2 bit cờ mode.
 4. **Chia bit giữa các ảnh:** ảnh screen đạt chất lượng rất cao với ít bit (ví dụ `2a760bf1` ở 0.075 cần QP 26, đạt ~42 dB). Có thể lấy bớt bit từ nhóm này cho ảnh tự nhiên (A3).
-5. **Điều chưa biết lớn nhất:** chất lượng thật của base ở khoảng 0.03 bpp. Câu trả lời sẽ đến từ S1/S2 của bản CVPR. Khi có checkpoint, chạy lại B6 với base thật thay cho trần DC-AE.
+5. **Điều chưa biết lớn nhất:** chất lượng thật của base ở khoảng 0.03 bpp. Đã đo trong bake-off (08/10): DC-AE + S1 + residual thua xa MS-ILLM ở cả 3 mức.
 
 **Giới hạn:** chỉ có 7 ảnh, và CER từ OCR khá nhiễu với chữ nhỏ.
 
 ---
 
-## C. Lịch tổng (đan xen với CVPR)
+## C. Lịch tổng
 
-| Thời gian | Việc | Khối lượng |
-|---|---|---|
-| 30/9 – 06/10 | **B1, B2, B3** và **A0** (kiểm tra tất định) | ~2.5 ngày, chủ yếu chạy nền |
-| 07/10 – 16/11 | **Chỉ làm CVPR.** Hai ràng buộc thiết kế mang từ CLIC sang: hyperprior S1 thân thiện số nguyên, và rate được điều kiện hóa liên tục. Nếu B3 kết luận cần residual thì đưa vào S1 | – |
-| 17/11 – 01/12 | A1: khung decoder, lần nộp số 1 và số 2 | ~1 tuần |
-| 01/12 – 20/12 | A2: entropy coding số nguyên, lần nộp số 3 (khớp PSNR) | ~2.5 tuần |
-| 15/12 – 10/01 | A3: điều khiển rate, codec của mình ở 0.075 bpp | ~3 tuần |
-| 05/01 – 31/01 | A4: tốc độ và kích thước, mở rộng lên 0.15/0.3, nhánh riêng theo B3 | ~4 tuần |
-| 26/01 | Paper PCS (không bắt buộc) | – |
-| 01/02 – 22/02 | A5, A6: mẹo phía encoder, 3 biến thể, tự chấm, **đóng băng decoder 22/02** | ~3 tuần |
-| 01/03 | Hạn validation | – |
-| 02/03 – 09/03 | Chỉ chạy encoder trên tập test, rồi nộp | 1 tuần |
-| 16/03 | Whitepaper | – |
+Xem `Plan CLIC 2027 v2 - tap trung de thang.md` (mục 4).
 
 ## D. Rủi ro chính
 
@@ -380,7 +366,7 @@ Chạy các bước `recon` và `metrics` của `experiments/clic_b/b_analysis.p
 |---|---|
 | Server decode sai vì float không tất định | A0 sớm, A2 dùng số nguyên, lần nộp số 2–3 kiểm tra trên server thật |
 | Bị lọt vào nhóm 25% chậm nhất | Chỉ tiêu ≤ 20 s, không dùng torch.compile, đo trên L4 từ tháng 1 |
-| Hết TPU/GPU vào đợt nước rút (TRC chỉ 30 ngày) | Việc train cho CLIC chủ yếu là fine-tune (QAT cho h_s, nhánh residual), đủ chạy trên Kaggle. Cân nhắc lùi thời điểm kích hoạt TRC nếu CVPR chưa cần tới |
+| Hết TPU/GPU vào đợt nước rút (TRC chỉ 30 ngày) | Việc train cho CLIC chủ yếu là fine-tune (QAT cho h_s, nhánh residual), đủ chạy trên Kaggle. |
 | 0.3 bpp thua VTM về độ trung thực | Điểm quyết định B3, đường residual |
 | Thước đo Q̂ lệch so với Elo của người chấm | Tự chấm theo cặp (A6), 3 biến thể để rải rủi ro |
 | Môi trường chạy lệch so với server | `check_submission.py` chạy trên docker của devkit hoặc venv torch 2.6.0, và coi PSNR trên leaderboard là phép đo chuẩn |

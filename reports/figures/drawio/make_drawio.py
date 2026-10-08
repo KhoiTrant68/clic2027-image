@@ -1,4 +1,4 @@
-"""Generate .drawio files for the four diagrams in the CLIC 2027 proposal doc."""
+"""Generate the .drawio diagrams of the CLIC 2027 proposal: architecture and encode/decode pipeline."""
 from datetime import date
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
@@ -123,48 +123,5 @@ outp = d.text("Ảnh tái tạo (PNG)", 24, 340, 124, 24, bold=True, align="cent
 d.edge(ids2[0], outp, (0.5, 1), (0.5, 0))
 d.save("Pipeline mã hóa – giải mã")
 
-# 3. Training stages ------------------------------------------------------------
-d = Diagram("3_huan_luyen", 760, 368)
-d.text("Ba giai đoạn của CVPR dùng lại nguyên vẹn; CLIC thêm nhánh residual sau 16/11", 24, 16, 712, 24, size=15, bold=True)
-d.text("Huấn luyện tuần tự, mỗi giai đoạn khởi tạo từ giai đoạn trước", 24, 40, 712, 18, size=11.5, color=QUIET)
-s1 = d.vertex(body("S1 · Codec latent", "Train g_a, g_s, hyperprior", "Loss: R + λ·MSE trên latent", "Đã xong: 200k bước", bold_last=True), 24, 72, 216, 88, BOX)
-s2 = d.vertex(body("S2 · Bridge nhiều bước", "Fine-tune SANA DiT", "Loss: flow matching z̄ → z", "Tiếp theo: mốc tối thiểu CVPR", bold_last=True), 272, 72, 216, 88, BOX)
-s3 = d.vertex(body("S3 · Một bước", "α-Flow, không cần JVP", "Loss: LPIPS/DISTS + GAN DINOv2", "Mục tiêu mở rộng", bold_last=True), 520, 72, 216, 88, BOX)
-r = d.vertex("<b>S1.5 · Residual có điều kiện (riêng cho CLIC)</b><br><font style=\"font-size:11.5px\">Codec pixel kiểu ELIC, điều kiện theo ảnh base x̂"
-             "<br>Loss: R + λ·(MSE + LPIPS), có thể thêm GAN nhẹ</font><br><b>Sau 16/11, bắt buộc cho 0.15 và 0.3 bpp</b>", 272, 200, 464, 88, ACCENT)
-d.vertex("DC-AE (encoder và decoder) đóng băng trong mọi giai đoạn", 24, 308, 712, 36, CENTER.replace("fillColor=#FFFFFF;", "fillColor=#F2F2F2;"))
-d.edge(s1, s2, (1, 0.5), (0, 0.5))
-d.edge(s2, s3, (1, 0.5), (0, 0.5))
-d.edge(s1, r, (0.5, 1), (0, 0.5), label="ảnh base x̂ từ S1")
-d.save("Huấn luyện")
 
-# 4. Roadmap timeline (bars placed to scale) ------------------------------------
-d = Diagram("4_lo_trinh", 760, 410)
-d.text("Decoder phải xong trước 22/02; tháng 10 và 11 dành cho CVPR", 24, 16, 712, 24, size=15, bold=True)
-d.text("Lộ trình 10/2026 – 03/2027, theo tháng", 24, 40, 712, 18, size=11.5, color=QUIET)
-rows = [("CVPR: codec base S1 + bridge S2", "2026-10-03", "2026-11-16"), ("Khung nộp bài, nộp thử 1–2", "2026-11-17", "2026-12-01"),
-        ("Entropy số nguyên, nộp thử 3", "2026-12-01", "2026-12-20"), ("Residual + phân bổ rate", "2026-12-15", "2027-01-10"),
-        ("Tốc độ, kích thước, 0.15/0.3 bpp", "2027-01-05", "2027-01-31"), ("Mẹo encoder, 3 biến thể, tự chấm", "2027-02-01", "2027-02-22"),
-        ("Đóng băng decoder", "2027-02-22", "2027-02-22"), ("Hạn validation (nộp decoder)", "2027-03-01", "2027-03-01"),
-        ("Nộp bitstream tập test", "2027-03-09", "2027-03-09")]
-D = date.fromisoformat
-lo, hi = D(rows[0][1]), D(rows[-1][2])
-X = lambda s: 280 + (D(s) - lo).days / (hi - lo).days * 360
-for m in ["2026-11-01", "2026-12-01", "2027-01-01", "2027-02-01", "2027-03-01"]:
-    d.vertex("", X(m), 88, 1, 298, "html=1;fillColor=#E6E6E6;strokeColor=none;")
-    d.text("Th%d/%s" % (int(m[5:7]), m[2:4]), X(m) - 30, 64, 60, 18, size=11.5, color=QUIET, align="center")
-d.vertex("", 280, 88, 360, 1, "html=1;fillColor=%s;strokeColor=none;" % GREY)
-for i, (name, s, e) in enumerate(rows):
-    y = 114 + 32 * i
-    key = name.startswith("Hạn validation")
-    d.text(name, 24, y - 10, 250, 20, bold=key)
-    if s == e:
-        style = "rhombus;html=1;fillColor=%s;strokeColor=none;" % (BLUE if key else "#BDBDBD")
-        d.vertex("", X(s) - 8, y - 8, 16, 16, style)
-        label = "%s/%s" % (s[8:], s[5:7])
-    else:
-        d.vertex("", X(s), y - 7, X(e) - X(s), 14, "rounded=1;arcSize=50;html=1;fillColor=#F2F2F2;strokeColor=%s;" % GREY)
-        label = "%s/%s – %s/%s" % (s[8:], s[5:7], e[8:], e[5:7])
-    d.text(label, X(e) + 14, y - 9, 100, 18, size=11.5, bold=key, color=INK if key else QUIET)
-d.save("Lộ trình")
 print("ok", sorted(p.name for p in OUT.glob("*.drawio")))

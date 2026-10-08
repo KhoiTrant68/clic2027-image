@@ -6,7 +6,7 @@ Configs written to --out/recon/<cfg>/<name>.png:
   vtmscc@<r>        VTM intra, 4:4:4 10-bit + SCC tools (IBC, palette, BDPCM, TS)
   dcae+res@<r>      DC-AE ceiling + residual (x - x̂) coded by VTM 4:4:4 with (r - BASE_BPP) bpp.
                     Pessimistic stand-in for a learned conditional residual layer; assumes the
-                    base costs BASE_BPP (the CVPR codec's operating range).
+                    base costs BASE_BPP (the S1 latent codec's operating range).
 
 Steps: prepare, dcae, vtm, inventory, metrics, crops, summary   (or: all)
 Every step skips outputs that already exist, so the notebook can be re-run after a timeout.

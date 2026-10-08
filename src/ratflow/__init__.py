@@ -1,1 +1,1 @@
-"""Rate-as-Time flow-bridge image codec (CVPR 2027) and its CLIC 2027 submission."""
+"""Shared code of the CLIC 2027 image-compression submission (eval, entropy coding, AE ports, S1)."""

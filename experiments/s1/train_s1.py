@@ -24,7 +24,7 @@ from ratflow.codec.latent_codec import LatentCodec  # noqa: E402
 
 SCALING = 0.41407  # DC-AE f32c32 (SANA) scaling factor
 # run 1 used [0.03 .. 4.0] -> Kodak 0.0155-0.12 bpp, saturating near the DC-AE ceiling above ~0.1 bpp;
-# run 2 shifts down to cover ~0.010-0.08 bpp (CVPR range plus CLIC 0.075; higher rates go to the residual branch)
+# run 2 shifts down to cover ~0.010-0.08 bpp (up to CLIC 0.075; higher rates go to the residual branch)
 DEFAULT_LAMBDAS = [0.015, 0.0256, 0.0438, 0.0748, 0.128, 0.219, 0.374, 0.6]
 
 

@@ -1,7 +1,7 @@
 [project]
 name = "ratflow"
 version = "0.1.0"
-description = "Rate-as-Time flow-bridge image codec (CVPR 2027) and its CLIC 2027 submission"
+description = "CLIC 2027 image compression (GPU track) submission"
 requires-python = ">=3.10"
 dependencies = ["numpy", "pillow"]
 
