@@ -10,6 +10,9 @@ Candidates (each gives several operating points per image; the allocator picks o
               is left out because its autoregressive context model decodes a 2K image in minutes)
   codlite  C5  CoD-Lite (2026), pixel-space one-step diffusion codec, public MIT checkpoints 0.0156 .. 0.5 bpp
   turbo    C4  probe: MS-ILLM q1..q3 reconstruction refined by SD-Turbo img2img (1 step, strength 0.15 / 0.3)
+  coolchic C6  Cool-chic 5.x (Orange, BSD-3): overfitted per-image codec, ~2000 MAC/pixel decoder; --tune
+              wasserstein = MSE + Wasserstein Distortion (Balle et al. CVPR 2025; Orange's CLIC 2025 entry).
+              Encoding is a per-image optimisation (slow; CLIC does not time the encoder).
   mix          per-image choice over the union of all candidates (what mode switching could buy)
 
 Steps (all resume: existing points/metrics are skipped):
@@ -48,7 +51,7 @@ from clic27.eval import metrics as M  # noqa: E402
 
 DATA_URL = "https://dhldkwazkze5h.cloudfront.net/data/clic2025_image_test.zip"
 RATES = [0.075, 0.15, 0.3]
-CANDS = ["vtm420", "vtmscc", "s1res", "msillm", "mbt", "codlite", "turbo"]
+CANDS = ["vtm420", "vtmscc", "s1res", "msillm", "mbt", "codlite", "turbo", "coolchic"]
 LABELS = {"ebfd571f": "screen", "bb7344a2": "screen", "86127fbd": "screen", "2a760bf1": "screen",
           "937476dd": "texture"}  # by eye in branch B; every other image is natural
 VTM_QPS = [34, 37, 40, 43, 46, 50]  # 2026-10-06 run: vtm420 qp26/30 = 0.80/0.52 bpp corpus (useless), qp34 0.33, qp50 0.029
@@ -61,6 +64,8 @@ CODLITE = ["0_0156", "0_0312", "0_1250", "0_5000"]  # public checkpoints in the 
 GENCODEC_COMMIT = "9b39a94d078fa2864e8246c2e4031cafaf756b84"
 TURBO_BASE = [1, 2, 3]  # MS-ILLM qualities refined by SD-Turbo (0.043 / 0.080 / 0.150 bpp on these images)
 TURBO_STRENGTH = [0.15, 0.3]
+COOLCHIC_COMMIT = "a6fe38a414dd098b39c41636bd6e423626402f7e"  # Cool-chic 5.x, 2026-10
+COOLCHIC_LAMBDAS = [0.001, 0.002, 0.004, 0.008, 0.016]  # first guess for 0.075-0.3 bpp on 2K images; calibrate
 AE_REPO = "Efficient-Large-Model/Sana_1600M_1024px_diffusers"
 HEADER_BYTES = 4  # per image: candidate/point id + flags; H and W are known to the decoder from the stream
 
@@ -497,6 +502,45 @@ def points_turbo(a, P, names):
     torch.cuda.empty_cache() if torch.cuda.is_available() else None
 
 
+def points_coolchic(a, P, names):
+    """Cool-chic (Orange-OpenSource/Cool-Chic, BSD-3): one overfitting run per (image, tune, lambda) with its own
+    cc_encode.py / cc_decode.py, so bytes are the real .cool bitstream. t_dec is the wall time of cc_decode.py
+    (includes Python start-up and imports, so it overstates the decoder itself); t_enc goes to the note."""
+    import shutil
+    src = a.out.parent / "Cool-Chic"
+    if not (src / "cc_encode.py").exists():
+        subprocess.run(["git", "clone", "-q", "https://github.com/Orange-OpenSource/Cool-Chic.git", str(src)], check=True)
+        subprocess.run(["git", "-C", str(src), "checkout", "-q", COOLCHIC_COMMIT], check=True)
+    _pip("constriction==0.4.2", "einops", "fvcore", "ConfigArgParse")
+    imgs = inputs(a)
+    for tune in a.coolchic_tunes:
+        for lm in a.coolchic_lambdas:
+            key = f"{'wd' if tune == 'wasserstein' else 'mse'}{lm:g}"
+            for _, name in P.todo("coolchic", [key], names):
+                work = Path(tempfile.mkdtemp(prefix="coolchic_"))
+                bs = work / "x.cool"
+                t0 = time.time()
+                r = subprocess.run([sys.executable, str(src / "cc_encode.py"), "--input", str(imgs[name]),
+                                    "--output", str(bs), "--workdir", str(work), "--lmbda", str(lm), "--tune", tune,
+                                    "--n_itr", str(a.coolchic_itr)], cwd=src, capture_output=True, text=True)
+                t_enc = time.time() - t0
+                if r.returncode or not bs.exists():
+                    print(f"coolchic {key} {name[:8]} encode FAILED:", (r.stdout + r.stderr)[-2000:], flush=True)
+                    shutil.rmtree(work, ignore_errors=True)
+                    continue
+                rec = P.recon("coolchic", key, name)
+                rec.parent.mkdir(parents=True, exist_ok=True)
+                t0 = time.time()
+                subprocess.run([sys.executable, str(src / "cc_decode.py"), "-i", str(bs), "-o", str(rec)], cwd=src,
+                               check=True, capture_output=True)
+                t_dec = time.time() - t0
+                n = bs.stat().st_size
+                P.add(dict(cand="coolchic", key=key, name=name, bytes=n + HEADER_BYTES, bytes_base=n, bytes_res=0,
+                           t_dec=t_dec, note=f"t_enc={t_enc:.0f}s itr={a.coolchic_itr}"))
+                print(f"coolchic {key} {name[:8]} {n} B  enc {t_enc:.0f}s  dec {t_dec:.1f}s", flush=True)
+                shutil.rmtree(work, ignore_errors=True)
+
+
 def points_mbt(a, P, names):
     import torch
     try:
@@ -526,7 +570,7 @@ def points(a):
     P = Points(a.out, Scorer(a))
     names = selected(a)
     for cand, fn in (("msillm", points_msillm), ("mbt", points_mbt), ("codlite", points_codlite), ("turbo", points_turbo),
-                     ("s1res", points_s1res)):
+                     ("coolchic", points_coolchic), ("s1res", points_s1res)):
         if cand in a.cands:
             try:
                 fn(a, P, names)
@@ -748,6 +792,9 @@ def main(argv=None):
     ap.add_argument("--qps", type=int, nargs="+", default=VTM_QPS, help="VTM QP grid for vtm420 / vtmscc")
     ap.add_argument("--only", nargs="+", default=None,
                     help="points for these images only: labels (screen, texture, natural) or name prefixes")
+    ap.add_argument("--coolchic-lambdas", type=float, nargs="+", default=COOLCHIC_LAMBDAS)
+    ap.add_argument("--coolchic-tunes", nargs="+", default=["wasserstein"], choices=["wasserstein", "mse"])
+    ap.add_argument("--coolchic-itr", type=int, default=10000, help="Cool-chic training iterations per image")
     a = ap.parse_args(argv)
     a.data = a.data or a.out / "valid"
     steps = STEPS if a.step == "all" else [a.step]
