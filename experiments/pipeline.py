@@ -13,7 +13,7 @@ Stages (in order): check, [data], [cache], [s1], [s1_eval], [parity], qhat, bake
   parity    (optional) clic27.nn / clic27.entropy vs diffusers and CPU vs GPU
   qhat      Q-hat v0: metrics on sampled CLIC perceptual ratings + Bradley-Terry fit
   bakeoff   base candidates on the 30 validation images at 0.075/0.15/0.3 bpp, corpus budget,
-            Q-hat allocation (builds VTM 23.8; uses --s1-ckpt and qhat_v1.json, else qhat_v0.json, when present)
+            Q-hat allocation (builds VTM 23.8; uses --s1-ckpt and qhat_v0.json, else qhat_v1.json, or --qhat-model)
   pack      <work>/results.zip with every summary (+ the S1 checkpoint)
 
 State lives in <work>/state.json; finished stages are skipped on re-runs. On Kaggle, attach the previous
@@ -271,7 +271,10 @@ class Pipeline:
         if not cands or {"vtm420", "vtmscc", "s1res"} & set(cands):
             args += ["--vtm", self.build_vtm()]
         ckpt = self.a.s1_ckpt or self._s1_ckpt_for_clic()
-        qhat = self._find("qhat/qhat_v1.json", "qhat_v1.json", "qhat/qhat_v0.json", "qhat_v0.json")
+        # v0 first: v1 (wd3 + MS-SSIM) rates VTM level with CoD-Lite at 0.075 bpp, against the 2025 Elo (VTM 1405 vs
+        # 1929 for the winner); see results/2026-10-09_bakeoff_comparison.md. --qhat-model picks another one.
+        qhat = Path(self.a.qhat_model) if self.a.qhat_model else self._find(
+            "qhat/qhat_v0.json", "qhat_v0.json", "qhat/qhat_v1.json", "qhat_v1.json")
         self.say("bakeoff: S1 checkpoint", ckpt, "| Q-hat", qhat)
         self.py("experiments/bakeoff/bakeoff.py", self.a.bakeoff_step, "--out", self.work / "bakeoff",
                 *(["--s1-ckpt", ckpt] if ckpt else []), *(["--qhat", qhat] if qhat else []), *args)
@@ -373,6 +376,7 @@ def parse(argv=None):
     ap.add_argument("--qhat-args", default="", help='one string passed to qhat.py, e.g. --qhat-args="--n 2024t=8000"')
     ap.add_argument("--bakeoff-step", default="all", choices=["prepare", "points", "metrics", "allocate", "summary", "all"],
                     help="e.g. 'points' with --bakeoff-args='--cands vtm420' in a CPU-only session (no GPU quota)")
+    ap.add_argument("--qhat-model", default=None, help="Q-hat json for the bake-off allocation (default: v0 found in work/inputs)")
     ap.add_argument("--bakeoff-args", default="", help='one string passed to bakeoff.py, e.g. --bakeoff-args="--cands msillm mbt"')
     ap.add_argument("--s1-ckpt", default=None, help="S1 checkpoint for bakeoff (default: s1_out/last.pt in the inputs)")
     ap.add_argument("--s1-min-steps", type=int, default=150_000, help="S1 counts as done only after this many steps")

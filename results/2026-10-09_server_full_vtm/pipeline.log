@@ -1,0 +1,497 @@
+[09:25:16 +  0.0m] clic27 pipeline @ 46a1134 | stages ['bakeoff'] | budget 12.0 h
+[09:25:16 +  0.0m] == check
+[09:25:21 +  0.1m] torch 2.11.0+cu128 | GPU: NVIDIA L40 | work: /mnt/home/guess03/clic/work_full_vtm
+[09:25:21 +  0.1m] == check: done {'gpu': 'NVIDIA L40', 'torch': '2.11.0+cu128'}
+[09:25:21 +  0.1m] == bakeoff
+[09:25:21 +  0.1m] $ bash -c set -e; cd '/mnt/home/guess03/clic/work_full_vtm'; [ -d vtm ] || git clone -q --depth 1 --branch VTM-23.8 https://vcgit.hhi.fraunhofer.de/jvet/VVCSoftware_VTM.git vtm; cd vtm; mkdir -p build; cd build; cmake .. -DCMAKE_BUILD_TYPE=Release > /dev/null; make -j$(nproc) EncoderApp 2>&1 | tail -2
+Note: switching to 'e0683790fd035558d1b75f70656b073820aa48d6'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+CMake Warning (deprecated) at CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+[100%] Linking CXX executable /mnt/home/guess03/clic/work_full_vtm/vtm/bin/umake/gcc-13.3/x86_64/release/EncoderApp
+[100%] Built target EncoderApp
+[09:28:14 +  3.0m] bakeoff: S1 checkpoint None | Q-hat /mnt/home/guess03/clic/inputs/qhat_v1/qhat/qhat_v1.json
+[09:28:14 +  3.0m] $ /mnt/home/guess03/clic/venv/bin/python /mnt/home/guess03/clic/clic2027-image/experiments/bakeoff/bakeoff.py all --out /mnt/home/guess03/clic/work_full_vtm/bakeoff --qhat /mnt/home/guess03/clic/inputs/qhat_v1/qhat/qhat_v1.json --cands vtm420 vtmscc --workers 24 --vtm /mnt/home/guess03/clic/work_full_vtm/vtm
+===== prepare
+30 images, 86245376 pixels, budgets {'0.075': 808550, '0.15': 1617100, '0.3': 3234201}
+===== points
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/mnt/home/guess03/clic/clic2027-image/src/clic27/eval/metrics.py:67: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+[1/360] vtm420 qp50 2a760bf1 1635 B
+[2/360] vtm420 qp50 50d13125 1067 B
+[3/360] vtm420 qp50 0369d229 2734 B
+[4/360] vtm420 qp50 4ebc0e6c 3047 B
+[5/360] vtm420 qp50 bb7344a2 4164 B
+[6/360] vtm420 qp50 0d154749 4705 B
+[7/360] vtm420 qp50 1b4ad095 2716 B
+[8/360] vtm420 qp50 1cba10ad 1993 B
+[9/360] vtm420 qp50 8426ed22 1665 B
+[10/360] vtm420 qp50 c9510efb 7889 B
+[11/360] vtm420 qp50 e0d8e29c 1593 B
+[12/360] vtm420 qp50 f67f11de 1358 B
+[13/360] vtm420 qp50 2684452d 8613 B
+[14/360] vtm420 qp50 a2a946cc 8399 B
+[15/360] vtm420 qp50 07b9f93f 7462 B
+[16/360] vtm420 qp50 2397c73f 9163 B
+[17/360] vtmscc qp50 0369d229 3016 B
+[18/360] vtm420 qp50 58104815 11831 B
+[19/360] vtm420 qp50 ff32adfa 8899 B
+[20/360] vtmscc qp50 1cba10ad 2119 B
+[21/360] vtmscc qp50 0d154749 4837 B
+[22/360] vtmscc qp50 1b4ad095 2907 B
+[23/360] vtmscc qp50 2a760bf1 1491 B
+[24/360] vtm420 qp50 86127fbd 12356 B
+[25/360] vtmscc qp50 50d13125 1092 B
+[26/360] vtm420 qp50 608cb09e 15823 B
+[27/360] vtmscc qp50 4ebc0e6c 3122 B
+[28/360] vtm420 qp50 50fe4c3d 17304 B
+[29/360] vtmscc qp50 8426ed22 1745 B
+[30/360] vtm420 qp50 79b1bb29 14567 B
+[31/360] vtm420 qp50 d0208a1e 15122 B
+[32/360] vtm420 qp50 a365e654 17519 B
+[33/360] vtm420 qp50 02809272 21280 B
+[34/360] vtm420 qp50 937476dd 30131 B
+[35/360] vtm420 qp50 eda6d427 14616 B
+[36/360] vtm420 qp50 b0b3744c 17109 B
+[37/360] vtmscc qp50 2684452d 8262 B
+[38/360] vtmscc qp50 07b9f93f 7907 B
+[39/360] vtm420 qp50 ebfd571f 19551 B
+[40/360] vtmscc qp50 bb7344a2 3994 B
+[41/360] vtmscc qp50 e0d8e29c 1633 B
+[42/360] vtmscc qp50 f67f11de 1508 B
+[43/360] vtmscc qp50 58104815 12173 B
+[44/360] vtmscc qp50 2397c73f 9530 B
+[45/360] vtmscc qp50 a2a946cc 9356 B
+[46/360] vtm420 qp46 0369d229 4494 B
+[47/360] vtm420 qp50 da52c4f6 28223 B
+[48/360] vtmscc qp50 c9510efb 8529 B
+[49/360] vtm420 qp46 2a760bf1 2398 B
+[50/360] vtm420 qp46 1cba10ad 3276 B
+[51/360] vtm420 qp46 50d13125 2355 B
+[52/360] vtm420 qp46 0d154749 10232 B
+[53/360] vtm420 qp46 1b4ad095 6122 B
+[54/360] vtmscc qp50 ff32adfa 9786 B
+[55/360] vtm420 qp46 4ebc0e6c 6846 B
+[56/360] vtm420 qp46 8426ed22 2716 B
+[57/360] vtmscc qp50 86127fbd 12133 B
+[58/360] vtm420 qp46 2684452d 15761 B
+[59/360] vtmscc qp50 50fe4c3d 18286 B
+[60/360] vtmscc qp50 608cb09e 18136 B
+[61/360] vtm420 qp46 07b9f93f 16178 B
+[62/360] vtm420 qp46 bb7344a2 8023 B
+[63/360] vtmscc qp50 02809272 21752 B
+[64/360] vtm420 qp46 2397c73f 18635 B
+[65/360] vtm420 qp46 a2a946cc 15793 B
+[66/360] vtm420 qp46 c9510efb 12683 B
+[67/360] vtmscc qp50 a365e654 18148 B
+[68/360] vtm420 qp46 e0d8e29c 3468 B
+[69/360] vtmscc qp50 d0208a1e 15602 B
+[70/360] vtmscc qp50 eda6d427 15066 B
+[71/360] vtm420 qp46 f67f11de 2025 B
+[72/360] vtmscc qp50 79b1bb29 15606 B
+[73/360] vtm420 qp46 02809272 41164 B
+[74/360] vtm420 qp46 58104815 24728 B
+[75/360] vtm420 qp46 608cb09e 30886 B
+[76/360] vtm420 qp46 ff32adfa 14609 B
+[77/360] vtm420 qp46 86127fbd 24932 B
+[78/360] vtmscc qp46 1cba10ad 3485 B
+[79/360] vtmscc qp46 2a760bf1 2232 B
+[80/360] vtmscc qp46 0369d229 4935 B
+[81/360] vtmscc qp50 b0b3744c 18933 B
+[82/360] vtm420 qp46 50fe4c3d 31446 B
+[83/360] vtmscc qp46 0d154749 10469 B
+[84/360] vtm420 qp46 79b1bb29 28800 B
+[85/360] vtmscc qp46 1b4ad095 6547 B
+[86/360] vtmscc qp46 50d13125 2366 B
+[87/360] vtmscc qp46 8426ed22 2820 B
+[88/360] vtmscc qp46 4ebc0e6c 6948 B
+[89/360] vtmscc qp50 da52c4f6 30046 B
+[90/360] vtmscc qp50 ebfd571f 16161 B
+[91/360] vtm420 qp46 937476dd 87608 B
+[92/360] vtm420 qp46 a365e654 36629 B
+[93/360] vtm420 qp46 eda6d427 28526 B
+[94/360] vtmscc qp50 937476dd 25415 B
+[95/360] vtm420 qp46 b0b3744c 39451 B
+[96/360] vtm420 qp46 d0208a1e 38482 B
+[97/360] vtm420 qp46 ebfd571f 45020 B
+[98/360] vtmscc qp46 2684452d 14934 B
+[99/360] vtmscc qp46 bb7344a2 7324 B
+[100/360] vtmscc qp46 f67f11de 2341 B
+[101/360] vtmscc qp46 e0d8e29c 3626 B
+[102/360] vtmscc qp46 c9510efb 13818 B
+[103/360] vtm420 qp43 0369d229 6882 B
+[104/360] vtmscc qp46 2397c73f 19135 B
+[105/360] vtm420 qp46 da52c4f6 50571 B
+[106/360] vtmscc qp46 07b9f93f 17082 B
+[107/360] vtm420 qp43 1cba10ad 4986 B
+[108/360] vtm420 qp43 2a760bf1 3174 B
+[109/360] vtmscc qp46 ff32adfa 16070 B
+[110/360] vtm420 qp43 0d154749 17493 B
+[111/360] vtmscc qp46 a2a946cc 17211 B
+[112/360] vtm420 qp43 1b4ad095 12115 B
+[113/360] vtm420 qp43 50d13125 4795 B
+[114/360] vtm420 qp43 4ebc0e6c 11572 B
+[115/360] vtm420 qp43 8426ed22 4060 B
+[116/360] vtmscc qp46 58104815 25148 B
+[117/360] vtm420 qp43 2684452d 23767 B
+[118/360] vtm420 qp43 07b9f93f 29117 B
+[119/360] vtm420 qp43 2397c73f 30037 B
+[120/360] vtmscc qp46 86127fbd 23582 B
+[121/360] vtmscc qp46 608cb09e 34518 B
+[122/360] vtm420 qp43 bb7344a2 11996 B
+[123/360] vtmscc qp46 50fe4c3d 32925 B
+[124/360] vtm420 qp43 a2a946cc 24464 B
+[125/360] vtm420 qp43 c9510efb 17890 B
+[126/360] vtm420 qp43 02809272 63253 B
+[127/360] vtm420 qp43 f67f11de 2843 B
+[128/360] vtm420 qp43 e0d8e29c 8643 B
+[129/360] vtmscc qp46 79b1bb29 30805 B
+[130/360] vtm420 qp43 58104815 41965 B
+[131/360] vtmscc qp46 02809272 41869 B
+[132/360] vtmscc qp46 eda6d427 29222 B
+[133/360] vtm420 qp43 86127fbd 39510 B
+[134/360] vtmscc qp46 a365e654 37275 B
+[135/360] vtm420 qp43 79b1bb29 46647 B
+[136/360] vtm420 qp43 50fe4c3d 49039 B
+[137/360] vtm420 qp43 608cb09e 48120 B
+[138/360] vtm420 qp43 ff32adfa 20811 B
+[139/360] vtmscc qp43 2a760bf1 3030 B
+[140/360] vtmscc qp43 1cba10ad 5238 B
+[141/360] vtmscc qp43 0369d229 7595 B
+[142/360] vtmscc qp46 b0b3744c 43538 B
+[143/360] vtmscc qp43 50d13125 4830 B
+[144/360] vtmscc qp46 ebfd571f 34039 B
+[145/360] vtm420 qp43 937476dd 163939 B
+[146/360] vtmscc qp43 8426ed22 4208 B
+[147/360] vtm420 qp43 a365e654 61241 B
+[148/360] vtmscc qp46 937476dd 86795 B
+[149/360] vtmscc qp43 4ebc0e6c 11745 B
+[150/360] vtmscc qp46 d0208a1e 39796 B
+[151/360] vtmscc qp43 0d154749 17725 B
+[152/360] vtmscc qp46 da52c4f6 54343 B
+[153/360] vtm420 qp43 b0b3744c 67600 B
+[154/360] vtm420 qp43 ebfd571f 66254 B
+[155/360] vtmscc qp43 1b4ad095 12601 B
+[156/360] vtmscc qp43 f67f11de 3270 B
+[157/360] vtm420 qp43 eda6d427 45293 B
+[158/360] vtmscc qp43 bb7344a2 11072 B
+[159/360] vtm420 qp43 d0208a1e 72851 B
+[160/360] vtmscc qp43 e0d8e29c 8886 B
+[161/360] vtmscc qp43 2684452d 22885 B
+[162/360] vtm420 qp43 da52c4f6 75210 B
+[163/360] vtmscc qp43 c9510efb 19385 B
+[164/360] vtm420 qp40 0369d229 10919 B
+[165/360] vtm420 qp40 1cba10ad 7597 B
+[166/360] vtm420 qp40 2a760bf1 4127 B
+[167/360] vtmscc qp43 ff32adfa 22838 B
+[168/360] vtmscc qp43 2397c73f 30874 B
+[169/360] vtmscc qp43 07b9f93f 30839 B
+[170/360] vtmscc qp43 a2a946cc 26656 B
+[171/360] vtm420 qp40 50d13125 9054 B
+[172/360] vtm420 qp40 1b4ad095 24181 B
+[173/360] vtm420 qp40 0d154749 28730 B
+[174/360] vtm420 qp40 4ebc0e6c 18155 B
+[175/360] vtm420 qp40 8426ed22 6145 B
+[176/360] vtm420 qp40 2684452d 34983 B
+[177/360] vtm420 qp40 2397c73f 45507 B
+[178/360] vtm420 qp40 07b9f93f 51625 B
+[179/360] vtmscc qp43 58104815 42483 B
+[180/360] vtmscc qp43 86127fbd 36960 B
+[181/360] vtmscc qp43 608cb09e 53609 B
+[182/360] vtm420 qp40 02809272 92874 B
+[183/360] vtm420 qp40 bb7344a2 17076 B
+[184/360] vtmscc qp43 50fe4c3d 51476 B
+[185/360] vtm420 qp40 a2a946cc 34928 B
+[186/360] vtm420 qp40 c9510efb 23547 B
+[187/360] vtm420 qp40 f67f11de 4070 B
+[188/360] vtmscc qp43 79b1bb29 49436 B
+[189/360] vtm420 qp40 e0d8e29c 18318 B
+[190/360] vtmscc qp43 02809272 64088 B
+[191/360] vtm420 qp40 608cb09e 69387 B
+[192/360] vtm420 qp40 79b1bb29 68634 B
+[193/360] vtmscc qp43 ebfd571f 49845 B
+[194/360] vtm420 qp40 86127fbd 60771 B
+[195/360] vtm420 qp40 ff32adfa 28059 B
+[196/360] vtmscc qp43 937476dd 163681 B
+[197/360] vtmscc qp43 a365e654 62547 B
+[198/360] vtm420 qp40 58104815 69320 B
+[199/360] vtmscc qp43 eda6d427 46625 B
+[200/360] vtmscc qp40 1cba10ad 8196 B
+[201/360] vtm420 qp40 50fe4c3d 74290 B
+[202/360] vtmscc qp40 0369d229 12247 B
+[203/360] vtmscc qp40 2a760bf1 4192 B
+[204/360] vtmscc qp43 d0208a1e 75261 B
+[205/360] vtmscc qp43 da52c4f6 80787 B
+[206/360] vtmscc qp40 8426ed22 6561 B
+[207/360] vtm420 qp40 ebfd571f 88700 B
+[208/360] vtmscc qp43 b0b3744c 74581 B
+[209/360] vtmscc qp40 50d13125 9187 B
+[210/360] vtm420 qp40 b0b3744c 103523 B
+[211/360] vtm420 qp40 a365e654 97756 B
+[212/360] vtm420 qp40 937476dd 261796 B
+[213/360] vtmscc qp40 1b4ad095 25566 B
+[214/360] vtmscc qp40 4ebc0e6c 18707 B
+[215/360] vtm420 qp40 eda6d427 69333 B
+[216/360] vtmscc qp40 0d154749 29293 B
+[217/360] vtmscc qp40 bb7344a2 16122 B
+[218/360] vtm420 qp40 da52c4f6 105739 B
+[219/360] vtmscc qp40 c9510efb 26963 B
+[220/360] vtmscc qp40 f67f11de 4967 B
+[221/360] vtmscc qp40 e0d8e29c 18623 B
+[222/360] vtm420 qp37 0369d229 17509 B
+[223/360] vtm420 qp40 d0208a1e 126853 B
+[224/360] vtmscc qp40 2684452d 35316 B
+[225/360] vtm420 qp37 1cba10ad 11817 B
+[226/360] vtm420 qp37 2a760bf1 5799 B
+[227/360] vtmscc qp40 a2a946cc 39957 B
+[228/360] vtmscc qp40 2397c73f 47971 B
+[229/360] vtmscc qp40 07b9f93f 55440 B
+[230/360] vtmscc qp40 ff32adfa 32834 B
+[231/360] vtm420 qp37 50d13125 15841 B
+[232/360] vtm420 qp37 2684452d 51097 B
+[233/360] vtm420 qp37 1b4ad095 45055 B
+[234/360] vtm420 qp37 0d154749 47137 B
+[235/360] vtm420 qp37 4ebc0e6c 28526 B
+[236/360] vtm420 qp37 8426ed22 9577 B
+[237/360] vtm420 qp37 2397c73f 67092 B
+[238/360] vtm420 qp37 07b9f93f 86366 B
+[239/360] vtmscc qp40 ebfd571f 67996 B
+[240/360] vtm420 qp37 02809272 132624 B
+[241/360] vtm420 qp37 bb7344a2 23527 B
+[242/360] vtmscc qp40 86127fbd 57611 B
+[243/360] vtm420 qp37 a2a946cc 49984 B
+[244/360] vtmscc qp40 50fe4c3d 80121 B
+[245/360] vtmscc qp40 02809272 95776 B
+[246/360] vtmscc qp40 79b1bb29 76109 B
+[247/360] vtmscc qp40 58104815 71002 B
+[248/360] vtm420 qp37 f67f11de 6051 B
+[249/360] vtm420 qp37 c9510efb 31606 B
+[250/360] vtmscc qp40 937476dd 261368 B
+[251/360] vtmscc qp40 b0b3744c 119190 B
+[252/360] vtmscc qp40 eda6d427 72441 B
+[253/360] vtm420 qp37 e0d8e29c 33622 B
+[254/360] vtm420 qp37 79b1bb29 99005 B
+[255/360] vtm420 qp37 86127fbd 89718 B
+[256/360] vtmscc qp40 608cb09e 80598 B
+[257/360] vtm420 qp37 ff32adfa 39160 B
+[258/360] vtmscc qp37 2a760bf1 5864 B
+[259/360] vtm420 qp37 50fe4c3d 112010 B
+[260/360] vtm420 qp37 b0b3744c 153696 B
+[261/360] vtm420 qp37 ebfd571f 113855 B
+[262/360] vtmscc qp40 a365e654 100748 B
+[263/360] vtmscc qp37 1cba10ad 13028 B
+[264/360] vtm420 qp37 608cb09e 100244 B
+[265/360] vtm420 qp37 58104815 113876 B
+[266/360] vtmscc qp37 0369d229 20040 B
+[267/360] vtmscc qp37 50d13125 16001 B
+[268/360] vtmscc qp37 8426ed22 10253 B
+[269/360] vtm420 qp37 937476dd 377151 B
+[270/360] vtmscc qp40 d0208a1e 133277 B
+[271/360] vtm420 qp37 a365e654 150809 B
+[272/360] vtmscc qp37 4ebc0e6c 29422 B
+[273/360] vtmscc qp37 1b4ad095 47071 B
+[274/360] vtm420 qp37 eda6d427 105490 B
+[275/360] vtm420 qp37 da52c4f6 146623 B
+[276/360] vtmscc qp37 bb7344a2 23059 B
+[277/360] vtmscc qp40 da52c4f6 117584 B
+[278/360] vtm420 qp37 d0208a1e 205414 B
+[279/360] vtmscc qp37 f67f11de 7766 B
+[280/360] vtmscc qp37 0d154749 48405 B
+[281/360] vtmscc qp37 c9510efb 36737 B
+[282/360] vtmscc qp37 2397c73f 71925 B
+[283/360] vtmscc qp37 07b9f93f 92815 B
+[284/360] vtmscc qp37 2684452d 53772 B
+[285/360] vtmscc qp37 e0d8e29c 34019 B
+[286/360] vtm420 qp34 2a760bf1 8186 B
+[287/360] vtm420 qp34 1cba10ad 18592 B
+[288/360] vtm420 qp34 0369d229 28122 B
+[289/360] vtmscc qp37 a2a946cc 58097 B
+[290/360] vtm420 qp34 50d13125 24664 B
+[291/360] vtm420 qp34 4ebc0e6c 44398 B
+[292/360] vtm420 qp34 1b4ad095 75254 B
+[293/360] vtmscc qp37 ff32adfa 46804 B
+[294/360] vtm420 qp34 2397c73f 94632 B
+[295/360] vtmscc qp37 02809272 138543 B
+[296/360] vtm420 qp34 2684452d 74683 B
+[297/360] vtmscc qp37 86127fbd 86735 B
+[298/360] vtmscc qp37 ebfd571f 89012 B
+[299/360] vtm420 qp34 07b9f93f 132961 B
+[300/360] vtm420 qp34 8426ed22 15137 B
+[301/360] vtmscc qp37 79b1bb29 112142 B
+[302/360] vtm420 qp34 0d154749 76503 B
+[303/360] vtm420 qp34 02809272 184016 B
+[304/360] vtm420 qp34 bb7344a2 31754 B
+[305/360] vtmscc qp37 937476dd 377178 B
+[306/360] vtm420 qp34 c9510efb 42306 B
+[307/360] vtm420 qp34 a2a946cc 69734 B
+[308/360] vtm420 qp34 f67f11de 9643 B
+[309/360] vtm420 qp34 e0d8e29c 54312 B
+[310/360] vtm420 qp34 50fe4c3d 165499 B
+[311/360] vtm420 qp34 ebfd571f 140992 B
+[312/360] vtmscc qp37 608cb09e 118591 B
+[313/360] vtmscc qp37 58104815 117178 B
+[314/360] vtm420 qp34 608cb09e 141723 B
+[315/360] vtm420 qp34 79b1bb29 138337 B
+[316/360] vtm420 qp34 86127fbd 130846 B
+[317/360] vtmscc qp37 b0b3744c 180818 B
+[318/360] vtmscc qp37 50fe4c3d 122066 B
+[319/360] vtmscc qp34 2a760bf1 8451 B
+[320/360] vtm420 qp34 ff32adfa 54786 B
+[321/360] vtm420 qp34 58104815 180119 B
+[322/360] vtmscc qp37 a365e654 157026 B
+[323/360] vtmscc qp34 1cba10ad 20829 B
+[324/360] vtm420 qp34 b0b3744c 216624 B
+[325/360] vtmscc qp34 50d13125 24835 B
+[326/360] vtmscc qp37 eda6d427 110722 B
+[327/360] vtmscc qp34 0369d229 32519 B
+[328/360] vtmscc qp34 8426ed22 16129 B
+[329/360] vtm420 qp34 eda6d427 159573 B
+[330/360] vtm420 qp34 da52c4f6 200013 B
+[331/360] vtm420 qp34 a365e654 221613 B
+[332/360] vtmscc qp37 d0208a1e 217931 B
+[333/360] vtm420 qp34 937476dd 513958 B
+[334/360] vtm420 qp34 d0208a1e 306824 B
+[335/360] vtmscc qp34 4ebc0e6c 46443 B
+[336/360] vtmscc qp37 da52c4f6 166223 B
+[337/360] vtmscc qp34 bb7344a2 31910 B
+[338/360] vtmscc qp34 1b4ad095 79373 B
+[339/360] vtmscc qp34 f67f11de 12749 B
+[340/360] vtmscc qp34 e0d8e29c 54939 B
+[341/360] vtmscc qp34 2397c73f 103899 B
+[342/360] vtmscc qp34 c9510efb 50152 B
+[343/360] vtmscc qp34 07b9f93f 144481 B
+[344/360] vtmscc qp34 2684452d 81308 B
+[345/360] vtmscc qp34 0d154749 78721 B
+[346/360] vtmscc qp34 a2a946cc 82556 B
+[347/360] vtmscc qp34 ebfd571f 112531 B
+[348/360] vtmscc qp34 02809272 195626 B
+[349/360] vtmscc qp34 ff32adfa 66978 B
+[350/360] vtmscc qp34 86127fbd 130029 B
+[351/360] vtmscc qp34 79b1bb29 161505 B
+[352/360] vtmscc qp34 937476dd 513982 B
+[353/360] vtmscc qp34 58104815 186821 B
+[354/360] vtmscc qp34 50fe4c3d 182491 B
+[355/360] vtmscc qp34 b0b3744c 263440 B
+[356/360] vtmscc qp34 608cb09e 170914 B
+[357/360] vtmscc qp34 a365e654 234398 B
+[358/360] vtmscc qp34 eda6d427 168400 B
+[359/360] vtmscc qp34 da52c4f6 231247 B
+[360/360] vtmscc qp34 d0208a1e 330934 B
+===== metrics
+===== allocate
+===== summary
+# So sánh base trên 30 ảnh validation CLIC 2027
+
+Ngân sách cả bộ ảnh (byte): {'0.075': 808550, '0.15': 1617100, '0.3': 3234201}. Mỗi ảnh chọn một điểm vận hành sao cho tổng byte ≤ ngân sách và tổng mục tiêu lớn nhất; mục tiêu: **qhat_v1**.
+
+Q̂ là tiện ích tuyến tính của Q̂ v0 (cao hơn = người chấm thích hơn; chênh 1.0 ≈ odds 2.7 lần). `t_dec`: giây/ảnh trên GPU của lần chạy này (không gồm VTM). `mix`: mỗi ảnh được chọn mode tốt nhất.
+
+## 0.075 bpp — all
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| vtm420 | 30 | 0.0749 | 25.73 | 0.9171 | 0.3037 | 0.1809 | 1.829 | nan |
+| vtmscc | 30 | 0.0749 | 25.73 | 0.9153 | 0.3050 | 0.1807 | 1.901 | nan |
+| mix | 30 | 0.0749 | 25.71 | 0.9152 | 0.3052 | 0.1804 | 1.904 | nan |
+
+## 0.075 bpp — natural
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| vtm420 | 25 | 0.0693 | 26.11 | 0.9160 | 0.3320 | 0.1953 | 1.683 | nan |
+| vtmscc | 25 | 0.0650 | 26.04 | 0.9135 | 0.3363 | 0.1976 | 1.659 | nan |
+| mix | 25 | 0.0650 | 26.01 | 0.9133 | 0.3366 | 0.1973 | 1.663 | nan |
+
+## 0.075 bpp — screen
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| vtm420 | 4 | 0.1144 | 30.50 | 0.9758 | 0.0905 | 0.0922 | 3.041 | nan |
+| vtmscc | 4 | 0.1490 | 32.62 | 0.9790 | 0.0805 | 0.0770 | 3.731 | nan |
+| mix | 4 | 0.1490 | 32.62 | 0.9790 | 0.0805 | 0.0770 | 3.731 | nan |
+
+## 0.15 bpp — all
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| vtm420 | 30 | 0.1498 | 27.83 | 0.9478 | 0.2243 | 0.1386 | 2.282 | nan |
+| vtmscc | 30 | 0.1499 | 27.80 | 0.9490 | 0.2206 | 0.1356 | 2.376 | nan |
+| mix | 30 | 0.1499 | 27.81 | 0.9491 | 0.2198 | 0.1353 | 2.377 | nan |
+
+## 0.15 bpp — natural
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| vtm420 | 25 | 0.1474 | 28.86 | 0.9517 | 0.2395 | 0.1468 | 2.156 | nan |
+| vtmscc | 25 | 0.1482 | 28.77 | 0.9524 | 0.2389 | 0.1457 | 2.201 | nan |
+| mix | 25 | 0.1482 | 28.79 | 0.9526 | 0.2379 | 0.1454 | 2.202 | nan |
+
+## 0.15 bpp — screen
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| vtm420 | 4 | 0.1898 | 33.28 | 0.9829 | 0.0729 | 0.0777 | 3.487 | nan |
+| vtmscc | 4 | 0.1881 | 35.25 | 0.9885 | 0.0564 | 0.0632 | 3.913 | nan |
+| mix | 4 | 0.1881 | 35.25 | 0.9885 | 0.0564 | 0.0632 | 3.913 | nan |
+
+## 0.3 bpp — all
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| vtm420 | 30 | 0.2994 | 31.72 | 0.9729 | 0.1520 | 0.1057 | 2.704 | nan |
+| vtmscc | 30 | 0.2994 | 31.99 | 0.9759 | 0.1469 | 0.0998 | 2.826 | nan |
+| mix | 30 | 0.2994 | 31.99 | 0.9759 | 0.1469 | 0.0998 | 2.826 | nan |
+
+## 0.3 bpp — natural
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| vtm420 | 25 | 0.2785 | 31.73 | 0.9700 | 0.1728 | 0.1162 | 2.530 | nan |
+| vtmscc | 25 | 0.2945 | 32.37 | 0.9739 | 0.1660 | 0.1104 | 2.648 | nan |
+| mix | 25 | 0.2945 | 32.37 | 0.9739 | 0.1660 | 0.1104 | 2.648 | nan |
+
+## 0.3 bpp — screen
+
+| cand | n | bpp | PSNR | MS-SSIM | LPIPS↓ | DISTS↓ | Q̂ | t_dec (s) |
+|---|---|---|---|---|---|---|---|---|
+| vtm420 | 4 | 0.2448 | 35.19 | 0.9889 | 0.0524 | 0.0637 | 3.665 | nan |
+| vtmscc | 4 | 0.2221 | 36.43 | 0.9910 | 0.0461 | 0.0541 | 4.013 | nan |
+| mix | 4 | 0.2221 | 36.43 | 0.9910 | 0.0461 | 0.0541 | 4.013 | nan |
+
+## Ảnh nào được `mix` giao cho base nào
+
+| rate | vtm420 | vtmscc | s1res | msillm | mbt | codlite | turbo | coolchic |
+|---|---|---|---|---|---|---|---|---|
+| 0.075 | 7 | 23 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0.15 | 4 | 26 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0.3 | 0 | 30 | 0 | 0 | 0 | 0 | 0 | 0 |
+[11:20:17 +115.0m] == bakeoff: incomplete {'s1_ckpt': 'None', 'qhat': '/mnt/home/guess03/clic/inputs/qhat_v1/qhat/qhat_v1.json', 'step': 'all', 'cands': ['vtm420', 'vtmscc']}

@@ -1,0 +1,22 @@
+{
+ "check": {
+  "done": true,
+  "seconds": 6,
+  "commit": "46a1134",
+  "gpu": "NVIDIA L40",
+  "torch": "2.11.0+cu128"
+ },
+ "bakeoff": {
+  "done": false,
+  "seconds": 3393,
+  "commit": "46a1134",
+  "s1_ckpt": "None",
+  "qhat": "/mnt/home/guess03/clic/inputs/qhat_v1/qhat/qhat_v1.json",
+  "step": "all",
+  "cands": [
+   "msillm",
+   "mbt",
+   "codlite"
+  ]
+ }
+}
