@@ -1,0 +1,46 @@
+{
+ "2021v": {
+  "rows": 5220,
+  "sanity": {
+   "n": 0,
+   "picked_original": NaN
+  },
+  "duplicates": {
+   "pairs": 757,
+   "agreement": 0.7767503302509907
+  }
+ },
+ "2021t": {
+  "rows": 122107,
+  "sanity": {
+   "n": 0,
+   "picked_original": NaN
+  },
+  "duplicates": {
+   "pairs": 5319,
+   "agreement": 0.7200601616845271
+  }
+ },
+ "2022t": {
+  "rows": 57300,
+  "sanity": {
+   "n": 1303,
+   "picked_original": 0.9240214888718342
+  },
+  "duplicates": {
+   "pairs": 0,
+   "agreement": NaN
+  }
+ },
+ "2024t": {
+  "rows": 24806,
+  "sanity": {
+   "n": 1325,
+   "picked_original": 0.969811320754717
+  },
+  "duplicates": {
+   "pairs": 1,
+   "agreement": 0.0
+  }
+ }
+}

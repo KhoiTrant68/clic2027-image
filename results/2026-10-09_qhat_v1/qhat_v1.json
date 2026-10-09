@@ -1,0 +1,24 @@
+{
+ "version": "qhat_v1",
+ "nonneg": true,
+ "features": [
+  "msssim",
+  "wd3"
+ ],
+ "transform": "see qhat.transform",
+ "scale": [
+  0.6838573484770498,
+  16.085180823321384
+ ],
+ "bias": 0.018137429560976148,
+ "weights": [
+  1.2214736195146594,
+  0.10296981137034827
+ ],
+ "weights_std": [
+  0.8353137106759597,
+  1.6562880352353462
+ ],
+ "n": 8000,
+ "note": "Q-hat(O, X) = sum_k weights[k] * transform_k(phi_k(O, X)); P(A > B) = sigmoid(bias + Qa - Qb)"
+}

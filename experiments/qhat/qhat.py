@@ -365,12 +365,29 @@ def accuracy(X, y, b, w):
     return float((((X @ w + b) > 0) == (y > 0.5)).mean()) if len(y) else float("nan")
 
 
+def fit_weights(X, y, nonneg=False):
+    """Logistic fit; with nonneg, features whose weight comes out negative are dropped (weight 0) and the rest
+    refitted until every weight is >= 0. Every transformed feature is 'higher = better', so a negative weight would
+    let the bit allocator buy Q-hat by making a metric worse (the v0 fit gave PSNR one; v1 with all features gave
+    the Wasserstein features negative weights because they are collinear with PSNR / MS-SSIM)."""
+    cols = list(range(X.shape[1]))
+    while True:
+        b, w = logistic(X[:, cols], y)
+        if not nonneg or (w >= 0).all() or len(cols) == 1:
+            break
+        keep = [c for c, wi in zip(cols, w) if wi >= 0]
+        cols = keep or [cols[int(np.argmax(w))]]
+    full = np.zeros(X.shape[1])
+    full[cols] = w
+    return b, full
+
+
 def fit(a):
     from clic27.eval import metrics as M
     out = Path(a.out)
     rows = M.read_csv(out / "features.csv")
     meta = json.loads((out / "ratings_meta.json").read_text()) if (out / "ratings_meta.json").exists() else {}
-    names = [k for k in FULL_REF + NO_REF if f"{k}_a" in rows[0]]
+    names = [k for k in FULL_REF + NO_REF if f"{k}_a" in rows[0] and (not a.features or k in a.features)]
     X, y, s = design(rows, names)
     sd = X.std(0) + 1e-12  # differences are ~zero-mean; scale only
     Xs = X / sd
@@ -383,7 +400,7 @@ def fit(a):
         acc = []
         for k in range(5):
             tr, te = mask & (fold != k), mask & (fold == k)
-            b, w = logistic(Xs[tr][:, cols], y[tr])
+            b, w = fit_weights(Xs[tr][:, cols], y[tr], a.nonneg)
             acc.append(accuracy(Xs[te][:, cols], y[te], b, w) * te.sum())
         return sum(acc) / mask.sum()
 
@@ -402,18 +419,18 @@ def fit(a):
     cross = {}
     if "2024t" in sets and len(sets) > 1:
         tr, te = s != "2024t", s == "2024t"
-        b, w = logistic(Xs[tr], y[tr])
+        b, w = fit_weights(Xs[tr], y[tr], a.nonneg)
         cross = dict(train=[x for x in sets if x != "2024t"], test="2024t", acc=accuracy(Xs[te], y[te], b, w))
         base = [j for j, k in enumerate(names) if k not in WD]
         if len(base) < len(names):  # the same test without the Wasserstein features (the v0 feature set)
-            b0, w0 = logistic(Xs[tr][:, base], y[tr])
+            b0, w0 = fit_weights(Xs[tr][:, base], y[tr], a.nonneg)
             cross["acc_without_wd"] = accuracy(Xs[te][:, base], y[te], b0, w0)
             for k in WD:
                 if k in names:
                     j = names.index(k)
                     cross[f"acc_only_{k}"] = float(((Xs[te][:, j] > 0) == (y[te] > 0.5)).mean())
-    b, w = logistic(Xs, y)
-    model = dict(version=a.version, features=names, transform="see qhat.transform", scale=sd.tolist(),
+    b, w = fit_weights(Xs, y, a.nonneg)
+    model = dict(version=a.version, nonneg=a.nonneg, features=names, transform="see qhat.transform", scale=sd.tolist(),
                  bias=float(b), weights=(w / sd).tolist(), weights_std=w.tolist(), n=int(len(y)),
                  note="Q-hat(O, X) = sum_k weights[k] * transform_k(phi_k(O, X)); P(A > B) = sigmoid(bias + Qa - Qb)")
     (out / f"{a.version}.json").write_text(json.dumps(model, indent=1))
@@ -459,6 +476,8 @@ def main(argv=None):
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--allow-cpu", action="store_true")
     ap.add_argument("--version", default="qhat_v1", help="model name: <out>/<version>.json")
+    ap.add_argument("--features", nargs="*", default=None, help="fit on these features only (default: all)")
+    ap.add_argument("--nonneg", action="store_true", help="no negative weights (drop and refit)")
     a = ap.parse_args(argv)
     a.n = {k: int(v) for k, v in (x.split("=") for x in a.n)}
     if a.step in ("features", "all"):
