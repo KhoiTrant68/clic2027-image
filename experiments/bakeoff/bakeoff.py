@@ -10,9 +10,9 @@ Candidates (each gives several operating points per image; the allocator picks o
               is left out because its autoregressive context model decodes a 2K image in minutes)
   codlite  C5  CoD-Lite (2026), pixel-space one-step diffusion codec, public MIT checkpoints 0.0156 .. 0.5 bpp
   turbo    C4  probe: MS-ILLM q1..q3 reconstruction refined by SD-Turbo img2img (1 step, strength 0.15 / 0.3)
-  coolchic C6  Cool-chic 5.x (Orange, BSD-3): overfitted per-image codec, ~2000 MAC/pixel decoder; --tune
-              wasserstein = MSE + Wasserstein Distortion (Balle et al. CVPR 2025; Orange's CLIC 2025 entry).
-              Encoding is a per-image optimisation (slow; CLIC does not time the encoder).
+  coolchic C6  Cool-chic, tag clic2025 (Orange's CLIC 2025 entry, BSD-3): overfitted per-image codec, ~1000-2000
+              MAC/pixel, C/AVX2 CPU decoder; tune wasserstein = MSE + Wasserstein Distortion (Balle et al. CVPR 2025).
+              Encoding is a per-image optimisation (~20 GB GPU, tens of minutes; CLIC does not time the encoder).
   mix          per-image choice over the union of all candidates (what mode switching could buy)
 
 Steps (all resume: existing points/metrics are skipped):
@@ -64,7 +64,8 @@ CODLITE = ["0_0156", "0_0312", "0_1250", "0_5000"]  # public checkpoints in the 
 GENCODEC_COMMIT = "9b39a94d078fa2864e8246c2e4031cafaf756b84"
 TURBO_BASE = [1, 2, 3]  # MS-ILLM qualities refined by SD-Turbo (0.043 / 0.080 / 0.150 bpp on these images)
 TURBO_STRENGTH = [0.15, 0.3]
-COOLCHIC_COMMIT = "a6fe38a414dd098b39c41636bd6e423626402f7e"  # Cool-chic 5.x, 2026-10
+COOLCHIC_TAG = "clic2025"  # 5.x dropped the C decoder; this tag has it, plus cfg/enc/intra/perceptive.cfg
+COOLCHIC_COMMIT = "a2298497584d812b7d748035481dbca52110f827"
 COOLCHIC_LAMBDAS = [0.001, 0.002, 0.004, 0.008, 0.016]  # first guess for 0.075-0.3 bpp on 2K images; calibrate
 AE_REPO = "Efficient-Large-Model/Sana_1600M_1024px_diffusers"
 HEADER_BYTES = 4  # per image: candidate/point id + flags; H and W are known to the decoder from the stream
@@ -504,43 +505,111 @@ def points_turbo(a, P, names):
     torch.cuda.empty_cache() if torch.cuda.is_available() else None
 
 
-def points_coolchic(a, P, names):
-    """Cool-chic (Orange-OpenSource/Cool-Chic, BSD-3): one overfitting run per (image, tune, lambda) with its own
-    cc_encode.py / cc_decode.py, so bytes are the real .cool bitstream. t_dec is the wall time of cc_decode.py
-    (includes Python start-up and imports, so it overstates the decoder itself); t_enc goes to the note."""
-    import shutil
-    src = (a.out.parent / "Cool-Chic").resolve()  # cc_encode.py runs with cwd = src: every path must be absolute
-    if not (src / "cc_encode.py").exists():
-        subprocess.run(["git", "clone", "-q", "https://github.com/Orange-OpenSource/Cool-Chic.git", str(src)], check=True)
+def _coolchic_setup(a):
+    """Clone the tag and build its C++ extensions (CABAC encoder, CPU and AVX2 decoders) for --coolchic-python. The
+    encoder needs torch >= 2.7.1 there (the CLIC server's 2.6 is enough for the decoder: it does not use torch). The
+    tag's setup.py leaves common_randomness.cpp out of the AVX2 decoder (undefined symbol at import): added here."""
+    src = (a.out.parent / "Cool-Chic-clic2025").resolve()  # encode.py runs with cwd = src: every path must be absolute
+    py = a.coolchic_python or sys.executable
+    if not (src / "coolchic" / "encode.py").exists():
+        subprocess.run(["git", "clone", "-q", "--branch", COOLCHIC_TAG, "https://github.com/Orange-OpenSource/Cool-Chic.git",
+                        str(src)], check=True)
         subprocess.run(["git", "-C", str(src), "checkout", "-q", COOLCHIC_COMMIT], check=True)
-    _pip("constriction==0.4.2", "einops", "fvcore", "ConfigArgParse")
+    if not list((src / "coolchic" / "CCLIB").glob("ccdecapi_avx2*.so")):
+        setup = src / "setup.py"
+        s = setup.read_text()
+        i, j = s.index('"ccdecapi_avx2"'), s.index('"CCDECAPI_AVX2"')
+        if "common_randomness.cpp" not in s[i:j]:
+            ctx = '"coolchic/cpp/Contexts.cpp",'
+            k = s.index(ctx, i) + len(ctx)
+            setup.write_text(s[:k] + '\n                "coolchic/cpp/common_randomness.cpp",' + s[k:])
+        tv = subprocess.run([py, "-c", "import torch; print(torch.__version__)"], capture_output=True, text=True).stdout.strip()
+        if not tv or tuple(int(v) for v in tv.split("+")[0].split(".")[:2]) < (2, 7):
+            raise RuntimeError(f"Cool-chic encoder needs torch >= 2.7.1 in --coolchic-python {py} (found {tv!r})")
+        subprocess.run([py, "-m", "pip", "install", "-q", "pybind11", "einops", "fvcore", "ConfigArgParse", "psutil"],
+                       check=True)
+        subprocess.run([py, "-m", "pip", "install", "-q", "--no-build-isolation", "--no-deps", "-e", str(src)], check=True)
+    return src, py
+
+
+COOLCHIC_DEC = """import sys, time
+sys.path.insert(0, "coolchic")
+from CCLIB.ccdecapi_avx2 import cc_decode_avx2
+t = time.perf_counter()
+cc_decode_avx2(sys.argv[1], sys.argv[2], 0, 0, 64, 0)
+print(time.perf_counter() - t)
+"""
+
+
+def _coolchic_job(src, py, img, lm, tune, dec, itr, gpu):
+    """Worker thread: encode.py on one GPU, then the AVX2 C decoder (one CPU core). t_dec is the decoder call only,
+    without Python start-up. Returns (bitstream bytes, t_enc, t_dec, ppm path) or raises with the log tail."""
+    import shutil
+    work =Path(tempfile.mkdtemp(prefix="coolchic_")).resolve()
+    bs = work / "x.cool"
+    cmd = [py, "coolchic/encode.py", "-i", str(img), "-o", str(bs), "--workdir", str(work), "--lmbda", str(lm),
+           "--enc_cfg", "cfg/enc/intra/perceptive.cfg", "--dec_cfg_residue", f"cfg/dec/intra/{dec}.cfg", "--tune", tune]
+    cmd += ["--n_itr", str(itr)] if itr else []
+    env = dict(os.environ, PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True")
+    if gpu is not None:
+        env["CUDA_VISIBLE_DEVICES"] = str(gpu)
+    t0 = time.time()
+    r = subprocess.run(cmd, cwd=src, env=env, capture_output=True, text=True)
+    t_enc = time.time() - t0
+    if r.returncode or not bs.exists():
+        shutil.rmtree(work, ignore_errors=True)
+        raise RuntimeError((r.stdout + r.stderr)[-2000:])
+    ppm = work / "x.ppm"
+    d = subprocess.run([py, "-c", COOLCHIC_DEC, str(bs), str(ppm)], cwd=src, capture_output=True, text=True, check=True)
+    return bs.stat().st_size, t_enc, float(d.stdout.split()[-1]), ppm
+
+
+def points_coolchic(a, P, names):
+    """Cool-chic at the tag clic2025 (Orange-OpenSource/Cool-Chic, BSD-3; Orange's CLIC 2025 entry): one overfitting
+    run per (image, tune, lambda, decoder size) with cfg/enc/intra/perceptive.cfg (10k iterations, tune wasserstein
+    = 0.8 MSE + 0.2 Wasserstein Distortion), so bytes are the real .cool bitstream, decoded by the C/AVX2 decoder
+    that would ship. v5.x dropped that decoder (Python only, 14.6 s per 2K image). An encode takes about 20 GB of
+    GPU memory (Wasserstein on the full image); --coolchic-gpus runs one encode per listed GPU at a time."""
+    import shutil
+    from concurrent.futures import ThreadPoolExecutor
+    from queue import Queue
+    from PIL import Image
+    src, py = _coolchic_setup(a)
     imgs = inputs(a)
+    jobs = []
     for tune in a.coolchic_tunes:
-        for lm in a.coolchic_lambdas:
-            key = f"{'wd' if tune == 'wasserstein' else 'mse'}{lm:g}"
-            for _, name in P.todo("coolchic", [key], names):
-                work = Path(tempfile.mkdtemp(prefix="coolchic_")).resolve()
-                bs = work / "x.cool"
-                t0 = time.time()
-                r = subprocess.run([sys.executable, str(src / "cc_encode.py"), "--input", str(Path(imgs[name]).resolve()),
-                                    "--output", str(bs), "--workdir", str(work), "--lmbda", str(lm), "--tune", tune,
-                                    "--n_itr", str(a.coolchic_itr)], cwd=src, capture_output=True, text=True)
-                t_enc = time.time() - t0
-                if r.returncode or not bs.exists():
-                    print(f"coolchic {key} {name[:8]} encode FAILED:", (r.stdout + r.stderr)[-2000:], flush=True)
-                    shutil.rmtree(work, ignore_errors=True)
-                    continue
-                rec = P.recon("coolchic", key, name).resolve()
-                rec.parent.mkdir(parents=True, exist_ok=True)
-                t0 = time.time()
-                subprocess.run([sys.executable, str(src / "cc_decode.py"), "-i", str(bs), "-o", str(rec)], cwd=src,
-                               check=True, capture_output=True)
-                t_dec = time.time() - t0
-                n = bs.stat().st_size
-                P.add(dict(cand="coolchic", key=key, name=name, bytes=n + HEADER_BYTES, bytes_base=n, bytes_res=0,
-                           t_dec=t_dec, note=f"t_enc={t_enc:.0f}s itr={a.coolchic_itr}"))
-                print(f"coolchic {key} {name[:8]} {n} B  enc {t_enc:.0f}s  dec {t_dec:.1f}s", flush=True)
-                shutil.rmtree(work, ignore_errors=True)
+        for dec in a.coolchic_decs:
+            for lm in a.coolchic_lambdas:
+                key = f"{'wd' if tune == 'wasserstein' else 'mse'}{lm:g}{dec}"
+                jobs += [(key, name, lm, tune, dec) for _, name in P.todo("coolchic", [key], names)]
+    gpus = Queue()
+    for g in a.coolchic_gpus or [None]:
+        gpus.put(g)
+
+    def run(job):
+        key, name, lm, tune, dec = job
+        g = gpus.get()
+        try:
+            return _coolchic_job(src, py, Path(imgs[name]).resolve(), lm, tune, dec, a.coolchic_itr, g)
+        finally:
+            gpus.put(g)
+
+    with ThreadPoolExecutor(max_workers=gpus.qsize()) as ex:
+        futs = {ex.submit(run, j): j for j in jobs}
+        for fut in as_completed(futs):
+            key, name = futs[fut][:2]
+            try:
+                n, t_enc, t_dec, ppm = fut.result()
+            except Exception as e:  # noqa: BLE001
+                print(f"coolchic {key} {name[:8]} FAILED:", e, flush=True)
+                continue
+            rec = P.recon("coolchic", key, name)
+            rec.parent.mkdir(parents=True, exist_ok=True)
+            Image.open(ppm).convert("RGB").save(rec)
+            shutil.rmtree(ppm.parent, ignore_errors=True)
+            P.add(dict(cand="coolchic", key=key, name=name, bytes=n + HEADER_BYTES, bytes_base=n, bytes_res=0,
+                       t_dec=t_dec, note=f"t_enc={t_enc:.0f}s itr={a.coolchic_itr or 'cfg'} tag={COOLCHIC_TAG}"))
+            print(f"coolchic {key} {name[:8]} {n} B  enc {t_enc:.0f}s  dec {t_dec:.2f}s (C, AVX2)", flush=True)
 
 
 def points_mbt(a, P, names):
@@ -806,7 +875,11 @@ def main(argv=None):
                     help="points for these images only: labels (screen, texture, natural) or name prefixes")
     ap.add_argument("--coolchic-lambdas", type=float, nargs="+", default=COOLCHIC_LAMBDAS)
     ap.add_argument("--coolchic-tunes", nargs="+", default=["wasserstein"], choices=["wasserstein", "mse"])
-    ap.add_argument("--coolchic-itr", type=int, default=10000, help="Cool-chic training iterations per image")
+    ap.add_argument("--coolchic-itr", type=int, default=None, help="Cool-chic iterations (default: perceptive.cfg, 10k)")
+    ap.add_argument("--coolchic-decs", nargs="+", default=["lop"], choices=["vlop", "lop", "mop", "hop"],
+                    help="Cool-chic decoder sizes (cfg/dec/intra): very low / low / medium / high complexity")
+    ap.add_argument("--coolchic-gpus", nargs="+", default=None, help="one Cool-chic encode at a time per GPU id")
+    ap.add_argument("--coolchic-python", default=None, help="interpreter with torch >= 2.7.1 for Cool-chic")
     a = ap.parse_args(argv)
     a.data = a.data or a.out / "valid"
     steps = STEPS if a.step == "all" else [a.step]
