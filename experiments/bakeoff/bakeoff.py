@@ -13,6 +13,9 @@ Candidates (each gives several operating points per image; the allocator picks o
   coolchic C6  Cool-chic, tag clic2025 (Orange's CLIC 2025 entry, BSD-3): overfitted per-image codec, ~1000-2000
               MAC/pixel, C/AVX2 CPU decoder; tune wasserstein = MSE + Wasserstein Distortion (Balle et al. CVPR 2025).
               Encoding is a per-image optimisation (~20 GB GPU, tens of minutes; CLIC does not time the encoder).
+  ditic    C7  DiT-IC (CVPR 2026): ELIC-style latent codec + one-step SANA-600M DiT + DC-AE f32 decoder, merged
+              checkpoints q2..q4 (Kodak 0.044 .. 0.100 bpp; Apache-2.0 card, SANA base "research only")
+  crdr     C8  CRDR (WACV 2024): ELIC + GAN, one model for 0.08 .. 0.72 bpp (rate index q) with a realism knob beta
   mix          per-image choice over the union of all candidates (what mode switching could buy)
 
 Steps (all resume: existing points/metrics are skipped):
@@ -51,7 +54,7 @@ from clic27.eval import metrics as M  # noqa: E402
 
 DATA_URL = "https://dhldkwazkze5h.cloudfront.net/data/clic2025_image_test.zip"
 RATES = [0.075, 0.15, 0.3]
-CANDS = ["vtm420", "vtmscc", "s1res", "msillm", "mbt", "codlite", "turbo", "coolchic"]
+CANDS = ["vtm420", "vtmscc", "s1res", "msillm", "mbt", "codlite", "turbo", "coolchic", "ditic", "crdr"]
 LABELS = {"ebfd571f": "screen", "bb7344a2": "screen", "86127fbd": "screen", "2a760bf1": "screen",
           "937476dd": "texture"}  # by eye in branch B; every other image is natural
 VTM_QPS = [34, 37, 40, 43, 46, 50]  # 2026-10-06 run: vtm420 qp26/30 = 0.80/0.52 bpp corpus (useless), qp34 0.33, qp50 0.029
@@ -67,6 +70,13 @@ TURBO_STRENGTH = [0.15, 0.3]
 COOLCHIC_TAG = "clic2025"  # 5.x dropped the C decoder; this tag has it, plus cfg/enc/intra/perceptive.cfg
 COOLCHIC_COMMIT = "a2298497584d812b7d748035481dbca52110f827"
 COOLCHIC_LAMBDAS = [0.001, 0.002, 0.004, 0.008, 0.016]  # first guess for 0.075-0.3 bpp on 2K images; calibrate
+DITIC_REPO, DITIC_COMMIT = "https://github.com/Eric-qi/DiT-IC.git", "cd43f5d9761fb34f5224622145629d3ff2b89ca1"
+DITIC_HF, DITIC_BASE = "JunqiShi/DiT-IC", "Efficient-Large-Model/Sana_600M_1024px_diffusers"  # base: configs only
+DITIC_Q = ["q2", "q3", "q4"]  # Kodak 0.044 / 0.081 / 0.100 bpp; q1 (0.009) is far below the CLIC rates
+CRDR_REPO, CRDR_COMMIT = "https://github.com/iwa-shi/CRDR.git", "6eeec5d90b6d1abdee2d98f3533eef7146c26c48"
+CRDR_GDRIVE = "1H6T9-k0RX5SXk0VljHNiXUGXZrZl2seb"  # crdr.pth.tar, the released stage-3 model
+CRDR_Q = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]  # CLIC2020: 0.080, 0.106, 0.140, 0.192, 0.264, 0.360, 0.489 bpp
+CRDR_BETA = [3.84, 5.12]  # 3.84: the paper's realism point; 5.12: the maximum
 AE_REPO = "Efficient-Large-Model/Sana_1600M_1024px_diffusers"
 HEADER_BYTES = 4  # per image: candidate/point id + flags; H and W are known to the decoder from the stream
 
@@ -612,6 +622,196 @@ def points_coolchic(a, P, names):
             print(f"coolchic {key} {name[:8]} {n} B  enc {t_enc:.0f}s  dec {t_dec:.2f}s (C, AVX2)", flush=True)
 
 
+# ---------------------------------------------------------------- C7 / C8: codecs run in their own interpreter
+def _checkout(a, dirname, url, commit):
+    src = (a.out.parent / dirname).resolve()
+    if not src.exists():
+        subprocess.run(["git", "clone", "-q", url, str(src)], check=True)
+        subprocess.run(["git", "-C", str(src), "checkout", "-q", commit], check=True)
+    return src
+
+
+def _run_points(P, cand, code, cwd, jobs, args):
+    """Runs `python -c code jobs.json *args` with cwd = the codec's checkout, so its top-level packages (DiT-IC's
+    `models`, CRDR's `src`) and its imports stay out of this process. jobs: dicts with key, name, src, dst. The child
+    prints one 'POINT {json}' line per finished image; each becomes a point (and its metrics) right away."""
+    if not jobs:
+        return
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+        json.dump(jobs, f)
+    p = subprocess.Popen([sys.executable, "-c", code, f.name, *map(str, args)], cwd=cwd, stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT, text=True, bufsize=1)
+    for line in p.stdout:
+        if not line.startswith("POINT "):
+            print(f"  [{cand}] {line}", end="", flush=True)
+            continue
+        r = json.loads(line[6:])
+        P.add(dict(cand=cand, key=r["key"], name=r["name"], bytes=r["bytes"] + HEADER_BYTES, bytes_base=r["bytes"],
+                   bytes_res=0, t_dec=r["t_dec"], note=f"decoder_params={r['decoder_params']}"))
+        print(f"{cand} {r['key']} {r['name'][:8]} {r['bytes']} B  dec {r['t_dec']:.2f}s  peak {r['peak_gb']:.1f} GB",
+              flush=True)
+    if p.wait():
+        raise RuntimeError(f"{cand}: runner exited with code {p.returncode}")
+
+
+DITIC_RUN = r"""
+import json, sys, time, types
+from pathlib import Path
+import numpy as np, torch, torch.nn as nn, torch.nn.functional as F, yaml
+from PIL import Image
+from huggingface_hub import hf_hub_download
+jobs, hf_repo, base, tile, dtype = json.load(open(sys.argv[1])), sys.argv[2], sys.argv[3], int(sys.argv[4]), sys.argv[5]
+import models  # DiT-IC's package; its training-only modules (LPIPS, pyiqa, taming, CLIP) are stubbed out
+
+
+class Unused(nn.Module):
+    def __init__(self, *a, **k):
+        super().__init__()
+
+
+for mod, attr, val in (("models.losses", "LPIPSWithDiscriminator", Unused),
+                       ("models.foundation_models", "aux_foundation_model", None)):
+    sys.modules[mod] = types.ModuleType(mod)
+    setattr(sys.modules[mod], attr, val)
+from models.DiT_IC import Codec
+
+cfg = yaml.safe_load(open("configs/inference_merge.yaml"))["model"]["params"]
+cfg.update(dit_path=base, use_ema=True, use_merge=True, training=False)
+amp = dict(bf16=torch.bfloat16, fp16=torch.float16).get(dtype)
+dev = torch.device("cuda")
+by_key = {}
+for j in jobs:
+    by_key.setdefault(j["key"], []).append(j)
+for key, todo in by_key.items():
+    ckpt = hf_hub_download(hf_repo, f"{key}_merge_ema.pt")
+    net = Codec("cuda", "Codec", **dict(cfg, codec_path=ckpt))  # loads the merged weights with strict=False
+    have = set(torch.load(ckpt, map_location="cpu", mmap=True))
+    miss = [k for k in net.state_dict() if k not in have and not k.startswith("loss.")]
+    if miss:  # e.g. a diffusers version that renamed SANA / DC-AE modules: the net would run on random weights
+        raise SystemExit(f"ditic {key}: {len(miss)} weights not in the checkpoint, e.g. {miss[:5]}")
+    net = net.to(dev).eval()
+    net.codec.update(force=True)
+    if tile:
+        net.vae.enable_tiling(tile_sample_min_height=tile, tile_sample_min_width=tile,
+                              tile_sample_stride_height=tile * 7 // 8, tile_sample_stride_width=tile * 7 // 8)
+    n_dec = sum(p.numel() for p in net.parameters()) - sum(p.numel() for p in net.aux_codec.parameters()) \
+        - sum(p.numel() for p in net.vae.encoder.parameters())
+    for j in todo:
+        x = np.asarray(Image.open(j["src"]).convert("RGB"))
+        H, W = x.shape[:2]
+        t = torch.from_numpy(x.copy()).permute(2, 0, 1)[None].float().div(127.5).sub(1).to(dev)
+        t = F.pad(t, (0, (-W) % 256, 0, (-H) % 256), mode="reflect")
+        torch.cuda.reset_peak_memory_stats()
+        with torch.no_grad(), torch.autocast("cuda", dtype=amp, enabled=amp is not None):
+            out = net.compress(t)
+            torch.cuda.synchronize()
+            t0 = time.time()
+            y = net.decompress(out["strings"], out["shape"])
+            torch.cuda.synchronize()
+            t_dec = time.time() - t0
+        rec = y[0, :, :H, :W].float().clamp(-1, 1).add(1).mul(127.5).round().byte().permute(1, 2, 0).cpu().numpy()
+        Path(j["dst"]).parent.mkdir(parents=True, exist_ok=True)
+        Image.fromarray(rec).save(j["dst"])
+        print("POINT " + json.dumps(dict(key=key, name=j["name"], bytes=sum(len(s[0]) for s in out["strings"]),
+                                         t_dec=t_dec, decoder_params=n_dec,
+                                         peak_gb=torch.cuda.max_memory_allocated() / 2**30)), flush=True)
+    del net
+    torch.cuda.empty_cache()
+"""
+
+
+def points_ditic(a, P, names):
+    """DiT-IC (Shi et al., CVPR 2026; github Eric-qi/DiT-IC, HF JunqiShi/DiT-IC): the image goes to the DC-AE f32
+    latent of SANA and to an ELIC analysis transform; an ELIC-style codec (hyperprior + 4-step context, f64, CompressAI
+    rANS) sends it; the decoder runs one step of the LoRA-tuned SANA-600M DiT and the LoRA-tuned DC-AE decoder.
+    Bytes are the real rANS strings. --ditic-tile tiles the DC-AE (encode and decode): 2K full-frame needs ~16 GB."""
+    try:
+        import diffusers  # noqa: F401
+    except ImportError:
+        _pip("diffusers")
+    src = _checkout(a, "DiT-IC", DITIC_REPO, DITIC_COMMIT)
+    jobs = [dict(key=k, name=n, src=str(Path(inputs(a)[n]).resolve()), dst=str(P.recon("ditic", k, n).resolve()))
+            for k, n in P.todo("ditic", DITIC_Q, names)]
+    _run_points(P, "ditic", DITIC_RUN, src, jobs, [DITIC_HF, DITIC_BASE, a.ditic_tile, a.ditic_dtype])
+
+
+CRDR_RUN = r"""
+import json, re, sys, time
+from pathlib import Path
+import numpy as np, torch
+from PIL import Image
+jobs, ckpt, threads = json.load(open(sys.argv[1])), sys.argv[2], int(sys.argv[3])
+torch.set_num_threads(threads)  # the hyperprior decoder and the context model run on the CPU (CRDR's codec_setup)
+torch.backends.cudnn.deterministic = True
+import src  # noqa: F401  CRDR's package: registers the model classes
+from src.models import build_comp_model
+from src.utils.options import TestConfig
+
+cfg, text, _ = TestConfig._file2dict_yaml("config/crdr.yaml")
+cfg.update(device="cuda", is_train=False)
+model = build_comp_model(TestConfig(cfg, cfg_text=text, filename="config/crdr.yaml")).to("cuda")
+# Not CRDR's load_learned_weight: it keeps only the checkpoint keys the model has, and CompressAI >= 1.2.5 renamed
+# the factorized prior's _matrix{i} / _bias{i} / _factor{i} to matrices.{i} / ... so z's prior stayed random (the
+# README's 0.0641 bpp demo came out at 0.2697 bpp). Renamed here and loaded strictly.
+plural = dict(matrix="matrices", bias="biases", factor="factors")
+sd = torch.load(ckpt, map_location="cpu", weights_only=False)["comp_model"]
+sd = {re.sub(r"\._(matrix|bias|factor)(\d+)$", lambda m: f".{plural[m.group(1)]}.{m.group(2)}", k.removeprefix("module.")): v
+      for k, v in sd.items()}
+model.load_state_dict(sd)
+model.codec_setup()
+model.eval()
+n_dec = sum(p.numel() for m in (model.decoder, model.hyperdecoder, model.context_model) for p in m.parameters())
+cur = None
+for j in jobs:  # sorted by (q, name, beta): each (q, image) is encoded once, then decoded at every beta
+    if cur != (j["q"], j["name"]):
+        x = np.asarray(Image.open(j["src"]).convert("RGB"))
+        t = torch.from_numpy(x.copy()).permute(2, 0, 1)[None].float().div(127.5).sub(1)
+        strings = model.compress(t, rate_ind=j["q"])["string_list"]
+        cur = (j["q"], j["name"])
+    torch.cuda.reset_peak_memory_stats()
+    torch.cuda.synchronize()
+    t0 = time.time()
+    with torch.no_grad():
+        y = model.decompress(strings, beta=j["beta"])[0]
+    torch.cuda.synchronize()
+    t_dec = time.time() - t0
+    rec = y[0].float().clamp(-1, 1).add(1).mul(127.5).round().byte().permute(1, 2, 0).cpu().numpy()
+    Path(j["dst"]).parent.mkdir(parents=True, exist_ok=True)
+    Image.fromarray(rec).save(j["dst"])
+    print("POINT " + json.dumps(dict(key=j["key"], name=j["name"], bytes=sum(len(s) for s in strings), t_dec=t_dec,
+                                     decoder_params=n_dec, peak_gb=torch.cuda.max_memory_allocated() / 2**30)),
+          flush=True)
+"""
+
+
+def points_crdr(a, P, names):
+    """CRDR (Iwai et al., WACV 2024; github iwa-shi/CRDR): ELIC transforms + Minnen charm context model, one model for
+    every rate (rate index q, 0..4) with a decoder-side realism control beta (0 = MSE end, 5.12 = most realistic),
+    trained with a GAN. The pipeline keeps the hyperprior decoder and context model on the CPU (--crdr-threads), so
+    t_dec includes CPU entropy decoding. Bytes are the real strings (header + z + y)."""
+    import urllib.request
+    src = _checkout(a, "CRDR", CRDR_REPO, CRDR_COMMIT)
+    ckpt = src / "crdr.pth.tar"
+    if not ckpt.exists():
+        tmp = ckpt.with_suffix(".part")
+        urllib.request.urlretrieve(f"https://drive.usercontent.google.com/download?id={CRDR_GDRIVE}&confirm=t", tmp)
+        if tmp.stat().st_size < 10**7:  # Google Drive answered with an HTML page instead of the file
+            raise RuntimeError(f"crdr: checkpoint download failed ({tmp.stat().st_size} bytes)")
+        tmp.rename(ckpt)
+    try:
+        import addict  # noqa: F401
+        import cv2  # noqa: F401
+        import pandas  # noqa: F401
+        import python_log_indenter  # noqa: F401
+    except ImportError:
+        _pip("addict", "opencv-python-headless", "pandas", "python-log-indenter")
+    points_ = {f"q{q:g}b{b:g}": (q, b) for q in a.crdr_q for b in a.crdr_beta}
+    jobs = [dict(key=k, name=n, q=points_[k][0], beta=points_[k][1], src=str(Path(inputs(a)[n]).resolve()),
+                 dst=str(P.recon("crdr", k, n).resolve())) for k, n in P.todo("crdr", list(points_), names)]
+    jobs.sort(key=lambda j: (j["q"], j["name"], j["beta"]))
+    _run_points(P, "crdr", CRDR_RUN, src, jobs, [ckpt, a.crdr_threads])
+
+
 def points_mbt(a, P, names):
     import torch
     try:
@@ -641,7 +841,8 @@ def points(a):
     P = Points(a.out, Scorer(a))
     names = selected(a)
     for cand, fn in (("msillm", points_msillm), ("mbt", points_mbt), ("codlite", points_codlite), ("turbo", points_turbo),
-                     ("coolchic", points_coolchic), ("s1res", points_s1res)):
+                     ("coolchic", points_coolchic), ("ditic", points_ditic), ("crdr", points_crdr),
+                     ("s1res", points_s1res)):
         if cand in a.cands:
             try:
                 fn(a, P, names)
@@ -880,6 +1081,11 @@ def main(argv=None):
                     help="Cool-chic decoder sizes (cfg/dec/intra): very low / low / medium / high complexity")
     ap.add_argument("--coolchic-gpus", nargs="+", default=None, help="one Cool-chic encode at a time per GPU id")
     ap.add_argument("--coolchic-python", default=None, help="interpreter with torch >= 2.7.1 for Cool-chic")
+    ap.add_argument("--ditic-tile", type=int, default=1024, help="DC-AE tile size in pixels (0: full frame, ~16 GB)")
+    ap.add_argument("--ditic-dtype", default="fp32", choices=["fp32", "bf16", "fp16"], help="autocast for DiT-IC")
+    ap.add_argument("--crdr-q", type=float, nargs="+", default=CRDR_Q, help="CRDR rate indices (0..4)")
+    ap.add_argument("--crdr-beta", type=float, nargs="+", default=CRDR_BETA, help="CRDR realism (0..5.12)")
+    ap.add_argument("--crdr-threads", type=int, default=8, help="CPU threads for CRDR's CPU entropy decoding")
     a = ap.parse_args(argv)
     a.data = a.data or a.out / "valid"
     steps = STEPS if a.step == "all" else [a.step]
