@@ -59,6 +59,7 @@ Gộp với hai session ngày 09/10 (`server_full_gpu`, `server_full_vtm`), rồ
 
 1. **Tự chấm DiT-IC so với MS-ILLM ở 0.075** (ảnh cắt 512×512, có ảnh gốc, giống cách CLIC chấm), khoảng 100 cặp.
    Việc này quyết định có đổi base cho mức 0.075 hay không, vì Q̂ v0 và v1 lệch nhau.
+   **Đã làm 11/10** (`2026-10-11_rating_ditic_msillm/`): DiT-IC thắng 69% (ảnh tự nhiên 73%), ≈ +138 Elo, khớp Q̂ v0.
 2. **Chọn mode theo nội dung:** ảnh có chữ đi VTM-SCC hoặc MS-ILLM. Cần một bộ phát hiện chữ, có thể dùng OCR CER của nhánh B.
 3. **Tăng tốc DC-AE decoder 3–5×:**
    - trước hết thử giải mã cả khung hình không chia tile ở bf16 (L4 có 24 GB) và channels_last;

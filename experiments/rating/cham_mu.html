@@ -1,0 +1,403 @@
+<title>Chấm mù 0.075 bpp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a neutral-grey viewing booth. One 512x512 frame in the middle, the controls in a strip under it,
+   counters in mono. Deliberately one dark look: the surround stays achromatic (R=G=B) so nothing tints the
+   colours being judged. */
+:root {
+  --bg: #2a2a2a;        /* booth surround, neutral */
+  --panel: #333333;
+  --line: #4b4b4b;
+  --fg: #e8e8e8;
+  --muted: #a6a6a6;
+  --accent: #d6a24a;    /* focus and the current view only, kept off the frame itself */
+  --ok: #7cc49a;
+  --warn: #e0866b;
+  --font: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --frame: 512px;
+  color-scheme: dark;
+}
+html, body { background: var(--bg); color: var(--fg); }
+body { font-family: var(--font); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1680px; margin: 0 auto; padding: 18px 16px 40px; display: grid; gap: 18px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
+h1 { font-size: 1.35rem; font-weight: 600; margin: 0; letter-spacing: 0.01em; text-wrap: balance; }
+.sub { color: var(--muted); margin: 2px 0 0; font-size: 0.9rem; }
+.count { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 0.95rem; color: var(--muted); }
+.count b { color: var(--fg); font-weight: 500; }
+.bar { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.2s; }
+.status { font-size: 0.85rem; color: var(--muted); min-height: 1.3em; }
+.status.warn { color: var(--warn); }
+
+.booth { display: grid; justify-items: center; gap: 14px; }
+.views { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; max-width: 100%; }
+.view { display: grid; gap: 6px; justify-items: center; max-width: 100%; }
+.tag { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.tag.on { color: var(--accent); }
+.frame { width: var(--frame); max-width: 100%; aspect-ratio: 1; background-repeat: no-repeat; background-size: 300% 100%;
+  background-color: #000; outline: 1px solid var(--line); cursor: pointer; touch-action: manipulation; }
+.frame.loading { background-image: none !important; }
+.flip-label { font-family: var(--mono); font-size: 1.05rem; letter-spacing: 0.06em; color: var(--accent); min-height: 1.5em; }
+
+.controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.controls.choose { gap: 14px; }
+button { font: inherit; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+  padding: 8px 14px; cursor: pointer; }
+button:hover { border-color: var(--muted); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+button:disabled { opacity: 0.45; cursor: default; }
+button.pick { font-weight: 600; padding: 12px 26px; min-width: 9.5rem; }
+button.pick.chosen { background: var(--accent); color: #1d1d1d; border-color: var(--accent); }
+kbd { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); border: 1px solid var(--line); border-radius: 4px;
+  padding: 0 5px; margin-left: 6px; }
+.opts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; font-size: 0.88rem; color: var(--muted); }
+.opts .grp { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.opts button { padding: 4px 10px; font-size: 0.85rem; }
+
+.how { max-width: 70ch; justify-self: center; color: var(--muted); font-size: 0.9rem; }
+.how summary { cursor: pointer; color: var(--fg); }
+.how ul { padding-left: 1.2em; margin: 8px 0 0; display: grid; gap: 4px; }
+
+.done { display: grid; gap: 16px; justify-items: center; text-align: center; }
+.done h2 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+.stats { display: grid; gap: 10px; width: min(760px, 100%); }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; gap: 6px 18px; align-items: baseline;
+  padding: 8px 0; border-bottom: 1px solid var(--line); text-align: left; }
+.row .k { min-width: 0; }
+.row .v { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+.row.head { color: var(--muted); font-size: 0.82rem; letter-spacing: 0.04em; }
+.note { color: var(--muted); font-size: 0.85rem; max-width: 70ch; }
+@media (max-width: 560px) {
+  .row { grid-template-columns: minmax(0, 1fr) auto auto; }
+  .row .v.elo { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Chấm mù 0.075 bpp</h1>
+      <p class="sub">30 ảnh validation CLIC 2027, mỗi ảnh 3 vùng cắt 512×512. Hai bản nén cùng ngân sách byte cho cả bộ ảnh.</p>
+    </div>
+    <div class="count" id="count">Cặp <b>–</b> / –</div>
+  </header>
+  <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+  <div class="status" id="status" role="status">Đang tải các cặp ảnh…</div>
+
+  <section class="booth" id="booth">
+    <div class="views" id="views"></div>
+    <div class="controls" id="viewBtns">
+      <button id="vA" aria-pressed="true">Xem A<kbd>1</kbd></button>
+      <button id="vR" aria-pressed="false">Ảnh gốc<kbd>giữ Space</kbd></button>
+      <button id="vB" aria-pressed="false">Xem B<kbd>2</kbd></button>
+    </div>
+    <div class="controls choose">
+      <button class="pick" id="pickA" disabled>A tốt hơn<kbd>←</kbd></button>
+      <button class="pick" id="pickB" disabled>B tốt hơn<kbd>→</kbd></button>
+    </div>
+    <div class="opts">
+      <div class="grp">Hiển thị
+        <button id="mFlip" aria-pressed="true">Lật một khung</button>
+        <button id="mSide" aria-pressed="false">Cạnh nhau</button>
+      </div>
+      <div class="grp">Cỡ
+        <button id="sCss" aria-pressed="true">512 px</button>
+        <button id="sDev" aria-pressed="false">1:1 điểm ảnh màn hình</button>
+      </div>
+      <div class="grp"><button id="back" disabled>Quay lại cặp trước<kbd>⌫</kbd></button></div>
+    </div>
+    <details class="how">
+      <summary>Cách chấm</summary>
+      <ul>
+        <li>Mỗi cặp có hai bản nén A và B của cùng một vùng ảnh. Lật qua lại giữa A và B (phím 1, 2, hoặc bấm vào ảnh), giữ Space để xem ảnh gốc.</li>
+        <li>Chọn bản bạn thấy tốt hơn khi so với ảnh gốc: giống ảnh gốc hơn và ít lỗi khó chịu hơn. Không có lựa chọn hoà; nếu thấy như nhau, chọn theo cảm giác.</li>
+        <li>Không biết bản nào là codec nào; bên A và B đổi ngẫu nhiên ở mỗi cặp. Vài cặp xuất hiện lại lần hai để đo độ ổn định.</li>
+        <li>Nên chấm trên màn hình máy tính, ánh sáng phòng dịu, cỡ “1:1 điểm ảnh màn hình” nếu màn hình đủ rộng.</li>
+        <li>Phiếu được lưu sau mỗi lựa chọn; đóng trang rồi mở lại sẽ chấm tiếp từ chỗ dở.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="done" id="done" hidden>
+    <h2>Bạn đã chấm xong</h2>
+    <p class="note" id="doneNote">Cảm ơn bạn. Kết quả của mọi người chấm, tính đến lúc này:</p>
+    <div class="stats" id="stats"></div>
+    <p class="note">Elo = 400·log10(p / (1 − p)) từ tỉ lệ thắng p, khoảng tin cậy 95% Wilson (coi mỗi phiếu độc lập). Cặp lặp lại chỉ dùng để đo độ ổn định.</p>
+    <div class="controls">
+      <button id="review">Xem lại các cặp</button>
+      <button id="copy" hidden>Sao chép phiếu (JSON)</button>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const N_REPEAT = 10;
+  const POS = { original: "0% 0%", msillm: "50% 0%", ditic: "100% 0%" };
+  let pairs = [], byId = {}, plan = null, answers = {}, idx = 0, view = "A", mode = "flip", size = "css";
+  let db = null, uid = null, ref = null, saving = Promise.resolve(), allDocs = [], flips = 0, shownAt = 0, holdPrev = null;
+  let reviewing = false;
+
+  const store = {
+    get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  };
+  const rnd = (n) => { const a = new Uint32Array(1); crypto.getRandomValues(a); return a[0] % n; };
+  function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = rnd(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+  function makePlan() {
+    const order = shuffle(pairs.map((p) => p.id));
+    const sides = {};
+    for (const id of order) sides[id] = rnd(2) ? "ditic" : "msillm";  // codec shown as A
+    const repeats = {};
+    const pool = shuffle(order.slice(0, Math.floor(order.length * 0.6))).slice(0, N_REPEAT);
+    pool.forEach((pid, k) => {
+      const rid = "r" + k;
+      repeats[rid] = pid;
+      sides[rid] = sides[pid] === "ditic" ? "msillm" : "ditic";  // the other side this time
+      const at = order.indexOf(pid) + 15 + rnd(Math.max(1, order.length - order.indexOf(pid) - 15));
+      order.splice(Math.min(at, order.length), 0, rid);
+    });
+    return { order, sides, repeats, made: new Date().toISOString() };
+  }
+
+  const pairOf = (tid) => byId[plan.repeats[tid] || tid];
+  const codecOf = (tid, side) => (side === "A" ? plan.sides[tid] : plan.sides[tid] === "ditic" ? "msillm" : "ditic");
+  const firstOpen = () => { const i = plan.order.findIndex((t) => !answers[t]); return i < 0 ? plan.order.length : i; };
+
+  function setStatus(msg, warn) { $("status").textContent = msg; $("status").classList.toggle("warn", !!warn); }
+
+  function buildViews() {
+    const v = $("views");
+    v.replaceChildren();
+    const mk = (tag) => {
+      const box = document.createElement("div"); box.className = "view";
+      const t = document.createElement("div"); t.className = "tag"; t.textContent = tag;
+      const f = document.createElement("div"); f.className = "frame loading"; f.dataset.role = tag;
+      f.setAttribute("role", "img");
+      f.addEventListener("click", () => { if (mode === "flip") show(view === "A" ? "B" : "A"); });
+      box.append(t, f); v.append(box); return box;
+    };
+    if (mode === "flip") { const b = mk("A"); b.querySelector(".tag").className = "flip-label"; }
+    else { mk("A"); mk("Gốc"); mk("B"); }
+    applySize();
+  }
+
+  function applySize() {
+    const px = size === "dev" ? 512 / (window.devicePixelRatio || 1) : 512;
+    document.documentElement.style.setProperty("--frame", px + "px");
+  }
+
+  function paint() {
+    if (!plan) return;
+    const done = firstOpen() >= plan.order.length;
+    const total = plan.order.length;
+    const answered = plan.order.filter((t) => answers[t]).length;
+    $("count").innerHTML = "";
+    const b = document.createElement("b"); b.textContent = Math.min(idx + 1, total);
+    $("count").append("Cặp ", b, " / " + total);
+    $("bar").style.width = (100 * answered / total) + "%";
+    $("back").disabled = idx === 0;
+    if (idx >= total) { finish(); return; }
+    $("booth").hidden = false; $("done").hidden = true;
+    const tid = plan.order[idx], p = pairOf(tid);
+    const url = "img/" + p.id + ".webp";
+    for (const f of document.querySelectorAll(".frame")) {
+      f.classList.add("loading");
+      const role = f.dataset.role === "A" && mode === "flip" ? view : f.dataset.role;
+      const which = role === "Gốc" || role === "R" ? "original" : codecOf(tid, role);
+      f.style.backgroundImage = `url("${url}")`;
+      f.style.backgroundPosition = POS[which];
+      f.setAttribute("aria-label", role === "Gốc" || role === "R" ? "Ảnh gốc" : "Bản " + role);
+    }
+    const img = new Image();
+    img.onload = () => document.querySelectorAll(".frame").forEach((f) => f.classList.remove("loading"));
+    img.onerror = () => setStatus("Không tải được ảnh " + p.id + ". Thử tải lại trang.", true);
+    img.src = url;
+    const next = plan.order[idx + 1];
+    if (next) { const pre = new Image(); pre.src = "img/" + pairOf(next).id + ".webp"; }
+    if (mode === "flip") {
+      const lab = document.querySelector(".flip-label");
+      lab.textContent = view === "R" ? "ẢNH GỐC" : "BẢN " + view;
+    }
+    $("vA").setAttribute("aria-pressed", String(view === "A"));
+    $("vB").setAttribute("aria-pressed", String(view === "B"));
+    $("vR").setAttribute("aria-pressed", String(view === "R"));
+    const prev = answers[tid];
+    $("pickA").classList.toggle("chosen", !!prev && prev.c === codecOf(tid, "A"));
+    $("pickB").classList.toggle("chosen", !!prev && prev.c === codecOf(tid, "B"));
+    $("pickA").disabled = $("pickB").disabled = false;
+  }
+
+  function show(v) {
+    if (mode !== "flip" || !plan || idx >= plan.order.length) return;
+    if (v !== view) flips++;
+    view = v;
+    const f = document.querySelector(".frame"), tid = plan.order[idx];
+    f.style.backgroundPosition = POS[v === "R" ? "original" : codecOf(tid, v)];
+    document.querySelector(".flip-label").textContent = v === "R" ? "ẢNH GỐC" : "BẢN " + v;
+    f.setAttribute("aria-label", v === "R" ? "Ảnh gốc" : "Bản " + v);
+    $("vA").setAttribute("aria-pressed", String(v === "A"));
+    $("vB").setAttribute("aria-pressed", String(v === "B"));
+    $("vR").setAttribute("aria-pressed", String(v === "R"));
+  }
+
+  function pick(side) {
+    if (!plan || idx >= plan.order.length) return;
+    const tid = plan.order[idx];
+    answers[tid] = { c: codecOf(tid, side), a: plan.sides[tid], ms: Math.round(performance.now() - shownAt), f: flips,
+                     at: new Date().toISOString() };
+    save();
+    const open = firstOpen();
+    idx = reviewing ? Math.min(idx + 1, open) : open;
+    if (idx === open) reviewing = false;
+    startTrial();
+  }
+
+  function startTrial() { view = "A"; flips = 0; shownAt = performance.now(); paint(); }
+
+  function save() {
+    const body = { v: 1, plan, answers, n: Object.keys(answers).length, updated: new Date().toISOString() };
+    store.set("cham_mu_state", body);
+    if (!ref) return;
+    saving = saving.then(() => ref.set(body)).then(() => setStatus("Đã lưu " + body.n + " phiếu."))
+      .catch((e) => setStatus(e && e.code === "invalid_argument"
+        ? "Bạn chỉ có quyền xem trang này nên phiếu không lưu lên máy chủ. Nhờ chủ trang cấp quyền Contributor."
+        : "Chưa lưu được phiếu (" + (e && e.code || "lỗi") + "). Phiếu vẫn giữ trên trình duyệt này.", true));
+  }
+
+  function wilson(k, n) {
+    if (!n) return [NaN, NaN];
+    const z = 1.96, p = k / n, d = 1 + z * z / n, c = (p + z * z / (2 * n)) / d;
+    const h = (z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n))) / d;
+    return [c - h, c + h];
+  }
+  const elo = (p, n) => { const q = Math.min(Math.max(p, 0.5 / n), 1 - 0.5 / n); return 400 * Math.log10(q / (1 - q)); };
+  const fmt = (x, d = 0) => (Number.isFinite(x) ? (x > 0 && d === 0 ? "+" : "") + x.toFixed(d) : "–");
+
+  function renderStats() {
+    const docs = allDocs.length ? allDocs : [{ plan, answers }];
+    const groups = { "Tất cả": [0, 0], "Ảnh tự nhiên": [0, 0], "Ảnh màn hình / chữ": [0, 0], "Texture": [0, 0] };
+    const lab = { natural: "Ảnh tự nhiên", screen: "Ảnh màn hình / chữ", texture: "Texture" };
+    let rep = 0, repSame = 0, raters = 0;
+    for (const d of docs) {
+      if (!d || !d.plan || !d.answers) continue;
+      const ans = d.answers;
+      if (Object.keys(ans).length) raters++;
+      for (const [tid, a] of Object.entries(ans)) {
+        const pid = d.plan.repeats && d.plan.repeats[tid];
+        if (pid) { if (ans[pid]) { rep++; if (ans[pid].c === a.c) repSame++; } continue; }
+        const p = byId[tid]; if (!p) continue;
+        const w = a.c === "ditic" ? 1 : 0;
+        for (const g of ["Tất cả", lab[p.label]]) { groups[g][0] += w; groups[g][1] += 1; }
+      }
+    }
+    const s = $("stats"); s.replaceChildren();
+    const row = (cells, head) => {
+      const r = document.createElement("div"); r.className = "row" + (head ? " head" : "");
+      cells.forEach((c, i) => { const e = document.createElement("div"); e.className = i ? "v" + (i === 3 ? " elo" : "") : "k"; e.textContent = c; r.append(e); });
+      s.append(r);
+    };
+    row(["Nhóm", "phiếu", "DiT-IC thắng", "Elo DiT-IC − MS-ILLM"], true);
+    for (const [g, [k, n]] of Object.entries(groups)) {
+      if (!n) continue;
+      const [lo, hi] = wilson(k, n);
+      row([g, String(n), `${(100 * k / n).toFixed(0)}% (${(100 * lo).toFixed(0)}–${(100 * hi).toFixed(0)}%)`,
+           `${fmt(elo(k / n, n))} (${fmt(elo(lo, n))} … ${fmt(elo(hi, n))})`]);
+    }
+    row(["Người chấm", String(raters), "", ""]);
+    if (rep) row(["Cặp lặp lại chọn giống lần đầu", String(rep), `${(100 * repSame / rep).toFixed(0)}%`, ""]);
+  }
+
+  function finish() {
+    $("booth").hidden = true; $("done").hidden = false;
+    $("doneNote").textContent = ref ? "Cảm ơn bạn. Kết quả của mọi người chấm, tính đến lúc này:"
+      : "Cảm ơn bạn. Phiếu chỉ nằm trên trình duyệt này; bấm “Sao chép phiếu” rồi gửi cho người tổ chức. Kết quả của bạn:";
+    $("copy").hidden = !!ref;
+    $("pickA").disabled = $("pickB").disabled = true;
+    renderStats();
+  }
+
+  // ---- controls
+  $("vA").onclick = () => show("A");
+  $("vB").onclick = () => show("B");
+  const holdOn = () => { if (mode !== "flip") return; if (view !== "R") holdPrev = view; show("R"); };
+  const holdOff = () => { if (view === "R" && holdPrev) { show(holdPrev); holdPrev = null; } };
+  $("vR").addEventListener("pointerdown", holdOn);
+  $("vR").addEventListener("pointerup", holdOff);
+  $("vR").addEventListener("pointerleave", holdOff);
+  $("vR").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); view === "R" ? holdOff() : holdOn(); } });
+  $("pickA").onclick = () => pick("A");
+  $("pickB").onclick = () => pick("B");
+  $("back").onclick = () => { if (idx > 0) { idx--; reviewing = true; startTrial(); } };
+  $("review").onclick = () => { idx = 0; reviewing = true; startTrial(); };
+  $("copy").onclick = () => {
+    const txt = JSON.stringify({ plan, answers });
+    navigator.clipboard.writeText(txt).then(() => setStatus("Đã sao chép phiếu."),
+      () => setStatus("Trình duyệt không cho sao chép tự động. Phiếu vẫn được lưu trên trình duyệt này.", true));
+  };
+  const setMode = (m) => { mode = m; $("mFlip").setAttribute("aria-pressed", String(m === "flip"));
+    $("mSide").setAttribute("aria-pressed", String(m === "side")); $("viewBtns").hidden = m !== "flip";
+    store.set("cham_mu_mode", m); view = "A"; buildViews(); paint(); };
+  $("mFlip").onclick = () => setMode("flip");
+  $("mSide").onclick = () => setMode("side");
+  const setSize = (s) => { size = s; $("sCss").setAttribute("aria-pressed", String(s === "css"));
+    $("sDev").setAttribute("aria-pressed", String(s === "dev")); store.set("cham_mu_size", s); applySize(); };
+  $("sCss").onclick = () => setSize("css");
+  $("sDev").onclick = () => setSize("dev");
+  document.addEventListener("keydown", (e) => {
+    if (e.target.closest && e.target.closest("summary")) return;
+    if (e.key === "1") show("A");
+    else if (e.key === "2") show("B");
+    else if (e.key === " " || e.key === "0") { e.preventDefault(); if (!e.repeat) holdOn(); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); if (!$("pickA").disabled) pick("A"); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); if (!$("pickB").disabled) pick("B"); }
+    else if (e.key === "Backspace") { e.preventDefault(); $("back").click(); }
+  });
+  document.addEventListener("keyup", (e) => { if (e.key === " " || e.key === "0") holdOff(); });
+
+  // ---- boot
+  async function boot() {
+    const m = store.get("cham_mu_mode"); if (m === "side") mode = "side";
+    const s = store.get("cham_mu_size"); if (s === "dev") size = "dev";
+    $("mFlip").setAttribute("aria-pressed", String(mode === "flip")); $("mSide").setAttribute("aria-pressed", String(mode === "side"));
+    $("viewBtns").hidden = mode !== "flip";
+    $("sCss").setAttribute("aria-pressed", String(size === "css")); $("sDev").setAttribute("aria-pressed", String(size === "dev"));
+    buildViews();
+    try {
+      const meta = await (await fetch("pairs.json")).json();
+      pairs = meta.pairs; byId = Object.fromEntries(pairs.map((p) => [p.id, p]));
+    } catch { setStatus("Không tải được danh sách cặp ảnh. Thử tải lại trang.", true); return; }
+
+    const local = store.get("cham_mu_state");
+    const claude = window.claude;
+    const [dbNs, user] = claude && claude.use ? await Promise.all([claude.use("db"), claude.use("user")]) : [null, null];
+    db = dbNs; uid = user ? await user.id() : null;
+    if (db && uid) {
+      ref = db.doc("votes/" + uid);
+      try {
+        const snap = await ref.get();
+        const d = snap.exists ? snap.data() : null;
+        if (d && d.plan) { plan = d.plan; answers = { ...(d.answers || {}) }; }
+      } catch (e) { setStatus("Chưa đọc được phiếu cũ (" + (e && e.code || "lỗi") + "). Bắt đầu phiếu mới.", true); }
+      db.collection("votes").onSnapshot((q) => { allDocs = q.docs.map((x) => x.data()); if (!$("done").hidden) renderStats(); },
+        () => {});
+    }
+    if (!plan && local && local.plan) { plan = local.plan; answers = { ...(local.answers || {}) }; }
+    if (!plan) plan = makePlan();
+    idx = firstOpen();
+    const n = Object.keys(answers).length;
+    setStatus(ref ? (n ? `Chấm tiếp: đã có ${n} phiếu.` : "Sẵn sàng. Phiếu được lưu sau mỗi lựa chọn.")
+      : "Không kết nối được kho phiếu: phiếu chỉ lưu trên trình duyệt này.", !ref);
+    startTrial();
+  }
+  boot();
+})();
+</script>
