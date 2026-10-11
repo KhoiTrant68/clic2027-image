@@ -1,0 +1,75 @@
+== dcae_bench.log
+  raw_cnt = _raw_device_count_nvml()
+  warnings.warn(
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+fp32 tile1024 (now)                 3.59  3.59  3.60  4.92 | mean  3.92 s  peak  4.0 GB
+fp32 full frame                    OOM (RuntimeError)
+tf32 full frame                    OOM (RuntimeError)
+bf16 tile1024                       1.34  1.34  1.34  1.87 | mean  1.47 s  peak  2.8 GB
+bf16 full frame                    OOM (RuntimeError)
+bf16 full +cudnn.benchmark         OOM (RuntimeError)
+bf16 full +channels_last+bench     OOM (RuntimeError)
+fp16 full +channels_last+bench     OOM (RuntimeError)
+min PSNR over the images vs fp32 tile1024 (now)
+  fp32 tile1024 (now)                 99.0 dB
+  bf16 tile1024                       47.6 dB
+== dcae_bench2.log
+  raw_cnt = _raw_device_count_nvml()
+  warnings.warn(
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+fp32 tile1024 (now)                 3.58  3.59  3.60  4.92 | mean  3.92 s  peak  4.0 GB
+bf16 tile1024                       1.34  1.34  1.34  1.87 | mean  1.47 s  peak  2.8 GB
+bf16 tile1024 +CL                   1.33  1.32  1.33  1.86 | mean  1.46 s  peak  2.8 GB
+bf16 tile1024 +CL+bench             1.32  1.33  1.33  1.86 | mean  1.46 s  peak  2.8 GB
+bf16 tile1056/ov64 +CL+bench        1.18  1.17  1.18  1.64 | mean  1.29 s  peak  2.9 GB
+bf16 tile1280/ov64 +CL+bench        1.15  1.15  1.14  1.53 | mean  1.24 s  peak  3.7 GB
+bf16 tile1536/ov64 +CL+bench        1.18  1.18  1.17  1.54 | mean  1.27 s  peak  4.8 GB
+fp16 tile1056/ov64 +CL+bench        1.17  1.18  1.18  1.64 | mean  1.29 s  peak  5.5 GB
+min PSNR over the images vs fp32 tile1024 (now)
+  fp32 tile1024 (now)                 99.0 dB
+  bf16 tile1024                       47.6 dB
+  bf16 tile1024 +CL                   47.6 dB
+  bf16 tile1024 +CL+bench             47.6 dB
+  bf16 tile1056/ov64 +CL+bench        36.1 dB
+  bf16 tile1280/ov64 +CL+bench        33.2 dB
+  bf16 tile1536/ov64 +CL+bench        32.2 dB
+  fp16 tile1056/ov64 +CL+bench        36.3 dB
+== dcae_bench3.log
+  raw_cnt = _raw_device_count_nvml()
+  warnings.warn(
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+  warnings.warn(
+  warnings.warn(msg)
+  warnings.warn(msg)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+fp32 tile1024/ov128 (now)    t  2.42 s | vs original: PSNR 27.574  LPIPS 0.0640  DISTS 0.0620
+bf16 tile1024/ov128          t  1.47 s | vs original: PSNR 27.560  LPIPS 0.0641  DISTS 0.0620
+bf16 tile1280/ov64           t  1.26 s | vs original: PSNR 27.496  LPIPS 0.0653  DISTS 0.0628
+bf16 tile1280/ov128          t  1.37 s | vs original: PSNR 27.534  LPIPS 0.0647  DISTS 0.0627
+bf16 tile1280/ov256          t  1.50 s | vs original: PSNR 27.542  LPIPS 0.0645  DISTS 0.0624
+bf16 tile1536/ov256          t  1.60 s | vs original: PSNR 27.525  LPIPS 0.0649  DISTS 0.0627
+== dcae_bench4.log
+  raw_cnt = _raw_device_count_nvml()
+  warnings.warn(
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+  warnings.warn(
+  warnings.warn(msg)
+  warnings.warn(msg)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+bf16 tile1280/ov128 (round 3)     1.18  1.17  1.18  1.57 | mean  1.28 s peak  4.2 GB | vs base  99.0 dB | vs original PSNR 27.534 LPIPS 0.0647 DISTS 0.0627
++ fast norm                       0.92  0.93  0.92  1.23 | mean  1.00 s peak  3.0 GB | vs base  53.1 dB | vs original PSNR 27.521 LPIPS 0.0647 DISTS 0.0627
++ fast norm + channels_last       0.92  0.94  0.95  1.24 | mean  1.01 s peak  3.0 GB | vs base  50.2 dB | vs original PSNR 27.521 LPIPS 0.0647 DISTS 0.0627
++ fast norm tile1024/ov128        0.99  0.99  0.99  1.41 | mean  1.09 s peak  2.6 GB | vs base  34.0 dB | vs original PSNR 27.546 LPIPS 0.0641 DISTS 0.0620
+== dcae_bench5.log
+  raw_cnt = _raw_device_count_nvml()
+  warnings.warn(
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+  warnings.warn(
+  warnings.warn(msg)
+  warnings.warn(msg)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+bf16 + fast norm, full frame, crop: 8426ed22 RuntimeError (over the 10 GB cap?)
+bake-off now: fp32, tile1024         n=8 entropy 0.086  dit 0.282  dcae 2.571  total 2.939 | vs original PSNR 24.616 LPIPS 0.0719 DISTS 0.0602
+bf16 + fast norm, tile1280           n=8 entropy 0.087  dit 0.104  dcae 0.980  total 1.171 | vs original PSNR 24.563 LPIPS 0.0724 DISTS 0.0608
+bf16 + fast norm, tile1280, crop     n=8 entropy 0.087  dit 0.104  dcae 0.907  total 1.098 | vs original PSNR 24.562 LPIPS 0.0724 DISTS 0.0608
+bf16 + fast norm, full frame, crop   n=3 entropy 0.083  dit 0.088  dcae 0.780  total 0.951 | vs original PSNR 24.689 LPIPS 0.0725 DISTS 0.0656

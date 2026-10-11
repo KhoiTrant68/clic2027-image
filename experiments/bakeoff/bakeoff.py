@@ -660,8 +660,11 @@ from pathlib import Path
 import numpy as np, torch, torch.nn as nn, torch.nn.functional as F, yaml
 from PIL import Image
 from huggingface_hub import hf_hub_download
-jobs, hf_repo, base, tile, dtype = json.load(open(sys.argv[1])), sys.argv[2], sys.argv[3], int(sys.argv[4]), sys.argv[5]
+jobs, hf_repo, base = json.load(open(sys.argv[1])), sys.argv[2], sys.argv[3]
+tile, overlap, dtype = int(sys.argv[4]), int(sys.argv[5]), sys.argv[6]
+import math
 import models  # DiT-IC's package; its training-only modules (LPIPS, pyiqa, taming, CLIP) are stubbed out
+from diffusers.models.autoencoders.autoencoder_dc import ResBlock
 
 
 class Unused(nn.Module):
@@ -675,9 +678,53 @@ for mod, attr, val in (("models.losses", "LPIPSWithDiscriminator", Unused),
     setattr(sys.modules[mod], attr, val)
 from models.DiT_IC import Codec
 
+
+# Faster DC-AE decoder (2026-10-11, results/2026-10-11_ditic_speed.md): diffusers' RMSNorm moves channels last and
+# makes a full fp32 copy of every 2K activation; here the sum of squares accumulates in fp32 inside one reduction and
+# the scale, weight and residual are applied in place (addcmul). Same output to ~53 dB.
+def rms_scale(h, norm):
+    ss = torch.linalg.vector_norm(h, ord=2, dim=1, keepdim=True, dtype=torch.float32)
+    return torch.rsqrt(ss.square_().div_(h.shape[1]).add_(norm.eps)).to(h.dtype)
+
+
+def res_forward(self, x):
+    h = self.conv2(F.silu(self.conv1(x), inplace=True))
+    h.mul_(rms_scale(h, self.norm))
+    out = torch.addcmul(x, h, self.norm.weight.view(1, -1, 1, 1))
+    return out.add_(self.norm.bias.view(1, -1, 1, 1)) if self.norm.bias is not None else out
+
+
+def dec_forward(self, h):
+    if self.in_shortcut:
+        h = self.conv_in(h) + h.repeat_interleave(self.in_shortcut_repeats, dim=1,
+                                                   output_size=h.shape[1] * self.in_shortcut_repeats)
+    else:
+        h = self.conv_in(h)
+    for up_block in reversed(self.up_blocks):
+        h = up_block(h)
+    n = self.norm_out
+    h = h * rms_scale(h, n)
+    h = torch.addcmul(n.bias.view(1, -1, 1, 1), h, n.weight.view(1, -1, 1, 1)) if n.bias is not None \
+        else h * n.weight.view(1, -1, 1, 1)
+    return self.conv_out(self.conv_act(h))
+
+
+def decompress(net, strings, shape, H, W, dt):
+    # Codec.decompress, with the latent codec in fp32 (entropy decoding must stay deterministic), the DiT and the
+    # DC-AE decoder in dt, and the latent cut to the image (+2 rows/cols) instead of the 256-px padding.
+    mean, logs, res, prompt = net.codec.decompress(strings, shape)
+    scale = torch.exp(0.5 * torch.clamp(logs, -30.0, 20.0))
+    enc = net.prompter(prompt.to(dt))
+    ts = net.sched.base_scheduler.timesteps.expand(mean.shape[0]) * net.DiT.config.timestep_scale
+    pred = net.DiT(mean.to(dt), encoder_hidden_states=enc, timestep=ts.to(mean.device), return_dict=False)[0]
+    z = (net.sched.step(pred.float(), scale, net.timesteps, mean, return_dict=True) + res) / net.vae.config.scaling_factor
+    z = z[:, :, :min(z.shape[2], math.ceil(H / 32) + 2), :min(z.shape[3], math.ceil(W / 32) + 2)]
+    return net.vae.decode(z.to(dt), return_dict=False)[0]
+
+
 cfg = yaml.safe_load(open("configs/inference_merge.yaml"))["model"]["params"]
 cfg.update(dit_path=base, use_ema=True, use_merge=True, training=False)
-amp = dict(bf16=torch.bfloat16, fp16=torch.float16).get(dtype)
+dt = dict(bf16=torch.bfloat16, fp16=torch.float16, fp32=torch.float32)[dtype]
 dev = torch.device("cuda")
 by_key = {}
 for j in jobs:
@@ -691,9 +738,15 @@ for key, todo in by_key.items():
         raise SystemExit(f"ditic {key}: {len(miss)} weights not in the checkpoint, e.g. {miss[:5]}")
     net = net.to(dev).eval()
     net.codec.update(force=True)
-    if tile:
+    for m in (net.DiT, net.prompter, net.vae.decoder):  # the encoder side (DC-AE encoder, ELIC g_a, codec) stays fp32
+        m.to(dt)
+    for m in net.vae.decoder.modules():
+        if isinstance(m, ResBlock):
+            m.forward = types.MethodType(res_forward, m)
+    net.vae.decoder.forward = types.MethodType(dec_forward, net.vae.decoder)
+    if tile:  # encode and decode alike
         net.vae.enable_tiling(tile_sample_min_height=tile, tile_sample_min_width=tile,
-                              tile_sample_stride_height=tile * 7 // 8, tile_sample_stride_width=tile * 7 // 8)
+                              tile_sample_stride_height=tile - overlap, tile_sample_stride_width=tile - overlap)
     n_dec = sum(p.numel() for p in net.parameters()) - sum(p.numel() for p in net.aux_codec.parameters()) \
         - sum(p.numel() for p in net.vae.encoder.parameters())
     for j in todo:
@@ -702,11 +755,11 @@ for key, todo in by_key.items():
         t = torch.from_numpy(x.copy()).permute(2, 0, 1)[None].float().div(127.5).sub(1).to(dev)
         t = F.pad(t, (0, (-W) % 256, 0, (-H) % 256), mode="reflect")
         torch.cuda.reset_peak_memory_stats()
-        with torch.no_grad(), torch.autocast("cuda", dtype=amp, enabled=amp is not None):
+        with torch.no_grad():
             out = net.compress(t)
             torch.cuda.synchronize()
             t0 = time.time()
-            y = net.decompress(out["strings"], out["shape"])
+            y = decompress(net, out["strings"], out["shape"], H, W, dt)
             torch.cuda.synchronize()
             t_dec = time.time() - t0
         rec = y[0, :, :H, :W].float().clamp(-1, 1).add(1).mul(127.5).round().byte().permute(1, 2, 0).cpu().numpy()
@@ -724,7 +777,9 @@ def points_ditic(a, P, names):
     """DiT-IC (Shi et al., CVPR 2026; github Eric-qi/DiT-IC, HF JunqiShi/DiT-IC): the image goes to the DC-AE f32
     latent of SANA and to an ELIC analysis transform; an ELIC-style codec (hyperprior + 4-step context, f64, CompressAI
     rANS) sends it; the decoder runs one step of the LoRA-tuned SANA-600M DiT and the LoRA-tuned DC-AE decoder.
-    Bytes are the real rANS strings. --ditic-tile tiles the DC-AE (encode and decode): 2K full-frame needs ~16 GB."""
+    Bytes are the real rANS strings. Decoder as it would ship (results/2026-10-11_ditic_speed.md): DiT and DC-AE
+    decoder weights in --ditic-dtype (bf16), an NCHW RMSNorm, the latent cut to the image; --ditic-tile/-overlap tile
+    the DC-AE (encode and decode). 2.7x faster than fp32 with tile 1024 and the stock decoder, same quality."""
     try:
         import diffusers  # noqa: F401
     except ImportError:
@@ -732,7 +787,7 @@ def points_ditic(a, P, names):
     src = _checkout(a, "DiT-IC", DITIC_REPO, DITIC_COMMIT)
     jobs = [dict(key=k, name=n, src=str(Path(inputs(a)[n]).resolve()), dst=str(P.recon("ditic", k, n).resolve()))
             for k, n in P.todo("ditic", DITIC_Q, names)]
-    _run_points(P, "ditic", DITIC_RUN, src, jobs, [DITIC_HF, DITIC_BASE, a.ditic_tile, a.ditic_dtype])
+    _run_points(P, "ditic", DITIC_RUN, src, jobs, [DITIC_HF, DITIC_BASE, a.ditic_tile, a.ditic_overlap, a.ditic_dtype])
 
 
 CRDR_RUN = r"""
@@ -1081,8 +1136,11 @@ def main(argv=None):
                     help="Cool-chic decoder sizes (cfg/dec/intra): very low / low / medium / high complexity")
     ap.add_argument("--coolchic-gpus", nargs="+", default=None, help="one Cool-chic encode at a time per GPU id")
     ap.add_argument("--coolchic-python", default=None, help="interpreter with torch >= 2.7.1 for Cool-chic")
-    ap.add_argument("--ditic-tile", type=int, default=1024, help="DC-AE tile size in pixels (0: full frame, ~16 GB)")
-    ap.add_argument("--ditic-dtype", default="fp32", choices=["fp32", "bf16", "fp16"], help="autocast for DiT-IC")
+    ap.add_argument("--ditic-tile", type=int, default=1280,
+                    help="DC-AE tile size in pixels (0: full frame; a 2048x2048 image then needs > 10 GB)")
+    ap.add_argument("--ditic-overlap", type=int, default=128, help="DC-AE tile overlap in pixels")
+    ap.add_argument("--ditic-dtype", default="bf16", choices=["fp32", "bf16", "fp16"],
+                    help="weights of DiT-IC's DiT and DC-AE decoder (the latent codec and the encoder side stay fp32)")
     ap.add_argument("--crdr-q", type=float, nargs="+", default=CRDR_Q, help="CRDR rate indices (0..4)")
     ap.add_argument("--crdr-beta", type=float, nargs="+", default=CRDR_BETA, help="CRDR realism (0..5.12)")
     ap.add_argument("--crdr-threads", type=int, default=8, help="CPU threads for CRDR's CPU entropy decoding")
