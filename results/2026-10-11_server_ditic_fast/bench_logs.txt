@@ -73,3 +73,23 @@ bake-off now: fp32, tile1024         n=8 entropy 0.086  dit 0.282  dcae 2.571  t
 bf16 + fast norm, tile1280           n=8 entropy 0.087  dit 0.104  dcae 0.980  total 1.171 | vs original PSNR 24.563 LPIPS 0.0724 DISTS 0.0608
 bf16 + fast norm, tile1280, crop     n=8 entropy 0.087  dit 0.104  dcae 0.907  total 1.098 | vs original PSNR 24.562 LPIPS 0.0724 DISTS 0.0608
 bf16 + fast norm, full frame, crop   n=3 entropy 0.083  dit 0.088  dcae 0.780  total 0.951 | vs original PSNR 24.689 LPIPS 0.0725 DISTS 0.0656
+== dcae_bench6.log
+images every variant decoded: 6 | failures (over the 10 GB cap): {'+ sub-pixel, full frame': ['8426ed22', 'ebfd571f']}
+default now: bf16+norm, tile1280, crop   n=8 entropy 0.083  dit 0.113  dcae 1.023  total 1.219 | total on common 1.114 | peak 3.9 GB | vs default 99.0 dB | vs original PSNR 24.562 LPIPS 0.0724 DISTS 0.0608
++ sub-pixel up conv                      n=8 entropy 0.085  dit 0.111  dcae 1.161  total 1.356 | total on common 1.235 | peak 4.7 GB | vs default 48.5 dB | vs original PSNR 24.563 LPIPS 0.0724 DISTS 0.0608
++ sub-pixel, full frame                  n=6 entropy 0.080  dit 0.102  dcae 0.952  total 1.135 | total on common 1.135 | peak 6.4 GB | vs default 31.3 dB | vs original PSNR 23.179 LPIPS 0.0848 DISTS 0.0674
+full frame, no sub-pixel                 n=8 entropy 0.084  dit 0.112  dcae 0.948  total 1.144 | total on common 1.022 | peak 6.0 GB | vs default 31.3 dB | vs original PSNR 24.515 LPIPS 0.0731 DISTS 0.0611
+== dcae_bench7.log
+eager bf16 + NCHW norm, 1280x1280 tile: 0.454 s
+torch.compile default                     : 0.312 s (1.45x)  compile 34 s  vs eager 47.8 dB
+torch.compile max-autotune-no-cudagraphs  : 0.417 s (1.09x)  compile 1749 s  vs eager 47.5 dB
+== dcae_bench8.log
+encoded 30 images 808804 bytes
+tile 1280: load 20.4 s | first image 9.78 s | images 2..30 mean 2.776 s | decode total 90.3 s for 30 images
+tile 0: load 20.4 s | first image 4.19 s | images 2..30 mean 2.179 s | decode total 67.4 s for 30 images
+tile 1280: load 20.8 s | first image 9.89 s | images 2..30 mean 2.811 s | decode total 91.4 s for 30 images
+== dcae_bench8b.log
+tile 0 bucket 0: load 20.7 s | 11 latent shapes | first image 4.33 s | images 2..30 mean 2.157 s | decode total 66.9 s for 30 images | same image again: mean 1.533 s | first 8 images LPIPS 0.0770 DISTS 0.0687
+tile 0 bucket 16: load 19.5 s | 4 latent shapes | first image 4.23 s | images 2..30 mean 1.872 s | decode total 58.5 s for 30 images | first 8 images LPIPS 0.0770 DISTS 0.0688
+tile 1280 bucket 16: load 19.0 s | 4 latent shapes | first image 9.76 s | images 2..30 mean 2.129 s | decode total 71.5 s for 30 images | first 8 images LPIPS 0.0764 DISTS 0.0685
+tile 1280 bucket 0: load 19.5 s | 11 latent shapes | first image 9.87 s | images 2..30 mean 2.808 s | decode total 91.3 s for 30 images | first 8 images LPIPS 0.0763 DISTS 0.0684

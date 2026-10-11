@@ -661,7 +661,7 @@ import numpy as np, torch, torch.nn as nn, torch.nn.functional as F, yaml
 from PIL import Image
 from huggingface_hub import hf_hub_download
 jobs, hf_repo, base = json.load(open(sys.argv[1])), sys.argv[2], sys.argv[3]
-tile, overlap, dtype = int(sys.argv[4]), int(sys.argv[5]), sys.argv[6]
+tile, overlap, dtype, bucket = int(sys.argv[4]), int(sys.argv[5]), sys.argv[6], int(sys.argv[7])
 import math
 import models  # DiT-IC's package; its training-only modules (LPIPS, pyiqa, taming, CLIP) are stubbed out
 from diffusers.models.autoencoders.autoencoder_dc import ResBlock
@@ -711,7 +711,9 @@ def dec_forward(self, h):
 
 def decompress(net, strings, shape, H, W, dt):
     # Codec.decompress, with the latent codec in fp32 (entropy decoding must stay deterministic), the DiT and the
-    # DC-AE decoder in dt, and the latent cut to the image (+2 rows/cols) instead of the 256-px padding.
+    # DC-AE decoder in dt, and the latent cut to the image (+2 rows/cols) instead of the 256-px padding, then padded
+    # (replicate) up to a multiple of `bucket` latents: CLIC decodes each image once, and every new tensor shape costs
+    # cuDNN set-up (~0.6 s per image on an L40); 30 images then fall on 4 shapes.
     mean, logs, res, prompt = net.codec.decompress(strings, shape)
     scale = torch.exp(0.5 * torch.clamp(logs, -30.0, 20.0))
     enc = net.prompter(prompt.to(dt))
@@ -719,6 +721,8 @@ def decompress(net, strings, shape, H, W, dt):
     pred = net.DiT(mean.to(dt), encoder_hidden_states=enc, timestep=ts.to(mean.device), return_dict=False)[0]
     z = (net.sched.step(pred.float(), scale, net.timesteps, mean, return_dict=True) + res) / net.vae.config.scaling_factor
     z = z[:, :, :min(z.shape[2], math.ceil(H / 32) + 2), :min(z.shape[3], math.ceil(W / 32) + 2)]
+    if bucket:
+        z = F.pad(z, (0, (-z.shape[3]) % bucket, 0, (-z.shape[2]) % bucket), mode="replicate")
     return net.vae.decode(z.to(dt), return_dict=False)[0]
 
 
@@ -744,9 +748,6 @@ for key, todo in by_key.items():
         if isinstance(m, ResBlock):
             m.forward = types.MethodType(res_forward, m)
     net.vae.decoder.forward = types.MethodType(dec_forward, net.vae.decoder)
-    if tile:  # encode and decode alike
-        net.vae.enable_tiling(tile_sample_min_height=tile, tile_sample_min_width=tile,
-                              tile_sample_stride_height=tile - overlap, tile_sample_stride_width=tile - overlap)
     n_dec = sum(p.numel() for p in net.parameters()) - sum(p.numel() for p in net.aux_codec.parameters()) \
         - sum(p.numel() for p in net.vae.encoder.parameters())
     for j in todo:
@@ -756,7 +757,16 @@ for key, todo in by_key.items():
         t = F.pad(t, (0, (-W) % 256, 0, (-H) % 256), mode="reflect")
         torch.cuda.reset_peak_memory_stats()
         with torch.no_grad():
+            # the tiling flag is shared by encode and decode: the fp32 encoder always tiles (not timed, and a 2K full
+            # frame needs > 10 GB), the decoder follows --ditic-tile (0: full frame)
+            net.vae.enable_tiling(tile_sample_min_height=1024, tile_sample_min_width=1024,
+                                  tile_sample_stride_height=896, tile_sample_stride_width=896)
             out = net.compress(t)
+            if tile:
+                net.vae.enable_tiling(tile_sample_min_height=tile, tile_sample_min_width=tile,
+                                      tile_sample_stride_height=tile - overlap, tile_sample_stride_width=tile - overlap)
+            else:
+                net.vae.disable_tiling()
             torch.cuda.synchronize()
             t0 = time.time()
             y = decompress(net, out["strings"], out["shape"], H, W, dt)
@@ -778,8 +788,8 @@ def points_ditic(a, P, names):
     latent of SANA and to an ELIC analysis transform; an ELIC-style codec (hyperprior + 4-step context, f64, CompressAI
     rANS) sends it; the decoder runs one step of the LoRA-tuned SANA-600M DiT and the LoRA-tuned DC-AE decoder.
     Bytes are the real rANS strings. Decoder as it would ship (results/2026-10-11_ditic_speed.md): DiT and DC-AE
-    decoder weights in --ditic-dtype (bf16), an NCHW RMSNorm, the latent cut to the image; --ditic-tile/-overlap tile
-    the DC-AE (encode and decode). 2.7x faster than fp32 with tile 1024 and the stock decoder, same quality."""
+    decoder weights in --ditic-dtype (bf16), an NCHW RMSNorm, the latent cut to the image and padded to a multiple of
+    --ditic-bucket latents, full-frame DC-AE (--ditic-tile 0; the fp32 encoder side always tiles 1024)."""
     try:
         import diffusers  # noqa: F401
     except ImportError:
@@ -787,7 +797,8 @@ def points_ditic(a, P, names):
     src = _checkout(a, "DiT-IC", DITIC_REPO, DITIC_COMMIT)
     jobs = [dict(key=k, name=n, src=str(Path(inputs(a)[n]).resolve()), dst=str(P.recon("ditic", k, n).resolve()))
             for k, n in P.todo("ditic", DITIC_Q, names)]
-    _run_points(P, "ditic", DITIC_RUN, src, jobs, [DITIC_HF, DITIC_BASE, a.ditic_tile, a.ditic_overlap, a.ditic_dtype])
+    _run_points(P, "ditic", DITIC_RUN, src, jobs, [DITIC_HF, DITIC_BASE, a.ditic_tile, a.ditic_overlap, a.ditic_dtype,
+                                                     a.ditic_bucket])
 
 
 CRDR_RUN = r"""
@@ -1136,8 +1147,11 @@ def main(argv=None):
                     help="Cool-chic decoder sizes (cfg/dec/intra): very low / low / medium / high complexity")
     ap.add_argument("--coolchic-gpus", nargs="+", default=None, help="one Cool-chic encode at a time per GPU id")
     ap.add_argument("--coolchic-python", default=None, help="interpreter with torch >= 2.7.1 for Cool-chic")
-    ap.add_argument("--ditic-tile", type=int, default=1280,
-                    help="DC-AE tile size in pixels (0: full frame; a 2048x2048 image then needs > 10 GB)")
+    ap.add_argument("--ditic-tile", type=int, default=0,
+                    help="DC-AE decoder tile size in pixels; 0 = full frame (default: 1.3-1.5x faster when each image is "
+                         "decoded once, LPIPS +0.0007 vs 1280; peak ~6 GB)")
+    ap.add_argument("--ditic-bucket", type=int, default=16,
+                    help="pad the latent to a multiple of this many latents (16 = 512 px) so images share tensor shapes")
     ap.add_argument("--ditic-overlap", type=int, default=128, help="DC-AE tile overlap in pixels")
     ap.add_argument("--ditic-dtype", default="bf16", choices=["fp32", "bf16", "fp16"],
                     help="weights of DiT-IC's DiT and DC-AE decoder (the latent codec and the encoder side stay fp32)")
