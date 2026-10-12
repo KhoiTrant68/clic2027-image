@@ -1,0 +1,11 @@
+student initialised from distill/run_q3/best.pt (step 20000)
+== eval step 1000: CLIC val vs teacher L1 0.0907 LPIPS 0.1719 ~PSNR 24.6 dB (best)
+== eval step 2000: CLIC val vs teacher L1 0.0724 LPIPS 0.1602 ~PSNR 26.6 dB (best)
+== eval step 3000: CLIC val vs teacher L1 0.0741 LPIPS 0.1650 ~PSNR 26.3 dB
+== eval step 4000: CLIC val vs teacher L1 0.0692 LPIPS 0.1680 ~PSNR 26.8 dB
+== eval step 5000: CLIC val vs teacher L1 0.0811 LPIPS 0.1641 ~PSNR 25.7 dB
+== eval step 6000: CLIC val vs teacher L1 0.0718 LPIPS 0.1523 ~PSNR 26.5 dB (best)
+== eval step 7000: CLIC val vs teacher L1 0.0711 LPIPS 0.1504 ~PSNR 26.5 dB (best)
+== eval step 8000: CLIC val vs teacher L1 0.0722 LPIPS 0.1484 ~PSNR 26.5 dB (best)
+== eval step 9000: CLIC val vs teacher L1 0.0686 LPIPS 0.1465 ~PSNR 26.8 dB (best)
+== eval step 10000: CLIC val vs teacher L1 0.0685 LPIPS 0.1484 ~PSNR 26.9 dB

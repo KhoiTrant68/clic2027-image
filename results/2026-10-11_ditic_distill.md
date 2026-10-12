@@ -1,0 +1,54 @@
+# Chưng cất decoder DC-AE của DiT-IC (q3), 11/10/2026
+
+Mục tiêu: giải mã nhanh hơn mà giữ chất lượng DiT-IC, vì đó là phần đã thắng 69% khi tự chấm mù. Code: `experiments/ditic_distill/`.
+
+## Cách làm
+
+- **Thầy:** decoder DC-AE đã gộp LoRA của checkpoint DiT-IC q3 (bf16).
+- **Học trò:** cùng cấu trúc, nhưng ba tầng ResBlock độ phân giải cao còn một nửa số kênh (512/256/128 → 256/128/64).
+  `conv_in` và ba tầng EfficientViT (1/32 … 1/8) được chép từ thầy và đóng băng. Thầy và trò dùng chung phần đầu này,
+  nên chỉ 6.2 M tham số được train.
+- **Dữ liệu:** latent mà DiT-IC thật sinh ra cho 800 ảnh DIV2K train (encoder → rANS → DiT một bước bf16).
+  Mỗi bước lấy cắt ngẫu nhiên 384×384, batch 4. Không dùng ảnh gốc: học trò chỉ học bắt chước đầu ra của thầy.
+- **Đợt 1:** L1 + LPIPS(VGG), 20 000 bước.
+- **Đợt 2:** khởi tạo từ đợt 1, thêm PatchGAN (spectral norm, hinge; đầu ra của thầy là "thật"), 10 000 bước.
+- **Chấm:** 30 ảnh validation CLIC, cùng bitstream q3 (0.076 bpp), so với ảnh gốc; giải mã cả khung hình + gom kích thước.
+
+## Chất lượng (30 ảnh, so với ảnh gốc)
+
+| decoder | PSNR | LPIPS | DISTS | WD3 | Q̂ v0 | trò − thầy |
+|---|---|---|---|---|---|---|
+| thầy | 24.70 | 0.083 | 0.069 | 0.214 | **+0.157** | |
+| đợt 1: L1 + LPIPS, 20k | 25.25 | 0.111 | 0.084 | 0.263 | −0.269 | −0.43 (30/30 ảnh kém hơn) |
+| đợt 2: GAN 0.1, 10k | 24.85 | 0.101 | 0.080 | 0.254 | −0.086 | −0.24 (27/30) |
+| **đợt 2: GAN 0.1, chạy tiếp tới 30k** (khởi động lại LR ở 10k) | 24.77 | 0.095 | 0.077 | 0.243 | **−0.012** | **−0.17** (19/30) |
+| đợt 2: GAN 0.3, 10k | 24.60 | 0.109 | 0.086 | 0.283 | −0.240 | −0.40 |
+| *MS-ILLM ở 0.075 (bake-off, để so)* | | | | | *−0.45* | |
+
+- Đợt 1 làm mịn ảnh: PSNR cao hơn thầy, nhưng mọi thước đo cảm nhận đều kém.
+- GAN 0.1 thu hẹp khoảng cách từ 0.43 xuống 0.24 Q̂ sau 10k bước:
+  −0.639 / −0.322 / −0.215 / −0.112 / −0.086 tại 2k / 4k / 6k / 8k / 10k.
+- Chạy tiếp tới 30k bước: −0.208 / −0.112 / −0.058 / −0.023 / −0.012 tại 14k / 18k / 22k / 26k / 30k.
+  Khoảng cách còn **0.17 Q̂ (≈ −29 Elo)**, đang chậm lại, có vẻ gần bão hoà.
+- GAN 0.3 kém hơn GAN 0.1.
+- Học trò 30k hơn MS-ILLM ≈ 0.44 Q̂. Đã chép sang `~/clic/distill/students/q3.pt` cho ứng viên bake-off `ditics`.
+
+## Tốc độ DC-AE (30 ảnh, giải mã cả khung hình, bf16, GPU L40 lúc rảnh)
+
+| decoder | mỗi ảnh | 30 ảnh | so với thầy |
+|---|---|---|---|
+| thầy | 0.43 s | 12.9 s | |
+| học trò 64/128/256 | 0.24 s | 7.3 s | 1.77× |
+| học trò rộng 96/192/384 (chưa train) | 0.35 s | 10.4 s | 1.22× (không đáng train) |
+
+Lưu ý: các số trong `2026-10-11_ditic_speed.md` đo lúc server bận và chậm hơn khoảng 2.2 lần (thầy 0.96 s so với 0.43 s).
+Lúc rảnh, cả decoder (entropy + DiT + DC-AE) khoảng 17–18 s cho 30 ảnh với thầy và ~11 s với học trò, trên L40.
+**L4 vẫn chưa đo.**
+
+## Đang chạy / tiếp theo
+
+- Học trò q4 (GPU 1) và q2 (GPU 0), cùng công thức: 20k bước L1 + LPIPS, rồi 30k bước GAN 0.1
+  (`~/clic/distill/run_student.sh <q> <gpu>`), chấm snapshot 20k / 25k / 30k. Mỗi mức ~6–7 giờ.
+- Bake-off có thêm ứng viên `ditics`: DiT-IC với decoder học trò, cùng bitstream với `ditic`
+  (`--ditic-students <dir với q2.pt q3.pt q4.pt>`). Khi đủ ba học trò sẽ chạy cả 30 ảnh và chia bit theo Q̂ v0, so với `ditic`.
+- Kết quả từng snapshot: `2026-10-11_ditic_distill/stage*/`.

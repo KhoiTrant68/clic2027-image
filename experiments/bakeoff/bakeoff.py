@@ -16,6 +16,8 @@ Candidates (each gives several operating points per image; the allocator picks o
   ditic    C7  DiT-IC (CVPR 2026): ELIC-style latent codec + one-step SANA-600M DiT + DC-AE f32 decoder, merged
               checkpoints q2..q4 (Kodak 0.044 .. 0.100 bpp; Apache-2.0 card, SANA base "research only")
   crdr     C8  CRDR (WACV 2024): ELIC + GAN, one model for 0.08 .. 0.72 bpp (rate index q) with a realism knob beta
+  ditics   C7s DiT-IC with distilled DC-AE decoders (experiments/ditic_distill, one student per checkpoint q: half the
+              channels in the high-resolution stages, ~1.8x faster DC-AE); same bitstreams as ditic
   mix          per-image choice over the union of all candidates (what mode switching could buy)
 
 Steps (all resume: existing points/metrics are skipped):
@@ -54,7 +56,7 @@ from clic27.eval import metrics as M  # noqa: E402
 
 DATA_URL = "https://dhldkwazkze5h.cloudfront.net/data/clic2025_image_test.zip"
 RATES = [0.075, 0.15, 0.3]
-CANDS = ["vtm420", "vtmscc", "s1res", "msillm", "mbt", "codlite", "turbo", "coolchic", "ditic", "crdr"]
+CANDS = ["vtm420", "vtmscc", "s1res", "msillm", "mbt", "codlite", "turbo", "coolchic", "ditic", "ditics", "crdr"]
 LABELS = {"ebfd571f": "screen", "bb7344a2": "screen", "86127fbd": "screen", "2a760bf1": "screen",
           "937476dd": "texture"}  # by eye in branch B; every other image is natural
 VTM_QPS = [34, 37, 40, 43, 46, 50]  # 2026-10-06 run: vtm420 qp26/30 = 0.80/0.52 bpp corpus (useless), qp34 0.33, qp50 0.029
@@ -662,6 +664,7 @@ from PIL import Image
 from huggingface_hub import hf_hub_download
 jobs, hf_repo, base = json.load(open(sys.argv[1])), sys.argv[2], sys.argv[3]
 tile, overlap, dtype, bucket = int(sys.argv[4]), int(sys.argv[5]), sys.argv[6], int(sys.argv[7])
+students, distill_code = (sys.argv[8], sys.argv[9]) if len(sys.argv) > 9 else ("", "")
 import math
 import models  # DiT-IC's package; its training-only modules (LPIPS, pyiqa, taming, CLIP) are stubbed out
 from diffusers.models.autoencoders.autoencoder_dc import ResBlock
@@ -742,6 +745,13 @@ for key, todo in by_key.items():
         raise SystemExit(f"ditic {key}: {len(miss)} weights not in the checkpoint, e.g. {miss[:5]}")
     net = net.to(dev).eval()
     net.codec.update(force=True)
+    if students:  # ditics: this checkpoint's distilled DC-AE decoder (its EfficientViT stages are the teacher's)
+        sys.path.insert(0, distill_code)
+        from common import build_student, load_student_weights
+        ck = torch.load(Path(students) / f"{key}.pt", map_location="cpu", weights_only=False)
+        student = build_student(net.vae.decoder, ck["channels"])
+        load_student_weights(student, ck)
+        net.vae.decoder = student.to(dev).eval()
     for m in (net.DiT, net.prompter, net.vae.decoder):  # the encoder side (DC-AE encoder, ELIC g_a, codec) stays fp32
         m.to(dt)
     for m in net.vae.decoder.modules():
@@ -790,15 +800,29 @@ def points_ditic(a, P, names):
     Bytes are the real rANS strings. Decoder as it would ship (results/2026-10-11_ditic_speed.md): DiT and DC-AE
     decoder weights in --ditic-dtype (bf16), an NCHW RMSNorm, the latent cut to the image and padded to a multiple of
     --ditic-bucket latents, full-frame DC-AE (--ditic-tile 0; the fp32 encoder side always tiles 1024)."""
+    _ditic(a, P, names, "ditic", [])
+
+
+def points_ditics(a, P, names):
+    """ditic with the distilled decoders: --ditic-students holds one train.py checkpoint or snapshot per key (q2.pt,
+    q3.pt, q4.pt); keys without one are skipped."""
+    if not a.ditic_students:
+        print("ditics: no --ditic-students, skipping", flush=True)
+        return
+    _ditic(a, P, names, "ditics", [Path(a.ditic_students).resolve(), ROOT / "experiments" / "ditic_distill"])
+
+
+def _ditic(a, P, names, cand, extra):
     try:
         import diffusers  # noqa: F401
     except ImportError:
         _pip("diffusers")
+    keys = [k for k in DITIC_Q if not extra or (Path(extra[0]) / f"{k}.pt").exists()]
     src = _checkout(a, "DiT-IC", DITIC_REPO, DITIC_COMMIT)
-    jobs = [dict(key=k, name=n, src=str(Path(inputs(a)[n]).resolve()), dst=str(P.recon("ditic", k, n).resolve()))
-            for k, n in P.todo("ditic", DITIC_Q, names)]
-    _run_points(P, "ditic", DITIC_RUN, src, jobs, [DITIC_HF, DITIC_BASE, a.ditic_tile, a.ditic_overlap, a.ditic_dtype,
-                                                     a.ditic_bucket])
+    jobs = [dict(key=k, name=n, src=str(Path(inputs(a)[n]).resolve()), dst=str(P.recon(cand, k, n).resolve()))
+            for k, n in P.todo(cand, keys, names)]
+    _run_points(P, cand, DITIC_RUN, src, jobs, [DITIC_HF, DITIC_BASE, a.ditic_tile, a.ditic_overlap, a.ditic_dtype,
+                                                 a.ditic_bucket, *extra])
 
 
 CRDR_RUN = r"""
@@ -907,7 +931,8 @@ def points(a):
     P = Points(a.out, Scorer(a))
     names = selected(a)
     for cand, fn in (("msillm", points_msillm), ("mbt", points_mbt), ("codlite", points_codlite), ("turbo", points_turbo),
-                     ("coolchic", points_coolchic), ("ditic", points_ditic), ("crdr", points_crdr),
+                     ("coolchic", points_coolchic), ("ditic", points_ditic), ("ditics", points_ditics),
+                     ("crdr", points_crdr),
                      ("s1res", points_s1res)):
         if cand in a.cands:
             try:
@@ -1150,6 +1175,8 @@ def main(argv=None):
     ap.add_argument("--ditic-tile", type=int, default=0,
                     help="DC-AE decoder tile size in pixels; 0 = full frame (default: 1.3-1.5x faster when each image is "
                          "decoded once, LPIPS +0.0007 vs 1280; peak ~6 GB)")
+    ap.add_argument("--ditic-students", default=None,
+                    help="dir with distilled DC-AE decoders q2.pt / q3.pt / q4.pt (experiments/ditic_distill) for ditics")
     ap.add_argument("--ditic-bucket", type=int, default=16,
                     help="pad the latent to a multiple of this many latents (16 = 512 px) so images share tensor shapes")
     ap.add_argument("--ditic-overlap", type=int, default=128, help="DC-AE tile overlap in pixels")
