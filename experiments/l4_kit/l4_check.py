@@ -13,7 +13,9 @@ Needs DITIC_DIR (DiT-IC checkout) and experiments/ditic_distill/common.py.
 import argparse
 import json
 import math
+import os
 import platform
+import resource
 import socket
 import sys
 import time
@@ -182,10 +184,13 @@ def cmd_speed(a):
         torch.cuda.synchronize(); t0 = time.time()
         decompress(net, r["strings"], r["shape"], r["H"], r["W"])
         torch.cuda.synchronize(); ts.append(time.time() - t0)
-    res = dict(env=env_info(), decoder=a.decoder, q=src["q"], load_s=t_load, first_s=ts[0], mean_rest_s=float(np.mean(ts[1:])),
-               total_s=float(sum(ts)), n=len(ts), peak_gb=torch.cuda.max_memory_allocated() / 2**30)
-    print(f"== {a.decoder} on {res['env']['gpu']}: load {t_load:.1f} s | first image {ts[0]:.2f} s | images 2..{len(ts)} "
-          f"mean {res['mean_rest_s']:.3f} s | decode total {res['total_s']:.1f} s | peak {res['peak_gb']:.1f} GB", flush=True)
+    res = dict(env=env_info(), decoder=a.decoder, q=src["q"], tag=a.tag, load_s=t_load, first_s=ts[0],
+               mean_rest_s=float(np.mean(ts[1:])), total_s=float(sum(ts)), n=len(ts),
+               peak_gb=torch.cuda.max_memory_allocated() / 2**30, cpus=len(os.sched_getaffinity(0)),
+               torch_threads=torch.get_num_threads(), peak_rss_gb=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 2**20)
+    print(f"== {a.decoder} on {res['env']['gpu']}{' ' + a.tag if a.tag else ''}: load {t_load:.1f} s | first image "
+          f"{ts[0]:.2f} s | images 2..{len(ts)} mean {res['mean_rest_s']:.3f} s | decode total {res['total_s']:.1f} s | "
+          f"peak {res['peak_gb']:.1f} GB | {res['cpus']} CPUs, RAM peak {res['peak_rss_gb']:.1f} GB", flush=True)
     if a.json:
         Path(a.json).write_text(json.dumps(res, indent=1))
 
@@ -225,6 +230,7 @@ def main():
     s.add_argument("--decoder", choices=["teacher", "student"], default="teacher")
     s.add_argument("--students", default=None)
     s.add_argument("--json", default=None)
+    s.add_argument("--tag", default="", help="label for the result line, e.g. the emulation setting")
     for p in (e, d, s):
         p.add_argument("--valid", required=True, help="dir with the 30 CLIC validation PNGs")
     c = sub.add_parser("compare")
