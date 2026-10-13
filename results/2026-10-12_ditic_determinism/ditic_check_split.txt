@@ -1,0 +1,8 @@
+02809272 2048x1360: cpu/gpu bitstreams identical (36236 / 36236 B)
+  stream from cpu: index mismatches 0/245760, symbol mismatches 0, scale rel. diff max 1.2e-14 (p99.9 6.3e-15), scales within 1e-4 / 1e-5 of a boundary: 364 / 28, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.06 s gpu 1.57 s
+  stream from gpu: index mismatches 0/245760, symbol mismatches 0, scale rel. diff max 1.2e-14 (p99.9 6.3e-15), scales within 1e-4 / 1e-5 of a boundary: 364 / 28, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.12 s gpu 1.56 s
+  GPU decode split: entropy chain (fp64) 1.489 s + rest (fp32) 0.006 s; mean output vs the all-fp64 decode: max |diff| 5.49e-03
+8426ed22 2048x2048: cpu/gpu bitstreams identical (21096 / 21096 B)
+  stream from cpu: index mismatches 0/327680, symbol mismatches 0, scale rel. diff max 1.7e-14 (p99.9 6.9e-15), scales within 1e-4 / 1e-5 of a boundary: 416 / 48, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.51 s gpu 1.75 s
+  stream from gpu: index mismatches 0/327680, symbol mismatches 0, scale rel. diff max 1.7e-14 (p99.9 6.9e-15), scales within 1e-4 / 1e-5 of a boundary: 416 / 48, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.34 s gpu 1.77 s
+  GPU decode split: entropy chain (fp64) 1.638 s + rest (fp32) 0.006 s; mean output vs the all-fp64 decode: max |diff| 3.63e-03

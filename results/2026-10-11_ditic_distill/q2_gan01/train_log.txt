@@ -1,0 +1,27 @@
+teacher decoder 159.2 M params, student 143.0 M (6.2 M trained), channels (64, 128, 256, 512, 1024, 1024)
+== eval step 2000: CLIC val vs teacher L1 0.0893 LPIPS 0.2246 ~PSNR 24.7 dB (best)
+== eval step 4000: CLIC val vs teacher L1 0.0760 LPIPS 0.1738 ~PSNR 25.9 dB (best)
+== eval step 6000: CLIC val vs teacher L1 0.0705 LPIPS 0.1602 ~PSNR 26.4 dB (best)
+== eval step 8000: CLIC val vs teacher L1 0.0683 LPIPS 0.1445 ~PSNR 26.7 dB (best)
+== eval step 10000: CLIC val vs teacher L1 0.0648 LPIPS 0.1357 ~PSNR 27.1 dB (best)
+== eval step 12000: CLIC val vs teacher L1 0.0623 LPIPS 0.1299 ~PSNR 27.3 dB (best)
+== eval step 14000: CLIC val vs teacher L1 0.0605 LPIPS 0.1235 ~PSNR 27.6 dB (best)
+== eval step 16000: CLIC val vs teacher L1 0.0596 LPIPS 0.1206 ~PSNR 27.7 dB (best)
+== eval step 18000: CLIC val vs teacher L1 0.0592 LPIPS 0.1187 ~PSNR 27.8 dB (best)
+== eval step 20000: CLIC val vs teacher L1 0.0587 LPIPS 0.1172 ~PSNR 27.8 dB (best)
+student initialised from distill/run_q2/best.pt (step 20000)
+== eval step 2000: CLIC val vs teacher L1 0.0697 LPIPS 0.1514 ~PSNR 26.5 dB (best)
+== eval step 4000: CLIC val vs teacher L1 0.0650 LPIPS 0.1523 ~PSNR 27.0 dB (best)
+== eval step 6000: CLIC val vs teacher L1 0.0659 LPIPS 0.1436 ~PSNR 26.8 dB (best)
+== eval step 8000: CLIC val vs teacher L1 0.0655 LPIPS 0.1377 ~PSNR 26.9 dB (best)
+== eval step 10000: CLIC val vs teacher L1 0.0661 LPIPS 0.1406 ~PSNR 26.7 dB
+== eval step 12000: CLIC val vs teacher L1 0.0671 LPIPS 0.1377 ~PSNR 26.6 dB
+== eval step 14000: CLIC val vs teacher L1 0.0670 LPIPS 0.1387 ~PSNR 26.7 dB
+== eval step 16000: CLIC val vs teacher L1 0.0638 LPIPS 0.1289 ~PSNR 27.2 dB (best)
+== eval step 18000: CLIC val vs teacher L1 0.0629 LPIPS 0.1279 ~PSNR 27.3 dB (best)
+== eval step 20000: CLIC val vs teacher L1 0.0634 LPIPS 0.1270 ~PSNR 27.2 dB (best)
+== eval step 22000: CLIC val vs teacher L1 0.0632 LPIPS 0.1260 ~PSNR 27.2 dB (best)
+== eval step 24000: CLIC val vs teacher L1 0.0611 LPIPS 0.1250 ~PSNR 27.5 dB (best)
+== eval step 26000: CLIC val vs teacher L1 0.0622 LPIPS 0.1240 ~PSNR 27.3 dB
+== eval step 28000: CLIC val vs teacher L1 0.0612 LPIPS 0.1226 ~PSNR 27.4 dB (best)
+== eval step 30000: CLIC val vs teacher L1 0.0618 LPIPS 0.1226 ~PSNR 27.4 dB

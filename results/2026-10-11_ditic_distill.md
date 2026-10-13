@@ -45,10 +45,36 @@ Lưu ý: các số trong `2026-10-11_ditic_speed.md` đo lúc server bận và c
 Lúc rảnh, cả decoder (entropy + DiT + DC-AE) khoảng 17–18 s cho 30 ảnh với thầy và ~11 s với học trò, trên L40.
 **L4 vẫn chưa đo.**
 
-## Đang chạy / tiếp theo
+## Cả ba mức q (13/10)
 
-- Học trò q4 (GPU 1) và q2 (GPU 0), cùng công thức: 20k bước L1 + LPIPS, rồi 30k bước GAN 0.1
-  (`~/clic/distill/run_student.sh <q> <gpu>`), chấm snapshot 20k / 25k / 30k. Mỗi mức ~6–7 giờ.
-- Bake-off có thêm ứng viên `ditics`: DiT-IC với decoder học trò, cùng bitstream với `ditic`
-  (`--ditic-students <dir với q2.pt q3.pt q4.pt>`). Khi đủ ba học trò sẽ chạy cả 30 ảnh và chia bit theo Q̂ v0, so với `ditic`.
-- Kết quả từng snapshot: `2026-10-11_ditic_distill/stage*/`.
+Cùng công thức cho q4 và q2: 20k bước L1 + LPIPS, rồi 30k bước GAN 0.1. Snapshot 30k là tốt nhất ở cả ba mức.
+Mỗi mức tính trên cả 30 ảnh ở đúng mức q đó, Q̂ v0:
+
+| mức | thầy | học trò | trò − thầy | số ảnh kém hơn > 0.1 |
+|---|---|---|---|---|
+| q2 | −0.450 | −0.584 | −0.13 | 14/30 |
+| q3 | +0.157 | −0.012 | −0.17 | 19/30 |
+| q4 | +0.272 | +0.115 | −0.16 | 17/30 |
+
+## Bake-off `ditics` (13/10, `2026-10-13_bakeoff_v0`)
+
+Thầy (`ditic`) và trò (`ditics`) chạy lại cùng lúc với cấu hình mặc định (cả khung hình, gom 16), cùng bitstream. Gộp với các
+ứng viên cũ rồi chia bit theo Q̂ v0. Ở **0.075 bpp**:
+
+| ứng viên | Q̂ v0 | LPIPS | DISTS | giải mã cả decoder (s/ảnh, L40) |
+|---|---|---|---|---|
+| MS-ILLM | −0.451 | 0.094 | 0.094 | 0.81 |
+| DiT-IC thầy | **+0.164** | 0.083 | 0.069 | 0.55 (16.5 s / 30 ảnh) |
+| DiT-IC học trò | **−0.000** | 0.094 | 0.076 | **0.36** (10.8 s / 30 ảnh) |
+| mix | +0.184 | | | |
+
+- **Học trò so với thầy:** kém 0.16 Q̂ (≈ −29 Elo), giải mã nhanh gấp 1.5 lần. Vẫn hơn MS-ILLM 0.45 Q̂ (≈ +78 Elo).
+- **Ở 0.15 bpp:** `mix` giao 16 ảnh cho DiT-IC (thầy), 11 cho MS-ILLM; mix +0.758 so với MS-ILLM +0.545.
+- **Chọn thầy hay trò:** phụ thuộc thời gian giải mã thật trên L4 và luật "25% chậm nhất không được giải". Cần đo trên L4.
+
+## Tiếp theo
+
+- **Đo trên L4:** thời gian giải mã của thầy và trò, đồng thời kiểm tra nén và giải giữa hai máy L4
+  (xem `2026-10-12_ditic_determinism/summary.md`).
+- Học trò đã sẵn ở `~/clic/distill/students/{q2,q3,q4}.pt` trên server (snapshot 30k). Ứng viên bake-off: `ditics`.
+- Kết quả từng snapshot: `2026-10-11_ditic_distill/*/`.

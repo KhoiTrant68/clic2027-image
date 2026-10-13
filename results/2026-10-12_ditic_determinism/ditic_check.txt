@@ -1,0 +1,18 @@
+02809272 2048x1360: cpu/gpu bitstreams DIFFER (36236 / 36228 B)
+  stream from cpu: index mismatches 120122/245760, symbol mismatches 141989, scale rel. diff max 1.8e+07 (p99.9 9.1e+06), scales within 1e-4 / 1e-5 of a boundary: 364 / 28, max |decoded output cpu - gpu| 1.96e+09
+  stream from gpu: index mismatches 101222/245760, symbol mismatches 119633, scale rel. diff max 1.4e+04 (p99.9 1.4e+01), scales within 1e-4 / 1e-5 of a boundary: 250 / 20, max |decoded output cpu - gpu| 1.27e+09
+8426ed22 2048x2048: cpu/gpu bitstreams DIFFER (21096 / 21100 B)
+  stream from cpu: index mismatches 121965/327680, symbol mismatches 128390, scale rel. diff max 6.2e+07 (p99.9 1.7e+07), scales within 1e-4 / 1e-5 of a boundary: 416 / 47, max |decoded output cpu - gpu| 1.45e+09
+  stream from gpu: index mismatches 60541/327680, symbol mismatches 66932, scale rel. diff max 6.0e+03 (p99.9 7.7e+00), scales within 1e-4 / 1e-5 of a boundary: 397 / 43, max |decoded output cpu - gpu| 2.31e+08
+ebfd571f 2048x2048: cpu/gpu bitstreams DIFFER (21556 / 21552 B)
+  stream from cpu: index mismatches 154990/327680, symbol mismatches 175985, scale rel. diff max 8.5e+07 (p99.9 1.8e+07), scales within 1e-4 / 1e-5 of a boundary: 304 / 32, max |decoded output cpu - gpu| 1.76e+09
+  stream from gpu: index mismatches 93194/327680, symbol mismatches 102540, scale rel. diff max 9.1e+03 (p99.9 1.6e+01), scales within 1e-4 / 1e-5 of a boundary: 258 / 28, max |decoded output cpu - gpu| 3.41e+08
+bb7344a2 1024x2048: cpu/gpu bitstreams DIFFER (13116 / 13120 B)
+  stream from cpu: index mismatches 37051/163840, symbol mismatches 42535, scale rel. diff max 1.5e+07 (p99.9 6.6e+06), scales within 1e-4 / 1e-5 of a boundary: 175 / 17, max |decoded output cpu - gpu| 6.84e+08
+  stream from gpu: index mismatches 69069/163840, symbol mismatches 75632, scale rel. diff max 1.7e+03 (p99.9 1.2e+01), scales within 1e-4 / 1e-5 of a boundary: 97 / 14, max |decoded output cpu - gpu| 4.32e+09
+937476dd 1536x2048: cpu/gpu bitstreams DIFFER (24328 / 24324 B)
+  stream from cpu: index mismatches 36809/245760, symbol mismatches 81648, scale rel. diff max 6.5e-01 (p99.9 2.2e-01), scales within 1e-4 / 1e-5 of a boundary: 309 / 34, max |decoded output cpu - gpu| 1.75e+01
+  stream from gpu: index mismatches 63933/245760, symbol mismatches 112343, scale rel. diff max 1.8e+04 (p99.9 2.4e+01), scales within 1e-4 / 1e-5 of a boundary: 300 / 30, max |decoded output cpu - gpu| 8.44e+07
+50fe4c3d 1296x2048: cpu/gpu bitstreams DIFFER (37100 / 37108 B)
+  stream from cpu: index mismatches 98411/245760, symbol mismatches 133279, scale rel. diff max 2.6e+07 (p99.9 5.4e+06), scales within 1e-4 / 1e-5 of a boundary: 321 / 24, max |decoded output cpu - gpu| 1.14e+09
+  stream from gpu: index mismatches 120563/245760, symbol mismatches 154419, scale rel. diff max 3.0e+03 (p99.9 2.4e+01), scales within 1e-4 / 1e-5 of a boundary: 184 / 16, max |decoded output cpu - gpu| 1.60e+09

@@ -1,0 +1,19 @@
+02809272 2048x1360: cpu/gpu bitstreams identical (36236 / 36236 B)
+  stream from cpu: index mismatches 0/245760, symbol mismatches 0, scale rel. diff max 1.2e-14 (p99.9 6.3e-15), scales within 1e-4 / 1e-5 of a boundary: 364 / 28, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.11 s gpu 1.56 s
+  stream from gpu: index mismatches 0/245760, symbol mismatches 0, scale rel. diff max 1.2e-14 (p99.9 6.3e-15), scales within 1e-4 / 1e-5 of a boundary: 364 / 28, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.08 s gpu 1.56 s
+8426ed22 2048x2048: cpu/gpu bitstreams identical (21096 / 21096 B)
+  stream from cpu: index mismatches 0/327680, symbol mismatches 0, scale rel. diff max 1.7e-14 (p99.9 6.9e-15), scales within 1e-4 / 1e-5 of a boundary: 416 / 48, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.61 s gpu 1.78 s
+  stream from gpu: index mismatches 0/327680, symbol mismatches 0, scale rel. diff max 1.7e-14 (p99.9 6.9e-15), scales within 1e-4 / 1e-5 of a boundary: 416 / 48, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.55 s gpu 1.79 s
+ebfd571f 2048x2048: cpu/gpu bitstreams identical (21556 / 21556 B)
+  stream from cpu: index mismatches 0/327680, symbol mismatches 0, scale rel. diff max 7.4e-14 (p99.9 1.9e-14), scales within 1e-4 / 1e-5 of a boundary: 303 / 32, max |decoded output cpu - gpu| 7.45e-09 | codec decode cpu 1.59 s gpu 1.77 s
+  stream from gpu: index mismatches 0/327680, symbol mismatches 0, scale rel. diff max 7.4e-14 (p99.9 1.9e-14), scales within 1e-4 / 1e-5 of a boundary: 303 / 32, max |decoded output cpu - gpu| 7.45e-09 | codec decode cpu 1.50 s gpu 1.77 s
+bb7344a2 1024x2048: cpu/gpu bitstreams identical (13116 / 13116 B)
+  stream from cpu: index mismatches 0/163840, symbol mismatches 0, scale rel. diff max 3.2e-13 (p99.9 2.0e-14), scales within 1e-4 / 1e-5 of a boundary: 174 / 17, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 0.72 s gpu 1.43 s
+  stream from gpu: index mismatches 0/163840, symbol mismatches 0, scale rel. diff max 3.2e-13 (p99.9 2.0e-14), scales within 1e-4 / 1e-5 of a boundary: 174 / 17, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 0.79 s gpu 1.44 s
+937476dd 1536x2048: cpu/gpu bitstreams identical (24328 / 24328 B)
+  stream from cpu: index mismatches 0/245760, symbol mismatches 0, scale rel. diff max 1.4e-14 (p99.9 6.4e-15), scales within 1e-4 / 1e-5 of a boundary: 309 / 33, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.10 s gpu 1.56 s
+  stream from gpu: index mismatches 0/245760, symbol mismatches 0, scale rel. diff max 1.4e-14 (p99.9 6.4e-15), scales within 1e-4 / 1e-5 of a boundary: 309 / 33, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.09 s gpu 1.57 s
+50fe4c3d 1296x2048: cpu/gpu bitstreams identical (37100 / 37100 B)
+  stream from cpu: index mismatches 0/245760, symbol mismatches 0, scale rel. diff max 9.7e-15 (p99.9 6.2e-15), scales within 1e-4 / 1e-5 of a boundary: 307 / 27, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.13 s gpu 1.57 s
+  stream from gpu: index mismatches 0/245760, symbol mismatches 0, scale rel. diff max 9.7e-15 (p99.9 6.2e-15), scales within 1e-4 / 1e-5 of a boundary: 307 / 27, max |decoded output cpu - gpu| 0.00e+00 | codec decode cpu 1.20 s gpu 1.56 s
+dtype fp64 | cudnn.allow_tf32=True matmul.allow_tf32=False
