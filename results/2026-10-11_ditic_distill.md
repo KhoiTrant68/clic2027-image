@@ -75,6 +75,7 @@ Thầy (`ditic`) và trò (`ditics`) chạy lại cùng lúc với cấu hình m
 ## Tiếp theo
 
 - **Đo trên L4:** thời gian giải mã của thầy và trò, đồng thời kiểm tra nén và giải giữa hai máy L4
-  (xem `2026-10-12_ditic_determinism/summary.md`).
+  (xem `2026-10-12_ditic_determinism/summary.md`). Kit sẵn sàng: `experiments/l4_kit/README.md`;
+  số đối chiếu trên L40: `2026-10-13_l4_kit_l40/summary.md`.
 - Học trò đã sẵn ở `~/clic/distill/students/{q2,q3,q4}.pt` trên server (snapshot 30k). Ứng viên bake-off: `ditics`.
 - Kết quả từng snapshot: `2026-10-11_ditic_distill/*/`.

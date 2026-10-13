@@ -1,0 +1,233 @@
+{
+ "encoder": {
+  "host": "server-01",
+  "gpu": "NVIDIA L40",
+  "torch": "2.6.0+cu124",
+  "cuda": "12.4",
+  "cudnn": 90100,
+  "python": "3.12.3",
+  "driver": "580.178.04\n580.178.04"
+ },
+ "decoder": {
+  "host": "server-01",
+  "gpu": "NVIDIA L40",
+  "torch": "2.6.0+cu124",
+  "cuda": "12.4",
+  "cudnn": 90100,
+  "python": "3.12.3",
+  "driver": "580.178.04\n580.178.04"
+ },
+ "verdict": "BIT-EXACT",
+ "images": [
+  {
+   "name": "02809272",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 20.213904764430062,
+   "psnr_encoder_side": 20.213904764430062
+  },
+  {
+   "name": "0369d229",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 30.98847239151076,
+   "psnr_encoder_side": 30.98847239151076
+  },
+  {
+   "name": "07b9f93f",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 22.89151129878838,
+   "psnr_encoder_side": 22.89151129878838
+  },
+  {
+   "name": "0d154749",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 26.003974354320395,
+   "psnr_encoder_side": 26.003974354320395
+  },
+  {
+   "name": "1b4ad095",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 26.26268092450774,
+   "psnr_encoder_side": 26.26268092450774
+  },
+  {
+   "name": "1cba10ad",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 33.30654602324622,
+   "psnr_encoder_side": 33.30654602324622
+  },
+  {
+   "name": "2397c73f",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 23.567444115627637,
+   "psnr_encoder_side": 23.567444115627637
+  },
+  {
+   "name": "2684452d",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 24.653099340669215,
+   "psnr_encoder_side": 24.653099340669215
+  },
+  {
+   "name": "2a760bf1",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 32.50195671276971,
+   "psnr_encoder_side": 32.50195671276971
+  },
+  {
+   "name": "4ebc0e6c",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 27.462866001630005,
+   "psnr_encoder_side": 27.462866001630005
+  },
+  {
+   "name": "50d13125",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 30.32287331613489,
+   "psnr_encoder_side": 30.32287331613489
+  },
+  {
+   "name": "50fe4c3d",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 21.27414768717108,
+   "psnr_encoder_side": 21.27414768717108
+  },
+  {
+   "name": "58104815",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 22.076053680322257,
+   "psnr_encoder_side": 22.076053680322257
+  },
+  {
+   "name": "608cb09e",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 22.488751689487376,
+   "psnr_encoder_side": 22.488751689487376
+  },
+  {
+   "name": "79b1bb29",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 20.33260665104683,
+   "psnr_encoder_side": 20.33260665104683
+  },
+  {
+   "name": "8426ed22",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 35.802991565705575,
+   "psnr_encoder_side": 35.802991565705575
+  },
+  {
+   "name": "86127fbd",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 21.26802258405883,
+   "psnr_encoder_side": 21.26802258405883
+  },
+  {
+   "name": "937476dd",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 15.33095865849999,
+   "psnr_encoder_side": 15.33095865849999
+  },
+  {
+   "name": "a2a946cc",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 24.95064134269303,
+   "psnr_encoder_side": 24.95064134269303
+  },
+  {
+   "name": "a365e654",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 19.110797222925093,
+   "psnr_encoder_side": 19.110797222925093
+  },
+  {
+   "name": "b0b3744c",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 18.25833735183584,
+   "psnr_encoder_side": 18.25833735183584
+  },
+  {
+   "name": "bb7344a2",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 26.695836240490415,
+   "psnr_encoder_side": 26.695836240490415
+  },
+  {
+   "name": "c9510efb",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 29.768515046536397,
+   "psnr_encoder_side": 29.768515046536397
+  },
+  {
+   "name": "d0208a1e",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 18.951551098974,
+   "psnr_encoder_side": 18.951551098974
+  },
+  {
+   "name": "da52c4f6",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 19.80151504608395,
+   "psnr_encoder_side": 19.80151504608395
+  },
+  {
+   "name": "e0d8e29c",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 27.448201986045866,
+   "psnr_encoder_side": 27.448201986045866
+  },
+  {
+   "name": "ebfd571f",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 21.247748069929607,
+   "psnr_encoder_side": 21.247748069929607
+  },
+  {
+   "name": "eda6d427",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 21.975845194321426,
+   "psnr_encoder_side": 21.975845194321426
+  },
+  {
+   "name": "f67f11de",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 33.677587744430795,
+   "psnr_encoder_side": 33.677587744430795
+  },
+  {
+   "name": "ff32adfa",
+   "idx_bad": 0,
+   "sym_bad": 0,
+   "psnr_here": 28.086321198072255,
+   "psnr_encoder_side": 28.086321198072255
+  }
+ ]
+}

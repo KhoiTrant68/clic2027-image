@@ -1,0 +1,35 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+There are modules in SanaTransformer2DModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+========mode is #scale#======
+Init Done
+02809272 36236 B, local decode PSNR 20.21
+0369d229 23920 B, local decode PSNR 30.99
+07b9f93f 23768 B, local decode PSNR 22.89
+0d154749 30216 B, local decode PSNR 26.00
+1b4ad095 21752 B, local decode PSNR 26.26
+1cba10ad 24004 B, local decode PSNR 33.31
+2397c73f 24868 B, local decode PSNR 23.57
+2684452d 30772 B, local decode PSNR 24.65
+2a760bf1 13744 B, local decode PSNR 32.50
+4ebc0e6c 22036 B, local decode PSNR 27.46
+50d13125 11720 B, local decode PSNR 30.32
+50fe4c3d 37100 B, local decode PSNR 21.27
+58104815 33344 B, local decode PSNR 22.08
+608cb09e 42228 B, local decode PSNR 22.49
+79b1bb29 25528 B, local decode PSNR 20.33
+8426ed22 21096 B, local decode PSNR 35.80
+86127fbd 24592 B, local decode PSNR 21.27
+937476dd 24328 B, local decode PSNR 15.33
+a2a946cc 29572 B, local decode PSNR 24.95
+a365e654 33352 B, local decode PSNR 19.11
+b0b3744c 27800 B, local decode PSNR 18.26
+bb7344a2 13116 B, local decode PSNR 26.70
+c9510efb 30692 B, local decode PSNR 29.77
+d0208a1e 32024 B, local decode PSNR 18.95
+da52c4f6 41176 B, local decode PSNR 19.80
+e0d8e29c 20096 B, local decode PSNR 27.45
+ebfd571f 21556 B, local decode PSNR 21.25
+eda6d427 37668 B, local decode PSNR 21.98
+f67f11de 16980 B, local decode PSNR 33.68
+ff32adfa 33572 B, local decode PSNR 28.09
+saved /mnt/home/guess03/clic/clic27_l4/out_server-01/streams_server-01.pt from {"host": "server-01", "gpu": "NVIDIA L40", "torch": "2.6.0+cu124", "cuda": "12.4", "cudnn": 90100, "python": "3.12.3", "driver": "580.178.04\n580.178.04"}

@@ -1,0 +1,20 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+There are modules in SanaTransformer2DModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+========mode is #scale#======
+Init Done
+== teacher on NVIDIA L40: load 18.8 s | first image 0.94 s | images 2..30 mean 0.570 s | decode total 17.5 s | peak 5.5 GB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+There are modules in SanaTransformer2DModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+========mode is #scale#======
+Init Done
+== student on NVIDIA L40: load 18.6 s | first image 0.62 s | images 2..30 mean 0.371 s | decode total 11.4 s | peak 4.4 GB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+There are modules in SanaTransformer2DModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+========mode is #scale#======
+Init Done
+== teacher on NVIDIA L40: load 17.3 s | first image 0.82 s | images 2..30 mean 0.568 s | decode total 17.3 s | peak 5.5 GB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+There are modules in SanaTransformer2DModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+========mode is #scale#======
+Init Done
+== student on NVIDIA L40: load 20.6 s | first image 0.74 s | images 2..30 mean 0.368 s | decode total 11.4 s | peak 4.4 GB

@@ -10,6 +10,7 @@ Run on the server with the DiT-IC checkout importable (DITIC_DIR).
 from __future__ import annotations
 
 import math
+import os
 import sys
 import types
 from pathlib import Path
@@ -18,7 +19,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-DITIC_DIR = Path("/mnt/home/guess03/clic/work_new/DiT-IC")
+DITIC_DIR = Path(os.environ.get("DITIC_DIR", "/mnt/home/guess03/clic/work_new/DiT-IC"))  # DiT-IC checkout
 BASE = "Efficient-Large-Model/Sana_600M_1024px_diffusers"
 HF = "JunqiShi/DiT-IC"
 STUDENT_CHANNELS = (64, 128, 256, 512, 1024, 1024)
@@ -40,6 +41,12 @@ def load_ditic(q: str, device: str = "cuda"):
                            ("models.foundation_models", "aux_foundation_model", None)):
         sys.modules[mod] = types.ModuleType(mod)
         setattr(sys.modules[mod], attr, val)
+    import diffusers  # noqa: F401  before the stub below: diffusers probes for peft when imported
+    try:
+        import peft  # noqa: F401  only used for LoRA training; the merged checkpoints never call it
+    except ImportError:
+        sys.modules["peft"] = types.ModuleType("peft")
+        sys.modules["peft"].get_peft_model = sys.modules["peft"].LoraConfig = None
     from models.DiT_IC import Codec
     cfg = yaml.safe_load(open(DITIC_DIR / "configs" / "inference_merge.yaml"))["model"]["params"]
     cfg.update(dit_path=BASE, use_ema=True, use_merge=True, training=False)

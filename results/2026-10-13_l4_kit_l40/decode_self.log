@@ -1,0 +1,37 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+There are modules in SanaTransformer2DModel that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.
+========mode is #scale#======
+Init Done
+streams encoded on {"host": "server-01", "gpu": "NVIDIA L40", "torch": "2.6.0+cu124", "cuda": "12.4", "cudnn": 90100, "python": "3.12.3", "driver": "580.178.04\n580.178.04"}
+decoding on       {"host": "server-01", "gpu": "NVIDIA L40", "torch": "2.6.0+cu124", "cuda": "12.4", "cudnn": 90100, "python": "3.12.3", "driver": "580.178.04\n580.178.04"}
+02809272: index mismatches 0, symbol mismatches 0, PSNR here 20.21 (encoder side 20.21)
+0369d229: index mismatches 0, symbol mismatches 0, PSNR here 30.99 (encoder side 30.99)
+07b9f93f: index mismatches 0, symbol mismatches 0, PSNR here 22.89 (encoder side 22.89)
+0d154749: index mismatches 0, symbol mismatches 0, PSNR here 26.00 (encoder side 26.00)
+1b4ad095: index mismatches 0, symbol mismatches 0, PSNR here 26.26 (encoder side 26.26)
+1cba10ad: index mismatches 0, symbol mismatches 0, PSNR here 33.31 (encoder side 33.31)
+2397c73f: index mismatches 0, symbol mismatches 0, PSNR here 23.57 (encoder side 23.57)
+2684452d: index mismatches 0, symbol mismatches 0, PSNR here 24.65 (encoder side 24.65)
+2a760bf1: index mismatches 0, symbol mismatches 0, PSNR here 32.50 (encoder side 32.50)
+4ebc0e6c: index mismatches 0, symbol mismatches 0, PSNR here 27.46 (encoder side 27.46)
+50d13125: index mismatches 0, symbol mismatches 0, PSNR here 30.32 (encoder side 30.32)
+50fe4c3d: index mismatches 0, symbol mismatches 0, PSNR here 21.27 (encoder side 21.27)
+58104815: index mismatches 0, symbol mismatches 0, PSNR here 22.08 (encoder side 22.08)
+608cb09e: index mismatches 0, symbol mismatches 0, PSNR here 22.49 (encoder side 22.49)
+79b1bb29: index mismatches 0, symbol mismatches 0, PSNR here 20.33 (encoder side 20.33)
+8426ed22: index mismatches 0, symbol mismatches 0, PSNR here 35.80 (encoder side 35.80)
+86127fbd: index mismatches 0, symbol mismatches 0, PSNR here 21.27 (encoder side 21.27)
+937476dd: index mismatches 0, symbol mismatches 0, PSNR here 15.33 (encoder side 15.33)
+a2a946cc: index mismatches 0, symbol mismatches 0, PSNR here 24.95 (encoder side 24.95)
+a365e654: index mismatches 0, symbol mismatches 0, PSNR here 19.11 (encoder side 19.11)
+b0b3744c: index mismatches 0, symbol mismatches 0, PSNR here 18.26 (encoder side 18.26)
+bb7344a2: index mismatches 0, symbol mismatches 0, PSNR here 26.70 (encoder side 26.70)
+c9510efb: index mismatches 0, symbol mismatches 0, PSNR here 29.77 (encoder side 29.77)
+d0208a1e: index mismatches 0, symbol mismatches 0, PSNR here 18.95 (encoder side 18.95)
+da52c4f6: index mismatches 0, symbol mismatches 0, PSNR here 19.80 (encoder side 19.80)
+e0d8e29c: index mismatches 0, symbol mismatches 0, PSNR here 27.45 (encoder side 27.45)
+ebfd571f: index mismatches 0, symbol mismatches 0, PSNR here 21.25 (encoder side 21.25)
+eda6d427: index mismatches 0, symbol mismatches 0, PSNR here 21.98 (encoder side 21.98)
+f67f11de: index mismatches 0, symbol mismatches 0, PSNR here 33.68 (encoder side 33.68)
+ff32adfa: index mismatches 0, symbol mismatches 0, PSNR here 28.09 (encoder side 28.09)
+== BIT-EXACT: NVIDIA L40 (server-01) -> NVIDIA L40 (server-01)
