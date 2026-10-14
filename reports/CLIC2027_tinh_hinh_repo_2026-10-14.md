@@ -1,235 +1,329 @@
-# Tình hình repo CLIC 2027 (Image, GPU track), ngày 14/10/2026
+# Báo cáo nghiên cứu tiến độ CLIC 2027 — Image GPU Track
 
-Nguồn: các file `results/*`, `reports/*`, `plans/Plan CLIC 2027 v2 - tap trung de thang.md` và git log của nhánh
-`claude/what-should-i-do-now-f6f4dd`. Mọi con số được chép từ các file kết quả. Phần ước lượng Elo là suy luận và được ghi rõ.
+**Ngày chốt:** 14/10/2026  
+**Phạm vi:** lựa chọn codec, chất lượng cảm nhận, độ tin cậy của bitstream, tốc độ giải mã và mức độ sẵn sàng nộp bài.  
+**Nguồn nội bộ:** các artifact trong **results/**, **reports/**, **plans/Plan CLIC 2027 v2 - tap trung de thang.md** và Git log của nhánh **claude/what-should-i-do-now-f6f4dd**.  
+**Trạng thái bằng chứng:** báo cáo tổng hợp các kết quả đã ghi trong repo; không có nghĩa là toàn bộ thí nghiệm đã được chạy lại độc lập.
 
-## Tóm tắt
+## Tóm tắt điều hành
 
-- **Đã chọn được hướng chính:**
-  - **0.075 bpp:** DiT-IC cho ảnh tự nhiên.
-  - **0.15 và 0.3 bpp:** MS-ILLM, trộn với DiT-IC theo từng ảnh.
-  - **Ảnh chữ và màn hình:** VTM-SCC.
+### Quyết định kỹ thuật hiện tại
 
-  Phương án này thắng mọi ứng viên khác trong bake-off. Trong lần chấm mù, DiT-IC được chọn 69% so với MS-ILLM.
-- **Chưa đủ để thắng.** So với đội nhất GPU năm 2025, ước lượng thô:
-  - ở 0.075 mình gần bằng, thiếu khoảng 30–55 Elo;
-  - ở 0.15 thiếu khoảng **95 Elo**;
-  - ở 0.3 thiếu khoảng 40 Elo.
-- **Chưa có gì nộp được.** Ba việc còn thiếu:
-  - decoder chưa chạy được trong môi trường CLIC (không có diffusers và compressai);
-  - chưa đo trên L4;
-  - chưa kiểm chứng bitstream giải đúng từng bit giữa hai máy L4.
-- **Rủi ro lớn nhất là tốc độ trên L4.** Trên L40 của server, cả decoder mất 17.5 s cho 30 ảnh với decoder gốc và 11.4 s với
-  decoder chưng cất. Suy từ thông số, L4 chậm khoảng 3 lần, tức khoảng 50 s và 33 s. Đội nhất 2025 mất 24 s, và
-  25% bài chậm nhất mất quyền nhận giải.
-- **Code chưa được sao lưu.** Toàn bộ việc từ 09/10 đã merge vào `main` trên máy (14/10) nhưng chưa push lên GitHub.
-  Checkpoint của decoder chưng cất chỉ nằm trên server.
-
----
-
-## 1. Đối chiếu với kế hoạch v2
-
-Năm câu hỏi của tháng 10, theo mục 3 của kế hoạch:
-
-| # | Câu hỏi | Hạn | Trạng thái |
+| Mức bitrate | Hướng đang chọn | Vai trò | Điểm cần lưu ý |
 |---|---|---|---|
-| Q1 | Base nào cho Q̂ cao nhất ở từng mức? | 26/10 | ✅ Gần xong: DiT-IC ở 0.075, MS-ILLM (trộn DiT-IC) ở 0.15/0.3. Còn thiếu số tốc độ L4 |
-| Q2 | Q̂ dự đoán người chấm tốt đến đâu? | 12/10 | ✅ Q̂ v0: 0.812 khi thử trên năm khác. Đã kiểm bằng chấm mù. Q̂ v1 bị loại |
-| Q3 | Các đội đầu 2024–2025 đã làm gì? | 12/10 | ⛔ Bị chặn: OpenReview bắt qua bước xác minh chống bot. Mới đọc được bảng xếp hạng và slide |
-| Q4 | Mỗi ứng viên giải mã nhanh đến đâu trên L4? | 26/10 | 🟡 Kit đo đã sẵn và chạy thử trên L40. **Chưa thuê L4** |
-| Q5 | Server CLIC tính byte và chạy decoder ra sao? | khi server mở | ⬜ Chưa nộp thử lần nào |
+| 0.075 bpp | **DiT-IC** cho ảnh tự nhiên | Codec chính | Chất lượng chữ/màn hình kém; cần bộ chọn mode riêng |
+| 0.15 bpp | **Trộn theo ảnh: DiT-IC + MS-ILLM**, thêm mode dự phòng | Codec chính | DiT-IC hiện chỉ có operating point đến khoảng 0.10 bpp |
+| 0.3 bpp | **Trộn theo ảnh, chủ yếu MS-ILLM** | Codec chính | Cần cải thiện thêm chất lượng và xác minh chi phí giải mã |
+| Ảnh chữ / giao diện / màn hình | **VTM-SCC** | Mode chuyên biệt | Bộ phát hiện ảnh chữ chưa được triển khai |
 
-**Thay đổi so với kế hoạch:**
-- **Compute:** Kaggle không còn là nơi chạy chính. Từ 09/10, mọi thứ chạy trên server 2 × L40 (`ssh guess`).
-- **Phạm vi model:** kế hoạch v2 chỉ nhắm tới các codec C0–C4. Nay đã thêm CoD-Lite, Cool-chic, DiT-IC và CRDR.
+Bake-off nội bộ ngày 13/10 cho thấy phương án trộn theo ảnh đạt Q̂ v0 cao nhất trong các phương án được báo cáo ở cả ba mức bitrate. Trong phép chấm mù ngày 11/10, DiT-IC được chọn 62/90 lần so với MS-ILLM trên crop 512×512 ở 0.075 bpp. Đây là tín hiệu thuận lợi, nhưng phép chấm mù hiện chỉ có **một người chấm** và bake-off 30 ảnh chưa đại diện cho tập test CLIC 2027.
 
-## 2. Các ứng viên đã thử
+### Mức độ sẵn sàng
 
-| Ứng viên | Kết quả chính | Trạng thái |
-|---|---|---|
-| VTM 4:2:0, VTM-SCC | Mốc chuẩn. SCC tốt nhất cho ảnh màn hình | Giữ VTM-SCC làm mode cho ảnh chữ/màn hình |
-| S1: DC-AE + S1 + residual VTM (C1) | Thua MS-ILLM 1–2.3 Q̂ ở cả 3 mức, giải mã 9 s/ảnh trên T4 | Loại (06/10) |
-| mbt2018-mean | Q̂ −2.0 ở 0.15 | Loại |
-| SD-Turbo refiner trên MS-ILLM | Kém hơn MS-ILLM | Loại (08/10) |
-| CoD-Lite (pixel-space, một bước) | 0.075: −0.38 (MS-ILLM −0.45). 0.15/0.3: kém MS-ILLM. Nhanh nhất: 0.15 s/ảnh | Không làm base. Thỉnh thoảng được chọn khi trộn |
-| Cool-chic (tag `clic2025`, decoder C trên CPU) | Kém MS-ILLM khoảng 0.4–0.6 Q̂. Encode khoảng 1.5 giờ/ảnh/λ | Tạm dừng theo yêu cầu của bạn (09/10) |
-| CRDR | Kém MS-ILLM theo Q̂ v0, giải mã 5 s/ảnh | Loại (10/10) |
-| **MS-ILLM** | Base mạnh nhất ở 0.15 và 0.3 | **Chọn cho 0.15/0.3.** Trọng số giấy phép CC-BY-NC |
-| **DiT-IC** (SANA-600M + DC-AE + codec kiểu ELIC) | 0.075: Q̂ +0.164, hơn MS-ILLM 0.62 | **Chọn cho ảnh tự nhiên ở 0.075.** Làm hỏng chữ |
-| DiT-IC với decoder chưng cất | Kém decoder gốc khoảng 0.16 Q̂, nhanh hơn 1.5 lần | Dự phòng nếu L4 quá chậm |
+**Hệ thống chưa sẵn sàng nộp.** Các chặn chính:
 
-## 3. Kết quả chính
+1. Chưa chứng minh decoder chạy được trong môi trường CLIC tối giản.
+2. Chưa đo tốc độ trên L4 thật.
+3. Chưa kiểm tra bitstream giữa hai máy L4 độc lập.
+4. Decoder DiT-IC đang vượt ngân sách trọng số 4 GB nếu lưu riêng các mức q2/q3/q4.
+5. Chưa có bộ phát hiện ảnh chữ/màn hình để chọn mode phù hợp.
+6. Các thay đổi mới nhất và checkpoint decoder chưng cất chưa được sao lưu đầy đủ.
 
-### 3.1 Q̂: thước đo thay người chấm
+**Rủi ro quyết định nhất là tốc độ và tính tái lập của giải mã trên L4.** Trên L40, decoder DiT-IC hiện tại mất 17.5 giây cho 30 ảnh ở bản gốc và 11.4 giây ở bản chưng cất, chưa tính khoảng 18 giây nạp mạng trong phép đo được ghi nhận. Quy đổi sang L4 chưa được xác minh và không nên dùng làm số liệu chính thức.
 
-- **Q̂ v0** là mô hình Bradley–Terry trên các thước đo LPIPS, DISTS, PSNR, MS-SSIM…, fit trên dữ liệu chấm theo cặp của
-  CLIC 2021/2022/2024.
-  - Dự đoán đúng 0.812 khi thử trên năm không dùng để fit.
-  - Mức trần thực tế là 72–78%: đó là tỷ lệ người chấm tự đồng ý với chính mình khi gặp lại cùng câu hỏi.
-  - PSNR đơn lẻ chỉ đúng 57%.
-- **Q̂ v1** (thêm Wasserstein Distortion) có điểm cao hơn (0.833), nhưng đặt VTM ngang CoD-Lite ở 0.075, trái với Elo 2025.
-  Lần chấm mù cũng bác nó. **Bỏ v1, dùng v0.**
-- **Quy đổi:** 1.0 Q̂ ≈ 174 Elo.
+## 1. Quy ước về bằng chứng
 
-### 3.2 Bake-off ngày 13/10
+- **Đã đo / đã quan sát:** số liệu có ghi trong artifact hoặc báo cáo thí nghiệm nội bộ.
+- **Ước lượng:** giá trị suy ra từ Q̂, kết quả năm trước hoặc mô hình quy đổi phần cứng.
+- **Chưa xác minh:** chưa chạy trên đúng phần cứng, môi trường hoặc tập dữ liệu đích.
+- **Giả thuyết / đề xuất:** hướng kỹ thuật cần được kiểm nghiệm.
 
-Tập: 30 ảnh validation (cũng là bộ test của 2025). Mỗi ứng viên được chia bit cho cả bộ ảnh theo Q̂ v0, đúng ngân sách byte.
-File: `results/2026-10-13_bakeoff_v0`.
+Q̂ và Elo trong báo cáo là chỉ số nội bộ. Chúng không phải điểm chính thức của CLIC và không bảo đảm thứ hạng trên tập test 2027.
 
-| ứng viên | Q̂ ở 0.075 | Q̂ ở 0.15 | Q̂ ở 0.3 | giải mã (s/ảnh, L40) |
+## 2. Mục tiêu và pipeline nghiên cứu
+
+Mục tiêu không chỉ là tìm codec có điểm cảm nhận cao, mà là tìm cấu hình đồng thời thỏa mãn chất lượng, ngân sách bitrate, giới hạn tài nguyên, tính tất định của bitstream và yêu cầu đóng gói của CLIC.
+
+~~~mermaid
+flowchart TD
+    A["Tập ảnh validation"] --> B["Chạy các codec ứng viên"]
+    B --> C["Phân bổ byte theo từng bitrate"]
+    C --> D["Giải mã và tính metric"]
+    D --> E["Q̂ v0: ước lượng preference"]
+    E --> F["Bake-off 0.075 / 0.15 / 0.3 bpp"]
+    F --> G["Chọn codec theo ảnh và theo rate"]
+    G --> H["Chấm mù với người"]
+    H --> I["Kiểm tra chéo Q̂ và preference"]
+    G --> J["Benchmark decoder"]
+    J --> K["Đo L4, RAM, CPU, thời gian nạp"]
+    K --> L["Kiểm tra bitstream giữa hai máy"]
+    L --> M["Đóng gói môi trường CLIC"]
+    M --> N["Submission smoke test"]
+~~~
+
+### Pipeline triển khai và giải mã
+
+~~~mermaid
+flowchart LR
+    A["Bitstream + metadata"] --> B["Đọc header / xác định mode"]
+    B --> C{"Loại codec"}
+    C -->|DiT-IC| D["Entropy decode latent"]
+    D --> E["DC-AE decoder / SANA pipeline"]
+    C -->|MS-ILLM| F["Entropy decode + neural synthesis"]
+    C -->|Ảnh chữ / màn hình| G["VTM-SCC decoder"]
+    E --> H["Ảnh RGB đầu ra"]
+    F --> H
+    G --> H
+    H --> I["Kiểm tra tên file, kích thước, số lượng"]
+~~~
+
+Sơ đồ thứ hai mô tả luồng logic ở mức hệ thống; nó **không khẳng định** mọi nhánh đã được tích hợp hoàn chỉnh vào một decoder duy nhất. Tích hợp DiT-IC, MS-ILLM và VTM-SCC vào môi trường submission vẫn là hạng mục phải hoàn thành.
+
+## 3. Đối chiếu kế hoạch tháng 10
+
+| ID | Câu hỏi nghiên cứu / kỹ thuật | Hạn kế hoạch | Trạng thái ngày 14/10 | Bằng chứng còn thiếu |
+|---|---|---:|---|---|
+| Q1 | Codec nào có Q̂ cao nhất ở từng rate? | 26/10 | **Gần hoàn thành** | Tốc độ L4 và kiểm tra trên tập ảnh lớn hơn |
+| Q2 | Q̂ dự đoán preference của người tốt đến đâu? | 12/10 | **Có kết quả sơ bộ** | Nhiều người chấm và tập đánh giá lớn hơn |
+| Q3 | Các đội đầu 2024–2025 đã làm gì? | 12/10 | **Bị chặn một phần** | Đọc đầy đủ paper/whitepaper; OpenReview yêu cầu xác minh |
+| Q4 | Decoder chạy nhanh đến đâu trên L4? | 26/10 | **Chưa đo trên L4 thật** | Benchmark trên L4 bằng kit hiện có |
+| Q5 | Server CLIC đóng gói và tính byte thế nào? | Khi server mở | **Chưa thử submission** | Chạy checker và submission validation thực tế |
+
+Thay đổi vận hành so với kế hoạch v2: từ 09/10, server có 2×L40 trở thành môi trường chạy chính thay cho Kaggle. Phạm vi ứng viên mở rộng ngoài C0–C4, gồm CoD-Lite, Cool-chic, DiT-IC và CRDR.
+
+## 4. Phương pháp đánh giá
+
+### 4.1 Q̂ v0 và Q̂ v1
+
+Q̂ v0 là mô hình preference Bradley–Terry được fit từ kết quả chấm theo cặp của CLIC 2021/2022/2024, sử dụng các đặc trưng chất lượng như LPIPS, DISTS, PSNR và MS-SSIM cùng các metric liên quan.
+
+| Phép đánh giá | Kết quả được báo cáo | Diễn giải |
+|---|---:|---|
+| Q̂ v0, thử trên năm không dùng để fit | 0.812 accuracy | Khả năng dự đoán preference sơ bộ; cần xác minh lại từ artifact gốc |
+| PSNR đơn lẻ | 0.57 accuracy | Yếu hơn Q̂ v0 trong phép so sánh nội bộ |
+| Mức đồng thuận tự lặp của người chấm | 72–78% | Trần tham khảo được báo cáo, không phải hằng số phổ quát |
+| Q̂ v1, có Wasserstein Distortion | 0.833 accuracy | Điểm cao hơn nhưng không phù hợp với một số đối chiếu ngoài mẫu và kết quả chấm mù |
+| Quy đổi Q̂ sang Elo | 1.0 Q̂ ≈ 174 Elo | Quy đổi nội bộ, không phải chuẩn chính thức |
+
+**Quyết định hiện tại:** dùng Q̂ v0 để chọn codec; không dùng Q̂ v1 làm tiêu chí chính. Q̂ v1 bị loại vì tạo thứ tự codec đáng ngờ ở 0.075 bpp và không được kết quả chấm mù ủng hộ.
+
+**Giới hạn:** accuracy 0.812 không đồng nghĩa điểm Q̂ tuyệt đối được hiệu chuẩn chính xác cho tập test 2027. Kết quả 26/30 ảnh khớp đa số phiếu trong phép chấm mù cũng là mẫu nhỏ.
+
+### 4.2 Thiết lập bake-off
+
+- **Ngày:** 13/10/2026.
+- **Tập:** 30 ảnh validation, được báo cáo là cùng bộ ảnh test dùng trong CLIC 2025.
+- **Bitrate mục tiêu:** 0.075, 0.15 và 0.3 bpp.
+- **Phân bổ byte:** trên toàn bộ tập ảnh theo Q̂ v0.
+- **Artifact:** **results/2026-10-13_bakeoff_v0**.
+
+Cần giữ nguyên cấu hình, commit, file Q̂, quy tắc phân bổ byte và đầu ra đã giải mã để có thể tái lập phép đo.
+
+## 5. Kết quả chất lượng
+
+### 5.1 Bake-off ngày 13/10
+
+| Ứng viên | Q̂ v0 @ 0.075 bpp | Q̂ v0 @ 0.15 bpp | Q̂ v0 @ 0.3 bpp | Tốc độ giải mã trên L40 |
+|---|---:|---:|---:|---:|
+| VTM 4:2:0 | −2.515 | −1.163 | −0.152 | Chưa có số tổng hợp |
+| VTM-SCC | −2.404 | −1.102 | −0.004 | Chưa có số tổng hợp |
+| MS-ILLM | −0.451 | +0.545 | +1.383 | 0.7–0.8 s/ảnh |
+| CoD-Lite | −0.382 | +0.285 | +0.906 | 0.15 s/ảnh |
+| DiT-IC | +0.164 | Chỉ có operating point tới khoảng 0.096 bpp | — | 0.55 s/ảnh |
+| DiT-IC chưng cất | −0.000 | — | — | 0.36 s/ảnh |
+| **Trộn theo ảnh** | **+0.184** | **+0.758** | **+1.421** | Phụ thuộc mode từng ảnh |
+
+Đây là số liệu nội bộ được ghi trong repo, chưa phải kết quả chính thức của CLIC. Không so sánh trực tiếp các điểm từ những phiên bản Q̂ khác nhau.
+
+### 5.2 Phân bổ codec khi trộn theo ảnh
+
+| Bitrate | DiT-IC | MS-ILLM | VTM-SCC | CoD-Lite |
 |---|---|---|---|---|
-| VTM 4:2:0 | −2.515 | −1.163 | −0.152 | |
-| VTM-SCC | −2.404 | −1.102 | −0.004 | |
-| MS-ILLM | −0.451 | +0.545 | +1.383 | 0.7–0.8 |
-| CoD-Lite | −0.382 | +0.285 | +0.906 | 0.15 |
-| DiT-IC | +0.164 | (chỉ tới 0.096 bpp) | | 0.55 |
-| DiT-IC chưng cất | −0.000 | | | 0.36 |
-| **trộn theo ảnh** | **+0.184** | **+0.758** | **+1.421** | |
+| 0.075 bpp | 29 ảnh (q2: 4, q3: 24, q4: 1) | — | 1 ảnh | — |
+| 0.15 bpp | 16 ảnh (q3: 10, q4: 6) | 11 ảnh | 2 ảnh | 1 ảnh |
+| 0.3 bpp | 3 ảnh (q4) | 24 ảnh | 2 ảnh | 1 ảnh |
 
-**Khi trộn, bộ chia bit chọn:**
+DiT-IC hiện chỉ có operating point đến khoảng 0.10 bpp. Ở mức 0.15 bpp, phương án trộn dùng DiT-IC trên một phần ảnh và dành ngân sách bit còn lại cho các ảnh được mã hóa bằng codec khác.
 
-| rate | DiT-IC | MS-ILLM | VTM-SCC | CoD-Lite |
-|---|---|---|---|---|
-| 0.075 | 29 ảnh (q2: 4, q3: 24, q4: 1) | | 1 | |
-| 0.15 | 16 ảnh (q3: 10, q4: 6) | 11 | 2 | 1 |
-| 0.3 | 3 ảnh (q4) | 24 | 2 | 1 |
+### 5.3 Chấm mù DiT-IC so với MS-ILLM
 
-DiT-IC chỉ có điểm vận hành tới khoảng 0.10 bpp. Ở 0.15, nó tiết kiệm bit ở các ảnh nó nhận để chuyển sang các ảnh của MS-ILLM.
-
-### 3.3 Chấm mù (11/10)
-
-Chi tiết trong `results/2026-10-11_rating_ditic_msillm`.
-
-- **Thiết kế:** 90 cặp crop 512×512 ở 0.075 bpp, DiT-IC so với MS-ILLM, thêm 10 cặp lặp lại có đảo bên.
-- **Người chấm:** 1 người, là bạn.
-- **Kết quả chung:** DiT-IC được chọn 62/90 lần, tức **69%** (khoảng tin cậy 59–78%), tương đương khoảng **+138 Elo**.
-  - Ảnh tự nhiên: 73%.
-  - Ảnh chữ/màn hình: chỉ 4/12. DiT-IC thua ở đây, nên cần mode khác cho loại ảnh này.
-- **Đối chiếu với Q̂ v0:** Q̂ v0 dự đoán +111 Elo, và khớp đa số phiếu ở 26/30 ảnh.
-- **Độ nhất quán:** 7/10 cặp lặp lại được chọn giống lần đầu.
-
-### 3.4 Tốc độ decoder DiT-IC
-
-| bước | 30 ảnh | ghi chú |
-|---|---|---|
-| Bản gốc, fp32 | ~42 s (1.4 s/ảnh) | L40 |
-| Trọng số bf16, RMSNorm NCHW, chia tile, cắt latent theo ảnh | 2.94 → 1.10 s/ảnh | L40 lúc bận |
-| Giải cả khung hình, gom latent theo bội số 16 | 91 → 58.5 s | L40 lúc bận; đo như CLIC: mỗi ảnh giải một lần |
-| **Bản hiện tại, decoder gốc** | **17.5 s** (0.57 s/ảnh) | L40 rảnh, môi trường giống CLIC (torch 2.6) |
-| **Bản hiện tại, decoder chưng cất** | **11.4 s** (0.37 s/ảnh) | như trên |
-| Nạp mạng (chưa tính ở trên) | ~18 s | Dựng từ checkpoint fp32 4.3 GB. Bản nộp sẽ gói sẵn trọng số bf16 |
-
-- **Đã thử, không có lợi:** channels_last, `cudnn.benchmark`, fp16, tách up-conv thành sub-pixel (đúng nhưng chậm hơn).
-- **`torch.compile`:** nhanh hơn 1.45 lần. Muốn dùng cho bài nộp phải build bằng AOTInductor trên torch 2.6, kiến trúc sm_89.
-  Chưa làm.
-
-### 3.5 Chưng cất decoder DC-AE
-
-Chi tiết trong `results/2026-10-11_ditic_distill.md`.
-
-- **Cấu trúc:** decoder trò có ba tầng độ phân giải cao còn một nửa số kênh. Phần đầu được chép từ decoder gốc và đóng băng.
-- **Huấn luyện:** 20k bước L1 + LPIPS, sau đó 30k bước có thêm GAN (trọng số 0.1).
-- **Chất lượng:** kém decoder gốc 0.13 / 0.17 / 0.16 Q̂ ở q2 / q3 / q4, tức khoảng −29 Elo. Vẫn hơn MS-ILLM khoảng 0.45 Q̂.
-- **Lưu trữ:** checkpoint `~/clic/distill/students/{q2,q3,q4}.pt` **chỉ có trên server**.
-
-### 3.6 Tất định của entropy coding
-
-Chi tiết trong `results/2026-10-12_ditic_determinism`.
-
-| hai bên | precision | kết quả |
-|---|---|---|
-| CPU ↔ GPU | fp32 | 15–60% chỉ số lệch → ảnh hỏng |
-| CPU ↔ GPU | fp64 | khớp từng bit, nhưng phần entropy mất 1.5 s/ảnh |
-| GPU 0 ↔ GPU 1 (cùng máy, cùng L40) | fp32 | khớp từng bit, 0.14 s/ảnh |
-| L40 → L40, môi trường giống CLIC (kit L4, 13/10) | fp32 | khớp từng bit trên cả 30 ảnh |
-
-- **Phạm vi:** vấn đề này áp dụng cho mọi codec có hyperprior số thực, **kể cả MS-ILLM**.
-- **Hướng A:** nén trên đúng loại máy và phần mềm như decoder của CLIC, tức L4 với torch 2.6 và cuDNN deterministic.
-  Chưa kiểm chứng giữa hai máy L4.
-- **Hướng B (dự phòng):** chuỗi tham số entropy bằng số nguyên int8. Phải fine-tune có lượng tử hoá, ước khoảng một tuần.
-
-## 4. Vị trí ước lượng so với 2025
-
-Lấy VTM 2025 làm mốc ở từng rate, cộng chênh Q̂ v0 × 174. Đây là suy luận, chỉ đúng về cỡ độ lớn.
-
-| rate | phương án | Elo ước lượng | GPU nhất 2025 | còn thiếu |
-|---|---|---|---|---|
-| 0.075 | trộn (DiT-IC) | ~1875 theo Q̂, ~1900 theo chấm mù | 1929 (Vcoder) | ~30–55 |
-| 0.15 | trộn (DiT-IC + MS-ILLM) | ~2030 | 2127 | **~95** |
-| 0.3 | trộn (chủ yếu MS-ILLM) | ~2230 | 2269 | ~40 |
-
-- **Cách xếp hạng chung:** cộng thứ hạng ở từng rate. Năm 2025, nhóm đầu ở 0.15 và 0.3 chỉ cách nhau khoảng 20 Elo.
-  Với mức thiếu trên, mình nằm ngoài top ở hai rate này.
-- **Đây chỉ là mức sàn.** Các đội 2027 cũng sẽ mạnh lên: năm 2025 không có bài diffusion vì luật tốc độ, năm 2027 thì có thể có.
-- **Giới hạn của ước lượng:**
-  - Q̂ v0 chỉ đúng khoảng 81%.
-  - Phiếu chấm mù mới có một người.
-  - Bộ test 2027 là ảnh mới, không phải 30 ảnh này.
-
-## 5. Còn thiếu để nộp được bài
-
-| việc | trạng thái | ghi chú |
-|---|---|---|
-| Decoder chạy trong môi trường CLIC (torch 2.6, **không có** diffusers, compressai, timm, peft) | 🟡 Có nền | `src/clic27/nn` đã có DC-AE và SANA bằng torch thuần. Còn thiếu: phần codec của DiT-IC, prompter, bước scheduler, rANS (hoặc chuyển sang `range-coder` 1.1 có sẵn), MS-ILLM. Đã có thẻ đề xuất session riêng |
-| Decoder ≤ 4 GB | ⚠️ Đang vượt | Mỗi mức q của DiT-IC khoảng 1.8 GB ở bf16, và bộ chia bit dùng cả q2, q3, q4 (khoảng 5.3 GB) cộng MS-ILLM. Phải dùng chung trọng số SANA, chỉ lưu phần chênh cho từng q, hoặc bớt số mức q |
-| RAM 12 GB, 2 CPU | ⬜ Chưa đo | `l4_check.py speed` nay ghi RAM đỉnh và số CPU. File kit trên server chưa đóng gói lại với bản này |
-| Tốc độ trên L4 | ⬜ Chưa đo | Kit `experiments/l4_kit` sẵn sàng. Thuê một L4 khoảng 30 phút, chi phí khoảng 1 USD. Giả lập L4 trên L40 bằng MPS đã thử và cho kết quả không tin được |
-| Tất định giữa hai L4 | ⬜ Chưa đo | Cùng kit, cần lần thuê thứ hai trên một máy khác |
-| Phát hiện ảnh chữ/màn hình để đổi mode | ⬜ Chưa làm | Bộ chia bit chọn mode theo Q̂, mà Q̂ v0 không bắt được lỗi chữ: ở 0.075 nó giao 29/30 ảnh cho DiT-IC, kể cả ảnh màn hình. Trong khi đó người chấm chỉ chọn DiT-IC 4/12 lần trên crop có chữ. Cần quy tắc riêng phía encoder |
-| Định dạng bitstream, `check_submission.py`, nộp thử | ⬜ Chưa làm | Kế hoạch v2 hẹn tháng 11. Chưa biết server validation đã mở chưa |
-
-## 6. Còn thiếu để thắng
-
-1. **0.15 bpp (~95 Elo, đòn bẩy lớn nhất).** DiT-IC dừng ở khoảng 0.10 bpp. Cần thêm điểm vận hành 0.15–0.3, ví dụ
-   fine-tune codec của DiT-IC với λ thấp hơn, bắt đầu từ q4, trên server. Đây là việc train, tính bằng tuần.
-2. **0.3 bpp (~40 Elo).** Fine-tune MS-ILLM với GAN/LPIPS hướng theo Q̂, hoặc dùng DiT-IC sau khi đã mở rộng rate.
-3. **Tốc độ.** Nếu L4 chậm như ước tính, cần decoder chưng cất, AOTInductor, hoặc chưng cất mạnh hơn.
-   Mục tiêu trong kế hoạch: ≤ 20 s cho 30 ảnh.
-4. **Thêm người chấm.** Một người chấm là quá ít trước mốc quyết định. Trang chấm mù đã có sẵn và chia sẻ được.
-5. **Whitepaper 2025.** Cần bạn mở OpenReview và qua bước xác minh, để mình đọc cách các đội đầu làm.
-
-## 7. Rủi ro
-
-| rủi ro | mức | cách xử lý |
-|---|---|---|
-| DiT-IC quá chậm trên L4, rơi vào 25% chậm nhất | **cao** | Đo ngay. Dùng decoder chưng cất, AOTInductor. Nếu vẫn không đạt, quay về MS-ILLM ở 0.075 (mất khoảng 110 Elo) |
-| Bitstream không giải đúng trên L4 của CLIC | cao | Đo giữa hai L4, nộp thử lên server validation. Dự phòng: entropy số nguyên (khoảng một tuần) |
-| Decoder vượt 4 GB | trung bình | Dùng chung trọng số SANA cho các mức q, lưu phần chênh; hoặc lượng tử trọng số |
-| Giấy phép: trọng số MS-ILLM là CC-BY-NC; giấy phép của SANA và DiT-IC chưa kiểm tra | thấp–trung bình | Kiểm tra giấy phép và luật CLIC về trọng số bên thứ ba trước khi nộp |
-| Mất code hoặc checkpoint | trung bình | Push `main` lên GitHub, sao lưu `~/clic/distill/students` |
-| Q̂ dẫn sai hướng | trung bình | Thêm người chấm. Đã thấy Q̂ v0 khớp người ở 26/30 ảnh |
-
-## 8. Đề xuất cho 2 tuần tới (đến mốc 27/10)
-
-1. **Thuê L4 lần 1 (khoảng 30 phút):** lấy số tốc độ thật của decoder gốc và decoder chưng cất, cùng kết quả kiểm L40 → L4.
-   Số này quyết định DiT-IC còn dùng được không.
-2. **Thuê L4 lần 2, trên máy khác:** kiểm bitstream giữa hai L4 (hướng A).
-3. **Song song: đóng gói decoder DiT-IC chạy được trong môi trường CLIC.** Việc này cần làm dù chọn model nào, gồm cả bài
-   toán dung lượng 4 GB.
-4. **Thêm 2–3 người chấm** bằng trang chấm mù hiện có.
-5. **Mốc 27/10:** chốt decoder (gốc hay chưng cất) và kế hoạch mở rộng DiT-IC lên 0.15.
-
-## 9. Tình trạng repo
-
-**Bản đồ code:**
-
-| thư mục | nội dung |
+| Thuộc tính | Thiết lập / kết quả |
 |---|---|
-| `src/clic27/` | `nn/`: DC-AE, SANA bằng torch thuần. `entropy/`: rANS numpy, bảng CDF số nguyên, mạng số nguyên. `eval/metrics.py`. `codec/`: S1 (đã loại) |
-| `experiments/bakeoff/` | So sánh các ứng viên và chia bit theo Q̂. DiT-IC, CRDR, Cool-chic chạy trong tiến trình riêng |
-| `experiments/qhat/` | Fit Q̂ v0/v1 trên dữ liệu chấm của CLIC |
-| `experiments/rating/` | Trang chấm mù (artifact) và các cặp ảnh |
-| `experiments/ditic_speed/`, `ditic_distill/` | Tăng tốc decoder DiT-IC, chưng cất decoder DC-AE |
-| `experiments/determinism/` | Kiểm tất định entropy coding giữa các thiết bị |
-| `experiments/l4_kit/` | Kit đo trên L4 thuê: dựng môi trường giống CLIC, đo tốc độ, kiểm bitstream giữa hai máy |
-| `plans/`, `reports/`, `results/` | Kế hoạch, báo cáo, kết quả theo ngày |
+| Ngày | 11/10/2026 |
+| Artifact | **results/2026-10-11_rating_ditic_msillm** |
+| Thiết lập | 90 cặp crop 512×512, 0.075 bpp; thêm 10 cặp lặp lại có đảo bên |
+| Người chấm | 1 |
+| DiT-IC được chọn | 62/90 = 68.9% (làm tròn 69%) |
+| Khoảng tin cậy được báo cáo | 59–78% |
+| Preference trên ảnh tự nhiên | 73% |
+| Ảnh chữ/màn hình | DiT-IC được chọn 4/12 lần |
+| Q̂ v0 dự đoán | +111 Elo; khớp đa số phiếu trên 26/30 ảnh |
+| Độ nhất quán của 10 cặp lặp | 7/10 cặp |
 
-**Việc dọn dẹp:**
-- **Git:** ngày 14/10, nhánh `claude/what-should-i-do-now-f6f4dd` (từ Cool-chic `clic2025` tới báo cáo này) đã được merge
-  fast-forward vào `main`. `origin/main` vẫn dừng ở bake-off 09/10, cần push.
-- **Giả lập L4:** `experiments/l4_kit/l4_emu.py` và `emulate_l4.sh` (giả lập L4 trên L40 bằng MPS) được giữ lại để ghi nhận.
-  Số hiệu chỉnh ghi ở đầu `emulate_l4.sh`. Không dùng số đo từ hai file này.
-- **Tài liệu cũ:**
-  - `README.md` vẫn mô tả quy trình Kaggle và chưa nhắc tới DiT-IC, server, chưng cất, kit L4.
-  - `plans/Plan CLIC 2027 v2` vẫn ghi compute là Kaggle cộng L4.
-- **Chỉ có trên server, chưa sao lưu:** checkpoint chưng cất, latent DIV2K dùng để chưng cất, các file streams.
+Kết quả ủng hộ DiT-IC trên ảnh tự nhiên ở 0.075 bpp nhưng đồng thời cho thấy cần xử lý riêng ảnh chữ/màn hình. Vì chỉ có một người chấm và số crop chữ ít, cần xác nhận với thêm người chấm và nhiều ảnh hơn.
+
+## 6. Các codec đã khảo sát
+
+| Codec / ứng viên | Kết quả được ghi nhận | Quyết định hiện tại |
+|---|---|---|
+| VTM 4:2:0 | Baseline cổ điển | Giữ làm mốc so sánh |
+| VTM-SCC | Tốt nhất trong các lựa chọn đã thử cho ảnh chữ/màn hình | Giữ làm mode chuyên biệt |
+| S1: DC-AE + S1 + residual VTM | Thấp hơn MS-ILLM khoảng 1–2.3 Q̂ ở ba rate; khoảng 9 s/ảnh trên T4 | Loại ngày 06/10 |
+| mbt2018-mean | Q̂ khoảng −2.0 ở 0.15 bpp | Loại |
+| SD-Turbo refiner trên MS-ILLM | Kém MS-ILLM | Loại ngày 08/10 |
+| CoD-Lite | −0.382 ở 0.075 bpp so với −0.451 của MS-ILLM; khoảng 0.15 s/ảnh; kém MS-ILLM ở 0.15/0.3 | Không dùng làm base; có thể được bộ trộn chọn |
+| Cool-chic (tag clic2025, decoder C trên CPU) | Kém MS-ILLM khoảng 0.4–0.6 Q̂; encode khoảng 1.5 giờ/ảnh/λ | Tạm dừng ngày 09/10 |
+| CRDR | Kém MS-ILLM theo Q̂ v0; khoảng 5 s/ảnh để giải mã | Loại ngày 10/10 |
+| MS-ILLM | Base mạnh ở 0.15 và 0.3 bpp | Chọn; cần rà soát giấy phép trọng số CC-BY-NC |
+| DiT-IC (SANA-600M + DC-AE + codec kiểu ELIC) | +0.164 ở 0.075 bpp, cao hơn MS-ILLM khoảng 0.62 Q̂; kém trên chữ/màn hình | Chọn cho ảnh tự nhiên ở 0.075 bpp |
+| DiT-IC chưng cất | Kém decoder gốc khoảng 0.16 Q̂; nhanh hơn khoảng 1.5× trong phép đo được báo cáo | Dự phòng nếu tốc độ L4 không đạt |
+
+## 7. Tốc độ, dung lượng và tính tất định
+
+### 7.1 Tốc độ decoder DiT-IC trên L40
+
+| Cấu hình / phép đo | Thời gian | Diễn giải |
+|---|---:|---|
+| Decoder gốc fp32 | Khoảng 42 s / 30 ảnh (1.4 s/ảnh) | Đo ban đầu trên L40 |
+| Tối ưu bf16, RMSNorm NCHW, tile và cắt latent theo ảnh | 2.94 → 1.10 s/ảnh | Server đang bận |
+| Giải toàn khung hình, gom latent theo bội số 16 | 91 → 58.5 s / 30 ảnh | Server đang bận; mỗi ảnh giải một lần |
+| **Decoder gốc hiện tại** | **17.5 s / 30 ảnh (0.57 s/ảnh)** | L40 rảnh, môi trường gần CLIC, torch 2.6 |
+| **Decoder chưng cất hiện tại** | **11.4 s / 30 ảnh (0.37 s/ảnh)** | Cùng điều kiện nêu trên |
+| Nạp mạng | Khoảng 18 s | Không nằm trong thời gian trên; dựng từ checkpoint fp32 4.3 GB |
+
+Các thử nghiệm channels_last, cudnn.benchmark, fp16 và tách up-convolution thành sub-pixel không đem lại lợi ích trong cấu hình đã thử. torch.compile nhanh hơn khoảng 1.45×, nhưng chưa tích hợp vào artifact nộp; hướng được đề xuất là build AOTInductor trên torch 2.6, kiến trúc sm_89.
+
+**Chưa được kết luận decoder đạt mục tiêu tốc độ trên L4.** Các phép đo hiện có là trên L40. Mô phỏng L4 bằng MPS đã được ghi nhận là không đáng tin cậy.
+
+### 7.2 Chưng cất decoder DC-AE
+
+- **Artifact:** **results/2026-10-11_ditic_distill.md**.
+- Kiến trúc student giảm một nửa số kênh ở ba tầng độ phân giải cao; phần đầu được sao chép từ decoder gốc và đóng băng.
+- Huấn luyện 20k bước với L1 + LPIPS, sau đó 30k bước bổ sung GAN với trọng số 0.1.
+- Chất lượng kém decoder gốc 0.13 / 0.17 / 0.16 Q̂ ở q2 / q3 / q4, tương đương khoảng −29 Elo theo quy đổi nội bộ.
+- Vẫn cao hơn MS-ILLM khoảng 0.45 Q̂ trong phép so sánh được báo cáo.
+- Checkpoint **~/clic/distill/students/{q2,q3,q4}.pt** hiện chỉ có trên server.
+
+### 7.3 Tính tất định của entropy coding
+
+| Thiết bị / precision | Kết quả | Ý nghĩa |
+|---|---|---|
+| CPU ↔ GPU, fp32 | 15–60% chỉ số lệch; ảnh hỏng | Không dùng cấu hình này |
+| CPU ↔ GPU, fp64 | Khớp từng bit; phần entropy mất khoảng 1.5 s/ảnh | Đúng nhưng có chi phí lớn |
+| GPU 0 ↔ GPU 1 trên cùng máy L40, fp32 | Khớp từng bit; 0.14 s/ảnh | Bằng chứng trong cùng máy |
+| L40 ↔ L40, môi trường giống CLIC, kit L4 ngày 13/10, fp32 | Khớp từng bit trên 30 ảnh | Chưa phải kiểm tra L4 ↔ L4 |
+
+Vấn đề có thể ảnh hưởng mọi codec dùng hyperprior số thực, bao gồm MS-ILLM. Hướng ưu tiên là kiểm tra giải mã trên đúng phần cứng và phần mềm của môi trường đích. **Hai máy L4 độc lập vẫn chưa được kiểm tra.** Phương án dự phòng là entropy coding số nguyên/int8 và fine-tune có lượng tử hóa; ước lượng công sức khoảng một tuần, chưa phải cam kết thời gian.
+
+### 7.4 Ngân sách tài nguyên
+
+| Ràng buộc | Trạng thái |
+|---|---|
+| Decoder ≤ 4 GB | **Chưa đạt / chưa chứng minh**: q2, q3, q4 của DiT-IC khoảng 1.8 GB mỗi mức ở bf16, tổng khoảng 5.3 GB trước khi cộng MS-ILLM |
+| RAM 12 GB, 2 CPU | Chưa đo trong cấu hình submission cuối |
+| L4 24 GB | Chưa benchmark trên L4 thật |
+| Thời gian giải mã | Mục tiêu nội bộ ≤20 s / 30 ảnh; chưa xác nhận trên L4 |
+| Tất định giữa hai máy L4 | Chưa kiểm tra |
+
+Tài liệu CLIC nêu môi trường GPU track có 2 CPU, 12 GB RAM và L4 24 GB; đồng thời 25% submission chậm nhất có thể không được xét giải. Cần kiểm tra lại quy định chính thức và môi trường của đúng mùa thi trước khi đóng băng decoder: https://clic2027.compression.cc/faq/
+
+## 8. Ước lượng khoảng cách so với kết quả 2025
+
+Ước lượng nội bộ lấy VTM 2025 làm mốc theo từng rate và cộng chênh lệch Q̂ v0 × 174 Elo. Đây là quy đổi định hướng, không phải dự đoán thứ hạng đáng tin cậy.
+
+| Rate | Phương án hiện tại | Elo ước lượng trong báo cáo | Mốc GPU nhất 2025 | Khoảng cách ước lượng |
+|---|---|---:|---:|---:|
+| 0.075 bpp | Trộn, chủ yếu DiT-IC | ~1875 theo Q̂; ~1900 theo chấm mù | 1929 (Vcoder) | Thiếu khoảng 30–55 |
+| 0.15 bpp | DiT-IC + MS-ILLM | ~2030 | 2127 | **Thiếu khoảng 95** |
+| 0.3 bpp | Trộn, chủ yếu MS-ILLM | ~2230 | 2269 | Thiếu khoảng 40 |
+
+### Cách diễn giải
+
+- Đây là **ước lượng thô**, không phải bảng xếp hạng CLIC 2027.
+- Q̂ v0 có accuracy được báo cáo khoảng 0.812; chấm mù mới có một người; bake-off chỉ có 30 ảnh.
+- Tập test 2027 sẽ khác bộ ảnh đã dùng.
+- Các đội khác có thể cải thiện đáng kể so với năm 2025.
+- Theo ước lượng hiện tại, 0.15 bpp là khoảng trống lớn nhất; đây là ưu tiên nghiên cứu về chất lượng sau khi giải quyết các rủi ro submission.
+
+## 9. Việc cần làm trước khi nộp
+
+| Ưu tiên | Việc | Tiêu chí hoàn thành | Trạng thái |
+|---|---|---|---|
+| **P0** | Push main lên GitHub | Remote chứa đầy đủ code và báo cáo đến 14/10 | Chưa hoàn thành theo ghi chú repo |
+| **P0** | Sao lưu checkpoint chưng cất, latent DIV2K và streams | Có bản sao kiểm tra được ngoài server hiện tại | Chưa hoàn thành |
+| **P0** | Chạy kit trên L4 thật | Có log thời gian giải mã, thời gian nạp, RAM đỉnh và phiên bản môi trường | Chưa chạy |
+| **P0** | Kiểm tra bitstream L4 ↔ L4 | Encode trên máy A, decode trên máy B; pixel đầu ra và checksum khớp | Chưa chạy |
+| **P0** | Decoder chạy trong môi trường CLIC tối giản | Không phụ thuộc diffusers, compressai, timm, peft; giải mã đủ file và đúng kích thước | Mới có nền, chưa tích hợp hoàn chỉnh |
+| **P0** | Giải quyết ngân sách 4 GB | Tổng artifact decoder và trọng số trong giới hạn; có đo chính thức | Chưa đạt / chưa chứng minh |
+| **P1** | Thêm bộ phát hiện ảnh chữ/màn hình | Mode VTM-SCC được chọn đúng trên validation; đo precision/recall và ảnh hưởng chất lượng | Chưa làm |
+| **P1** | Mở rộng chấm mù | Thêm 2–3 người chấm, giữ cặp lặp và phân tích theo loại ảnh | Chưa làm |
+| **P1** | Chạy checker và submission thử | Không thiếu file; tên, kích thước và định dạng đầu ra đúng | Chưa làm |
+| **P1** | Rà soát giấy phép | Xác minh code, pretrained weights và quyền sử dụng trong cuộc thi | Chưa hoàn thành |
+| **P2** | Mở rộng DiT-IC lên 0.15–0.3 bpp | Có operating point mới và bake-off công bằng ở cùng bitrate | Chưa làm |
+| **P2** | Cải thiện 0.3 bpp | Thử fine-tune MS-ILLM theo GAN/LPIPS hoặc mục tiêu preference; xác nhận bằng chấm mù | Đề xuất |
+| **P2** | Thử AOTInductor / chưng cất thêm | Cải thiện tốc độ thực trên L4 mà không làm giảm Q̂ quá mức | Chưa hoàn thành |
+| **P2** | Đọc paper/whitepaper các đội đầu 2025 | Ghi lại phương pháp, bitrate, tốc độ và tính khả thi với luật 2027 | Bị chặn một phần bởi OpenReview |
+
+### Kế hoạch hành động đến 27/10/2026
+
+1. **L4 run #1:** chạy decoder gốc và chưng cất; đo end-to-end, memory và kiểm tra bitstream L40 → L4.
+2. **L4 run #2:** dùng một máy L4 khác để xác nhận bitstream giữa hai máy.
+3. **Đóng gói decoder DiT-IC:** loại bỏ phụ thuộc không có trong môi trường đích; xử lý chia sẻ trọng số SANA giữa các mức q hoặc giảm số mức q để đạt giới hạn 4 GB.
+4. **Chạy thêm chấm mù:** mời 2–3 người chấm; phân tích riêng ảnh tự nhiên và ảnh chữ/màn hình.
+5. **Cổng quyết định ngày 27/10:** chốt decoder gốc hay chưng cất và quyết định có tiếp tục mở rộng DiT-IC lên 0.15 bpp hay không.
+
+Nếu bất kỳ kiểm tra P0 nào thất bại, ưu tiên chuyển sang phương án đơn giản hơn có thể giải mã tin cậy thay vì tối ưu thêm Q̂ trên một pipeline chưa thể nộp.
+
+## 10. Rủi ro và phương án giảm thiểu
+
+| Rủi ro | Mức | Giảm thiểu / phương án dự phòng |
+|---|---|---|
+| DiT-IC quá chậm trên L4, rơi vào nhóm 25% chậm nhất | **Cao** | Đo L4 ngay; thử decoder chưng cất và AOTInductor. Nếu không đạt, cân nhắc MS-ILLM ở 0.075 bpp, với tổn thất chất lượng ước khoảng 110 Elo theo ghi chú nội bộ |
+| Bitstream sai giữa môi trường encode/decode | **Cao** | Kiểm tra hai máy L4; cố định môi trường. Dự phòng entropy coding số nguyên |
+| Decoder vượt 4 GB | **Cao** | Chia sẻ trọng số SANA giữa các mức q, lưu phần delta hoặc giảm số mức q; xác nhận bằng artifact thực tế |
+| Q̂ chọn sai loại ảnh | **Trung bình–cao** | Phát hiện ảnh chữ/màn hình; đánh giá bằng chấm mù theo nhóm ảnh |
+| Q̂ không khái quát sang test 2027 | **Trung bình** | Thêm người chấm, tăng số ảnh, báo cáo độ bất định |
+| Vi phạm giấy phép / điều kiện sử dụng pretrained weights | **Trung bình** | Rà soát giấy phép MS-ILLM, SANA, DiT-IC và quy định cuộc thi trước khi nộp |
+| Mất code hoặc checkpoint | **Cao** | Push remote; sao lưu checkpoint, latent và streams; kiểm tra khả năng khôi phục |
+
+## 11. Bản đồ code và trạng thái repo
+
+| Đường dẫn | Vai trò |
+|---|---|
+| **src/clic27/nn/** | DC-AE và SANA triển khai bằng PyTorch thuần |
+| **src/clic27/entropy/** | rANS bằng NumPy, bảng CDF số nguyên và mạng số nguyên |
+| **src/clic27/eval/metrics.py** | Các metric đánh giá |
+| **src/clic27/codec/** | Codec S1, hiện đã bị loại khỏi lựa chọn chính |
+| **experiments/bakeoff/** | Chạy ứng viên, so sánh codec và phân bổ byte theo Q̂; một số codec chạy trong tiến trình riêng |
+| **experiments/qhat/** | Fit và đánh giá Q̂ v0/v1 |
+| **experiments/rating/** | Artifact trang chấm mù và các cặp ảnh |
+| **experiments/ditic_speed/** | Thử nghiệm tối ưu tốc độ DiT-IC |
+| **experiments/ditic_distill/** | Chưng cất decoder DC-AE |
+| **experiments/determinism/** | Kiểm tra tính tất định entropy coding |
+| **experiments/l4_kit/** | Kit benchmark trên L4 thuê: môi trường, tốc độ và kiểm tra bitstream |
+| **plans/**, **reports/**, **results/** | Kế hoạch, báo cáo và kết quả thí nghiệm |
+
+### Vệ sinh Git và artifact
+
+- Theo ghi chú ngày 14/10, nhánh **claude/what-should-i-do-now-f6f4dd** đã được merge fast-forward vào **main** trên máy local. **origin/main** vẫn dừng ở bake-off ngày 09/10 và cần push.
+- **experiments/l4_kit/l4_emu.py** và **emulate_l4.sh** được giữ để ghi lại thử nghiệm mô phỏng L4 trên L40 bằng MPS; **không dùng kết quả mô phỏng làm benchmark L4**.
+- **README.md** vẫn mô tả quy trình Kaggle và chưa phản ánh DiT-IC, server, decoder chưng cất và kit L4.
+- **plans/Plan CLIC 2027 v2** vẫn ghi compute là Kaggle cộng L4.
+- Checkpoint chưng cất, latent DIV2K dùng để chưng cất và các file streams hiện chỉ có trên server theo ghi chú nguồn.
+
+## 12. Kết luận
+
+Hướng nghiên cứu hiện tại có bằng chứng ban đầu ủng hộ DiT-IC cho ảnh tự nhiên ở bitrate thấp, MS-ILLM ở bitrate trung bình/cao và VTM-SCC cho ảnh chữ/màn hình. Phương án trộn theo ảnh đạt Q̂ v0 tốt nhất trong bake-off 30 ảnh đã báo cáo. Tuy nhiên, đây chưa phải bằng chứng rằng hệ thống sẽ thắng CLIC 2027.
+
+Trong ngắn hạn, **không nên tối ưu chất lượng thêm trước khi khóa được khả năng giải mã**. Ba cổng bắt buộc là: (1) chạy được trong môi trường CLIC, (2) giải mã nhất quán giữa hai máy L4, và (3) đáp ứng giới hạn thời gian và dung lượng. Sau khi vượt qua các cổng này, cần mở rộng đánh giá người chấm và tập ảnh, rồi mới đầu tư vào việc mở rộng operating point DiT-IC ở 0.15–0.3 bpp.
+
+## Tài liệu tham khảo
+
+- CLIC 2027 FAQ — môi trường đánh giá và quy định hiệu năng: https://clic2027.compression.cc/faq/
+- CLIC 2027 tasks: https://clic2027.compression.cc/tasks/
+- MS-ILLM, *Improving Statistical Fidelity for Neural Image Compression with Implicit Local Likelihood Models*: https://arxiv.org/abs/2301.11189
+- DC-AE: https://arxiv.org/abs/2410.10733
+- SANA: https://arxiv.org/abs/2410.10629
+- CoD-Lite: https://arxiv.org/abs/2604.12525
+- COOL-CHIC: https://openaccess.thecvf.com/content/ICCV2023/html/Ladune_COOL-CHIC_Coordinate-based_Low_Complexity_Hierarchical_Image_Codec_ICCV_2023_paper.html
+- MBT2018, *Joint Autoregressive and Hierarchical Priors for Learned Image Compression*: https://arxiv.org/abs/1809.02736
