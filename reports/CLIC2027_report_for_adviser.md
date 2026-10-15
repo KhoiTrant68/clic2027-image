@@ -8,6 +8,8 @@ decoder và tính tái lập của môi trường CLIC 2027.
 
 **Gợi ý đọc:** mục 1 tóm tắt quyết định; mục 5 trình bày bằng chứng thực nghiệm; mục 9–10 là hướng nghiên cứu và nội dung xin ý kiến. Mục 3 giải thích pipeline, còn Phụ lục A trình bày nền tảng MS-ILLM.
 
+**Đọc kiến trúc model:** [Phụ lục B](#model-mechanisms) bổ sung cơ chế encode/decode, thành phần dùng khi train, sơ đồ kiến trúc và đối chiếu với code đã chạy. Nguồn là paper gốc và implementation chính thức, đọc/đối chiếu ngày 15/10/2026.
+
 ## 1. Tóm tắt dự án
 
 **Cập nhật sau vòng tích hợp ngày 15/10:** PULSE-L đã chạy qua CLI bake-off chính với **150 điểm (30 ảnh × q0–q4)**, có header truyền thật. Mix đạt **Q̂ 1.4978 tại 0.3 bpp**, thay cho 1.4912 của vòng sàng lọc dưới đây; tại 0.15 bpp vẫn đạt 0.7891. Gói decoder PULSE-L riêng giải mã 30/30 ảnh khớp pixel trong **12.235 giây trên L40**, tính cả giải nén gói, khởi động, nạp model và ghi PNG. Gói ZIP 74.7 MB; VRAM toàn thiết bị cao nhất trong vòng tích hợp là 5,920 MiB, thấp hơn giới hạn 30 GB/GPU. Đây chưa phải benchmark toàn bộ mix hoặc trên L4. Chi tiết và giới hạn phép đo: [báo cáo tích hợp PULSE-L](CLIC2027_pulse_integration_2026-10-15.md). Các số 204 lượt và 1.4912 bên dưới mô tả vòng sàng lọc trước đó; 120 payload lặp lại đã được xác nhận giống hệt, không tính là điểm chất lượng mới.
@@ -513,6 +515,8 @@ tính tất định của mọi thành phần entropy coding phụ thuộc số 
 
 ### 4.3 DiT-IC — hướng diffusion/latent cho bitrate thấp
 
+**Paper gốc:** Junqi Shi và cộng sự, *DiT-IC: Aligned Diffusion Transformer for Efficient Image Compression*, CVPR 2026. [Bản proceedings](https://openaccess.thecvf.com/content/CVPR2026/html/Shi_DiT-IC_Aligned_Diffusion_Transformer_for_Efficient_Image_Compression_CVPR_2026_paper.html). Xem [B.3](#model-ditic) về ba cơ chế alignment và sự khác biệt với student nội bộ.
+
 **Thành phần được ghi trong repo:** SANA-600M, DC-AE và codec latent
 theo hướng ELIC/entropy coding.\
 Tham khảo nền tảng: [SANA](https://arxiv.org/abs/2410.10629),
@@ -594,9 +598,26 @@ kiện.
 
 ### 4.7 PULSE-L — ứng viên decoder nhẹ mới
 
+**Phân biệt phiên bản:** PULSE base khoảng 5.2 kMAC/pixel, PULSE-L perceptual khoảng 20 kMAC/pixel theo [bảng model chính thức](https://github.com/microsoft/GenCodec/blob/main/PULSE/README.md). Không gán độ phức tạp hay tốc độ CPU của base cho checkpoint L mà repo đang dùng. Xem [B.4](#model-pulse) về pixel renderer, CDF số nguyên và Meta Prior.
+
 PULSE kết hợp xử lý đặc trưng ở độ phân giải thấp, pixel renderer và entropy path có thành phần số nguyên. Bản phát hành có checkpoint perceptual base/L và nhiều mức q. Dự án đã thử cả hai, sau đó chọn PULSE-L để đánh giá đầy đủ vì vùng rate và khả năng bổ sung cho mix phù hợp hơn. [Implementation chính thức](https://github.com/microsoft/GenCodec/tree/main/PULSE).
 
 Vai trò hiện tại của PULSE-L là bổ sung cho các codec đã có, chưa thay chúng ở mọi rate. Các con số chất lượng và tốc độ do dự án đo được trình bày tại mục 5.8–5.10; không dùng benchmark phần cứng của tác giả thay cho benchmark L40/L4 của dự án. Entropy số nguyên là đặc tính đáng quan tâm, nhưng parity của toàn pipeline vẫn cần kiểm thực tế.
+
+### 4.8 Bản đồ cơ chế của các model đã chạy
+
+| Model / nhóm | Khác biệt cần hiểu | Phần đọc chi tiết |
+|---|---|---|
+| MS-ILLM | Discriminator tạo tín hiệu học cục bộ; không nằm trong decoder triển khai | Phụ lục A và [B.2](#model-msillm) |
+| DiT-IC; student nội bộ | Diffusion một bước trong latent; student của repo chỉ thay DC-AE decoder | [B.3](#model-ditic) |
+| PULSE / PULSE-L | Decoder bất đối xứng; tách điều khiển entropy khỏi dựng ảnh | [B.4](#model-pulse) |
+| CoD-Lite | Mã hóa condition bằng VQ; dựng ảnh trực tiếp bằng diffusion convolution | [B.5](#model-codlite) |
+| DC-VIC / AFP-GIC | Dự đoán prior từ thông tin đã truyền; không có ảnh gốc ở decoder | [B.6–B.7](#model-dcvic) |
+| CRDR | Điều khiển bitrate và realism riêng | [B.8](#model-crdr) |
+| Cool-Chic | Tối ưu riêng cho mỗi ảnh; phải truyền cả tham số mạng | [B.9](#model-coolchic) |
+| MBT2018-mean | Mean-scale hyperprior; phân biệt với bản autoregressive đầy đủ | [B.10](#model-mbt) |
+| VTM / VTM-SCC | Dự đoán khối và residual; công cụ riêng cho screen content | [B.11](#model-vtm) |
+| S1 / SD-Turbo refiner | Hai pipeline thí nghiệm của repo; không coi là paper codec mới | [B.12](#model-internal) |
 
 ## 5. Thiết kế thí nghiệm và ý nghĩa
 
@@ -1117,3 +1138,233 @@ Khi reproduce hoặc fine-tune trong dự án, cần đối chiếu config, chec
 ### A.6 Liên hệ với hướng nghiên cứu hiện tại
 
 MS-ILLM cho thấy việc thiết kế tín hiệu đối kháng cục bộ có thể quan trọng bên cạnh kiến trúc entropy. Điều dự án cần kiểm tra tiếp là liệu cách học chất lượng này hoặc distillation từ teacher có chuyển được sang decoder nhanh ở bitrate thấp mà vẫn giữ chữ/mặt hay không. Phụ lục cung cấp nền tảng cho câu hỏi đó; bằng chứng hiện tại của dự án vẫn là các phép đo và giới hạn tại mục 5, không phải một phương pháp training mới đã được xác nhận.
+
+<a id="model-mechanisms"></a>
+
+## Phụ lục B. Cơ chế và kiến trúc các model — đọc paper, đối chiếu implementation
+
+Phạm vi gồm các codec đã chạy trong repo và SANA/DC-AE/SD-Turbo làm nền tảng. Các ứng viên mới chỉ liệt kê ở mục 9.1 chưa được xem như implementation đã kiểm chứng. Sơ đồ dưới đây do báo cáo diễn giải ở mức luồng dữ liệu; không thay thế sơ đồ lớp đầy đủ của tác giả. Nhãn **Theo paper**, **Trong repo** và **Hàm ý** giúp phân biệt nguồn kiến thức với bằng chứng nội bộ.
+
+### B.1 Cách đọc một neural codec
+
+Đặt $x$ là ảnh, $y=g_a(x)$ là latent chính, $\hat y=Q(y)$ là latent đã lượng tử hóa. Với hyperprior, $z=h_a(y)$ cung cấp thông tin phụ để dự đoán phân phối của $\hat y$. Rate ước lượng thường có dạng:
+
+$$
+R_{\mathrm{est}}=-\log_2 p(\hat z)-\log_2 p(\hat y\mid\hat z),
+\qquad \hat x=g_s(\hat y).
+$$
+
+Entropy model quyết định cách biến symbol thành bit; synthesis transform quyết định cách biến latent đã giải mã thành ảnh. Đó là hai vai trò khác nhau. Mean-scale hyperprior mô hình hóa cả trung bình và độ phân tán; context model có thể bổ sung phụ thuộc giữa các symbol. [Minnen, Ballé và Toderici, NeurIPS 2018, mục 2–3](https://arxiv.org/pdf/1809.02736).
+
+```mermaid
+flowchart LR
+    X["Ảnh gốc x"] --> GA["Analysis transform"] --> Y["Latent y"] --> Q["Lượng tử hóa"]
+    Y --> HA["Hyper encoder"] --> Z["Hyperlatent lượng tử"]
+    Z --> BZ["Entropy encode: stream phụ"] --> DZ["Giải hyperlatent"] --> HS["Hyper decoder"]
+    HS --> P["Tham số xác suất"]
+    Q --> AE["Entropy encode"] --> BY["Stream chính"] --> AD["Entropy decode"]
+    P --> AE
+    P --> AD
+    AD --> GS["Synthesis transform"] --> O["Ảnh tái tạo"]
+```
+
+**Đối chiếu triển khai:** trong report, bpp thực luôn phải tính từ file truyền: payload + kích thước/quality + mode + framing cần thiết. Discriminator, teacher hoặc nhãn sinh từ ảnh gốc chỉ dùng khi train không tự động trở thành dữ liệu decoder được phép sử dụng. Với output số thực, cần tách ba kiểm tra: đọc được entropy stream, khớp latent/symbol và khớp pixel PNG.
+
+<a id="model-msillm"></a>
+
+### B.2 MS-ILLM — học thống kê cục bộ, giữ đường nén mean-scale hyperprior
+
+**Theo paper.** Muckley và cộng sự, *Improving Statistical Fidelity for Neural Image Compression with Implicit Local Likelihood Models*, ICML 2023. VQ-VAE biến ảnh thật thành bản đồ nhãn codebook. Discriminator U-Net dự đoán nhãn cục bộ hoặc fake; codec học tái tạo ảnh có cấu trúc nhãn phù hợp. Đây là cách đưa tín hiệu thống kê cục bộ vào training. Đường nén vẫn là encoder → latent/hyperlatent → entropy coding → decoder. VQ-VAE tạo nhãn và discriminator không cần chạy khi giải mã ảnh. [Paper, mục 4.1–4.5](https://proceedings.mlr.press/v202/muckley23a/muckley23a.pdf).
+
+```mermaid
+flowchart LR
+    X["Ảnh x"] --> C["Codec mean-scale hyperprior"] --> R["Ảnh tái tạo"]
+    X -. "chỉ train" .-> V["VQ-VAE: nhãn cục bộ"]
+    X -.-> D["Discriminator U-Net"]
+    R -.-> D
+    V -. "nhãn giám sát" .-> D
+    D -. "gradient khi train" .-> C
+```
+
+**Trong repo.** `_msillm_load` nạp checkpoint public q1–q5. Encoder/decoder ảnh chạy GPU, phần entropy sử dụng cách phân bố tensor do NeuralCompression quy định. Kiểm mới lưu cả hai payload cùng kích thước ảnh/padding: header 28 byte, không còn chỉ cộng giả định 4 byte. Bật deterministic đạt parity 5/5 ảnh giữa tiến trình; đây là kiểm triển khai nội bộ, không phải kết quả trong paper. [Code bake-off](../experiments/bakeoff/bakeoff.py), [kiểm stream](CLIC2027_msillm_stream_audit_2026-10-15.md).
+
+**Hàm ý:** nếu distill MS-ILLM sang decoder khác, tín hiệu teacher có thể lấy ở image/feature space; không được giả định latent hoặc entropy format tương thích. Phụ lục A trình bày kỹ hơn loss của ILLM.
+
+<a id="model-ditic"></a>
+
+### B.3 DiT-IC — ba alignment để đưa DiT về nhiệm vụ nén ảnh
+
+**Theo paper.** DiT-IC làm việc ở latent giảm kích thước không gian 32 lần. Ba cơ chế chính: variance-guided flow điều chỉnh mức tái tạo theo uncertainty; self-distillation dùng biểu diễn của encoder đóng băng làm đích cho latent tái tạo; latent-conditioned guidance thay điều kiện văn bản bằng embedding dự đoán từ latent. Training dùng alignment và rate–distortion, sau đó thêm đối kháng; LoRA thích nghi DiT và decoder. Khi inference không cần prompt văn bản. [Shi và cộng sự, CVPR 2026, mục 3.1–3.4](https://arxiv.org/html/2603.13162v1#S3).
+
+**Hai nền tảng.** DC-AE nén không gian sâu bằng residual autoencoding: shortcut space-to-channel giúp mạng học phần dư thay vì tự học toàn bộ phép giảm resolution; training nhiều giai đoạn xử lý khó khăn ở ảnh lớn. SANA kết hợp autoencoder nén sâu với linear-attention DiT và FFN có locality. DC-AE một mình chưa tạo file nén entropy, còn SANA gốc là hệ sinh ảnh. [DC-AE, mục 3](https://arxiv.org/html/2410.10733v1); [SANA, mục 3](https://arxiv.org/html/2410.10629v1).
+
+**Trong repo — luồng decoder thực tế:**
+
+```mermaid
+flowchart LR
+    B["Entropy strings + shape"] --> E["Latent codec decode"]
+    E --> M["mean và log-variance"]
+    E --> R["residual"]
+    E --> P["prompt latent"] --> PR["Prompter"]
+    M --> D["SANA DiT, một lần forward"]
+    PR --> D
+    D --> S["Scheduler step với scale"]
+    M --> S
+    S --> A["Cộng residual; hiệu chỉnh scale"]
+    R --> A
+    A --> V["DC-AE decoder"] --> O["RGB"]
+```
+
+Sơ đồ bám hàm `decompress` trong `_DITIC_SCRIPT`: entropy path giữ precision riêng; phần DiT/prompter/DC-AE dùng dtype cấu hình, cùng crop latent, bucket và RMSNorm tối ưu. Đây là bản triển khai đã điều chỉnh cho benchmark, không phải chép nguyên mọi chi tiết paper. [Code repo](../experiments/bakeoff/bakeoff.py), [implementation tác giả](https://github.com/Eric-qi/DiT-IC).
+
+**Phân biệt hai loại distillation:** self-distillation trong paper phục vụ tái tạo một bước của DiT-IC. Thí nghiệm `ditics` của chúng ta thay các tầng DC-AE độ phân giải cao bằng student hẹp hơn và học output teacher. Nó không phải tái lập nguyên recipe self-distillation của paper, cũng không thay toàn bộ DiT bằng mạng nhỏ.
+
+<a id="model-pulse"></a>
+
+### B.4 PULSE / PULSE-L — ít tính toán ở decoder, kiểm soát riêng đường entropy
+
+**Theo paper.** Encoder dùng patch embedding stride 16 và depthwise-convolution blocks. Hyperlatent ở độ phân giải 1/64. Latent chính chia checkerboard không gian–kênh, giải qua hai lượt thay vì quét tuần tự từng pixel. Decoder xử lý đặc trưng thấp resolution, rồi AdaLN điều chế MLP renderer trên lưới 1/4; PixelShuffle dựng patch RGB. Linear CDF predictor số nguyên chọn bảng xác suất; Meta Prior truyền chỉ số bank để thích nghi phân phối hyperlatent. Training perceptual đi từ LPIPS sang GAN và loss ROI chữ/mặt. [Jia và cộng sự, PULSE, arXiv 2026, mục 2–5](https://arxiv.org/html/2609.18602v1).
+
+```mermaid
+flowchart LR
+    B["Stream + QP"] --> Z["Meta Prior: giải hyperlatent"]
+    B --> E["Giải latent: hai lượt"]
+    Z --> C["Integer Linear CDF"] --> E
+    Z --> H["Hyper features / mean"] --> E
+    E --> L["Low-resolution body"] --> A["AdaLN modulation"]
+    E --> U["Content lên lưới 1/4"]
+    A --> P["MLP renderer + PixelShuffle"]
+    U --> P --> O["RGB"]
+```
+
+**Theo release.** Base và L cùng họ kiến trúc nhưng khác dung lượng; L perceptual khoảng 20 kMAC/pixel, base khoảng 5.2. Một model hỗ trợ q0–q7. Bundle gồm cấu hình, trọng số float và entropy-control integer; bitstream không chứa toàn bộ mạng. Tác giả chỉ bảo đảm tính tất định cho entropy-control trên nền tảng hỗ trợ, không hứa mọi pixel float giống nhau. [README chính thức, Models / Compress and decompress](https://github.com/microsoft/GenCodec/blob/main/PULSE/README.md).
+
+**Trong repo.** Bundle L đã chạy 150 điểm q0–q4 và kiểm decoder độc lập. Header `PL` bốn byte của repo bọc payload tác giả; file thật được tính byte. Benchmark 12.235 giây bao gồm khởi động, giải nén gói, nạp model và ghi PNG trên L40. Không dùng số CPU/base trong paper để thay cho phép đo này.
+
+**Hàm ý:** đây là nền tảng phù hợp để nghiên cứu decoder nhanh. “Thêm ROI chữ/mặt” tự nó chưa phải đóng góp mới vì paper đã làm; hướng distillation theo độ tin cậy cần ablation riêng và kiểm phạm vi prior art.
+
+<a id="model-codlite"></a>
+
+### B.5 CoD-Lite — condition nén giàu thông tin thay cho backbone sinh ảnh lớn
+
+**Theo paper.** Encoder–decoder convolution tạo condition qua vector quantization; chỉ số codebook được mã hóa độ dài cố định. Condition dẫn dắt diffusion convolution một bước trong pixel space. Backbone thay attention bằng depthwise convolution và channel attention, đầu MLP dựng pixel. Pretraining hướng compression cung cấp điều kiện giàu thông tin; fine-tune cố định timestep/noise, dùng reconstruction/perceptual loss, DMD từ teacher CoD và GAN. Teacher/discriminator chỉ phục vụ training. [Jia và cộng sự, ICML 2026](https://proceedings.mlr.press/v306/jia26i.html); [paper, mục 5](https://arxiv.org/html/2604.12525v1#S5).
+
+```mermaid
+flowchart LR
+    X["Ảnh"] --> E["Encoder"] --> V["VQ indices"] --> B["Fixed-length bits"]
+    B --> C["Condition decoder"] --> D["Convolution diffusion: một bước"] --> O["RGB"]
+```
+
+**Trong repo.** `points_codlite` gọi `compress`, dựng condition bằng `decompress`, rồi `inference` với tensor khởi đầu bằng không. Config/checkpoint gắn với từng operating point; không xem một checkpoint bất kỳ là model variable-rate liên tục. Ảnh được pad theo bội số 64 rồi crop về kích thước gốc. [Code bake-off](../experiments/bakeoff/bakeoff.py), [release CoD-Lite](https://github.com/microsoft/GenCodec/tree/main/CoD_Lite).
+
+**Hàm ý:** paper cho thấy một hướng giảm tải bằng condition tốt và distillation, nhưng lợi ích FID trên tập của tác giả không chứng minh lợi ích Q̂/preference trên validation của ta. Việc giữ CoD-Lite trong bảng là để đối chiếu phương án này, không vì nhãn “real-time” tự động đáp ứng bài thi.
+
+<a id="model-dcvic"></a>
+
+### B.6 DC-VIC — dự đoán token và sửa feature của VQGAN
+
+**Theo paper.** Compression encoder dựa trên residual/attention nhận ảnh, đặc trưng VQGAN và hai điều kiện. Hyperprior cùng channel autoregressive model mã hóa latent. Ở decoder, token estimator gồm CNN/Swin dự đoán index codebook; nhánh SFT tạo đặc trưng điều chế các tầng của VQGAN decoder đóng băng. $\beta_{rate}$ điều khiển tổng rate, $\beta_{vq}$ điều khiển độ chính xác dự đoán token, từ đó cân bằng thông tin cho token và sửa feature. Training qua lấy mẫu điều kiện, chọn cặp điều kiện rồi fine-tune. [Iwai, Miyazaki và Omachi, IEEE Access 2024, mục III, hình 2–6; DOI](https://doi.org/10.1109/ACCESS.2024.3522238), [bản toàn văn tác giả](https://www.researchgate.net/publication/387411891_Dual-Conditioned_Training_to_Exploit_Pre-trained_Codebook-based_Generative_Model_in_Image_Compression).
+
+```mermaid
+flowchart LR
+    B["Bits + điều kiện"] --> E["Entropy decode"] --> Y["Latent"]
+    Y --> T["Token estimator"] --> C["Tra codebook"] --> V["VQGAN decoder cố định"]
+    Y --> S["SFT extractor"] --> V
+    V --> O["RGB"]
+```
+
+**Trong repo.** Đã chạy checkpoint **PatchGAN**, không phải OASIS. API quality 0–4 chọn cấu hình đã được release; không hiểu q là số bit/pixel cố định. Các tensor entropy cũ được chuyển tên cho stack CompressAI hiện tại rồi strict-load. Pilot 18 điểm hợp lệ chỉ hỗ trợ nhận xét về cấu hình này. [Release chính thức](https://github.com/iwa-shi/DC_VIC), [ghi nhận thử nghiệm](CLIC2027_new_models_2026-10-15.md).
+
+**Hàm ý:** prior giúp tái tạo texture, nhưng dự đoán sai token vẫn có thể tạo chi tiết sai; SFT có vai trò sửa theo thông tin đã truyền. Decoder cần cả bộ dự đoán và VQGAN, nên phải đo tổng load/runtime thay vì chỉ đếm số bước sinh ảnh.
+
+<a id="model-afp"></a>
+
+### B.7 AFP-GIC — chuyển prior hợp nhất từ AdaCode sang codec
+
+**Theo paper.** AdaCode đóng băng hợp nhất nhiều codebook bằng trọng số theo nội dung. Prior Feature Adapter đưa đặc trưng đó vào encoder. Decoder không nhận prior gốc: Prior Estimator fully-convolutional dự đoán prior tương ứng từ latent đã giải mã và biến điều khiển; SFT điều chế decoder AdaCode đóng băng. Loss alignment giúp prior dự đoán gần prior từ ảnh gốc. Vì vậy thông tin vẫn phải đi qua bottleneck entropy; không có đường truyền prior “miễn phí”. [Pei, Liu và Ling, *Adaptive Fused Prior Transfer for Controllable Generative Image Compression*, bản arXiv v2 năm 2026, mục III, bảng I–II](https://arxiv.org/html/2605.16817v2#S3).
+
+```mermaid
+flowchart LR
+    X["Ảnh gốc"] --> A["AdaCode prior extractor cố định"] --> P["Prior adapter"] --> E["Compression encoder"]
+    X --> E --> B["Entropy bitstream"] --> Y["Latent đã giải mã"]
+    Y --> PE["Prior Estimator"] --> D["AdaCode decoder + SFT"]
+    Y --> S["SFT extractor"] --> D --> O["RGB"]
+```
+
+**Trong repo.** Chạy `afp_gic_release.pth.tar` qua runtime public; model có nhiều q nhưng pilot chỉ đo q0/1/4. Smoke load thiếu entropy parameters bị loại; bảng kết quả dùng strict-load. Prior ở đây là prior dựng ảnh, cần phân biệt với entropy prior tính xác suất symbol. [Release](https://github.com/yifeipet/AFP_GIC), [probe hiện có](../experiments/new_codecs/probe.py).
+
+**Hàm ý:** ý tưởng đáng học là supervision bất đối xứng: encoder nhìn ảnh gốc, decoder học dự đoán từ bit đã nhận. Pilot của chúng ta chưa cho thấy lợi ích đủ để mở train dài; kết quả đó không phủ định kiến trúc trên mọi tập dữ liệu.
+
+<a id="model-crdr"></a>
+
+### B.8 CRDR — một model, hai nút điều khiển
+
+**Theo paper.** CRDR dùng encoder kiểu ELIC, entropy model theo kênh và generator có beta-conditioning. Interpolation Channel Attention điều chỉnh theo q; $\beta$ được Fourier-encode rồi đưa qua MLP vào residual blocks để đổi realism. HRRGAN dùng reconstruction ở rate cao hơn làm đối chiếu cho generator, giảm áp lực so trực tiếp mọi reconstruction với ảnh gốc. Discriminator chỉ dùng khi train. [Iwai, Miyazaki và Omachi, WACV 2024, mục 3, hình 2–4](https://arxiv.org/html/2405.16817v1#S3).
+
+**Luồng:** `ảnh + q → encoder → entropy stream → latent → generator(latent, q, beta) → RGB`. q làm thay đổi representation và rate; beta đổi cách tái tạo từ representation. Vì vậy tăng beta không tự động tăng lượng thông tin đúng về ảnh gốc.
+
+**Trong repo.** Một ảnh/q được nén một lần rồi thử nhiều beta. Phần hyperprior/context chạy CPU theo setup tác giả. Cần truyền hoặc cố định rõ beta trong gói decoder cuối; nó không được suy ra nhờ ảnh gốc. [Code `points_crdr`](../experiments/bakeoff/bakeoff.py), [implementation tác giả](https://github.com/iwa-shi/CRDR).
+
+**Hàm ý:** cơ chế nhiều rate/realism giúp giảm số checkpoint cần đóng gói. Tuy nhiên, quyết định sử dụng vẫn phải dựa trên chất lượng và thời gian đo được, không chỉ số checkpoint ít hơn.
+
+<a id="model-coolchic"></a>
+
+### B.9 Cool-Chic — encode bằng tối ưu riêng cho từng ảnh
+
+**Theo paper gốc.** Cool-Chic tối ưu latent phân cấp nhiều resolution cùng mạng synthesis nhỏ và probability model cho từng ảnh. Latent được đưa về cùng resolution để dựng RGB; entropy model dùng ngữ cảnh nhân quả. Bitstream phải mang cả latent lẫn tham số mạng đã lượng tử hóa. Decoder nhẹ vì chi phí tối ưu chuyển sang encoder. [Ladune và cộng sự, ICCV 2023, mục 2.1–2.4](https://arxiv.org/pdf/2212.05458).
+
+```mermaid
+flowchart LR
+    X["Một ảnh"] --> OPT["Tối ưu latent và mạng cho ảnh đó"] --> B["Bits latent + tham số mạng"]
+    B --> E["Entropy decode"] --> L["Latent nhiều resolution"] --> U["Upsampling + synthesis"] --> O["RGB"]
+    B --> W["Tham số mạng"] --> U
+    W --> E
+```
+
+**Trong repo.** Checkout được pin ở tag `clic2025`, có decoder C/AVX2; không phải cấu hình MLP nhỏ nhất của paper 2023 hoặc bản 5.x hiện hành. Run dùng lựa chọn perceptual/Wasserstein theo config và tối ưu per-image. Do kiến trúc, entropy và recipe đã thay đổi qua các phiên bản, không gán số parameter/MAC của paper gốc cho binary CLIC 2025. [Tag đã chọn](https://github.com/Orange-OpenSource/Cool-Chic/tree/clic2025), [wrapper](../experiments/bakeoff/bakeoff.py).
+
+**Hàm ý:** thích hợp để thử có chọn lọc trên ảnh mà encoder có thể dành nhiều thời gian. Khi đánh giá phải tính byte tham số mạng; “decoder ít tham số” không có nghĩa mọi ảnh chỉ tốn byte latent.
+
+<a id="model-mbt"></a>
+
+### B.10 MBT2018-mean — phân biệt bản mean-scale và bản autoregressive
+
+**Theo paper và thư viện.** Paper Minnen–Ballé–Toderici kết hợp hierarchical prior và autoregressive context để dự đoán Gaussian cho latent. Trong CompressAI, `MeanScaleHyperprior` chỉ dự đoán mean/scale từ hyperprior; `JointAutoregressiveHierarchicalPriors` bổ sung context. Hai lớp không phải cùng một decoder. [Paper NeurIPS 2018](https://arxiv.org/pdf/1809.02736); [tài liệu model CompressAI](https://interdigitalinc.github.io/CompressAI/models.html#meanscalehyperprior).
+
+**Trong repo.** Candidate `mbt` gọi `mbt2018_mean`, qualities 1–4, metric MSE. Đường đi là analysis/synthesis CNN với hyperprior, không phải baseline raster-autoregressive đầy đủ. Vì thế kết luận tốc độ hoặc chất lượng của phép chạy này chỉ áp dụng cho bản mean-scale. [Hàm `points_mbt`](../experiments/bakeoff/bakeoff.py).
+
+**Hàm ý:** đây là mốc tham chiếu hữu ích để tách lợi ích của generative decoder khỏi khả năng mã hóa latent thông thường. Không diễn giải kết quả kém theo Q̂ thành thất bại của cả dòng entropy model MBT.
+
+<a id="model-vtm"></a>
+
+### B.11 VTM / VTM-SCC — codec khối, không có neural teacher
+
+**Theo tài liệu chuẩn.** VVC kết hợp chia khối, dự đoán, biến đổi/lượng tử residual, entropy coding và lọc vòng lặp. Với ảnh tĩnh dùng cấu hình intra. Screen-content tools khai thác vùng phẳng, màu lặp và cấu trúc lặp: IBC lấy tham chiếu trong cùng ảnh; palette dùng bảng màu; transform skip/BDPCM phục vụ residual phù hợp. [Bross và cộng sự, *Overview of the VVC Standard and its Applications*, TCSVT 2021](https://doi.org/10.1109/TCSVT.2021.3101953).
+
+**Trong repo.** Nhánh `vtm420` dùng YUV 4:2:0 10-bit; `vtmscc` dùng 4:4:4, thử bật IBC/PLT/BDPCM/transform-skip và ghi flags thực vào point. Wrapper có cơ chế fallback nếu binary từ chối tổ hợp flags; vì vậy không mặc định mọi point đều dùng đủ công cụ SCC. [Chuyển màu và lệnh VTM](../experiments/clic_b/b6_vtm_residual.py), [wrapper bake-off](../experiments/bakeoff/bakeoff.py).
+
+**Hàm ý:** cạnh chữ và vùng màu phẳng là lý do hợp lý để giữ mode này trong mix; cần kiểm từng lựa chọn bằng dữ liệu, không coi mọi ảnh screen đều nên dùng VTM.
+
+<a id="model-internal"></a>
+
+### B.12 S1 và SD-Turbo refiner — đâu là thành phần paper, đâu là thiết kế nội bộ?
+
+**S1 trong repo.** DC-AE tạo latent 32 kênh ở resolution 1/32. `LatentCodec` dùng ResBlock cho analysis/synthesis, gain theo rate, hyperprior và subtractive dither. Hyper-synthesis cùng các quyết định CDF dùng đường integer; reconstruction transform vẫn float. Loss hiện có là rate cộng MSE latent, không trực tiếp tối ưu preference ảnh. Khi ghép residual VTM, phải cộng byte cả base và residual. Đây là thiết kế nội bộ đọc từ [latent_codec.py](../src/clic27/codec/latent_codec.py) và [trainer S1](../experiments/s1/train_s1.py), không gán thành một paper S1 công khai.
+
+**SD-Turbo theo paper nền tảng.** Adversarial Diffusion Distillation kết hợp teacher diffusion và adversarial loss để huấn luyện student sinh ảnh với ít bước. Mục tiêu là tăng tốc generation; bản thân phương pháp này không cung cấp bitstream codec. [Sauer và cộng sự, *Adversarial Diffusion Distillation*, bản arXiv 2023, mục 3](https://arxiv.org/html/2311.17042v1).
+
+**Refiner trong repo.** Pipeline lấy reconstruction MS-ILLM làm đầu vào SD-Turbo img2img. Đây là hậu xử lý do repo ghép, không phải codec SD-Turbo của tác giả paper. Nó tăng chi phí decoder và có thể đổi chi tiết dù không truyền thêm thông tin ảnh. Vì vậy cần chấm chất lượng, tính trọng số/runtime và xác định seed/control để tái lập.
+
+### B.13 Từ kiến trúc đến các thí nghiệm cần làm
+
+Các kết luận sau là **suy luận thiết kế cho repo**, chưa phải kết quả thực nghiệm mới:
+
+| Câu hỏi | Bài học từ kiến trúc | Kiểm chứng cụ thể |
+|---|---|---|
+| Vì sao một bước vẫn có thể chậm? | Backbone, entropy CPU, load model và ghi ảnh đều có chi phí | Benchmark toàn gói; tách load / entropy / synthesis / I/O |
+| Có nên distill latent giữa các model? | Representation và bitstream không tự tương thích | Bắt đầu từ image-space teacher; nếu dùng latent, phải học và kiểm projection |
+| Làm sao giữ chữ/mặt? | Prior sinh có thể bù texture nhưng tạo chi tiết sai | Chấm mù theo nhóm ảnh, kiểm text/face; so uniform và confidence-weighted distillation |
+| Làm sao giảm số model trong gói? | Variable-rate giảm nhu cầu checkpoint riêng nhưng không bảo đảm đủ dải rate | Kiểm byte thật ở rate thấp và chất lượng tại cùng budget |
+| Khi nào gọi decoder tái lập được? | CDF đúng và PNG đúng là hai phép kiểm khác nhau | So symbol/latent, rồi pixel trên tiến trình và thiết bị đích |
+
+**Ghi chú đọc nguồn:** các phần mô tả phương pháp dựa trên thân bài, hình kiến trúc và mục training, không chỉ abstract. DiT-IC và CoD-Lite được đối chiếu với proceedings; PULSE ghi rõ là preprint 2026; AFP-GIC tham chiếu chính xác bản v2 đã đọc. Với DC-VIC, đọc bản toàn văn tác giả và đối chiếu metadata với [danh mục của nhóm Tohoku](https://www.iic.ecei.tohoku.ac.jp/~machi/paper/paper-e.html). Công cụ `paper-search` không trả kết quả trong lần truy vấn này; tra cứu được hoàn tất qua nguồn paper/proceedings và repo chính thức. Không bổ sung tuyên bố SOTA, xếp hạng hoặc tốc độ mới nếu chưa có phép đo tương ứng của dự án.
