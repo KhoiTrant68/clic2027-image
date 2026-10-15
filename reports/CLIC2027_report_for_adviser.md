@@ -10,11 +10,49 @@ decoder và tính tái lập của môi trường CLIC 2027.
 
 ## 1. Tóm tắt dự án
 
+**Cập nhật sau vòng tích hợp ngày 15/10:** PULSE-L đã chạy qua CLI bake-off chính với **150 điểm (30 ảnh × q0–q4)**, có header truyền thật. Mix đạt **Q̂ 1.4978 tại 0.3 bpp**, thay cho 1.4912 của vòng sàng lọc dưới đây; tại 0.15 bpp vẫn đạt 0.7891. Gói decoder PULSE-L riêng giải mã 30/30 ảnh khớp pixel trong **12.235 giây trên L40**, tính cả giải nén gói, khởi động, nạp model và ghi PNG. Gói ZIP 74.7 MB; VRAM toàn thiết bị cao nhất trong vòng tích hợp là 5,920 MiB, thấp hơn giới hạn 30 GB/GPU. Đây chưa phải benchmark toàn bộ mix hoặc trên L4. Chi tiết và giới hạn phép đo: [báo cáo tích hợp PULSE-L](CLIC2027_pulse_integration_2026-10-15.md). Các số 204 lượt và 1.4912 bên dưới mô tả vòng sàng lọc trước đó; 120 payload lặp lại đã được xác nhận giống hệt, không tính là điểm chất lượng mới.
+
 Đến ngày 15/10/2026, dự án đã xây dựng thước đo preference Q̂ v0, đánh giá nhiều codec bằng bitstream thật, thử chưng cất decoder DiT-IC và kiểm tra một phần tính tất định. Vòng mới hoàn tất **204 lượt nén–giải nén**, gồm AFP-GIC, DC-VIC, PULSE và PULSE-L; riêng PULSE-L được đánh giá trên đủ 30 ảnh ở bốn mức chất lượng.
 
 Kết quả mới đáng chú ý là **thêm PULSE-L vào lựa chọn theo ảnh**: Q̂ tăng từ **0.7582 lên 0.7891 ở 0.15 bpp**, và từ **1.4215 lên 1.4912 ở 0.3 bpp**. Đây là mức tăng của metric đại diện trên validation, chưa được xác nhận bằng chấm mù. Decoder PULSE-L có trung vị 57.2 ms/ảnh trên L40 trong phép đo API; chưa phải thời gian bài nộp trên L4.
 
 Đề xuất hiện tại là giữ DiT-IC cho bitrate thấp, bổ sung PULSE-L vào hệ thống hỗn hợp và nghiên cứu cách lựa chọn codec có tính cả thời gian giải mã, chi phí nạp model và độ tin cậy của đánh giá chất lượng. Các phần tiếp theo phân biệt **kết quả đã đo**, **diễn giải** và **thí nghiệm đề xuất**.
+
+### Đọc nhanh bằng hình — cập nhật 15/10
+
+**Kiểm deployment mới nhất:** nhánh MS-ILLM của mix đã được kiểm bằng stream lưu trên đĩa. Cấu hình mặc định lệch pixel nhẹ giữa tiến trình; cấu hình deterministic đạt **5/5 ảnh khớp pixel**, metadata thực tăng tổng 120 byte và vẫn vừa budget. Output khác nhẹ baseline nên cần chấm lại trước khi gán điểm Q̂ cho decoder mới. Xem [báo cáo kiểm MS-ILLM](CLIC2027_msillm_stream_audit_2026-10-15.md). Các biểu đồ dưới đây vẫn mô tả bake-off trước hiệu chỉnh này.
+
+**Chất lượng tăng bao nhiêu?** Hình trái so sánh cùng budget trên cùng 30 ảnh; hình phải tách mức tăng để thấy cải thiện nhỏ ở 0.075 bpp. Q̂ là metric đại diện, chưa phải điểm cuộc thi hoặc preference đã xác nhận bằng chấm mù.
+
+![Chất lượng mix trước và sau tích hợp PULSE-L](figures/pulse_2026-10-15/quality.png)
+
+**PULSE-L đóng vai trò gì?** Tại 0.3 bpp, allocator chọn PULSE-L cho 22/30 ảnh; các codec khác vẫn đóng góp. Thanh thể hiện số ảnh, không phải tỷ trọng byte.
+
+![Phân bố lựa chọn codec tại 0.3 bpp](figures/pulse_2026-10-15/allocation.png)
+
+**Vì sao thời gian giảm?** Phần lớn chênh lệch đến từ ghi PNG đầu ra, trong khi 30/30 ảnh vẫn khớp pixel. VRAM dùng GB thập phân để so cùng đơn vị với hạn mức 30 GB/GPU; đây là tổng bộ nhớ thiết bị quan sát, gồm cả tiến trình khác.
+
+![Thời gian offline và bộ nhớ GPU](figures/pulse_2026-10-15/runtime_memory.png)
+
+Thời gian trên chỉ đo **PULSE-L riêng trên L40**, một lượt mỗi cấu hình. Các nhánh khác chưa được đo chung trong gói decoder toàn mix. Xem [báo cáo tích hợp](CLIC2027_pulse_integration_2026-10-15.md) để đối chiếu nguồn và phạm vi đo. Hình có bản SVG và [script tái tạo từ artifact](figures/pulse_2026-10-15/make_figures.py).
+
+**Từ bằng chứng hiện tại đến quyết định training:** ô xanh là kết quả đã đo, ô vàng là việc còn cần thực hiện.
+
+```mermaid
+flowchart LR
+    A["ĐÃ ĐO: 150 điểm PULSE-L<br/>30 ảnh × 5 quality"] --> B["ĐÃ ĐO: mix đạt Q̂ 1.4978<br/>tại 0.3 bpp"]
+    A --> C["ĐÃ ĐO: PULSE-L offline trên L40<br/>12.235 s; 30/30 ảnh khớp pixel"]
+    B --> D["CẦN LÀM: dispatcher và gói toàn mix"]
+    C --> D
+    D --> E["CẦN KIỂM: tốc độ và parity trên L4"]
+    B --> F["CẦN KIỂM: chấm mù mix cũ / mới"]
+    E --> G["QUYẾT ĐỊNH: ngân sách fine-tune<br/>và hướng rate thấp"]
+    F --> G
+    classDef done fill:#e4f3ef,stroke:#008577,color:#163c35;
+    classDef pending fill:#fff3df,stroke:#d87826,color:#613700;
+    class A,B,C done;
+    class D,E,F,G pending;
+```
 
 ### 1.1 Vấn đề nghiên cứu
 

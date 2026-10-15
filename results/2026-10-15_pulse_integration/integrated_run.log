@@ -1,0 +1,6 @@
+RUN prepare
+RUN points
+RUN metrics
+RUN allocate
+RUN summary
+COMPLETED ../integrated_bakeoff

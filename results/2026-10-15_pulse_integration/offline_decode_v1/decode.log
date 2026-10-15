@@ -1,0 +1,2 @@
+VRAM guard {'total_mib': 46068, 'initial_used_mib': 1247, 'allocator_cap_mib': 18432, 'device_limit_mib': 23034.0, 'physical_gpu': '1'}
+{"n": 30, "torch": "2.6.0+cu124", "network": "Python TCP disabled", "verify_s": 0.16679415298858657, "load_s": 0.6237617949955165, "loop_s": 37.214856780017726, "inside_process_s": 40.16522707900731, "peak_rss_kib": 1037264, "peak_allocated_mib": 1391.98828125, "peak_reserved_mib": 2380.0}

@@ -1,0 +1,7 @@
+{
+  "experiments/bakeoff/bakeoff.py": "daa9ef12d1c3ffbd598c4bf293152648b800bcccc7c5ef75828ab8a048098440",
+  "experiments/bakeoff/pulse_codec.py": "959d551afff16abc98c7e427f3757681050fc43fad2351f6315bd39648c58f40",
+  "experiments/new_codecs/pulse_decode.py": "4009741d6771c442a26e3bebb47b0aaa3b5af7809095ba020444d2bb0952393e",
+  "experiments/new_codecs/benchmark_pulse.py": "8211a63a087c72c1ba2ee61d566c6903dc24e46d953af4ceff491e69cb48ab1b",
+  "experiments/new_codecs/package_pulse.py": "8b73d29d1f1d321ac8910da0a70147c63bc3d2b089e1f524d347552ffd160d38"
+}

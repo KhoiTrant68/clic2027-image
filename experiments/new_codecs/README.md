@@ -66,3 +66,83 @@ yet cross-platform parity, official L4 benchmarking or a competition package.
 `collect.py` creates a small result archive including per-point metadata, score
 tables, memory traces and SHA256 provenance. PNGs, streams and large weights stay
 on server. An earlier AFP non-strict-load smoke is explicitly invalid/excluded.
+
+## Main bake-off integration and offline deployment
+
+The main CLI now accepts `--cands pulse --pulse-bundle PATH --pulse-runtime PATH`
+and `--pulse-q 0 1 2 3 4`. `pulse` is opt-in, so legacy default candidate runs do
+not require PULSE. Streams are stored at `streams/pulse/qN/<name>.bin`. Their
+first four bytes are `PL`, version 1, flags 0; the remaining payload is the
+author's checked PULSE envelope (QP, dimensions, bundle ID included). `bytes`
+includes all four transmitted bytes; no second estimated header is added.
+
+Use the integrated runner to separate Torch 2.6 coding from Torch 2.11 scoring:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 ~/clic/venv/bin/python experiments/new_codecs/run_integrated.py \
+  --gpu-memory-guard --repo "$PWD" \
+  --baseline ~/clic/work_merge_1013_v0 --out ~/clic/research_20261015/integrated_repeat \
+  --data ~/clic/work_full_gpu/bakeoff/valid \
+  --bundle ~/clic/research_20261015/weights/pulse/pulse-l-perceptual \
+  --runtime ~/clic/research_20261015/pulse_vendor \
+  --qhat ~/clic/inputs/qhat_v0/qhat/qhat_v0.json \
+  --codec-python ~/clic/clic27_l4/venv/bin/python \
+  --metric-python ~/clic/venv/bin/python
+```
+
+The output directory must be new. Baseline points/metrics are copied, not edited.
+The runner calls main bake-off prepare/points/metrics/allocate/summary and refuses
+an incomplete PULSE grid. Keep reconstructions between `--defer-metrics` and
+metrics; they are the input to the scorer. Archive the runtime source as well as
+bundle hashes; the bundle identity check does not detect arbitrary runtime edits.
+
+`package_pulse.py --repo ... --runtime ... --bundle ... --license ... --out ...`
+creates a relocatable Linux/Python-3.12 decoder directory and ZIP. It includes
+weights, codec source, rANS extension, original license, helper scripts and a
+checksum manifest. Python, Torch, NumPy, Pillow and system CUDA libraries are
+provided by the host environment, not included in the ZIP. This research kit is
+not yet an official CLIC submission or a mixed-codec decoder.
+
+`benchmark_pulse.py --gpu-memory-guard --archive ... --bakeoff ... --out ...
+--python /absolute/path/to/python` selects the full-corpus PULSE allocation at
+0.3 bpp, verifies actual input bytes, unpacks into a new directory and launches
+isolated Python. The decoder blocks Python TCP connections and uses an empty HF
+cache. This is an offline dependency check, not OS-level network isolation.
+It compares all decoded pixels with bake-off reconstructions after timing ends.
+
+Outputs use lossless PNG with `compress_level=0`: same pixels, larger PNG files,
+less CPU recompression. Output PNG size is not codec-stream bitrate. Wall time
+includes unpack, process startup, checksum validation, model load, decode and PNG
+write; comparison with reference images is excluded. Use identical measurement
+scope when comparing other decoders. Keep the guard even on this small model.
+
+Completed integrated run: 150 points, 120 payloads exactly match the earlier
+probe (before adding the four-byte mode header), two framing unit tests pass,
+and 30/30 independent output images match. Results and limits are in
+`results/2026-10-15_pulse_integration` and
+`reports/CLIC2027_pulse_integration_2026-10-15.md`.
+
+## MS-ILLM selected-stream audit
+
+`verify_msillm.py` audits the five MS-ILLM images selected by the integrated
+mix at 0.3 bpp. It creates a new output directory, encodes actual 28-byte framed
+streams, launches a fresh decoder with Python TCP blocked and compares pixels.
+Explicit local hub source and checkpoint paths are required; this is not yet a
+relocatable decoder package. Add `--deterministic` for the configuration that
+passed fresh-process parity. The default run exposed one-level pixel differences.
+
+```bash
+CUDA_VISIBLE_DEVICES=0 ~/clic/venv/bin/python verify_msillm.py \
+  --gpu-memory-guard --deterministic --out msillm-selected-mix03-repeat \
+  --hub ~/.cache/torch/hub/facebookresearch_NeuralCompression_main \
+  --weights ~/.cache/torch/hub/checkpoints --bakeoff integrated_bakeoff \
+  --data ~/clic/work_full_gpu/bakeoff/valid \
+  --reference ~/clic/work_full_gpu/bakeoff/recon/msillm
+```
+
+Use `--limit 1` for smoke. The decoder receives neither source images nor the
+selection table: model quality and dimensions come from its stream. Full run:
+5/5 exact fresh-process outputs, +120 bytes versus baseline accounting, still
+within budget. Deterministic output differs slightly from old reconstructions;
+rescore before claiming the old Qhat value for the new decoder. See
+`reports/CLIC2027_msillm_stream_audit_2026-10-15.md` and the matching results folder.

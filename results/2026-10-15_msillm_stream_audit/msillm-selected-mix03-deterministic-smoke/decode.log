@@ -1,0 +1,4 @@
+VRAM guard {'total_mib': 46068, 'initial_used_mib': 1247, 'allocator_cap_mib': 18432, 'device_limit_mib': 23034.0, 'physical_gpu': '0'}
+/mnt/home/guess03/.cache/torch/hub/facebookresearch_NeuralCompression_main/neuralcompression/__init__.py:21: UserWarning: Could not retrieve neuralcompression version!
+  warnings.warn("Could not retrieve neuralcompression version!")
+{"name": "da52c4f66dc00c2f381e8475fbf8a7aa2c5433a9c59cc175646c62e02892faf7", "key": "q4", "bytes": 147220, "payload_bytes": 147192, "decode_s": 0.9359070680220611, "write_s": 0.17954384605400264, "sha256": "33cab9ec34c5221567cb115b2e5659fb0e4eea29e1d7a50cfa285781d7443b26"}

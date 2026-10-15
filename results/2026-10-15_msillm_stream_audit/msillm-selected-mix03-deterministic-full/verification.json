@@ -1,0 +1,64 @@
+{
+  "n": 5,
+  "deterministic": true,
+  "encode_process_wall_s": 24.25539096700959,
+  "decode_process_wall_s": 19.565252057043836,
+  "baseline_mix_bytes": 3231292,
+  "msillm_byte_correction": 120,
+  "mix_bytes_after_msillm_correction": 3231412,
+  "budget": 3234201,
+  "fits_after_msillm_correction": true,
+  "scope": "MS-ILLM branch only; other branches have not all been framed/audited",
+  "images": [
+    {
+      "name": "da52c4f66dc00c2f381e8475fbf8a7aa2c5433a9c59cc175646c62e02892faf7",
+      "fresh_exact": true,
+      "fresh_max_abs": 0,
+      "fresh_mae": 0.0,
+      "fresh_changed_values": 0,
+      "baseline_exact": false,
+      "baseline_max_abs": 1,
+      "baseline_mae": 0.007070144952512255
+    },
+    {
+      "name": "a365e6541bab5c0f4e01bf43a0c3a655d88292a8ac45403a889c308d11854555",
+      "fresh_exact": true,
+      "fresh_max_abs": 0,
+      "fresh_mae": 0.0,
+      "fresh_changed_values": 0,
+      "baseline_exact": false,
+      "baseline_max_abs": 1,
+      "baseline_mae": 0.0070876177619485295
+    },
+    {
+      "name": "581048154e3c4b579c79155742dcf643c18b9bb47782aca7f0768eff185bc32e",
+      "fresh_exact": true,
+      "fresh_max_abs": 0,
+      "fresh_mae": 0.0,
+      "fresh_changed_values": 0,
+      "baseline_exact": false,
+      "baseline_max_abs": 1,
+      "baseline_mae": 0.00751470209478022
+    },
+    {
+      "name": "50d13125b665e0c4c1673264807bfc3cc7a217819329696843fea4c69aff8b91",
+      "fresh_exact": true,
+      "fresh_max_abs": 0,
+      "fresh_mae": 0.0,
+      "fresh_changed_values": 0,
+      "baseline_exact": false,
+      "baseline_max_abs": 1,
+      "baseline_mae": 0.0035419538909313725
+    },
+    {
+      "name": "0d154749c7771f58e89ad343653ec4e20d6f037da829f47f5598e5d0a4ab61f0",
+      "fresh_exact": true,
+      "fresh_max_abs": 0,
+      "fresh_mae": 0.0,
+      "fresh_changed_values": 0,
+      "baseline_exact": false,
+      "baseline_max_abs": 3,
+      "baseline_mae": 0.01036065793504902
+    }
+  ]
+}

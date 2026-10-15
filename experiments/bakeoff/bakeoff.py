@@ -18,6 +18,7 @@ Candidates (each gives several operating points per image; the allocator picks o
   crdr     C8  CRDR (WACV 2024): ELIC + GAN, one model for 0.08 .. 0.72 bpp (rate index q) with a realism knob beta
   ditics   C7s DiT-IC with distilled DC-AE decoders (experiments/ditic_distill, one student per checkpoint q: half the
               channels in the high-resolution stages, ~1.8x faster DC-AE); same bitstreams as ditic
+  pulse    C9  PULSE-L perceptual, local bundle and compiled rANS runtime; actual streams with a 4-byte mode header
   mix          per-image choice over the union of all candidates (what mode switching could buy)
 
 Steps (all resume: existing points/metrics are skipped):
@@ -56,7 +57,7 @@ from clic27.eval import metrics as M  # noqa: E402
 
 DATA_URL = "https://dhldkwazkze5h.cloudfront.net/data/clic2025_image_test.zip"
 RATES = [0.075, 0.15, 0.3]
-CANDS = ["vtm420", "vtmscc", "s1res", "msillm", "mbt", "codlite", "turbo", "coolchic", "ditic", "ditics", "crdr"]
+CANDS = ["vtm420", "vtmscc", "s1res", "msillm", "mbt", "codlite", "turbo", "coolchic", "ditic", "ditics", "crdr", "pulse"]
 LABELS = {"ebfd571f": "screen", "bb7344a2": "screen", "86127fbd": "screen", "2a760bf1": "screen",
           "937476dd": "texture"}  # by eye in branch B; every other image is natural
 VTM_QPS = [34, 37, 40, 43, 46, 50]  # 2026-10-06 run: vtm420 qp26/30 = 0.80/0.52 bpp corpus (useless), qp34 0.33, qp50 0.029
@@ -927,17 +928,63 @@ def points_mbt(a, P, names):
     _learned(a, P, names, "mbt", {f"q{q}": q for q in MBT_Q}, load)
 
 
+def points_pulse(a, P, names):
+    """Local PULSE bundle, actual saved streams, including the four-byte mode header."""
+    import torch
+    sys.path.insert(0, str(HERE))
+    from pulse_codec import pack, unpack, bundle_hashes
+    if not a.pulse_bundle or not a.pulse_runtime:
+        raise ValueError("pulse requires --pulse-bundle and --pulse-runtime (offline local paths)")
+    provenance = dict(bundle=bundle_hashes(a.pulse_bundle),
+                      framing="PL/version1/flags0", torch=torch.__version__)
+    a.out.mkdir(parents=True, exist_ok=True)
+    identity = a.out / "pulse_model.json"
+    if identity.exists() and json.loads(identity.read_text()) != provenance:
+        raise ValueError("PULSE bundle or Torch version changed; use a new output directory")
+    identity.write_text(json.dumps(provenance, indent=2))
+    sys.path.insert(0, str(a.pulse_runtime))
+    from codec.checkpoint import load_model
+    from codec.images import read_image, save_image
+    from codec.runtime import configure_runtime, compress_image, decompress_image
+    configure_runtime(M.device(), 2)
+    model = load_model(a.pulse_bundle, M.device())
+    src = inputs(a)
+    for key, name in P.todo("pulse", [f"q{q}" for q in a.pulse_q], names):
+        image = read_image(src[name], M.device())
+        shape = image.shape[-2:]
+        payload, _ = compress_image(model, image, int(key[1:]))
+        del image
+        stream = a.out / "streams" / "pulse" / key / f"{name}.bin"
+        stream.parent.mkdir(parents=True, exist_ok=True)
+        stream.write_bytes(pack(payload))
+        reconstruction, milliseconds = decompress_image(model, unpack(stream.read_bytes()))
+        if reconstruction.shape[-2:] != shape:
+            raise ValueError("PULSE output dimensions differ from original")
+        target = P.recon("pulse", key, name)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        save_image(reconstruction, target)
+        del reconstruction
+        P.add(dict(cand="pulse", key=key, name=name, bytes=stream.stat().st_size,
+                   bytes_base=len(payload), bytes_res=0, t_dec=milliseconds / 1000,
+                   note="PULSE-L; actual PL v1 header; API time excludes load and I/O"))
+        print(f"pulse {key} {name[:8]} {stream.stat().st_size} B", flush=True)
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
+
 def points(a):
-    P = Points(a.out, Scorer(a))
+    P = Points(a.out, None if a.defer_metrics else Scorer(a))
     names = selected(a)
     for cand, fn in (("msillm", points_msillm), ("mbt", points_mbt), ("codlite", points_codlite), ("turbo", points_turbo),
                      ("coolchic", points_coolchic), ("ditic", points_ditic), ("ditics", points_ditics),
-                     ("crdr", points_crdr),
+                     ("crdr", points_crdr), ("pulse", points_pulse),
                      ("s1res", points_s1res)):
         if cand in a.cands:
             try:
                 fn(a, P, names)
             except Exception as e:  # noqa: BLE001  one broken candidate must not stop the others
+                if cand == "pulse":
+                    raise  # fail the integration run instead of silently allocating without it
                 import traceback
                 traceback.print_exc()
                 print(f"== {cand} FAILED: {e}", flush=True)
@@ -1156,7 +1203,12 @@ def main(argv=None):
     ap.add_argument("step", choices=STEPS + ["all"])
     ap.add_argument("--out", type=Path, default=Path("work/bakeoff"))
     ap.add_argument("--data", type=Path, default=None, help="default: <out>/valid")
-    ap.add_argument("--cands", nargs="+", default=CANDS, choices=CANDS)
+    ap.add_argument("--cands", nargs="+", default=[c for c in CANDS if c != "pulse"], choices=CANDS)
+    ap.add_argument("--pulse-bundle", type=Path, help="local PULSE-L perceptual bundle directory")
+    ap.add_argument("--pulse-runtime", type=Path, help="local installed PULSE package including rANS extension")
+    ap.add_argument("--pulse-q", type=int, nargs="+", choices=range(8), default=[0, 1, 2, 3, 4])
+    ap.add_argument("--gpu-memory-guard", action="store_true", help="conservative half-device guard, below 30 GB on L40")
+    ap.add_argument("--defer-metrics", action="store_true", help="retain reconstructions and score with a separate compatible interpreter")
     ap.add_argument("--vtm", default="vtm", help="VTM 23.8 checkout with bin/ built")
     ap.add_argument("--s1-ckpt", default=None, help="S1 checkpoint (run 1, lambdas 0.03..4: covers 0.02..0.12 bpp)")
     ap.add_argument("--s1-res-levels", type=int, nargs="+", default=[2, 3])
@@ -1187,12 +1239,19 @@ def main(argv=None):
     ap.add_argument("--crdr-threads", type=int, default=8, help="CPU threads for CRDR's CPU entropy decoding")
     a = ap.parse_args(argv)
     a.data = a.data or a.out / "valid"
+    guard = None
+    if a.gpu_memory_guard:
+        sys.path.insert(0, str(ROOT / "experiments/new_codecs"))
+        from half_vram import install
+        guard = install(a.out / "vram.jsonl")
     steps = STEPS if a.step == "all" else [a.step]
     if steps[0] != "prepare" and not (a.data.exists() and inputs(a)):
         steps = ["prepare"] + steps  # a single later step (e.g. points in a CPU session) still needs the images
     for s in steps:
         print(f"===== {s}", flush=True)
         globals()[s](a)
+    if guard:
+        guard.set()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,47 @@
+[
+  {
+    "cand": "mix",
+    "rate": "0.3",
+    "name": "da52c4f66dc00c2f381e8475fbf8a7aa2c5433a9c59cc175646c62e02892faf7",
+    "point_cand": "msillm",
+    "key": "q4",
+    "bytes": "147196",
+    "score": "1.435253266445519"
+  },
+  {
+    "cand": "mix",
+    "rate": "0.3",
+    "name": "a365e6541bab5c0f4e01bf43a0c3a655d88292a8ac45403a889c308d11854555",
+    "point_cand": "msillm",
+    "key": "q4",
+    "bytes": "134664",
+    "score": "1.0408053663425083"
+  },
+  {
+    "cand": "mix",
+    "rate": "0.3",
+    "name": "581048154e3c4b579c79155742dcf643c18b9bb47782aca7f0768eff185bc32e",
+    "point_cand": "msillm",
+    "key": "q4",
+    "bytes": "129416",
+    "score": "-0.10924510673461374"
+  },
+  {
+    "cand": "mix",
+    "rate": "0.3",
+    "name": "50d13125b665e0c4c1673264807bfc3cc7a217819329696843fea4c69aff8b91",
+    "point_cand": "msillm",
+    "key": "q5",
+    "bytes": "35340",
+    "score": "2.5851802198620173"
+  },
+  {
+    "cand": "mix",
+    "rate": "0.3",
+    "name": "0d154749c7771f58e89ad343653ec4e20d6f037da829f47f5598e5d0a4ab61f0",
+    "point_cand": "msillm",
+    "key": "q4",
+    "bytes": "103116",
+    "score": "0.5510615224353648"
+  }
+]

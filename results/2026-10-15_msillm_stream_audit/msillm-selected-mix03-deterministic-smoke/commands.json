@@ -1,0 +1,32 @@
+[
+  [
+    "/mnt/home/guess03/clic/venv/bin/python",
+    "/mnt/home/guess03/clic/research_20261015/verify_msillm.py",
+    "--stage",
+    "encode",
+    "--out",
+    "msillm-selected-mix03-deterministic-smoke",
+    "--hub",
+    "/mnt/home/guess03/.cache/torch/hub/facebookresearch_NeuralCompression_main",
+    "--weights",
+    "/mnt/home/guess03/.cache/torch/hub/checkpoints",
+    "--gpu-memory-guard",
+    "--data",
+    "/mnt/home/guess03/clic/work_full_gpu/bakeoff/valid",
+    "--deterministic"
+  ],
+  [
+    "/mnt/home/guess03/clic/venv/bin/python",
+    "/mnt/home/guess03/clic/research_20261015/verify_msillm.py",
+    "--stage",
+    "decode",
+    "--out",
+    "msillm-selected-mix03-deterministic-smoke",
+    "--hub",
+    "/mnt/home/guess03/.cache/torch/hub/facebookresearch_NeuralCompression_main",
+    "--weights",
+    "/mnt/home/guess03/.cache/torch/hub/checkpoints",
+    "--gpu-memory-guard",
+    "--deterministic"
+  ]
+]

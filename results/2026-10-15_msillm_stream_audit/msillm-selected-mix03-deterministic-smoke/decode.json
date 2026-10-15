@@ -1,0 +1,26 @@
+{
+  "torch": "2.11.0+cu128",
+  "deterministic": true,
+  "cudnn_deterministic": true,
+  "cudnn_benchmark": false,
+  "network": "Python TCP disabled",
+  "loads": [
+    {
+      "key": "q4",
+      "seconds": 5.307994510047138,
+      "checkpoint_sha256": "4cebee063ed04ce3d432e70a5e1063593f5faf6c4d00ed1ff42b5dbd39941baf"
+    }
+  ],
+  "images": [
+    {
+      "name": "da52c4f66dc00c2f381e8475fbf8a7aa2c5433a9c59cc175646c62e02892faf7",
+      "key": "q4",
+      "bytes": 147220,
+      "payload_bytes": 147192,
+      "decode_s": 0.9359070680220611,
+      "write_s": 0.17954384605400264,
+      "sha256": "33cab9ec34c5221567cb115b2e5659fb0e4eea29e1d7a50cfa285781d7443b26"
+    }
+  ],
+  "peak_allocated_mib": 3708.71142578125
+}

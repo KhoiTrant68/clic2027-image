@@ -1,0 +1,24 @@
+{
+  "n": 1,
+  "deterministic": true,
+  "encode_process_wall_s": 13.400777597969864,
+  "decode_process_wall_s": 11.508602330985013,
+  "baseline_mix_bytes": 3231292,
+  "msillm_byte_correction": 24,
+  "mix_bytes_after_msillm_correction": 3231316,
+  "budget": 3234201,
+  "fits_after_msillm_correction": true,
+  "scope": "MS-ILLM branch only; other branches have not all been framed/audited",
+  "images": [
+    {
+      "name": "da52c4f66dc00c2f381e8475fbf8a7aa2c5433a9c59cc175646c62e02892faf7",
+      "fresh_exact": true,
+      "fresh_max_abs": 0,
+      "fresh_mae": 0.0,
+      "fresh_changed_values": 0,
+      "baseline_exact": false,
+      "baseline_max_abs": 1,
+      "baseline_mae": 0.007070144952512255
+    }
+  ]
+}

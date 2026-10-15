@@ -1,0 +1,9 @@
+{
+  "bundle": {
+    "config.json": "c3fb19b73eb79698a992deb6c272d25ef2e981552d3cdef6c400172c3fee4823",
+    "model.pt": "88025ccb1c4d9d79140e34bee9909f87973feb5e99b446704cd611cc16eb8ff5",
+    "entropy_control_int.pt": "1be144ba1adc81d0920d391a2b0bf187a57df14a4a5f6f321d467807a75d070f"
+  },
+  "framing": "PL/version1/flags0",
+  "torch": "2.6.0+cu124"
+}
