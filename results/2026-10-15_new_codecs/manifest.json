@@ -1,0 +1,255 @@
+{
+  "root": "/mnt/home/guess03/clic/research_20261015",
+  "runs": {
+    "pilot_afp_strict": {
+      "count": 18,
+      "success": 18,
+      "images": 6,
+      "max_device_used_mib": 11264,
+      "max_allocated_mib": 7353.13037109375,
+      "decode_median_s": 6.998103510486544,
+      "decode_min_s": 4.826454530993942,
+      "decode_max_s": 9.966553008998744,
+      "meta": {
+        "model": "afp",
+        "torch": "2.11.0+cu128",
+        "load_s": 2.347240289003821,
+        "runtime": "/mnt/home/guess03/clic/research_20261015/AFP_GIC/public_release/runtime",
+        "weights": "/mnt/home/guess03/clic/research_20261015/weights/afp_gic_release.pth.tar",
+        "qualities": [
+          0,
+          1,
+          4
+        ],
+        "full_frame": true,
+        "seed": 0
+      }
+    },
+    "pilot_dcvic_strict": {
+      "count": 18,
+      "success": 18,
+      "images": 6,
+      "max_device_used_mib": 7718,
+      "max_allocated_mib": 3692.38330078125,
+      "decode_median_s": 9.492571800510632,
+      "decode_min_s": 6.177687293005874,
+      "decode_max_s": 13.267694548005238,
+      "meta": {
+        "model": "dcvic",
+        "torch": "2.11.0+cu128",
+        "load_s": 2.7095039389969315,
+        "runtime": "/mnt/home/guess03/clic/research_20261015/DC_VIC",
+        "weights": "/mnt/home/guess03/clic/research_20261015/weights/dc_vic_patchgan.pth.tar",
+        "qualities": [
+          0,
+          1,
+          4
+        ],
+        "full_frame": true,
+        "seed": 0
+      }
+    },
+    "pilot_pulse_base": {
+      "count": 24,
+      "success": 24,
+      "images": 6,
+      "max_device_used_mib": 3130,
+      "max_allocated_mib": 788.30078125,
+      "decode_median_s": 0.051324675005162135,
+      "decode_min_s": 0.029962836008053273,
+      "decode_max_s": 0.10225735302083194,
+      "meta": {
+        "model": "pulse-perceptual",
+        "torch": "2.6.0+cu124",
+        "load_s": 0.5288900659943465,
+        "qualities": [
+          0,
+          2,
+          4,
+          7
+        ],
+        "full_frame": true
+      }
+    },
+    "pilot_pulse_large": {
+      "count": 24,
+      "success": 24,
+      "images": 6,
+      "max_device_used_mib": 4140,
+      "max_allocated_mib": 1236.55126953125,
+      "decode_median_s": 0.0629976530035492,
+      "decode_min_s": 0.038144723017467186,
+      "decode_max_s": 0.1249044839933049,
+      "meta": {
+        "model": "pulse-l-perceptual",
+        "torch": "2.6.0+cu124",
+        "load_s": 0.5952468669856898,
+        "qualities": [
+          0,
+          2,
+          4,
+          7
+        ],
+        "full_frame": true
+      }
+    },
+    "full_pulse_large": {
+      "count": 120,
+      "success": 120,
+      "images": 30,
+      "max_device_used_mib": 4304,
+      "max_allocated_mib": 1391.23876953125,
+      "decode_median_s": 0.057225276992539875,
+      "decode_min_s": 0.03079564298968762,
+      "decode_max_s": 0.1213953849801328,
+      "meta": {
+        "model": "pulse-l-perceptual",
+        "torch": "2.6.0+cu124",
+        "load_s": 0.730446308007231,
+        "qualities": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "full_frame": true
+      }
+    }
+  },
+  "repos": {
+    "AFP_GIC": "bcbe90506c47d2f52aa4cb2ed43ba87286dc1b60",
+    "DC_VIC": "3eb4e7823f67d674c63d41cbeb78be3455f17f20",
+    "GenCodec": "9b39a94d078fa2864e8246c2e4031cafaf756b84",
+    "ml-pico": "4a738740f045dfaf0a6003879382028dcb956e97"
+  },
+  "weights": {
+    "weights/.cache/huggingface/.gitignore": {
+      "bytes": 1,
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+    },
+    "weights/.cache/huggingface/CACHEDIR.TAG": {
+      "bytes": 191,
+      "sha256": "f6572428f6d5e1575e73a1502895a8731f10757dfbb634909c6e154b849af91d"
+    },
+    "weights/.cache/huggingface/download/afp_gic_release.pth.tar.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "weights/.cache/huggingface/download/afp_gic_release.pth.tar.metadata": {
+      "bytes": 125,
+      "sha256": "5f660d5464a82d9bf3f30cfff2c9805232ced226c03533314ff75953431fee1b"
+    },
+    "weights/afp_gic_release.pth.tar": {
+      "bytes": 487057582,
+      "sha256": "ea064cf795ae58fe0150ee01704b85df61d7efbddd3b8b84e77e81078ab72b24"
+    },
+    "weights/dc_vic_patchgan.pth.tar": {
+      "bytes": 608339368,
+      "sha256": "9e7b6e0ae849b8452c0ba4076091e737a65778dc2b883e63906aedf8767cc3d5"
+    },
+    "weights/pulse/.cache/huggingface/.gitignore": {
+      "bytes": 1,
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+    },
+    "weights/pulse/.cache/huggingface/CACHEDIR.TAG": {
+      "bytes": 191,
+      "sha256": "f6572428f6d5e1575e73a1502895a8731f10757dfbb634909c6e154b849af91d"
+    },
+    "weights/pulse/.cache/huggingface/download/manifest.json.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "weights/pulse/.cache/huggingface/download/manifest.json.metadata": {
+      "bytes": 101,
+      "sha256": "93326f8f68b75a8cef89b2da203e509574106f4950518968438640daace14cf9"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-l-perceptual/config.json.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-l-perceptual/config.json.metadata": {
+      "bytes": 101,
+      "sha256": "0a53ad1ef23d06077f388c67d5df92e57d732cb5c09f6f62fb6d57f99dc4ba48"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-l-perceptual/entropy_control_int.pt.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-l-perceptual/entropy_control_int.pt.metadata": {
+      "bytes": 125,
+      "sha256": "0ea2c8d0f0350bee401d71b48dfc5a27b2a46888958477e5c7ccc9a3f6b25901"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-l-perceptual/model.pt.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-l-perceptual/model.pt.metadata": {
+      "bytes": 125,
+      "sha256": "86026a022f62e18dc2ea0a5f5fc42f0de3aef2a00ed37669b8b403163931096c"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-perceptual/config.json.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-perceptual/config.json.metadata": {
+      "bytes": 101,
+      "sha256": "5ee617478507d637c2eefa7dd9ad08fce3bb5c99d41ccd9ab9c1edc60d52517d"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-perceptual/entropy_control_int.pt.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-perceptual/entropy_control_int.pt.metadata": {
+      "bytes": 124,
+      "sha256": "3a5934eaade12a4532a035efac7ac19a292a93ce96146d1c8859144c9fab84b4"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-perceptual/model.pt.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "weights/pulse/.cache/huggingface/download/pulse-perceptual/model.pt.metadata": {
+      "bytes": 125,
+      "sha256": "76d8af6b089eedd2a0b8feb3d1a2a4cf2c3d1edf922b8a2dd86c0ddfa7a5094c"
+    },
+    "weights/pulse/manifest.json": {
+      "bytes": 3883,
+      "sha256": "71436db99060327c27c36d90a214f2463402d24fef576db5527e291f64b39017"
+    },
+    "weights/pulse/pulse-l-perceptual/config.json": {
+      "bytes": 434,
+      "sha256": "c3fb19b73eb79698a992deb6c272d25ef2e981552d3cdef6c400172c3fee4823"
+    },
+    "weights/pulse/pulse-l-perceptual/entropy_control_int.pt": {
+      "bytes": 44174263,
+      "sha256": "1be144ba1adc81d0920d391a2b0bf187a57df14a4a5f6f321d467807a75d070f"
+    },
+    "weights/pulse/pulse-l-perceptual/model.pt": {
+      "bytes": 77229546,
+      "sha256": "88025ccb1c4d9d79140e34bee9909f87973feb5e99b446704cd611cc16eb8ff5"
+    },
+    "weights/pulse/pulse-perceptual/config.json": {
+      "bytes": 434,
+      "sha256": "31fea8de71c6e5ed7f7b75f003dae89fbba5df869c7423c24b7e901b30ffc1c9"
+    },
+    "weights/pulse/pulse-perceptual/entropy_control_int.pt": {
+      "bytes": 29551351,
+      "sha256": "a8c0e717f07929fbbd841fdf247dd2869fd032bcd14c936d342d4e6351c2ae56"
+    },
+    "weights/pulse/pulse-perceptual/model.pt": {
+      "bytes": 58947402,
+      "sha256": "13fb7396d7737812e2321a3996874b9a0272991372351f1957387c906226744b"
+    }
+  },
+  "invalid_excluded": [
+    "smoke_afp: non-strict checkpoint load; entropy parameters skipped"
+  ],
+  "latest_user_vram_limit_bytes": 30000000000,
+  "these_runs_used_stricter_half_device_guard": true,
+  "source_sha256": {
+    "/mnt/home/guess03/clic/inputs/qhat_v0/qhat/qhat_v0.json": "7c4f6aee69f51772516e1889d0c6ea16a30d4de3a9f140501efcc91ed82b24e4",
+    "/mnt/home/guess03/clic/work_merge_1013_v0/metrics.csv": "0e0215342801269fbeaffcaf8632d161481880f242f9f5d9459577e338b7eb9d",
+    "/mnt/home/guess03/clic/clic2027-image/src/clic27/eval/metrics.py": "af049cde77ce2465e817a296667855baa95df9aa7d73ff28c92640180b6989cf",
+    "/mnt/home/guess03/clic/clic2027-image/experiments/qhat/qhat.py": "b88015c37f9b55b8b5a3da523e16500f43561130a3c541f9fe6cb89d5d953a92",
+    "/mnt/home/guess03/clic/clic2027-image/experiments/bakeoff/bakeoff.py": "e11d5801791ba8a677a68907f940603bea7079be7099d23d4cec41471611d2f5"
+  }
+}

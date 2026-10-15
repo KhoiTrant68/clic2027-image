@@ -1,0 +1,14 @@
+{
+  "model": "afp",
+  "torch": "2.11.0+cu128",
+  "load_s": 2.347240289003821,
+  "runtime": "/mnt/home/guess03/clic/research_20261015/AFP_GIC/public_release/runtime",
+  "weights": "/mnt/home/guess03/clic/research_20261015/weights/afp_gic_release.pth.tar",
+  "qualities": [
+    0,
+    1,
+    4
+  ],
+  "full_frame": true,
+  "seed": 0
+}

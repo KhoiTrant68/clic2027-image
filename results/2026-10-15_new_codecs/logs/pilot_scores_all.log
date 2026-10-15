@@ -1,0 +1,326 @@
+VRAM guard {'total_mib': 46068, 'initial_used_mib': 1517, 'allocator_cap_mib': 18432, 'device_limit_mib': 23034.0, 'physical_gpu': '1'}
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/mnt/home/guess03/clic/clic2027-image/src/clic27/eval/metrics.py:67: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+{"cand": "pulse-l-perceptual", "key": "q0", "name": "02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7", "bytes": 103945, "t_dec": 0.07855310698505491, "psnr": 27.031312185975285, "msssim": 0.963280439376831, "lpips_alex": 0.058153093945892416, "lpips_vgg": 0.16667029940906694, "dists": 0.053746804770301373, "clipiqa": 0.8539413809776306, "score": 1.2062674558083828}
+{"cand": "pulse-l-perceptual", "key": "q0", "name": "0369d229ba4c9965d5caeb38c359a027a810968eee930b81520b604e76b4df14", "bytes": 35074, "t_dec": 0.04563244100427255, "psnr": 33.39757741400465, "msssim": 0.9635457992553711, "lpips_alex": 0.031186255226459573, "lpips_vgg": 0.15205382669673245, "dists": 0.05173271841862622, "clipiqa": 0.748749315738678, "score": 0.9303711577374555}
+{"cand": "pulse-l-perceptual", "key": "q0", "name": "07b9f93f170a0381836bdf301280a5b80b2c4be6e66f793a3c335dc200fb4e5b", "bytes": 54363, "t_dec": 0.061898916988866404, "psnr": 27.594253753858894, "msssim": 0.9401938319206238, "lpips_alex": 0.05167370914098095, "lpips_vgg": 0.16576735092436565, "dists": 0.05678263972787296, "clipiqa": 0.8093013763427734, "score": 0.7984106980794161}
+{"cand": "pulse-l-perceptual", "key": "q0", "name": "937476dd72f98638f34299dda5e9c252621b5e809c364692fc2934e000583286", "bytes": 195275, "t_dec": 0.08804883799166419, "psnr": 21.827642513022, "msssim": 0.9113368988037109, "lpips_alex": 0.053311536088585854, "lpips_vgg": 0.11957774683833122, "dists": 0.02874043087164561, "clipiqa": 0.3663807213306427, "score": 0.501084663535079}
+{"cand": "pulse-l-perceptual", "key": "q0", "name": "bb7344a2ba499b2d48b891abee1b903dc17d265437ac57028b5999b6cd5bcdc4", "bytes": 33300, "t_dec": 0.043566370994085446, "psnr": 34.02946492627018, "msssim": 0.9872598648071289, "lpips_alex": 0.026503366883844137, "lpips_vgg": 0.07039883360266685, "dists": 0.043949030339717865, "clipiqa": 0.6127175688743591, "score": 1.6017164852969992}
+{"cand": "pulse-l-perceptual", "key": "q0", "name": "ebfd571f1c6824316047a29cb5f376eec15f56dd51821119c1842be068a8b950", "bytes": 99939, "t_dec": 0.0636630640074145, "psnr": 29.685244563518264, "msssim": 0.9921671152114868, "lpips_alex": 0.012928397074574605, "lpips_vgg": 0.038936584489420056, "dists": 0.038683272898197174, "clipiqa": 0.618411123752594, "score": 2.221636927263801}
+{"cand": "pulse-l-perceptual", "key": "q2", "name": "02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7", "bytes": 149930, "t_dec": 0.05630359798669815, "psnr": 28.8778188121967, "msssim": 0.9777036905288696, "lpips_alex": 0.038286733594449125, "lpips_vgg": 0.12317622479270486, "dists": 0.037355536923689, "clipiqa": 0.8563271164894104, "score": 1.8121310443222114}
+{"cand": "pulse-l-perceptual", "key": "q2", "name": "0369d229ba4c9965d5caeb38c359a027a810968eee930b81520b604e76b4df14", "bytes": 52682, "t_dec": 0.04845248398487456, "psnr": 34.51606926404382, "msssim": 0.9721522331237793, "lpips_alex": 0.02290986031293869, "lpips_vgg": 0.12548315290580778, "dists": 0.03844737761160907, "clipiqa": 0.7781809568405151, "score": 1.3657173605770043}
+{"cand": "pulse-l-perceptual", "key": "q2", "name": "07b9f93f170a0381836bdf301280a5b80b2c4be6e66f793a3c335dc200fb4e5b", "bytes": 87357, "t_dec": 0.05478976998711005, "psnr": 29.19870433491948, "msssim": 0.9582260847091675, "lpips_alex": 0.03699163786847802, "lpips_vgg": 0.1383696425048744, "dists": 0.041552738231771136, "clipiqa": 0.8204489350318909, "score": 1.2804394264134302}
+{"cand": "pulse-l-perceptual", "key": "q2", "name": "937476dd72f98638f34299dda5e9c252621b5e809c364692fc2934e000583286", "bytes": 289011, "t_dec": 0.07807549700373784, "psnr": 23.804059404197574, "msssim": 0.949711799621582, "lpips_alex": 0.03371390995259086, "lpips_vgg": 0.08160099511345227, "dists": 0.01782926420370738, "clipiqa": 0.4115530848503113, "score": 1.1259423370059785}
+{"cand": "pulse-l-perceptual", "key": "q2", "name": "bb7344a2ba499b2d48b891abee1b903dc17d265437ac57028b5999b6cd5bcdc4", "bytes": 45161, "t_dec": 0.038144723017467186, "psnr": 35.75828695783415, "msssim": 0.9918690919876099, "lpips_alex": 0.017915074131451547, "lpips_vgg": 0.051980272808577865, "dists": 0.03328949213027954, "clipiqa": 0.5731460452079773, "score": 1.9471436580922985}
+{"cand": "pulse-l-perceptual", "key": "q2", "name": "ebfd571f1c6824316047a29cb5f376eec15f56dd51821119c1842be068a8b950", "bytes": 134427, "t_dec": 0.0638816120044794, "psnr": 31.427521802234757, "msssim": 0.9942390322685242, "lpips_alex": 0.009002550839795731, "lpips_vgg": 0.036368563305586576, "dists": 0.03879212215542793, "clipiqa": 0.6758729815483093, "score": 2.453147691629204}
+{"cand": "pulse-l-perceptual", "key": "q4", "name": "02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7", "bytes": 210892, "t_dec": 0.0623322419996839, "psnr": 30.74338911510919, "msssim": 0.9865037202835083, "lpips_alex": 0.025380117407835582, "lpips_vgg": 0.08967863945838284, "dists": 0.026390159656019773, "clipiqa": 0.8687931299209595, "score": 2.3225451833119872}
+{"cand": "pulse-l-perceptual", "key": "q4", "name": "0369d229ba4c9965d5caeb38c359a027a810968eee930b81520b604e76b4df14", "bytes": 79806, "t_dec": 0.05673439399106428, "psnr": 35.65014700484011, "msssim": 0.9788084030151367, "lpips_alex": 0.01713387566509054, "lpips_vgg": 0.10212668167317615, "dists": 0.028292639641200795, "clipiqa": 0.7767253518104553, "score": 1.6931210817146276}
+{"cand": "pulse-l-perceptual", "key": "q4", "name": "07b9f93f170a0381836bdf301280a5b80b2c4be6e66f793a3c335dc200fb4e5b", "bytes": 133504, "t_dec": 0.061715557996649295, "psnr": 30.86845520631698, "msssim": 0.9699268341064453, "lpips_alex": 0.02606000701403793, "lpips_vgg": 0.11394254869836218, "dists": 0.03277732747442582, "clipiqa": 0.8361431956291199, "score": 1.6455495612874769}
+{"cand": "pulse-l-perceptual", "key": "q4", "name": "937476dd72f98638f34299dda5e9c252621b5e809c364692fc2934e000583286", "bytes": 407996, "t_dec": 0.07572085101855919, "psnr": 25.990607255383182, "msssim": 0.9729141592979431, "lpips_alex": 0.023086329456418753, "lpips_vgg": 0.05361722782254219, "dists": 0.013129204511642456, "clipiqa": 0.47254061698913574, "score": 1.6719090304976776}
+{"cand": "pulse-l-perceptual", "key": "q4", "name": "bb7344a2ba499b2d48b891abee1b903dc17d265437ac57028b5999b6cd5bcdc4", "bytes": 59492, "t_dec": 0.0423333480139263, "psnr": 37.13154825414352, "msssim": 0.9946388006210327, "lpips_alex": 0.012311970407608896, "lpips_vgg": 0.039002495526801795, "dists": 0.0269642174243927, "clipiqa": 0.6021696329116821, "score": 2.3241725178590076}
+{"cand": "pulse-l-perceptual", "key": "q4", "name": "ebfd571f1c6824316047a29cb5f376eec15f56dd51821119c1842be068a8b950", "bytes": 169965, "t_dec": 0.07631761400261894, "psnr": 32.876965578338705, "msssim": 0.9956125020980835, "lpips_alex": 0.007036563372821547, "lpips_vgg": 0.031400867737829685, "dists": 0.029185514897108078, "clipiqa": 0.7021850347518921, "score": 2.7576639475893057}
+{"cand": "pulse-l-perceptual", "key": "q7", "name": "02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7", "bytes": 334501, "t_dec": 0.0894462639989797, "psnr": 33.29223802712094, "msssim": 0.9931921362876892, "lpips_alex": 0.013276715102769872, "lpips_vgg": 0.055874242085744354, "dists": 0.015583481683450588, "clipiqa": 0.8763048648834229, "score": 2.9044051538883684}
+{"cand": "pulse-l-perceptual", "key": "q7", "name": "0369d229ba4c9965d5caeb38c359a027a810968eee930b81520b604e76b4df14", "bytes": 151269, "t_dec": 0.07438476200331934, "psnr": 37.424699970790144, "msssim": 0.9865279197692871, "lpips_alex": 0.01044290250112467, "lpips_vgg": 0.07303709236576277, "dists": 0.015919317042126374, "clipiqa": 0.7708830833435059, "score": 2.1425921526614147}
+{"cand": "pulse-l-perceptual", "key": "q7", "name": "07b9f93f170a0381836bdf301280a5b80b2c4be6e66f793a3c335dc200fb4e5b", "bytes": 236641, "t_dec": 0.06673119298648089, "psnr": 33.085830008974646, "msssim": 0.9806350469589233, "lpips_alex": 0.015891389189945423, "lpips_vgg": 0.08361216031891458, "dists": 0.018905593893107246, "clipiqa": 0.8543072938919067, "score": 2.1447591511663258}
+{"cand": "pulse-l-perceptual", "key": "q7", "name": "937476dd72f98638f34299dda5e9c252621b5e809c364692fc2934e000583286", "bytes": 604690, "t_dec": 0.1249044839933049, "psnr": 28.896306465627745, "msssim": 0.9881221055984497, "lpips_alex": 0.012299168389290571, "lpips_vgg": 0.029835281738390524, "dists": 0.007397120197614034, "clipiqa": 0.4735279083251953, "score": 2.21483049510348}
+{"cand": "pulse-l-perceptual", "key": "q7", "name": "bb7344a2ba499b2d48b891abee1b903dc17d265437ac57028b5999b6cd5bcdc4", "bytes": 88150, "t_dec": 0.054298687988193706, "psnr": 39.317559946726554, "msssim": 0.9968017339706421, "lpips_alex": 0.007105722033884376, "lpips_vgg": 0.026506498164962977, "dists": 0.01789495348930359, "clipiqa": 0.6099262833595276, "score": 2.7314728482074497}
+{"cand": "pulse-l-perceptual", "key": "q7", "name": "ebfd571f1c6824316047a29cb5f376eec15f56dd51821119c1842be068a8b950", "bytes": 238201, "t_dec": 0.084511052002199, "psnr": 34.379937509759614, "msssim": 0.9964054822921753, "lpips_alex": 0.0053747631318401545, "lpips_vgg": 0.03676584525965154, "dists": 0.0378776490688324, "clipiqa": 0.7242240905761719, "score": 2.7301703977964884}
+[
+  {
+    "cand": "codlite",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": true,
+    "bpp": 0.07459642610497237,
+    "qhat": -0.5209680284760637
+  },
+  {
+    "cand": "codlite",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": true,
+    "bpp": 0.1491820614640884,
+    "qhat": 0.0006154096575308835
+  },
+  {
+    "cand": "codlite",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": true,
+    "bpp": 0.29835333218232046,
+    "qhat": 0.8671295612614117
+  },
+  {
+    "cand": "ditic",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": true,
+    "bpp": 0.07491655156537753,
+    "qhat": 0.2622775084454816
+  },
+  {
+    "cand": "ditic",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": true,
+    "bpp": 0.07769516862338859,
+    "qhat": 0.2656108120425023
+  },
+  {
+    "cand": "ditic",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": true,
+    "bpp": 0.07769516862338859,
+    "qhat": 0.2656108120425023
+  },
+  {
+    "cand": "ditics",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": true,
+    "bpp": 0.07491655156537753,
+    "qhat": -0.09266993394074881
+  },
+  {
+    "cand": "ditics",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": true,
+    "bpp": 0.08373438938766115,
+    "qhat": -0.07295844708670733
+  },
+  {
+    "cand": "ditics",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": true,
+    "bpp": 0.08373438938766115,
+    "qhat": -0.07295844708670733
+  },
+  {
+    "cand": "msillm",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": true,
+    "bpp": 0.07495791609116022,
+    "qhat": -0.3030002337941985
+  },
+  {
+    "cand": "msillm",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": true,
+    "bpp": 0.14941046558471455,
+    "qhat": 0.6422805712789006
+  },
+  {
+    "cand": "msillm",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": true,
+    "bpp": 0.29972375690607733,
+    "qhat": 1.7323400569508287
+  },
+  {
+    "cand": "vtmscc",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": true,
+    "bpp": 0.07262531652854512,
+    "qhat": -1.5775536493764974
+  },
+  {
+    "cand": "vtmscc",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": true,
+    "bpp": 0.14841591850828728,
+    "qhat": -0.2750817094371751
+  },
+  {
+    "cand": "vtmscc",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": true,
+    "bpp": 0.29551042026358193,
+    "qhat": 0.876198418018796
+  },
+  {
+    "cand": "afp",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": true,
+    "bpp": 0.07470253510589318,
+    "qhat": -0.7304122514963881
+  },
+  {
+    "cand": "afp",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": true,
+    "bpp": 0.1415026473296501,
+    "qhat": 0.3158420398323564
+  },
+  {
+    "cand": "afp",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": true,
+    "bpp": 0.22538451024401474,
+    "qhat": 0.8712137174595808
+  },
+  {
+    "cand": "dcvic",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": false
+  },
+  {
+    "cand": "dcvic",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": true,
+    "bpp": 0.14656530559392264,
+    "qhat": 0.4599096869271375
+  },
+  {
+    "cand": "dcvic",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": true,
+    "bpp": 0.22919903890423574,
+    "qhat": 1.0236549802245225
+  },
+  {
+    "cand": "pulse-perceptual",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": false
+  },
+  {
+    "cand": "pulse-perceptual",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": false
+  },
+  {
+    "cand": "pulse-perceptual",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": false
+  },
+  {
+    "cand": "pulse-l-perceptual",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": false
+  },
+  {
+    "cand": "pulse-l-perceptual",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": false
+  },
+  {
+    "cand": "pulse-l-perceptual",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": true,
+    "bpp": 0.29426004258747696,
+    "qhat": 1.6056704004904618
+  },
+  {
+    "cand": "baseline_mix",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": true,
+    "bpp": 0.07387884150552486,
+    "qhat": 0.38057384137469713
+  },
+  {
+    "cand": "baseline_mix",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": true,
+    "bpp": 0.14737955729166666,
+    "qhat": 1.0408793086251509
+  },
+  {
+    "cand": "baseline_mix",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": true,
+    "bpp": 0.29979164868209024,
+    "qhat": 1.8629160902833515
+  },
+  {
+    "cand": "expanded_mix",
+    "rate": 0.075,
+    "n": 6,
+    "budget_bytes": 166809,
+    "feasible": true,
+    "bpp": 0.07387884150552486,
+    "qhat": 0.38057384137469713
+  },
+  {
+    "cand": "expanded_mix",
+    "rate": 0.15,
+    "n": 6,
+    "budget_bytes": 333619,
+    "feasible": true,
+    "bpp": 0.14938124064802025,
+    "qhat": 1.055966692393471
+  },
+  {
+    "cand": "expanded_mix",
+    "rate": 0.3,
+    "n": 6,
+    "budget_bytes": 667238,
+    "feasible": true,
+    "bpp": 0.29974578801220075,
+    "qhat": 1.9194113085945066
+  }
+]

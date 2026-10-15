@@ -1,0 +1,14 @@
+{
+  "model": "afp",
+  "q": 0,
+  "name": "07b9f93f170a0381836bdf301280a5b80b2c4be6e66f793a3c335dc200fb4e5b",
+  "status": "ok",
+  "bytes": 13466,
+  "pixels": 2785280,
+  "bpp": 0.03867761948529412,
+  "encode_s": 6.376886140002171,
+  "decode_s": 7.06292305898387,
+  "peak_allocated_mib": 5157.77099609375,
+  "peak_reserved_mib": 6444.0,
+  "stream_sha256": "4a3ed859fe5c151d56edccb1c6ffb7dcea2cdd7ee2416a61f80312aced3ffe35"
+}

@@ -1,0 +1,14 @@
+{
+  "model": "pulse-l-perceptual",
+  "q": 4,
+  "name": "937476dd72f98638f34299dda5e9c252621b5e809c364692fc2934e000583286",
+  "status": "ok",
+  "bytes": 407996,
+  "pixels": 3145728,
+  "bpp": 1.0375874837239583,
+  "encode_s": 0.08663384898682125,
+  "decode_s": 0.07572085101855919,
+  "peak_allocated_mib": 981.61328125,
+  "peak_reserved_mib": 1658.0,
+  "stream_sha256": "d243b085e70007670ea6a7a7a8fbfbb0b8e9c858fcc88e8633ad44b5a106e9a2"
+}

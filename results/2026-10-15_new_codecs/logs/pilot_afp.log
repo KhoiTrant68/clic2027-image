@@ -1,0 +1,36 @@
+VRAM guard {'total_mib': 46068, 'initial_used_mib': 1517, 'allocator_cap_mib': 18432, 'device_limit_mib': 23034.0, 'physical_gpu': '0'}
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+[  INFO  ] comp_model [[34mHyperpriorCharmDualCondVicModel[0m] (from [32mhyperprior_charm_dc_vic_model.py[0m) is build
+[  INFO  ] encoder [[34mElicDualBetaFtVqScEncoder[0m] (from [32melic_dual_beta_ft_autoencoder.py[0m) is build
+[  INFO  ] decoder [[34mElicDualBetaFtFeatFusionDecoder[0m] (from [32melic_dual_beta_ft_autoencoder.py[0m) is build
+[  INFO  ] hyperencoder [[34mMinnen20HyperEncoder[0m] (from [32mminnen20_hyperprior.py[0m) is build
+[  INFO  ] hyperdecoder [[34mMinnen20HyperDecoder[0m] (from [32mminnen20_hyperprior.py[0m) is build
+[  INFO  ] entropy_model [[34mSteEntropyBottleneck[0m] (from [32mentropy_bottleneck.py[0m) is build
+[  INFO  ] entropy_model [[34mSteGaussianMeanScaleConditional[0m] (from [32mste_gaussian_conditional.py[0m) is build
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torch/functional.py:505: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /pytorch/aten/src/ATen/native/TensorShape.cpp:4381.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+[  INFO  ] No external AdaCode checkpoint is provided. The adapter will be initialized from explicit codebook_params and later populated by the released AFP-GIC checkpoint.
+[  INFO  ] context_model [[34mMinnen20CharmContextModel[0m] (from [32mminnen20_charm_context_model.py[0m) is build
+[  INFO  ] use_selected_beta_pairs: True
+[  INFO  ] selected_beta_rate: [1.921, 1.312, 0.844, 0.422, 0.091]
+[  INFO  ] selected_beta_vq: [2.25, 3.5, 3.25, 0.5, 2.25]
+[  INFO  ] load checkpoint: /mnt/home/guess03/clic/research_20261015/weights/afp_gic_release.pth.tar
+/mnt/home/guess03/clic/research_20261015/AFP_GIC/public_release/runtime/src/models/comp_model/base_model.py:109: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  ckpt = torch.load(ckpt_path, map_location=self.device)
+Traceback (most recent call last):
+  File "/mnt/home/guess03/clic/research_20261015/probe.py", line 132, in <module>
+    main()
+  File "/mnt/home/guess03/clic/research_20261015/probe.py", line 58, in main
+    model.load_learned_weight(ckpt_path=str(weights), strict=True)
+  File "/mnt/home/guess03/clic/research_20261015/AFP_GIC/public_release/runtime/src/models/comp_model/base_model.py", line 125, in load_learned_weight
+    out = self.load_state_dict(new_state_dict)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/guess03/clic/research_20261015/AFP_GIC/public_release/runtime/src/models/comp_model/base_model.py", line 104, in load_state_dict
+    return super().load_state_dict(state_dict, strict=strict)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 2639, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for HyperpriorCharmDualCondVicModel:
+	Missing key(s) in state_dict: "entropy_model_z.matrices.0", "entropy_model_z.matrices.1", "entropy_model_z.matrices.2", "entropy_model_z.matrices.3", "entropy_model_z.matrices.4", "entropy_model_z.biases.0", "entropy_model_z.biases.1", "entropy_model_z.biases.2", "entropy_model_z.biases.3", "entropy_model_z.biases.4", "entropy_model_z.factors.0", "entropy_model_z.factors.1", "entropy_model_z.factors.2", "entropy_model_z.factors.3". 
+	Unexpected key(s) in state_dict: "entropy_model_z._matrix0", "entropy_model_z._bias0", "entropy_model_z._factor0", "entropy_model_z._matrix1", "entropy_model_z._bias1", "entropy_model_z._factor1", "entropy_model_z._matrix2", "entropy_model_z._bias2", "entropy_model_z._factor2", "entropy_model_z._matrix3", "entropy_model_z._bias3", "entropy_model_z._factor3", "entropy_model_z._matrix4", "entropy_model_z._bias4". 

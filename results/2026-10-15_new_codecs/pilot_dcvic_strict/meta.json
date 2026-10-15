@@ -1,0 +1,14 @@
+{
+  "model": "dcvic",
+  "torch": "2.11.0+cu128",
+  "load_s": 2.7095039389969315,
+  "runtime": "/mnt/home/guess03/clic/research_20261015/DC_VIC",
+  "weights": "/mnt/home/guess03/clic/research_20261015/weights/dc_vic_patchgan.pth.tar",
+  "qualities": [
+    0,
+    1,
+    4
+  ],
+  "full_frame": true,
+  "seed": 0
+}

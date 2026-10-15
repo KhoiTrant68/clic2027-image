@@ -1,0 +1,23 @@
+[
+  {
+    "q": 0,
+    "name": "02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7",
+    "same_pixels": true,
+    "max_abs_difference": 0,
+    "decode_ms": 402.01594299287535
+  },
+  {
+    "q": 1,
+    "name": "937476dd72f98638f34299dda5e9c252621b5e809c364692fc2934e000583286",
+    "same_pixels": true,
+    "max_abs_difference": 0,
+    "decode_ms": 130.89603898697533
+  },
+  {
+    "q": 4,
+    "name": "ebfd571f1c6824316047a29cb5f376eec15f56dd51821119c1842be068a8b950",
+    "same_pixels": true,
+    "max_abs_difference": 0,
+    "decode_ms": 110.10443200939335
+  }
+]

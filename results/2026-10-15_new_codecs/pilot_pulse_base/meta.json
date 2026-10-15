@@ -1,0 +1,12 @@
+{
+  "model": "pulse-perceptual",
+  "torch": "2.6.0+cu124",
+  "load_s": 0.5288900659943465,
+  "qualities": [
+    0,
+    2,
+    4,
+    7
+  ],
+  "full_frame": true
+}

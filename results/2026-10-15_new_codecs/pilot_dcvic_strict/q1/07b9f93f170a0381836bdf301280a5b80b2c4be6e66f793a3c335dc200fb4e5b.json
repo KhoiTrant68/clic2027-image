@@ -1,0 +1,14 @@
+{
+  "model": "dcvic",
+  "q": 1,
+  "name": "07b9f93f170a0381836bdf301280a5b80b2c4be6e66f793a3c335dc200fb4e5b",
+  "status": "ok",
+  "bytes": 23342,
+  "pixels": 2785280,
+  "bpp": 0.06704388786764706,
+  "encode_s": 7.004239523026627,
+  "decode_s": 9.484974864026299,
+  "peak_allocated_mib": 2677.60205078125,
+  "peak_reserved_mib": 4350.0,
+  "stream_sha256": "de31b7a290d53316804767641b2d35a879f8e3225f3da8c80db0bb12d84f4436"
+}
