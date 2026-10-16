@@ -80,7 +80,7 @@ PSNR đo sai số pixel, nhưng không phải lúc nào cũng phản ánh ảnh 
 | **0.3 bpp** | Mix có PULSE-L, giữ MS-ILLM và các mode bổ sung | PULSE-L được chọn cho 20/30 ảnh; mix đạt Q̂ 1.4912 | Kết quả nội bộ; cần holdout và benchmark toàn gói |
 | **Ảnh chữ, giao diện, màn hình** | VTM-SCC | Codec hướng screen content giữ cấu trúc và chữ tốt hơn trong thử nghiệm trước đó | Có tín hiệu tốt; bộ phát hiện ảnh chưa triển khai |
 
-**Vấn đề chính:** Các rủi ro lớn nhất hiện nay là benchmark trên L4 thật, tính tất định giữa hai máy L4, đóng gói decoder trong giới hạn 4 GB và tích hợp các nhánh codec thành một pipeline decode hoàn chỉnh.
+**Vấn đề chính:** Benchmark trên L4 thật, tính tất định giữa các máy L4(mình có thể thuê runpod để chạy evaluation nhưng cần đảm bảo kết quả chạy trên các máy L4 là giống nhau), đóng gói decoder trong giới hạn 4 GB và tích hợp các nhánh codec thành một pipeline decode hoàn chỉnh.
 
 ## 2. Mục tiêu, giả thuyết và tiêu chí thành công
 
@@ -88,24 +88,25 @@ PSNR đo sai số pixel, nhưng không phải lúc nào cũng phản ánh ảnh 
 
 -   Tối ưu chất lượng cảm nhận theo ngân sách bitrate của toàn bộ tập ảnh.
 -   Cho phép chọn codec/operating point khác nhau theo ảnh và theo  bitrate.
--   Đo riêng chất lượng, tốc độ, bộ nhớ, kích thước artifact và độ tin cậy của giải mã.
--   Giữ pipeline thí nghiệm có thể chạy lại, lưu log và tiếp tục từ trạng thái trước.
+-   Đo riêng chất lượng, tốc độ, bộ nhớ, kích thước artifact và độ tin cậy của decoder.
 
 ### 2.2 Giả thuyết nghiên cứu
 
 -   **H1 --- Preference thay cho PSNR đơn lẻ:** một mô hình $\hat{Q}$ kết hợp nhiều metric sẽ dự đoán lựa chọn của người chấm tốt hơn PSNR riêng. **Giải thích**: $\hat{Q}$ là một mô hình dự đoán chất lượng; điểm số do mô hình tạo ra mới là metric dùng để đánh giá và so sánh codec.
 -   **H2 --- Codec chuyên biệt theo loại ảnh:** codec diffusion/latent có thể có lợi trên ảnh tự nhiên ở bitrate rất thấp, trong khi VTM-SCC có thể phù hợp hơn cho ảnh chữ/màn hình.
--   **H3 --- Trộn theo ảnh tốt hơn một codec duy nhất:** phân bổ ngân sách byte cho codec/operating point phù hợp từng ảnh có thể tăng tổng preference dưới cùng ngân sách byte.
--   **H4 --- Decoder chưng cất là phương án đánh đổi:** có thể giảm thời gian giải mã với tổn thất chất lượng cảm nhận có giới hạn.
+-   **H3 --- Trộn theo ảnh tốt sẽ hơn một codec duy nhất:** phân bổ ngân sách byte cho codec/operating point phù hợp từng ảnh có thể tăng tổng preference dưới cùng ngân sách byte.
+-   **H4 --- Decoder chưng cất là phương án có thể suy nghĩ tuy nhiên sẽ có đánh đổi:** có thể giảm thời gian giải mã với tổn thất chất lượng cảm nhận có giới hạn.
 -   **H5 --- Tính tất định là điều kiện bắt buộc:** chất lượng cao không có ý nghĩa nếu entropy decode tạo latent/ảnh khác nhau giữa môi trường encode và decode.
 
 ### 2.3 Tiêu chí thành công
 
-Luật hiện tại yêu cầu đủ ba rate, decoder không quá **4 GB**, chạy với **2 CPU, RAM 12 GB và GPU L4 24 GB**. Chất lượng được đánh giá bằng người; nhóm **25% bài có thời gian giải mã cao nhất** không đủ điều kiện nhận giải. Decoder test phải khớp hash đã đăng ký ở validation. Có thể dùng decoder khác nhau giữa các rate, nhưng mỗi decoder phải được đăng ký trước. [Nguồn: CLIC 2027 tasks](https://clic2027.compression.cc/tasks/).
+Luật hiện tại yêu cầu đủ ba rate, decoder không quá **4 GB**, chạy với **2 CPU, RAM 12 GB và GPU L4 24 GB**. Chất lượng được đánh giá bằng người; nhóm **25% bài có thời gian giải mã lâu nhất** không đủ điều kiện nhận giải. Decoder test phải khớp hash đã đăng ký ở validation. Có thể dùng decoder khác nhau giữa các rate, nhưng mỗi decoder phải được đăng ký trước. [Nguồn: CLIC 2027 tasks](https://clic2027.compression.cc/tasks/).
 
-Mục tiêu kỹ thuật nội bộ là hướng tới **≤20 giây/30 ảnh trên L4**, đồng thời báo riêng decode và tổng wall time từ tiến trình mới. Mốc 20 giây chưa được xác nhận, cũng không bảo đảm tránh nhóm 25% chậm nhất. Kết quả nghiên cứu chỉ được xem là sẵn sàng triển khai khi qua kiểm tra bitstream, byte-accounting và chạy trọn gói trong môi trường đích.
+Mục tiêu kỹ thuật nội bộ là hướng tới **≤20 giây/30 ảnh trên L4**, đồng thời có báo cáo số liệu riêng cho decode và tổng time xử lý. Mốc 20 giây chưa được xác nhận là mốc đáng tin cậy, cũng không bảo đảm tránh nhóm 25% chậm nhất nhưng là con số an toàn (theo số liệu của challenge đợt trước 2025). 
 
-Tài nguyên nghiên cứu hiện có là **2 GPU L40** trên server. Giới hạn được chủ dự án cho phép là **30 GB trên mỗi GPU**, hiểu bảo thủ là 30,000,000,000 byte tổng bộ nhớ thiết bị, gồm cả dịch vụ đang chạy. Giới hạn này dành cho nghiên cứu trên server; không thay đổi giới hạn phần cứng bài nộp L4.
+Lưu ý quan trọng: Kết quả nghiên cứu chỉ được xem là sẵn sàng nộp khi qua kiểm tra bitstream, byte-accounting và chạy trọn gói trong môi trường L4.
+
+Tài nguyên nghiên cứu hiện có là **2 GPU L40** trên server. Giới hạn được cho phép là **30 GB trên mỗi GPU**. Giới hạn này dành cho nghiên cứu trên server; không thay đổi giới hạn phần cứng bài nộp L4.
 
 ## 3. Pipeline nghiên cứu tổng thể
 
@@ -148,7 +149,7 @@ Dữ liệu preference thường chứa các cặp ảnh được so sánh: ngư
 
 - Mỗi năm có thể có phân bố ảnh khác nhau: ảnh tự nhiên, cảnh vật, chân dung, ảnh có nhiều chi tiết hoặc vùng phẳng.
 - Dùng nhiều năm giúp kiểm tra liệu mô hình đánh giá chất lượng có tổng quát hóa hay chỉ phù hợp với một tập ảnh cụ thể.
-- Có thể dùng một số năm để huấn luyện và năm còn lại để kiểm tra khả năng dự đoán trên dữ liệu chưa thấy.
+- Có thể dùng một số năm để huấn luyện và năm còn lại để kiểm tra khả năng dự đoán trên dữ liệu chưa thấy. Hiện tại đang dùng 2021+2022 train còn 2024 test
 
 **Đầu ra: Tập dữ liệu các so sánh chất lượng, ví dụ:**
 
@@ -168,7 +169,7 @@ Với mỗi ảnh nén, so sánh ảnh đó với ảnh gốc và tính các met
 | Metric   | Ý nghĩa                                                                      |
 | -------- | ---------------------------------------------------------------------------- |
 | PSNR     | Đo sai số pixel; cao thường là tốt hơn.                                      |
-| MS-SSIM  | Đo độ tương đồng về cấu trúc ở nhiều thang đo.                               |
+| MS-SSIM  | Đo độ tương đồng về cấu trúc ở nhiều scale.                               |
 | LPIPS    | Đo khoảng cách đặc trưng perceptual từ mạng học sâu; thấp thường là tốt hơn. |
 | DISTS    | Đánh giá khác biệt về cấu trúc và kết cấu; thấp thường là tốt hơn.           |
 | CLIP-IQA | Ước lượng chất lượng cảm nhận dựa trên đặc trưng học được.                   |
@@ -202,7 +203,7 @@ s_i=\hat{Q}(x_i,\hat{x}_i)
 =\sum_{k=1}^{K}w_k\,T_k\!\left(\phi_k(x_i,\hat{x}_i)\right).
 $$
 
-Ở đây $x_i$ là ảnh gốc, $\hat{x}_i$ là ảnh tái tạo, $\phi_k$ là metric thứ $k$, $T_k$ là phép biến đổi metric và $w_k$ là trọng số đã fit. Trong repo, `qhat.transform` biến đổi đặc trưng và `bakeoff.qhat_score` tính tổng có trọng số. Bias A/B dùng khi dự đoán preference, không cộng vào utility từng ảnh của allocator. Điểm Q̂ không phải phần trăm chất lượng và không có mốc 0 mang ý nghĩa tuyệt đối.
+Ở đây $x_i$ là ảnh gốc, $\hat{x}_i$ là ảnh tái tạo, $\phi_k$ là metric thứ $k$, $T_k$ là phép biến đổi metric và $w_k$ là trọng số đã fit. Bias A/B dùng khi dự đoán preference, không cộng vào utility từng ảnh của allocator.
 
 Mô hình học tham số $\theta$ sao cho thứ tự dự đoán khớp với preference trong dữ liệu huấn luyện.
 
@@ -228,13 +229,7 @@ Tập 30 ảnh giúp giảm chi phí tính toán khi thử nhiều cấu hình, 
 - Các phương pháp phân bổ bitrate.
 - Các thay đổi ở encoder hoặc decoder.
 
-Đây là tập validation CLIC 2027 gồm 30 ảnh, trùng tập test CLIC 2025, có ảnh tự nhiên, game và screen content. Không phải một tập con tự chọn từ validation lớn hơn. [Nguồn dữ liệu chính thức](https://clic2027.compression.cc/tasks/).
-
-**Phân biệt validation chính thức với pilot và holdout**
-
-Vòng mới dùng pilot sáu ảnh lấy từ tập này để phát hiện lỗi và loại ứng viên yếu, sau đó đánh giá PULSE-L trên đủ 30 ảnh. Cần bổ sung dev/holdout độc lập ngoài validation để kiểm tra khả năng tổng quát hóa; không dùng 30 ảnh validation để train codec.
-
-Tuy nhiên, 30 ảnh chỉ phù hợp để sàng lọc và phân tích sơ bộ. Kết quả có thể thay đổi đáng kể theo cách chọn ảnh, nhất là khi chỉ có vài ảnh đại diện cho một loại nội dung.
+Đây là tập validation CLIC 2027 gồm 30 ảnh, trùng tập test CLIC 2025, có ảnh tự nhiên, game và screen content. [Nguồn dữ liệu chính thức](https://clic2027.compression.cc/tasks/).
 
 **Đầu ra:** Một tập validation cố định, được sử dụng nhất quán cho các codec so sánh.
 
@@ -244,13 +239,12 @@ Tuy nhiên, 30 ảnh chỉ phù hợp để sàng lọc và phân tích sơ bộ
 
 Các ứng viên trong dự án bao gồm:
 
-- VTM / VTM-SCC: Codec dựa trên công nghệ video coding, đóng vai trò baseline truyền thống.
-- MS-ILLM: Phương pháp nén ảnh dựa trên mô hình học sâu.
-- MBT2018: Một codec nén ảnh học sâu có entropy model.
-- CoD-Lite: Một phương pháp nén ảnh học sâu khác.
+- VTM / VTM-SCC: Codec đóng vai trò baseline truyền thống.
+- MS-ILLM 
+- MBT2018 
+- CoD-Lite
 - DC-AE + latent codec: Mã hóa ảnh thành latent rồi lượng tử hóa và entropy-code latent.
-- DiT-IC: Hướng nghiên cứu kết hợp biểu diễn latent với mô hình sinh hoặc xử lý dựa trên kiến trúc DiT, theo thiết kế cụ thể của dự án.
-
+- DiT-IC
 Khi encode, mỗi codec chuyển ảnh thành bitstream. Bitstream có thể chứa latent đã lượng tử hóa, thông tin phụ, header và dữ liệu entropy-coded.
 
 **Điều cần kiểm soát:**
@@ -258,11 +252,11 @@ Khi encode, mỗi codec chuyển ảnh thành bitstream. Bitstream có thể ch�
 2. Chọn cấu hình tương ứng với mục tiêu bitrate.
 3. Tính bitrate từ số byte thực tế của bitstream, không chỉ dựa trên tham số rate của model.
 4. Ghi lại phiên bản code, checkpoint, cấu hình và thời gian encode.
-5. Không để một codec được dùng thông tin bổ sung mà codec khác không được phép sử dụng.
+5. Inference công bằng trên các codec.
 
 **Đầu ra:** Bitstream của mỗi codec, cùng metadata về cấu hình, số byte và thời gian encode.
 
-#### Bước F — Decode và đo metric / thời gian
+#### Bước F — Decode và đo metric + thời gian
 
 **Mục tiêu: Đánh giá chất lượng ảnh khôi phục và chi phí tính toán thực tế.**
 
@@ -287,7 +281,7 @@ Tốc độ giải mã rất quan trọng. Cần phân biệt:
 - Thời gian xử lý phụ trợ, chẳng hạn entropy decoding hoặc chuyển đổi tensor.
 - Peak VRAM và chi phí khởi tạo.
 
-Để so sánh công bằng, cần thống nhất phần cứng, số ảnh, batch size, warm-up và cách đo thời gian. Không nên so sánh số liệu thu từ các điều kiện khác nhau như thể chúng tương đương. Các phép đo hiện tại cố định cách đo trên L40; kết quả L4 phải được đo riêng. Không giả định hai GPU có hiệu năng tương đương hoặc dùng hệ số quy đổi chưa được kiểm chứng.
+Để so sánh công bằng, cần thống nhất phần cứng, số ảnh, batch size, warm-up và cách đo thời gian. Các phép đo hiện tại cố định cách đo trên L40; kết quả L4 phải được đo riêng.
 
 **Đầu ra:** Ảnh tái tạo, metric chất lượng, thời gian decode và thống kê tài nguyên cho mỗi codec.
 
@@ -297,46 +291,46 @@ Tốc độ giải mã rất quan trọng. Cần phân biệt:
 
 Mục tiêu: Phân bổ tổng số byte cho các ảnh sao cho tổng bitrate của cả tập nằm trong ngân sách quy định.
 
-Nếu có $N$ ảnh, với kích thước ảnh $H_i \times W_i$, tổng số bitstream là $B_{\text{total}}$ byte, bitrate trung bình là:
-
-$$
-\mathrm{bpp}_{\mathrm{avg}}=\frac{8B_{\mathrm{total}}}{\sum_{i=1}^{N}H_iW_i}.
-$$
-
-Trong đó $B_{\text{total}}$ phải bao gồm các thành phần bitstream thực sự được tính vào ngân sách cuộc thi, chẳng hạn header và side information nếu chúng thuộc phần dữ liệu được chấm.
-
 **Tại sao phải phân bổ ngân sách?**
 
-Giả sử codec A có thể dành nhiều byte cho ảnh khó và ít byte cho ảnh dễ, còn codec B dùng cùng một bitrate cho mọi ảnh. Nếu A được tối ưu trên toàn tập, nó có thể tạo ra chất lượng trung bình cao hơn bằng cách đặt thêm bit vào những ảnh mà các bit bổ sung mang lại nhiều cải thiện nhất.
+Giả sử bạn có 10.000.000 byte (khoảng 10 MB) để lưu trữ một bộ tập hợp 100 bức ảnh. 
+Bạn có hai lựa chọn:
+- Chia đều: Mỗi bức ảnh nhận đúng 100.000 byte. Nhưng cách này kém hiệu quả
+- Chia thông minh: Ảnh đơn giản nhận 30.000 byte, ảnh phức tạp nhận 250.000 byte.
 
-Một cách diễn đạt bài toán phân bổ bitrate là:
+**Tại sao "Chia đều Bitrate" lại kém hiệu quả?**
 
-$$
-\max_{j_1,\ldots,j_N}\sum_{i=1}^{N}\hat{Q}_{i,j_i}
-$$
+Hiệu suất biểu diễn hình ảnh tuân theo quy luật hiệu suất giảm dần (Diminishing Returns): 
+- Ảnh dễ (bầu trời xanh, tường phẳng, phông nền mờ) ---> Chỉ cần lượng byte rất nhỏ để đạt chất lượng tiệm cận hoàn hảo. Nếu rót thêm byte vào đây, điểm chất lượng $\hat{Q}$ gần như không tăng thêm đáng kể. 
+- Trong khi ảnh khó (văn bản, chi tiết tóc, kết cấu phức tạp, khung cảnh nhiều vật thể), nếu thiếu byte, chất lượng vỡ nát nghiêm trọng làm giảm điểm $\hat{Q}$ rất sâu. Nhưng nếu cấp thêm byte, điểm chất lượng lại gia tăng cực kỳ rõ rệt.
 
-với ràng buộc ngân sách:
+Một codec tối ưu toàn cục sẽ rút bớt byte từ các ảnh dễ để viện trợ cho các ảnh khó, giúp tổng điểm trung bình toàn tập nâng lên rõ rệt so với việc cào bằng.
 
-$$
-\sum_{i=1}^{N}B_{i,j_i}\leq
-B_{\mathrm{budget}}=
-\left\lfloor\frac{r}{8}\sum_{i=1}^{N}H_iW_i\right\rfloor.
-$$
+**Cụ thể thì bước này làm gì**
+Bước này giải quyết lựa chọn thứ hai để tối đa hóa chất lượng cảm nhận trung bình ($\hat{Q}$) trên toàn bộ tập dữ liệu, đảm bảo tổng dung lượng không vượt quá hằng số ngân sách $B_{\text{budget}}$. Một cách diễn đạt bài toán phân bổ bitrate là:
 
-Trong đó:
+Bitrate trung bình toàn tập tính theo bits per pixel ($\text{bpp}_{\text{avg}}$):
 
-- $N$: số ảnh; $H_i,W_i$: kích thước ảnh $i$.
-- $j_i$: lựa chọn codec và mức chất lượng cho ảnh $i$ trong các điểm đã đo.
-- $\hat{Q}_{i,j_i}$: utility dự đoán của lựa chọn đó.
-- $B_{i,j_i}$: số byte thực tế của bitstream; $r$: budget bpp toàn tập.
+$$\text{bpp}_{\text{avg}} = \frac{8 \cdot B_{\text{total}}}{\sum_{i=1}^{N} H_i W_i}$$
 
-Repo dùng multiple-choice knapsack: chọn đúng một điểm cho mỗi ảnh, tối đa tổng Q̂ với trọng số ảnh bằng nhau. Chi phí byte được làm tròn lên khi giải bằng quy hoạch động; kết quả luôn phải kiểm lại bằng byte thật. Trong khi bpp được gộp theo tổng pixel, Q̂ báo cáo là trung bình theo ảnh.
+Để khống chế bitrate không vượt quá mức target $r$, tổng số byte tối đa cho phép toàn tập là:
 
-Nếu cuộc thi đánh giá theo chất lượng trung bình không trọng số, mục tiêu cần phản ánh đúng quy tắc đó; không nên tự đặt trọng số làm thay đổi mục tiêu đánh giá.
+$$B_{\text{budget}} = \left\lfloor \frac{r}{8} \sum_{i=1}^{N} H_i W_i \right\rfloor$$
+
+**Bài toán Multiple-Choice Knapsack (MCKP)**
+
+* **Vật phẩm:** $N$ bức ảnh.
+* **Thực đơn Lựa chọn:** Với mỗi ảnh $i$, ta có danh sách các codec nén $j_i$ (ví dụ: $q = VTM, COD-Lite,\dots$).
+* **Chi phí:** Lựa chọn $j_i$ tốn $B_{i, j_i}$ byte thực tế.
+* **Giá trị thu về:** Lựa chọn $j_i$ đem lại điểm chất lượng dự đoán $\hat{Q}_{i, j_i}$.
+
+Mục tiêu là tìm bộ chỉ số $(j_1, j_2, \dots, j_N)$ giải quyết bài toán:
+
+$$\max \sum_{i=1}^{N} \hat{Q}_{i, j_i} \quad \text{với điều kiện} \quad \sum_{i=1}^{N} B_{i, j_i} \le B_{\text{budget}}$$
 
 **Đầu ra:** Các bitstream hoặc cấu hình bitrate đã được chọn sao cho tổng số byte nằm trong ngân sách tương ứng.
 
-Lưu ý quan trọng: Không phải lúc nào codec cũng có thể được cấp chính xác số byte mong muốn. Phân bổ bitrate cần dùng các điểm rate–distortion đã đo, nội suy hoặc thử nghiệm thêm, rồi kiểm tra lại bằng kích thước bitstream thực tế.
+Lưu ý quan trọng: Không phải lúc nào codec cũng có thể được cấp chính xác số byte mong muốn. Phân bổ bitrate cần dùng các điểm rate–distortion đã đo, nội suy hoặc thử nghiệm thêm, rồi kiểm tra lại bằng kích thước bitstream thực tế. (Giải thích cụ thể ở phần phục lục C)
 
 #### Bước H — Từ $\hat{Q}$ đến bake-off tại 0.075 / 0.15 / 0.3 bpp
 
@@ -378,8 +372,6 @@ Các phân tích cần làm:
 
 Có thể biểu diễn kết quả bằng đường cong rate–quality: trục ngang là bpp, trục dọc là $\hat{Q}$. Một codec tốt hơn thường có điểm cao hơn ở cùng bitrate hoặc đạt cùng chất lượng với ít bit hơn.
 
-Nếu sử dụng BD-rate hoặc một đại lượng tổng hợp tương tự, cần xác định rõ metric, miền bitrate và phương pháp nội suy. Không nên tính hoặc diễn giải một con số tổng hợp khi các đường cong không có miền bitrate phù hợp.
-
 **Đầu ra:** Danh sách codec được ưu tiên, các điểm mạnh/yếu và giả thuyết cần kiểm tra tiếp.
 
 #### Bước J — Blind grading với người
@@ -414,9 +406,7 @@ Những chỉ số nên ghi nhận:
 | Thời gian khởi tạo    | Nạp model có tốn đáng kể thời gian không?     |
 | Độ ổn định            | Có OOM, timeout hoặc lỗi ngẫu nhiên không?    |
 
-Cần benchmark trên phần cứng phù hợp với môi trường cuộc thi, hoặc ghi rõ khi đang sử dụng phần cứng thay thế.
-
-Đặc biệt, nên đo toàn bộ đường đi từ bitstream đến ảnh đầu ra, không chỉ đo một phép forward của neural network. Entropy decoding, chuyển dữ liệu, hậu xử lý và khởi tạo đều có thể làm tăng thời gian thực tế.
+Cần benchmark trên phần cứng phù hợp với môi trường cuộc thi (hiện đang sử dụng phần cứng thay thế)
 
 **Đầu ra:** Bảng benchmark và kết luận codec nào đáp ứng các giới hạn thời gian/bộ nhớ.
 
@@ -633,9 +623,9 @@ giữ lại/ngoài năm huấn luyện.
 | Kết quả được báo cáo | Ý nghĩa | Giới hạn |
 | --- | --- | --- |
 | **Q̂ v0: cross-year accuracy 0.812** | Train trên 2021t/2021v/2022t, test 2024t | Không phải accuracy trên ảnh nén CLIC 2027 |
-| **Trên 2024t: dấu PSNR 0.705; Q̂ v0 cross-year 0.812** | So trên cùng miền test, Q̂ có tín hiệu tốt hơn PSNR đơn lẻ | Cần kiểm lại split theo ảnh và leakage |
-| **Trên 8.000 cặp: Q̂ v0 5-fold CV 0.788; dấu PSNR 0.625** | Kết quả gộp khác với phép kiểm tra cross-year | Không trộn hai protocol thành một con số |
-| **Q̂ v1: cross-year 0.833** | Accuracy cao hơn chưa đủ để chọn khi ranking ở miền rate thấp không phù hợp | Tiếp tục dùng v0 cho bảng codec hiện tại; v1 chỉ làm phân tích độ nhạy |
+| **Trên 2024t: PSNR 0.705; Q̂ v0 cross-year 0.812** | So trên cùng miền test, Q̂ có tín hiệu tốt hơn PSNR đơn lẻ | Cần kiểm lại split theo ảnh và leakage |
+| **Trên 8.000 cặp: Q̂ v0 5-fold CV 0.788; PSNR 0.625** | Kết quả gộp khác với phép kiểm tra cross-year | Không trộn hai protocol thành một con số |
+| **Q̂ v1: cross-year 0.833** | Accuracy cao hơn chưa đủ để chọn khi ranking ở miền rate thấp không phù hợp | Tiếp tục dùng v0 cho bảng codec hiện tại; v1 chỉ làm phân tích độ nhạy. Nguyên nhân không chọn v1: Trong bài toán nén ảnh, việc duy trì thứ tự xếp hạng (ranking) ở miền bitrate thấp (low rate regime) cực kỳ quan trọng (nơi ảnh dễ bị nhòe/artefact nặng). $\hat{Q}\text{ v1}$ tuy nâng accuracy tổng thể nhưng lại làm sai lệch thứ tự xếp hạng ở dải bitrate thấp này.  |
 
 Nguồn: [Q̂ v0](D:/AwesomeCV/ratflow-codec/results/2026-10-06_qhat_v0/summary.md) và [Q̂ v1](D:/AwesomeCV/ratflow-codec/results/2026-10-09_qhat_v1/summary.md). Các cặp cùng ảnh có thể phụ thuộc nhau; accuracy cross-year không loại bỏ mọi dạng domain shift. Tỉ lệ đồng ý giữa hai người là chỉ báo độ nhiễu, không phải một trần toán học tuyệt đối của mọi mô hình dự đoán.
 
@@ -718,8 +708,6 @@ phân giải cao; huấn luyện bắt chước output teacher bằng L1 + LPIPS
 **Ý nghĩa:** chưng cất giảm độ phức tạp và tăng tốc, nhưng làm giảm Q̂ ở
 cả ba operating point. Quyết định dùng teacher hay student phải dựa trên
 tốc độ L4 thật, không phải L40.\
-**Cần làm:** đánh giá Pareto chất lượng--thời gian; không chọn student
-chỉ vì nhanh hơn nếu teacher vẫn qua được giới hạn tốc độ.
 
 ### 5.5 Thí nghiệm E — benchmark tốc độ
 
@@ -780,7 +768,7 @@ matrix, precision/recall và preference cuối cùng.
 
 ### 5.8 Thí nghiệm H — sàng lọc model mới trên sáu ảnh
 
-**Câu hỏi:** model mới công khai có bổ sung chất lượng hoặc tốc độ hữu ích cho các codec hiện có không?
+**Câu hỏi:** model mới công khai có tăng chất lượng hoặc tốc độ hữu ích so với các codec hiện có không?
 
 Pilot cố định trước sáu ảnh: ba ảnh tự nhiên (`02809272`, `0369d229`, `07b9f93f`), texture (`937476dd`), hai ảnh screen (`bb7344a2`, `ebfd571f`). Chạy nguyên kích thước, lưu bitstream thật, đọc lại bitstream để decode, kiểm kích thước ảnh và chấm bằng metric chung của repo. Bộ sáu ảnh chỉ dùng sàng lọc, không đại diện đủ phân phối validation.
 
@@ -798,7 +786,6 @@ Pilot cố định trước sáu ảnh: ba ảnh tự nhiên (`02809272`, `0369d
 
 AFP/DC-VIC được chạy trên Torch 2.11.0+cu128, CompressAI 1.2.8; PULSE dùng Torch 2.6.0+cu124. Do khác runtime và chưa tối ưu cùng điều kiện, thời gian trên chỉ để sàng lọc. Các phép thử không được gọi là tái lập đầy đủ kết quả paper.
 
-**Kiểm soát lỗi:** checkpoint AFP/DC-VIC cần đổi tên các entropy parameters của CompressAI cũ, sau đó load bằng `strict=True`. Một smoke AFP trước khi sửa đã bỏ sót trọng số; toàn bộ kết quả smoke đó bị loại. Bảng này chỉ dùng các run `pilot_afp_strict` và `pilot_dcvic_strict` hợp lệ.
 
 **Quyết định:** chưa mở rộng AFP/DC-VIC vì chất lượng pilot chưa vượt baseline và decoder chậm; PULSE base có vùng rate chưa phù hợp. PULSE-L có lợi thế tốc độ và khả năng bổ sung cho mix, nên được chọn chạy đủ 30 ảnh. [Bảng pilot gốc](D:/AwesomeCV/ratflow-codec/results/2026-10-15_new_codecs/pilot_scores/summary.csv).
 
@@ -1368,3 +1355,48 @@ Các kết luận sau là **suy luận thiết kế cho repo**, chưa phải k�
 | Khi nào gọi decoder tái lập được? | CDF đúng và PNG đúng là hai phép kiểm khác nhau | So symbol/latent, rồi pixel trên tiến trình và thiết bị đích |
 
 **Ghi chú đọc nguồn:** các phần mô tả phương pháp dựa trên thân bài, hình kiến trúc và mục training, không chỉ abstract. DiT-IC và CoD-Lite được đối chiếu với proceedings; PULSE ghi rõ là preprint 2026; AFP-GIC tham chiếu chính xác bản v2 đã đọc. Với DC-VIC, đọc bản toàn văn tác giả và đối chiếu metadata với [danh mục của nhóm Tohoku](https://www.iic.ecei.tohoku.ac.jp/~machi/paper/paper-e.html). Công cụ `paper-search` không trả kết quả trong lần truy vấn này; tra cứu được hoàn tất qua nguồn paper/proceedings và repo chính thức. Không bổ sung tuyên bố SOTA, xếp hạng hoặc tốc độ mới nếu chưa có phép đo tương ứng của dự án.
+
+
+Lưu ý này phản ánh tính **thực tế kỹ thuật** trong xử lý tín hiệu và nén dữ liệu: các codec nén ảnh/video không phải là một "vòi nước" có thể vặn mở chính xác đến từng bit dung lượng theo ý muốn, mà vận hành dựa trên các quy luật rời rạc và thống kê.
+
+---
+
+## Phụ lục C. Tại sao Codec không thể xuất ra chính xác số byte mong muốn?
+
+* **Tham số điều phối rời rạc (Discrete Parameters):** Hầu hết các codec điều khiển dung lượng thông qua các tham số rời rạc, như bước lượng hóa $QP$ (Quantization Parameter trong HEVC/VVC) hoặc nấc chất lượng $q \in [1, 100]$ (trong JPEG). Bạn không thể chọn một $QP = 22.473$ nếu codec chỉ nhận số nguyên.
+* **Bản chất biến đổi của Mã hóa Entropy (Entropy Coding):** Các bộ mã hóa entropy (như CABAC hay Arithmetic Coding) nén dữ liệu dựa trên xác suất xuất hiện của các ký hiệu. Dung lượng bitstream thực tế phụ thuộc hoàn toàn vào cấu trúc chi tiết của từng bức ảnh, khiến việc tính toán chính xác số byte trước khi nén thực sự là bất khả thi.
+* **Chi phí cố định (Overhead / Side Information):** Mỗi bitstream đều chứa phần đầu (file header), bảng lượng hóa, metadata, hoặc thông tin phụ cho bộ giải mã. Những thành phần này chiếm dung lượng rời rạc và không giảm tuyến tính khi bạn hạ thấp chất lượng ảnh.
+
+---
+
+### 1. Phương pháp phân bổ Bitrate thực tế
+
+Để đưa tổng dung lượng toàn tập về sát ngân sách $B_{\text{budget}}$, quy trình kỹ thuật được thực hiện theo 3 bước:
+
+#### Bước 1: Đo đạc các điểm Rate–Distortion (R-D) mốc
+
+Cho từng bức ảnh $i$, tiến hành nén thử nghiệm ở một tập hợp các nấc chất lượng cố định (ví dụ $q \in \{10, 20, 30, \dots, 100\}$).
+
+Ghi nhận các cặp giá trị thực tế:
+
+
+$$(R_{i, j}, D_{i, j}) = (\text{Số byte thực tế}, \text{Điểm quality } \hat{Q})$$
+
+#### Bước 2: Xây dựng đường cong R-D và Nội suy (Interpolation)
+
+* **Nội suy (Interpolation):** Vẽ đường cong Rate–Distortion nối các điểm mốc $(R, D)$. Nếu ngân sách tối ưu cho ảnh $i$ rơi vào khoảng giữa hai nấc $q = 30$ và $q = 40$, ta dùng nội suy (tuyến tính hoặc spline) để ước lượng nấc chất lượng trung gian hoặc tỷ lệ hòa trộn thích hợp.
+* **Thử nghiệm bổ sung (Fine-tuning / Binary Search):** Với các codec cho phép tinh chỉnh tham số mịn hơn (hoặc chỉnh hệ số Lagrange $\lambda$ trong nén neural), thuật toán sẽ thực hiện **tìm kiếm nhị phân (Binary Search)** xung quanh vùng dự đoán để tìm ra tham số tiệm cận nhất với số byte mục tiêu.
+
+#### Bước 3: Giải bài toán Tối ưu hóa (Knapsack / DP)
+
+Sử dụng các điểm R-D (cả điểm đo thực tế và điểm nội suy) đưa vào thuật toán Quy hoạch động (Dynamic Programming) để chọn ra cấu hình nấc nén $j_i$ cho từng ảnh sao cho tổng $\sum \hat{Q}_i$ lớn nhất.
+
+---
+
+### 2. Tại sao bắt buộc phải "Kiểm tra lại bằng kích thước bitstream thực tế"?
+
+Nội suy chỉ là phép **ước lượng toán học**, không phải kết quả nén thật.
+
+1. **Tránh nguy cơ Disqualification:** Trong các cuộc thi như CLIC, ngân sách $B_{\text{budget}}$ là ranh giới cứng. Nếu tổng dung lượng thực tế vượt ngân sách dù chỉ **1 byte** do sai số nội suy, bài thi sẽ bị tính là phạm quy.
+2. **Tránh lãng phí Ngân sách:** Nếu tổng dung lượng thực tế nhỏ hơn nhiều so với ngân sách cho phép, bạn đang bỏ phí dung lượng mà đáng lẽ có thể dùng để nâng cao chất lượng $\hat{Q}$ cho các ảnh khó.
+3. **Tính toán đúng Side Information:** Việc xuất bitstream hoàn chỉnh và đóng gói thành file thực tế là cách duy nhất để đo chính xác 100% dung lượng bao gồm cả header, metadata và side information.
