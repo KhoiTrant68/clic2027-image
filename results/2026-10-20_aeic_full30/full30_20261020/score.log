@@ -1,0 +1,343 @@
+VRAM guard {'total_mib': 46068, 'initial_used_mib': 16517, 'allocator_cap_mib': 8192, 'device_limit_mib': None, 'physical_gpu': '1', 'shared_small': True, 'process_limit_mib': 10240}
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/mnt/home/guess03/clic/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/mnt/home/guess03/clic/research_20261015/integration_repo/src/clic27/eval/metrics.py:67: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].float().div(255).to(dev)
+{"cand": "aeic_se", "key": "q2", "name": "02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7", "bytes": 17805, "t_dec": 26.218913793563843, "psnr": 18.828248707314476, "msssim": 0.7953495383262634, "lpips_alex": 0.18462182130007182, "lpips_vgg": 0.33686148173668806, "dists": 0.12090017883216633, "clipiqa": 0.8934029340744019, "score": -1.0542096862731043}
+{"cand": "aeic_se", "key": "q2", "name": "0369d229ba4c9965d5caeb38c359a027a810968eee930b81520b604e76b4df14", "bytes": 9080, "t_dec": 21.302812814712524, "psnr": 27.56688833027104, "msssim": 0.9195350408554077, "lpips_alex": 0.07043962577248321, "lpips_vgg": 0.2253588764983065, "dists": 0.08382163363344529, "clipiqa": 0.8538051843643188, "score": 0.1446600875514032}
+{"cand": "aeic_se", "key": "q2", "name": "07b9f93f170a0381836bdf301280a5b80b2c4be6e66f793a3c335dc200fb4e5b", "bytes": 8579, "t_dec": 21.890658378601074, "psnr": 21.604118774660954, "msssim": 0.8323543071746826, "lpips_alex": 0.1374812789261341, "lpips_vgg": 0.2851001486182213, "dists": 0.12288265158148373, "clipiqa": 0.9058228731155396, "score": -0.8171413126432097}
+{"cand": "aeic_se", "key": "q2", "name": "0d154749c7771f58e89ad343653ec4e20d6f037da829f47f5598e5d0a4ab61f0", "bytes": 11158, "t_dec": 21.24153995513916, "psnr": 24.515639408526457, "msssim": 0.7608436942100525, "lpips_alex": 0.19048111000481774, "lpips_vgg": 0.3787198881892597, "dists": 0.13583927890833686, "clipiqa": 0.5999974608421326, "score": -2.1653913490876806}
+{"cand": "aeic_se", "key": "q2", "name": "1b4ad095795ac552b38a21d51be7bfaee8e7d0a70619d84767814321df4ed062", "bytes": 8507, "t_dec": 18.889524698257446, "psnr": 25.272179006455872, "msssim": 0.8197218775749207, "lpips_alex": 0.16784024709149412, "lpips_vgg": 0.30729580003964274, "dists": 0.0973239972403175, "clipiqa": 0.8078407049179077, "score": -0.9144983318216331}
+{"cand": "aeic_se", "key": "q2", "name": "1cba10ad9bb4ced57e42f7656c5f2a58d32dc6bad084957d2f8d1c78e0fcd224", "bytes": 6910, "t_dec": 26.16749334335327, "psnr": 30.479152835097338, "msssim": 0.9300044775009155, "lpips_alex": 0.09429317538273856, "lpips_vgg": 0.2992575337513558, "dists": 0.11063481230758926, "clipiqa": 0.4469781517982483, "score": -1.1732738280643824}
+{"cand": "aeic_se", "key": "q2", "name": "2397c73f8feeb8f630fe055da5551c671794afae80528e8612dc62fc0cf61294", "bytes": 10481, "t_dec": 27.416234254837036, "psnr": 21.92557106403577, "msssim": 0.8791103363037109, "lpips_alex": 0.1313725207658375, "lpips_vgg": 0.24235800110241945, "dists": 0.10598622507908766, "clipiqa": 0.8502423763275146, "score": -0.3827777691636287}
+{"cand": "aeic_se", "key": "q2", "name": "2684452db505ddbbb53f42a3f3bcfe86fdd0d6d8d98c029db4b4c6fc1f55b750", "bytes": 12755, "t_dec": 29.039787530899048, "psnr": 23.79074888152829, "msssim": 0.8617877960205078, "lpips_alex": 0.14044539415661025, "lpips_vgg": 0.27629193540881664, "dists": 0.0922406999503865, "clipiqa": 0.7715862989425659, "score": -0.5687009984401068}
+{"cand": "aeic_se", "key": "q2", "name": "2a760bf1ccea6998be3890dcc2371b23f35fe3006562884b45bc534a621d5c12", "bytes": 4477, "t_dec": 14.341187953948975, "psnr": 28.104365753465252, "msssim": 0.9726583957672119, "lpips_alex": 0.03958348955573707, "lpips_vgg": 0.11754641823213675, "dists": 0.06842515540534053, "clipiqa": 0.9009946584701538, "score": 1.3741371660057569}
+{"cand": "aeic_se", "key": "q2", "name": "4ebc0e6c463bcf8ada38673c268aae56d44864347fd74b81a9fb5659bf96a010", "bytes": 7216, "t_dec": 21.35944151878357, "psnr": 25.304457424567662, "msssim": 0.8142206072807312, "lpips_alex": 0.18296776124659705, "lpips_vgg": 0.32727401878903895, "dists": 0.10955961381687837, "clipiqa": 0.785393476486206, "score": -1.2215116067377576}
+{"cand": "aeic_se", "key": "q2", "name": "50d13125b665e0c4c1673264807bfc3cc7a217819329696843fea4c69aff8b91", "bytes": 4084, "t_dec": 23.354311227798462, "psnr": 27.9701892763067, "msssim": 0.9453490972518921, "lpips_alex": 0.04291762490208973, "lpips_vgg": 0.1490264441817999, "dists": 0.12577633033780491, "clipiqa": 0.9034032821655273, "score": 0.0971692382093794}
+{"cand": "aeic_se", "key": "q2", "name": "50fe4c3d47d864858e1aaa60fecef5c453b4e18d2b368718eeb5c1e249e0c902", "bytes": 16654, "t_dec": 21.3724102973938, "psnr": 19.801537016927874, "msssim": 0.8349484205245972, "lpips_alex": 0.19263579995359903, "lpips_vgg": 0.33670096531694316, "dists": 0.1080888401211044, "clipiqa": 0.8423799276351929, "score": -0.8876441401389794}
+{"cand": "aeic_se", "key": "q2", "name": "581048154e3c4b579c79155742dcf643c18b9bb47782aca7f0768eff185bc32e", "bytes": 14318, "t_dec": 23.17262578010559, "psnr": 20.865999925909055, "msssim": 0.7411438226699829, "lpips_alex": 0.2449111577819337, "lpips_vgg": 0.4037003516332134, "dists": 0.12693835401928033, "clipiqa": 0.4904954135417938, "score": -2.324385882339186}
+{"cand": "aeic_se", "key": "q2", "name": "608cb09e6ffc66d4bc838d4088bf4c0ab889d7e83d4f5d78805cbc4497e432a1", "bytes": 20172, "t_dec": 31.04040288925171, "psnr": 21.25380472927469, "msssim": 0.7908840179443359, "lpips_alex": 0.20439925976097584, "lpips_vgg": 0.34803153355331984, "dists": 0.1171705985770506, "clipiqa": 0.40604841709136963, "score": -2.0048127187973517}
+{"cand": "aeic_se", "key": "q2", "name": "79b1bb29124f590c2e99e6c71c18affe25115d594a821cadc58bf24bf94dae8d", "bytes": 12028, "t_dec": 28.37065291404724, "psnr": 19.578449075071067, "msssim": 0.8456816673278809, "lpips_alex": 0.1340840347111225, "lpips_vgg": 0.2818651504814625, "dists": 0.09902231097221374, "clipiqa": 0.7298177480697632, "score": -0.6548560502268296}
+{"cand": "aeic_se", "key": "q2", "name": "8426ed2245c791232862b0a0b2a62a1f17031e8e6e38921fe939df0b3a05ac41", "bytes": 6663, "t_dec": 36.13469743728638, "psnr": 31.715886290355208, "msssim": 0.9412979483604431, "lpips_alex": 0.0861472396645695, "lpips_vgg": 0.2655896609649062, "dists": 0.09440715238451958, "clipiqa": 0.33199751377105713, "score": -0.987461173566408}
+{"cand": "aeic_se", "key": "q2", "name": "86127fbdb368eb28c3039cf61aff1c4cfdc4ade24070c8f2389968d5ead681e1", "bytes": 12973, "t_dec": 13.47887396812439, "psnr": 19.782166864141537, "msssim": 0.7849420309066772, "lpips_alex": 0.17319565736612336, "lpips_vgg": 0.34273633947137927, "dists": 0.13928622789070255, "clipiqa": 0.8604750037193298, "score": -1.4187754459583408}
+{"cand": "aeic_se", "key": "q2", "name": "937476dd72f98638f34299dda5e9c252621b5e809c364692fc2934e000583286", "bytes": 5929, "t_dec": 22.137739419937134, "psnr": 11.989639227119396, "msssim": 0.2232954502105713, "lpips_alex": 0.21699856221675873, "lpips_vgg": 0.34356486797332764, "dists": 0.1717322717110316, "clipiqa": 0.5018165111541748, "score": -3.065028184534708}
+{"cand": "aeic_se", "key": "q2", "name": "a2a946cc516f9eec0f141da3c31a96df94fe342c651af46f0d38f6c04400323a", "bytes": 13058, "t_dec": 20.19229006767273, "psnr": 22.82170624685886, "msssim": 0.8837833404541016, "lpips_alex": 0.13598112878115737, "lpips_vgg": 0.2633807683692259, "dists": 0.10358906651244444, "clipiqa": 0.5894929766654968, "score": -0.8654870017458889}
+{"cand": "aeic_se", "key": "q2", "name": "a365e6541bab5c0f4e01bf43a0c3a655d88292a8ac45403a889c308d11854555", "bytes": 13520, "t_dec": 20.622822999954224, "psnr": 18.532910031554618, "msssim": 0.7533735036849976, "lpips_alex": 0.16984031835899632, "lpips_vgg": 0.3062602936344988, "dists": 0.10150037179974948, "clipiqa": 0.8185456395149231, "score": -0.9078941338142787}
+{"cand": "aeic_se", "key": "q2", "name": "b0b3744cc6b5ad6426b1ac02909b4389ea7fc4140d72a888ccdfb21f573a6db4", "bytes": 11479, "t_dec": 21.23250699043274, "psnr": 17.924197289464775, "msssim": 0.7476415038108826, "lpips_alex": 0.20614431184880874, "lpips_vgg": 0.3498896967838792, "dists": 0.11617775191279019, "clipiqa": 0.9374699592590332, "score": -1.080175205342273}
+{"cand": "aeic_se", "key": "q2", "name": "bb7344a2ba499b2d48b891abee1b903dc17d265437ac57028b5999b6cd5bcdc4", "bytes": 6185, "t_dec": 13.462117195129395, "psnr": 24.304102346433787, "msssim": 0.930222749710083, "lpips_alex": 0.09527936391532421, "lpips_vgg": 0.14405219769105315, "dists": 0.11928736418485641, "clipiqa": 0.41865143179893494, "score": -0.7615598285666176}
+{"cand": "aeic_se", "key": "q2", "name": "c9510efb03d1852c29ecad84cc0558768728681a3b9b04eae0dbbd9be142dd95", "bytes": 13394, "t_dec": 20.41053009033203, "psnr": 27.093277932460836, "msssim": 0.9366070628166199, "lpips_alex": 0.0897972261204439, "lpips_vgg": 0.22807507308966973, "dists": 0.0758231322554981, "clipiqa": 0.6695675849914551, "score": 0.047660902373475755}
+{"cand": "aeic_se", "key": "q2", "name": "d0208a1e9b4fde642b9752da2907d82d5b530a6e2e6e18ef71d5524a92d1cf9a", "bytes": 12009, "t_dec": 21.693978786468506, "psnr": 18.342812721861886, "msssim": 0.6130915880203247, "lpips_alex": 0.24981238009298548, "lpips_vgg": 0.3838247279033941, "dists": 0.10984999537467957, "clipiqa": 0.8776969313621521, "score": -1.5313472750063433}
+{"cand": "aeic_se", "key": "q2", "name": "da52c4f66dc00c2f381e8475fbf8a7aa2c5433a9c59cc175646c62e02892faf7", "bytes": 22641, "t_dec": 21.901125192642212, "psnr": 18.711601132459492, "msssim": 0.8200798034667969, "lpips_alex": 0.1960374383803676, "lpips_vgg": 0.34472875577561995, "dists": 0.11665022443322574, "clipiqa": 0.7554433941841125, "score": -1.1957690587521448}
+{"cand": "aeic_se", "key": "q2", "name": "e0d8e29cadfc99663c7d1a4a5afe20c454ec54d0d873776ec397c59405c74790", "bytes": 5681, "t_dec": 29.664576053619385, "psnr": 26.83882674707606, "msssim": 0.8905439376831055, "lpips_alex": 0.12469615881495616, "lpips_vgg": 0.3008433111888521, "dists": 0.10767184899133794, "clipiqa": 0.724801778793335, "score": -0.8578357855663896}
+{"cand": "aeic_se", "key": "q2", "name": "ebfd571f1c6824316047a29cb5f376eec15f56dd51821119c1842be068a8b950", "bytes": 10638, "t_dec": 33.34941530227661, "psnr": 20.057637531420642, "msssim": 0.940114438533783, "lpips_alex": 0.06832289253361523, "lpips_vgg": 0.07856623304542154, "dists": 0.11854599043726921, "clipiqa": 0.08414256572723389, "score": -0.8794370966474157}
+{"cand": "aeic_se", "key": "q2", "name": "eda6d42794b0d0140628fa90fc0c14a7ba88159b8474d0077027c32ee2ddf6f0", "bytes": 15599, "t_dec": 25.17045283317566, "psnr": 20.894249730645544, "msssim": 0.8220251798629761, "lpips_alex": 0.16789872283298596, "lpips_vgg": 0.3147893049845509, "dists": 0.1029431329053991, "clipiqa": 0.8187245726585388, "score": -0.8342409859581918}
+{"cand": "aeic_se", "key": "q2", "name": "f67f11de4ca9ebda3db52c41fd3d26c3105687b2d37571e54631a1e4486d0b30", "bytes": 5348, "t_dec": 24.888230800628662, "psnr": 29.131729826433993, "msssim": 0.9276518821716309, "lpips_alex": 0.07350801580868588, "lpips_vgg": 0.22081117178587353, "dists": 0.11039480654632344, "clipiqa": 0.7381999492645264, "score": -0.4116278910366148}
+{"cand": "aeic_se", "key": "q2", "name": "ff32adfa29d4b5de26293352f53cc983d12d3ededd71fe65ca0ef0d887be65c4", "bytes": 16009, "t_dec": 22.504767656326294, "psnr": 24.974646022617865, "msssim": 0.903833270072937, "lpips_alex": 0.11072141111773603, "lpips_vgg": 0.21951225619105733, "dists": 0.07875776062993442, "clipiqa": 0.9266384840011597, "score": 0.2547703691102072}
+{"cand": "aeic_me", "key": "q2", "name": "02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7", "bytes": 17998, "t_dec": 25.595732927322388, "psnr": 19.425083164209745, "msssim": 0.8109296560287476, "lpips_alex": 0.17908667680971763, "lpips_vgg": 0.322727815543904, "dists": 0.10925475236247567, "clipiqa": 0.8958151340484619, "score": -0.816783387793716}
+{"cand": "aeic_me", "key": "q2", "name": "0369d229ba4c9965d5caeb38c359a027a810968eee930b81520b604e76b4df14", "bytes": 9393, "t_dec": 20.026641607284546, "psnr": 27.862463080278964, "msssim": 0.9254151582717896, "lpips_alex": 0.06477603469701375, "lpips_vgg": 0.21182025990941944, "dists": 0.07449922859668731, "clipiqa": 0.864406168460846, "score": 0.37107889393617777}
+{"cand": "aeic_me", "key": "q2", "name": "07b9f93f170a0381836bdf301280a5b80b2c4be6e66f793a3c335dc200fb4e5b", "bytes": 9127, "t_dec": 19.00476908683777, "psnr": 22.066588918486065, "msssim": 0.8450261950492859, "lpips_alex": 0.12889634116607554, "lpips_vgg": 0.2747846544665449, "dists": 0.11560583342524136, "clipiqa": 0.8781540393829346, "score": -0.6907645148645905}
+{"cand": "aeic_me", "key": "q2", "name": "0d154749c7771f58e89ad343653ec4e20d6f037da829f47f5598e5d0a4ab61f0", "bytes": 12202, "t_dec": 18.853517293930054, "psnr": 25.090560240755437, "msssim": 0.7845599055290222, "lpips_alex": 0.1739846094566233, "lpips_vgg": 0.3453762349836967, "dists": 0.10674363497425528, "clipiqa": 0.6826075911521912, "score": -1.4626543115027504}
+{"cand": "aeic_me", "key": "q2", "name": "1b4ad095795ac552b38a21d51be7bfaee8e7d0a70619d84767814321df4ed062", "bytes": 8931, "t_dec": 15.937504529953003, "psnr": 25.5493589108263, "msssim": 0.8326419591903687, "lpips_alex": 0.15716433466265076, "lpips_vgg": 0.29639713583808197, "dists": 0.08922545219722547, "clipiqa": 0.7752894759178162, "score": -0.7754196655770229}
+{"cand": "aeic_me", "key": "q2", "name": "1cba10ad9bb4ced57e42f7656c5f2a58d32dc6bad084957d2f8d1c78e0fcd224", "bytes": 7941, "t_dec": 23.262672185897827, "psnr": 30.7091058365642, "msssim": 0.935908317565918, "lpips_alex": 0.08553483370619203, "lpips_vgg": 0.27717907542308556, "dists": 0.09961408883043864, "clipiqa": 0.4935568571090698, "score": -0.8250724249301691}
+{"cand": "aeic_me", "key": "q2", "name": "2397c73f8feeb8f630fe055da5551c671794afae80528e8612dc62fc0cf61294", "bytes": 10701, "t_dec": 20.835651874542236, "psnr": 22.50061256456878, "msssim": 0.8859626054763794, "lpips_alex": 0.12438820531482206, "lpips_vgg": 0.2343098359511179, "dists": 0.10035447390640483, "clipiqa": 0.8559175133705139, "score": -0.2463871845065877}
+{"cand": "aeic_me", "key": "q2", "name": "2684452db505ddbbb53f42a3f3bcfe86fdd0d6d8d98c029db4b4c6fc1f55b750", "bytes": 13131, "t_dec": 30.781142711639404, "psnr": 24.15160791935338, "msssim": 0.869009256362915, "lpips_alex": 0.12840460048002356, "lpips_vgg": 0.26428855140419566, "dists": 0.08544541737612556, "clipiqa": 0.8404074907302856, "score": -0.2828155974784745}
+{"cand": "aeic_me", "key": "q2", "name": "2a760bf1ccea6998be3890dcc2371b23f35fe3006562884b45bc534a621d5c12", "bytes": 4797, "t_dec": 17.42923617362976, "psnr": 29.456271062186154, "msssim": 0.9782780408859253, "lpips_alex": 0.03367927847108964, "lpips_vgg": 0.08477369856474729, "dists": 0.05545612039237187, "clipiqa": 0.8990055322647095, "score": 1.7298556305509354}
+{"cand": "aeic_me", "key": "q2", "name": "4ebc0e6c463bcf8ada38673c268aae56d44864347fd74b81a9fb5659bf96a010", "bytes": 8153, "t_dec": 19.732069492340088, "psnr": 26.09225466445804, "msssim": 0.8360781669616699, "lpips_alex": 0.1688839926110471, "lpips_vgg": 0.3034201149554814, "dists": 0.0983556759708068, "clipiqa": 0.7833540439605713, "score": -0.9365183218613293}
+{"cand": "aeic_me", "key": "q2", "name": "50d13125b665e0c4c1673264807bfc3cc7a217819329696843fea4c69aff8b91", "bytes": 4223, "t_dec": 18.84682273864746, "psnr": 29.24212721293965, "msssim": 0.9407891035079956, "lpips_alex": 0.03798618517706499, "lpips_vgg": 0.11164815418203088, "dists": 0.11033505359116723, "clipiqa": 0.889321506023407, "score": 0.2968327701143108}
+{"cand": "aeic_me", "key": "q2", "name": "50fe4c3d47d864858e1aaa60fecef5c453b4e18d2b368718eeb5c1e249e0c902", "bytes": 17162, "t_dec": 19.242623567581177, "psnr": 20.166439886578704, "msssim": 0.8509677648544312, "lpips_alex": 0.17879452294221632, "lpips_vgg": 0.3221755082960482, "dists": 0.10074016985333996, "clipiqa": 0.8040730357170105, "score": -0.7404515307368424}
+{"cand": "aeic_me", "key": "q2", "name": "581048154e3c4b579c79155742dcf643c18b9bb47782aca7f0768eff185bc32e", "bytes": 15345, "t_dec": 19.639039039611816, "psnr": 21.41222123352793, "msssim": 0.7577480673789978, "lpips_alex": 0.2177554335813601, "lpips_vgg": 0.38201929997284334, "dists": 0.10578827527198163, "clipiqa": 0.45034945011138916, "score": -1.9703032319009592}
+{"cand": "aeic_me", "key": "q2", "name": "608cb09e6ffc66d4bc838d4088bf4c0ab889d7e83d4f5d78805cbc4497e432a1", "bytes": 20095, "t_dec": 22.699318885803223, "psnr": 21.518432567469958, "msssim": 0.8019563555717468, "lpips_alex": 0.18973439475338832, "lpips_vgg": 0.3352987725360721, "dists": 0.10772437237057031, "clipiqa": 0.4398636519908905, "score": -1.731266447365738}
+{"cand": "aeic_me", "key": "q2", "name": "79b1bb29124f590c2e99e6c71c18affe25115d594a821cadc58bf24bf94dae8d", "bytes": 12140, "t_dec": 17.251778602600098, "psnr": 20.062210245121502, "msssim": 0.8543574213981628, "lpips_alex": 0.1328814271837473, "lpips_vgg": 0.27493062019348147, "dists": 0.09515621364116669, "clipiqa": 0.730643093585968, "score": -0.5633319142807194}
+{"cand": "aeic_me", "key": "q2", "name": "8426ed2245c791232862b0a0b2a62a1f17031e8e6e38921fe939df0b3a05ac41", "bytes": 7347, "t_dec": 44.64453077316284, "psnr": 31.957928986471767, "msssim": 0.9446814060211182, "lpips_alex": 0.08200402511283755, "lpips_vgg": 0.26016555540263653, "dists": 0.08712054044008255, "clipiqa": 0.4738112986087799, "score": -0.5939214717254655}
+{"cand": "aeic_me", "key": "q2", "name": "86127fbdb368eb28c3039cf61aff1c4cfdc4ade24070c8f2389968d5ead681e1", "bytes": 13016, "t_dec": 18.13426160812378, "psnr": 20.695911002345824, "msssim": 0.8069442510604858, "lpips_alex": 0.15129916687480738, "lpips_vgg": 0.30747339691295, "dists": 0.10904700150255298, "clipiqa": 0.8461531400680542, "score": -0.8606111923777326}
+{"cand": "aeic_me", "key": "q2", "name": "937476dd72f98638f34299dda5e9c252621b5e809c364692fc2934e000583286", "bytes": 8285, "t_dec": 20.066766500473022, "psnr": 13.45041644567866, "msssim": 0.35749202966690063, "lpips_alex": 0.20894624417026839, "lpips_vgg": 0.3011110896865527, "dists": 0.1449990173180898, "clipiqa": 0.38587328791618347, "score": -2.7134728213797836}
+{"cand": "aeic_me", "key": "q2", "name": "a2a946cc516f9eec0f141da3c31a96df94fe342c651af46f0d38f6c04400323a", "bytes": 13142, "t_dec": 18.821449756622314, "psnr": 23.777530207301055, "msssim": 0.895140528678894, "lpips_alex": 0.1216907194651225, "lpips_vgg": 0.25119148782070944, "dists": 0.09355452674276689, "clipiqa": 0.40089455246925354, "score": -0.9639708874826274}
+{"cand": "aeic_me", "key": "q2", "name": "a365e6541bab5c0f4e01bf43a0c3a655d88292a8ac45403a889c308d11854555", "bytes": 14092, "t_dec": 18.96268367767334, "psnr": 19.14710901661542, "msssim": 0.7730700373649597, "lpips_alex": 0.16697505708126462, "lpips_vgg": 0.296247131859555, "dists": 0.09500171717475442, "clipiqa": 0.8282383680343628, "score": -0.7432698991442899}
+{"cand": "aeic_me", "key": "q2", "name": "b0b3744cc6b5ad6426b1ac02909b4389ea7fc4140d72a888ccdfb21f573a6db4", "bytes": 12153, "t_dec": 17.986963272094727, "psnr": 18.49693309319956, "msssim": 0.7569338083267212, "lpips_alex": 0.1991531954968677, "lpips_vgg": 0.336319573924822, "dists": 0.11189518307938295, "clipiqa": 0.9190848469734192, "score": -1.0029307208208}
+{"cand": "aeic_me", "key": "q2", "name": "bb7344a2ba499b2d48b891abee1b903dc17d265437ac57028b5999b6cd5bcdc4", "bytes": 6459, "t_dec": 11.548269987106323, "psnr": 24.83089080678511, "msssim": 0.935718297958374, "lpips_alex": 0.08388140145689249, "lpips_vgg": 0.12475763075053692, "dists": 0.11327376961708069, "clipiqa": 0.5251621603965759, "score": -0.39481434688153966}
+{"cand": "aeic_me", "key": "q2", "name": "c9510efb03d1852c29ecad84cc0558768728681a3b9b04eae0dbbd9be142dd95", "bytes": 13391, "t_dec": 18.049954414367676, "psnr": 27.611395198528154, "msssim": 0.940855860710144, "lpips_alex": 0.08264674623222912, "lpips_vgg": 0.2177059788037749, "dists": 0.06784623282797196, "clipiqa": 0.700727641582489, "score": 0.27484626408768986}
+{"cand": "aeic_me", "key": "q2", "name": "d0208a1e9b4fde642b9752da2907d82d5b530a6e2e6e18ef71d5524a92d1cf9a", "bytes": 13430, "t_dec": 18.962266445159912, "psnr": 18.734702742344922, "msssim": 0.6396006345748901, "lpips_alex": 0.24422763581661616, "lpips_vgg": 0.37340540956048407, "dists": 0.09679218407939462, "clipiqa": 0.8707382678985596, "score": -1.296870592219714}
+{"cand": "aeic_me", "key": "q2", "name": "da52c4f66dc00c2f381e8475fbf8a7aa2c5433a9c59cc175646c62e02892faf7", "bytes": 22449, "t_dec": 19.90793466567993, "psnr": 19.129353721501683, "msssim": 0.8227831721305847, "lpips_alex": 0.19974530422512224, "lpips_vgg": 0.34419288836857853, "dists": 0.12257192012141732, "clipiqa": 0.7713557481765747, "score": -1.262866161480929}
+{"cand": "aeic_me", "key": "q2", "name": "e0d8e29cadfc99663c7d1a4a5afe20c454ec54d0d873776ec397c59405c74790", "bytes": 6487, "t_dec": 18.394638776779175, "psnr": 27.14751660407782, "msssim": 0.8973264098167419, "lpips_alex": 0.11756701157154406, "lpips_vgg": 0.28811688870191576, "dists": 0.09685322256649241, "clipiqa": 0.7478913068771362, "score": -0.5953586899717541}
+{"cand": "aeic_me", "key": "q2", "name": "ebfd571f1c6824316047a29cb5f376eec15f56dd51821119c1842be068a8b950", "bytes": 12429, "t_dec": 28.19695210456848, "psnr": 20.86656688062705, "msssim": 0.9490332007408142, "lpips_alex": 0.07203319203108549, "lpips_vgg": 0.06861524208215997, "dists": 0.10982545837759972, "clipiqa": 0.06076202169060707, "score": -0.7157749561043194}
+{"cand": "aeic_me", "key": "q2", "name": "eda6d42794b0d0140628fa90fc0c14a7ba88159b8474d0077027c32ee2ddf6f0", "bytes": 16213, "t_dec": 32.45072317123413, "psnr": 21.25502970118593, "msssim": 0.8363142013549805, "lpips_alex": 0.15634448179865584, "lpips_vgg": 0.29777412204181447, "dists": 0.09357674244572134, "clipiqa": 0.8271288871765137, "score": -0.5880419019450372}
+{"cand": "aeic_me", "key": "q2", "name": "f67f11de4ca9ebda3db52c41fd3d26c3105687b2d37571e54631a1e4486d0b30", "bytes": 5579, "t_dec": 23.57172966003418, "psnr": 29.56362075964931, "msssim": 0.9296543002128601, "lpips_alex": 0.06561286884186533, "lpips_vgg": 0.20143094341106274, "dists": 0.09578722949121513, "clipiqa": 0.6929200291633606, "score": -0.22179573048237441}
+{"cand": "aeic_me", "key": "q2", "name": "ff32adfa29d4b5de26293352f53cc983d12d3ededd71fe65ca0ef0d887be65c4", "bytes": 15685, "t_dec": 19.103660106658936, "psnr": 25.276772059888643, "msssim": 0.9083225727081299, "lpips_alex": 0.10079460127607864, "lpips_vgg": 0.21053133606910707, "dists": 0.07155585955171025, "clipiqa": 0.9287717342376709, "score": 0.41852945246589135}
+[
+  {
+    "cand": "codlite",
+    "rate": 0.075,
+    "n": 30,
+    "budget_bytes": 808550,
+    "feasible": true,
+    "bpp": 0.07490664774886019,
+    "qhat": -0.3824530228771573
+  },
+  {
+    "cand": "codlite",
+    "rate": 0.15,
+    "n": 30,
+    "budget_bytes": 1617100,
+    "feasible": true,
+    "bpp": 0.1497071796637538,
+    "qhat": 0.284605056844493
+  },
+  {
+    "cand": "codlite",
+    "rate": 0.3,
+    "n": 30,
+    "budget_bytes": 3234201,
+    "feasible": true,
+    "bpp": 0.2995931979008359,
+    "qhat": 0.9055274103828049
+  },
+  {
+    "cand": "ditic",
+    "rate": 0.075,
+    "n": 30,
+    "budget_bytes": 808550,
+    "feasible": true,
+    "bpp": 0.07493633049962006,
+    "qhat": 0.16440341650740692
+  },
+  {
+    "cand": "ditic",
+    "rate": 0.15,
+    "n": 30,
+    "budget_bytes": 1617100,
+    "feasible": true,
+    "bpp": 0.09577399256743921,
+    "qhat": 0.27880204884290904
+  },
+  {
+    "cand": "ditic",
+    "rate": 0.3,
+    "n": 30,
+    "budget_bytes": 3234201,
+    "feasible": true,
+    "bpp": 0.09577399256743921,
+    "qhat": 0.27880204884290904
+  },
+  {
+    "cand": "ditics",
+    "rate": 0.075,
+    "n": 30,
+    "budget_bytes": 808550,
+    "feasible": true,
+    "bpp": 0.07477678571428571,
+    "qhat": -0.0002490839542060715
+  },
+  {
+    "cand": "ditics",
+    "rate": 0.15,
+    "n": 30,
+    "budget_bytes": 1617100,
+    "feasible": true,
+    "bpp": 0.09842763048537234,
+    "qhat": 0.115066681609449
+  },
+  {
+    "cand": "ditics",
+    "rate": 0.3,
+    "n": 30,
+    "budget_bytes": 3234201,
+    "feasible": true,
+    "bpp": 0.09842763048537234,
+    "qhat": 0.115066681609449
+  },
+  {
+    "cand": "msillm",
+    "rate": 0.075,
+    "n": 30,
+    "budget_bytes": 808550,
+    "feasible": true,
+    "bpp": 0.07493670153400456,
+    "qhat": -0.45133299138575816
+  },
+  {
+    "cand": "msillm",
+    "rate": 0.15,
+    "n": 30,
+    "budget_bytes": 1617100,
+    "feasible": true,
+    "bpp": 0.14979363067534193,
+    "qhat": 0.5446741471758801
+  },
+  {
+    "cand": "msillm",
+    "rate": 0.3,
+    "n": 30,
+    "budget_bytes": 3234201,
+    "feasible": true,
+    "bpp": 0.29967259925911854,
+    "qhat": 1.3831491840779613
+  },
+  {
+    "cand": "pulse",
+    "rate": 0.075,
+    "n": 30,
+    "budget_bytes": 808550,
+    "feasible": false
+  },
+  {
+    "cand": "pulse",
+    "rate": 0.15,
+    "n": 30,
+    "budget_bytes": 1617100,
+    "feasible": false
+  },
+  {
+    "cand": "pulse",
+    "rate": 0.3,
+    "n": 30,
+    "budget_bytes": 3234201,
+    "feasible": true,
+    "bpp": 0.29976981026785715,
+    "qhat": 1.4233748062896785
+  },
+  {
+    "cand": "vtmscc",
+    "rate": 0.075,
+    "n": 30,
+    "budget_bytes": 808550,
+    "feasible": true,
+    "bpp": 0.07489041499453837,
+    "qhat": -2.4037814978724867
+  },
+  {
+    "cand": "vtmscc",
+    "rate": 0.15,
+    "n": 30,
+    "budget_bytes": 1617100,
+    "feasible": true,
+    "bpp": 0.14986227203647418,
+    "qhat": -1.1020070165682871
+  },
+  {
+    "cand": "vtmscc",
+    "rate": 0.3,
+    "n": 30,
+    "budget_bytes": 3234201,
+    "feasible": true,
+    "bpp": 0.2990000066786189,
+    "qhat": -0.004375364218244098
+  },
+  {
+    "cand": "aeic_se",
+    "rate": 0.075,
+    "n": 30,
+    "budget_bytes": 808550,
+    "feasible": true,
+    "bpp": 0.031106595210391337,
+    "qhat": -0.9015814992326414
+  },
+  {
+    "cand": "aeic_se",
+    "rate": 0.15,
+    "n": 30,
+    "budget_bytes": 1617100,
+    "feasible": true,
+    "bpp": 0.031106595210391337,
+    "qhat": -0.9015814992326414
+  },
+  {
+    "cand": "aeic_se",
+    "rate": 0.3,
+    "n": 30,
+    "budget_bytes": 3234201,
+    "feasible": true,
+    "bpp": 0.031106595210391337,
+    "qhat": -0.9015814992326414
+  },
+  {
+    "cand": "aeic_me",
+    "rate": 0.075,
+    "n": 30,
+    "budget_bytes": 808550,
+    "feasible": true,
+    "bpp": 0.032604275503419454,
+    "qhat": -0.6634774964553419
+  },
+  {
+    "cand": "aeic_me",
+    "rate": 0.15,
+    "n": 30,
+    "budget_bytes": 1617100,
+    "feasible": true,
+    "bpp": 0.032604275503419454,
+    "qhat": -0.6634774964553419
+  },
+  {
+    "cand": "aeic_me",
+    "rate": 0.3,
+    "n": 30,
+    "budget_bytes": 3234201,
+    "feasible": true,
+    "bpp": 0.032604275503419454,
+    "qhat": -0.6634774964553419
+  },
+  {
+    "cand": "baseline_mix",
+    "rate": 0.075,
+    "n": 30,
+    "budget_bytes": 808550,
+    "feasible": true,
+    "bpp": 0.07491564533268427,
+    "qhat": 0.18414234756223938
+  },
+  {
+    "cand": "baseline_mix",
+    "rate": 0.15,
+    "n": 30,
+    "budget_bytes": 1617100,
+    "feasible": true,
+    "bpp": 0.1499080020243636,
+    "qhat": 0.7891367311966362
+  },
+  {
+    "cand": "baseline_mix",
+    "rate": 0.3,
+    "n": 30,
+    "budget_bytes": 3234201,
+    "feasible": true,
+    "bpp": 0.2997301095887158,
+    "qhat": 1.4978110237684277
+  },
+  {
+    "cand": "expanded_mix",
+    "rate": 0.075,
+    "n": 30,
+    "budget_bytes": 808550,
+    "feasible": true,
+    "bpp": 0.07493549567225494,
+    "qhat": 0.19031304168602073
+  },
+  {
+    "cand": "expanded_mix",
+    "rate": 0.15,
+    "n": 30,
+    "budget_bytes": 1617100,
+    "feasible": true,
+    "bpp": 0.1499080020243636,
+    "qhat": 0.7891367311966362
+  },
+  {
+    "cand": "expanded_mix",
+    "rate": 0.3,
+    "n": 30,
+    "budget_bytes": 3234201,
+    "feasible": true,
+    "bpp": 0.2997301095887158,
+    "qhat": 1.4978110237684277
+  }
+]

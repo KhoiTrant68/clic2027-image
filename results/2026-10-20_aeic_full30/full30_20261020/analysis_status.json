@@ -1,0 +1,57 @@
+{
+  "state": "complete",
+  "updated_unix": 1792453783.016854,
+  "comparisons": [
+    {
+      "rate": 0.075,
+      "baseline_qhat": 0.18414234756223938,
+      "expanded_qhat": 0.19031304168602073,
+      "delta_qhat": 0.006170694123781351,
+      "baseline_bpp": 0.07491564533268427,
+      "expanded_bpp": 0.07493549567225494,
+      "aeic_selected": 3,
+      "counts": {
+        "ditic": 25,
+        "aeic_me": 3,
+        "pulse": 1,
+        "vtmscc": 1
+      }
+    },
+    {
+      "rate": 0.15,
+      "baseline_qhat": 0.7891367311966362,
+      "expanded_qhat": 0.7891367311966362,
+      "delta_qhat": 0.0,
+      "baseline_bpp": 0.1499080020243636,
+      "expanded_bpp": 0.1499080020243636,
+      "aeic_selected": 0,
+      "counts": {
+        "ditic": 14,
+        "pulse": 10,
+        "msillm": 4,
+        "vtmscc": 2
+      }
+    },
+    {
+      "rate": 0.3,
+      "baseline_qhat": 1.4978110237684277,
+      "expanded_qhat": 1.4978110237684277,
+      "delta_qhat": 0.0,
+      "baseline_bpp": 0.2997301095887158,
+      "expanded_bpp": 0.2997301095887158,
+      "aeic_selected": 0,
+      "counts": {
+        "pulse": 22,
+        "msillm": 5,
+        "vtmscc": 2,
+        "ditic": 1
+      }
+    }
+  ],
+  "metric_gate": false,
+  "threshold": "delta Qhat >= 0.02 and >=3 AEIC-selected images at at least one rate",
+  "human_review": "pending",
+  "fine_tuning_started": false,
+  "reason": "Metric gain does not meet the predeclared practical threshold",
+  "blind_pairs": 18
+}

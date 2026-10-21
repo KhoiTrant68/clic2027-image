@@ -1,0 +1,13 @@
+{
+  "status": "ok",
+  "name": "c9510efb03d1852c29ecad84cc0558768728681a3b9b04eae0dbbd9be142dd95",
+  "bytes": 13391,
+  "bpp": 0.038462201286764704,
+  "height": 1360,
+  "width": 2048,
+  "encode_s": 0.07358860969543457,
+  "decode_s": 18.049954414367676,
+  "wall_s": 18.5437769239943,
+  "stream_sha256": "d1a9feae8a5c86d3f833e7c6d450dc2630cb43d1863a897d24e02a4425b3ebc1",
+  "pixel_sha256": "bc00705e14837cc53acd181c966b133201281a31dd13af6b7c1172a456d394da"
+}

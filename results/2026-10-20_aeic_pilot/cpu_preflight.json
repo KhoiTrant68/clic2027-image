@@ -1,0 +1,25 @@
+[
+  {
+    "variant": "SE",
+    "weights_sha256": "519a0f935dc19fa7f8c5d4dd24df32c3d1c017f29834dd6a7bf68587b47a16a1",
+    "stream_bytes": 48,
+    "repeat_latents_equal": true,
+    "training_only_keys": [
+      "g_a.project.bias",
+      "g_a.project.weight",
+      "g_s.project.bias",
+      "g_s.project.weight",
+      "h_a.project.bias",
+      "h_a.project.weight",
+      "h_s.project.bias",
+      "h_s.project.weight"
+    ]
+  },
+  {
+    "variant": "ME",
+    "weights_sha256": "90ebc6f7a74cfd9c2a057ec1d22c0400698025b0dd12c0065261b48c5fd9f3e2",
+    "stream_bytes": 52,
+    "repeat_latents_equal": true,
+    "training_only_keys": []
+  }
+]

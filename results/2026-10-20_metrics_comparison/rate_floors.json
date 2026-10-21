@@ -1,0 +1,14 @@
+{
+  "mbt": {
+    "minimum_bytes": 1416296,
+    "minimum_corpus_bpp": 0.1313736286569149
+  },
+  "crdr": {
+    "minimum_bytes": 1276880,
+    "minimum_corpus_bpp": 0.11844159621960486
+  },
+  "pulse": {
+    "minimum_bytes": 2071232,
+    "minimum_corpus_bpp": 0.19212457256838905
+  }
+}

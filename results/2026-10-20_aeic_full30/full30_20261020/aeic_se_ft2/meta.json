@@ -1,0 +1,25 @@
+{
+  "model": "aeic_se",
+  "qualities": [
+    2
+  ],
+  "config": {
+    "codec_type": "AEIC-SE",
+    "codec_path": "/mnt/home/guess03/clic/aeic_20261016/weights/AEIC_SE_ft2.pkl",
+    "vae_decoder_path": "/mnt/home/guess03/clic/aeic_20261016/weights/AdcSR/weight/pretrained/halfDecoder.ckpt",
+    "lora_rank_unet": 32,
+    "merge_LoRA": true,
+    "compile_model": false,
+    "use_tiled_vae": true,
+    "use_tiled_unet": true,
+    "latent_tiled_size": 64,
+    "latent_tiled_overlap": 16,
+    "vae_decoder_tiled_size": 64,
+    "weights_sha256": "519a0f935dc19fa7f8c5d4dd24df32c3d1c017f29834dd6a7bf68587b47a16a1",
+    "vae_sha256": "60c8763a8f7e79a9956cb6e0c5dd813deb5f54ef43b3665fce880acc718e5032",
+    "torch": "2.1.2+cu121",
+    "color_fix": false,
+    "deterministic": true,
+    "dtype": "float32"
+  }
+}

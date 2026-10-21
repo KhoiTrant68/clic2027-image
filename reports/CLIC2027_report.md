@@ -1,24 +1,26 @@
-# CLIC 2027 Image GPU Track — Báo cáo tiến độ
+# CLIC 2027 Image GPU Track — Báo cáo tổng hợp
 
-**Ngày cập nhật:** 15/10/2026\
+**Ngày biên tập tổng hợp:** 21/10/2026 — số liệu đến 20/10/2026\
 **Repo:** [clic2027-image](https://github.com/KhoiTrant68/clic2027-image)\
 **Mục tiêu:** xây dựng bộ nén ảnh có chất lượng cảm nhận cao ở các mức
 bitrate thấp, đồng thời đáp ứng giới hạn thời gian giải mã, dung lượng
 decoder và tính tái lập của môi trường CLIC 2027.
 
-**Gợi ý đọc:** mục 1 tóm tắt quyết định; mục 5 trình bày bằng chứng thực nghiệm; mục 9–10 là hướng nghiên cứu và nội dung xin ý kiến. Mục 3 giải thích pipeline, còn Phụ lục A trình bày nền tảng MS-ILLM.
+**Bản tổng hợp chính:** kiến trúc model, kết quả thực nghiệm, bảng metric và hình minh họa được đặt trong cùng tài liệu. Các báo cáo riêng giữ vai trò lưu vết nguồn.
+
+**Đọc nhanh:** [metric và thang Q̂](#metrics-qhat) → [bảng + hình 30 ảnh](#comparison-30) → [pilot 6 ảnh](#pilot-six) → [AEIC, VRAM và tốc độ](#aeic-full30). Mục 1 là quyết định hiện tại; mục 9–10 là hướng nghiên cứu; Phụ lục A–C giữ nền tảng và cơ chế model.
 
 **Đọc kiến trúc model:** [Phụ lục B](#model-mechanisms) bổ sung cơ chế encode/decode, thành phần dùng khi train, sơ đồ kiến trúc và đối chiếu với code đã chạy. Nguồn là paper gốc và implementation chính thức, đọc/đối chiếu ngày 15/10/2026.
 
 ## 1. Tóm tắt dự án
 
-**Cập nhật sau vòng tích hợp ngày 15/10:** PULSE-L đã chạy qua CLI bake-off chính với **150 điểm (30 ảnh × q0–q4)**, có header truyền thật. Mix đạt **Q̂ 1.4978 tại 0.3 bpp**, thay cho 1.4912 của vòng sàng lọc dưới đây; tại 0.15 bpp vẫn đạt 0.7891. Gói decoder PULSE-L riêng giải mã 30/30 ảnh khớp pixel trong **12.235 giây trên L40**, tính cả giải nén gói, khởi động, nạp model và ghi PNG. Gói ZIP 74.7 MB; VRAM toàn thiết bị cao nhất trong vòng tích hợp là 5,920 MiB, thấp hơn giới hạn 30 GB/GPU. Đây chưa phải benchmark toàn bộ mix hoặc trên L4. Chi tiết và giới hạn phép đo: [báo cáo tích hợp PULSE-L](CLIC2027_pulse_integration_2026-10-15.md). Các số 204 lượt và 1.4912 bên dưới mô tả vòng sàng lọc trước đó; 120 payload lặp lại đã được xác nhận giống hệt, không tính là điểm chất lượng mới.
+**Trạng thái theo dữ liệu đến 20/10:** PULSE-L đã tích hợp vào bake-off với **150 điểm (30 ảnh × q0–q4)**. Mix có PULSE-L đạt Q̂ **0,1841 / 0,7891 / 1,4978** dưới các ngân sách **0,075 / 0,15 / 0,3 bpp**. PULSE-L được chọn cho 22/30 ảnh ở ngân sách cao nhất. Đây là kết quả metric đại diện, chưa phải preference được người chấm xác nhận.
 
-Đến ngày 15/10/2026, dự án đã xây dựng thước đo preference Q̂ v0, đánh giá nhiều codec bằng bitstream thật, thử chưng cất decoder DiT-IC và kiểm tra một phần tính tất định. Vòng mới hoàn tất **204 lượt nén–giải nén**, gồm AFP-GIC, DC-VIC, PULSE và PULSE-L; riêng PULSE-L được đánh giá trên đủ 30 ảnh ở bốn mức chất lượng.
+**Vòng AEIC đã hoàn tất:** hai checkpoint ME-ft2/SE-ft2 cho **60/60 stream thật và 60/60 ảnh khớp pixel** khi decode ở tiến trình mới trên cùng L40. Thêm AEIC nâng mix ở 0,075 bpp từ **0,1841 lên 0,1903**; hai ngân sách cao không đổi. Mức tăng **+0,00617** thấp hơn ngưỡng sàng lọc +0,02; do đó **chưa fine-tune hoặc đưa AEIC vào decoder chính**. Đỉnh VRAM riêng tiến trình khoảng **6,84 GiB (SE) / 7,32 GiB (ME)**. Phân tích đầy đủ cùng ảnh crop nằm tại [mục 5.11](#aeic-full30).
 
-Kết quả mới đáng chú ý là **thêm PULSE-L vào lựa chọn theo ảnh**: Q̂ tăng từ **0.7582 lên 0.7891 ở 0.15 bpp**, và từ **1.4215 lên 1.4912 ở 0.3 bpp**. Đây là mức tăng của metric đại diện trên validation, chưa được xác nhận bằng chấm mù. Decoder PULSE-L có trung vị 57.2 ms/ảnh trên L40 trong phép đo API; chưa phải thời gian bài nộp trên L4.
+**Khả năng triển khai:** gói PULSE-L riêng đã decode 30/30 ảnh khớp pixel trong **12,235 giây trên L40**, gồm giải nén gói, khởi động, load và ghi PNG. ZIP 74,7 MB; đỉnh tổng VRAM thiết bị trong vòng tích hợp 5.920 MiB. Đây chưa phải benchmark toàn mix hoặc trên L4. [Bằng chứng tích hợp](CLIC2027_pulse_integration_2026-10-15.md).
 
-Đề xuất hiện tại là giữ DiT-IC cho bitrate thấp, bổ sung PULSE-L vào hệ thống hỗn hợp và nghiên cứu cách lựa chọn codec có tính cả thời gian giải mã, chi phí nạp model và độ tin cậy của đánh giá chất lượng. Các phần tiếp theo phân biệt **kết quả đã đo**, **diễn giải** và **thí nghiệm đề xuất**.
+**Ưu tiên hiện tại:** giữ mix có PULSE-L làm phương án chính; kiểm toàn gói decoder, chấm mù và holdout trước khi mở rộng huấn luyện. DiT-IC vẫn có tín hiệu tốt ở bitrate thấp; MS-ILLM và PULSE-L bổ sung ở rate cao. Các vòng sàng lọc trước tích hợp được giữ tại mục 5.8–5.10 và ghi rõ phạm vi lịch sử.
 
 ### Đọc nhanh bằng hình — cập nhật 15/10
 
@@ -77,7 +79,8 @@ PSNR đo sai số pixel, nhưng không phải lúc nào cũng phản ánh ảnh 
 | --- | --- | --- | --- |
 | **0.075 bpp, ảnh tự nhiên** | DiT-IC | Bake-off và chấm mù sơ bộ ủng hộ DiT-IC so với MS-ILLM | Bằng chứng ban đầu; mẫu nhỏ |
 | **0.15 bpp** | Mix DiT-IC, MS-ILLM, PULSE-L và VTM-SCC | PULSE-L được chọn cho 10/30 ảnh trong allocation mới | Q̂ trên 30 ảnh; chưa có chấm mù mix mới |
-| **0.3 bpp** | Mix có PULSE-L, giữ MS-ILLM và các mode bổ sung | PULSE-L được chọn cho 20/30 ảnh; mix đạt Q̂ 1.4912 | Kết quả nội bộ; cần holdout và benchmark toàn gói |
+| **0.3 bpp** | Mix có PULSE-L, giữ MS-ILLM và các mode bổ sung | PULSE-L được chọn cho 22/30 ảnh; mix đạt Q̂ 1.4978 | Kết quả nội bộ; cần holdout và benchmark toàn gói |
+| **AEIC-ME/SE ft2** | Giữ kết quả nghiên cứu, chưa fine-tune | Tăng Q̂ mix +0,00617 tại 0,075 bpp, không đạt ngưỡng +0,02; chi phí decode cao | Chỉ áp dụng recipe/checkpoint đã thử |
 | **Ảnh chữ, giao diện, màn hình** | VTM-SCC | Codec hướng screen content giữ cấu trúc và chữ tốt hơn trong thử nghiệm trước đó | Có tín hiệu tốt; bộ phát hiện ảnh chưa triển khai |
 
 **Vấn đề chính:** Benchmark trên L4 thật, tính tất định giữa các máy L4(mình có thể thuê runpod để chạy evaluation nhưng cần đảm bảo kết quả chạy trên các máy L4 là giống nhau), đóng gói decoder trong giới hạn 4 GB và tích hợp các nhánh codec thành một pipeline decode hoàn chỉnh.
@@ -259,7 +262,7 @@ Khi encode, mỗi codec chuyển ảnh thành bitstream. Bitstream có thể ch�
 #### Bước F — Decode và đo metric + thời gian
 
 **Mục tiêu: Đánh giá chất lượng ảnh khôi phục và chi phí tính toán thực tế.**
-
+FTuwj
 Mỗi bitstream được giải mã thành ảnh tái tạo $\hat{x}$. Sau đó, ảnh tái tạo được so sánh với ảnh gốc $x$.
 
 **Các đại lượng chính:**
@@ -465,22 +468,94 @@ Một codec chỉ thực sự là ứng viên tốt khi đáp ứng cả ba nhó
 
 ## 4. Các mô hình và codec đang sử dụng
 
-### 4.1 Q̂ — thước đo preference tự động
+<a id="metrics-qhat"></a>
 
-**Vai trò:** Q̂ không phải codec nén ảnh. Nó là mô hình xếp hạng dùng để
-sàng lọc codec và phân bổ ngân sách byte theo chất lượng cảm nhận dự
-đoán.
+### 4.1 Metrics và Q̂ — cách đọc thang đo
 
-**Cách làm:**
-1. Lấy dữ liệu đánh giá theo cặp từ CLIC 2021, 2022 và 2024.
-2. Tính các đặc trưng chất lượng như PSNR, MS-SSIM, LPIPS, DISTS và các metric liên quan cho các ảnh trong cặp.
-3. Fit mô hình preference Bradley--Terry để ước lượng xác suất một ảnh được ưa thích hơn ảnh kia.
-4. Đánh giá trên phần dữ liệu giữ lại test so với baseline.
-5. Dùng Q̂ v0 trong bake-off để đánh giá và tối ưu phân bổ byte.
+**Vai trò:** Q̂ là mô hình preference để sàng lọc và phân bổ byte, không phải codec. Phần này thống nhất cách đọc tất cả bảng và hình trong báo cáo.
 
-**Ý nghĩa:** Q̂ cho phép đánh giá hàng loạt ứng viên nhanh hơn việc con
-người phải chấm mọi cặp. Tuy nhiên, Q̂ chỉ là proxy; không thay thế đánh
-giá người thật và có thể khái quát kém sang ảnh hoặc codec mới.
+#### Các metric và quy ước gộp toàn tập
+
+| Metric | Đơn vị / thang đo | Chiều tốt | Ý nghĩa và giới hạn |
+|---|---|---|---|
+| Bitrate — bpp | Bit trên một pixel; `8 × tổng byte / tổng pixel` | Thấp hơn khi giữ chất lượng tương đương | Tính byte stream thật. Không chỉ tính entropy ước lượng. Cần đọc cùng chất lượng. |
+| PSNR | dB, không phải phần trăm | ↑ | Đo sai số RGB; nhạy với lệch màu/vị trí, có thể ưu ái ảnh mịn. Bảng dùng **pooled PSNR** từ MSE gộp có trọng số pixel. |
+| MS-SSIM | Thường 0–1; 1 là giống hoàn toàn theo metric | ↑ | Độ giống cấu trúc ở nhiều tỉ lệ. Không bảo đảm chữ và chi tiết ngữ nghĩa đúng. |
+| LPIPS-Alex | Khoảng cách đặc trưng AlexNet; 0 là khớp | ↓ | Dùng bản Alex trong cột LPIPS của báo cáo cũ. Không phải thang phần trăm, không mặc định bị chặn ở 1. |
+| LPIPS-VGG | Khoảng cách đặc trưng VGG; 0 là khớp | ↓ | Khác backbone với LPIPS-Alex; không trộn hai giá trị vào một cột. |
+| DISTS | Sai khác cấu trúc/texture; gần 0 tốt hơn | ↓ | Hữu ích cho ảnh cảm nhận; vẫn có thể bỏ sót lỗi chữ hoặc texture bịa. |
+| CLIP-IQA | Điểm chất lượng ảnh không cần ảnh gốc, thường 0–1 | ↑ | Ảnh trông tự nhiên có thể được điểm cao dù không trung thực với ảnh gốc. |
+| **Q̂ v0** | **Tiện ích thực, không có thang 0–100 hay mốc “đạt” cố định** | ↑ | Kết hợp sáu metric để dự đoán preference theo cặp. Giá trị âm hợp lệ; không đồng nghĩa model hỏng. |
+| Decode time | Giây/ảnh hoặc giây/toàn bộ tập | ↓ | Phải phân biệt API với toàn gói gồm khởi động/load/I/O, và giữ phần cứng/tải giống nhau. |
+| VRAM | MiB/GiB; ghi rõ theo PID hay toàn GPU | ↓ khi chất lượng/tốc độ tương đương | Số toàn GPU có thể bao gồm job khác. Không so thẳng với số riêng tiến trình. |
+| Pixel parity | Số ảnh giải mã khớp pixel / tổng số | Đủ toàn bộ | Kiểm tính tái lập, không phải điểm chất lượng. Khớp trên L40 chưa chứng minh khớp trên L4. |
+| OCR CER | Tỷ lệ lỗi ký tự, có thể >1 khi nhiều ký tự chèn | ↓ | Có trong probe chữ của repo; chưa đo đồng nhất cho mọi codec. |
+| FID/KID, WD3/WD5 | Các khoảng cách phân phối/đặc trưng | ↓ ở dạng khoảng cách gốc | Có công cụ trong repo nhưng chưa phủ tất cả phương pháp ở bảng chính; **không nằm trong Q̂ v0**. |
+
+Quy ước tính ảnh của repo: PSNR từ RGB; MS-SSIM trên ảnh đầy đủ; LPIPS và DISTS theo tile 512×512, gộp theo diện tích tile, bỏ tile có cạnh nhỏ hơn 64. Bpp gộp theo pixel; MS-SSIM, LPIPS, DISTS, CLIP-IQA và Q̂ của tập là trung bình đều trên các ảnh. Nguồn: [metrics.py](../src/clic27/eval/metrics.py), [Features và transform](../experiments/qhat/qhat.py), [bake-off summary](../experiments/bakeoff/bakeoff.py).
+
+#### Phân biệt Q̂ với quality index
+
+**Q̂ khác `q0/q1/q2/q3/q4`.** Các tên `q…` là chỉ số cấu hình/checkpoint chất lượng của từng codec; không có thang chung giữa các model. Q̂ là điểm được tính từ ảnh tái tạo và các metric bên dưới.
+
+#### Công thức thực tế
+
+Với ảnh gốc \(O\) và ảnh tái tạo \(X\), repo tính Q̂ v0 **riêng cho từng ảnh**:
+
+```text
+Q̂(O, X) =
+  -0.034319 × PSNR
+  +1.346040 × [-log10(max(1 - MS-SSIM, 0.000001))]
+  -2.096177 × LPIPS-Alex
+  -2.379560 × LPIPS-VGG
+  -13.931139 × DISTS
+  +1.720847 × CLIP-IQA
+```
+
+Các hệ số trên được làm tròn để trình bày; script dùng đủ precision trong [qhat_v0.json](../results/2026-10-15_new_codecs/qhat_v0.json). Trọng số `weights` đã được đổi khỏi chuẩn hóa khi xuất model; **không chia thêm cho `scale`**. Hệ số PSNR âm là kết quả fit đồng thời các đặc trưng tương quan; không diễn giải thành quy luật “PSNR càng thấp càng tốt”, hoặc lý do cố tình làm hỏng ảnh.
+
+**Không thế trực tiếp các số trung bình trong bảng vào công thức để tái tạo Q̂ trung bình.** Phép biến đổi MS-SSIM là phi tuyến, còn PSNR trong bảng là pooled PSNR, khác trung bình PSNR từng ảnh. Script tính Q̂ từng ảnh trước rồi mới lấy trung bình.
+
+#### Chênh lệch Q̂ có nghĩa gì?
+
+Mô hình preference lưu trong repo:
+
+```text
+P(A được chọn hơn B | cùng ảnh gốc) = sigmoid(0.095620 + Q̂(A) - Q̂(B))
+sigmoid(z) = 1 / (1 + exp(-z))
+```
+
+Bias 0,095620 phản ánh thiên lệch vị trí A/B trong phép fit, **không cộng vào Q̂ riêng của codec**. Bảng dưới minh họa logistic khi bỏ bias vị trí để dễ đọc:
+
+| ΔQ̂ = Q̂(A) − Q̂(B) trên cùng ảnh | Xác suất mô hình, giả sử bias = 0 |
+|---:|---:|
+| 0 | 50,0% |
+| +0,25 | 56,2% |
+| +0,5 | 62,2% |
+| +1 | 73,1% |
+| +2 | 88,1% |
+
+Đây là **diễn giải của mô hình**, không phải xác suất đã được kiểm chứng trên CLIC 2027. Tăng 1 Q̂ làm odds dự đoán nhân khoảng \(e ≈ 2,72\) trong mô hình. Q̂ = 1 không có nghĩa chất lượng “100%”; Q̂ = 0 cũng không phải ảnh ngẫu nhiên hay mốc đạt chuẩn.
+
+**Không lấy sigmoid của ΔQ̂ trung bình toàn tập để tuyên bố tỷ lệ thắng của codec.** Mỗi ảnh có chênh lệch khác nhau; ngay trung bình xác suất theo từng ảnh cũng chỉ là dự đoán, chưa phải phiếu người. Ví dụ AEIC làm mix tăng +0,00617 trung bình nhờ đổi cách chia bit, trong khi cả ba ảnh chuyển sang AEIC đều giảm Q̂ riêng.
+
+**Hình 7 — Diễn giải chênh lệch Q̂ của cùng một cặp ảnh.** Đường liền bỏ bias vị trí; đường đứt dùng bias trong file fit. Trục phần trăm là xác suất của mô hình preference, không phải chuyển Q̂ thành điểm chất lượng 0–100.
+
+![Đường sigmoid minh họa quan hệ giữa chênh lệch Qhat và xác suất mô hình chọn A](figures/metrics_2026-10-20/07_qhat_scale.png)
+
+#### Mức tin cậy hiện có
+
+| Kiểm tra Q̂ | Q̂ v0 | Q̂ v1 | Cách đọc |
+|---|---:|---:|---|
+| Số câu hỏi có features dùng để fit | 8.000 | 8.000 | Dữ liệu preference CLIC cũ; không phải 8.000 ảnh độc lập |
+| Accuracy 5-fold đã lưu | 78,8% | 79,0% | Fold theo câu hỏi; chưa bảo đảm độc lập theo ảnh |
+| Train 2021/2022, test 2024 | 81,2% | 83,3% | Accuracy cross-year đã lưu; không phải accuracy trên tập 2027 |
+| Đặc trưng | PSNR, MS-SSIM, LPIPS-A/V, DISTS, CLIP-IQA | MS-SSIM, WD3 | **Hai thang điểm khác nhau; không so trị số v0 với v1** |
+| Vai trò trong bảng này | **Dùng thống nhất** | Không dùng để xếp hạng | Giữ cùng objective với allocator hiện tại |
+
+Cross-year score đánh giá model fit trên các năm cũ; file weights triển khai được fit lại trên đủ dữ liệu. Repo còn có kiểm tra một người chấm DiT-IC với MS-ILLM: 62/90 crop nghiêng về DiT-IC, dấu ΔQ̂ v0 phù hợp đa số phiếu ở 26/30 ảnh. Bằng chứng này chỉ thuộc cặp model/cấu hình cũ, không xác nhận AEIC hay PULSE, và không thay thế nghiên cứu nhiều người. Không gọi mức đồng ý giữa hai người là một trần toán học tuyệt đối.
+
+Nguồn: [fit v0](../results/2026-10-06_qhat_v0/fit.json), [fit v1](../results/2026-10-09_qhat_v1/fit.json), [phiếu so DiT-IC/MS-ILLM](../results/2026-10-11_rating_ditic_msillm/summary.md).
 
 ### 4.2 MS-ILLM — codec học sâu làm base ở bitrate trung bình/cao
 
@@ -577,7 +652,7 @@ chọn đó có cải thiện tổng preference dưới cùng ngân sách byte k
 | --- | --- | --- |
 | **CoD-Lite** | Codec học sâu cạnh tranh, tốc độ nhanh | Q̂ v0 −0.382 ở 0.075 bpp; khoảng 0.15 s/ảnh; kém MS-ILLM ở 0.15/0.3 theo bake-off |
 | **MBT2018-mean** | Baseline learned compression cổ điển | Q̂ khoảng −2.0 tại 0.15 bpp; loại khỏi lựa chọn chính |
-| **S1: DC-AE + S1 + residual VTM** | Kiểm tra hướng latent codec đa rate kết hợp residual | Kém MS-ILLM khoảng 1--2.3 Q̂ trong phép so sánh được ghi nhận; loại khỏi hướng chính |
+| **S1: DC-AE + S1 + residual VTM** | Kiểm tra hướng latent codec đa rate kết hợp residual | Artifact local chỉ có metric cho 28/30 ảnh; chưa xếp hạng toàn tập. Các probe Kodak được ghi riêng ở mục 5.12 |
 | **SD-Turbo refiner** | Kiểm tra khả năng hậu xử lý/refinement | Không vượt MS-ILLM trong thử nghiệm nội bộ; dừng |
 | **COOL-CHIC** | Codec tọa độ/implicit representation, tham khảo đối thủ | Theo ghi chú nội bộ, kém MS-ILLM khoảng 0.4--0.6 Q̂ và encode chậm; tạm dừng |
 | **CRDR** | Ứng viên learned codec khác | Kém MS-ILLM theo Q̂ v0 và khoảng 5 s/ảnh giải mã trong phép đo ghi nhận; loại khỏi lựa chọn chính |
@@ -635,32 +710,110 @@ cứu.\
 **Việc tiếp theo:** tái lập split, kiểm tra rò rỉ dữ liệu, báo cáo
 confidence interval và calibration; đánh giá trên nhiều người chấm.
 
-### 5.2 Thí nghiệm B — bake-off nhiều codec trên 30 ảnh
+<a id="comparison-30"></a>
 
-**Câu hỏi:** codec nào có chất lượng cảm nhận tốt nhất tại các rate mục
-tiêu, khi ngân sách byte của cả tập bị giới hạn?
+### 5.2 Thí nghiệm B — bảng và đồ thị tổng hợp trên 30 ảnh
 
-**Thiết kế được ghi:** 30 ảnh validation, các mức 0.075/0.15/0.3 bpp,
-encode/decode bằng nhiều codec; phân bổ ngân sách byte toàn tập theo Q̂
-v0. Kết quả trong `results/2026-10-13_bakeoff_v0`.
+**Cập nhật dữ liệu đến 20/10/2026.** Các bảng dưới đây thay bảng tổng quan 13/10, giữ rõ nguồn snapshot của từng phương pháp và bổ sung AEIC. Không chạy lại model trong bước tổng hợp.
 
-| Ứng viên | 0.075 bpp | 0.15 bpp | 0.3 bpp |
-| --- | --- | --- | --- |
-| **VTM 4:2:0** | −2.515 | −1.163 | −0.152 |
-| **VTM-SCC** | −2.404 | −1.102 | −0.004 |
-| **MS-ILLM** | −0.451 | +0.545 | +1.383 |
-| **CoD-Lite** | −0.382 | +0.285 | +0.906 |
-| **DiT-IC** | +0.164 | Chưa có operating point phù hợp tới 0.15 | --- |
-| **DiT-IC chưng cất** | −0.000 | --- | --- |
-| **Trộn theo ảnh** | **+0.184** | **+0.758** | **+1.421** |
+- Bảng 30 ảnh dùng cùng danh sách ảnh và tổng 86.245.376 pixel. Các ngân sách byte là 808.550 / 1.617.100 / 3.234.201.
+- Mỗi phương pháp chọn một điểm đã đo cho từng ảnh để tối đa tổng Q̂ dưới **ngân sách toàn tập**. Đây không phải kết quả mọi ảnh đều đúng cùng bpp.
+- VTM-SCC, MS-ILLM, CoD-Lite, DiT-IC, student và PULSE-L lấy từ snapshot tích hợp 15/10. VTM 4:2:0 và MBT lấy từ snapshot 13/10; CRDR từ 10/10; SD-Turbo refiner từ 08/10. Đó là các evaluation đã hoàn tất, **không phải so tiến độ huấn luyện ngang số bước**.
+- Mix có PULSE gồm sáu họ trong snapshot tích hợp; mix + AEIC thêm hai biến thể. **Không phải mix hợp nhất toàn bộ các phương pháp lịch sử** ở bảng này.
+- Pixel parity và header của tất cả codec lịch sử chưa được kiểm cùng một quy trình triển khai. Đặc biệt MS-ILLM có [audit riêng](CLIC2027_msillm_stream_audit_2026-10-15.md); bảng giữ output/metric snapshot đã đo, chưa đại diện một gói decoder cuối cùng.
+- S1 + residual có point cho 30 ảnh nhưng chỉ **364 metric rows phủ 28/30 ảnh** trong artifact local. Không điền một Q̂ “toàn 30 ảnh” từ tập thiếu.
+- Nhãn `Không vừa` chỉ nói về các checkpoint/điểm đã thử, không nói kiến trúc đó không thể đạt rate thấp hơn sau huấn luyện.
 
-*Lưu ý:* đây là Q̂ v0 nội bộ; ô "---" nghĩa là không có kết quả được báo
-cáo cho cấu hình đó, không có nghĩa là điểm bằng 0.
+#### Q̂ theo ba ngân sách
 
-**Ý nghĩa:** kết quả ủng hộ một hệ thống hỗn hợp thay vì codec duy nhất.
-Ở 0.075 bpp, DiT-IC có lợi thế trên ảnh tự nhiên; ở 0.15/0.3 bpp,
-MS-ILLM bổ sung operating point hữu ích. Tuy nhiên, 30 ảnh là tập nhỏ và
-Q̂ có thể sai; cần mở rộng mẫu và xác nhận bằng người.
+Mỗi ô là **Q̂ / bpp thực** dưới ngân sách cột. `Không vừa` nghĩa là các điểm đã có không đủ thấp để nén toàn tập. Bitrate thấp hơn ngân sách không được nội suy thành một điểm mới.
+
+| Phương pháp | ≤0,075 bpp | ≤0,15 bpp | ≤0,3 bpp |
+|---|---:|---:|---:|
+| VTM 4:2:0 | -2.5149 / 0.0749 | -1.1633 / 0.1498 | -0.1516 / 0.2998 |
+| VTM-SCC 4:4:4 | -2.4038 / 0.0749 | -1.1020 / 0.1499 | -0.0044 / 0.2990 |
+| DC-AE + S1 + residual VTM | Thiếu metric (28/30 ảnh) | Thiếu metric (28/30 ảnh) | Thiếu metric (28/30 ảnh) |
+| MBT2018-mean | Không vừa | -2.0078 / 0.1499 | -0.4737 / 0.2995 |
+| MS-ILLM + SD-Turbo refiner | -1.6089 / 0.0749 | -1.3315 / 0.1463 | -1.3315 / 0.1463 |
+| MS-ILLM | -0.4513 / 0.0749 | 0.5447 / 0.1498 | 1.3831 / 0.2997 |
+| CoD-Lite | -0.3825 / 0.0749 | 0.2846 / 0.1497 | 0.9055 / 0.2996 |
+| CRDR | Không vừa | 0.2953 / 0.1498 | 1.2716 / 0.2997 |
+| DiT-IC | 0.1644 / 0.0749 | 0.2788 / 0.0958 | 0.2788 / 0.0958 |
+| DiT-IC student | -0.0002 / 0.0748 | 0.1151 / 0.0984 | 0.1151 / 0.0984 |
+| PULSE-L perceptual | Không vừa | Không vừa | 1.4234 / 0.2998 |
+| Mix có PULSE-L | 0.1841 / 0.0749 | 0.7891 / 0.1499 | 1.4978 / 0.2997 |
+| Mix có PULSE-L + AEIC | 0.1903 / 0.0749 | 0.7891 / 0.1499 | 1.4978 / 0.2997 |
+
+**Hình 1— Q̂ theo ngân sách.** Đọc theo cột để so dưới cùng trần byte, đọc theo hàng để xem phương pháp thay đổi thế nào khi tăng ngân sách. Mỗi ô ghi cả Q̂ và bitrate thực. Ví dụ DiT-IC chỉ đạt khoảng 0,096 bpp trong các điểm đã thử; hai cột ngân sách cao không phải hai checkpoint mới.
+
+![Qhat theo ba ngân sách trên cùng 30 ảnh, mỗi ô kèm bitrate thực](figures/metrics_2026-10-20/01_qhat_overview.png)
+
+**Hình 2— Hai tiêu chí chất lượng theo bitrate thực.** Q̂ và PSNR có thể dẫn đến thứ tự khác nhau. AEIC nằm ở khoảng 0,03 bpp, vì vậy không xem nó như một điểm đã đo tại 0,075 bpp. Đường nối chỉ giúp theo dõi các điểm có sẵn, không chứng minh chất lượng giữa các điểm.
+
+![Qhat và PSNR theo bitrate thực của các phương pháp tiêu biểu](figures/metrics_2026-10-20/02_rate_quality.png)
+
+#### Đầy đủ metrics — ngân sách 0.075 bpp
+
+| Phương pháp | bpp thực | PSNR pooled ↑ | MS-SSIM ↑ | LPIPS-Alex ↓ | LPIPS-VGG ↓ | DISTS ↓ | CLIP-IQA ↑ | Q̂ v0 ↑ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| VTM 4:2:0 | 0.07488 | 26.01 | 0.9213 | 0.2961 | 0.3756 | 0.1782 | 0.4652 | -2.5149 |
+| VTM-SCC 4:4:4 | 0.07489 | 26.15 | 0.9256 | 0.2867 | 0.3698 | 0.1738 | 0.4606 | -2.4038 |
+| MS-ILLM + SD-Turbo refiner | 0.07488 | 22.22 | 0.8422 | 0.1972 | 0.3010 | 0.1492 | 0.7098 | -1.6089 |
+| MS-ILLM | 0.07494 | 25.15 | 0.9143 | 0.0943 | 0.2664 | 0.0939 | 0.5940 | -0.4513 |
+| CoD-Lite | 0.07491 | 22.02 | 0.8579 | 0.1091 | 0.2301 | 0.0934 | 0.6798 | -0.3825 |
+| DiT-IC | 0.07494 | 22.27 | 0.8795 | 0.0831 | 0.2028 | 0.0687 | 0.7034 | 0.1644 |
+| DiT-IC student | 0.07478 | 22.24 | 0.8768 | 0.0944 | 0.2070 | 0.0762 | 0.6932 | -0.0002 |
+| Mix có PULSE-L | 0.07492 | 22.38 | 0.8758 | 0.0847 | 0.2078 | 0.0711 | 0.7261 | 0.1841 |
+| Mix có PULSE-L + AEIC | 0.07494 | 22.10 | 0.8735 | 0.0883 | 0.2086 | 0.0699 | 0.7240 | 0.1903 |
+
+![Sáu metric tại ngân sách 0.075 bpp](figures/metrics_2026-10-20/03_metrics_0075.png)
+
+Ở ngân sách thấp, Q̂ cao không đồng nghĩa PSNR, MS-SSIM và mọi khoảng cách cảm nhận đều tốt hơn. Hai hàng mix thể hiện rõ đánh đổi khi thêm AEIC.
+
+#### Đầy đủ metrics — ngân sách 0.15 bpp
+
+| Phương pháp | bpp thực | PSNR pooled ↑ | MS-SSIM ↑ | LPIPS-Alex ↓ | LPIPS-VGG ↓ | DISTS ↓ | CLIP-IQA ↑ | Q̂ v0 ↑ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| VTM 4:2:0 | 0.14977 | 28.29 | 0.9549 | 0.2141 | 0.3153 | 0.1351 | 0.6030 | -1.1633 |
+| VTM-SCC 4:4:4 | 0.14986 | 28.10 | 0.9529 | 0.2109 | 0.3099 | 0.1334 | 0.5899 | -1.1020 |
+| MBT2018-mean | 0.14988 | 27.42 | 0.9500 | 0.2611 | 0.3501 | 0.1649 | 0.4798 | -2.0078 |
+| MS-ILLM + SD-Turbo refiner | 0.14630 | 22.13 | 0.8475 | 0.1779 | 0.2828 | 0.1402 | 0.7366 | -1.3315 |
+| MS-ILLM | 0.14979 | 27.19 | 0.9490 | 0.0580 | 0.2143 | 0.0608 | 0.6550 | 0.5447 |
+| CoD-Lite | 0.14971 | 23.87 | 0.9206 | 0.0798 | 0.1857 | 0.0697 | 0.6710 | 0.2846 |
+| CRDR | 0.14983 | 27.66 | 0.9470 | 0.0637 | 0.2354 | 0.0737 | 0.6855 | 0.2953 |
+| DiT-IC | 0.09577 | 22.57 | 0.8879 | 0.0784 | 0.1902 | 0.0643 | 0.6946 | 0.2788 |
+| DiT-IC student | 0.09843 | 22.62 | 0.8875 | 0.0911 | 0.1943 | 0.0722 | 0.6888 | 0.1151 |
+| Mix có PULSE-L | 0.14991 | 24.59 | 0.9257 | 0.0653 | 0.1774 | 0.0536 | 0.7170 | 0.7891 |
+| Mix có PULSE-L + AEIC | 0.14991 | 24.59 | 0.9257 | 0.0653 | 0.1774 | 0.0536 | 0.7170 | 0.7891 |
+
+![Sáu metric tại ngân sách 0.15 bpp](figures/metrics_2026-10-20/04_metrics_015.png)
+
+DiT-IC và student dùng dưới 0,1 bpp; đây chưa phải các checkpoint khớp rate 0,15 bpp. Hai mix trùng kết quả vì AEIC không được chọn.
+
+#### Đầy đủ metrics — ngân sách 0.3 bpp
+
+| Phương pháp | bpp thực | PSNR pooled ↑ | MS-SSIM ↑ | LPIPS-Alex ↓ | LPIPS-VGG ↓ | DISTS ↓ | CLIP-IQA ↑ | Q̂ v0 ↑ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| VTM 4:2:0 | 0.29980 | 31.62 | 0.9733 | 0.1496 | 0.2594 | 0.1046 | 0.6872 | -0.1516 |
+| VTM-SCC 4:4:4 | 0.29900 | 31.68 | 0.9757 | 0.1449 | 0.2535 | 0.0994 | 0.6711 | -0.0044 |
+| MBT2018-mean | 0.29945 | 29.80 | 0.9726 | 0.1719 | 0.2790 | 0.1160 | 0.6187 | -0.4737 |
+| MS-ILLM + SD-Turbo refiner | 0.14630 | 22.13 | 0.8475 | 0.1779 | 0.2828 | 0.1402 | 0.7366 | -1.3315 |
+| MS-ILLM | 0.29967 | 29.41 | 0.9731 | 0.0335 | 0.1621 | 0.0362 | 0.6909 | 1.3831 |
+| CoD-Lite | 0.29959 | 25.77 | 0.9518 | 0.0583 | 0.1453 | 0.0536 | 0.6804 | 0.9055 |
+| CRDR | 0.29968 | 29.99 | 0.9701 | 0.0352 | 0.1712 | 0.0436 | 0.7343 | 1.2716 |
+| DiT-IC | 0.09577 | 22.57 | 0.8879 | 0.0784 | 0.1902 | 0.0643 | 0.6946 | 0.2788 |
+| DiT-IC student | 0.09843 | 22.62 | 0.8875 | 0.0911 | 0.1943 | 0.0722 | 0.6888 | 0.1151 |
+| PULSE-L perceptual | 0.29977 | 29.43 | 0.9702 | 0.0353 | 0.1216 | 0.0345 | 0.6760 | 1.4234 |
+| Mix có PULSE-L | 0.29973 | 29.34 | 0.9707 | 0.0364 | 0.1281 | 0.0338 | 0.6932 | 1.4978 |
+| Mix có PULSE-L + AEIC | 0.29973 | 29.34 | 0.9707 | 0.0364 | 0.1281 | 0.0338 | 0.6932 | 1.4978 |
+
+![Sáu metric tại ngân sách 0.3 bpp](figures/metrics_2026-10-20/05_metrics_03.png)
+
+VTM-SCC nổi bật về PSNR/MS-SSIM; PULSE-L có Q̂ cao nhất trong các codec đơn đã thử ở gần budget. Chênh lệch nhỏ chưa được kiểm định ý nghĩa thống kê.
+
+Mỗi hình giữ cùng thứ tự hàng trong sáu panel, sắp theo Q̂ giảm dần. Số sau tên là bpp thực; các trục dùng giá trị metric gốc. ↑ tốt hơn khi tăng, ↓ tốt hơn khi giảm. Khoảng cách giữa các panel không cùng đơn vị nên không so trực tiếp. Các đường RD chỉ nối các điểm đã đo để hướng dẫn mắt, không ngoại suy checkpoint mới.
+
+Nguồn: [CSV 30 ảnh](../results/2026-10-20_metrics_comparison/full30_budget_metrics.csv), [script tính lại](../results/2026-10-20_metrics_comparison/build_comparison.py), [hash dữ liệu](../results/2026-10-20_metrics_comparison/sources.sha256.json).
 
 ### 5.3 Thí nghiệm C — chấm mù DiT-IC so với MS-ILLM
 
@@ -766,6 +919,8 @@ một nhóm ảnh. Cần báo cáo metric theo nhóm: ảnh tự nhiên, chữ/m
 texture, ảnh có cạnh mảnh; sau đó đánh giá bộ chọn mode bằng confusion
 matrix, precision/recall và preference cuối cùng.
 
+<a id="pilot-six"></a>
+
 ### 5.8 Thí nghiệm H — sàng lọc model mới trên sáu ảnh
 
 **Câu hỏi:** model mới công khai có tăng chất lượng hoặc tốc độ hữu ích so với các codec hiện có không?
@@ -789,7 +944,51 @@ AFP/DC-VIC được chạy trên Torch 2.11.0+cu128, CompressAI 1.2.8; PULSE dù
 
 **Quyết định:** chưa mở rộng AFP/DC-VIC vì chất lượng pilot chưa vượt baseline và decoder chậm; PULSE base có vùng rate chưa phù hợp. PULSE-L có lợi thế tốc độ và khả năng bổ sung cho mix, nên được chọn chạy đủ 30 ảnh. [Bảng pilot gốc](D:/AwesomeCV/ratflow-codec/results/2026-10-15_new_codecs/pilot_scores/summary.csv).
 
+
+
+#### Đồ thị và đầy đủ metrics trên cùng pilot
+
+![Q̂ và bitrate thực trên pilot 6 ảnh](figures/metrics_2026-10-20/06_pilot6.png)
+
+Màu cùng thang với hình 30 ảnh, nhưng tập ảnh khác nhau. Chỉ so các hàng trong đúng pilot. `PULSE(-L)` trong tên mix chỉ tập ứng viên chứa PULSE base và PULSE-L, không nói mọi họ đều được chọn.
+
+AFP-GIC/DC-VIC/PULSE-L dưới đây là pilot 6 ảnh. Baseline pilot chưa có PULSE-L; khác baseline tích hợp của bảng 30 ảnh. PULSE base đã chạy 24 điểm nhưng không vừa cả ba budget, nên không có hàng allocation hợp lệ.
+
+##### Ngân sách 0.075 bpp
+
+| Phương pháp | bpp thực | PSNR pooled ↑ | MS-SSIM ↑ | LPIPS-Alex ↓ | LPIPS-VGG ↓ | DISTS ↓ | CLIP-IQA ↑ | Q̂ v0 ↑ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| AFP-GIC | 0.07470 | 23.20 | 0.8956 | 0.0901 | 0.2323 | 0.1190 | 0.5922 | -0.7304 |
+| MS-ILLM | 0.07496 | 23.40 | 0.9020 | 0.0883 | 0.2119 | 0.1005 | 0.5833 | -0.3030 |
+| Mix baseline pilot | 0.07388 | 20.10 | 0.8324 | 0.0757 | 0.1676 | 0.0756 | 0.7221 | 0.3806 |
+| Mix pilot + AFP/DC-VIC/PULSE/PULSE-L | 0.07388 | 20.10 | 0.8324 | 0.0757 | 0.1676 | 0.0756 | 0.7221 | 0.3806 |
+
+##### Ngân sách 0.15 bpp
+
+| Phương pháp | bpp thực | PSNR pooled ↑ | MS-SSIM ↑ | LPIPS-Alex ↓ | LPIPS-VGG ↓ | DISTS ↓ | CLIP-IQA ↑ | Q̂ v0 ↑ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| AFP-GIC | 0.14150 | 24.30 | 0.9191 | 0.0649 | 0.1841 | 0.0860 | 0.6910 | 0.3158 |
+| DC-VIC PatchGAN | 0.14657 | 24.11 | 0.9183 | 0.0653 | 0.1693 | 0.0805 | 0.6945 | 0.4599 |
+| MS-ILLM | 0.14941 | 25.49 | 0.9528 | 0.0501 | 0.1742 | 0.0627 | 0.6128 | 0.6423 |
+| Mix baseline pilot | 0.14738 | 21.86 | 0.8825 | 0.0563 | 0.1446 | 0.0585 | 0.7162 | 1.0409 |
+| Mix pilot + AFP/DC-VIC/PULSE/PULSE-L | 0.14938 | 21.86 | 0.8825 | 0.0564 | 0.1406 | 0.0581 | 0.7135 | 1.0560 |
+
+##### Ngân sách 0.3 bpp
+
+| Phương pháp | bpp thực | PSNR pooled ↑ | MS-SSIM ↑ | LPIPS-Alex ↓ | LPIPS-VGG ↓ | DISTS ↓ | CLIP-IQA ↑ | Q̂ v0 ↑ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| AFP-GIC | 0.22538 | 26.65 | 0.9594 | 0.0393 | 0.1693 | 0.0660 | 0.7165 | 0.8712 |
+| DC-VIC PatchGAN | 0.22920 | 26.69 | 0.9601 | 0.0378 | 0.1505 | 0.0577 | 0.6975 | 1.0237 |
+| PULSE-L pilot | 0.29426 | 27.06 | 0.9668 | 0.0309 | 0.0987 | 0.0348 | 0.6743 | 1.6057 |
+| MS-ILLM | 0.29972 | 28.06 | 0.9761 | 0.0255 | 0.1283 | 0.0339 | 0.7154 | 1.7323 |
+| Mix baseline pilot | 0.29979 | 27.45 | 0.9628 | 0.0385 | 0.1051 | 0.0342 | 0.7653 | 1.8629 |
+| Mix pilot + AFP/DC-VIC/PULSE/PULSE-L | 0.29975 | 28.44 | 0.9734 | 0.0421 | 0.1012 | 0.0310 | 0.7204 | 1.9194 |
+
+Nguồn: [CSV pilot 6 ảnh](../results/2026-10-20_metrics_comparison/pilot6_budget_metrics.csv).
+
 ### 5.9 Thí nghiệm I — PULSE-L trên đủ 30 ảnh
+
+**Vòng sàng lọc lịch sử 15/10, trước tích hợp q0–q4.** Các số 1,4912 và 20/30 dưới đây thuộc vòng bốn quality; kết quả sau tích hợp là 1,4978 và 22/30 tại 0,3 bpp, xem mục 1 và 5.2.
 
 Chạy q0/1/2/4, tổng cộng **120 điểm**. So sánh cùng bộ ảnh, cùng Q̂ v0, cùng allocator và cùng ngân sách byte với baseline. Mix mở rộng trong bảng này chỉ thêm **PULSE-L**, không thêm AFP/DC-VIC/PULSE base vì chúng mới được chấm trên sáu ảnh.
 
@@ -820,6 +1019,8 @@ Nguồn: [summary 30 ảnh](D:/AwesomeCV/ratflow-codec/results/2026-10-15_new_co
 
 ### 5.10 Thí nghiệm J — tốc độ, VRAM và decode độc lập của PULSE-L
 
+**Phép đo lịch sử của vòng sàng lọc 120 điểm.** Bảng dưới giữ thời gian API và kiểm parity 3 ảnh của vòng này. Phép kiểm toàn gói PULSE-L sau tích hợp đã đạt 30/30 ảnh khớp pixel và 12,235 giây tổng wall time trên L40, được trình bày cùng đồ thị tại mục 1. Không so trực tiếp hai protocol như một mức tăng tốc của model.
+
 | Đại lượng | Kết quả | Phạm vi |
 |---|---:|---|
 | Trung vị decode | 57.2 ms/ảnh | 120 điểm trên L40, hai CPU thread |
@@ -834,6 +1035,146 @@ Phép đo tốc độ trong run full xảy ra sau encode trong cùng tiến trì
 Đỉnh VRAM các run pilot lần lượt là AFP-GIC 11,264 MiB, DC-VIC 7,718 MiB, PULSE 3,130 MiB và PULSE-L 4,140 MiB. Tất cả giữ guard nửa thiết bị, chặt hơn mức 30 GB/GPU mới được cho phép. Guard theo dõi tổng bộ nhớ và dừng job của mình trước ngưỡng, nhưng không phải phân vùng GPU cứng.
 
 Nguồn: [manifest](D:/AwesomeCV/ratflow-codec/results/2026-10-15_new_codecs/manifest.json) và [kiểm decode từ tiến trình mới](D:/AwesomeCV/ratflow-codec/results/2026-10-15_new_codecs/fresh_decode/checks.json). Ba phép kiểm này chưa chứng minh parity CPU↔GPU hoặc L40↔L4. Tổng vòng mới có 204 điểm encode/decode hợp lệ và ba phép kiểm bổ sung; chưa train checkpoint mới.
+
+<a id="aeic-full30"></a>
+
+### 5.11 Thí nghiệm K — AEIC full30: chất lượng, chi phí và quyết định
+
+Ngày thực nghiệm: 20/10/2026, múi giờ Asia/Bangkok.
+
+#### Metrics của hai checkpoint cố định
+
+| Phương pháp | bpp thực | PSNR pooled ↑ | MS-SSIM ↑ | LPIPS-Alex ↓ | LPIPS-VGG ↓ | DISTS ↓ | CLIP-IQA ↑ | Q̂ v0 ↑ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| AEIC-SE ft2 | 0.03111 | 20.71 | 0.8287 | 0.1441 | 0.2807 | 0.1097 | 0.7081 | -0.9016 |
+| AEIC-ME ft2 | 0.03260 | 21.48 | 0.8434 | 0.1352 | 0.2640 | 0.0988 | 0.7087 | -0.6635 |
+
+Cả hai checkpoint dùng khoảng 0,03 bpp; không so chúng như các điểm đã đo tại 0,075 bpp.
+
+#### Kết quả và quyết định
+
+**Hoàn tất lúc 06:49:43: 60/60 điểm có bitstream thật, 60/60 ảnh khớp pixel khi giải mã ở tiến trình mới, scoring và phân bổ ngân sách hoàn tất. Không fine-tune AEIC ở vòng này**, vì mức cải thiện không đạt ngưỡng thực dụng đã định trước. Các tiến trình AEIC và scorer đã kết thúc.
+
+| Ngân sách toàn tập | Q̂ mix có PULSE | Q̂ thêm AEIC | ΔQ̂ trung bình | Ảnh dùng AEIC |
+|---|---:|---:|---:|---:|
+| 0,075 bpp | 0,184142 | 0,190313 | **+0,006171** | 3/30, đều ME |
+| 0,15 bpp | 0,789137 | 0,789137 | 0 | 0/30 |
+| 0,3 bpp | 1,497811 | 1,497811 | 0 | 0/30 |
+
+SE không được chọn ở cả ba ngân sách. Baseline gồm 780 điểm của sáu codec, bao gồm 150 điểm PULSE-L; thêm AEIC tạo tổng 840 điểm. Q̂ baseline tái lập khớp số đã lưu trong sai số 1e-6. Bitrate thực của mix mở rộng lần lượt là 0,0749355 / 0,1499080 / 0,2997301 bpp, đều không vượt ngân sách.
+
+![Chất lượng và số ảnh được chọn theo codec](../results/2026-10-20_aeic_full30/full30_20261020/quality_and_selection.png)
+
+Nguồn số liệu: [comparison.json](../results/2026-10-20_aeic_full30/full30_20261020/comparison.json), [allocation.csv](../results/2026-10-20_aeic_full30/full30_20261020/scores/allocation.csv), [baseline_preflight.json](../results/2026-10-20_aeic_full30/full30_20261020/baseline_preflight.json). Hình có [bản SVG](../results/2026-10-20_aeic_full30/full30_20261020/quality_and_selection.svg) và [script tái tạo](../experiments/new_codecs/summarize_aeic.py).
+
+##### Lợi ích đến từ đâu?
+
+Ở 0,075 bpp, có sáu ảnh đổi lựa chọn:
+
+| Ảnh (prefix) | Trước → sau | Thay đổi byte | ΔQ̂ riêng ảnh |
+|---|---|---:|---:|
+| `2684452d` — tượng và bảng chữ | DiT-IC q4 → AEIC-ME ft2 | −25.497 | −0,84497 |
+| `937476dd` — texture vải | DiT-IC q3 → AEIC-ME ft2 | −16.047 | −0,38640 |
+| `d0208a1e` — thác nước | DiT-IC q2 → AEIC-ME ft2 | −3.846 | −0,10844 |
+| `8426ed22` — chân dung | DiT-IC q2 → q3 | +13.920 | +0,46328 |
+| `a365e654` — đường phố | DiT-IC q2 → q3 | +14.904 | +0,48898 |
+| `eda6d427` — phố và xe đạp | DiT-IC q2 → q3 | +16.780 | +0,57266 |
+
+Ba ảnh chuyển sang AEIC tiết kiệm **45.390 byte**, nhưng tổng Q̂ của chúng giảm 1,33980. Ba ảnh còn lại dùng thêm 45.604 byte và tăng tổng Q̂ 1,52492. Chênh lệch tổng là 0,18512; chia cho 30 ảnh được **+0,00617 Q̂ trung bình**. Cả tập chỉ dùng thêm 214 byte so với baseline, vẫn dưới budget.
+
+Do đó, việc allocator chọn AEIC **không chứng minh AEIC cho ảnh đẹp hơn lựa chọn cũ**. Trong phép thử này, AEIC đóng vai trò lựa chọn ít bit để nhường ngân sách. Nguồn đầy đủ: [changed_images.csv](../results/2026-10-20_aeic_full30/full30_20261020/changed_images.csv).
+
+##### Bộ nhớ và thời gian
+
+| Model | Bpp gộp 30 ảnh | Q̂ đơn model | Decode độc lập TB/ảnh | Tổng API decode 30 ảnh | Peak VRAM riêng tiến trình |
+|---|---:|---:|---:|---:|---:|
+| AEIC-SE ft2 | 0,03111 | −0,90158 | 24,26 s | 727,78 s | 7.006 MiB = 6,84 GiB |
+| AEIC-ME ft2 | 0,03260 | −0,66348 | 21,90 s | 656,90 s | 7.496 MiB = 7,32 GiB |
+
+Scorer đạt peak 4.072 MiB. Tất cả thấp hơn ngưỡng dừng riêng tiến trình 10 GiB. ME và SE chạy trên hai GPU có tải dùng chung khác nhau, nên **không suy ra ME nhanh hơn SE về mặt kiến trúc** từ bảng này. Q̂ đơn model cũng không phải so sánh ở cùng bitrate với mix.
+
+Riêng ba ảnh AEIC-ME được chọn tại 0,075 bpp đã cần tổng **65,20 giây API decode**, chưa gồm nạp model và I/O. Đây là chi phí đáng cân nhắc cho một mức tăng Q̂ nhỏ; chưa đo thời gian toàn mix trên L4. Bộ file weights nguồn cần nạp có tổng 4,792 GB cho ME và 4,633 GB cho SE (GB thập phân), gồm cả tensor sau đó bị cắt bỏ hoặc thay thế. **Đây chưa phải kích thước gói decoder tối ưu**, cũng chưa tính dependencies. Số đo: [resource_summary.json](../results/2026-10-20_aeic_full30/full30_20261020/resource_summary.json), [weight_inventory.json](../results/2026-10-20_aeic_full30/full30_20261020/weight_inventory.json).
+
+##### Quan sát trực quan và bộ chấm A/B
+
+Đã tạo **18 cặp crop × 3 ảnh gốc/A/B = 54 ảnh lossless**, phủ đủ sáu lựa chọn thay đổi: mỗi ảnh gồm một crop giữa và hai crop ngẫu nhiên có texture, seed cố định. Tên model không có trong trang chấm; khóa đáp án được giữ riêng. Phiếu người xem chưa được điền.
+
+- [Mở bộ chấm HTML](../results/2026-10-20_aeic_full30/full30_20261020/blind_review/index.html): chọn A/B/ngang nhau/khó đánh giá rồi tải phiếu JSON. Mở file bằng trình duyệt trên máy; giữ nguyên thư mục `img` bên cạnh.
+- [Ghi chú trực quan của AI trước khi mở khóa A/B](../results/2026-10-20_aeic_full30/full30_20261020/visual_audit/AI_NOTES_BLIND.md): đã xem toàn bộ 18 crop, không tính thành phiếu người thật.
+- Ảnh trong bộ chấm đã được kiểm tra đủ file và đúng kích thước 512×512. Trình duyệt tích hợp chặn URL `file://`, nên thao tác chấm/lưu phiếu trong trình duyệt chưa được xác nhận bằng UI.
+
+Sau khi đối chiếu khóa: các crop chữ và vải chuyển sang AEIC có những sai lệch dễ thấy; crop thác nước có chi tiết được giữ tốt hơn ở một số vị trí nhưng không nhất quán. Các ảnh được thêm bit cũng không thể hiện ưu thế rõ ở mọi crop. Đây là nhận xét định tính của AI, không phải kết quả nghiên cứu preference.
+
+![Ví dụ chữ và vải, ảnh gốc cùng A/B ẩn tên](../results/2026-10-20_aeic_full30/full30_20261020/visual_audit/examples.png)
+
+Hai hàng là p002 (chữ) và p006 (vải); ảnh gốc ở bên trái, A/B ở giữa/phải. Các crop được giữ nguyên pixel, không tăng nét hay chỉnh màu để minh họa.
+
+##### Hành động sau vòng này
+
+1. **Giữ mix có PULSE làm phương án chính**, lưu AEIC là candidate nghiên cứu, chưa tích hợp vào decoder nộp bài.
+2. **Không chạy fine-tune dài hoặc pilot fine-tune ở vòng này**: +0,00617 thấp hơn ngưỡng +0,02, chưa có bằng chứng trực quan bù lại chi phí decoder. Kết luận này chỉ áp dụng hai checkpoint ft2 và recipe tile đã thử; không kết luận mọi cấu hình AEIC đều không hữu ích.
+3. Đã chuẩn bị kiểm tra khả năng fine-tune để dùng lại nếu có giả thuyết mới đủ cụ thể. Muốn mở lại hướng này cần đánh giá thêm trên held-out, cải thiện có ý nghĩa và phép đo chi phí triển khai; không dùng việc huấn luyện dài để thay thế các bằng chứng còn thiếu.
+
+Các bước đánh giá, phân tích, crop và báo cáo đã hoàn tất. Chấm bởi người là phần còn mở nếu muốn thu thập preference; không cần chờ phiếu để thực hiện quyết định không fine-tune theo ngưỡng đã định.
+
+#### Câu hỏi thực nghiệm
+
+AEIC-ME/SE có giúp hệ thống hiện tại phân bổ ngân sách tốt hơn ở 0,075 / 0,15 / 0,3 bpp hay không? Baseline là **mix đã tích hợp PULSE-L**, không phải mix cũ của pilot ba ảnh.
+
+Đơn vị so sánh chính là phương án nén **cùng 30 ảnh dưới cùng ngân sách byte toàn tập**. Một ảnh có thể được nén rẻ hơn để nhường bit cho ảnh khác. Vì vậy, không so trực tiếp AEIC-ft2 ở khoảng 0,02–0,03 bpp với một codec ở 0,075 bpp rồi kết luận ai tốt hơn.
+
+Protocol và ngưỡng quyết định được ghi trước khi scoring trong [PLAN.md](../results/2026-10-20_aeic_full30/PLAN.md). Ngưỡng sàng lọc thực dụng: tăng ít nhất 0,02 Q̂ trung bình và AEIC được chọn cho ít nhất 3/30 ảnh ở một ngân sách. Đây không phải kiểm định ý nghĩa thống kê hay ngưỡng thắng cuộc thi.
+
+#### Cấu hình và tính hợp lệ
+
+- Hai checkpoint chính thức ME-ft2 và SE-ft2; mã tác giả pin tại [`7222c2c`](https://github.com/LuizScarlet/AEIC/tree/7222c2c85e8db7ea0b829a139313ab7f4fdea88c).
+- Giữ nguyên kích thước ảnh, dùng entropy coder thật. Số byte bao gồm header AEIC 4 byte và metadata kích thước trong stream tác giả.
+- `q2` trong thư mục kết quả chỉ định danh checkpoint ft2; không cùng mức bitrate/chất lượng với q2 của PULSE hoặc codec khác.
+- Tắt color correction cần thống kê từ ảnh gốc. Tiến trình giải mã độc lập không được truyền đường dẫn tập ảnh gốc; so SHA256 RGB với lần giải mã reference.
+- FP32, seed 0, cuDNN deterministic, tắt TF32, tắt compile, bật xformers. Latent tile 64, overlap 16, VAE tile 64. Đây là cấu hình ít VRAM khác tile mặc định tác giả; không coi kết quả này là tái lập nguyên vẹn benchmark trong paper.
+- SE chạy GPU 0, ME chạy GPU 1 trên hai L40 dùng chung. Allocator 8 GiB, dừng nếu bộ nhớ riêng tiến trình đạt 10 GiB hoặc thiết bị còn dưới 1,5 GiB trống. Guard là giám sát phần mềm, không phải phân vùng GPU cứng.
+- Chỉ chấm điểm sau khi cả 60 stream vượt kiểm giải mã độc lập. Q̂ baseline phải khớp kết quả mix đã lưu trong sai số 1e-6.
+
+#### Cơ chế liên quan đến kết quả
+
+Đường giải mã trong [`AEIC_practical.py`](https://github.com/LuizScarlet/AEIC/blob/7222c2c85e8db7ea0b829a139313ab7f4fdea88c/src/AEIC_practical.py) khôi phục latent qua entropy decoder, dùng UNet một bước rồi cộng residual trong không gian latent trước khi đưa vào VAE decoder. [`base_model.py`](https://github.com/LuizScarlet/AEIC/blob/7222c2c85e8db7ea0b829a139313ab7f4fdea88c/src/base_model.py) bỏ time embedding và cross-attention của UNet, thay VAE decoder bằng bản thu hẹp, bỏ VAE encoder và gộp LoRA khi suy luận.
+
+Các bước cắt giảm này vẫn để lại một decoder diffusion đáng kể. Tile nhỏ giúp giảm bộ nhớ nhưng có thể tăng thời gian và thay đổi output. Do đó cần đo đồng thời Q̂, ảnh trực quan, bitstream, thời gian và VRAM. Không dùng mức VRAM suy luận để dự đoán trực tiếp khả năng fine-tune: trainer còn có backward, optimizer, CLIP, DINOv3 discriminator và các mạng tính loss.
+
+#### Phạm vi diễn giải
+
+Q̂ v0 là metric đại diện của dự án, không phải phiếu người xem. Việc thêm candidate vào allocator và đánh giá trên chính 30 ảnh này là kết quả validation nội bộ; cần held-out độc lập trước khi tuyên bố khả năng tổng quát. Pixel parity trong hai tiến trình trên cùng môi trường L40 chưa chứng minh parity trên L4 hoặc một môi trường thư viện khác.
+
+Thời gian API trên GPU dùng chung không tương đương thời gian toàn gói decoder trong môi trường thi. Mức peak lấy từ trace NVML theo PID, chu kỳ 0,25 giây; có thể bỏ lỡ đỉnh ngắn. Không dùng counter peak của PyTorch làm peak toàn run vì VAEHook tác giả reset counter trong quá trình giải mã.
+
+Việc chấm A/B của người xem được để trống. Nhận xét trực quan của trợ lý, nếu có, được ghi riêng và không tính thành phiếu người thật.
+
+#### Chuẩn bị fine-tune
+
+Đã kiểm tra trainer, cấu hình và 800 ảnh DIV2K trên server. Chi tiết các điều kiện trước launch, lỗi lệch batch giữa shell/YAML, giới hạn dừng pilot và recipe một GPU nằm trong [TRAINING_READINESS.md](../results/2026-10-20_aeic_full30/TRAINING_READINESS.md). Huấn luyện chỉ được khởi động sau khi các ngưỡng chất lượng, trực quan và chi phí được đáp ứng.
+
+#### Bằng chứng và chạy lại
+
+Server: `guess:~/clic/aeic_20261016/full30_20261020`. Bitstream và ảnh đầy đủ được giữ tại đây. Bản local gồm log, metadata, metrics, allocation, parity, trace VRAM và crop: [thư mục kết quả](../results/2026-10-20_aeic_full30/README.md).
+
+Hash code/baseline, manifest 30 ảnh và hash ảnh nguồn: [provenance.json](../results/2026-10-20_aeic_full30/full30_20261020/provenance.json). Bản code baseline trên server là snapshot không có `.git`; những file Python liên quan được hash nội dung. Phiên bản môi trường và hashes weights có trong [bằng chứng pilot](../results/2026-10-20_aeic_pilot/README.md).
+
+Artifact server `full30_evidence.tgz` được tải về và kiểm SHA256: `b1951ca73279a0e8ef113d73fc12bb0c3781ffd81a1fbebec954c682d0bc0368`. Contact sheet và ghi chú AI được tạo thêm tại local, sau khi tải artifact, nên không nằm trong hash tar này.
+
+### 5.12 Các probe khác đã chạy và dữ liệu chưa đủ
+
+| Phương pháp / phép thử | Tập và điều kiện | bpp thực | PSNR | LPIPS-Alex ↓ | DISTS ↓ | Q̂ v0 | Phạm vi kết luận |
+|---|---|---:|---:|---:|---:|---:|---|
+| Cool-Chic 5.0.1, 2.000 iterations | Một ảnh `2684452d` | 0,1114 | 29,11 | 0,109 | 0,091 | −0,41 | Không xếp chung bảng 30 ảnh |
+| Cool-Chic tag CLIC2025 | Một ảnh `2684452d`, perceptive config | 0,557 | 32,67 | — | — | +1,33 | Ngoài cả ba ngân sách mục tiêu |
+| S1 r4, step 200.000 | Kodak, snapshot `results/s1` | 0,0710 | 21,70 | 0,1521 | 0,1058 | — | Không có đủ features để tính Q̂ v0 |
+| S1 r7, cùng snapshot | Kodak | 0,1215 | 23,29 | 0,0980 | 0,0621 | — | Khác tập với bảng chính |
+| DC-AE ceiling | Kodak, latent không bị nén bởi S1 | Không có | 23,66 | 0,0905 | 0,0583 | — | Kiểm backbone; **không phải codec có bitrate thật** |
+| DC-AE + residual giả định base 0,03 bpp | Probe B6 natural/screen | Xem nguồn | Theo nhóm | Theo nhóm | Theo nhóm | — | Chi phí base giả định; không trộn với true-bitstream codec |
+
+`—` là không có số tương ứng trong bằng chứng này, không phải 0. Nguồn: [Cool-Chic 5.0.1](../results/2026-10-09_coolchic_probe/summary.md), [Cool-Chic CLIC2025](../results/2026-10-09_coolchic2025_probe/summary.md), [S1/Kodak](../results/s1/s1_eval/summary.md), [B6](../results/clic_b/b6_results/summary.md). Nhiều checkpoint/ablation distillation đã được chạy; bảng chính dùng student được đưa vào bake-off, không trộn các snapshot huấn luyện trung gian thành codec mới.
+
+PICO, ProGIC, EGIC và PORT trong báo cáo khảo sát là các hướng đã đọc/tìm implementation; chưa có kết quả inference hợp lệ trong bộ artifact này, nên không gán metric cho chúng.
 
 ## 6. Kết quả tổng hợp và cách diễn giải
 
@@ -851,7 +1192,7 @@ Nguồn: [manifest](D:/AwesomeCV/ratflow-codec/results/2026-10-15_new_codecs/man
     hơn teacher.
 6.  **Tính tất định và đóng gói là blockers:** chưa được xác nhận trên
     hai máy L4 độc lập và môi trường submission.
-7.  **PULSE-L bổ sung được cho mix:** ΔQ̂ là +0.0309/+0.0697 ở 0.15/0.3 trên 30 ảnh; decoder nhẹ là lý do tiếp tục đầu tư, nhưng chưa có bằng chứng người chấm cho mix mới.
+7.  **PULSE-L bổ sung được cho mix:** sau tích hợp, Q̂ đạt 0,7891/1,4978 ở 0,15/0,3 trên 30 ảnh; decoder nhẹ là lý do tiếp tục đầu tư, nhưng chưa có bằng chứng người chấm cho mix mới.
 8.  **Model mới không tự động tốt hơn:** AFP-GIC/DC-VIC chưa vượt baseline trong pilot; PULSE base chưa đáp ứng budget. Sàng lọc bằng byte thật giúp tránh dành train dài cho cấu hình chưa phù hợp.
 
 ### 6.2 Những điều chưa thể kết luận
@@ -865,6 +1206,16 @@ Nguồn: [manifest](D:/AwesomeCV/ratflow-codec/results/2026-10-15_new_codecs/man
     chạy được riêng trong bake-off.
 -   Chưa thể xem giới hạn 4 GB là đạt khi tổng trọng số q2/q3/q4 và các
     codec khác chưa được kiểm kê trong artifact cuối.
+
+### 6.3 Đọc đồng thời các metric để quyết định
+
+Ở ngân sách 0,075, DiT-IC có Q̂ tốt nhất trong các codec đơn được phân bổ gần hết ngân sách; VTM có PSNR/MS-SSIM cao hơn nhưng LPIPS/DISTS kém hơn. Đây là ví dụ rõ cho việc các metric đánh giá những thuộc tính khác nhau.
+
+Ở 0,15, MS-ILLM đạt Q̂ 0,5447; mix có PULSE đạt 0,7891 nhờ chia byte giữa nhiều họ model. DiT-IC chỉ dùng khoảng 0,0958 bpp nên điểm ở cột này không mô tả khả năng của một checkpoint DiT-IC 0,15 bpp chưa được thử.
+
+Ở 0,3, PULSE-L đạt Q̂ 1,4234, MS-ILLM 1,3831, CRDR 1,2716; mix đạt 1,4978. Khoảng cách này thuộc metric đại diện trên validation, chưa phải kết luận thắng theo người chấm.
+
+Thêm AEIC tại 0,075 làm Q̂ tăng từ 0,1841 lên 0,1903 nhưng PSNR giảm 22,38 → 22,10 dB, MS-SSIM giảm 0,8758 → 0,8735, LPIPS-Alex tăng 0,0847 → 0,0883; DISTS giảm nhẹ 0,0711 → 0,0699. **Q̂ tăng không có nghĩa mọi metric đều tốt lên.** Quyết định chưa fine-tune AEIC vẫn giữ nguyên theo [mục 5.11](#aeic-full30).
 
 ## 7. Pipeline phần mềm và tái lập thí nghiệm
 
@@ -930,7 +1281,7 @@ Các script đã qua kiểm tra cú pháp và guard bộ nhớ; bằng chứng c
 | [DC-VIC](https://github.com/iwa-shi/DC_VIC) | Khai thác codebook sinh ảnh bằng dual conditioning | Đã thử PatchGAN; giữ làm tham khảo phương pháp |
 | [PICO](https://github.com/apple-aiml-research/ml-pico) | Tối ưu cảm nhận người xem cùng hiệu năng triển khai | Đã rà repo: viewer/ảnh kết quả, chưa tìm được runtime và weights để chạy trên tập của dự án |
 | [ProGIC](https://arxiv.org/abs/2603.02897) | Progressive RVQ và backbone nhẹ | Có paper; chưa xác minh được checkpoint chạy được |
-| [AEIC](https://github.com/LuizScarlet/AEIC) | Ultra-low bitrate với shallow encoder | Có repo; chưa thử, cần kiểm chi phí decoder trước |
+| [AEIC](https://github.com/LuizScarlet/AEIC) | Ultra-low bitrate với shallow encoder | Đã thử ME/SE ft2 trên 30 ảnh; 60/60 parity, mức tăng mix +0,00617 ở 0,075; chưa fine-tune (mục 5.11) |
 | [PORT — CLIC 2025](https://www.jdl.link/doc/2011/20251221_232_32_18.PORT%20Perception-Oriented%20Image%20Compression.pdf) | Decoder nhanh, loss semantic/patch và phân bổ theo ROI | Tìm được paper của PKUSZ-AliMerlin; chưa tìm checkpoint công khai để thử |
 | [Cool-Chic — tag CLIC 2025](https://github.com/Orange-OpenSource/Cool-Chic/releases) | Tối ưu từng ảnh, decoder C nhẹ | Đã có phép thử trong repo ngày 09/10; chưa chạy lại trong vòng mới |
 
@@ -940,7 +1291,7 @@ Tìm được paper không đồng nghĩa có thể reproduce. Các mục “ch�
 
 ### 9.2 Hướng A — lựa chọn codec có tính chi phí triển khai
 
-**Giả thuyết:** lựa chọn theo từng ảnh có thể đạt chất lượng tốt hơn tại cùng ngân sách byte và thời gian nếu tính cả chi phí nạp từng họ decoder. Bằng chứng khởi đầu là PULSE-L được chọn trên 10/30 và 20/30 ảnh ở hai budget cao.
+**Giả thuyết:** lựa chọn theo từng ảnh có thể đạt chất lượng tốt hơn tại cùng ngân sách byte và thời gian nếu tính cả chi phí nạp từng họ decoder. Bằng chứng khởi đầu là PULSE-L được chọn trên 10/30 và 22/30 ảnh ở hai budget cao sau tích hợp.
 
 Giữ các lựa chọn $j_i$ ở mục 3 và bổ sung ràng buộc thời gian:
 
@@ -983,7 +1334,7 @@ Các khoảng ngày dưới đây là **mục tiêu nội bộ**, không phải 
 
 | Giai đoạn | Công việc | Sản phẩm và cổng quyết định |
 |---|---|---|
-| 16–18/10 | Tích hợp PULSE-L vào bake-off; khóa manifest baseline; lưu checkpoint/stream và thử phục hồi | Chạy lại bảng 30 ảnh; không ghi đè kết quả cũ; kiểm đủ byte/header/mode |
+| Đã hoàn tất đến 20/10 | Tích hợp PULSE-L và sàng lọc AEIC-ME/SE full30 | Bảng metric và ảnh trong mục 5.2/5.11; chưa fine-tune AEIC vì không đạt ngưỡng |
 | 19–23/10 | Đóng gói decoder offline, profile load/decode/I/O/RAM; chuẩn bị hoặc chạy L4 A/B khi có máy | Report tổng wall time, kích thước artifact; tách entropy parity và PNG parity |
 | 19–27/10 | Chấm mù mix mới với mix cũ, thêm 2–3 người; tạo dev/holdout độc lập | Preference theo ảnh/nhóm; bootstrap theo ảnh, không coi crop là mẫu độc lập |
 | 24–31/10 | Thử A0/A1/A2; smoke B0/B1/B2 dưới 30 GB/GPU | Đường Pareto, actual-rate, chi phí GPU-giờ; chọn tối đa hai nhánh để mở rộng |
@@ -1003,7 +1354,7 @@ Không cần chờ L4 để làm mọi pilot có giới hạn trên L40. Tuy nhi
 
 ## 11. Kết luận và tài liệu đối chiếu
 
-Dự án đã có bằng chứng ủng hộ hệ thống nhiều codec: DiT-IC có tín hiệu tốt ở rate thấp; MS-ILLM và PULSE-L bổ sung ở rate cao hơn; VTM-SCC giữ vai trò trên một số nội dung screen. Kết quả mới nhất nâng Q̂ mix lên 0.7891/1.4912 tại 0.15/0.3 bpp, nhưng chưa xác nhận bằng người. Ưu tiên tiếp theo là tích hợp PULSE-L, chấm mù và đo gói decoder thật, đồng thời sàng lọc có giới hạn các giả thuyết A/B trên server.
+Dự án đã có bằng chứng ủng hộ hệ thống nhiều codec: DiT-IC có tín hiệu tốt ở rate thấp; MS-ILLM và PULSE-L bổ sung ở rate cao hơn; VTM-SCC giữ vai trò trên một số nội dung screen. Sau tích hợp, mix có PULSE-L đạt Q̂ 0,1841/0,7891/1,4978 tại ba ngân sách. AEIC tăng thêm +0,00617 ở rate thấp nhưng chưa đạt ngưỡng để fine-tune; kết quả chưa được xác nhận bằng người. Ưu tiên tiếp theo là chấm mù, holdout và đo gói decoder toàn mix, đồng thời sàng lọc có giới hạn các giả thuyết A/B trên server.
 
 ### 11.1 Bằng chứng trong repo
 
@@ -1021,7 +1372,19 @@ Dự án đã có bằng chứng ủng hộ hệ thống nhiều codec: DiT-IC c
 | Nghiên cứu và pilot chi tiết | [Report model mới](D:/AwesomeCV/ratflow-codec/reports/CLIC2027_new_models_2026-10-15.md) |
 | Kế hoạch toàn chiến dịch | [Plan v3](<D:/AwesomeCV/ratflow-codec/plans/Plan CLIC 2027 v3 - execution 2026-10-15.md>) |
 
-Các bảng cập nhật lấy từ artifact đã lưu đến ngày 15/10/2026. Các thí nghiệm A/B/C trong kế hoạch chưa được thực hiện; số liệu của chúng không nằm trong các bảng kết quả hiện tại.
+Các bảng tổng hợp cập nhật lấy từ artifact đã lưu đến ngày 20/10/2026; ngày biên tập tài liệu là 21/10/2026. Các thí nghiệm A/B/C trong kế hoạch chưa được thực hiện; số liệu của chúng không nằm trong các bảng kết quả hiện tại.
+
+#### Nguồn bảng và hình tổng hợp
+
+- [CSV 30 ảnh, đủ metrics và nguồn mỗi hàng](../results/2026-10-20_metrics_comparison/full30_budget_metrics.csv).
+- [CSV AEIC checkpoint cố định](../results/2026-10-20_metrics_comparison/aeic_fixed_metrics.csv).
+- [CSV pilot 6 ảnh](../results/2026-10-20_metrics_comparison/pilot6_budget_metrics.csv).
+- [Bitrate tối thiểu của các điểm đã thử](../results/2026-10-20_metrics_comparison/rate_floors.json): MBT khoảng 0,1314 bpp, CRDR 0,1184 bpp và PULSE-L 0,1921 bpp trên toàn bộ 30 ảnh; dùng để kiểm tra các ô `Không vừa`.
+- [Script tổng hợp không dùng GPU](../results/2026-10-20_metrics_comparison/build_comparison.py), [hash nguồn](../results/2026-10-20_metrics_comparison/sources.sha256.json).
+
+Hash nguồn văn bản chuẩn hóa CRLF thành LF (giữ BOM nếu có) để tái kiểm chứng trên Windows/Linux. Script ghép allocation với metric từng ảnh, tính lại Q̂ từ weights v0 và pooled PSNR, đối chiếu summary đã lưu, kiểm đủ số ảnh và không vượt ngân sách. Với AEIC không lưu MSE, MSE được suy ngược từ PSNR từng ảnh trước khi gộp. Không suy ra metric bị thiếu bằng cách nội suy giữa các model, và không chạy lại inference trong bước này.
+
+Bảy đồ thị metric được nhúng trực tiếp tại mục 4.1, 5.2 và 5.8. [Script vẽ](figures/metrics_2026-10-20/make_figures.py), [manifest nguồn hình](figures/metrics_2026-10-20/manifest.json), [ghi chú kiểm tra](figures/metrics_2026-10-20/figure_notes.md). Kết quả AEIC, hình phân bổ và ảnh crop được nhúng tại mục 5.11.
 
 ### 11.2 Nguồn bên ngoài
 

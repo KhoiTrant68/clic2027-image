@@ -1,0 +1,22 @@
+diff --git a/src/cpp/rans/rans.cpp b/src/cpp/rans/rans.cpp
+index 14dc46c..92b2361 100644
+--- a/src/cpp/rans/rans.cpp
++++ b/src/cpp/rans/rans.cpp
+@@ -209,7 +209,7 @@ void RansEncoderLibMultiThread::encode_with_indexes(
+     const std::shared_ptr<std::vector<int16_t>> symbols,
+     const std::shared_ptr<std::vector<int16_t>> indexes,
+     const int cdf_group_index) {
+-  PendingTask p;
++  PendingTask p{};
+   p.workType = WorkType::Encode;
+   p.symbols = symbols;
+   p.indexes = indexes;
+@@ -222,7 +222,7 @@ void RansEncoderLibMultiThread::encode_with_indexes(
+ }
+ 
+ void RansEncoderLibMultiThread::flush() {
+-  PendingTask p;
++  PendingTask p{};
+   p.workType = WorkType::Flush;
+   {
+     std::unique_lock<std::mutex> lk(m_mutex_pending);

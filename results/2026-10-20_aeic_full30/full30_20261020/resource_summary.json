@@ -1,0 +1,73 @@
+{
+  "models": {
+    "se": {
+      "n": 30,
+      "corpus_bpp": 0.031106595210391337,
+      "bytes": 335350,
+      "mean_qhat": -0.9015814992326414,
+      "encode_mean_s": 0.14840261936187743,
+      "independent_decode_mean_s": 24.25923070112864,
+      "independent_decode_median_s": 22.91175639629364,
+      "independent_decode_max_s": 42.540770292282104,
+      "independent_decode_total_s": 727.7769210338593,
+      "own_peak_mib": 7006,
+      "nvml_samples": 4231,
+      "encode_timing": {
+        "load_s": 12.888614176001283,
+        "total_s": 736.701952656993,
+        "max_allocated_bytes": 3926211072,
+        "max_reserved_bytes": 4068474880
+      },
+      "decode_timing": {
+        "load_s": 10.88855757600686,
+        "total_s": 748.9598381770047,
+        "max_allocated_bytes": 3927259648,
+        "max_reserved_bytes": 4026531840
+      }
+    },
+    "me": {
+      "n": 30,
+      "corpus_bpp": 0.032604275503419454,
+      "bytes": 351496,
+      "mean_qhat": -0.663477496455342,
+      "encode_mean_s": 0.18303063710530598,
+      "independent_decode_mean_s": 21.896552483240765,
+      "independent_decode_median_s": 20.616716623306274,
+      "independent_decode_max_s": 33.097938537597656,
+      "independent_decode_total_s": 656.8965744972229,
+      "own_peak_mib": 7496,
+      "nvml_samples": 3858,
+      "encode_timing": {
+        "load_s": 8.560942794007133,
+        "total_s": 667.2088111610065,
+        "max_allocated_bytes": 4119162368,
+        "max_reserved_bytes": 4359979008
+      },
+      "decode_timing": {
+        "load_s": 8.656304511998314,
+        "total_s": 675.4019682759972,
+        "max_allocated_bytes": 4119490048,
+        "max_reserved_bytes": 4307550208
+      }
+    }
+  },
+  "selected_aeic_costs": [
+    {
+      "rate": 0.075,
+      "aeic_images": 3,
+      "aeic_decode_seconds": 65.19675612449646
+    },
+    {
+      "rate": 0.15,
+      "aeic_images": 0,
+      "aeic_decode_seconds": 0
+    },
+    {
+      "rate": 0.3,
+      "aeic_images": 0,
+      "aeic_decode_seconds": 0
+    }
+  ],
+  "timing_caveat": "Measured on shared L40 GPUs; model loading, process startup and PNG I/O excluded from per-image API times. Not an official isolated decoder benchmark.",
+  "memory_caveat": "Peak from 0.25-second NVML samples; brief peaks between samples may be missed. VAEHook resets PyTorch peak counters, so those counters are not used as whole-run peak."
+}

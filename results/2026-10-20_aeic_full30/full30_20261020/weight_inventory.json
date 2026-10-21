@@ -1,0 +1,14 @@
+{
+  "source_weight_bytes": {
+    "sd-turbo/unet/diffusion_pytorch_model.safetensors": 3463726504,
+    "sd-turbo/vae/diffusion_pytorch_model.safetensors": 334643268,
+    "AdcSR/weight/pretrained/halfDecoder.ckpt": 377612294,
+    "AEIC_ME_ft2.pkl": 616101950,
+    "AEIC_SE_ft2.pkl": 457303974
+  },
+  "source_inputs_per_model_bytes": {
+    "ME": 4792084016,
+    "SE": 4633286040
+  },
+  "note": "These are source checkpoint inputs, including subsequently pruned or replaced tensors, not a packaged decoder size. Config files, Python environment and code are excluded."
+}

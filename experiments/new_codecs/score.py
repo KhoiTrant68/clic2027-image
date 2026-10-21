@@ -62,7 +62,7 @@ def main():
     for file in sorted((a.baseline / "points").glob("*.csv")):
         for r in M.read_csv(file):
             key = (r["cand"], r["key"], r["name"])
-            if r["name"] in files and r["cand"] in {"msillm", "ditic", "ditics", "vtmscc", "codlite"} and key in bm:
+            if r["name"] in files and r["cand"] in {"msillm", "ditic", "ditics", "vtmscc", "codlite", "pulse"} and key in bm:
                 base_rows.append(dict(r, score=qhat_score(qm, bm[key])))
     for r in [*base_rows, *rows]:
         options.setdefault(r["cand"], {}).setdefault(r["name"], []).append(

@@ -1,0 +1,116 @@
+{
+  "date": "2026-10-20",
+  "matplotlib": "3.11.2",
+  "hash_format": "SHA-256 of text bytes with CRLF normalized to LF; BOM is preserved",
+  "script_sha256": "e7afed6d0123fccfb5a7020c7b3528e143d1872524f325200abf79720a45eb86",
+  "figures": [
+    {
+      "name": "01_qhat_overview",
+      "description": "Qhat cells and actual bpp read directly from CSV.",
+      "sources": [
+        {
+          "path": "results/2026-10-20_metrics_comparison/full30_budget_metrics.csv",
+          "start": 1,
+          "end": 33,
+          "sha256": "2fecaef903f8d17cf1dcb3bd5374a27139a1da565e8d71c5b03d708ee691a063"
+        },
+        {
+          "path": "results/2026-10-20_metrics_comparison/rate_floors.json",
+          "start": 1,
+          "end": 14,
+          "sha256": "c8d402f64606001de53f9a67369e8c64b72e50bdafe4ac57f732aa15fdf86436"
+        },
+        {
+          "path": "results/2026-10-06_sessiona/bakeoff/metrics.csv",
+          "start": 1,
+          "end": 622,
+          "sha256": "4c1910698170efdb41ad05cc98be045927589ff7c3bcaaeefba53a0c61cfddeb"
+        }
+      ]
+    },
+    {
+      "name": "02_rate_quality",
+      "description": "Measured actual bitrate versus Qhat and pooled PSNR; selected methods only.",
+      "sources": [
+        {
+          "path": "results/2026-10-20_metrics_comparison/full30_budget_metrics.csv",
+          "start": 1,
+          "end": 33,
+          "sha256": "2fecaef903f8d17cf1dcb3bd5374a27139a1da565e8d71c5b03d708ee691a063"
+        },
+        {
+          "path": "results/2026-10-20_metrics_comparison/aeic_fixed_metrics.csv",
+          "start": 1,
+          "end": 3,
+          "sha256": "d41f49dc212dd284d7fef5ff4ca6e6a387f3a4d391163185449ab8d6fcbddbb5"
+        }
+      ]
+    },
+    {
+      "name": "03_metrics_0075",
+      "description": "Six raw metrics for all available allocations at budget 0.075.",
+      "sources": [
+        {
+          "path": "results/2026-10-20_metrics_comparison/full30_budget_metrics.csv",
+          "start": 1,
+          "end": 33,
+          "sha256": "2fecaef903f8d17cf1dcb3bd5374a27139a1da565e8d71c5b03d708ee691a063"
+        }
+      ]
+    },
+    {
+      "name": "04_metrics_015",
+      "description": "Six raw metrics for all available allocations at budget 0.15.",
+      "sources": [
+        {
+          "path": "results/2026-10-20_metrics_comparison/full30_budget_metrics.csv",
+          "start": 1,
+          "end": 33,
+          "sha256": "2fecaef903f8d17cf1dcb3bd5374a27139a1da565e8d71c5b03d708ee691a063"
+        }
+      ]
+    },
+    {
+      "name": "05_metrics_03",
+      "description": "Six raw metrics for all available allocations at budget 0.3.",
+      "sources": [
+        {
+          "path": "results/2026-10-20_metrics_comparison/full30_budget_metrics.csv",
+          "start": 1,
+          "end": 33,
+          "sha256": "2fecaef903f8d17cf1dcb3bd5374a27139a1da565e8d71c5b03d708ee691a063"
+        }
+      ]
+    },
+    {
+      "name": "06_pilot6",
+      "description": "Qhat cells and actual bpp read directly from CSV.",
+      "sources": [
+        {
+          "path": "results/2026-10-20_metrics_comparison/pilot6_budget_metrics.csv",
+          "start": 1,
+          "end": 16,
+          "sha256": "938476505af5ce3f1e089daec06e8470135cfb949b91e84b65c35cc3b38455c3"
+        },
+        {
+          "path": "results/2026-10-15_new_codecs/pilot_scores/summary.json",
+          "start": 1,
+          "end": 287,
+          "sha256": "b975b20f16aab3d5f1c80f41c71fa99d220627aaecab522662a636a22b661ad2"
+        }
+      ]
+    },
+    {
+      "name": "07_qhat_scale",
+      "description": "Analytical sigmoid illustration, not empirical preference measurements.",
+      "sources": [
+        {
+          "path": "results/2026-10-15_new_codecs/qhat_v0.json",
+          "start": 1,
+          "end": 39,
+          "sha256": "7c4f6aee69f51772516e1889d0c6ea16a30d4de3a9f140501efcc91ed82b24e4"
+        }
+      ]
+    }
+  ]
+}
