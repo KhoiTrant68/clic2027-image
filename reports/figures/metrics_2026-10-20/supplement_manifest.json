@@ -1,0 +1,97 @@
+{
+  "source": "results\\2026-10-20_metrics_comparison\\full30_budget_metrics.csv",
+  "sha256": "2fecaef903f8d17cf1dcb3bd5374a27139a1da565e8d71c5b03d708ee691a063",
+  "frontier": [
+    {
+      "method": "msillm",
+      "budget_bpp": 0.15,
+      "bytes": 1614876,
+      "actual_bpp": 0.14979363067534193,
+      "qhat_v0": 0.5446741471758801
+    },
+    {
+      "method": "msillm",
+      "budget_bpp": 0.3,
+      "bytes": 3230672,
+      "actual_bpp": 0.29967259925911854,
+      "qhat_v0": 1.3831491840779613
+    },
+    {
+      "method": "codlite",
+      "budget_bpp": 0.15,
+      "bytes": 1613944,
+      "actual_bpp": 0.1497071796637538,
+      "qhat_v0": 0.284605056844493
+    },
+    {
+      "method": "codlite",
+      "budget_bpp": 0.3,
+      "bytes": 3229816,
+      "actual_bpp": 0.2995931979008359,
+      "qhat_v0": 0.905527410382805
+    },
+    {
+      "method": "ditic",
+      "budget_bpp": 0.15,
+      "bytes": 1032508,
+      "actual_bpp": 0.09577399256743921,
+      "qhat_v0": 0.27880204884290904
+    },
+    {
+      "method": "ditic",
+      "budget_bpp": 0.3,
+      "bytes": 1032508,
+      "actual_bpp": 0.09577399256743921,
+      "qhat_v0": 0.27880204884290904
+    },
+    {
+      "method": "ditics",
+      "budget_bpp": 0.075,
+      "bytes": 806144,
+      "actual_bpp": 0.07477678571428571,
+      "qhat_v0": -0.0002490839542060715
+    },
+    {
+      "method": "mix",
+      "budget_bpp": 0.075,
+      "bytes": 807641,
+      "actual_bpp": 0.07491564533268427,
+      "qhat_v0": 0.18414234756223938
+    },
+    {
+      "method": "mix",
+      "budget_bpp": 0.15,
+      "bytes": 1616109,
+      "actual_bpp": 0.1499080020243636,
+      "qhat_v0": 0.7891367311966362
+    },
+    {
+      "method": "mix",
+      "budget_bpp": 0.3,
+      "bytes": 3231292,
+      "actual_bpp": 0.2997301095887158,
+      "qhat_v0": 1.4978110237684277
+    },
+    {
+      "method": "expanded_mix",
+      "budget_bpp": 0.075,
+      "bytes": 807855,
+      "actual_bpp": 0.07493549567225494,
+      "qhat_v0": 0.19031304168602076
+    },
+    {
+      "method": "expanded_mix",
+      "budget_bpp": 0.15,
+      "bytes": 1616109,
+      "actual_bpp": 0.1499080020243636,
+      "qhat_v0": 0.7891367311966362
+    },
+    {
+      "method": "expanded_mix",
+      "budget_bpp": 0.3,
+      "bytes": 3231292,
+      "actual_bpp": 0.2997301095887158,
+      "qhat_v0": 1.4978110237684277
+    }
+  ]
+}
