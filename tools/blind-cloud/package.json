@@ -1,0 +1,6 @@
+{
+  "name": "clic-blind-study",
+  "private": true,
+  "type": "module",
+  "devDependencies": { "wrangler": "4.51.0" }
+}

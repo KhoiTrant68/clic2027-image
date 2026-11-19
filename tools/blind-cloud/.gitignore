@@ -1,0 +1,11 @@
+/node_modules/
+/.wrangler/
+/.wrangler-login.log
+/public/
+/seed.sql
+/invitations.csv
+/wrangler.jsonc
+/votes.csv
+/deployment/
+/export.json
+/export/

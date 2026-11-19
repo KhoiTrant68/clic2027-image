@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kết quả nén ảnh CLIC</title>
+<style>
+  :root{font:15px system-ui,sans-serif;color:#eaf1fb;background:#10151e;color-scheme:dark}[hidden]{display:none!important}
+  body{margin:0}main{max-width:1450px;margin:auto;padding:24px}h1{font-size:26px;margin:0 0 8px}p{color:#abb9cd;line-height:1.55}
+  form,.filters{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:16px 0}label{display:grid;gap:5px}
+  input,select,button{background:#202c3d;color:inherit;border:1px solid #455572;border-radius:8px;padding:9px;font:inherit;max-width:100%}
+  button{cursor:pointer}button:hover{background:#334565}input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid #91bbff}
+  .table{overflow:auto;border:1px solid #344359;border-radius:10px}table{width:100%;border-collapse:collapse;white-space:nowrap}
+  th,td{padding:9px 11px;text-align:left;border-bottom:1px solid #2c3a50}th{background:#1b2839;position:sticky;top:0}td.num{font-variant-numeric:tabular-nums}
+  td.source{font-size:12px;color:#abb9cd}td.status{color:#a9c8f5}tbody tr:hover{background:#192534}
+  #error{color:#ffb5ac}details{margin:22px 0}summary{cursor:pointer}ul{line-height:1.6;overflow-wrap:anywhere}a{color:#9cc6ff}
+  dialog{max-width:min(980px,90vw);max-height:88vh;background:#182234;border:1px solid #455572;border-radius:12px;color:inherit}
+  dialog::backdrop{background:#000a}.preview{display:grid;grid-template-columns:1fr 1fr;gap:12px}.preview img{width:100%;height:auto}
+</style>
+<main>
+  <h1>Kết quả nén ảnh CLIC</h1>
+  <p>Mỗi dòng là một điểm đo hoặc một phương án đã phân bổ ngân sách. <a href="/">Đến trang chấm mù</a></p>
+  <p id="error" role="alert"></p>
+  <section id="content" hidden>
+    <div class="filters">
+      <label>Bộ ảnh <select id="dataset"></select></label>
+      <label>Giao thức <select id="protocol"></select></label>
+      <label>Ngân sách bpp <select id="budget"></select></label>
+      <label>Tìm model <input id="search" type="search" placeholder="MLIC++, PULSE, AEIC…"></label>
+      <label>Sắp xếp <select id="sort"><option value="model">Tên model</option><option value="actual_bpp">Bitrate thực ↑</option><option value="lpips">LPIPS ↓ tốt hơn</option><option value="dists">DISTS ↓ tốt hơn</option><option value="psnr_pooled">PSNR gộp ↑ tốt hơn</option><option value="psnr_mean">PSNR TB ↑ tốt hơn</option><option value="msssim">MS-SSIM ↑ tốt hơn</option><option value="qhat">Q̂ ↑ tốt hơn</option></select></label>
+      <button type="button" id="download">Tải CSV theo bộ lọc</button>
+    </div>
+    <p id="count" aria-live="polite"></p>
+    <p>Chọn cùng bộ ảnh và giao thức để đối chiếu trực tiếp. Với nhóm “Cùng bitstream · phân bổ 09/11”, bpp thực là bitrate của gói stream cố định dùng chung cho bốn decoder và LPIPS dùng mạng Alex. PSNR gộp và PSNR trung bình nằm ở hai cột riêng. Các phép đo lịch sử có thể tính chi phí đóng gói theo cách khác.</p>
+    <div class="table"><table><thead id="columns"></thead><tbody id="rows"></tbody></table></div>
+    <button id="more" type="button" hidden>Xem thêm</button>
+    <details><summary id="inventory-title">Danh mục tệp nguồn</summary><ul id="inventory"></ul></details>
+  </section>
+  <dialog id="image-detail">
+    <form method="dialog"><button>Đóng</button></form>
+    <h2 id="detail-title"></h2>
+    <label>Chọn ảnh <select id="detail-image"></select></label>
+    <p id="detail-metrics"></p>
+    <div class="preview" id="detail-preview"><div>Ảnh gốc<img id="detail-ref" alt="Ảnh gốc"></div><div>Ảnh tái tạo<img id="detail-recon" alt="Ảnh tái tạo"></div></div>
+  </dialog>
+</main>
+<script type="module">
+  const el = id => document.getElementById(id);
+  const columns = [
+    ['model','Model'],['setting','Cấu hình'],['target_bpp','Ngân sách'],['actual_bpp','bpp thực'],['images','Ảnh'],['bytes','Byte'],
+    ['psnr_pooled','PSNR gộp'],['psnr_mean','PSNR TB'],['lpips','LPIPS / Alex'],['lpips_vgg','LPIPS-VGG'],['dists','DISTS'],['msssim','MS-SSIM'],['clipiqa','CLIP-IQA'],['qhat','Q̂'],
+    ['dataset','Bộ ảnh'],['protocol','Giao thức'],['availability','Dữ liệu'],['source','Nguồn'],
+  ];
+  let catalog, filtered = [], limit = 150;
+  function showDetails(row) {
+    const images = catalog.details[row.details];
+    el('detail-title').textContent = row.target_bpp == null ? row.model : `${row.model} · ${row.target_bpp} bpp`;
+    const select = el('detail-image');
+    select.replaceChildren(...images.map((image, index) => new Option(image.source, index)));
+    const preview = () => {
+      const image = images[select.value];
+      el('detail-preview').hidden = !(image.reference && image.asset);
+      if (!el('detail-preview').hidden) {
+        el('detail-ref').src = `/asset/${image.reference}.png`;
+        el('detail-recon').src = `/asset/${image.asset}.png`;
+      }
+      const metrics = [['bytes','Byte'],['psnr','PSNR'],['psnr_mean','PSNR'],['lpips','LPIPS'],['lpips_vgg','LPIPS-VGG'],['dists','DISTS'],['msssim','MS-SSIM'],['qhat','Q̂']];
+      const values = metrics.filter(([key]) => Number.isFinite(image[key]))
+        .map(([key, label]) => `${label} ${key === 'bytes' ? image[key].toLocaleString() : image[key].toFixed(4)}`);
+      if (image.pixels && Number.isFinite(image.bytes)) values.unshift(`${(8*image.bytes/image.pixels).toFixed(6)} bpp (stream ảnh)`);
+      el('detail-metrics').textContent = values.join(' · ');
+    };
+    select.onchange = preview;
+    preview();
+    el('image-detail').showModal();
+  }
+  function fill(select, values, allText, selected = '') {
+    select.replaceChildren(new Option(allText, ''), ...[...new Set(values)].sort().map(value => new Option(value, value)));
+    select.value = [...select.options].some(option => option.value === selected) ? selected : '';
+  }
+  function groupRows() { return catalog.rows.filter(row => !el('dataset').value || row.dataset === el('dataset').value); }
+  function refreshOptions() {
+    const rows = groupRows();
+    fill(el('protocol'), rows.map(row => row.protocol), 'Mọi giao thức', el('protocol').value);
+    fill(el('budget'), rows.map(row => String(row.target_bpp ?? 'Điểm đo tự do')), 'Mọi ngân sách', el('budget').value);
+  }
+  function render() {
+    const text = el('search').value.trim().toLowerCase();
+    const protocol = el('protocol').value, budget = el('budget').value, key = el('sort').value;
+    const descending = key.startsWith('psnr') || key === 'msssim' || key === 'qhat';
+    filtered = groupRows().filter(row => (!protocol || row.protocol === protocol) &&
+      (!budget || String(row.target_bpp ?? 'Điểm đo tự do') === budget) &&
+      `${row.model} ${row.setting}`.toLowerCase().includes(text));
+    const rank = row => Number.isFinite(row[key]) ? (descending ? -row[key] : row[key]) : Infinity;
+    filtered.sort((a,b) => key === 'model' ? a.model.localeCompare(b.model) : rank(a) === rank(b) ? 0 : rank(a) - rank(b));
+    const body = document.createDocumentFragment();
+    for (const row of filtered.slice(0,limit)) {
+      const line = document.createElement('tr');
+      for (const [key] of columns) {
+        const cell = line.insertCell();
+        const value = row[key];
+        cell.textContent = typeof value === 'number' ? (Number.isInteger(value) ? String(value) : value.toFixed(key === 'actual_bpp' ? 6 : 4)) : value || '—';
+        if (typeof value === 'number') cell.className = 'num';
+        if (key === 'source') cell.className = 'source';
+        if (key === 'availability') cell.className = 'status';
+        if (key === 'model' && row.details) {
+          const button = document.createElement('button');
+          button.textContent = row.model;
+          button.onclick = () => showDetails(row);
+          cell.replaceChildren(button);
+        }
+      }
+      body.append(line);
+    }
+    el('rows').replaceChildren(body);
+    el('count').textContent = `Hiển thị ${Math.min(limit,filtered.length)} / ${filtered.length} điểm theo bộ lọc.`;
+    el('more').hidden = filtered.length <= limit;
+  }
+  async function loadResults() {
+    el('error').textContent = '';
+    try {
+      const response = await fetch('/api/results');
+      if (!response.ok) throw Error('Chưa tải được dữ liệu. Hãy tải lại trang.');
+      catalog = await response.json();
+      el('content').hidden = false;
+      const header = document.createElement('tr');
+      for (const [,label] of columns) { const th = document.createElement('th'); th.textContent = label; header.append(th); }
+      el('columns').replaceChildren(header);
+      fill(el('dataset'),catalog.rows.map(row=>row.dataset),'Mọi bộ ảnh','CLIC30 · ảnh đầy đủ');
+      refreshOptions();
+      el('inventory-title').textContent = `Danh mục ${catalog.inventory.length} nguồn kết quả`;
+      el('inventory').replaceChildren(...catalog.inventory.map(row=>{const li=document.createElement('li');li.textContent=`${row.source} · ${row.status}`;return li}));
+      render();
+    } catch (error) { el('error').textContent = error.message; }
+  }
+  el('dataset').onchange = () => { refreshOptions(); limit=150; render(); };
+  for (const id of ['protocol','budget','search','sort']) el(id).oninput = () => { limit=150; render(); };
+  el('more').onclick = () => { limit+=150; render(); };
+  el('download').onclick = () => {
+    const quote = value => `"${String(value ?? '').replaceAll('"','""')}"`;
+    const lines = [columns.map(([key])=>key).join(','),...filtered.map(row=>columns.map(([key])=>quote(row[key])).join(','))];
+    const url = URL.createObjectURL(new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv;charset=utf-8'}));
+    const link = document.createElement('a'); link.href=url; link.download='clic-comparison.csv'; link.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+  loadResults();
+</script>
+</html>
