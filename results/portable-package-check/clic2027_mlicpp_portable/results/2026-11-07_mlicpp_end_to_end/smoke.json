@@ -1,0 +1,9 @@
+{
+  "identity_forward": true,
+  "identity_stream": true,
+  "identity_decode": true,
+  "log_step_gradient_l1": 0.04838814213871956,
+  "updated_log_step_l1": 0.0031986325047910213,
+  "loss": 0.7167505621910095,
+  "trainable_backbone": 116716352
+}

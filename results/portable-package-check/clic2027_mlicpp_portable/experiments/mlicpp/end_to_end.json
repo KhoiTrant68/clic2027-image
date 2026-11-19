@@ -1,0 +1,11 @@
+{
+  "data": "/home/jovyan/clic2027-artifacts/data/div2k/pilot224",
+  "upstream": "/home/jovyan/clic2027-image/refs/repos/MLIC",
+  "weights": "/home/jovyan/clic2027-artifacts/mlicpp/weights",
+  "steps": 2000,
+  "batch_size": 2,
+  "learning_rate": 0.00001,
+  "aux_learning_rate": 0.001,
+  "required_free_mib": 18432,
+  "wall_time_limit_s": 14400
+}

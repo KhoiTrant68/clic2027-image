@@ -1,0 +1,28 @@
+{
+  "summary": {
+    "source": {
+      "correct": 255,
+      "n": 256,
+      "accuracy": 0.99609375
+    },
+    "base": {
+      "correct": 251,
+      "n": 256,
+      "accuracy": 0.98046875
+    },
+    "perceptual": {
+      "correct": 250,
+      "n": 256,
+      "accuracy": 0.9765625
+    }
+  },
+  "actual_bpp": 0.026933670043945312,
+  "harmed": 1,
+  "recovered": 0,
+  "accuracy_delta": -0.00390625,
+  "ci95_image_bootstrap": [
+    -0.01171875,
+    0.0
+  ],
+  "warning": "Synthetic glyph classification, not human readability; no causal information-loss conclusion; one seed, one new font family."
+}

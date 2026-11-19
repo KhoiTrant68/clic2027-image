@@ -1,0 +1,5 @@
+{
+  "path": "/home/jovyan/clic2027-artifacts/mlicpp/pilot20261104/div2k224-q2-crop256",
+  "sha256": "5d73e535dae04230657bcda1f1b5c6244c869e91d3c8fb69817148a93e01a95b",
+  "warning": "Reused exact streams/features, not old losses; edge scale from same training split"
+}

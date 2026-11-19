@@ -1,0 +1,14 @@
+{
+  "name": "0599-innovation",
+  "candidates_attempted": 8,
+  "candidates_feasible": 0,
+  "completed_steps": 40,
+  "numerical_stop": null,
+  "rejected_candidates": [
+    {
+      "step": 20,
+      "reason": "Unsafe entropy candidate: zero frequency or bypass overflow"
+    }
+  ],
+  "reused_v1": false
+}

@@ -1,0 +1,16 @@
+{
+  "seeds": [
+    9041,
+    9042,
+    9043
+  ],
+  "steps": 2000,
+  "groups_per_batch": 16,
+  "hidden": 256,
+  "lr": 0.0003,
+  "device": "cpu",
+  "threads": 2,
+  "data": "/home/jovyan/clic2027-artifacts/mlicpp/critic-20261106/div2k-mlicpp-cost-critic-4train-2val-2000steps/dataset.npz",
+  "temperature": 1.0,
+  "mse_weight": 0.1
+}

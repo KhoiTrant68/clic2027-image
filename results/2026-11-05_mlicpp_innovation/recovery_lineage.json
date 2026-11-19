@@ -1,0 +1,11 @@
+{
+  "source": "/home/jovyan/clic2027-artifacts/mlicpp/innovation-20261105/div2k-q2-conditional-fixed-pixel-new32",
+  "source_status": {
+    "state": "failed",
+    "stage": "latent_search",
+    "mode": null,
+    "error": "latent_search/None: -15"
+  },
+  "source_elapsed_until_stop_s": 1188.6024057865143,
+  "change": "Numerical guards and per-image process/timeout; reuse completed streams. No model/data/objective/LR/step changes."
+}

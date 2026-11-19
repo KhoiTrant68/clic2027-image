@@ -1,0 +1,270 @@
+{
+  "test_sources": 32,
+  "bootstrap_replicates": 10000,
+  "seed": 9041,
+  "fresh_pixel_matches": 160,
+  "correction_overhead_bytes": 46,
+  "primary_parameter_count": 38240,
+  "source_hashes_verified": true,
+  "tto_candidates_attempted_known": 24,
+  "tto_candidates_feasible_known": 0,
+  "tto_candidate_counts_unknown": 29,
+  "tto_numerical_stops": [],
+  "tto_guard_rejections": [
+    {
+      "name": "0599-innovation",
+      "step": 20,
+      "reason": "Unsafe entropy candidate: zero frequency or bypass overflow"
+    },
+    {
+      "name": "0309-innovation",
+      "step": 35,
+      "reason": "Unsafe entropy candidate: zero frequency or bypass overflow"
+    }
+  ],
+  "tto_changed_streams": 1,
+  "tto_changed_outputs": 1,
+  "comparisons": [
+    {
+      "treatment": "conditional",
+      "control": "fixed",
+      "metric": "lpips",
+      "delta": 0.0022935120505280793,
+      "ci95": [
+        0.0013840262516168877,
+        0.003418711782433092
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "fixed",
+      "metric": "dists",
+      "delta": 0.0001703798770904541,
+      "ci95": [
+        -0.0010565388947725294,
+        0.0016978196334093802
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "fixed",
+      "metric": "edge",
+      "delta": -5.2917785527202484e-05,
+      "ci95": [
+        -0.00010666870915032939,
+        -6.940423930500749e-06
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "fixed",
+      "metric": "mse",
+      "delta": -0.5200324058532722,
+      "ci95": [
+        -0.9225897630055752,
+        -0.18095000982284634
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "pixel",
+      "metric": "lpips",
+      "delta": -0.009544389002257958,
+      "ci95": [
+        -0.015485787565557985,
+        -0.004865666536352366
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "pixel",
+      "metric": "dists",
+      "delta": -0.003690086305141449,
+      "ci95": [
+        -0.006155131105333567,
+        -0.001378236757591367
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "pixel",
+      "metric": "edge",
+      "delta": 0.00019800765230520306,
+      "ci95": [
+        0.00011890136531021705,
+        0.0002793873052757151
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "pixel",
+      "metric": "mse",
+      "delta": -3.082489490509033,
+      "ci95": [
+        -4.128180034955343,
+        -2.195228461424509
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "latent_tto",
+      "metric": "lpips",
+      "delta": -0.012381828477373347,
+      "ci95": [
+        -0.018264258131966925,
+        -0.007631638272869168
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "latent_tto",
+      "metric": "dists",
+      "delta": -0.004245994612574577,
+      "ci95": [
+        -0.0065363043453544375,
+        -0.002112747821956873
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "latent_tto",
+      "metric": "edge",
+      "delta": 2.8512796560617774e-05,
+      "ci95": [
+        -0.00024218755475408129,
+        0.0002015152456637271
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "latent_tto",
+      "metric": "mse",
+      "delta": 0.5621740023295081,
+      "ci95": [
+        -0.20371427536010767,
+        1.1119197408358275
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "base",
+      "metric": "lpips",
+      "delta": -0.012620077090105042,
+      "ci95": [
+        -0.01869825974208652,
+        -0.007727108558174223
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "base",
+      "metric": "dists",
+      "delta": -0.004118837416172028,
+      "ci95": [
+        -0.006350115407258272,
+        -0.0020638800226151946
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "base",
+      "metric": "edge",
+      "delta": 0.0001643273220235808,
+      "ci95": [
+        8.64739883072813e-05,
+        0.0002462201928169649
+      ]
+    },
+    {
+      "treatment": "conditional",
+      "control": "base",
+      "metric": "mse",
+      "delta": 0.9276151657104488,
+      "ci95": [
+        0.6324543078740434,
+        1.245048046112059
+      ]
+    },
+    {
+      "treatment": "fixed",
+      "control": "base",
+      "metric": "lpips",
+      "delta": -0.014913589140633121,
+      "ci95": [
+        -0.02142948701075511,
+        -0.009533208913489945
+      ]
+    },
+    {
+      "treatment": "fixed",
+      "control": "base",
+      "metric": "dists",
+      "delta": -0.004289217293262482,
+      "ci95": [
+        -0.007002463284879923,
+        -0.0017102953977882872
+      ]
+    },
+    {
+      "treatment": "fixed",
+      "control": "base",
+      "metric": "edge",
+      "delta": 0.00021724510755078327,
+      "ci95": [
+        0.00010604233810814126,
+        0.00033515643303507354
+      ]
+    },
+    {
+      "treatment": "fixed",
+      "control": "base",
+      "metric": "mse",
+      "delta": 1.447647571563721,
+      "ci95": [
+        0.8888650258382147,
+        2.0698231498400377
+      ]
+    },
+    {
+      "treatment": "latent_tto",
+      "control": "base",
+      "metric": "lpips",
+      "delta": -0.00023824861273169518,
+      "ci95": [
+        -0.0007147458381950855,
+        0.0
+      ]
+    },
+    {
+      "treatment": "latent_tto",
+      "control": "base",
+      "metric": "dists",
+      "delta": 0.00012715719640254974,
+      "ci95": [
+        0.0,
+        0.00038147158920764923
+      ]
+    },
+    {
+      "treatment": "latent_tto",
+      "control": "base",
+      "metric": "edge",
+      "delta": 0.00013581452546296302,
+      "ci95": [
+        0.0,
+        0.00040744357638888905
+      ]
+    },
+    {
+      "treatment": "latent_tto",
+      "control": "base",
+      "metric": "mse",
+      "delta": 0.3654411633809407,
+      "ci95": [
+        0.0,
+        1.096323490142822
+      ]
+    }
+  ],
+  "limitations": "One seed/rate, new32 DIV2K crops; exploratory pointwise CIs; fixed vs conditional is primary. No prior-confidence or human preference validation; unequal encoder compute across families."
+}

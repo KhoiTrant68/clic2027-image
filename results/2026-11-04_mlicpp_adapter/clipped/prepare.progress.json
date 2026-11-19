@@ -1,0 +1,15 @@
+{
+  "completed": 384,
+  "last": {
+    "name": "0611-0",
+    "source": "0611.png",
+    "split": "test",
+    "x": 419,
+    "y": 734,
+    "bytes": 3439,
+    "pixels": 65536,
+    "stream_sha256": "e1e74b3217ecb9ecf89b09d361ee31d237adbaa6ff1381cebcb404e33f80424e",
+    "feature_sha256": "6534002ed3b86d26d770abb2a860d45981b06ab4825ad91512af60f73bf30c5c"
+  },
+  "seconds": 212.24961999000516
+}

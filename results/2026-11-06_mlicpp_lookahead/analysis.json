@@ -1,0 +1,74 @@
+{
+  "images": [
+    {
+      "name": "0206-0",
+      "baseline_j": 0.21692799377441407,
+      "best_j": 0.21692799377441407,
+      "best_candidate": 0,
+      "myopic_rate_candidate": 14,
+      "myopic_rate_j": 0.21695402018229168,
+      "full_cdf_candidate": 14,
+      "full_cdf_j": 0.21695402018229168,
+      "future_rate_changes_choice": false,
+      "candidates": 16,
+      "cdf_eligible": 16,
+      "mean_encode_decode_s": 1.4961446353045176
+    },
+    {
+      "name": "0214-0",
+      "baseline_j": 0.2938870519002279,
+      "best_j": 0.293626823425293,
+      "best_candidate": 15,
+      "myopic_rate_candidate": 15,
+      "myopic_rate_j": 0.293626823425293,
+      "full_cdf_candidate": 5,
+      "full_cdf_j": 0.2936816431681315,
+      "future_rate_changes_choice": true,
+      "candidates": 16,
+      "cdf_eligible": 16,
+      "mean_encode_decode_s": 1.4968071235634852
+    },
+    {
+      "name": "0239-0",
+      "baseline_j": 0.11678331502278647,
+      "best_j": 0.11582742309570312,
+      "best_candidate": 4,
+      "myopic_rate_candidate": 4,
+      "myopic_rate_j": 0.11582742309570312,
+      "full_cdf_candidate": 4,
+      "full_cdf_j": 0.11582742309570312,
+      "future_rate_changes_choice": false,
+      "candidates": 16,
+      "cdf_eligible": 16,
+      "mean_encode_decode_s": 1.4983279031221173
+    },
+    {
+      "name": "0586-0",
+      "baseline_j": 0.6578597462972006,
+      "best_j": 0.6568890279134114,
+      "best_candidate": 5,
+      "myopic_rate_candidate": 10,
+      "myopic_rate_j": 0.6578572463989258,
+      "full_cdf_candidate": 8,
+      "full_cdf_j": 0.6578201548258463,
+      "future_rate_changes_choice": true,
+      "candidates": 16,
+      "cdf_eligible": 11,
+      "mean_encode_decode_s": 1.5151589287706884
+    }
+  ],
+  "best_vs_baseline_percent": -0.1701213578184979,
+  "best_vs_myopic_rate_percent": -0.0774173940862415,
+  "delta_j_ci95": [
+    -0.0007261638641358203,
+    0.0
+  ],
+  "exploratory_gate_passed": false,
+  "caveats": [
+    "4 reused development images",
+    "same candidates, not equal runtime search",
+    "finite candidate minimum is not a global optimum",
+    "no critic trained",
+    "bootstrap is exploratory, not a generalization guarantee"
+  ]
+}

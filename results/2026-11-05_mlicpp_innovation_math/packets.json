@@ -1,0 +1,242 @@
+[
+  {
+    "family": "conditional_vs_fixed",
+    "method": "conditional_basis",
+    "base": 0,
+    "sign": -1,
+    "bytes": 8,
+    "information_bits": 2,
+    "header_bytes": 7,
+    "padding_bits": 6,
+    "source": [
+      "1/10",
+      "1/2"
+    ],
+    "reconstruction": [
+      "1/10",
+      "1/2"
+    ],
+    "squared_error": "0",
+    "hex": "49434d3101000200"
+  },
+  {
+    "family": "conditional_vs_fixed",
+    "method": "conditional_basis",
+    "base": 0,
+    "sign": 1,
+    "bytes": 8,
+    "information_bits": 2,
+    "header_bytes": 7,
+    "padding_bits": 6,
+    "source": [
+      "9/10",
+      "1/2"
+    ],
+    "reconstruction": [
+      "9/10",
+      "1/2"
+    ],
+    "squared_error": "0",
+    "hex": "49434d3101000201"
+  },
+  {
+    "family": "conditional_vs_fixed",
+    "method": "conditional_basis",
+    "base": 1,
+    "sign": -1,
+    "bytes": 8,
+    "information_bits": 2,
+    "header_bytes": 7,
+    "padding_bits": 6,
+    "source": [
+      "1/2",
+      "1/10"
+    ],
+    "reconstruction": [
+      "1/2",
+      "1/10"
+    ],
+    "squared_error": "0",
+    "hex": "49434d3101000202"
+  },
+  {
+    "family": "conditional_vs_fixed",
+    "method": "conditional_basis",
+    "base": 1,
+    "sign": 1,
+    "bytes": 8,
+    "information_bits": 2,
+    "header_bytes": 7,
+    "padding_bits": 6,
+    "source": [
+      "1/2",
+      "9/10"
+    ],
+    "reconstruction": [
+      "1/2",
+      "9/10"
+    ],
+    "squared_error": "0",
+    "hex": "49434d3101000203"
+  },
+  {
+    "family": "conditional_vs_fixed",
+    "method": "fixed_basis",
+    "base": 0,
+    "sign": -1,
+    "bytes": 8,
+    "information_bits": 2,
+    "header_bytes": 7,
+    "padding_bits": 6,
+    "source": [
+      "1/10",
+      "1/2"
+    ],
+    "reconstruction": [
+      "3/10",
+      "3/10"
+    ],
+    "squared_error": "2/25",
+    "hex": "49434d3101010200"
+  },
+  {
+    "family": "conditional_vs_fixed",
+    "method": "fixed_basis",
+    "base": 0,
+    "sign": 1,
+    "bytes": 8,
+    "information_bits": 2,
+    "header_bytes": 7,
+    "padding_bits": 6,
+    "source": [
+      "9/10",
+      "1/2"
+    ],
+    "reconstruction": [
+      "7/10",
+      "7/10"
+    ],
+    "squared_error": "2/25",
+    "hex": "49434d3101010201"
+  },
+  {
+    "family": "conditional_vs_fixed",
+    "method": "fixed_basis",
+    "base": 1,
+    "sign": -1,
+    "bytes": 8,
+    "information_bits": 2,
+    "header_bytes": 7,
+    "padding_bits": 6,
+    "source": [
+      "1/2",
+      "1/10"
+    ],
+    "reconstruction": [
+      "3/10",
+      "3/10"
+    ],
+    "squared_error": "2/25",
+    "hex": "49434d3101010202"
+  },
+  {
+    "family": "conditional_vs_fixed",
+    "method": "fixed_basis",
+    "base": 1,
+    "sign": 1,
+    "bytes": 8,
+    "information_bits": 2,
+    "header_bytes": 7,
+    "padding_bits": 6,
+    "source": [
+      "1/2",
+      "9/10"
+    ],
+    "reconstruction": [
+      "7/10",
+      "7/10"
+    ],
+    "squared_error": "2/25",
+    "hex": "49434d3101010203"
+  },
+  {
+    "family": "misspecified_variance",
+    "method": "prior_variance",
+    "bytes": 8,
+    "information_bits": 1,
+    "header_bytes": 7,
+    "padding_bits": 7,
+    "squared_error": "1/4",
+    "hex": "49434d3101020100"
+  },
+  {
+    "family": "misspecified_variance",
+    "method": "prior_variance",
+    "bytes": 8,
+    "information_bits": 1,
+    "header_bytes": 7,
+    "padding_bits": 7,
+    "squared_error": "1/4",
+    "hex": "49434d3101020101"
+  },
+  {
+    "family": "misspecified_variance",
+    "method": "prior_variance",
+    "bytes": 8,
+    "information_bits": 1,
+    "header_bytes": 7,
+    "padding_bits": 7,
+    "squared_error": "1/4",
+    "hex": "49434d3101020100"
+  },
+  {
+    "family": "misspecified_variance",
+    "method": "prior_variance",
+    "bytes": 8,
+    "information_bits": 1,
+    "header_bytes": 7,
+    "padding_bits": 7,
+    "squared_error": "1/4",
+    "hex": "49434d3101020101"
+  },
+  {
+    "family": "misspecified_variance",
+    "method": "source_coordinate",
+    "bytes": 8,
+    "information_bits": 1,
+    "header_bytes": 7,
+    "padding_bits": 7,
+    "squared_error": "1/10000",
+    "hex": "49434d3101030100"
+  },
+  {
+    "family": "misspecified_variance",
+    "method": "source_coordinate",
+    "bytes": 8,
+    "information_bits": 1,
+    "header_bytes": 7,
+    "padding_bits": 7,
+    "squared_error": "1/10000",
+    "hex": "49434d3101030100"
+  },
+  {
+    "family": "misspecified_variance",
+    "method": "source_coordinate",
+    "bytes": 8,
+    "information_bits": 1,
+    "header_bytes": 7,
+    "padding_bits": 7,
+    "squared_error": "1/10000",
+    "hex": "49434d3101030101"
+  },
+  {
+    "family": "misspecified_variance",
+    "method": "source_coordinate",
+    "bytes": 8,
+    "information_bits": 1,
+    "header_bytes": 7,
+    "padding_bits": 7,
+    "squared_error": "1/10000",
+    "hex": "49434d3101030101"
+  }
+]

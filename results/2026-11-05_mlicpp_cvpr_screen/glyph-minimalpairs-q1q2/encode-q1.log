@@ -1,0 +1,11 @@
+VRAM guard {'total_mib': 46068, 'initial_used_mib': 0, 'allocator_cap_mib': 18432, 'device_limit_mib': 23034.0, 'physical_gpu': '1', 'shared_small': False, 'process_limit_mib': None}
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3483.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+{"quality": 1, "completed": 24}
+{"quality": 1, "completed": 48}
+{"quality": 1, "completed": 72}
+{"quality": 1, "completed": 96}
+{"quality": 1, "completed": 120}
+{"quality": 1, "completed": 144}
+{"quality": 1, "completed": 168}
+{"quality": 1, "completed": 192}

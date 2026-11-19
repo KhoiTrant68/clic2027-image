@@ -1,0 +1,22 @@
+{
+  "base": {
+    "regions": 128,
+    "fraction_clipped_one": 0.0
+  },
+  "mean": {
+    "regions": 128,
+    "fraction_clipped_one": 0.0
+  },
+  "cvar": {
+    "regions": 128,
+    "fraction_clipped_one": 0.0
+  },
+  "risk": {
+    "regions": 128,
+    "fraction_clipped_one": 0.0
+  },
+  "risk_hide_change": {
+    "regions": 128,
+    "fraction_clipped_one": 0.0
+  }
+}

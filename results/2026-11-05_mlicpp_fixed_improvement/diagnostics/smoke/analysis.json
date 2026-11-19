@@ -1,0 +1,292 @@
+{
+  "test_sources": 2,
+  "fresh_pixel_matches": 10,
+  "bootstrap_replicates": 10000,
+  "prefix_log_checkpoints": [
+    1
+  ],
+  "reference_training_prefix_exact": true,
+  "comparisons": [
+    {
+      "treatment": "long_s4",
+      "control": "reference_s2",
+      "metric": "lpips",
+      "delta": -0.00047377869486808777,
+      "ci95": [
+        -0.0007726997137069702,
+        -0.00017485767602920532
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "reference_s2",
+      "metric": "dists",
+      "delta": -0.00021269917488098145,
+      "ci95": [
+        -0.0002574920654296875,
+        -0.0001679062843322754
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "reference_s2",
+      "metric": "mse",
+      "delta": 0.010175069173179452,
+      "ci95": [
+        -0.000823974609375,
+        0.021174112955733904
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "reference_s2",
+      "metric": "edge",
+      "delta": -1.2515218505287917e-07,
+      "ci95": [
+        -4.986063052669215e-06,
+        4.735758682563457e-06
+      ]
+    },
+    {
+      "treatment": "long_s2",
+      "control": "reference_s2",
+      "metric": "lpips",
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "treatment": "long_s2",
+      "control": "reference_s2",
+      "metric": "dists",
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "treatment": "long_s2",
+      "control": "reference_s2",
+      "metric": "mse",
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "treatment": "long_s2",
+      "control": "reference_s2",
+      "metric": "edge",
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "treatment": "reference_s4",
+      "control": "reference_s2",
+      "metric": "lpips",
+      "delta": -0.00047377869486808777,
+      "ci95": [
+        -0.0007726997137069702,
+        -0.00017485767602920532
+      ]
+    },
+    {
+      "treatment": "reference_s4",
+      "control": "reference_s2",
+      "metric": "dists",
+      "delta": -0.00021269917488098145,
+      "ci95": [
+        -0.0002574920654296875,
+        -0.0001679062843322754
+      ]
+    },
+    {
+      "treatment": "reference_s4",
+      "control": "reference_s2",
+      "metric": "mse",
+      "delta": 0.010175069173179452,
+      "ci95": [
+        -0.000823974609375,
+        0.021174112955733904
+      ]
+    },
+    {
+      "treatment": "reference_s4",
+      "control": "reference_s2",
+      "metric": "edge",
+      "delta": -1.2515218505287917e-07,
+      "ci95": [
+        -4.986063052669215e-06,
+        4.735758682563457e-06
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "long_s2",
+      "metric": "lpips",
+      "delta": -0.00047377869486808777,
+      "ci95": [
+        -0.0007726997137069702,
+        -0.00017485767602920532
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "long_s2",
+      "metric": "dists",
+      "delta": -0.00021269917488098145,
+      "ci95": [
+        -0.0002574920654296875,
+        -0.0001679062843322754
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "long_s2",
+      "metric": "mse",
+      "delta": 0.010175069173179452,
+      "ci95": [
+        -0.000823974609375,
+        0.021174112955733904
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "long_s2",
+      "metric": "edge",
+      "delta": -1.2515218505287917e-07,
+      "ci95": [
+        -4.986063052669215e-06,
+        4.735758682563457e-06
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "reference_s4",
+      "metric": "lpips",
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "reference_s4",
+      "metric": "dists",
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "reference_s4",
+      "metric": "mse",
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "reference_s4",
+      "metric": "edge",
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "treatment": "reference_s2",
+      "control": "base",
+      "metric": "lpips",
+      "delta": -0.00045415759086608887,
+      "ci95": [
+        -0.000704541802406311,
+        -0.0002037733793258667
+      ]
+    },
+    {
+      "treatment": "reference_s2",
+      "control": "base",
+      "metric": "dists",
+      "delta": -0.00012242794036865234,
+      "ci95": [
+        -0.0001392960548400879,
+        -0.0001055598258972168
+      ]
+    },
+    {
+      "treatment": "reference_s2",
+      "control": "base",
+      "metric": "mse",
+      "delta": 0.012235005696615175,
+      "ci95": [
+        0.0009409586588553509,
+        0.023529052734375
+      ]
+    },
+    {
+      "treatment": "reference_s2",
+      "control": "base",
+      "metric": "edge",
+      "delta": 1.2214853261516972e-06,
+      "ci95": [
+        -3.3640907343354676e-06,
+        5.807061386638862e-06
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "base",
+      "metric": "lpips",
+      "delta": -0.0009279362857341766,
+      "ci95": [
+        -0.0014772415161132812,
+        -0.000378631055355072
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "base",
+      "metric": "dists",
+      "delta": -0.0003351271152496338,
+      "ci95": [
+        -0.0003630518913269043,
+        -0.0003072023391723633
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "base",
+      "metric": "mse",
+      "delta": 0.022410074869794627,
+      "ci95": [
+        0.0001169840494803509,
+        0.044703165690108904
+      ]
+    },
+    {
+      "treatment": "long_s4",
+      "control": "base",
+      "metric": "edge",
+      "delta": 1.096333141098818e-06,
+      "ci95": [
+        -8.350153787004683e-06,
+        1.0542820069202319e-05
+      ]
+    }
+  ],
+  "limitations": "One seed/rate, 32 new crops. Encoder compute increases with search budget. Pointwise exploratory CIs; no novelty/human/CLIC eligibility claim."
+}

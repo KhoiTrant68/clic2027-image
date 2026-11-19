@@ -1,0 +1,14 @@
+{
+  "step": 2000,
+  "loss": 0.15070810914039612,
+  "elapsed_s": 17.37743363599293,
+  "gpu_used_mib": 17591,
+  "train_mse": 5.866607466487039e-07,
+  "train_zero_mse": 2.7645116915664403e-06,
+  "validation_mse": 2.2795986751589226e-06,
+  "validation_zero_mse": 3.4818403946701437e-06,
+  "validation_mean_predictor_mse": 2.3124734980228823e-06,
+  "validation_ranking_regret": 0.00015494624733491946,
+  "validation_no_change_regret": 4.753474394192381e-05,
+  "validation_top1": 0.609375
+}

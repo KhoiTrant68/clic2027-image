@@ -1,0 +1,105 @@
+{
+  "verified_files": 79,
+  "verified_streams": 64,
+  "fresh_decode": {
+    "passed": 64,
+    "expected": 64,
+    "encoder_hook_installed": false,
+    "source_cache_read": false
+  },
+  "means": {
+    "baseline": {
+      "bpp": 0.1297607421875,
+      "mse": 54.74393844604492,
+      "j": 0.32136452674865723
+    },
+    "best_all": {
+      "bpp": 0.1300048828125,
+      "mse": 54.517981211344406,
+      "j": 0.3208178170522054
+    },
+    "best_eligible": {
+      "bpp": 0.1297607421875,
+      "mse": 54.652837117513016,
+      "j": 0.3210456720987956
+    },
+    "myopic": {
+      "bpp": 0.1298828125,
+      "mse": 54.6238759358724,
+      "j": 0.3210663782755534
+    },
+    "full_cdf": {
+      "bpp": 0.129638671875,
+      "mse": 54.69489669799805,
+      "j": 0.32107081031799317
+    }
+  },
+  "comparisons": {
+    "best_all_minus_baseline": {
+      "delta_j": -0.000546709696451847,
+      "relative_percent": -0.1701213578185108,
+      "ci95": [
+        -0.0009633051554362448,
+        -0.0001301142374674491
+      ]
+    },
+    "best_eligible_minus_myopic": {
+      "delta_j": -2.0706176757832873e-05,
+      "relative_percent": -0.006449188753131265,
+      "ci95": [
+        -4.259872436529477e-05,
+        0.0
+      ]
+    },
+    "full_cdf_minus_myopic": {
+      "delta_j": 4.432042439744821e-06,
+      "relative_percent": 0.001380413129381316,
+      "ci95": [
+        -2.7818679809638036e-05,
+        4.11148071288725e-05
+      ]
+    }
+  },
+  "excluded_from_cdf_diagnostic": 5,
+  "changed_choice": 2,
+  "max_suffix_symbols_changed": 1102,
+  "selected": [
+    {
+      "name": "0206-0",
+      "eligible": 16,
+      "baseline": 0,
+      "best_all": 0,
+      "best_eligible": 0,
+      "myopic": 14,
+      "full_cdf": 14
+    },
+    {
+      "name": "0214-0",
+      "eligible": 16,
+      "baseline": 0,
+      "best_all": 15,
+      "best_eligible": 15,
+      "myopic": 15,
+      "full_cdf": 5
+    },
+    {
+      "name": "0239-0",
+      "eligible": 16,
+      "baseline": 0,
+      "best_all": 4,
+      "best_eligible": 4,
+      "myopic": 4,
+      "full_cdf": 4
+    },
+    {
+      "name": "0586-0",
+      "eligible": 11,
+      "baseline": 0,
+      "best_all": 5,
+      "best_eligible": 15,
+      "myopic": 10,
+      "full_cdf": 8
+    }
+  ],
+  "note": "Post-run audit: matched candidate sets for CDF comparison; no new model selection or training."
+}

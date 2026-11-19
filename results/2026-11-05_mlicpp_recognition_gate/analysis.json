@@ -1,0 +1,240 @@
+{
+  "cnn": {
+    "n": 256,
+    "source": 255,
+    "base": 251,
+    "perceptual": 250,
+    "harmed": 1,
+    "recovered": 0,
+    "accuracy_delta": -0.00390625,
+    "ci95": [
+      -0.01171875,
+      0.0
+    ]
+  },
+  "cnn_source_correct_subset": {
+    "n": 255,
+    "source": 255,
+    "base": 251,
+    "perceptual": 250,
+    "harmed": 1,
+    "recovered": 0,
+    "accuracy_delta": -0.00392156862745098,
+    "ci95": [
+      -0.011764705882352941,
+      0.0
+    ]
+  },
+  "ocr": {
+    "n": 256,
+    "source": 202,
+    "base": 196,
+    "perceptual": 178,
+    "harmed": 37,
+    "recovered": 19,
+    "accuracy_delta": -0.0703125,
+    "ci95": [
+      -0.12890625,
+      -0.01171875
+    ]
+  },
+  "ocr_source_correct_subset": {
+    "n": 202,
+    "source": 202,
+    "base": 164,
+    "perceptual": 146,
+    "harmed": 29,
+    "recovered": 11,
+    "accuracy_delta": -0.0891089108910891,
+    "ci95": [
+      -0.1485148514851485,
+      -0.0297029702970297
+    ]
+  },
+  "cnn_groups": [
+    {
+      "field": "font",
+      "value": "SourceCodePro-Bold.ttf",
+      "n": 64,
+      "source": 64,
+      "base": 64,
+      "perceptual": 64,
+      "harmed": 0,
+      "recovered": 0,
+      "accuracy_delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "field": "font",
+      "value": "SourceCodePro-It.ttf",
+      "n": 64,
+      "source": 64,
+      "base": 64,
+      "perceptual": 64,
+      "harmed": 0,
+      "recovered": 0,
+      "accuracy_delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "field": "font",
+      "value": "SourceCodePro-Light.ttf",
+      "n": 64,
+      "source": 63,
+      "base": 59,
+      "perceptual": 58,
+      "harmed": 1,
+      "recovered": 0,
+      "accuracy_delta": -0.015625,
+      "ci95": [
+        -0.046875,
+        0.0
+      ]
+    },
+    {
+      "field": "font",
+      "value": "SourceCodePro-Regular.ttf",
+      "n": 64,
+      "source": 64,
+      "base": 64,
+      "perceptual": 64,
+      "harmed": 0,
+      "recovered": 0,
+      "accuracy_delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "field": "size",
+      "value": 14,
+      "n": 64,
+      "source": 64,
+      "base": 61,
+      "perceptual": 61,
+      "harmed": 0,
+      "recovered": 0,
+      "accuracy_delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "field": "size",
+      "value": 18,
+      "n": 64,
+      "source": 64,
+      "base": 64,
+      "perceptual": 64,
+      "harmed": 0,
+      "recovered": 0,
+      "accuracy_delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "field": "size",
+      "value": 24,
+      "n": 64,
+      "source": 63,
+      "base": 62,
+      "perceptual": 62,
+      "harmed": 0,
+      "recovered": 0,
+      "accuracy_delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "field": "size",
+      "value": 32,
+      "n": 64,
+      "source": 64,
+      "base": 64,
+      "perceptual": 63,
+      "harmed": 1,
+      "recovered": 0,
+      "accuracy_delta": -0.015625,
+      "ci95": [
+        -0.046875,
+        0.0
+      ]
+    },
+    {
+      "field": "contrast",
+      "value": 64,
+      "n": 128,
+      "source": 127,
+      "base": 123,
+      "perceptual": 122,
+      "harmed": 1,
+      "recovered": 0,
+      "accuracy_delta": -0.0078125,
+      "ci95": [
+        -0.0234375,
+        0.0
+      ]
+    },
+    {
+      "field": "contrast",
+      "value": 192,
+      "n": 128,
+      "source": 128,
+      "base": 128,
+      "perceptual": 128,
+      "harmed": 0,
+      "recovered": 0,
+      "accuracy_delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "field": "texture",
+      "value": false,
+      "n": 128,
+      "source": 128,
+      "base": 125,
+      "perceptual": 125,
+      "harmed": 0,
+      "recovered": 0,
+      "accuracy_delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "field": "texture",
+      "value": true,
+      "n": 128,
+      "source": 127,
+      "base": 126,
+      "perceptual": 125,
+      "harmed": 1,
+      "recovered": 0,
+      "accuracy_delta": -0.0078125,
+      "ci95": [
+        -0.0234375,
+        0.0
+      ]
+    }
+  ],
+  "actual_bpp": 0.026933670043945312,
+  "source_gate_epoch": 28,
+  "fresh_pixel_matches": 512,
+  "limitations": "One seed, one held-out font family, known boxes, synthetic data, image-level exploratory CIs; no latent readout or human evaluation."
+}

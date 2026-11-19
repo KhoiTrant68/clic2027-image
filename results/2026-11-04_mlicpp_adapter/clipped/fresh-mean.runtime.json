@@ -1,0 +1,13 @@
+{
+  "torch": "2.0.1+cu118",
+  "cuda": "11.8",
+  "cudnn": 8700,
+  "gpu": "NVIDIA L40",
+  "physical_gpu": "1",
+  "seed": 1984,
+  "cudnn_v8_api_disabled": "1",
+  "fp32": true,
+  "tf32": false,
+  "deterministic": true,
+  "threads": 2
+}

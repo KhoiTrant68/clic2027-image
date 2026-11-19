@@ -1,0 +1,10 @@
+{
+  "train_mse": 2.8656256745307473e-06,
+  "train_zero_mse": 2.7645116915664403e-06,
+  "validation_mse": 3.3099840948125347e-06,
+  "validation_zero_mse": 3.4818403946701437e-06,
+  "validation_mean_predictor_mse": 2.3124734980228823e-06,
+  "validation_ranking_regret": 0.0019834679518453413,
+  "validation_no_change_regret": 4.753474394192381e-05,
+  "validation_top1": 0.03125
+}

@@ -1,0 +1,171 @@
+{
+  "development_only": true,
+  "no_test_accessed": true,
+  "bootstrap_replicates": 10000,
+  "seed": 1984,
+  "note": "Exploratory paired-by-image intervals on reused development data; not confirmatory, no human preference inference.",
+  "comparisons": [
+    {
+      "treatment": "gan",
+      "control": "reconstruction",
+      "metric": "lpips",
+      "delta": 0.0016167010180652142,
+      "ci95": [
+        0.00026988533209078015,
+        0.0029854442982468754
+      ]
+    },
+    {
+      "treatment": "gan",
+      "control": "reconstruction",
+      "metric": "dists",
+      "delta": -0.0007565021514892578,
+      "ci95": [
+        -0.0031676674261689186,
+        0.0015281056519597768
+      ]
+    },
+    {
+      "treatment": "gan",
+      "control": "reconstruction",
+      "metric": "edge",
+      "delta": 0.00010705924654379602,
+      "ci95": [
+        3.154099447427969e-05,
+        0.00018475446611829915
+      ]
+    },
+    {
+      "treatment": "gan",
+      "control": "reconstruction",
+      "metric": "mse",
+      "delta": 0.6160871187845859,
+      "ci95": [
+        0.3554536461830137,
+        0.8819018284479762
+      ]
+    },
+    {
+      "treatment": "reconstruction",
+      "control": "mean",
+      "metric": "lpips",
+      "delta": -0.023407931344991084,
+      "ci95": [
+        -0.0305876609234474,
+        -0.016395944743817382
+      ]
+    },
+    {
+      "treatment": "reconstruction",
+      "control": "mean",
+      "metric": "dists",
+      "delta": -0.01697620376944542,
+      "ci95": [
+        -0.02780546061694622,
+        -0.005535986926406622
+      ]
+    },
+    {
+      "treatment": "reconstruction",
+      "control": "mean",
+      "metric": "edge",
+      "delta": -0.0014108950233483893,
+      "ci95": [
+        -0.0018852201386260674,
+        -0.0009184036694870936
+      ]
+    },
+    {
+      "treatment": "reconstruction",
+      "control": "mean",
+      "metric": "mse",
+      "delta": -8.075462023417156,
+      "ci95": [
+        -10.353136698404947,
+        -5.8340524991353355
+      ]
+    },
+    {
+      "treatment": "gan",
+      "control": "mean",
+      "metric": "lpips",
+      "delta": -0.02179123032692587,
+      "ci95": [
+        -0.02837691148506565,
+        -0.015395744730449225
+      ]
+    },
+    {
+      "treatment": "gan",
+      "control": "mean",
+      "metric": "dists",
+      "delta": -0.017732705920934677,
+      "ci95": [
+        -0.028376256441697476,
+        -0.006585873244330287
+      ]
+    },
+    {
+      "treatment": "gan",
+      "control": "mean",
+      "metric": "edge",
+      "delta": -0.001303835776804593,
+      "ci95": [
+        -0.0017709016977144186,
+        -0.0008254042540729515
+      ]
+    },
+    {
+      "treatment": "gan",
+      "control": "mean",
+      "metric": "mse",
+      "delta": -7.459374904632569,
+      "ci95": [
+        -9.646942639350891,
+        -5.316050843397778
+      ]
+    },
+    {
+      "treatment": "reconstruction",
+      "control": "base",
+      "metric": "lpips",
+      "delta": -0.10634977649169741,
+      "ci95": [
+        -0.13059522449912037,
+        -0.08293344670055376
+      ]
+    },
+    {
+      "treatment": "reconstruction",
+      "control": "base",
+      "metric": "dists",
+      "delta": -0.06596686318516731,
+      "ci95": [
+        -0.0794640485662967,
+        -0.05163236474618316
+      ]
+    },
+    {
+      "treatment": "reconstruction",
+      "control": "base",
+      "metric": "edge",
+      "delta": 0.0024686396783488735,
+      "ci95": [
+        0.0022461621534911468,
+        0.0027123399475637387
+      ]
+    },
+    {
+      "treatment": "reconstruction",
+      "control": "base",
+      "metric": "mse",
+      "delta": 11.343113104502361,
+      "ci95": [
+        9.305568953355154,
+        13.371187118689217
+      ]
+    }
+  ],
+  "fresh_pixel_matches": 128,
+  "source_hashes_verified": true
+}

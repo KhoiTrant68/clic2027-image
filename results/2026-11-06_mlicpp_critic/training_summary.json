@@ -1,0 +1,17 @@
+{
+  "steps": 2000,
+  "parameters": 1064193,
+  "weight_change_l1": 2310.818359375,
+  "best_validation_regret": 4.753474394192381e-05,
+  "final": {
+    "train_mse": 5.866607466487039e-07,
+    "train_zero_mse": 2.7645116915664403e-06,
+    "validation_mse": 2.2795986751589226e-06,
+    "validation_zero_mse": 3.4818403946701437e-06,
+    "validation_mean_predictor_mse": 2.3124734980228823e-06,
+    "validation_ranking_regret": 0.00015494624733491946,
+    "validation_no_change_regret": 4.753474394192381e-05,
+    "validation_top1": 0.609375
+  },
+  "caveat": "Offline ranking on teacher states; not rollout policy evaluation or a codec RD result"
+}

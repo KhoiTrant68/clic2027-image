@@ -1,0 +1,11 @@
+{
+  "mode": "mean",
+  "parameters": 34113,
+  "seed": 1984,
+  "steps": 1000,
+  "data_order": "Python Random(seed) replacement; shared across arms",
+  "checkpoint_selection": "fixed final step; validation logging only",
+  "architecture": "identical in all three arms; CVaR/head supervision differ",
+  "reference": "probe.py q2 legacy real-stream runtime; upstream playground/train.sh lr=1e-4, clip=1.0; crop256, seed1984. Decoder-only crop pilot, NOT full paper reproduction or GAN training.",
+  "intentional_changes": "freeze encoder/entropy/synthesis; adapt before synthesis layer5 at quarter resolution; cache exact FP32 features from actual streams; batch4; Adam same schedule and crop order in all arms; regional edge surrogate; no GAN; no Qhat optimization; local JSONL monitoring"
+}

@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "train_examples": 768,
+  "validation_examples": 384,
+  "source_disjoint": true,
+  "checkpoints": {
+    "critic_best.pt": {
+      "step": 1800,
+      "validation_mse": 2.2450067262980156e-06,
+      "regret": 4.753474394192381e-05,
+      "chosen_delta_j": 0.0,
+      "teacher_delta_j": -4.753474394192381e-05,
+      "sha256": "a92c784b1094deff1cd3968161d505046f92e1c95d5730d3611f94683dad1984"
+    },
+    "critic_last.pt": {
+      "step": 2000,
+      "validation_mse": 2.279598447785247e-06,
+      "regret": 0.00015494624733491946,
+      "chosen_delta_j": 0.00010741150356352591,
+      "teacher_delta_j": -4.753474394192381e-05,
+      "sha256": "546ee3e38ac40ffc5b7a32791dcae567687e9a52613d3c535c6d91a6437b6e90"
+    }
+  },
+  "device": "cpu",
+  "note": "Offline teacher-state decisions, not sequential rollout"
+}

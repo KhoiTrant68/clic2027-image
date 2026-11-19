@@ -1,0 +1,19 @@
+{
+  "rows": [
+    {
+      "symbol": 0,
+      "timed_out": false,
+      "exit_code": 0,
+      "stdout": "{\"version\": \"1.2.0b3\", \"bytes\": 8}",
+      "stderr": "",
+      "seconds": 2.2205917820101604
+    },
+    {
+      "symbol": -138273120,
+      "timed_out": true,
+      "exit_code": null,
+      "seconds": 8.028857734054327
+    }
+  ],
+  "note": "Native installed binary, synthetic single-symbol input; no GPU or image data."
+}

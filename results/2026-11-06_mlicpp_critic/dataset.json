@@ -1,0 +1,26 @@
+{
+  "train_sources": [
+    "0206.png",
+    "0214.png",
+    "0239.png",
+    "0586.png"
+  ],
+  "validation_sources": [
+    "0341.png",
+    "0797.png"
+  ],
+  "identity_checks": 6,
+  "examples": 1152,
+  "backbone": {
+    "quality": 2,
+    "lambda_mse": 0.0035,
+    "legacy": true,
+    "checkpoint": "/home/jovyan/clic2027-artifacts/mlicpp/weights/mlicpp-mse-q2-legacy.pth.tar",
+    "checkpoint_sha256": "5577dcccc7d154c07b9cc14f222606717cac12ac263f569cba11b012994e9fde",
+    "upstream_sha": "4aa9d2a512eb9db382172058e6c278fb0d376e17",
+    "cudnn_v8_api_disabled": "1",
+    "parameters": 116716928,
+    "load_s": 5.909409614978358
+  },
+  "source_role": "reused development; source-disjoint training and validation, not independent test"
+}

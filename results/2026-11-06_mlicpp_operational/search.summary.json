@@ -1,0 +1,22 @@
+{
+  "identity_j": 0.3176745173136394,
+  "scalar_j": 0.31742680295308434,
+  "slices_j": 0.31703116385142005,
+  "calls": 81,
+  "train_sources": 8,
+  "parameters": {
+    "scalar": 1,
+    "slices": 10
+  },
+  "backbone": {
+    "quality": 2,
+    "lambda_mse": 0.0035,
+    "legacy": true,
+    "checkpoint": "/home/jovyan/clic2027-artifacts/mlicpp/weights/mlicpp-mse-q2-legacy.pth.tar",
+    "checkpoint_sha256": "5577dcccc7d154c07b9cc14f222606717cac12ac263f569cba11b012994e9fde",
+    "upstream_sha": "4aa9d2a512eb9db382172058e6c278fb0d376e17",
+    "cudnn_v8_api_disabled": "1",
+    "parameters": 116716928,
+    "load_s": 7.473311022040434
+  }
+}

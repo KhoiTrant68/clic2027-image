@@ -1,0 +1,34 @@
+{
+  "step": 35,
+  "symbol_min": -298552512,
+  "symbol_max": 31972834,
+  "minimum_frequency": 1,
+  "maximum_bypass": 597101893,
+  "invalid_symbols": 61,
+  "examples": [
+    {
+      "symbol": -135362832,
+      "index": 63,
+      "frequency": 56,
+      "bypass": 270722533
+    },
+    {
+      "symbol": -141810640,
+      "index": 63,
+      "frequency": 56,
+      "bypass": 283618149
+    },
+    {
+      "symbol": -134329680,
+      "index": 63,
+      "frequency": 56,
+      "bypass": 268656229
+    },
+    {
+      "symbol": -162282464,
+      "index": 63,
+      "frequency": 56,
+      "bypass": 324561797
+    }
+  ]
+}

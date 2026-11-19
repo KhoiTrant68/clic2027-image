@@ -1,0 +1,182 @@
+[
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "n": 64,
+    "correct": 17,
+    "source_ocr_eligible": 60,
+    "correct_eligible": 17
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "n": 64,
+    "correct": 24,
+    "source_ocr_eligible": 60,
+    "correct_eligible": 24
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "n": 64,
+    "correct": 20,
+    "source_ocr_eligible": 60,
+    "correct_eligible": 20
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_ocr_center",
+    "n": 64,
+    "correct": 44,
+    "source_ocr_eligible": 60,
+    "correct_eligible": 44
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "n": 64,
+    "correct": 37,
+    "source_ocr_eligible": 56,
+    "correct_eligible": 29
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "n": 64,
+    "correct": 33,
+    "source_ocr_eligible": 56,
+    "correct_eligible": 28
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "n": 64,
+    "correct": 17,
+    "source_ocr_eligible": 56,
+    "correct_eligible": 15
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_ocr_center",
+    "n": 64,
+    "correct": 36,
+    "source_ocr_eligible": 56,
+    "correct_eligible": 36
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "n": 64,
+    "correct": 17,
+    "source_ocr_eligible": 60,
+    "correct_eligible": 17
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "n": 64,
+    "correct": 23,
+    "source_ocr_eligible": 60,
+    "correct_eligible": 23
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "n": 64,
+    "correct": 22,
+    "source_ocr_eligible": 60,
+    "correct_eligible": 22
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "n": 64,
+    "correct": 21,
+    "source_ocr_eligible": 60,
+    "correct_eligible": 21
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_ocr_center",
+    "n": 64,
+    "correct": 51,
+    "source_ocr_eligible": 60,
+    "correct_eligible": 51
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_ocr_center",
+    "n": 64,
+    "correct": 47,
+    "source_ocr_eligible": 60,
+    "correct_eligible": 47
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "n": 64,
+    "correct": 37,
+    "source_ocr_eligible": 56,
+    "correct_eligible": 29
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "n": 64,
+    "correct": 28,
+    "source_ocr_eligible": 56,
+    "correct_eligible": 25
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "n": 64,
+    "correct": 28,
+    "source_ocr_eligible": 56,
+    "correct_eligible": 25
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "n": 64,
+    "correct": 24,
+    "source_ocr_eligible": 56,
+    "correct_eligible": 21
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_ocr_center",
+    "n": 64,
+    "correct": 45,
+    "source_ocr_eligible": 56,
+    "correct_eligible": 44
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_ocr_center",
+    "n": 64,
+    "correct": 43,
+    "source_ocr_eligible": 56,
+    "correct_eligible": 42
+  }
+]

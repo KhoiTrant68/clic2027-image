@@ -1,0 +1,46 @@
+{
+  "status": "complete",
+  "arithmetic": "exact fractions; exhaustive finite source cases",
+  "total_packets": 16,
+  "bytes_per_packet": 8,
+  "conditional_risk": "0",
+  "fixed_rank1_risk": "2/25",
+  "prior_variance_risk": "1/4",
+  "source_coordinate_risk": "1/10000",
+  "variance_risk_ratio": "2500",
+  "decomposition_verified": true,
+  "malformed_packets_rejected": 4,
+  "quantization_checks": [
+    {
+      "bits": 1,
+      "coefficient": "1/2",
+      "error": "1/10",
+      "bound": "1/2"
+    },
+    {
+      "bits": 2,
+      "coefficient": "1/4",
+      "error": "3/20",
+      "bound": "1/4"
+    },
+    {
+      "bits": 3,
+      "coefficient": "3/8",
+      "error": "1/40",
+      "bound": "1/8"
+    },
+    {
+      "bits": 4,
+      "coefficient": "7/16",
+      "error": "3/80",
+      "bound": "1/16"
+    },
+    {
+      "bits": 8,
+      "coefficient": "103/256",
+      "error": "3/1280",
+      "bound": "1/256"
+    }
+  ],
+  "limitations": "Toy source and fixed constants; no MLIC++ image evaluation, no human preference, no novelty claim. Context-conditioned residual coding can match the conditional method."
+}

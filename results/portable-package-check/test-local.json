@@ -1,0 +1,13 @@
+{
+  "data": "D:\\AwesomeCV\\clic2027-image\\results\\portable-package-check\\artifacts with spaces\\data\\div2k\\pilot224",
+  "upstream": "D:\\AwesomeCV\\clic2027-image\\results\\portable-package-check\\clic2027_mlicpp_portable\\refs\\repos\\MLIC",
+  "weights": "D:\\AwesomeCV\\clic2027-image\\results\\portable-package-check\\artifacts with spaces\\mlicpp\\weights",
+  "steps": 2000,
+  "batch_size": 2,
+  "learning_rate": 1e-05,
+  "aux_learning_rate": 0.001,
+  "required_free_mib": 18432,
+  "wall_time_limit_s": 14400,
+  "test_data": "D:\\AwesomeCV\\clic2027-image\\results\\portable-package-check\\artifacts with spaces\\data\\div2k\\end-to-end-test32",
+  "gpu_index": 1
+}

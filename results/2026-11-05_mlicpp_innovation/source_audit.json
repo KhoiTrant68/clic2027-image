@@ -1,0 +1,11 @@
+{
+  "images": 32,
+  "previous_sources": 288,
+  "smoke_sources": 2,
+  "disjoint_previous": true,
+  "disjoint_smoke": true,
+  "source_crc_and_sha_verified": true,
+  "cached_target_matches_source_crop": true,
+  "base_streams_verified": true,
+  "caveat": "Disjointness applies to project pilot splits; author pretraining overlap not audited."
+}

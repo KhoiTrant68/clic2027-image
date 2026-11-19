@@ -1,0 +1,16 @@
+VRAM guard {'total_mib': 46068, 'initial_used_mib': 0, 'allocator_cap_mib': 18432, 'device_limit_mib': 23034.0, 'physical_gpu': '1', 'shared_small': False, 'process_limit_mib': None}
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torch/_utils.py:776: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+{"method": "base", "n": 32, "bpp": 0.1993408203125, "psnr_pooled": 30.604469049978817, "edge_cvar": 0.49921780824661255, "lpips": 0.17350362846627831, "dists": 0.20233425684273243, "msssim": 0.9685398880392313, "edge_mean": 0.3051825857255608, "suffix_s": 0.00831949266284937}
+{"method": "mean", "n": 32, "bpp": 0.1993408203125, "psnr_pooled": 29.42545630633312, "edge_cvar": 0.5280261635780334, "lpips": 0.09806481748819351, "dists": 0.14320380426943302, "msssim": 0.9580861981958151, "edge_mean": 0.35236471029929817, "suffix_s": 0.004671384052926442}
+{"method": "cvar", "n": 32, "bpp": 0.1993408203125, "psnr_pooled": 29.488898514824374, "edge_cvar": 0.5250099897384644, "lpips": 0.09837364428676665, "dists": 0.14213556982576847, "msssim": 0.9584403429180384, "edge_mean": 0.3508875072002411, "suffix_s": 0.004583482303132769}
+{"method": "risk", "n": 32, "bpp": 0.1993408203125, "psnr_pooled": 29.530255636565222, "edge_cvar": 0.5265393257141113, "lpips": 0.10133145819418132, "dists": 0.14397049322724342, "msssim": 0.9599707331508398, "edge_mean": 0.3486289922147989, "suffix_s": 0.0045772556513838936}
+{"method": "risk_hide_change", "n": 32, "bpp": 0.1993408203125, "psnr_pooled": 28.601592248173414, "edge_cvar": 0.5411530137062073, "lpips": 0.12537640292430297, "dists": 0.20272483676671982, "msssim": 0.9464502111077309, "edge_mean": 0.4003127287141979, "suffix_s": 0.0045421629984048195}

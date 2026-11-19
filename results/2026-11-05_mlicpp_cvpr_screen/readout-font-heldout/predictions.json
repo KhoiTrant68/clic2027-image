@@ -1,0 +1,8066 @@
+[
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "000-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "000-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "001-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "001-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "002-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "002-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "003-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "003-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "004-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "004-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "005-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "005-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "006-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "006-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "007-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "007-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "008-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "008-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "009-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "009-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "010-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "010-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "011-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "011-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "012-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "012-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "013-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "013-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "014-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "014-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "015-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "015-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "016-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "016-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "017-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "017-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "018-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "018-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "019-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "019-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "020-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "020-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "021-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "021-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "022-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "022-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "023-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "023-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "024-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "024-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "025-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "025-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "026-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "026-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "027-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "027-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "028-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "028-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "029-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "029-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "030-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "030-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "031-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "031-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "000-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "000-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "001-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "001-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "002-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "002-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "003-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "003-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "004-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "004-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "005-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "005-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "006-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "006-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "007-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "007-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "008-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "008-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "009-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "009-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "010-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "010-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "011-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "011-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "012-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "012-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "013-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "013-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "014-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "014-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "015-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "015-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "016-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "016-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "017-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "017-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "018-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "018-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "019-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "019-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "020-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "020-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "021-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "021-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "022-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "022-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "023-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "023-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "024-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "024-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "025-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "025-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "026-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "026-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "027-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "027-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "028-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "028-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "029-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "029-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "030-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "030-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "031-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "031-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "000-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "000-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "001-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "001-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "002-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "002-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "003-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "003-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "004-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "004-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "005-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "005-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "006-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "006-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "007-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "007-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "008-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "008-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "009-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "009-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "010-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "010-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "011-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "011-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "012-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "012-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "013-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "013-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "014-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "014-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "015-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "015-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "016-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "016-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "017-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "017-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "018-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "018-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "019-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "019-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "020-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "020-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "021-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "021-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "022-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "022-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "023-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "023-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "024-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "024-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "025-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "025-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "026-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "026-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "027-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "027-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "028-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "028-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "029-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "029-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "030-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "030-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "031-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "031-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "032-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "032-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "033-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "033-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "034-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "034-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "035-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "035-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "036-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "036-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "037-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "037-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "038-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "038-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "039-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "039-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "040-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "040-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "041-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "041-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "042-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "042-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "043-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "043-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "044-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "044-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "045-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "045-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "046-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "046-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "047-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "047-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "048-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "048-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "049-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "049-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "050-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "050-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "051-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "051-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "052-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "052-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "053-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "053-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "054-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "054-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "055-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "055-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "056-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "056-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "057-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "057-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "058-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "058-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "059-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "059-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "060-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "060-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "061-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "061-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "062-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "062-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "063-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "063-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "032-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "032-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "033-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "033-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "034-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "034-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "035-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "035-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "036-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "036-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "037-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "037-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "038-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "038-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "039-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "039-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "040-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "040-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "041-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "041-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "042-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "042-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "043-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "043-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "044-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "044-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "045-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "045-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "046-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "046-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "047-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "047-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "048-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "048-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "049-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "049-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "050-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "050-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "051-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "051-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "052-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "052-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "053-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "053-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "054-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "054-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "055-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "055-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "056-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "056-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "057-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "057-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "058-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "058-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "059-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "059-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "060-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "060-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "061-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "061-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "062-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "062-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "063-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "063-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "032-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "032-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "033-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "033-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "034-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "034-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "035-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "035-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "036-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "036-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "037-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "037-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "038-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "038-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "039-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "039-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "040-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "040-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "041-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "041-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "042-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "042-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "043-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "043-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "044-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "044-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "045-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "045-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "046-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "046-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "047-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "047-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "048-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "048-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "049-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "049-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "050-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "050-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "051-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "051-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "052-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "052-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "053-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "053-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "054-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "054-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "055-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "055-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "056-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "056-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "057-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "057-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "058-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "058-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "059-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "059-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "060-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "060-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "061-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "061-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "062-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "062-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "063-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 1,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "063-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "000-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "000-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "001-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "001-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "002-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "002-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "003-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "003-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "004-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "004-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "005-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "005-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "006-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "006-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "007-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "007-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "008-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "008-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "009-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "009-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "010-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "010-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "011-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "011-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "012-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "012-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "013-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "013-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "014-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "014-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "015-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "015-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "016-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "016-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "017-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "017-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "018-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "018-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "019-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "019-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "020-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "020-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "021-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "021-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "022-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "022-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "023-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "023-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "024-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "024-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "025-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "025-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "026-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "026-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "027-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "027-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "028-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "028-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "029-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "029-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "030-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "030-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "031-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "source_pixels",
+    "name": "031-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "000-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "000-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "001-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "001-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "002-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "002-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "003-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "003-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "004-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "004-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "005-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "005-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "006-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "006-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "007-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "007-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "008-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "008-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "009-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "009-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "010-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "010-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "011-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "011-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "012-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "012-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "013-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "013-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "014-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "014-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "015-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "015-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "016-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "016-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "017-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "017-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "018-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "018-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "019-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "019-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "020-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "020-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "021-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "021-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "022-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "022-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "023-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "023-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "024-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "024-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "025-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "025-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "026-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "026-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "027-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "027-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "028-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "028-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "029-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "029-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "030-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "030-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "031-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "base_pixels",
+    "name": "031-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "000-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "000-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "001-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "001-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "002-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "002-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "003-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "003-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "004-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "004-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "005-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "005-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "006-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "006-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "007-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "007-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "008-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "008-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "009-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "009-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "010-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "010-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "011-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "011-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "012-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "012-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "013-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "013-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "014-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "014-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "015-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "015-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "016-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "016-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "017-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "017-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "018-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "018-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "019-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "019-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "020-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "020-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "021-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "021-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "022-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "022-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "023-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "023-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "024-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "024-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "025-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "025-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "026-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "026-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "027-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "027-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "028-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "028-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "029-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "029-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "030-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "030-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "031-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "perceptual_pixels",
+    "name": "031-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "000-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "000-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "001-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "001-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "002-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "002-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "003-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "003-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "004-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "004-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "005-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "005-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "006-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "006-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "007-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "007-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "008-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "008-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "009-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "009-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "010-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "010-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "011-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "011-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "012-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "012-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "013-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "013-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "014-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "014-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "015-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "015-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "016-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "016-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "017-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "017-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "018-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "018-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "019-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "019-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "020-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "020-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "021-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "021-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "022-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "022-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "023-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "023-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "024-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "024-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "025-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "025-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "026-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "026-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "027-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "027-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "028-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "028-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "029-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "029-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "030-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "030-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "031-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "DejaVuSans.ttf",
+    "method": "actual_symbols",
+    "name": "031-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "032-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "032-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "033-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "033-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "034-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "034-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "035-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "035-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "036-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "036-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "037-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "037-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "038-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "038-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "039-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "039-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "040-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "040-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "041-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "041-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "042-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "042-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "043-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "043-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "044-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "044-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "045-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "045-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "046-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "046-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "047-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "047-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "048-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "048-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "049-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "049-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "050-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "050-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "051-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "051-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "052-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "052-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "053-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "053-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "054-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "054-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "055-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "055-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "056-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "056-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "057-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "057-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "058-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "058-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "059-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "059-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "060-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "060-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "061-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "061-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "062-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "062-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "063-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "source_pixels",
+    "name": "063-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "032-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "032-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "033-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "033-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "034-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "034-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "035-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "035-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "036-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "036-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "037-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "037-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "038-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "038-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "039-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "039-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "040-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "040-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "041-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "041-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "042-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "042-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "043-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "043-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "044-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "044-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "045-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "045-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "046-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "046-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "047-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "047-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "048-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "048-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "049-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "049-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "050-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "050-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "051-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "051-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "052-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "052-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "053-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "053-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "054-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "054-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "055-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "055-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "056-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "056-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "057-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "057-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "058-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "058-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "059-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "059-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "060-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "060-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "061-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "061-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "062-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "062-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "063-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "base_pixels",
+    "name": "063-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "032-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "032-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "033-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "033-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "034-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "034-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "035-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "035-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "036-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "036-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "037-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "037-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "038-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "038-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "039-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "039-b",
+    "label": "F",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "040-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "040-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "041-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "041-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "042-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "042-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "043-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "043-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "044-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "044-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "045-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "045-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "046-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "046-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "047-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "047-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "048-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "048-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "049-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "049-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "050-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "050-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "051-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "051-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "052-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "052-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "053-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "053-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "054-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "054-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "055-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "055-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "056-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "056-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "057-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "057-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "058-a",
+    "label": "6",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "058-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "059-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "059-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "060-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "060-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "061-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "061-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "062-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "062-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "063-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "perceptual_pixels",
+    "name": "063-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "032-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "032-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "033-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "033-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "034-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "034-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "035-a",
+    "label": "E",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "035-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "036-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "036-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "037-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "037-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "038-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "038-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": false
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "039-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "039-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "040-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "040-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "041-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "041-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "042-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "042-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "043-a",
+    "label": "E",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "043-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "044-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "044-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "045-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "045-b",
+    "label": "F",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "046-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "046-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "047-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "047-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "048-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "048-b",
+    "label": "8",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "049-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "049-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "050-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "050-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "051-a",
+    "label": "E",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "051-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "052-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "052-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "053-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "053-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "054-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "054-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "055-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "055-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "056-a",
+    "label": "6",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "056-b",
+    "label": "8",
+    "prediction": "F",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "057-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "057-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "058-a",
+    "label": "6",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "058-b",
+    "label": "8",
+    "prediction": "8",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "059-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "059-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "060-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "060-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "061-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "061-b",
+    "label": "F",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "062-a",
+    "label": "6",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "062-b",
+    "label": "8",
+    "prediction": "6",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "063-a",
+    "label": "E",
+    "prediction": "E",
+    "source_ocr_correct": true
+  },
+  {
+    "quality": 2,
+    "test_font": "Inconsolata-Regular.ttf",
+    "method": "actual_symbols",
+    "name": "063-b",
+    "label": "F",
+    "prediction": "8",
+    "source_ocr_correct": true
+  }
+]

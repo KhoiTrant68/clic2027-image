@@ -1,0 +1,7 @@
+{
+  "state": "waiting_for_gpu",
+  "next_stage": "train-baseline-q1-seed9041",
+  "free_mib": 766,
+  "required_free_mib": 18432,
+  "wait_remaining_s": 21570
+}

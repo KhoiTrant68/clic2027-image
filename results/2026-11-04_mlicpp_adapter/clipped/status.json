@@ -1,0 +1,10 @@
+{
+  "state": "complete",
+  "fresh_pixel_parity": true,
+  "modes": [
+    "mean",
+    "cvar",
+    "risk"
+  ],
+  "warning": "crop256, fixed legacy q2, single seed; no GAN, OCR/human study or L4 test"
+}

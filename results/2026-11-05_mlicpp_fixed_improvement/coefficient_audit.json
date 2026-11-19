@@ -1,0 +1,34 @@
+{
+  "long_s160": {
+    "coefficients": 1024,
+    "zero_fraction": 0.0009765625,
+    "saturated_fraction": 0.4560546875,
+    "mean_absolute_coefficient": 91.7275390625
+  },
+  "long_s40": {
+    "coefficients": 1024,
+    "zero_fraction": 0.0078125,
+    "saturated_fraction": 0.0703125,
+    "mean_absolute_coefficient": 61.8544921875
+  },
+  "reference_s160": {
+    "coefficients": 1024,
+    "zero_fraction": 0.0009765625,
+    "saturated_fraction": 0.5380859375,
+    "mean_absolute_coefficient": 95.6201171875
+  },
+  "reference_s40": {
+    "coefficients": 1024,
+    "zero_fraction": 0.001953125,
+    "saturated_fraction": 0.0107421875,
+    "mean_absolute_coefficient": 62.98046875
+  },
+  "reference_search_change": {
+    "changed_streams": 32,
+    "changed_outputs": 32
+  },
+  "long_search_change": {
+    "changed_streams": 32,
+    "changed_outputs": 32
+  }
+}

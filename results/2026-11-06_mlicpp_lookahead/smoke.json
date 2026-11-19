@@ -1,0 +1,6 @@
+{
+  "identity_stream_and_pixels": true,
+  "exact_integer_interventions": true,
+  "identical_prefix_and_hyperstream": true,
+  "device": "cpu"
+}

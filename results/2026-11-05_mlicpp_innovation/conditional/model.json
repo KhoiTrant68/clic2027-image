@@ -1,0 +1,5 @@
+{
+  "mode": "conditional",
+  "parameters": 38240,
+  "decoder": "fixed trained full-synthesis; decoder basis input is sole difference in primary contrast"
+}

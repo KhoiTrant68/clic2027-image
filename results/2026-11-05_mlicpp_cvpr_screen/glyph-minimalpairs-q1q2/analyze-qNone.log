@@ -1,0 +1,38 @@
+[
+  {
+    "quality": 1,
+    "method": "base",
+    "total_images": 192,
+    "semantic_originals": 128,
+    "source_ocr_correct": 116,
+    "source_pair_ocr_correct": 56,
+    "exact_stream_collisions_on_eligible_pairs": 0,
+    "exact_symbol_collisions_on_eligible_pairs": 0,
+    "reconstruction_correct_on_eligible": 76,
+    "actual_bpp": 0.020449320475260418
+  },
+  {
+    "quality": 2,
+    "method": "base",
+    "total_images": 192,
+    "semantic_originals": 128,
+    "source_ocr_correct": 116,
+    "source_pair_ocr_correct": 56,
+    "exact_stream_collisions_on_eligible_pairs": 0,
+    "exact_symbol_collisions_on_eligible_pairs": 0,
+    "reconstruction_correct_on_eligible": 90,
+    "actual_bpp": 0.025204976399739582
+  },
+  {
+    "quality": 2,
+    "method": "perceptual",
+    "total_images": 192,
+    "semantic_originals": 128,
+    "source_ocr_correct": 116,
+    "source_pair_ocr_correct": 56,
+    "exact_stream_collisions_on_eligible_pairs": 0,
+    "exact_symbol_collisions_on_eligible_pairs": 0,
+    "reconstruction_correct_on_eligible": 82,
+    "actual_bpp": 0.025204976399739582
+  }
+]

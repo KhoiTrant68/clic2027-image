@@ -1,0 +1,332 @@
+{
+  "test_sources": 32,
+  "fresh_pixel_matches": 160,
+  "bootstrap_replicates": 10000,
+  "prefix_log_checkpoints": [
+    1,
+    25,
+    50,
+    75,
+    100,
+    125,
+    150,
+    175,
+    200,
+    225,
+    250,
+    275,
+    300,
+    325,
+    350,
+    375,
+    400,
+    425,
+    450,
+    475,
+    500,
+    525,
+    550,
+    575,
+    600,
+    625,
+    650,
+    675,
+    700,
+    725,
+    750,
+    775,
+    800,
+    825,
+    850,
+    875,
+    900,
+    925,
+    950,
+    975,
+    1000
+  ],
+  "reference_training_prefix_exact": true,
+  "comparisons": [
+    {
+      "treatment": "long_s160",
+      "control": "reference_s40",
+      "metric": "lpips",
+      "delta": -0.007536663732025772,
+      "ci95": [
+        -0.012623090032138861,
+        -0.004122565123543609
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "reference_s40",
+      "metric": "dists",
+      "delta": 0.0006513465195894241,
+      "ci95": [
+        -0.001641482999548316,
+        0.0032081823330372566
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "reference_s40",
+      "metric": "mse",
+      "delta": 0.8372066815694172,
+      "ci95": [
+        0.5596542199452712,
+        1.194448514779409
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "reference_s40",
+      "metric": "edge",
+      "delta": 3.468717961040588e-05,
+      "ci95": [
+        1.0722272658553303e-05,
+        6.041020881391761e-05
+      ]
+    },
+    {
+      "treatment": "long_s40",
+      "control": "reference_s40",
+      "metric": "lpips",
+      "delta": -0.00373234786093235,
+      "ci95": [
+        -0.007470363863103557,
+        -0.0011536006262758748
+      ]
+    },
+    {
+      "treatment": "long_s40",
+      "control": "reference_s40",
+      "metric": "dists",
+      "delta": 0.00023712217807769775,
+      "ci95": [
+        -0.000993231823667884,
+        0.0015784180723130703
+      ]
+    },
+    {
+      "treatment": "long_s40",
+      "control": "reference_s40",
+      "metric": "mse",
+      "delta": 0.1554433504740394,
+      "ci95": [
+        0.04282189210255919,
+        0.28111209869384685
+      ]
+    },
+    {
+      "treatment": "long_s40",
+      "control": "reference_s40",
+      "metric": "edge",
+      "delta": 5.894980796648591e-06,
+      "ci95": [
+        -1.561333738075468e-05,
+        2.5056030633249767e-05
+      ]
+    },
+    {
+      "treatment": "reference_s160",
+      "control": "reference_s40",
+      "metric": "lpips",
+      "delta": -0.0033906154858414084,
+      "ci95": [
+        -0.004813854768872261,
+        -0.002341587861155859
+      ]
+    },
+    {
+      "treatment": "reference_s160",
+      "control": "reference_s40",
+      "metric": "dists",
+      "delta": 0.00043835677206516266,
+      "ci95": [
+        -0.0006677547004073858,
+        0.001620039716362953
+      ]
+    },
+    {
+      "treatment": "reference_s160",
+      "control": "reference_s40",
+      "metric": "mse",
+      "delta": 0.5214573542277023,
+      "ci95": [
+        0.3306139707565327,
+        0.7324555039405823
+      ]
+    },
+    {
+      "treatment": "reference_s160",
+      "control": "reference_s40",
+      "metric": "edge",
+      "delta": 2.0639472598681005e-05,
+      "ci95": [
+        -8.4076377500033e-06,
+        5.458151956529257e-05
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "long_s40",
+      "metric": "lpips",
+      "delta": -0.003804315871093422,
+      "ci95": [
+        -0.0052201009486452675,
+        -0.002726586927019526
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "long_s40",
+      "metric": "dists",
+      "delta": 0.0004142243415117264,
+      "ci95": [
+        -0.001410745084285736,
+        0.0025542185641825193
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "long_s40",
+      "metric": "mse",
+      "delta": 0.6817633310953779,
+      "ci95": [
+        0.4566504995028174,
+        0.9604911367098501
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "long_s40",
+      "metric": "edge",
+      "delta": 2.879219881375729e-05,
+      "ci95": [
+        4.3177034523980475e-06,
+        5.6613083697275125e-05
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "reference_s160",
+      "metric": "lpips",
+      "delta": -0.004146048246184364,
+      "ci95": [
+        -0.007951706849416951,
+        -0.0014829039188043692
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "reference_s160",
+      "metric": "dists",
+      "delta": 0.00021298974752426147,
+      "ci95": [
+        -0.001986877154558897,
+        0.0027121063787490123
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "reference_s160",
+      "metric": "mse",
+      "delta": 0.31574932734171496,
+      "ci95": [
+        0.09902100563049314,
+        0.5587926030158994
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "reference_s160",
+      "metric": "edge",
+      "delta": 1.4047707011724878e-05,
+      "ci95": [
+        -1.3532658838149127e-05,
+        3.829640436520719e-05
+      ]
+    },
+    {
+      "treatment": "reference_s40",
+      "control": "base",
+      "metric": "lpips",
+      "delta": -0.015300565341021866,
+      "ci95": [
+        -0.02730549015541328,
+        -0.007924065820407123
+      ]
+    },
+    {
+      "treatment": "reference_s40",
+      "control": "base",
+      "metric": "dists",
+      "delta": -0.005529817193746567,
+      "ci95": [
+        -0.008175068348646165,
+        -0.003184741688892246
+      ]
+    },
+    {
+      "treatment": "reference_s40",
+      "control": "base",
+      "metric": "mse",
+      "delta": 1.2342715263366701,
+      "ci95": [
+        0.6476692120234165,
+        1.9242635846138003
+      ]
+    },
+    {
+      "treatment": "reference_s40",
+      "control": "base",
+      "metric": "edge",
+      "delta": 0.000210934934380206,
+      "ci95": [
+        9.04112056510711e-05,
+        0.0003506208393156073
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "base",
+      "metric": "lpips",
+      "delta": -0.022837229073047638,
+      "ci95": [
+        -0.03974440650781617,
+        -0.01228823207638925
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "base",
+      "metric": "dists",
+      "delta": -0.004878470674157143,
+      "ci95": [
+        -0.008937554573640228,
+        -0.0009799216408282532
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "base",
+      "metric": "mse",
+      "delta": 2.071478207906087,
+      "ci95": [
+        1.2893177270889282,
+        2.993181538581848
+      ]
+    },
+    {
+      "treatment": "long_s160",
+      "control": "base",
+      "metric": "edge",
+      "delta": 0.0002456221139906119,
+      "ci95": [
+        0.00011675866603790163,
+        0.00038774737580898395
+      ]
+    }
+  ],
+  "limitations": "One seed/rate, 32 new crops. Encoder compute increases with search budget. Pointwise exploratory CIs; no novelty/human/CLIC eligibility claim."
+}

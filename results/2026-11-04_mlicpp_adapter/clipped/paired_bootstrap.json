@@ -1,0 +1,182 @@
+[
+  {
+    "treatment": "mean",
+    "control": "base",
+    "metric": "lpips",
+    "delta": -0.07390773203223944,
+    "ci95_low": -0.09238104035903234,
+    "ci95_high": -0.05643992674595211,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "mean",
+    "control": "base",
+    "metric": "dists",
+    "delta": -0.06082221865653992,
+    "ci95_low": -0.07078758054412901,
+    "ci95_high": -0.049925382528454076,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "mean",
+    "control": "base",
+    "metric": "edge_mean",
+    "delta": 0.08936910866759717,
+    "ci95_low": 0.07571307988837361,
+    "ci95_high": 0.10222168788895941,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "mean",
+    "control": "base",
+    "metric": "edge_cvar",
+    "delta": 0.016720179468393326,
+    "ci95_low": 0.0007281687576324861,
+    "ci95_high": 0.1009561554761601,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "cvar",
+    "control": "mean",
+    "metric": "lpips",
+    "delta": 4.3678213842213154e-05,
+    "ci95_low": -7.546317501692102e-05,
+    "ci95_high": 0.00016389003285439683,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "cvar",
+    "control": "mean",
+    "metric": "dists",
+    "delta": 0.00034425780177116394,
+    "ci95_low": -7.905075326561928e-05,
+    "ci95_high": 0.0008259827271103855,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "cvar",
+    "control": "mean",
+    "metric": "edge_mean",
+    "delta": -0.0004491307772696018,
+    "ci95_low": -0.0009168950258754194,
+    "ci95_high": -3.720715176314189e-06,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "cvar",
+    "control": "mean",
+    "metric": "edge_cvar",
+    "delta": 0.0,
+    "ci95_low": -0.0018439985113218426,
+    "ci95_high": 0.0,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk",
+    "control": "mean",
+    "metric": "lpips",
+    "delta": 0.0033582375035621226,
+    "ci95_low": 0.0016333616949850693,
+    "ci95_high": 0.005382954540255014,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk",
+    "control": "mean",
+    "metric": "dists",
+    "delta": 0.0012207608669996262,
+    "ci95_low": -0.0007452385034412146,
+    "ci95_high": 0.003118032496422524,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk",
+    "control": "mean",
+    "metric": "edge_mean",
+    "delta": -0.004935654811561108,
+    "ci95_low": -0.009036998101510107,
+    "ci95_high": -0.0008923597168177372,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk",
+    "control": "mean",
+    "metric": "edge_cvar",
+    "delta": 0.0,
+    "ci95_low": -0.004271358787082132,
+    "ci95_high": 9.875744581222534e-05,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk",
+    "control": "cvar",
+    "metric": "lpips",
+    "delta": 0.0033145592897199094,
+    "ci95_low": 0.0016347582219168543,
+    "ci95_high": 0.005307346016343216,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk",
+    "control": "cvar",
+    "metric": "dists",
+    "delta": 0.0008765030652284622,
+    "ci95_low": -0.0013595749158412218,
+    "ci95_high": 0.0029444665182381848,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk",
+    "control": "cvar",
+    "metric": "edge_mean",
+    "delta": -0.004486524034291506,
+    "ci95_low": -0.008646355103701353,
+    "ci95_high": -0.0002399033866822721,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk",
+    "control": "cvar",
+    "metric": "edge_cvar",
+    "delta": 0.0,
+    "ci95_low": -0.0031927736941725015,
+    "ci95_high": 0.0012724287807941437,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk_hide_change",
+    "control": "risk",
+    "metric": "lpips",
+    "delta": 0.02231186581775546,
+    "ci95_low": 0.008000835133134387,
+    "ci95_high": 0.036656230842345386,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk_hide_change",
+    "control": "risk",
+    "metric": "dists",
+    "delta": 0.05433845333755016,
+    "ci95_low": 0.04427343057468534,
+    "ci95_high": 0.0647600590251386,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk_hide_change",
+    "control": "risk",
+    "metric": "edge_mean",
+    "delta": 0.09874843712896109,
+    "ci95_low": 0.08256243985379115,
+    "ci95_high": 0.11457972733769566,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  },
+  {
+    "treatment": "risk_hide_change",
+    "control": "risk",
+    "metric": "edge_cvar",
+    "delta": 0.0,
+    "ci95_low": 0.0,
+    "ci95_high": 0.012888406403362751,
+    "interpretation": "negative is lower error; CI exploratory, no multiplicity adjustment"
+  }
+]

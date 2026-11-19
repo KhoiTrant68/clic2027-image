@@ -1,0 +1,5 @@
+{
+  "src/clic27/eval/metrics.py": "af049cde77ce2465e817a296667855baa95df9aa7d73ff28c92640180b6989cf",
+  "experiments/new_codecs/half_vram.py": "094983e9011e3d7f022a398b6453ce994fac8f2835a3d7c8b77867434ff1f1de",
+  "experiments/mlicpp/projection_probe.py": "dbbffd86a7878489f8cf13d56f425da795171668bb8b36865c9eb58318c706a0"
+}

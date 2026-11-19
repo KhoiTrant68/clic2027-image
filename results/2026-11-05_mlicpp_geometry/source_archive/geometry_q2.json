@@ -1,0 +1,24 @@
+{
+  "seed": 9041,
+  "steps": 1000,
+  "learning_rate": 0.001,
+  "batch_size": 16,
+  "train_limit": 128,
+  "validation_limit": 16,
+  "test_limit": 16,
+  "probes": 4,
+  "factors": [0.8, 1.0, 1.25, 1.6],
+  "smoke": false,
+  "wall_time_limit_s": 5400,
+  "synthesis_run": "/home/jovyan/clic2027-artifacts/mlicpp/full-synthesis-20261105/div2k-q2-full-synthesis-conditional-gan",
+  "test_data": "/home/jovyan/clic2027-artifacts/data/div2k/geometry-test16",
+  "upstream": "/home/jovyan/clic2027-image/refs/repos/MLIC",
+  "weights": "/home/jovyan/clic2027-artifacts/mlicpp/weights",
+  "excluded_manifests": [
+    "/home/jovyan/clic2027-artifacts/data/div2k/pilot224/manifest.json",
+    "/home/jovyan/clic2027-artifacts/data/div2k/cvpr-holdout64/manifest.json",
+    "/home/jovyan/clic2027-artifacts/data/div2k/innovation-new32/manifest.json",
+    "/home/jovyan/clic2027-artifacts/data/div2k/innovation-test32/manifest.json",
+    "/home/jovyan/clic2027-artifacts/data/div2k/fixed-improvement-test32/manifest.json"
+  ]
+}

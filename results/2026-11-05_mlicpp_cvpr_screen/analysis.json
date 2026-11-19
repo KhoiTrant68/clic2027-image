@@ -1,0 +1,462 @@
+{
+  "bootstrap_replicates": 10000,
+  "seed": 2037,
+  "inference": "Exploratory pointwise intervals; no multiplicity correction, not a confirmatory study.",
+  "projection": [
+    {
+      "treatment": "moment-8",
+      "control": "moment-8-matched-blend",
+      "metric": "lpips",
+      "delta": -0.00047504767735517817,
+      "ci95": [
+        -0.0012225121371784553,
+        0.0003171907851765352
+      ]
+    },
+    {
+      "treatment": "moment-8",
+      "control": "moment-8-matched-blend",
+      "metric": "dists",
+      "delta": -0.0033924365416169167,
+      "ci95": [
+        -0.005386421177536249,
+        -0.0017801501322537664
+      ]
+    },
+    {
+      "treatment": "moment-8",
+      "control": "moment-8-matched-blend",
+      "metric": "edge",
+      "delta": -3.1052447275887457e-05,
+      "ci95": [
+        -5.357671960353761e-05,
+        -1.3153048794834177e-05
+      ]
+    },
+    {
+      "treatment": "moment-8",
+      "control": "moment-8-matched-blend",
+      "metric": "mse",
+      "delta": -1.2720013459523518,
+      "ci95": [
+        -1.5905056099096928,
+        -1.0031113425890599
+      ]
+    },
+    {
+      "treatment": "moment-16",
+      "control": "moment-16-matched-blend",
+      "metric": "lpips",
+      "delta": -0.0008263654765414685,
+      "ci95": [
+        -0.0012671111675444991,
+        -0.000421928893575796
+      ]
+    },
+    {
+      "treatment": "moment-16",
+      "control": "moment-16-matched-blend",
+      "metric": "dists",
+      "delta": -0.0031137950718402863,
+      "ci95": [
+        -0.004828811227343977,
+        -0.0017940352903679014
+      ]
+    },
+    {
+      "treatment": "moment-16",
+      "control": "moment-16-matched-blend",
+      "metric": "edge",
+      "delta": -2.4086633095844452e-05,
+      "ci95": [
+        -4.511134758616472e-05,
+        -9.417760590628197e-06
+      ]
+    },
+    {
+      "treatment": "moment-16",
+      "control": "moment-16-matched-blend",
+      "metric": "mse",
+      "delta": -0.6462573210398362,
+      "ci95": [
+        -0.9285229325294498,
+        -0.4226290404796615
+      ]
+    },
+    {
+      "treatment": "moment-32",
+      "control": "moment-32-matched-blend",
+      "metric": "lpips",
+      "delta": -0.0006123803229911573,
+      "ci95": [
+        -0.0009294773592898764,
+        -0.0003262396689876824
+      ]
+    },
+    {
+      "treatment": "moment-32",
+      "control": "moment-32-matched-blend",
+      "metric": "dists",
+      "delta": -0.002331865020096302,
+      "ci95": [
+        -0.004052787437103689,
+        -0.0011505878530442717
+      ]
+    },
+    {
+      "treatment": "moment-32",
+      "control": "moment-32-matched-blend",
+      "metric": "edge",
+      "delta": -1.8894538258521836e-05,
+      "ci95": [
+        -3.96385598637941e-05,
+        -5.080064076666043e-06
+      ]
+    },
+    {
+      "treatment": "moment-32",
+      "control": "moment-32-matched-blend",
+      "metric": "mse",
+      "delta": -0.42028673489888513,
+      "ci95": [
+        -0.6860909918944041,
+        -0.21193538308143622
+      ]
+    },
+    {
+      "treatment": "random-8",
+      "control": "random-8-matched-blend",
+      "metric": "lpips",
+      "delta": -0.0002082555729430169,
+      "ci95": [
+        -0.0005197582715481986,
+        0.00011865607011714017
+      ]
+    },
+    {
+      "treatment": "random-8",
+      "control": "random-8-matched-blend",
+      "metric": "dists",
+      "delta": -0.00021479278802871704,
+      "ci95": [
+        -0.0006289425073191524,
+        0.00024275004398077724
+      ]
+    },
+    {
+      "treatment": "random-8",
+      "control": "random-8-matched-blend",
+      "metric": "edge",
+      "delta": 0.00010036876717087981,
+      "ci95": [
+        9.012916346902855e-05,
+        0.00011137125166077027
+      ]
+    },
+    {
+      "treatment": "random-8",
+      "control": "random-8-matched-blend",
+      "metric": "mse",
+      "delta": -0.06981778144836413,
+      "ci95": [
+        -0.090923128525415,
+        -0.049888533353805324
+      ]
+    },
+    {
+      "treatment": "random-16",
+      "control": "random-16-matched-blend",
+      "metric": "lpips",
+      "delta": -0.0004355420715000946,
+      "ci95": [
+        -0.0006415685138563276,
+        -0.0002526099442548003
+      ]
+    },
+    {
+      "treatment": "random-16",
+      "control": "random-16-matched-blend",
+      "metric": "dists",
+      "delta": -0.000279904343187809,
+      "ci95": [
+        -0.0005574350943788886,
+        2.1913275122642176e-05
+      ]
+    },
+    {
+      "treatment": "random-16",
+      "control": "random-16-matched-blend",
+      "metric": "edge",
+      "delta": 7.011041050917919e-05,
+      "ci95": [
+        6.428658655174703e-05,
+        7.631292933457019e-05
+      ]
+    },
+    {
+      "treatment": "random-16",
+      "control": "random-16-matched-blend",
+      "metric": "mse",
+      "delta": 0.016404072443643822,
+      "ci95": [
+        0.008517869313557056,
+        0.023980259895325328
+      ]
+    },
+    {
+      "treatment": "random-32",
+      "control": "random-32-matched-blend",
+      "metric": "lpips",
+      "delta": -0.00016936055180849507,
+      "ci95": [
+        -0.00028430744641809723,
+        -6.626076901739003e-05
+      ]
+    },
+    {
+      "treatment": "random-32",
+      "control": "random-32-matched-blend",
+      "metric": "dists",
+      "delta": -5.1002949476242065e-05,
+      "ci95": [
+        -0.00025669727474451063,
+        0.00014561684802174565
+      ]
+    },
+    {
+      "treatment": "random-32",
+      "control": "random-32-matched-blend",
+      "metric": "edge",
+      "delta": 4.068196927463828e-05,
+      "ci95": [
+        3.7275440216553495e-05,
+        4.418829155628223e-05
+      ]
+    },
+    {
+      "treatment": "random-32",
+      "control": "random-32-matched-blend",
+      "metric": "mse",
+      "delta": 0.03488596280415873,
+      "ci95": [
+        0.030039175351460713,
+        0.03982412616411813
+      ]
+    },
+    {
+      "treatment": "moment-8",
+      "control": "random-8",
+      "metric": "lpips",
+      "delta": -0.0002667921044121613,
+      "ci95": [
+        -0.0009104736697281623,
+        0.00041168694879161144
+      ]
+    },
+    {
+      "treatment": "moment-8",
+      "control": "random-8",
+      "metric": "dists",
+      "delta": -0.0031776437535881996,
+      "ci95": [
+        -0.005370936333201825,
+        -0.0014696832047775398
+      ]
+    },
+    {
+      "treatment": "moment-8",
+      "control": "random-8",
+      "metric": "edge",
+      "delta": -0.00013142121444676726,
+      "ci95": [
+        -0.0001594149227648318,
+        -0.00011023719295788614
+      ]
+    },
+    {
+      "treatment": "moment-8",
+      "control": "random-8",
+      "metric": "mse",
+      "delta": -1.2021835645039878,
+      "ci95": [
+        -1.5195495883623749,
+        -0.9373439192771916
+      ]
+    },
+    {
+      "treatment": "moment-16",
+      "control": "random-16",
+      "metric": "lpips",
+      "delta": -0.0003908234050413739,
+      "ci95": [
+        -0.000818510307726683,
+        1.9980641275196765e-05
+      ]
+    },
+    {
+      "treatment": "moment-16",
+      "control": "random-16",
+      "metric": "dists",
+      "delta": -0.0028338907286524773,
+      "ci95": [
+        -0.004708587029017508,
+        -0.0014391800854355098
+      ]
+    },
+    {
+      "treatment": "moment-16",
+      "control": "random-16",
+      "metric": "edge",
+      "delta": -9.419704360502364e-05,
+      "ci95": [
+        -0.00011686365307714092,
+        -7.811384972251348e-05
+      ]
+    },
+    {
+      "treatment": "moment-16",
+      "control": "random-16",
+      "metric": "mse",
+      "delta": -0.66266139348348,
+      "ci95": [
+        -0.9468265970548004,
+        -0.4394812544186906
+      ]
+    },
+    {
+      "treatment": "moment-32",
+      "control": "random-32",
+      "metric": "lpips",
+      "delta": -0.0004430197711826622,
+      "ci95": [
+        -0.0007827267800166737,
+        -0.00012342741375164252
+      ]
+    },
+    {
+      "treatment": "moment-32",
+      "control": "random-32",
+      "metric": "dists",
+      "delta": -0.00228086207062006,
+      "ci95": [
+        -0.004076499096117914,
+        -0.0010557750472798945
+      ]
+    },
+    {
+      "treatment": "moment-32",
+      "control": "random-32",
+      "metric": "edge",
+      "delta": -5.957650753316012e-05,
+      "ci95": [
+        -8.035672940795999e-05,
+        -4.545572337837789e-05
+      ]
+    },
+    {
+      "treatment": "moment-32",
+      "control": "random-32",
+      "metric": "mse",
+      "delta": -0.4551726977030438,
+      "ci95": [
+        -0.7204974492390953,
+        -0.246968793869019
+      ]
+    }
+  ],
+  "validation_unmatched": [
+    "moment-8",
+    "moment-16",
+    "random-8",
+    "random-16",
+    "random-32"
+  ],
+  "glyph_q2": {
+    "eligible": 116,
+    "harmed": 10,
+    "recovered": 2,
+    "both_correct": 80,
+    "both_wrong": 24,
+    "accuracy_delta": -0.06896551724137931,
+    "family_cluster_ci95": [
+      -0.1391304347826087,
+      -0.00847457627118644
+    ],
+    "image_mcnemar_exact_p": 0.03857421875,
+    "mcnemar_caveat": "Images within a family are dependent; this p-value is descriptive only.",
+    "strata": [
+      {
+        "field": "font",
+        "value": "DejaVuSans.ttf",
+        "eligible": 60,
+        "base": 49,
+        "perceptual": 43
+      },
+      {
+        "field": "font",
+        "value": "Inconsolata-Regular.ttf",
+        "eligible": 56,
+        "base": 41,
+        "perceptual": 39
+      },
+      {
+        "field": "size",
+        "value": 10,
+        "eligible": 20,
+        "base": 9,
+        "perceptual": 8
+      },
+      {
+        "field": "size",
+        "value": 14,
+        "eligible": 32,
+        "base": 19,
+        "perceptual": 16
+      },
+      {
+        "field": "size",
+        "value": 20,
+        "eligible": 32,
+        "base": 31,
+        "perceptual": 28
+      },
+      {
+        "field": "size",
+        "value": 28,
+        "eligible": 32,
+        "base": 31,
+        "perceptual": 30
+      },
+      {
+        "field": "contrast",
+        "value": 64,
+        "eligible": 58,
+        "base": 35,
+        "perceptual": 28
+      },
+      {
+        "field": "contrast",
+        "value": 192,
+        "eligible": 58,
+        "base": 55,
+        "perceptual": 54
+      },
+      {
+        "field": "background",
+        "value": "flat",
+        "eligible": 58,
+        "base": 47,
+        "perceptual": 44
+      },
+      {
+        "field": "background",
+        "value": "texture",
+        "eligible": 58,
+        "base": 43,
+        "perceptual": 38
+      }
+    ]
+  },
+  "fresh_outputs_verified": 1472,
+  "source_hashes_verified": true
+}

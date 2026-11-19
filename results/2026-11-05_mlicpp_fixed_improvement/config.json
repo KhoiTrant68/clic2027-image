@@ -1,0 +1,43 @@
+{
+  "seed": 9041,
+  "quality": 2,
+  "rank": 8,
+  "grid": 2,
+  "coefficient_step": 0.015625,
+  "amplitude": 0.25,
+  "steps": 5000,
+  "batch_size": 4,
+  "learning_rate": 0.0001,
+  "pixel_weight": 10.0,
+  "lpips_weight": 1.0,
+  "edge_weight": 0.1,
+  "search_steps": 40,
+  "search_lr": 0.03,
+  "train_limit": 320,
+  "validation_limit": 32,
+  "test_limit": 32,
+  "modes": [
+    "fixed"
+  ],
+  "old_cache": "/home/jovyan/clic2027-artifacts/mlicpp/pilot20261104/div2k224-q2-crop256",
+  "synthesis_run": "/home/jovyan/clic2027-artifacts/mlicpp/full-synthesis-20261105/div2k-q2-full-synthesis-conditional-gan",
+  "test_data": "/home/jovyan/clic2027-artifacts/data/div2k/fixed-improvement-test32",
+  "upstream": "/home/jovyan/clic2027-image/refs/repos/MLIC",
+  "weights": "/home/jovyan/clic2027-artifacts/mlicpp/weights",
+  "wall_time_limit_s": 7200,
+  "reference": "Fixed innovation 1000-step checkpoint. Two factors: training 1000/5000 steps and encoder coefficient search 40/160 steps. Same architecture, init/order, loss and 46-byte packet. Fresh source IDs[322:354]. No tuning on earlier 32 test images. No novelty claim.",
+  "search_budgets": [
+    40,
+    160
+  ],
+  "reference_steps": 1000,
+  "smoke": false,
+  "parity_check": false,
+  "reference_run": "/home/jovyan/clic2027-artifacts/mlicpp/innovation-20261105/div2k-q2-conditional-fixed-pixel-new32-recovery",
+  "excluded_manifests": [
+    "/home/jovyan/clic2027-artifacts/data/div2k/pilot224/manifest.json",
+    "/home/jovyan/clic2027-artifacts/data/div2k/cvpr-holdout64/manifest.json",
+    "/home/jovyan/clic2027-artifacts/data/div2k/innovation-test32/manifest.json",
+    "/home/jovyan/clic2027-artifacts/data/div2k/innovation-new32/manifest.json"
+  ]
+}

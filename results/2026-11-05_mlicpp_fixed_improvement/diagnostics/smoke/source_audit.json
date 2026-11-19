@@ -1,0 +1,11 @@
+{
+  "images": 2,
+  "previous_sources": 0,
+  "disjoint_previous": true,
+  "source_crc_and_sha_verified": true,
+  "cached_target_matches_source_crop": true,
+  "template_equal_reference": true,
+  "train_validation_manifest_equal_reference": true,
+  "author_pretraining_overlap_audited": false,
+  "smoke": true
+}

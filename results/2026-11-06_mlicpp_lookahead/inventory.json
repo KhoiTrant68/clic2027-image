@@ -1,0 +1,50 @@
+{
+  "records": [
+    {
+      "name": "0586-0",
+      "source": "0586.png",
+      "split": "validation",
+      "x": 549,
+      "y": 1511,
+      "bytes": 2383,
+      "pixels": 65536,
+      "stream_sha256": "2b8074bf8fb923f648cadec48ca6944d93b53c29011d1ec2735ea7d7d929989a",
+      "feature_sha256": "e62c77e31d67f395dd77b297ed960fe8edc3ae6d02aba6468ea6d9082ffc5c52"
+    },
+    {
+      "name": "0214-0",
+      "source": "0214.png",
+      "split": "validation",
+      "x": 1625,
+      "y": 1010,
+      "bytes": 527,
+      "pixels": 65536,
+      "stream_sha256": "a28eb9b32026d492e1502856e09552f4e0525663df1a8e8d5ab5b75193cba497",
+      "feature_sha256": "9c70a05a4b609ef7048eb74c3fb651beb9e393b3153ddc8b6c83c2ff4d66ba09"
+    },
+    {
+      "name": "0239-0",
+      "source": "0239.png",
+      "split": "validation",
+      "x": 1615,
+      "y": 212,
+      "bytes": 543,
+      "pixels": 65536,
+      "stream_sha256": "4130e3704007b6dcef272f31c9186b56b59dbdddb83d907a20ed470ba43fc761",
+      "feature_sha256": "75b28fdc45681e171799e9046fc66596de7c64de69094bdce5fdbca8719d2d84"
+    },
+    {
+      "name": "0206-0",
+      "source": "0206.png",
+      "split": "validation",
+      "x": 803,
+      "y": 1071,
+      "bytes": 799,
+      "pixels": 65536,
+      "stream_sha256": "1fb97fa7e775e977446c3871fe4e69efdc577b4dd9d49f5f0f727095470e8d84",
+      "feature_sha256": "20d179d5f68c9558ff5bd24300e08feb6d831b57b6ef9b47bb4a69b419c6bbfd"
+    }
+  ],
+  "role": "reused development, not holdout",
+  "geometry_test_opened": false
+}

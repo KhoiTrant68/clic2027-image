@@ -27,3 +27,6 @@ desktop.ini
 
 # Local blind-scoring images, private assignments and human ratings
 results/blind-scoring*/
+
+# large evidence archives (keep locally / on Kaggle)
+*.tgz

@@ -1,0 +1,31 @@
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3483.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torch/_utils.py:776: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+prepared source 0 examples 192
+prepared source 1 examples 384
+prepared source 2 examples 576
+prepared source 3 examples 768
+prepared source 4 examples 960
+prepared source 5 examples 1152
+train 1 loss 0.9648696780204773 validation regret 0.001747114432532726
+train 100 loss 1.2412917613983154 validation regret 0.00042976145721240755
+train 200 loss 0.3451421856880188 validation regret 0.0004604566162242918
+train 300 loss 0.40637272596359253 validation regret 0.0005253252653574236
+train 400 loss 0.5539677143096924 validation regret 0.00033457497909239464
+train 500 loss 0.4198570251464844 validation regret 0.00033457497909239464
+train 600 loss 0.2998564839363098 validation regret 0.00020364916224480112
+train 700 loss 0.10306656360626221 validation regret 0.00025314108449947526
+train 800 loss 0.19547173380851746 validation regret 0.00025314108449947526
+train 900 loss 0.270413875579834 validation regret 0.0001518587265536553
+train 1000 loss 0.25347450375556946 validation regret 0.00025314108449947526
+train 1100 loss 0.23803606629371643 validation regret 0.00025314108449947526
+train 1200 loss 0.158505380153656 validation regret 0.00019188682165349746
+train 1300 loss 0.5199510455131531 validation regret 0.00012048570351907983
+train 1400 loss 0.13198840618133545 validation regret 0.00020135064880832942
+train 1500 loss 0.22534403204917908 validation regret 0.00019188682165349746
+train 1600 loss 0.13517364859580994 validation regret 0.0001018320724597288
+train 1700 loss 0.14806115627288818 validation regret 0.0001018320724597288
+train 1800 loss 0.1330316662788391 validation regret 4.753474394192381e-05
+train 1900 loss 0.15568485856056213 validation regret 0.0001018320724597288
+train 2000 loss 0.15070810914039612 validation regret 0.00015494624733491946

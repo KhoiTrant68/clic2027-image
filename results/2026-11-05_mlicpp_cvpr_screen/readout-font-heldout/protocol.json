@@ -1,0 +1,9 @@
+{
+  "train_test": "Leave one font out; no nuisance variants; 64 train and 64 test per fold.",
+  "frozen_readout": "1-NN Euclidean; train-only feature centering then per-vector L2 normalization.",
+  "target": "Four central glyph classes 6/8/E/F; chance 25% on balanced full set.",
+  "pixel_access": "Privileged generator geometry, same for source/base/perceptual probes.",
+  "symbol_access": "Whole actual entropy y/z symbols, unequal feature dimension vs pixel controls.",
+  "limitations": "Two fonts, tiny synthetic distribution, known alignment, no statistical equivalence of representations. Neither failure nor success proves information loss/sufficiency.",
+  "source_sha256": "62692672004dca8e5e91337f976af086d10c469eec286d8c7945edfb72718d68"
+}

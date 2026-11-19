@@ -1,0 +1,155 @@
+VRAM guard {'total_mib': 46068, 'initial_used_mib': 1247, 'allocator_cap_mib': 18432, 'device_limit_mib': 23034.0, 'physical_gpu': '0', 'shared_small': False, 'process_limit_mib': None}
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+[
+  {
+    "name": "moment-8",
+    "method": {
+      "kind": "moment",
+      "block": 8
+    },
+    "control": {
+      "kind": "blend",
+      "alpha": 1.0
+    },
+    "matched_validation": false,
+    "validation_target": {
+      "kind": "moment",
+      "block": 8,
+      "lpips": 0.11601726079970831,
+      "edge": 0.027259656805175093
+    },
+    "validation_control": {
+      "kind": "blend",
+      "alpha": 1.0,
+      "lpips": 0.1166291531335446,
+      "edge": 0.027293012365536495
+    }
+  },
+  {
+    "name": "moment-16",
+    "method": {
+      "kind": "moment",
+      "block": 16
+    },
+    "control": {
+      "kind": "blend",
+      "alpha": 1.0
+    },
+    "matched_validation": false,
+    "validation_target": {
+      "kind": "moment",
+      "block": 16,
+      "lpips": 0.11635717887111241,
+      "edge": 0.027269763156998913
+    },
+    "validation_control": {
+      "kind": "blend",
+      "alpha": 1.0,
+      "lpips": 0.1166291531335446,
+      "edge": 0.027293012365536495
+    }
+  },
+  {
+    "name": "moment-32",
+    "method": {
+      "kind": "moment",
+      "block": 32
+    },
+    "control": {
+      "kind": "blend",
+      "alpha": 1.0
+    },
+    "matched_validation": true,
+    "validation_target": {
+      "kind": "moment",
+      "block": 32,
+      "lpips": 0.11659771500126226,
+      "edge": 0.027275296447980744
+    },
+    "validation_control": {
+      "kind": "blend",
+      "alpha": 1.0,
+      "lpips": 0.1166291531335446,
+      "edge": 0.027293012365536495
+    }
+  },
+  {
+    "name": "random-8",
+    "method": {
+      "kind": "random",
+      "block": 8
+    },
+    "control": {
+      "kind": "blend",
+      "alpha": 1.0
+    },
+    "matched_validation": false,
+    "validation_target": {
+      "kind": "random",
+      "block": 8,
+      "lpips": 0.11607867275597528,
+      "edge": 0.02737890431014113
+    },
+    "validation_control": {
+      "kind": "blend",
+      "alpha": 1.0,
+      "lpips": 0.1166291531335446,
+      "edge": 0.027293012365536495
+    }
+  },
+  {
+    "name": "random-16",
+    "method": {
+      "kind": "random",
+      "block": 16
+    },
+    "control": {
+      "kind": "blend",
+      "alpha": 1.0
+    },
+    "matched_validation": false,
+    "validation_target": {
+      "kind": "random",
+      "block": 16,
+      "lpips": 0.11630099795002025,
+      "edge": 0.027351190923162565
+    },
+    "validation_control": {
+      "kind": "blend",
+      "alpha": 1.0,
+      "lpips": 0.1166291531335446,
+      "edge": 0.027293012365536495
+    }
+  },
+  {
+    "name": "random-32",
+    "method": {
+      "kind": "random",
+      "block": 32
+    },
+    "control": {
+      "kind": "blend",
+      "alpha": 1.0
+    },
+    "matched_validation": false,
+    "validation_target": {
+      "kind": "random",
+      "block": 32,
+      "lpips": 0.11638741845672484,
+      "edge": 0.02732707816454809
+    },
+    "validation_control": {
+      "kind": "blend",
+      "alpha": 1.0,
+      "lpips": 0.1166291531335446,
+      "edge": 0.027293012365536495
+    }
+  }
+]

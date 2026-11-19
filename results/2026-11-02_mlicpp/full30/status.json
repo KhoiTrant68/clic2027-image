@@ -1,0 +1,12 @@
+{
+  "state": "complete",
+  "fresh_pixel_parity": true,
+  "images": 30,
+  "qualities": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "metrics": true
+}

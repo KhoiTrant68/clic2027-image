@@ -1,0 +1,14 @@
+{
+  "seed": 9041,
+  "reference_run": "/home/jovyan/clic2027-artifacts/mlicpp/geometry-20261105/div2k-q2-diagonal-geometry-distill1000-new16",
+  "upstream": "/home/jovyan/clic2027-image/refs/repos/MLIC",
+  "weights": "/home/jovyan/clic2027-artifacts/mlicpp/weights",
+  "train_sources": 8,
+  "validation_sources": 8,
+  "scalar_candidates": 40,
+  "sweeps": 2,
+  "log_step": 0.12,
+  "lambda_mse": 0.0035,
+  "factors": [0.8, 1.0, 1.25, 1.6],
+  "wall_time_limit_s": 5400
+}

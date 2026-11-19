@@ -1,0 +1,5 @@
+{
+  "worker": 5,
+  "groups": 32,
+  "examples": 1152
+}

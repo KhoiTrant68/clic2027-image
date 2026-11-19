@@ -1,0 +1,20 @@
+{
+  "completed": 192,
+  "total": 192,
+  "seconds": 199.69166983105242,
+  "last": {
+    "name": "063-nuisance",
+    "bytes": 319,
+    "bpp": 0.0389404296875,
+    "stream_sha256": "83c045d7dadf80d0a63811bb12000a970f5e982ac9a7376d64f6c08b5a832605",
+    "symbol_sha256": "55a2ad157b8ec3bca0dd1c7b3779b2d5b63a2a29b57f2361fea63bf44498b1eb",
+    "y_symbols": 81920,
+    "z_symbols": 3072,
+    "base_pixel_sha256": "e74fa41f8659eeb9436382b6af95fcc2c2af54b28788a324425e085698cb6f1b",
+    "base_ocr": "ABEDE",
+    "base_correct": true,
+    "perceptual_pixel_sha256": "5971a54bbea2bbddbfa30ca2c63f41d58bc6c52b3be05a0c5636a152ce326be5",
+    "perceptual_ocr": "ABEDE",
+    "perceptual_correct": true
+  }
+}

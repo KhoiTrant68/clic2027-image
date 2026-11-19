@@ -1,0 +1,9 @@
+{
+  "total_mib": 24576,
+  "initial_used_mib": 1924,
+  "allocator_cap_mib": 8316,
+  "device_limit_mib": 12288.0,
+  "physical_gpu": "2",
+  "shared_small": false,
+  "process_limit_mib": null
+}

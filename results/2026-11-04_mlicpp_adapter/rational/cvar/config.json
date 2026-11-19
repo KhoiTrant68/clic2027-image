@@ -1,0 +1,11 @@
+{
+  "mode": "cvar",
+  "parameters": 34113,
+  "seed": 1984,
+  "steps": 1000,
+  "data_order": "Python Random(seed) replacement; shared across arms",
+  "checkpoint_selection": "fixed final step; validation logging only",
+  "architecture": "identical in all three arms; CVaR/head supervision differ",
+  "reference": "pilot_q2.json hard-clipped surrogate; identical streams/features/checkpoint, seed, initialization, batches, optimizer and steps. Separate cohort, no merging metrics across transforms.",
+  "intentional_changes": "Only replace hard clipping by bounded monotone rational transform and convert initial tau consistently. Change motivated by validation CVaR saturation at 1, before inspecting test outcomes; rerun all three arms, no hyperparameter selection on test. Still legacy q2, no GAN, no L4/human/OCR."
+}

@@ -1,0 +1,3660 @@
+{
+  "seed": 2037,
+  "rows": [
+    {
+      "name": "000-a",
+      "family": 0,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "c8f509b11d876f29b4ad54b9e1144ee67d15f45ba772aca30cfc36ced1db0dea"
+    },
+    {
+      "name": "000-b",
+      "family": 0,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABSDE",
+      "source_ocr_correct": false,
+      "sha256": "77c54fc3da5461e7d5677cfd93cd9c4430471755257003db85e2d0341d16b7c3"
+    },
+    {
+      "name": "000-nuisance",
+      "family": 0,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "8404f89b7d58d639872a3f6771dc3b643c55547e1b7f1cb10d82876b483a877a"
+    },
+    {
+      "name": "001-a",
+      "family": 1,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "36010195d3bfa7865537f800ea9708afcbb6f685132adc44132702c38488feee"
+    },
+    {
+      "name": "001-b",
+      "family": 1,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "df7f437ed85d319cd8574353618023f4583236bcb51b2519bae8fdb866a17bfd"
+    },
+    {
+      "name": "001-nuisance",
+      "family": 1,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "3599c70b9c9a4da34fdabe1dbd805ba38e6dc73343542725d17d22e2c3395b25"
+    },
+    {
+      "name": "002-a",
+      "family": 2,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "7663ce205bc4d239cbe712fd906560fd11968808de82401abfbbe07d83942b11"
+    },
+    {
+      "name": "002-b",
+      "family": 2,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABSDE",
+      "source_ocr_correct": false,
+      "sha256": "abd3faea66b2512fca886d3af3639b4cbaafd5e710526dbf9e66c68c4795461c"
+    },
+    {
+      "name": "002-nuisance",
+      "family": 2,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "4bd72f04318fadf10fc1b9c73ac427aaab717f8edbe9ff2e688992c16aa5009c"
+    },
+    {
+      "name": "003-a",
+      "family": 3,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "305ca557d274ee35f3b455bb7c5b6ab052079f0bfe6bdb4bc46d96cabff553be"
+    },
+    {
+      "name": "003-b",
+      "family": 3,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "f38f4d941681b3307efe976cee7889e7db5539764e56109f052226fadfa18dbd"
+    },
+    {
+      "name": "003-nuisance",
+      "family": 3,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "307038b50d5e2151f761134daafb73f54be73be429a8477be7f75d0a39ee6f9c"
+    },
+    {
+      "name": "004-a",
+      "family": 4,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "9d9f3cc4274f218b22eeb8e241a6bd02aba5725e30ee99e792319e015329e6c1"
+    },
+    {
+      "name": "004-b",
+      "family": 4,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABSDE",
+      "source_ocr_correct": false,
+      "sha256": "cf6ea9ec4ae16676be2d91948af865b4b62392155c24a31b865faa144ac74706"
+    },
+    {
+      "name": "004-nuisance",
+      "family": 4,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "148724a944b54b5f1964d54d21029a1ad2b0e42290c66fe6ee0c56cc30e3c81d"
+    },
+    {
+      "name": "005-a",
+      "family": 5,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "37d80976b77ec2907e3b3ec77bc4a94e656ce2ee186f37cbb69483f9d10dfe5f"
+    },
+    {
+      "name": "005-b",
+      "family": 5,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "a1e17daf86878e9ecf13838b4ab49661e3d9b0c9eb39bc9a31129f1f8efd0f21"
+    },
+    {
+      "name": "005-nuisance",
+      "family": 5,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "f2f91091941fd43ba9b4c665774f509e7396a67137c05120fbabb5d0b228045c"
+    },
+    {
+      "name": "006-a",
+      "family": 6,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "b65f96d517e0cc4bf66218dfd4ea7d4389e0d9021015d49ea2fc05c67e1cc70e"
+    },
+    {
+      "name": "006-b",
+      "family": 6,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABSDE",
+      "source_ocr_correct": false,
+      "sha256": "3d51733d1c423ab6b236f61d52aed29718e3f798630efd60f581af9d4fcdcbc4"
+    },
+    {
+      "name": "006-nuisance",
+      "family": 6,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "5d022979db049992f849ebfe73025bc76233bde3d3f841bcb63e9f51431a4dbf"
+    },
+    {
+      "name": "007-a",
+      "family": 7,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "d5320fd2732a0afd987df4921dda9cb0bc8c94e2602b460fbf8a4282bbecc788"
+    },
+    {
+      "name": "007-b",
+      "family": 7,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "2f6e629c200f58a743b238e7e772f63ae29b4cd2936944bea207c8b9ef7092ae"
+    },
+    {
+      "name": "007-nuisance",
+      "family": 7,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        97,
+        115,
+        160,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "307d60d223d379cda5f9d7fa7a5ef29e712df1324b93f5a619c764ce62243411"
+    },
+    {
+      "name": "008-a",
+      "family": 8,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "f00b5e51e418099ba9e6e2c40a895f4993678f2f393da669f5e85bafd137ab2d"
+    },
+    {
+      "name": "008-b",
+      "family": 8,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "dc8a26d48d8d0dd13b039b7d6d314b9f58feca6b759a7ddad1c8cc39fb97e09f"
+    },
+    {
+      "name": "008-nuisance",
+      "family": 8,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "5f5636211b8d12097d53a13f74e2347980888275e4cabec462f0b3264f04dff2"
+    },
+    {
+      "name": "009-a",
+      "family": 9,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "1e747efe8b6451a108089f102f99c3010ba15def24b9c5047826509a9d48e6ac"
+    },
+    {
+      "name": "009-b",
+      "family": 9,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "33c8e3c164b4061821cf02775dbf6325d80cbcf78073f36bcc182cde38b6cc5b"
+    },
+    {
+      "name": "009-nuisance",
+      "family": 9,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "153643f7bd09368fcaf07066b03d8eb17a1ba6f51b8d754a1d422f6b92d165dc"
+    },
+    {
+      "name": "010-a",
+      "family": 10,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "92e6ba5d57da724b1180b1a8a37f9b49a0d8ddf333de62d4d5e655e91156a857"
+    },
+    {
+      "name": "010-b",
+      "family": 10,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "505ed21a483ac5065410c5d32e8de596e3b026a581a65b0d8f5d0335bf820f31"
+    },
+    {
+      "name": "010-nuisance",
+      "family": 10,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "7c60ee90bc07e3baae549b8ba376a20814122fc2ee6770bdc0269d1395329495"
+    },
+    {
+      "name": "011-a",
+      "family": 11,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "dc317fa1336ccbe58847c5a45db04b7f417d75612873fc821a98234db405bf84"
+    },
+    {
+      "name": "011-b",
+      "family": 11,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "f73d0a3ed916e916963d148bd165eeb0206cd0c937af1b7e1ea81519d5a73667"
+    },
+    {
+      "name": "011-nuisance",
+      "family": 11,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "abc3fde35d60662681d408219d7dd5e088697416d576e00f08ffd5eade66b4e3"
+    },
+    {
+      "name": "012-a",
+      "family": 12,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "9abb6cde80c545545dee7e5111d4d671ba2af1826492b5d63b32469f8f79861f"
+    },
+    {
+      "name": "012-b",
+      "family": 12,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "168378fb5b98982eac1280990e8bcf24e2b7cf49012991b0fce811d6de2ef3c3"
+    },
+    {
+      "name": "012-nuisance",
+      "family": 12,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "b2bfd0a68c4be74019e61fd903bf5f29cd0d08a2ae70e501f9eab9e8b66e00b9"
+    },
+    {
+      "name": "013-a",
+      "family": 13,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "338b7c48d7699b23ccf8114425da92b92b86fe5a98f13559b9285624cf29e6ae"
+    },
+    {
+      "name": "013-b",
+      "family": 13,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "5732fab8822c943dc39ff739478d8382d2481267670e1992cdce16ef785875ae"
+    },
+    {
+      "name": "013-nuisance",
+      "family": 13,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "9dd61ea476131ceebe5662859d3e546a5a90dac3b1db74edfc007d7d43f4d76c"
+    },
+    {
+      "name": "014-a",
+      "family": 14,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "97348359df02e3aef7f81f08a547db3976d96c07b5f4d0f9227bbb1f8062b803"
+    },
+    {
+      "name": "014-b",
+      "family": 14,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "74068a4504316c1ee5a8a6345c77fd0cee3a310d8e948cc01c99b1733cd71e6b"
+    },
+    {
+      "name": "014-nuisance",
+      "family": 14,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "e3a1c3ed985175ab1e7f5d93f57d0d4095365add57f087a1a34e0aa7d9b6affa"
+    },
+    {
+      "name": "015-a",
+      "family": 15,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "ddb60b51379adeef79ac0ace1f3388920eeca78fbd60b1b030ed7679a9dd30d0"
+    },
+    {
+      "name": "015-b",
+      "family": 15,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "d86c5c6781baa08dba1f5f335833971fda6279a2f80d7969abbd9ad997a1321c"
+    },
+    {
+      "name": "015-nuisance",
+      "family": 15,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        90,
+        113,
+        168,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "03a4f0746925862b56259de698e8d64d63e2110a268b8d50b870ded849bc2fe3"
+    },
+    {
+      "name": "016-a",
+      "family": 16,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "4b259e45187cd34c7dc4174fa76a685f266780337c319c9b278bd9e58333a45e"
+    },
+    {
+      "name": "016-b",
+      "family": 16,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "716a4ccfa9d01a22c56e1ce7ba0ba72f2d787f56174ef6147dd39e048ec6c8dc"
+    },
+    {
+      "name": "016-nuisance",
+      "family": 16,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "3881793787c13b9fdce10e2ac76dcd64fe6506634222842fa3b3c9501b1ffc1a"
+    },
+    {
+      "name": "017-a",
+      "family": 17,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "dc0e83639e2d3cc86a1392bee790fa938b444e4c3b275f88c9e3e034e128c388"
+    },
+    {
+      "name": "017-b",
+      "family": 17,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "eb696b3a850a47e3d3c5632f62a09e91a042828c57e0fe1615db47e730bb3e74"
+    },
+    {
+      "name": "017-nuisance",
+      "family": 17,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "ec5262ae4aed650d22de5f13ffed69a5b2f4fe1dc255a782774ad8f7dde6de24"
+    },
+    {
+      "name": "018-a",
+      "family": 18,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "fa44e2b20578bbaf2d504bb2e1130da315e20f86b40d398cf62fb7f1704bbb55"
+    },
+    {
+      "name": "018-b",
+      "family": 18,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "2b09e1e652bfe74619cc6d4aa2d0f7a8f233b30301514ae62ef94f62e83a6308"
+    },
+    {
+      "name": "018-nuisance",
+      "family": 18,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "84cbd79a41620953c697f41d7bf25a47d1b1023271300a0d021f3305b3e4bde8"
+    },
+    {
+      "name": "019-a",
+      "family": 19,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "2d3196b3b20011fa87382bc354bdfb9201f3e1c89a0b5c57fde0f7eb93b8c9bd"
+    },
+    {
+      "name": "019-b",
+      "family": 19,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "5d7f8426351b68b18e82d08fc3acf894557eed70d6a671e3f8eeb357998f10a4"
+    },
+    {
+      "name": "019-nuisance",
+      "family": 19,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "bc269c071459f36f6a1b7fccd879a7ca757a99f95776571b16fab5d8e69f8bad"
+    },
+    {
+      "name": "020-a",
+      "family": 20,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "0f1325450a0895d0cceb8fb0653635afc12692889835590b6f1082d44ddae68f"
+    },
+    {
+      "name": "020-b",
+      "family": 20,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "147489ba806a775a3e36e0f14810fcd5ea0e622cfc47ba37e4c9fe046654f427"
+    },
+    {
+      "name": "020-nuisance",
+      "family": 20,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "290969ad91867f6b0d147629a46da776583d72abd87cb3641464d7ec1419ef13"
+    },
+    {
+      "name": "021-a",
+      "family": 21,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "715c13d837923ff77fe7655b006d8f2236f20fe6138b204b297a7c7708557bed"
+    },
+    {
+      "name": "021-b",
+      "family": 21,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "2c8417652ee9b94d3626537e0e48e41fb41b45168a821c4d4faba0b088e3098c"
+    },
+    {
+      "name": "021-nuisance",
+      "family": 21,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "593510fa1ca85e6950cf49a6c5a90557c445d60af70a9aa6177cd49509894b8d"
+    },
+    {
+      "name": "022-a",
+      "family": 22,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "a41b874acc6e8717b79a2063563a8d4c194ec34e2ebff84ad4250744c3e3772d"
+    },
+    {
+      "name": "022-b",
+      "family": 22,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "a47473d6dc1a9d3f806ab08a0196748912c1186060e208ae1952704bc9f78039"
+    },
+    {
+      "name": "022-nuisance",
+      "family": 22,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "e85cf6a123f508e85aed75ef629db33e8e13e84ea7a207c6738ca655d64c1e12"
+    },
+    {
+      "name": "023-a",
+      "family": 23,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "34677b4dc073724c66169d1ae5c27923fed36753e5c82922f546621ac90b4448"
+    },
+    {
+      "name": "023-b",
+      "family": 23,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "2a9039a03bb59bbf95e6c3d103c88da312f1e607d886f0ceab197baa075397f9"
+    },
+    {
+      "name": "023-nuisance",
+      "family": 23,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        77,
+        110,
+        180,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "e2e2a4e628e795ed5137d721995eccb9b3e0529b6051efac8f9c842ae0651839"
+    },
+    {
+      "name": "024-a",
+      "family": 24,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "b118447580322cd75e0979f65fda696dcc22fa66045246d516db6d387a695e6b"
+    },
+    {
+      "name": "024-b",
+      "family": 24,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "d14c331953edb6bc14d85d6996fc84792213aca7cfeafbe2d1c183acb496b13d"
+    },
+    {
+      "name": "024-nuisance",
+      "family": 24,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "8b9a91a2e9b4700c1280767ef27db5f12225287328103746f186fd13911a1820"
+    },
+    {
+      "name": "025-a",
+      "family": 25,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "d2e2945f1835dfea729248e229fdb37742619db795815e2ea2aadedeb274d514"
+    },
+    {
+      "name": "025-b",
+      "family": 25,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "97cf3153a1e585eb092a2da371072401fad6f47ef522bc48657fe101ea6761af"
+    },
+    {
+      "name": "025-nuisance",
+      "family": 25,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "ed41e66133908599e558ca03dc425a18eab1e87777e80c37c9acbc463082176c"
+    },
+    {
+      "name": "026-a",
+      "family": 26,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "778491451a98627648021cf6f1bd8314d86c643c3c94b674a4b8fd365c9d7a57"
+    },
+    {
+      "name": "026-b",
+      "family": 26,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "fd296ed9cb3e00262932c78d062d22718eef9f48ad18c5a976cd159a8a21f723"
+    },
+    {
+      "name": "026-nuisance",
+      "family": 26,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "84389917132e465eac981270b0f9aeace2da4807fcb6dc999488aea29a2ad62a"
+    },
+    {
+      "name": "027-a",
+      "family": 27,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "84440af6ee5114c442e60a6c880332b0dbe850e54c91c6c9e2317f7926ead69c"
+    },
+    {
+      "name": "027-b",
+      "family": 27,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "d615f3cc9ca85f07e4e043b90c6227958b7ab72973afef126c372133aedc840a"
+    },
+    {
+      "name": "027-nuisance",
+      "family": 27,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "9f844058ed4d4c6a13d1010cd7bd4c50314c45d56bdcbcb6f6a26b2379d3995c"
+    },
+    {
+      "name": "028-a",
+      "family": 28,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "9979c5ea5154c29073282e92bba16fcc3da1b33c12eea0c46a6ce02fa59531d6"
+    },
+    {
+      "name": "028-b",
+      "family": 28,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "d3d64b594be7a656d5dc1e0bbc4de66a755cfe02e6a03cfe29f45c1cff8967c1"
+    },
+    {
+      "name": "028-nuisance",
+      "family": 28,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "bde2d162f9bceb920e2de551cafc623267831be035a4a31f6697fcdb2a39b5b3"
+    },
+    {
+      "name": "029-a",
+      "family": 29,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "95d8fb12734e9e804015e155f35650de5a61ca7caad16e6222654249299b607a"
+    },
+    {
+      "name": "029-b",
+      "family": 29,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "9e1c3026473bc548ec67c1a884c6df57b1962f1186b00b7d4d509131981b943e"
+    },
+    {
+      "name": "029-nuisance",
+      "family": 29,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "125bc78386ca8d42a20b6e5c3aed716624515a210b4f9b604ee7c7b7a3d873a1"
+    },
+    {
+      "name": "030-a",
+      "family": 30,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "aa85cb2633fe26b95eeb73f42ab0fd23da3709bb29cc79b64e939d598903f5b5"
+    },
+    {
+      "name": "030-b",
+      "family": 30,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "a24dad0118a272893e4465f71317003c1ca4194a588bbf777938aec2db2e428e"
+    },
+    {
+      "name": "030-nuisance",
+      "family": 30,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "a10deefc2bbd73c8ca21daa97719b90c6ee72d1fd17995de36c191b611fc2809"
+    },
+    {
+      "name": "031-a",
+      "family": 31,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "21b355066b957b515194dc56b06522d629ec7c8d0956757bae6e92d1b60f59ff"
+    },
+    {
+      "name": "031-b",
+      "family": 31,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "a6dbd403366dd843beb8f9a04d62a0f69347bc29e67697534cd0fbb4113c2379"
+    },
+    {
+      "name": "031-nuisance",
+      "family": 31,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "DejaVuSans.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        62,
+        106,
+        195,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "0f7e6c24a97cbcddb2e78fbc64681fe7fe96068cd9a56675a3a3a639f6e6fbf2"
+    },
+    {
+      "name": "032-a",
+      "family": 32,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABODE",
+      "source_ocr_correct": false,
+      "sha256": "a16f59e483cfda8e1c224c96bd8db69c9fbdd03973abfb48f3d3bca118dd6e60"
+    },
+    {
+      "name": "032-b",
+      "family": 32,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABSDE",
+      "source_ocr_correct": false,
+      "sha256": "79ddb9ce697b88f31fafe8eb56fd9e431d7d7a90c03c77dd98639725e7f28329"
+    },
+    {
+      "name": "032-nuisance",
+      "family": 32,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABODE",
+      "source_ocr_correct": false,
+      "sha256": "7c5a8b9b1e512cb46dcf9a7d5c6f26bd1e1a89c80a011160f648100567b60d92"
+    },
+    {
+      "name": "033-a",
+      "family": 33,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "73f7c4faa841b7e82cd6177af2a228e26d39ac19ed95b31d19361e3aaae527d7"
+    },
+    {
+      "name": "033-b",
+      "family": 33,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "63366e20e72a8d9cc7056a77e047bf95e5e98248eca5ea4b3c3b5ed2ad916503"
+    },
+    {
+      "name": "033-nuisance",
+      "family": 33,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "f72eadfb10458da8dd8bf7fd7a91e5b54076ac99aac4a9d13f5450413bac03eb"
+    },
+    {
+      "name": "034-a",
+      "family": 34,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABODE",
+      "source_ocr_correct": false,
+      "sha256": "8328747aa425985a4641bb7f42ac9c7aee76d6d9fb588713a4b9f3a9d907dd00"
+    },
+    {
+      "name": "034-b",
+      "family": 34,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABSDE",
+      "source_ocr_correct": false,
+      "sha256": "18a9f4ed678f2d503257f3df30f1f65406e3dafbfc354175c6ca1c053dd6aceb"
+    },
+    {
+      "name": "034-nuisance",
+      "family": 34,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABODE",
+      "source_ocr_correct": false,
+      "sha256": "7a5a9b16eb1cc4a75a3789102562cc12c596fbfb40e3ec520ce0ea303ca5cfdf"
+    },
+    {
+      "name": "035-a",
+      "family": 35,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "20695cb99248379603b255d5304edc3b113155f8e2c9230913283051bd2fa357"
+    },
+    {
+      "name": "035-b",
+      "family": 35,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "c87061384ee1a77a53f9316dc28348904d04d7895561f6a41fbcf0af5f65dc20"
+    },
+    {
+      "name": "035-nuisance",
+      "family": 35,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "02af36b116cab7ce19f0fd200841b504372869de2fdfcffe439f934f61961164"
+    },
+    {
+      "name": "036-a",
+      "family": 36,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABODE",
+      "source_ocr_correct": false,
+      "sha256": "3b0523612ed1a578debad02d0479f4d5424541f4a4b3ac04fb06456167858686"
+    },
+    {
+      "name": "036-b",
+      "family": 36,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABS8DE",
+      "source_ocr_correct": false,
+      "sha256": "00ab0bdf89847d5ad2d4f82e4d0f50dee47c3806daeab692d355cdc2a04e39c7"
+    },
+    {
+      "name": "036-nuisance",
+      "family": 36,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABODE",
+      "source_ocr_correct": false,
+      "sha256": "3e8e45433cf114c04685b50d72bb16a63e84de872e7668e61f6bad75872decc3"
+    },
+    {
+      "name": "037-a",
+      "family": 37,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "e0d7a71362d69fc068d338e96736956f88b06fe4de4cf39bc043805b750174f2"
+    },
+    {
+      "name": "037-b",
+      "family": 37,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "2a403e54e62131d33eba27c3023f58fbbe6aee5ab4f25bd28c2b045d0efe9054"
+    },
+    {
+      "name": "037-nuisance",
+      "family": 37,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "bc3dbcd7c6ad61a21872faf1314837df8c55d23c037acd208e8b02b66b9c44b1"
+    },
+    {
+      "name": "038-a",
+      "family": 38,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABODE",
+      "source_ocr_correct": false,
+      "sha256": "40877950fdc8c8aaf170a796b10825b2a26440cbf11bd225d2481a15cbeebce6"
+    },
+    {
+      "name": "038-b",
+      "family": 38,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABSDE",
+      "source_ocr_correct": false,
+      "sha256": "b23dca6c8b5b1edb75de6c65513ed83377a2644a908c2b3d40feb09ff1cf2baa"
+    },
+    {
+      "name": "038-nuisance",
+      "family": 38,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABODE",
+      "source_ocr_correct": false,
+      "sha256": "d8337e12595d9aadbb7f3e7c905a6c7d508ed5d8e4cde7c9d08451b6dd563877"
+    },
+    {
+      "name": "039-a",
+      "family": 39,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "93687298a76f18c8c86b7f6a3068b017c3841d84329d4b838bb32b896478862a"
+    },
+    {
+      "name": "039-b",
+      "family": 39,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "82d573e4890a2da5dd7d09021063d04539f747a2e40308fc8cd8941003e17d63"
+    },
+    {
+      "name": "039-nuisance",
+      "family": 39,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 10,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        105,
+        115,
+        153,
+        145
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "4e515b0ef316835b5ca9bff8810443d3f717453a4bc71ae41f2be8e3d9384578"
+    },
+    {
+      "name": "040-a",
+      "family": 40,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "d8059610544716bf9b2b009b79e53c7a1db99b742e12bd52ec9790a8662b04f7"
+    },
+    {
+      "name": "040-b",
+      "family": 40,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "afc1a04ed6d5dfea638d820d6c0518f4d665d40f1559d953b72afc7de2e682c3"
+    },
+    {
+      "name": "040-nuisance",
+      "family": 40,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "b06424ca9d7100fb8209d43afda4b24498101ba7a9181fb0b3ad585ac3b06859"
+    },
+    {
+      "name": "041-a",
+      "family": 41,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "c79c350db1268f15df434af765f9754d66e87605f3679b3e2ee21e9b13bdc457"
+    },
+    {
+      "name": "041-b",
+      "family": 41,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "2d36ebb81e1a2ccc0b63a34d255ed303f28d10f15c11480b194ed894b23f274e"
+    },
+    {
+      "name": "041-nuisance",
+      "family": 41,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "09d64653d55d5589e30ad4ac7b353ea45f84f8b191da2a27e88650b6eb28a943"
+    },
+    {
+      "name": "042-a",
+      "family": 42,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "12338f8b3134202b1c8af2b2ad44b209a66d8a3987e1fc740dbbd303741d3afe"
+    },
+    {
+      "name": "042-b",
+      "family": 42,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "6d093b38a7640d82afce57e8880a4d07d1af277ded47197609d44f71468230c9"
+    },
+    {
+      "name": "042-nuisance",
+      "family": 42,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "d7fb4788f258834e7d6ad6733849e2dad1a75674e8f56b3eec368344eaddf93e"
+    },
+    {
+      "name": "043-a",
+      "family": 43,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "6a6c2eeb1307eea84588add4209504ed6ca2f011c9a3b5f6841bb8949ce1736a"
+    },
+    {
+      "name": "043-b",
+      "family": 43,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "d4d12a959849704037e4998820b4464997eeaf2652ab4ca423484151c7e425ef"
+    },
+    {
+      "name": "043-nuisance",
+      "family": 43,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "ca9a5e6e9dabe69bcdeb19c6820763de9f7974f5e9e3791aa1feb59dd8edf573"
+    },
+    {
+      "name": "044-a",
+      "family": 44,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "7b307fe35862e85e8500972d67eab73949413f9ccd48685a74d41391d16afab2"
+    },
+    {
+      "name": "044-b",
+      "family": 44,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "b495f3284f5e5e8aab5a7fa26b415f4cf1450711a3b5e59a10907580c15bdcf7"
+    },
+    {
+      "name": "044-nuisance",
+      "family": 44,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "460c5dd280a96301ba53d65b71e50658558ae8fb8b3ecf675e6dc84af3fe8278"
+    },
+    {
+      "name": "045-a",
+      "family": 45,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "81ed66236b758cda9ec0b498031cfcd1e9a10f3a6b875d490896304bbac5f8d0"
+    },
+    {
+      "name": "045-b",
+      "family": 45,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "ff1f575f2033b5aa8e7f7dd73c8c8d5dca576b12d5f9ca943946156863a258fa"
+    },
+    {
+      "name": "045-nuisance",
+      "family": 45,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "7535eb5019a78f117c1307fab26424ac2b40bd467a53f261dd06c9eb70198b20"
+    },
+    {
+      "name": "046-a",
+      "family": 46,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "cfe6f88b3e095eaea0323ef1d9bf411bfaa1fd5aa1e11851176f46a1d26fc006"
+    },
+    {
+      "name": "046-b",
+      "family": 46,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "85c4701d0f2bace88fd3e7c8ad5c39c0b2fdb48f779e0d02ee110a161713a9bf"
+    },
+    {
+      "name": "046-nuisance",
+      "family": 46,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "10bd5159cfa0f6516616ac8db7c11b575d75633ee9fad869510d3444519616ca"
+    },
+    {
+      "name": "047-a",
+      "family": 47,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "307410b079b86a2e99869a2e7166c2650655b8fcb881b36a1e6b3dfd347008e3"
+    },
+    {
+      "name": "047-b",
+      "family": 47,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "9fae4762269c0eb35257027d2238c0d3e2de3efa2cf9fdc782703da911691768"
+    },
+    {
+      "name": "047-nuisance",
+      "family": 47,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 14,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        100,
+        113,
+        158,
+        147
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "5a0d1f3e31774efc56c29403e1d2be577277bca645a14992ef06d7154d63f73c"
+    },
+    {
+      "name": "048-a",
+      "family": 48,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "58db7cbd5712c61ae6bd27dd7ae80e6b7fc534bcc8593e6d0e741f1d95c72cc2"
+    },
+    {
+      "name": "048-b",
+      "family": 48,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "acf8fd40d9d69dc4c391822940991ab9b090a201cba40d79cea56f7d718bd9d6"
+    },
+    {
+      "name": "048-nuisance",
+      "family": 48,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "87b2f8e70b4267471e92a3b604fec045fd78b1032b86b9f3c545c96f29b98e40"
+    },
+    {
+      "name": "049-a",
+      "family": 49,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "d244a3c63bdad1192fcdac22bd7c504659587dcf8faeb48d37e6e43cc7a488ac"
+    },
+    {
+      "name": "049-b",
+      "family": 49,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "8d8734ad670aae2cea9c95dd9f8c4fab93d4a89cbc5dab1fadf6f9e76a5663dc"
+    },
+    {
+      "name": "049-nuisance",
+      "family": 49,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "d46a5c39f58944dfd4ee22a9d4c9812a36c54ec71c8a417023f5d7cfd222732b"
+    },
+    {
+      "name": "050-a",
+      "family": 50,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "06371528b8918f8fb5aa98ffdf31b7a6022e4ab696fcb8051cb4c2704feb5dcf"
+    },
+    {
+      "name": "050-b",
+      "family": 50,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "4247f54396afa05d9800f70c6e3e9850b615404b652d9428cd0831ff49f2e779"
+    },
+    {
+      "name": "050-nuisance",
+      "family": 50,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "1d931e521d9a83f46fff8e6ef1e6f94f221358127c8be274d172134c0c3b9ded"
+    },
+    {
+      "name": "051-a",
+      "family": 51,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "29a6fdfcea52d3da08a36a82a5d9c0424213757c9aede344e7fae78ffd54e161"
+    },
+    {
+      "name": "051-b",
+      "family": 51,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "b16ef145de88e3ea8b0c1335e76fd7b7992d996d70d013ec3a32c6de6f2615db"
+    },
+    {
+      "name": "051-nuisance",
+      "family": 51,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "5311b24b04aeaa1224ba6b685ee92e308bbf7f9538e00fd0f6458b21d2f7b18e"
+    },
+    {
+      "name": "052-a",
+      "family": 52,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "9cf14b20cf44466b2ffb7fbf68add5dd0e68aca2a193dafc2eab7de9e8e62dae"
+    },
+    {
+      "name": "052-b",
+      "family": 52,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "8a8f3962681802b7fd54039ae081bd5f0fb01da513bce1b04b0ee9ef926ae0ee"
+    },
+    {
+      "name": "052-nuisance",
+      "family": 52,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "ad9413bb7265e0d229b9fa1352c614a9df7ffca2c901f1702ee20cd132b8b991"
+    },
+    {
+      "name": "053-a",
+      "family": 53,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "4c46663289f85fc324e1c4422b64fa7117ff7bac1ee648beac02bff21d8c3e75"
+    },
+    {
+      "name": "053-b",
+      "family": 53,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "940ea6ac8808fea1aad4f2c115a9c21e2289c2aa209b42829d159a5eb1dc412b"
+    },
+    {
+      "name": "053-nuisance",
+      "family": 53,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "03ea0e365afac61944414c90c89934029361e38e9a0b549a5e5cd8a4c775fc96"
+    },
+    {
+      "name": "054-a",
+      "family": 54,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "e6e0a5e3bb6e220c2ed1f3c2daf6eb36456479515becf969eaf98a0272bb66ad"
+    },
+    {
+      "name": "054-b",
+      "family": 54,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "d922c446f7835bdc22a68d69541eb30c0d873718266307e1c3df4def41e4b6e8"
+    },
+    {
+      "name": "054-nuisance",
+      "family": 54,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "a43646750613adfa67ec9aaa32cbc6f50c020867d03fc2e91ab25371780d9a88"
+    },
+    {
+      "name": "055-a",
+      "family": 55,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "515124199dea6cbc87202f1de7f3ba670d03559fb0fdba154e5eb0bba4e076dd"
+    },
+    {
+      "name": "055-b",
+      "family": 55,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "5dfcd3bc75e41e6eeff328858d7e438d86f522e4f17c9d163e7bdecc66f0d8b6"
+    },
+    {
+      "name": "055-nuisance",
+      "family": 55,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 20,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        92,
+        110,
+        165,
+        150
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "1aab43cf7e8e9bc9e820c8489c0e6d99bf72b7040410d15baeb23c998b40d3a5"
+    },
+    {
+      "name": "056-a",
+      "family": 56,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "073b232e0fa1761bcf31c009f39cd81d1c70aca628c5ac76e93821a651fb8f95"
+    },
+    {
+      "name": "056-b",
+      "family": 56,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "84ca6f89d3cf13bac03cd6a7bfa1aa73bfc8cddbe249811bb84fb879355184ba"
+    },
+    {
+      "name": "056-nuisance",
+      "family": 56,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "3be60c20904f9aafc4fe18834278d750a0bc14588c1915035a20e414bcd6fef3"
+    },
+    {
+      "name": "057-a",
+      "family": 57,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "b21b4469ec0950753178bf304b47d079662503cac83a2ff3e3a167016074b869"
+    },
+    {
+      "name": "057-b",
+      "family": 57,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "b54a74e37e52fa8f20eb28c052cc5c2f9f6a87dbe8fddda7c7b21b611427e755"
+    },
+    {
+      "name": "057-nuisance",
+      "family": 57,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "261501ab16b7dc495c1474270ed51f838a16efb16576b37a61122b12d76f8cb2"
+    },
+    {
+      "name": "058-a",
+      "family": 58,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "df8f5218804c0aec9be13daf103a35bf131dd78d19bf50c7c05c401152b1e6b7"
+    },
+    {
+      "name": "058-b",
+      "family": 58,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "d462212a0b5d13e1a97e5f4eaf26e211e3c8d369e9eda6f34f672b2a1cc4a0db"
+    },
+    {
+      "name": "058-nuisance",
+      "family": 58,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "45a95e89137450ecfd04a12d44a75a2b94683f960c69b83854a76ebf67b9ba5f"
+    },
+    {
+      "name": "059-a",
+      "family": 59,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "4fd44a3f34ce6f37b1acc45e9dc40a5f20afdfb1f842df6269a0b9f1d379e631"
+    },
+    {
+      "name": "059-b",
+      "family": 59,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "c95535bc55051753368d297f01b5eb59054bc8de1514304c0622a51d4bbeb96c"
+    },
+    {
+      "name": "059-nuisance",
+      "family": 59,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 64,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "f8178da21444e33ff48b7c17660f90464b11d677e5e17448677d1bcbf23710d9"
+    },
+    {
+      "name": "060-a",
+      "family": 60,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "5b7dd03e77a699d9f76248537892d643f908a1cc381f93737ba68e6daabb4379"
+    },
+    {
+      "name": "060-b",
+      "family": 60,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "36ab24dd3bb91e01f92f340f7332217e9b65532deae374bfda1fd405ccd1f020"
+    },
+    {
+      "name": "060-nuisance",
+      "family": 60,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "0c2594fbea329ae4d9514accc96d9571a6ea6d2f42b2adf3aa2800bb6bf592b5"
+    },
+    {
+      "name": "061-a",
+      "family": 61,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "6f651eaefc93abafccc26d19e9307a3f4bf0918b6cd6ec7d646db5fc2fac2e62"
+    },
+    {
+      "name": "061-b",
+      "family": 61,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "b02662f1e632dd9a796fd8681c6777381766f7443e0b05247d25642f690a8b5c"
+    },
+    {
+      "name": "061-nuisance",
+      "family": 61,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "flat",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "56047e85337d304a62479da14c307e06848121045c0fa9643689b1478d7cb161"
+    },
+    {
+      "name": "062-a",
+      "family": 62,
+      "variant": "a",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "5f695191c55a130e4a382dfbc351d984cb9c6c2482c94219e186a66043cd7baf"
+    },
+    {
+      "name": "062-b",
+      "family": 62,
+      "variant": "b",
+      "label": "AB8DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB8DE",
+      "source_ocr_correct": true,
+      "sha256": "ad3a4bd841990e0d76b2b9816354964b56f37fa75e926edf6d84465020e3012f"
+    },
+    {
+      "name": "062-nuisance",
+      "family": 62,
+      "variant": "nuisance",
+      "label": "AB6DE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "AB6DE",
+      "source_ocr_correct": true,
+      "sha256": "6b3e508da25100decb6cd3e076e0002b4ec0ec79c54db485d3456c015fd25d9d"
+    },
+    {
+      "name": "063-a",
+      "family": 63,
+      "variant": "a",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "97bc6d46a5a69e5d7ee1abed54cb9f74864f15dd5aed7027e97eb91cf397dbe5"
+    },
+    {
+      "name": "063-b",
+      "family": 63,
+      "variant": "b",
+      "label": "ABFDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABFDE",
+      "source_ocr_correct": true,
+      "sha256": "7224ed9dcfa7e5b2d27c96711d0bf9881449758a11e7b403809a210e2b864404"
+    },
+    {
+      "name": "063-nuisance",
+      "family": 63,
+      "variant": "nuisance",
+      "label": "ABEDE",
+      "font": "Inconsolata-Regular.ttf",
+      "size": 28,
+      "contrast": 192,
+      "background": "texture",
+      "bbox": [
+        82,
+        106,
+        175,
+        154
+      ],
+      "source_ocr": "ABEDE",
+      "source_ocr_correct": true,
+      "sha256": "1ad0af09793b05ccb1f54c89eb70e6f8dd89d0fa801c4ea21e42edb2e068aa03"
+    }
+  ],
+  "fonts": {
+    "DejaVuSans.ttf": "7da195a74c55bef988d0d48f9508bd5d849425c1770dba5d7bfc6ce9ed848954",
+    "Inconsolata-Regular.ttf": "127875d255d4c5973ca57267a43bb9d1c04397e6c7d236984a595b6cdcb12b7c"
+  },
+  "warning": "Procedural glyphs; OCR-correct originals are an operational filter, not human legibility certification",
+  "renderer": "fixed character cells; a/b differs only at one glyph; nuisance translates all glyphs by one pixel",
+  "ocr_version": "tesseract 5.5.3"
+}

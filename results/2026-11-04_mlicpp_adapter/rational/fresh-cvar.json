@@ -1,0 +1,143 @@
+{
+  "quality": 2,
+  "lambda_mse": 0.0035,
+  "legacy": true,
+  "checkpoint": "/home/jovyan/clic2027-artifacts/mlicpp/weights/mlicpp-mse-q2-legacy.pth.tar",
+  "checkpoint_sha256": "5577dcccc7d154c07b9cc14f222606717cac12ac263f569cba11b012994e9fde",
+  "upstream_sha": "4aa9d2a512eb9db382172058e6c278fb0d376e17",
+  "cudnn_v8_api_disabled": "1",
+  "parameters": 116716928,
+  "load_s": 3.613019548007287,
+  "mode": "cvar",
+  "matches": 32,
+  "images": [
+    {
+      "name": "0111-0",
+      "pixel_sha256": "61be4940b21a47cd1f10fa97c533d7ee90439b65711cbc4e4a91cddc5f189b34"
+    },
+    {
+      "name": "0225-0",
+      "pixel_sha256": "05c9545975576b75f7e1838c89b94330de89839736961945f223e8cedf187085"
+    },
+    {
+      "name": "0145-0",
+      "pixel_sha256": "e8ac62babfab2fc7124d5afd9260a3226eb41d22a07df633965b95817a5ca480"
+    },
+    {
+      "name": "0510-0",
+      "pixel_sha256": "6cd17fd69583895e94f4443135b615fe33abcda798b4a0667ebac74a04e7a70b"
+    },
+    {
+      "name": "0292-0",
+      "pixel_sha256": "0c47df1b408cfb6d3c3e706523307724dff1022fea4e06dd53904eccd463974c"
+    },
+    {
+      "name": "0732-0",
+      "pixel_sha256": "f7ce5f60af6c4b1179b5ab38f00e585998e42051f79dcf027dd76b05f6d4f30f"
+    },
+    {
+      "name": "0688-0",
+      "pixel_sha256": "48c8a7b23a50265bbc820580260b843056787fb060aca8072983408f764f6c00"
+    },
+    {
+      "name": "0072-0",
+      "pixel_sha256": "db86de1f8f92ad1f0436860ed06783fa7f668ecd12663f381b8cfbb8fb0b20ed"
+    },
+    {
+      "name": "0663-0",
+      "pixel_sha256": "b4331974abda8b06fd76bfc7dbad7158492e2cc6f51f4a32bbc528e38ad705bf"
+    },
+    {
+      "name": "0793-0",
+      "pixel_sha256": "2ebbab82e939a059db353b8b462e756cc10724c9844a0fe8c0bc4c7e8080360c"
+    },
+    {
+      "name": "0463-0",
+      "pixel_sha256": "63be9e1ff7c4035da4d53f9a336cf1de1efdaecb01d896b510136f07ae6c8368"
+    },
+    {
+      "name": "0308-0",
+      "pixel_sha256": "96bee2046ae29cca5050eb3fb6a88364945229a23fa75cef8115605c2f09cb62"
+    },
+    {
+      "name": "0649-0",
+      "pixel_sha256": "9f249ed1de28e098fab398afbb165772ae65217364285f32ff40ca07f73d9b75"
+    },
+    {
+      "name": "0525-0",
+      "pixel_sha256": "351c79b3ef17251dd64f01dad87a0deccca8b0614d670b2e60d02a5878f8e78d"
+    },
+    {
+      "name": "0694-0",
+      "pixel_sha256": "bcb65daeb1936b6df9b795fc3eb82e1cc159eb0b728ea2d8708e71c493aeb978"
+    },
+    {
+      "name": "0469-0",
+      "pixel_sha256": "cbbd8e7e1358c0769ae7c7dcb34fab046749baf4c068776941a08725437a384e"
+    },
+    {
+      "name": "0644-0",
+      "pixel_sha256": "6209716f36c06d57126318afcb74366ec8bc90103e245552f49f684dab384c5e"
+    },
+    {
+      "name": "0562-0",
+      "pixel_sha256": "55eacb83dcf874ed366c72983de7a56f28ea6bda183bd41dd424eeb5dd642519"
+    },
+    {
+      "name": "0125-0",
+      "pixel_sha256": "714167f1236894b2db1eb723af0a2dc88307ae2ba14f107ecd4a8231575b9b31"
+    },
+    {
+      "name": "0116-0",
+      "pixel_sha256": "b98095b7c66d7e43879021170a59550cee3cf00097be354ee940ae8352e2cdd7"
+    },
+    {
+      "name": "0036-0",
+      "pixel_sha256": "d781f1f3f4048efb63a024c29757564b3cd3c3275c86d6cec7aa5212c0ffa226"
+    },
+    {
+      "name": "0048-0",
+      "pixel_sha256": "cd8da30a8c22dcdc37c7bccbd3682995073958810e66aebf2d19505fdaf0468d"
+    },
+    {
+      "name": "0185-0",
+      "pixel_sha256": "a159f1bbea5fc02cf20eb45ff604e3fce31b1c1aa6437c4f0b59a8083cd4df94"
+    },
+    {
+      "name": "0788-0",
+      "pixel_sha256": "24a7dd77258290eba722a435afee2c3019fc0d5708ecfacc3728b190898fda97"
+    },
+    {
+      "name": "0189-0",
+      "pixel_sha256": "1c95e26ff73b89b40fc20410db19c4aea44d9332b5f21348e46b95fd93e0c95f"
+    },
+    {
+      "name": "0050-0",
+      "pixel_sha256": "f64af84074266112814c7ae0a1ebe9ac2da731fbf9fcdd5a0dce60b8e67949d7"
+    },
+    {
+      "name": "0131-0",
+      "pixel_sha256": "9b062c96fffd882d5f2b6b308513e55b0c9b6334f91546f2fb3429b0132af1cd"
+    },
+    {
+      "name": "0776-0",
+      "pixel_sha256": "917239440d3ce2a12cbb39174b0363603c989c63a5e25f77b0dc6926140cf649"
+    },
+    {
+      "name": "0293-0",
+      "pixel_sha256": "dbc7798e99cb06b7d01adcde0a6b2ce21783fe75a571580d77f6128923c7ffac"
+    },
+    {
+      "name": "0198-0",
+      "pixel_sha256": "415021aa4bc5ffd990a8de27d5097296e0691a4115685e3e7c700ae8e7596e90"
+    },
+    {
+      "name": "0410-0",
+      "pixel_sha256": "7d76ad0acfa6ee7ed1f3e1756b96f4eb2aa66e22d3cae97a25974a3ac5870971"
+    },
+    {
+      "name": "0611-0",
+      "pixel_sha256": "1f1daa0681ba94100b635c827760563a4b37ccc9052ff56a81bcb76211b86963"
+    }
+  ]
+}

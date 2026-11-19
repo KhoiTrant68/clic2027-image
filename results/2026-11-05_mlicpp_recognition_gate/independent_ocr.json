@@ -1,0 +1,2581 @@
+{
+  "protocol": "Tesseract eng psm10 oem1, whitelist68EF, generator bbox, 4x bicubic. Fixed before reading codec accuracy. No test adaptation.",
+  "source_sha256": "7eb1d5b011fb02261cb04936f9606fe6516ccbc326e11acf747d50d5a55da787",
+  "version": "tesseract 5.5.3",
+  "rows": [
+    {
+      "name": "0000",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0001",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0002",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0003",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "EF",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0004",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0005",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0006",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0007",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "FE",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0008",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0009",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0010",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0011",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0012",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0013",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0014",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0015",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0016",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0017",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0018",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0019",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0020",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0021",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0022",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0023",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0024",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0025",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0026",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0027",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0028",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0029",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0030",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0031",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0032",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0033",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0034",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0035",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0036",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0037",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0038",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0039",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0040",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0041",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0042",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0043",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0044",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0045",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0046",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0047",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0048",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0049",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0050",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0051",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0052",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0053",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0054",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0055",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0056",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0057",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0058",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0059",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0060",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0061",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0062",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0063",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0064",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0065",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0066",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0067",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0068",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0069",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0070",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0071",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0072",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0073",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0074",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0075",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0076",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0077",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0078",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0079",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0080",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0081",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0082",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0083",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0084",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0085",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "6",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0086",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0087",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "FF",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0088",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0089",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0090",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0091",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0092",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0093",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0094",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0095",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0096",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0097",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0098",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "EF",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0099",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0100",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0101",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0102",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0103",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "FE",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0104",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0105",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0106",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0107",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0108",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0109",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0110",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0111",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0112",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0113",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0114",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "FE",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0115",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0116",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0117",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0118",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0119",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0120",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0121",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0122",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0123",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0124",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0125",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0126",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0127",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0128",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0129",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0130",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0131",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0132",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0133",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0134",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0135",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0136",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0137",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0138",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0139",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0140",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0141",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0142",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0143",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0144",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0145",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0146",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0147",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "EF",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0148",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0149",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0150",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0151",
+      "label": "F",
+      "source_prediction": "FE",
+      "source_correct": false,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0152",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0153",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0154",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0155",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0156",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0157",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0158",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0159",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0160",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0161",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0162",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0163",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0164",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0165",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0166",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0167",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": false,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0168",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0169",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0170",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0171",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "FE",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0172",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0173",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0174",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0175",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0176",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0177",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0178",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0179",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0180",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0181",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0182",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0183",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0184",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0185",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0186",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0187",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "FE",
+      "base_correct": false,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0188",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0189",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0190",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0191",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0192",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0193",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0194",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "EF",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0195",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0196",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0197",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0198",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0199",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "FF",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0200",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0201",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0202",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0203",
+      "label": "F",
+      "source_prediction": "FF",
+      "source_correct": false,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0204",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0205",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0206",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0207",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0208",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0209",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0210",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0211",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0212",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0213",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0214",
+      "label": "E",
+      "source_prediction": "EE",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0215",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0216",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0217",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0218",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "EF",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0219",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0220",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0221",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0222",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0223",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0224",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0225",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0226",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0227",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0228",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0229",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0230",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0231",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "E",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0232",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0233",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0234",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0235",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0236",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0237",
+      "label": "8",
+      "source_prediction": "8",
+      "source_correct": true,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0238",
+      "label": "E",
+      "source_prediction": "E",
+      "source_correct": true,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0239",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0240",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0241",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "8",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0242",
+      "label": "E",
+      "source_prediction": "EF",
+      "source_correct": false,
+      "base_prediction": "E",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0243",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0244",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0245",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0246",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0247",
+      "label": "F",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "E",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0248",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0249",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "8",
+      "base_correct": true,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0250",
+      "label": "E",
+      "source_prediction": "EF",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "E",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0251",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0252",
+      "label": "6",
+      "source_prediction": "6",
+      "source_correct": true,
+      "base_prediction": "6",
+      "base_correct": true,
+      "perceptual_prediction": "6",
+      "perceptual_correct": true
+    },
+    {
+      "name": "0253",
+      "label": "8",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0254",
+      "label": "E",
+      "source_prediction": "",
+      "source_correct": false,
+      "base_prediction": "",
+      "base_correct": false,
+      "perceptual_prediction": "",
+      "perceptual_correct": false
+    },
+    {
+      "name": "0255",
+      "label": "F",
+      "source_prediction": "F",
+      "source_correct": true,
+      "base_prediction": "F",
+      "base_correct": true,
+      "perceptual_prediction": "F",
+      "perceptual_correct": true
+    }
+  ],
+  "summary": {
+    "source": {
+      "n": 256,
+      "correct": 202
+    },
+    "base": {
+      "n": 256,
+      "correct": 196
+    },
+    "perceptual": {
+      "n": 256,
+      "correct": 178
+    }
+  }
+}
