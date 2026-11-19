@@ -1,0 +1,19 @@
+{
+  "seed": 7301,
+  "train_images": 2400,
+  "validation_images": 256,
+  "test_images": 256,
+  "train_fonts": ["Ubuntu-R.ttf", "Ubuntu-B.ttf", "Ubuntu-M.ttf", "Ubuntu-RI.ttf", "UbuntuMono-R.ttf", "Inconsolata-Bold.ttf"],
+  "validation_fonts": ["Ubuntu-C.ttf"],
+  "test_fonts": ["SourceCodePro-Regular.ttf", "SourceCodePro-Light.ttf", "SourceCodePro-Bold.ttf", "SourceCodePro-It.ttf"],
+  "classes": "68EF",
+  "sizes": [14, 18, 24, 32],
+  "contrasts": [64, 192],
+  "epochs": 30,
+  "batch_size": 64,
+  "learning_rate": 0.001,
+  "source_accuracy_gate": 0.95,
+  "quality": 2,
+  "gpu_hour_ceiling": 2,
+  "note": "Freeze before opening test. Train/validation use upper layouts; test uses lower layouts and a new font family. Generator boxes are privileged diagnostic input. No human-preference or novelty claim."
+}

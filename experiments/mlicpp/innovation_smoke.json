@@ -1,0 +1,31 @@
+{
+  "seed": 9041,
+  "quality": 2,
+  "rank": 8,
+  "grid": 2,
+  "coefficient_step": 0.015625,
+  "amplitude": 0.25,
+  "steps": 2,
+  "batch_size": 2,
+  "learning_rate": 0.0001,
+  "pixel_weight": 10.0,
+  "lpips_weight": 1.0,
+  "edge_weight": 0.1,
+  "search_steps": 2,
+  "search_lr": 0.03,
+  "train_limit": 4,
+  "validation_limit": 2,
+  "test_limit": 2,
+  "modes": [
+    "conditional",
+    "fixed",
+    "pixel"
+  ],
+  "old_cache": "/home/jovyan/clic2027-artifacts/mlicpp/pilot20261104/div2k224-q2-crop256",
+  "synthesis_run": "/home/jovyan/clic2027-artifacts/mlicpp/full-synthesis-20261105/div2k-q2-full-synthesis-conditional-gan",
+  "test_data": "/home/jovyan/clic2027-artifacts/data/div2k/innovation-new32",
+  "upstream": "/home/jovyan/clic2027-image/refs/repos/MLIC",
+  "weights": "/home/jovyan/clic2027-artifacts/mlicpp/weights",
+  "wall_time_limit_s": 600,
+  "reference": "full_synthesis_q2.json and frozen reconstruction/last.pt. Freeze full synthesis and entropy; train innovation encoder+basis only. Conditional/fixed share init, parameters, source encoder, training order and packet syntax; only basis conditioning changes. Pixel DCT is an additional conventional residual control, not matched decoder capacity. New test uses DIV2K permutation IDs[288:320], unseen by previous pilots. One seed, q2 crop pilot, not prior-confidence validation or CLIC eligibility claim."
+}

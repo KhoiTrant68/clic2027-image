@@ -2,7 +2,15 @@
 
 > **Phạm vi:** So sánh các cấu hình đã thử trên cùng tập 30 ảnh. Q̂ là điểm do mô hình dự đoán mức ưa thích tạo ra; thứ hạng theo Q̂ chưa được xác nhận bằng đánh giá độc lập từ người xem.
 
+> **Cập nhật 04/11/2026:** Đã bổ sung thử nghiệm MLIC++ MSE legacy ngày 02/11 vào các bảng và phần phân tích. Các hình trong thư mục `metrics_2026-10-20` giữ nguyên số liệu ngày 20/10, **chưa có MLIC++**; thứ hạng cập nhật được trình bày trong bảng và nội dung. Nguồn bổ sung: [kết quả MLIC++](../results/2026-11-02_mlicpp/full30/comparison.csv) và [báo cáo chi tiết](CLIC2027_MLICpp_full30_2026-11-02.md).
+
+> **Pilot nghiên cứu 05/11/2026:** Đã train/infer/eval ba nhánh hiệu chỉnh trên 32 crop từ nguồn mới, kiểm 160/160 fresh decode matches. Fixed giảm LPIPS 14,62% so base khi thêm 46 byte/ảnh; conditional không vượt fixed. Đây là tập và operating point khác, chưa có Q̂/human evaluation, nên giữ riêng khỏi các bảng 30 ảnh. Xem [báo cáo pilot và giới hạn](MLICpp_innovation_pilot_2026-11-05.md).
+
 **Nội dung**
+
+Pilot fixed tiếp theo đã so sánh 1.000/5.000 bước học × 40/160 bước tìm hệ số trên 32 nguồn mới khác. Tổ hợp dài giảm LPIPS 8,63% so fixed cũ ở cùng byte, nhưng DISTS chưa cho thấy cải thiện và PSNR giảm nhẹ. [Kết quả riêng của pilot](MLICpp_fixed_improvement_2026-11-05.md); không nhập vào bảng benchmark 30 ảnh bên dưới.
+
+[Pilot lượng tử hóa theo hình học decoder](MLICpp_geometry_pilot_2026-11-05.md) đã train mạng dự đoán và kiểm 256 bitstream trên 16 nguồn mới. Chưa thấy cải thiện RD so với uniform trong khoảng giao đã đo; kết quả crop này tiếp tục được báo cáo riêng.
 
 1. [Các thước đo và cách đọc Q̂](#metrics-qhat)
 2. [Kết quả trên 30 ảnh](#ket-qua)
@@ -123,6 +131,8 @@ Mỗi ô ghi **Q̂ / bpp thực** dưới trần ngân sách của cột. `Khôn
 | PULSE-L perceptual | Không vừa | Không vừa | 1.4234 / 0.2998 |
 | Mix có PULSE-L | 0.1841 / 0.0749 | 0.7891 / 0.1499 | 1.4978 / 0.2997 |
 | Mix có PULSE-L + AEIC | 0.1903 / 0.0749 | 0.7891 / 0.1499 | 1.4978 / 0.2997 |
+| Mix có PULSE-L + MLIC++ | 0.1853 / 0.0749 | 0.7891 / 0.1499 | 1.4978 / 0.2997 |
+| MLIC++ MSE legacy | Không vừa | -0.9476 / 0.1498 | 0.2566 / 0.2991 |
 
 ![Qhat theo ba ngân sách trên cùng 30 ảnh, mỗi ô kèm bitrate thực](figures/metrics_2026-10-20/01_qhat_overview.png)
 
@@ -131,6 +141,8 @@ Mỗi ô ghi **Q̂ / bpp thực** dưới trần ngân sách của cột. `Khôn
 <!-- **Hình dự phòng — Hai tiêu chí chất lượng theo bitrate thực.** Q̂ và PSNR có thể dẫn đến thứ tự khác nhau. AEIC nằm ở khoảng 0,03 bpp, vì vậy không xem nó như một điểm đã đo tại 0,075 bpp. Đường nối chỉ giúp theo dõi các điểm có sẵn, không chứng minh chất lượng giữa các điểm.
 
 ![Qhat và PSNR theo bitrate thực của các phương pháp tiêu biểu](figures/metrics_2026-10-20/02_rate_quality.png) -->
+
+Các hàng MLIC++ dùng bốn checkpoint MSE chính thức thuộc phiên bản kiến trúc cũ (legacy), chọn checkpoint riêng cho từng ảnh theo Q̂. Mix có PULSE-L + MLIC++ được phân bổ lại từ toàn bộ tập điểm baseline cộng MLIC++; **chưa có thử nghiệm gộp đồng thời AEIC và MLIC++**. Đối chứng cùng bộ phân bổ nhưng chưa thêm MLIC++ trùng với mix có PULSE-L ở cả ba ngân sách.
 
 ### 2.2. Các metric tại ngân sách 0.075 bpp
 
@@ -145,6 +157,7 @@ Mỗi ô ghi **Q̂ / bpp thực** dưới trần ngân sách của cột. `Khôn
 | DiT-IC student | 0.07478 | 22.24 | 0.8768 | 0.0944 | 0.2070 | 0.0762 | 0.6932 | -0.0002 |
 | Mix có PULSE-L | 0.07492 | 22.38 | 0.8758 | 0.0847 | 0.2078 | 0.0711 | 0.7261 | 0.1841 |
 | Mix có PULSE-L + AEIC | 0.07494 | 22.10 | 0.8735 | 0.0883 | 0.2086 | 0.0699 | 0.7240 | 0.1903 |
+| Mix có PULSE-L + MLIC++ | 0.07492 | 22.40 | 0.8769 | 0.0844 | 0.2073 | 0.0709 | 0.7203 | 0.1853 |
 
 ![Sáu metric tại ngân sách 0.075 bpp](figures/metrics_2026-10-20/03_metrics_0075.png)
 
@@ -167,6 +180,8 @@ Mỗi ô ghi **Q̂ / bpp thực** dưới trần ngân sách của cột. `Khôn
 | DiT-IC student | 0.09843 | 22.62 | 0.8875 | 0.0911 | 0.1943 | 0.0722 | 0.6888 | 0.1151 |
 | Mix có PULSE-L | 0.14991 | 24.59 | 0.9257 | 0.0653 | 0.1774 | 0.0536 | 0.7170 | 0.7891 |
 | Mix có PULSE-L + AEIC | 0.14991 | 24.59 | 0.9257 | 0.0653 | 0.1774 | 0.0536 | 0.7170 | 0.7891 |
+| MLIC++ MSE legacy | 0.14982 | 29.55 | 0.9635 | 0.1993 | 0.3072 | 0.1359 | 0.6493 | -0.9476 |
+| Mix có PULSE-L + MLIC++ | 0.14991 | 24.59 | 0.9257 | 0.0653 | 0.1774 | 0.0536 | 0.7170 | 0.7891 |
 
 ![Sáu metric tại ngân sách 0.15 bpp](figures/metrics_2026-10-20/04_metrics_015.png)
 
@@ -190,22 +205,26 @@ DiT-IC và student dùng dưới 0,1 bpp, nên chưa thể xem là các điểm 
 | PULSE-L perceptual | 0.29977 | 29.43 | 0.9702 | 0.0353 | 0.1216 | 0.0345 | 0.6760 | 1.4234 |
 | Mix có PULSE-L | 0.29973 | 29.34 | 0.9707 | 0.0364 | 0.1281 | 0.0338 | 0.6932 | 1.4978 |
 | Mix có PULSE-L + AEIC | 0.29973 | 29.34 | 0.9707 | 0.0364 | 0.1281 | 0.0338 | 0.6932 | 1.4978 |
+| MLIC++ MSE legacy | 0.29913 | 31.96 | 0.9792 | 0.1327 | 0.2457 | 0.0946 | 0.7126 | 0.2566 |
+| Mix có PULSE-L + MLIC++ | 0.29973 | 29.34 | 0.9707 | 0.0364 | 0.1281 | 0.0338 | 0.6932 | 1.4978 |
 
 ![Sáu metric tại ngân sách 0.3 bpp](figures/metrics_2026-10-20/05_metrics_03.png)
 
-**Hình 5 — Sáu metric tại ngân sách 0.3 bpp.** VTM-SCC dẫn đầu về PSNR và MS-SSIM; các phương pháp đứng đầu theo những metric khác có thể khác nhau.
+**Hình 5 — Sáu metric tại ngân sách 0.3 bpp, số liệu ngày 20/10.** VTM-SCC dẫn đầu về PSNR và MS-SSIM trong các phương pháp có trên hình; MLIC++ chưa được đưa vào hình này.
 
-Gần trần ngân sách này, VTM-SCC đạt PSNR và MS-SSIM cao nhất; PULSE-L có Q̂ cao nhất trong các codec đơn đã thử.
+Sau khi bổ sung MLIC++, gần trần ngân sách này MLIC++ MSE legacy đạt PSNR 31.96 dB và MS-SSIM 0.9792, cao hơn VTM-SCC (31.68 dB; 0.9757). PULSE-L vẫn có Q̂ cao nhất trong các codec đơn đã thử. Nhận xét VTM-SCC dẫn đầu ở Hình 5 chỉ áp dụng cho tập phương pháp cũ trong hình.
 
 **Cách đọc ba hình metric:** Trong mỗi hình, sáu biểu đồ thành phần giữ cùng thứ tự hàng, sắp theo Q̂ giảm dần. Số sau tên phương pháp là bpp thực; các trục dùng giá trị metric gốc. Ký hiệu ↑ nghĩa là cao hơn tốt hơn, ↓ nghĩa là thấp hơn tốt hơn. Không so trực tiếp khoảng cách giữa các biểu đồ vì chúng dùng các thang đo khác nhau. Đường bitrate–chất lượng chỉ nối các điểm đã đo để giúp theo dõi, không ngoại suy kết quả cho checkpoint mới.
 
-Nguồn: [CSV 30 ảnh](../results/2026-10-20_metrics_comparison/full30_budget_metrics.csv), [script tính lại](../results/2026-10-20_metrics_comparison/build_comparison.py), [hash dữ liệu](../results/2026-10-20_metrics_comparison/sources.sha256.json).
+Nguồn bổ sung MLIC++: [120 điểm metric](../results/2026-11-02_mlicpp/full30/metrics.csv), [so sánh theo ngân sách](../results/2026-11-02_mlicpp/full30/comparison.csv), [hash mã nguồn và bằng chứng](../results/2026-11-02_mlicpp/full30/evidence.sha256.json). Đã nén và giải mã thực 30 ảnh × 4 checkpoint trên A30; 120/120 ảnh khớp hash pixel giữa giải mã trong tiến trình encode và một tiến trình decoder mới trên cùng GPU. Stream tính cả header 31 byte/ảnh. Chưa kiểm trên L4 hay khác máy.
+
+Nguồn bảng lịch sử: [CSV 30 ảnh](../results/2026-10-20_metrics_comparison/full30_budget_metrics.csv), [script tính lại](../results/2026-10-20_metrics_comparison/build_comparison.py), [hash dữ liệu](../results/2026-10-20_metrics_comparison/sources.sha256.json).
 
 <a id="bien-pareto"></a>
 
 ## 3. Biên Pareto giữa bitrate và Q̂
 
-Phân tích sử dụng số liệu chưa làm tròn trong [CSV 30 ảnh](../results/2026-10-20_metrics_comparison/full30_budget_metrics.csv), không chạy lại các codec. Mỗi điểm trên đồ thị là một phương án phân bổ byte đã đo trên toàn tập. Với các phương pháp mix, codec được chọn riêng cho từng ảnh; vì vậy, mix là phương án phối hợp nhiều codec. Chỉ các cấu hình có đủ metric trên cả 30 ảnh mới được đưa vào phân tích.
+Phân tích sử dụng số liệu chưa làm tròn của MLIC++ trong [CSV bổ sung](../results/2026-11-02_mlicpp/full30/comparison.csv) cùng [CSV 30 ảnh](../results/2026-10-20_metrics_comparison/full30_budget_metrics.csv). Lần cập nhật báo cáo này phân tích số đo đã lưu, không chạy lại các codec. Mỗi điểm trên đồ thị là một phương án phân bổ byte đã đo trên toàn tập. Với các phương pháp mix, codec được chọn riêng cho từng ảnh; vì vậy, mix là phương án phối hợp nhiều codec. Chỉ các cấu hình có đủ metric trên cả 30 ảnh mới được đưa vào phân tích.
 
 ### 3.1. Tiêu chí xác định biên Pareto
 
@@ -223,6 +242,7 @@ Mọi điểm đều được đo trên cùng 86.245.376 pixel, nên so sánh t�
 | --- | ---: | ---: | ---: |
 | DiT-IC student | 806,144 | 0.07477679 | -0.0002 |
 | Mix có PULSE-L | 807,641 | 0.07491565 | 0.1841 |
+| Mix có PULSE-L + MLIC++ | 807,687 | 0.07491991 | 0.1853 |
 | Mix có PULSE-L + AEIC | 807,855 | 0.07493550 | 0.1903 |
 | DiT-IC | 1,032,508 | 0.09577399 | 0.2788 |
 | CoD-Lite | 1,613,944 | 0.14970718 | 0.2846 |
@@ -237,6 +257,7 @@ Khi chỉ xét bitrate và Q̂, tất cả điểm đã đo của VTM 4:2:0, VTM
 | Điểm vận hành bị chi phối | Phương án dùng ít byte hơn và đạt Q̂ cao hơn |
 | --- | --- |
 | VTM 4:2:0 và VTM-SCC, cả ba ngân sách | DiT-IC student tại 0.07477679 bpp dùng ít byte hơn và có Q̂ cao hơn mọi điểm được báo cáo của hai phương pháp tham chiếu. |
+| MLIC++ MSE legacy, phân bổ ở 0.15 và 0.3 bpp | Điểm 0.15 bpp bị DiT-IC tại 0.09577399 bpp chi phối; điểm 0.3 bpp bị MS-ILLM tại 0.14979363 bpp chi phối. |
 | MBT2018-mean, cả hai ngân sách khả thi | DiT-IC tại 0.09577399 bpp có Q̂ cao hơn và dùng ít byte hơn. |
 | MS-ILLM + SD-Turbo, mọi ngân sách | DiT-IC student tại 0.07477679 bpp có Q̂ cao hơn và dùng ít byte hơn. |
 | CRDR, các điểm ở ngân sách 0.15 và 0.3 | MS-ILLM ở ngân sách tương ứng có Q̂ cao hơn và dùng ít byte hơn. |
@@ -244,13 +265,15 @@ Khi chỉ xét bitrate và Q̂, tất cả điểm đã đo của VTM 4:2:0, VTM
 | MS-ILLM, CoD-Lite và DiT-IC, các điểm ở ngân sách 0.075 | Mix có PULSE-L chi phối MS-ILLM và DiT-IC; DiT-IC student chi phối CoD-Lite. |
 | DiT-IC student, điểm lặp ở ngân sách 0.15/0.3 | DiT-IC tại 0.09577399 bpp đạt Q̂ 0.2788, so với 0.1151 tại 0.09842763 bpp của student. |
 
+Điểm mix bổ sung MLIC++ ở 0.07491991 bpp thuộc biên Pareto cập nhật: dùng nhiều hơn mix gốc 46 byte và tăng Q̂ 0.001143, nhưng vẫn dùng ít byte hơn mix có AEIC. Tại hai ngân sách lớn hơn, mix bổ sung MLIC++ trùng mix gốc vì không chọn ảnh nào từ MLIC++. Bốn điểm dùng cố định q1–q4 cũng bị chi phối: DiT-IC tại 0.09577399 bpp chi phối q1–q3; mix tại 0.29973011 bpp chi phối q4. Hình 6 và manifest hình cũ chưa bao gồm điểm bổ sung này.
+
 ### 3.3. Phương án nào hiệu quả nhất?
 
 Dưới các trần ngân sách đã thử, Q̂ cao nhất thuộc về:
 
 - **Ngân sách 0.075 bpp:** Mix có PULSE-L + AEIC, đạt 0.1903.
-- **Ngân sách 0.15 bpp:** hai phương án mix đồng hạng, đạt 0.7891.
-- **Ngân sách 0.3 bpp:** hai phương án mix đồng hạng, đạt 1.4978.
+- **Ngân sách 0.15 bpp:** ba phương án mix đồng hạng, đạt 0.7891.
+- **Ngân sách 0.3 bpp:** ba phương án mix đồng hạng, đạt 1.4978.
 
 Nếu chỉ xét codec đơn, DiT-IC có Q̂ cao nhất dưới 0.075 bpp, MS-ILLM dưới 0.15 bpp, còn PULSE-L dưới 0.3 bpp. PULSE-L vẫn đứng đầu nhóm codec đơn ở ngân sách lớn nhất, dù bị chi phối khi đưa các phương án mix vào so sánh.
 
@@ -266,9 +289,11 @@ Không có một điểm hiệu quả nhất cho mọi yêu cầu: cần xác đ
 
 **Hình 7 — PSNR gộp và Q̂ trung bình dưới trần ngân sách 0.3 bpp.** Trên cả hai trục, giá trị cao hơn là tốt hơn theo tiêu chí tương ứng. DiT-IC, student và bộ tinh chỉnh SD-Turbo lần lượt chỉ dùng khoảng 0.096, 0.098 và 0.146 bpp, nên hình này chưa phải so sánh cùng bitrate cho các phương pháp đó. Hai kết quả mix trùng nhau.
 
-Ở gần 0.3 bpp, VTM-SCC đạt PSNR gộp cao nhất (31.68 dB) và MS-SSIM cao nhất (0.9757), nhưng Q̂ là -0.0044. MS-ILLM đạt 29.41 dB và Q̂ 1.3831; PULSE-L đạt 29.43 dB và Q̂ 1.4234; mix đạt 29.34 dB và Q̂ 1.4978. So với VTM-SCC, ba phương pháp này lần lượt giảm khoảng 2.26, 2.24 và 2.33 dB, đồng thời tăng điểm mô hình dự đoán mức ưa thích. Thứ hạng quan sát được vì vậy phụ thuộc đáng kể vào tiêu chí đánh giá.
+Trong tập phương pháp cũ ở Hình 7, VTM-SCC dẫn đầu về PSNR (31.68 dB) và MS-SSIM (0.9757), nhưng Q̂ là -0.0044. Kết quả bổ sung của MLIC++ MSE legacy đạt PSNR 31.96 dB, MS-SSIM 0.9792 và Q̂ 0.2566 tại 0.29913 bpp, vượt VTM-SCC theo cả ba chỉ số này. MS-ILLM đạt 29.41 dB và Q̂ 1.3831; PULSE-L đạt 29.43 dB và Q̂ 1.4234; mix đạt 29.34 dB và Q̂ 1.4978. So với VTM-SCC, ba phương pháp này lần lượt giảm khoảng 2.26, 2.24 và 2.33 dB, đồng thời tăng điểm mô hình dự đoán mức ưa thích. Thứ hạng quan sát được vì vậy phụ thuộc đáng kể vào tiêu chí đánh giá.
 
 Sự khác biệt về thứ hạng cũng xuất hiện gần 0.075 bpp: VTM-SCC đạt 26.15 dB và Q̂ -2.4038, trong khi DiT-IC đạt 22.27 dB và Q̂ 0.1644 ở bitrate thực gần tương đương. Tuy nhiên, chỉ giảm PSNR không bảo đảm Q̂ tốt hơn: bộ tinh chỉnh SD-Turbo chỉ đạt 22.13 dB và Q̂ -1.3315 tại bitrate cao nhất đã đo. Kết quả cho thấy sự khác biệt thực nghiệm giữa độ trung thực pixel và mức ưa thích do Q̂ dự đoán, chứ không cho thấy giảm độ trung thực luôn mang lại lợi ích. Các số liệu này cũng chưa xác lập một cận lý thuyết về quan hệ bitrate–độ méo–cảm nhận.
+
+So với mix có PULSE-L, MLIC++ tăng PSNR khoảng 4.96 dB tại 0.15 bpp và 2.62 dB tại 0.3 bpp, nhưng Q̂ lần lượt giảm 1.7367 và 1.2412. Các cấu hình đã thử cho thấy ưu thế về sai số pixel chưa đủ để chọn MLIC++ theo mục tiêu Q̂.
 
 Q̂ kết hợp các metric có tương quan với nhau, trong đó có PSNR từng ảnh, nên không phải bằng chứng độc lập về chất lượng cảm nhận. Hệ số PSNR âm trong mô hình đã ước lượng không cho phép suy ra quan hệ nhân quả. Hơn nữa, PSNR trên hình được gộp theo pixel, còn Q̂ được tính riêng từng ảnh rồi lấy trung bình; xu hướng trên biểu đồ phân tán không tách được đóng góp của từng đặc trưng. Cần đánh giá độc lập từ người xem để xác định chênh lệch thứ hạng có phản ánh mức ưa thích thực tế hay không.
 
@@ -281,6 +306,8 @@ Q̂ kết hợp các metric có tương quan với nhau, trong đó có PSNR t�
 **Hình 8 — Hai khoảng cách cảm nhận có tham chiếu ảnh gốc.** Các điểm gần góc dưới bên trái có khoảng cách nhỏ hơn theo cả hai metric. Số ghi cạnh mỗi điểm tương ứng với phương pháp trong chú giải. Kết quả dùng quy trình tổng hợp theo ô ảnh đã nêu; các phương pháp có cùng trần ngân sách nhưng khác bitrate thực. Hai kết quả mix trùng nhau.
 
 Gần 0.3 bpp, MS-ILLM, PULSE-L và mix đều cải thiện cả hai khoảng cách so với VTM-SCC (LPIPS-Alex 0.1449; DISTS 0.0994). MS-ILLM đạt 0.0335 và 0.0362, tương ứng giảm 76.9% và 63.6%. PULSE-L đạt 0.0353 và 0.0345, giảm 75.6% và 65.3%; mix đạt 0.0364 và 0.0338, giảm 74.8% và 66.0%. Đây là tỷ lệ giảm giá trị metric được tính trước khi làm tròn, không phải phần trăm cải thiện chất lượng cảm nhận.
+
+MLIC++ MSE legacy ở 0.29913 bpp đạt LPIPS-Alex 0.1327 và DISTS 0.0946: thấp hơn VTM-SCC một chút, nhưng cao hơn rõ rệt so với mix (0.0364; 0.0338). Tại 0.14982 bpp, MLIC++ có LPIPS-Alex 0.1993 và DISTS 0.1359; so với VTM-SCC, LPIPS-Alex thấp hơn nhưng DISTS cao hơn. Vì vậy, ngay cả lợi thế so với VTM-SCC cũng phụ thuộc metric và ngân sách.
 
 **Hai metric cho thứ hạng khác nhau.** MS-ILLM có LPIPS-Alex thấp nhất trong các kết quả ở ngân sách 0.3, còn hai phương án mix có DISTS thấp nhất. So với MS-ILLM, PULSE-L có DISTS thấp hơn nhưng LPIPS-Alex cao hơn một chút. So với PULSE-L, mix tiếp tục giảm DISTS nhưng tăng LPIPS-Alex. Ngay trong nhóm thước đo độ méo dựa trên đặc trưng, các phương pháp vẫn có những đánh đổi khác nhau; không phương pháp nào đồng thời đạt giá trị thấp nhất ở cả hai khoảng cách.
 
@@ -313,6 +340,8 @@ Các chênh lệch dưới đây được tính từ giá trị trung bình chư
 | PULSE-L perceptual | Không vừa | Không vừa | +1.4278 |
 | Mix có PULSE-L | +2.5879 | +1.8911 | +1.5022 |
 | Mix có PULSE-L + AEIC | +2.5941 | +1.8911 | +1.5022 |
+| Mix có PULSE-L + MLIC++ | +2.5891 | +1.8911 | +1.5022 |
+| MLIC++ MSE legacy | Không vừa | +0.1544 | +0.2610 |
 
 `Không vừa` nghĩa là chưa có điểm khả thi trên đủ 30 ảnh trong các cấu hình đã thử, không phải mức tăng bằng không. Hàng DC-AE thiếu dữ liệu được loại khỏi xếp hạng định lượng.
 
@@ -322,6 +351,8 @@ Các chênh lệch dưới đây được tính từ giá trị trung bình chư
 
 Mix có PULSE-L + AEIC tăng lần lượt 2.5941, 1.8911 và 1.5022 đơn vị Q̂ so với VTM-SCC tại ba ngân sách. Ở ngân sách lớn nhất, mix hơn PULSE-L 0.0744 và hơn MS-ILLM 0.1147. Khi bổ sung AEIC vào tập codec ứng viên, điểm mix chỉ tăng +0.0062 tại ngân sách thấp nhất và thay đổi 0.0000 tại hai ngân sách lớn hơn, nơi AEIC không được chọn. Kết quả này chỉ mô tả phương án phân bổ đã thử; chưa thể kết luận AEIC không mang lại lợi ích ở cấu hình khác.
 
+MLIC++ MSE legacy tăng Q̂ so với VTM-SCC lần lượt +0.1544 và +0.2610 tại hai ngân sách khả thi. Khi thêm vào mix, mức tăng so với mix gốc chỉ là +0.001143 ở 0.075 bpp (chọn 1/30 ảnh), và bằng 0 ở hai ngân sách lớn hơn. Mức tăng này nhỏ hơn mức tăng của AEIC trong thử nghiệm riêng; chưa kiểm việc kết hợp cả hai.
+
 DiT-IC và student lặp lại cùng điểm vận hành trong hai cột ngân sách lớn hơn. Lợi thế so với VTM-SCC thu hẹp ở trần lớn nhất vì VTM-SCC được cải thiện, trong khi bitrate và Q̂ của hai phương pháp này giữ nguyên. Chất lượng ảnh tái tạo của chúng không giảm. Kết quả SD-Turbo cũng được lặp lại ở hai trần lớn hơn.
 
 > **Lưu ý:** Áp dụng hàm sigmoid lên chênh lệch Q̂ trung bình toàn tập không cho ra trung bình xác suất ưa thích theo từng cặp ảnh. Bảng trên chỉ báo cáo chênh lệch điểm.
@@ -330,13 +361,13 @@ DiT-IC và student lặp lại cùng điểm vận hành trong hai cột ngân s
 
 ## 7. Thảo luận và kết luận
 
-Đánh giá trên 30 ảnh cho thấy thứ hạng theo độ trung thực pixel khác với thứ hạng theo Q̂. Gần 0.3 bpp, VTM-SCC đạt PSNR và MS-SSIM cao nhất trong các phương pháp đã đánh giá, còn MS-ILLM, PULSE-L và mix có độ méo dựa trên đặc trưng thấp hơn đáng kể và Q̂ cao hơn. Vì vậy, cần báo cáo đồng thời độ trung thực, khoảng cách cảm nhận và điểm dự đoán mức ưa thích. Chỉ dùng một metric sẽ bỏ qua những khác biệt quan trọng giữa các mục tiêu tái tạo.
+Đánh giá trên 30 ảnh cho thấy thứ hạng theo độ trung thực pixel khác với thứ hạng theo Q̂. Gần 0.3 bpp, MLIC++ MSE legacy đạt PSNR và MS-SSIM cao nhất trong các phương pháp được trình bày tại ngân sách này; MS-ILLM, PULSE-L và mix có LPIPS-Alex, DISTS thấp hơn đáng kể và Q̂ cao hơn MLIC++. Vì vậy, cần báo cáo đồng thời độ trung thực, khoảng cách cảm nhận và điểm dự đoán mức ưa thích. Chỉ dùng một metric sẽ bỏ qua những khác biệt quan trọng giữa các mục tiêu tái tạo.
 
-Phương án chọn codec riêng cho từng ảnh đạt Q̂ cao nhất dưới mỗi trần byte đã thử. Mix có PULSE-L + AEIC đạt Q̂ 0.1903 ở ngân sách thấp nhất; cả hai mix đạt 0.7891 và 1.4978 tại hai ngân sách lớn hơn. Ở ngân sách lớn nhất, mix cao hơn PULSE-L — codec đơn có Q̂ cao nhất — 0.0744 đơn vị, đồng thời dùng ít byte hơn một chút. Lợi ích này chỉ được xác lập theo mục tiêu Q̂ v0; chưa chứng minh người xem thực sự thích kết quả hơn hoặc mọi metric đều được cải thiện. MS-ILLM vẫn có LPIPS-Alex thấp hơn mix.
+Phương án chọn codec riêng cho từng ảnh đạt Q̂ cao nhất dưới mỗi trần byte đã thử. Mix có PULSE-L + AEIC đạt Q̂ 0.1903 ở ngân sách thấp nhất; cả ba mix đạt 0.7891 và 1.4978 tại hai ngân sách lớn hơn. Ở ngân sách lớn nhất, mix cao hơn PULSE-L — codec đơn có Q̂ cao nhất — 0.0744 đơn vị, đồng thời dùng ít byte hơn một chút. Lợi ích này chỉ được xác lập theo mục tiêu Q̂ v0; chưa chứng minh người xem thực sự thích kết quả hơn hoặc mọi metric đều được cải thiện. MS-ILLM vẫn có LPIPS-Alex thấp hơn mix.
 
 Biên Pareto cho thấy tối đa hóa Q̂ dưới một trần byte và giảm bitrate để đạt một mức chất lượng cho trước là hai bài toán khác nhau. DiT-IC có một điểm đáng chú ý ở bitrate thấp, trong khi CoD-Lite và MS-ILLM vẫn có các điểm không bị chi phối ở bitrate cao hơn. Việc một điểm có thuộc biên hay không có thể phụ thuộc vào chênh lệch kích thước luồng nén rất nhỏ; do đó, cần thêm phép đo tại các bitrate tương đương. Các điểm bị chi phối vẫn có thể đáng cân nhắc nếu xét thêm độ trung thực hoặc chi phí triển khai.
 
-Theo mục tiêu Q̂ hiện tại, mix là ứng viên nên được ưu tiên đánh giá tiếp; VTM-SCC là phương pháp tham chiếu mạnh về độ trung thực ở khoảng 0.3 bpp. Để khẳng định ưu thế rộng hơn, cần một tập ảnh kiểm thử độc lập lớn hơn, nhiều điểm bitrate hơn và đánh giá từ người xem. Các bước tiếp theo là bổ sung metric còn thiếu, đo thêm các điểm có bitrate tương đương và tổ chức so sánh theo cặp để xác định ảnh tái tạo nào được ưa thích hơn.
+Theo mục tiêu Q̂ hiện tại, mix là ứng viên nên được ưu tiên đánh giá tiếp. MLIC++ MSE legacy là baseline đáng giữ cho độ trung thực pixel, nhưng chưa có cơ sở thay mix hoặc thêm decoder chỉ từ mức tăng Q̂ 0.001143 trên một ảnh. Kết luận này giới hạn ở bốn checkpoint legacy đã thử, không đại diện cho mọi biến thể MLIC++. Để khẳng định ưu thế rộng hơn, cần một tập ảnh kiểm thử độc lập lớn hơn, nhiều điểm bitrate hơn và đánh giá từ người xem. Các bước tiếp theo là bổ sung metric còn thiếu, đo thêm các điểm có bitrate tương đương và tổ chức so sánh theo cặp để xác định ảnh tái tạo nào được ưa thích hơn.
 
 <a id="gioi-han"></a>
 
@@ -350,6 +381,8 @@ Theo mục tiêu Q̂ hiện tại, mix là ứng viên nên được ưu tiên �
 
 4. **Q̂ chưa được kiểm chứng độc lập bằng đánh giá từ người xem.** Q̂ v0 được tính từ mô hình dự đoán mức ưa thích, không phải điểm đánh giá trực tiếp của người xem. Các metric đang phân tích cũng là đầu vào của mô hình, nên sự đồng thuận giữa chúng và Q̂ không phải bằng chứng độc lập. Thứ hạng của các ảnh tái tạo trong báo cáo chưa được người xem xác nhận. Điểm Q̂ và chênh lệch điểm không thể được hiểu là phần trăm chất lượng hay tỷ lệ thắng đo từ người xem. Việc dùng cùng một mô hình để chọn và đánh giá mix cũng có thể ưu tiên các phương án phù hợp với cách gán trọng số của mô hình đó.
 
-5. **Cách tổng hợp và phạm vi đánh giá hiệu quả.** PSNR gộp đặt trọng số theo số pixel, còn các điểm chất lượng khác lấy trung bình theo ảnh; khác biệt này cần được tính đến khi diễn giải. LPIPS và DISTS dùng quy trình chia ô ảnh đã nêu, không bảo đảm nội dung ngữ nghĩa hay chữ viết được giữ đúng. Biên Pareto chưa xét thời gian giải mã, bộ nhớ, độ phức tạp và khả năng tái lập trên các phần cứng khác nhau. Vì vậy, kết quả chỉ phản ánh hiệu quả bitrate–Q̂ trong bộ số liệu hiện tại, chưa phản ánh hiệu quả triển khai tổng thể.
+5. **Môi trường và độ tin cậy của đối chứng bổ sung.** MLIC++ được chạy trên A30 với PyTorch 2.0.1+cu118 và CompressAI 1.2.0b3, cùng mã tính metric và Q̂ của repo; môi trường khác lần benchmark cũ. Metadata byte và đầu ra của các nhánh baseline chưa được kiểm lại toàn bộ, nên đây là so sánh hồi cứu, chưa phải so sánh hai gói nộp hoàn chỉnh. Các lần chạy ban đầu gặp lệch CDF/NaN với cuDNN v8 mặc định; cấu hình cuối cố định cuDNN v7 qua `TORCH_CUDNN_V8_API_DISABLED=1` và thư viện NVRTC 11.8, sau đó chạy lại đủ 120 điểm và kiểm hash. Khớp pixel trên cùng A30 chưa chứng minh khả năng giải mã giữa các GPU hoặc máy khác nhau.
 
-**Nguồn và cách tái tạo:** Dùng [make_supplement.py](figures/metrics_2026-10-20/make_supplement.py) để tạo lại các hình bổ sung, danh sách điểm thuộc biên và bảng mức tăng. Mã băm SHA-256 của CSV cùng các hàng thuộc biên được lưu trong [supplement_manifest.json](figures/metrics_2026-10-20/supplement_manifest.json). Phần này chỉ phân tích số đo đã lưu; quy trình tiền xử lý metric và thực thi codec chưa được kiểm tra lại trong lần bổ sung này.
+6. **Cách tổng hợp và phạm vi đánh giá hiệu quả.** PSNR gộp đặt trọng số theo số pixel, còn các điểm chất lượng khác lấy trung bình theo ảnh; khác biệt này cần được tính đến khi diễn giải. LPIPS và DISTS dùng quy trình chia ô ảnh đã nêu, không bảo đảm nội dung ngữ nghĩa hay chữ viết được giữ đúng. Biên Pareto chưa xét thời gian giải mã, bộ nhớ, độ phức tạp và khả năng tái lập trên các phần cứng khác nhau. Vì vậy, kết quả chỉ phản ánh hiệu quả bitrate–Q̂ trong bộ số liệu hiện tại, chưa phản ánh hiệu quả triển khai tổng thể.
+
+**Nguồn và cách tái tạo:** Dùng [make_supplement.py](figures/metrics_2026-10-20/make_supplement.py) để tạo lại các hình bổ sung, danh sách điểm thuộc biên và bảng mức tăng. Mã băm SHA-256 của CSV cùng các hàng thuộc biên được lưu trong [supplement_manifest.json](figures/metrics_2026-10-20/supplement_manifest.json). Các script hình và manifest này chỉ tái tạo phần số liệu ngày 20/10, chưa bao gồm MLIC++. Phần MLIC++ dùng [compare.py](../experiments/mlicpp/compare.py), [hướng dẫn chạy](../experiments/mlicpp/README.md) và [báo cáo chi tiết ngày 02/11](CLIC2027_MLICpp_full30_2026-11-02.md); số liệu bổ sung đã được nén, giải mã và tính metric thực trên server.

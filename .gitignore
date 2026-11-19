@@ -25,3 +25,5 @@ desktop.ini
 *.pt
 *.pt.tmp
 
+# Local blind-scoring images, private assignments and human ratings
+results/blind-scoring*/

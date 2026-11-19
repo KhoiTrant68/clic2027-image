@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "workers": {
+    "msillm": [
+      "{python}", "../../experiments/new_codecs/verify_msillm.py",
+      "--stage", "decode", "--out", "{work}",
+      "--hub", "runtime/msillm", "--weights", "weights/msillm",
+      "--deterministic", "--gpu-memory-guard"
+    ],
+    "pulse": [
+      "{python}", "runtime/pulse/decode.py",
+      "--input", "{input}", "--output", "{output}",
+      "--report", "{report}", "--gpu-memory-guard"
+    ]
+  }
+}

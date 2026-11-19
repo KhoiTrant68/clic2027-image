@@ -5,15 +5,15 @@ Repo không phục vụ paper nào.
 
 | Thư mục | Nội dung |
 |---|---|
-| `plans/` | Kế hoạch CLIC: `Plan CLIC 2027 v2 - tap trung de thang.md` (lịch và quyết định hiện hành), `Plan CLIC 2027.md` (luật thi, phần kỹ thuật A1–A6 và nhánh B) |
+| `plans/` | [Kế hoạch v3](<plans/Plan CLIC 2027 v3 - execution 2026-10-15.md>) là kế hoạch triển khai hiện hành; v2 và bản gốc được giữ để tham khảo lịch sử. |
 | `src/clic27/` | Package dùng chung:<br>• `eval/metrics.py`: **mọi con số trong phân tích CLIC đều đi qua module này**<br>• `nn/`: DC-AE (và SANA DiT) viết lại bằng torch thuần, không cần diffusers (server không có diffusers)<br>• `codec/latent_codec.py`: S1, codec đa rate trên latent DC-AE (ứng viên C1)<br>• `entropy/`: rANS bằng numpy, bảng CDF số nguyên, mạng số nguyên `QConv2d` (khớp từng bit giữa các máy), `GaussianConditional`, `DiscretePrior` |
 | `experiments/` | `qhat/` (Q̂: thước đo thay người chấm, fit trên dữ liệu chấm theo cặp của CLIC), `bakeoff/` (so sánh các base trên 30 ảnh validation, chia bit theo Q̂; `merge_sessions.py` gộp nhiều session), `clic_b/` (trần AE, VTM/VTM-SCC trên ảnh màn hình), `determinism/` (float vs số nguyên giữa các máy), `parity/` (torch thuần vs diffusers), `s1/` (train/eval S1) |
-| `clic/` | `l4/`: dựng môi trường giống server trên máy L4 thuê. Sau này thêm `submission/`, `encoder/`, `tools/` |
+| `clic/` | `l4/`: chuẩn bị môi trường L4. [submission/](clic/submission/README.md): khung decoder toàn mix và giao diện worker. `tools/check_submission.py`: kiểm manifest, ngân sách byte và ảnh đầu ra trên local. Các worker GPU chưa được kiểm đầy đủ. |
 | `reports/` | Báo cáo theo ngày (tình trạng, rà soát codec diffusion) |
 | `results/` | Kết quả chạy trên Kaggle theo ngày. Chỉ commit `summary.md`, csv, json; zip, recon, npz và crops bị bỏ qua |
 | `refs/` | `code_notes.md` (đọc code các codec đối thủ), `README.md` (URL và commit của các repo tham khảo và devkit CLIC). Bản clone nằm trong `refs/repos/`, không commit |
 | `tools/` | `bundle.py`: đóng gói code thành một file `clic27_run.py`; `clic_notebook.py`: notebook Kaggle `clic_qhat_bakeoff.ipynb` và `run_clic.sh` (được `bundle.py` gọi) |
-| `tests/` | `python tests/test_metrics.py`, `test_entropy.py`, `test_dither.py` (hoặc `pytest`), chạy trên CPU, không cần torch |
+| `tests/` | Kiểm metric, entropy, dither và framing stream trên CPU. Thêm `python -m unittest discover -s tests -p test_submission.py -v` để kiểm đóng gói và điều phối bằng worker giả lập, không cần torch. |
 
 ## Quy trình
 
@@ -29,6 +29,14 @@ Repo không phục vụ paper nào.
 
 
 ## Q̂ và so sánh base (bake-off)
+
+**Chấm mù bằng người:** [tool A/B trên trình duyệt](tools/BLIND_SCORING.md), có ảnh gốc, zoom/cuộn đồng bộ, lưu phiên và xuất phiếu CSV. Chạy thử: `python tools/blind_score.py demo --out results/blind-scoring-demo`, sau đó `python tools/blind_score.py serve --study results/blind-scoring-demo/study`.
+
+Thử nghiệm bổ sung: [MLIC++ trên 30 ảnh, 02/11/2026](reports/CLIC2027_MLICpp_full30_2026-11-02.md), kèm [hướng dẫn chạy trong môi trường riêng](experiments/mlicpp/README.md).
+
+Nghiên cứu ngày 05/11/2026: [pilot conditional/fixed](reports/MLICpp_innovation_pilot_2026-11-05.md), [cải thiện fixed và đối chứng cùng byte](reports/MLICpp_fixed_improvement_2026-11-05.md), [định hướng đóng góp cho CVPR/ICCV/ECCV/WACV](reports/MLICpp_top_venue_research_2026-11-05.md).
+
+[Pilot lượng tử hóa theo hình học decoder](reports/MLICpp_geometry_pilot_2026-11-05.md): đã train mạng dự đoán 1.000 bước và kiểm 256/256 bitstream trên 16 nguồn mới; chưa cải thiện RD so với uniform trong khoảng giao đã đo.
 
 Một lần chạy trên Kaggle (GPU T4 + Internet), tự tiếp tục khi chạy lại:
 

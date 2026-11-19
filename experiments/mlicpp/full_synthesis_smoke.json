@@ -1,0 +1,23 @@
+{
+  "seed": 1984,
+  "cache": "/home/jovyan/clic2027-artifacts/mlicpp/pilot20261104/div2k224-q2-crop256",
+  "upstream": "/home/jovyan/clic2027-image/refs/repos/MLIC",
+  "weights": "/home/jovyan/clic2027-artifacts/mlicpp/weights",
+  "adapter": "/home/jovyan/clic2027-artifacts/mlicpp/pilot20261104/div2k224-q2-risk-adapter-seed1984-rational/mean/last.pt",
+  "quality": 2,
+  "legacy": true,
+  "train_limit": 4,
+  "validation_limit": 2,
+  "steps": 2,
+  "batch_size": 2,
+  "learning_rate": 1e-05,
+  "discriminator_learning_rate": 0.0001,
+  "pixel_weight": 10.0,
+  "lpips_weight": 1.0,
+  "edge_weight": 0.1,
+  "gan_weight": 0.01,
+  "gan_warmup": 0,
+  "log_every": 1,
+  "wall_time_limit_s": 600,
+  "reference": "pilot_q2_rational.json: same source split, real q2 streams, seed, batch size, steps and reconstruction loss weights. Intentional changes: train full g_s at LR1e-5 instead of a frozen g_s plus tiny adapter at LR1e-4; two full-g_s arms differ only in conditional GAN training. Fixed final checkpoint; validation is development data, no test accessed."
+}

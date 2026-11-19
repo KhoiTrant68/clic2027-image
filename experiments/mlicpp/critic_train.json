@@ -1,0 +1,13 @@
+{
+  "rollout_run": "/home/jovyan/clic2027-artifacts/mlicpp/joint-symbol-20261106/div2k-mlicpp-q2-joint-symbol-6workers-4sweeps",
+  "train_workers": [0, 1, 2, 3],
+  "validation_workers": [4, 5],
+  "seed": 9041,
+  "steps": 2000,
+  "batch_size": 64,
+  "learning_rate": 0.0003,
+  "hidden": 256,
+  "allocator_fraction": 0.16,
+  "min_free_mib": 1536,
+  "wall_time_limit_s": 3600
+}
