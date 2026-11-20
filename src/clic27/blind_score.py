@@ -161,6 +161,33 @@ def repo_file(rel):
     return path if path.is_file() else None
 
 
+NO_STUDY_PAGE = '''<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chấm mù</title><style>
+:root{--bg:#f4f4f5;--surface:#fff;--line:#dcdce0;--text:#18181b;--muted:#5f5f6b;--code:#f0f0f2;--focus:#2563eb;
+font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--text);background:var(--bg);color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#121214;--surface:#1c1c1f;--line:#34343a;--text:#ececef;--muted:#a1a1aa;
+--code:#26262a;--focus:#8fb2ff;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);line-height:1.55;font-size:15px}a{color:var(--focus)}
+.top{display:flex;gap:20px;align-items:center;padding:10px 24px;background:var(--surface);border-bottom:1px solid var(--line)}
+.top nav{margin-left:auto;display:flex;gap:4px}.top nav a{padding:6px 12px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.top nav a[aria-current]{background:var(--code);color:var(--text);font-weight:600}
+main{max-width:760px;margin:32px auto;padding:0 16px}.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 24px}
+h1{font-size:22px;margin:0 0 8px}p{color:var(--muted)}pre{background:var(--code);border-radius:8px;padding:10px 12px;overflow-x:auto;font-size:13px}
+</style></head><body>
+<header class="top"><b>CLIC 2027</b><nav><a href="/" aria-current="page">Chấm mù</a><a href="/results">Kết quả thí nghiệm</a></nav></header>
+<main><div class="card"><h1>Chưa mở phiên chấm</h1>
+<p>Server này đang chạy ở chế độ <code>results</code>, chỉ phục vụ trang kết quả. Để chấm, dừng server (Ctrl+C) rồi chạy với một bộ ảnh đã chuẩn bị.</p>
+<p>Thử nhanh với 3 ảnh mẫu tổng hợp:</p>
+<pre>python src/clic27/blind_score.py demo --out results/blind-scoring-demo
+python src/clic27/blind_score.py serve --study results/blind-scoring-demo/study</pre>
+<p>Ảnh thật: tạo thư mục gồm <code>reference/</code> và một thư mục recon cho mỗi codec, viết <code>config.json</code>, rồi chạy:</p>
+<pre>python src/clic27/blind_score.py prepare --config &lt;config.json&gt; --out &lt;study&gt;
+python src/clic27/blind_score.py serve --study &lt;study&gt;</pre>
+<p>Chi tiết: <code>tools/BLIND_SCORING.md</code>. <a href="/results">Về trang kết quả</a></p>
+</div></main></body></html>'''.encode('utf-8')
+
+
 def handler(store, tracker=TRACKER):
     page = Path(__file__).with_name('blind_score.html').read_bytes()
     results_page = Path(__file__).with_name('tracker.html').read_bytes()
@@ -186,10 +213,8 @@ def handler(store, tracker=TRACKER):
         def do_GET(self):
             path = urlparse(self.path).path
             try:
-                if path == '/':
-                    if store is None:  # tracker-only server
-                        self.send_response(302); self.send_header('Location', '/results'); self.end_headers(); return
-                    self.respond(200, page, 'text/html; charset=utf-8')
+                if path == '/':  # tracker-only server: explain how to start scoring instead of bouncing to /results
+                    self.respond(200, page if store is not None else NO_STUDY_PAGE, 'text/html; charset=utf-8')
                 elif path == '/results':
                     self.respond(200, results_page, 'text/html; charset=utf-8')
                 elif path == '/api/results':
