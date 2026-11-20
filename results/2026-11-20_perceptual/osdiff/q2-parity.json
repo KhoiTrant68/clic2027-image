@@ -1,0 +1,6 @@
+{
+  "quality": "2",
+  "images": 30,
+  "stream_parity": true,
+  "pixel_mismatch": {}
+}

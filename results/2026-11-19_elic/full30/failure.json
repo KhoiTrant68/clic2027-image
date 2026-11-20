@@ -1,0 +1,4 @@
+{
+  "stage": "run",
+  "error": "CalledProcessError(76, ['/mnt/data/khoitm8/clic2027/envs/elic/bin/python', '/mnt/data/khoitm8/clic2027/clic2027-image/experiments/elic/probe.py', '--upstream', 'refs/ELiC-ReImplemetation', '--weights', 'elic/weights', '--out', 'elic/full30', '--stage', 'score', '--data', 'data/valid30', '--qhat', '/mnt/data/khoitm8/clic2027/clic2027-image/results/2026-10-15_new_codecs/qhat_v0.json', '--qualities', '1', '2', '3', '4'])"
+}

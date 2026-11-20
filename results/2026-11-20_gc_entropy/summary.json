@@ -1,0 +1,112 @@
+{
+ "q1": {
+  "R_bpp": 0.11751530070344728,
+  "rows": [
+   {
+    "variant": "V0",
+    "bpp": 0.1693435064927423,
+    "vs_R_pct": 44.103368224436366,
+    "params": 4325312,
+    "forward_s": 0.466362539678812,
+    "steps": 50000,
+    "vs_V0_pct": 0.0,
+    "forward_x": 1.0,
+    "gap_closed_pct": 0.0
+   },
+   {
+    "variant": "V0f",
+    "bpp": 0.1671851743861897,
+    "vs_R_pct": 42.266729000749926,
+    "params": 4325312,
+    "forward_s": 0.23303702473640442,
+    "steps": 50000,
+    "vs_V0_pct": -1.2745290039480106,
+    "forward_x": 0.49969070178084857,
+    "gap_closed_pct": 4.164396728930144
+   },
+   {
+    "variant": "V1",
+    "bpp": 0.16212544289041073,
+    "vs_R_pct": 37.96113520531104,
+    "params": 7230272,
+    "forward_s": 0.5403187870979309,
+    "steps": 50000,
+    "vs_V0_pct": -4.262379911591663,
+    "forward_x": 1.1585810204011093,
+    "gap_closed_pct": 13.92690233514208
+   },
+   {
+    "variant": "V2",
+    "bpp": 0.16159438842335733,
+    "vs_R_pct": 37.509232802922156,
+    "params": 7946048,
+    "forward_s": 0.9305884055793285,
+    "steps": 50000,
+    "vs_V0_pct": -4.575975914209074,
+    "forward_x": 1.9954184275182842,
+    "gap_closed_pct": 14.951546076838202
+   }
+  ],
+  "gate": {
+   "R_below_V0_pct": 30.60536944268144,
+   "entropy_is_source": true,
+   "pick": null,
+   "note": "50k steps: selection only (design 2.1); G0 is decided on the 300k-step runs below"
+  }
+ },
+ "q2": {
+  "R_bpp": 0.17978885460724223,
+  "rows": [
+   {
+    "variant": "V0",
+    "bpp": 0.2481199260178308,
+    "vs_R_pct": 38.00628885470194,
+    "params": 4325312,
+    "forward_s": 0.5236510671675205,
+    "steps": 50000,
+    "vs_V0_pct": 0.0,
+    "forward_x": 1.0,
+    "gap_closed_pct": 0.0
+   },
+   {
+    "variant": "V0f",
+    "bpp": 0.24738444401500434,
+    "vs_R_pct": 37.59720787777867,
+    "params": 4325312,
+    "forward_s": 0.19941125065088272,
+    "steps": 50000,
+    "vs_V0_pct": -0.29642198215616977,
+    "forward_x": 0.38080940373046035,
+    "gap_closed_pct": 1.0763507547058606
+   },
+   {
+    "variant": "V1",
+    "bpp": 0.24122719643326154,
+    "vs_R_pct": 34.1724974889208,
+    "params": 7230272,
+    "forward_s": 0.7236377540975809,
+    "steps": 50000,
+    "vs_V0_pct": -2.777983088739888,
+    "forward_x": 1.3819082963237481,
+    "gap_closed_pct": 10.087255244619465
+   },
+   {
+    "variant": "V2",
+    "bpp": 0.2405136175974524,
+    "vs_R_pct": 33.77559922881008,
+    "params": 7946048,
+    "forward_s": 0.6693920623511076,
+    "steps": 50000,
+    "vs_V0_pct": -3.065577417523402,
+    "forward_x": 1.2783170021440313,
+    "gap_closed_pct": 11.131551523132902
+   }
+  ],
+  "gate": {
+   "R_below_V0_pct": 27.53953400972643,
+   "entropy_is_source": true,
+   "pick": null,
+   "note": "50k steps: selection only (design 2.1); G0 is decided on the 300k-step runs below"
+  }
+ }
+}

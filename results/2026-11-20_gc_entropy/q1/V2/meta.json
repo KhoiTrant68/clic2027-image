@@ -1,0 +1,30 @@
+{
+ "variant": "V2",
+ "config": {
+  "integer": true,
+  "local5": true,
+  "deep": true,
+  "inter": true,
+  "intra": false,
+  "slices": [
+   16,
+   16,
+   32,
+   64,
+   192
+  ]
+ },
+ "params": 7946048,
+ "steps": 50000,
+ "batch": 32,
+ "lr": 0.0001,
+ "pool": [
+  65536,
+  320,
+  16,
+  16
+ ],
+ "data": "/mnt/data/khoitm8/clic2027/gce/q1",
+ "init": null,
+ "init_step": 0
+}

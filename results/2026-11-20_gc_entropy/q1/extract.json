@@ -1,0 +1,16 @@
+{
+ "quality": 1,
+ "pool": 65536,
+ "crop": 256,
+ "codec": {
+  "quality": 1,
+  "lambda_mse": 0.0018,
+  "legacy": true,
+  "checkpoint": "/mnt/data/khoitm8/clic2027/mlicpp/weights/mlicpp-mse-q1-legacy.pth.tar",
+  "checkpoint_sha256": "2823b3d9abd29eab97dc9aa0c3d1e5053b26a7f59dc8773cc794653a3b53d906",
+  "upstream_sha": "4aa9d2a512eb9db382172058e6c278fb0d376e17",
+  "cudnn_v8_api_disabled": "1",
+  "parameters": 116716928,
+  "load_s": 3.457030391320586
+ }
+}

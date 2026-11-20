@@ -1,90 +1,460 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Chấm mù chất lượng ảnh</title>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chấm mù ảnh</title>
 <style>
-:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#e8edf5;background:#10151e;color-scheme:dark}*{box-sizing:border-box}body{margin:0}header{padding:22px 28px;border-bottom:1px solid #30394a;display:flex;justify-content:space-between;align-items:center;gap:20px}h1{font-size:21px;margin:0 0 6px}.muted{color:#aab6ca;font-size:14px}main{padding:22px 28px;max-width:2000px;margin:auto}button,select{font:inherit;border:1px solid #44516a;background:#202c3e;color:#f1f5fb;border-radius:9px;padding:12px 18px;cursor:pointer}button:hover{background:#30415d}button:focus-visible,select:focus-visible{outline:3px solid #8fb7ff;outline-offset:3px}button:disabled{opacity:.45;cursor:wait}.primary{background:#3267c6;border-color:#6897ef}.welcome{max-width:760px;margin:45px auto;padding:30px;background:#192231;border:1px solid #303e53;border-radius:16px;line-height:1.7}.welcome h2{margin-top:0}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 18px}.toolbar h2{font-size:18px;margin:0;max-width:70%}.images{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.panel{background:#192231;border:1px solid #354257;border-radius:12px;overflow:hidden}.panel h3{margin:0;padding:13px 16px;font-size:16px;border-bottom:1px solid #354257}.viewport{height:54vh;min-height:240px;overflow:auto;background:#080b10}.viewport img{display:block;max-width:none;height:auto;image-rendering:auto}.controls{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:24px}.controls button{min-width:150px}kbd{font-size:12px;border:1px solid #66748c;border-radius:4px;padding:1px 5px;margin-left:7px;color:#bfcee4}.note{text-align:center;margin:14px;color:#aab6ca;font-size:13px}#error{color:#ffb5ac;white-space:pre-wrap;margin:12px 0}progress{width:160px;height:8px;accent-color:#85b0ff}[hidden]{display:none!important}@media(max-width:760px){header,main{padding:16px}.images{grid-template-columns:1fr}.viewport{height:38vh}.toolbar{align-items:flex-start}.toolbar h2{max-width:65%}.welcome{margin:12px auto;padding:22px}kbd{display:none}}
-.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:57px;padding:9px 12px;border-bottom:1px solid #354257}.panel .panel-heading h3{padding:0;border:0}.panel-heading button{padding:6px 9px;font-size:13px}.panel-heading button[aria-pressed="true"]{background:#3267c6;border-color:#6897ef}.compare-frame{display:grid;width:max-content}.compare-frame img{grid-area:1/1}
-.welcome{max-width:860px;margin:22px auto}.welcome h2{font-size:28px;line-height:1.25}.welcome ol{padding-left:24px}.welcome li{margin:9px 0}.welcome details{margin:18px 0;color:#bfcde0}.welcome summary{cursor:pointer}.welcome .primary{font-size:18px;padding:15px 24px}.viewport img,.compare-frame{margin-inline:auto}.panel:has([data-flip][aria-pressed="true"]){border:2px solid #efc66f}.panel:has([data-flip][aria-pressed="true"]) .panel-heading{background:#453923}.original-notice{padding:12px 16px;margin:12px 0;background:#453923;border:1px solid #b49149;border-radius:9px;display:flex;align-items:center;justify-content:space-between;gap:12px}.study-help{color:#bfcde0;margin:0 0 14px}.controls{position:sticky;bottom:0;background:#10151ef2;padding:12px 0;margin-top:12px}.viewport{height:clamp(220px,50vh,650px)}.note{line-height:1.5}.panel-heading h3{line-height:1.3}@media(max-width:760px){.images{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.images>.panel:first-child{grid-column:1/-1}.images>.panel:first-child .viewport{height:20vh;min-height:140px}.viewport{height:32vh;min-height:180px}.panel-heading{align-items:flex-start;flex-direction:column}.controls{gap:6px}.controls button{min-width:0;flex:1 1 44%;padding:12px 6px}.original-notice{align-items:flex-start;flex-direction:column}.toolbar h2{max-width:100%}.toolbar{flex-wrap:wrap}}
-</style></head><body>
-<header><div><h1>Chấm mù chất lượng ảnh</h1><div class="muted">So sánh theo cảm nhận · Không hiển thị tên codec</div></div><div><div id="progressText" class="muted">Sẵn sàng</div><progress id="progress" value="0" max="1" aria-label="Tiến độ"></progress></div></header>
-<main><div id="error" role="alert"></div>
-<section id="welcome" class="welcome"><h2>Bạn thích bản nào hơn?</h2><p>Quan sát ảnh gốc, rồi so sánh hai bản A và B. Cân nhắc độ rõ, chi tiết, màu sắc và các lỗi gây khó chịu. Không cần đoán phương pháp nén.</p><p>Chọn <strong>Khó phân biệt</strong> nếu chất lượng tương đương; chọn <strong>Bỏ qua</strong> nếu bạn không thể đánh giá. Bạn có thể lật từng bản sang ảnh gốc hoặc lăn chuột trên ảnh để zoom cả ba khung.</p><p class="muted">Không yêu cầu tên hay email. Lựa chọn được lưu trên máy chạy công cụ; trình duyệt giữ mã phiên để bạn tiếp tục. Mỗi người nên dùng một hồ sơ trình duyệt riêng. A/B và thứ tự câu hỏi được xáo trộn.</p><button id="start" class="primary" disabled>Bắt đầu chấm</button></section>
-<section id="study" hidden><div class="toolbar"><h2 id="question"></h2><label>Phóng to <select id="zoom"><option value="fit">Xem trọn ảnh</option><option value="1">100%</option><option value="2">200%</option><option id="wheelZoom" value="wheel" hidden></option></select></label></div>
-<p class="study-help">So với ảnh gốc, bạn thấy A hay B đẹp hơn? <strong>Bấm lựa chọn để lưu và sang câu tiếp theo.</strong></p>
-<div class="images">
-  <article class="panel"><div class="panel-heading"><h3>Ảnh gốc</h3></div><div class="viewport"><img id="ref" alt="Ảnh tham chiếu"></div></article>
-  <article class="panel"><div class="panel-heading"><h3>Bản A<span id="a-state" class="muted" hidden> · Ảnh gốc</span></h3><button type="button" data-flip="a" aria-controls="a-frame" aria-pressed="false" disabled>Lật ảnh A</button></div><div class="viewport"><div id="a-frame" class="compare-frame"><img id="a" alt="Bản A"><img id="a-original" alt="Ảnh gốc" hidden></div></div></article>
-  <article class="panel"><div class="panel-heading"><h3>Bản B<span id="b-state" class="muted" hidden> · Ảnh gốc</span></h3><button type="button" data-flip="b" aria-controls="b-frame" aria-pressed="false" disabled>Lật ảnh B</button></div><div class="viewport"><div id="b-frame" class="compare-frame"><img id="b" alt="Bản B"><img id="b-original" alt="Ảnh gốc" hidden></div></div></article>
-</div>
-<div id="originalNotice" class="original-notice" role="status" hidden><span>Bạn đang xem ảnh gốc thay cho A hoặc B. Hãy trở lại hai bản trước khi chọn.</span><button id="restoreVersions" type="button">Trở lại A và B</button></div>
-<div class="controls"><button data-choice="A" class="primary">Chọn A <kbd>1</kbd></button><button data-choice="tie">Hai bản tương đương <kbd>2</kbd></button><button data-choice="B" class="primary">Chọn B <kbd>3</kbd></button><button data-choice="skip">Bỏ qua câu này <kbd>4</kbd></button></div>
-<div class="note" id="hint">Đang tải ảnh…</div></section>
-<section id="finished" class="welcome" hidden><h2>Đã lưu toàn bộ lựa chọn</h2><p>Cảm ơn bạn đã hoàn thành phiên chấm. Kết quả và tên codec được giữ ở phía người tổ chức.</p></section></main>
+:root{
+  --bg:#f4f4f5;--surface:#ffffff;--surface-2:#f0f0f2;--line:#dcdce0;--text:#18181b;--muted:#5f5f6b;
+  --stage:#26272b;--stage-line:#3a3b40;
+  --a:#2563eb;--a-soft:#dbe6fd;--b:#c2410c;--b-soft:#fde4d6;--ref:#a16207;--ref-soft:#fdf0c8;
+  --focus:#2563eb;--danger:#b91c1c;--danger-soft:#fde2e2;--radius:10px;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--text);background:var(--bg);color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121214;--surface:#1c1c1f;--surface-2:#26262a;--line:#34343a;--text:#ececef;--muted:#a1a1aa;
+  --stage:#202124;--stage-line:#34353a;
+  --a:#6b9bff;--a-soft:#1d2b4d;--b:#ff9a5c;--b-soft:#4a2717;--ref:#f5c542;--ref-soft:#423510;
+  --focus:#8fb2ff;--danger:#ff8a8a;--danger-soft:#3d1717;color-scheme:dark;
+}}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);display:flex;flex-direction:column;font-size:15px;line-height:1.5}
+button{font:inherit;color:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--surface);padding:8px 14px}
+button:hover:not(:disabled){background:var(--surface-2)}
+button:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;border:1px solid currentColor;border-bottom-width:2px;border-radius:5px;padding:2px 6px;opacity:.75}
+[hidden]{display:none!important}
+
+/* Header */
+.top{display:flex;align-items:center;gap:16px;padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--line);min-height:56px}
+.brand{font-weight:650;font-size:16px;white-space:nowrap}
+.progress{flex:1;display:flex;align-items:center;gap:12px;max-width:520px;margin:0 auto}
+.progress-text{font-size:14px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.bar{flex:1;height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar>span{display:block;height:100%;width:0;background:var(--a);transition:width .25s}
+.icon-btn{width:36px;height:36px;padding:0;border-radius:50%;font-weight:700;margin-left:auto;flex:none}
+.progress:not([hidden])+.icon-btn{margin-left:0}
+
+/* Pages (welcome / finished) */
+.page{flex:1;overflow:auto;padding:40px 20px}
+.card{max-width:720px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:32px}
+.card h1{font-size:26px;line-height:1.25;margin:0 0 8px}
+.lead{color:var(--muted);margin:0 0 24px;font-size:16px}
+.steps{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:14px}
+.steps li{display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start}
+.steps .n{width:32px;height:32px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;font-weight:700}
+.steps strong{display:block}
+.steps span{color:var(--muted)}
+.keys{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;align-items:center;background:var(--surface-2);border-radius:var(--radius);padding:16px 18px;margin:0 0 24px;font-size:14px}
+.keys dt{display:flex;gap:4px;justify-content:flex-end}
+.keys dd{margin:0}
+.primary{background:var(--text);color:var(--bg);border-color:var(--text);font-weight:600;padding:12px 22px;font-size:16px}
+.primary:hover:not(:disabled){background:var(--text);opacity:.88}
+.fine{font-size:13px;color:var(--muted);margin:16px 0 0}
+.rounds{display:grid;gap:12px;margin:0 0 8px}
+.round{border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;display:grid;gap:6px}
+.round h2{font-size:17px;margin:0}
+.round p,.round ul{margin:0;color:var(--muted);font-size:14px}
+.round ul{padding-left:18px}
+.round .row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:8px}
+.round a,.card a{color:var(--a)}
+
+/* Study */
+.study{flex:1;display:flex;flex-direction:column;min-height:0}
+.question{margin:0;padding:12px 20px 0;font-size:17px;font-weight:600;text-align:center}
+.tools{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:10px 20px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;border-radius:0;padding:6px 12px;font-size:14px}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.zoom-value{font-size:13px;color:var(--muted);min-width:44px;font-variant-numeric:tabular-nums}
+.hold{font-size:14px;padding:6px 12px;user-select:none;-webkit-user-select:none;touch-action:none}
+.hold[aria-pressed="true"]{background:var(--ref-soft);border-color:var(--ref);color:var(--text)}
+.stage{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px}
+.panel{position:relative;min-height:0;background:var(--stage);border:2px solid var(--stage-line);border-radius:var(--radius);overflow:hidden;touch-action:none;cursor:grab}
+.panel.dragging{cursor:grabbing}
+.panel img{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.panel .ref{visibility:hidden}
+.panel.zoomed img{image-rendering:pixelated}
+.tag{position:absolute;top:10px;left:10px;z-index:2;font-weight:700;font-size:15px;padding:4px 12px;border-radius:99px;color:#fff;pointer-events:none}
+.panel[data-side="a"] .tag{background:var(--a)}
+.panel[data-side="b"] .tag{background:var(--b)}
+.showing-ref .panel{border-color:var(--ref)}
+.showing-ref .panel .ver{visibility:hidden}
+.showing-ref .panel .ref{visibility:visible}
+.showing-ref .panel .tag{background:var(--ref);color:#1a1300}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:#d4d4d8;font-size:14px;z-index:3;background:var(--stage)}
+.vote{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;padding:12px 20px 16px;align-items:stretch}
+.vote button{padding:14px 12px;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px}
+.vote .va{background:var(--a-soft);border-color:var(--a)}
+.vote .vb{background:var(--b-soft);border-color:var(--b)}
+.vote .va:hover:not(:disabled){background:var(--a-soft);filter:brightness(.97)}
+.vote .vb:hover:not(:disabled){background:var(--b-soft);filter:brightness(.97)}
+.vote .vt{min-width:170px}
+.subvote{display:flex;justify-content:center;gap:18px;padding:0 20px 14px;font-size:13px;color:var(--muted)}
+.link{border:0;background:none;padding:0;color:var(--muted);text-decoration:underline;font-size:13px}
+.link:hover:not(:disabled){background:none;color:var(--text)}
+
+.alert{margin:12px 20px 0;padding:10px 14px;border-radius:8px;background:var(--danger-soft);color:var(--danger);display:flex;gap:12px;align-items:center;justify-content:space-between}
+.alert button{font-size:14px;padding:4px 10px}
+
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--text);padding:24px;max-width:460px;width:calc(100% - 32px)}
+dialog::backdrop{background:#0008}
+dialog h2{margin:0 0 12px;font-size:18px}
+
+@media (max-width:760px){
+  .top{padding:8px 12px;gap:10px}
+  .brand{display:none}
+  .page{padding:16px 12px}
+  .card{padding:22px 18px}
+  .card h1{font-size:22px}
+  .question{font-size:15px;padding:10px 12px 0}
+  .tools{padding:8px 12px}
+  .stage{grid-template-columns:1fr;grid-template-rows:1fr 1fr;padding:0 12px}
+  .vote{grid-template-columns:1fr 1fr;padding:10px 12px 12px}
+  .vote .vt{grid-column:1/-1;grid-row:2;min-width:0}
+  .vote kbd,.hold kbd,.keys-hint,.key-s{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">Chấm mù ảnh</div>
+  <div class="progress" id="progressBox" hidden>
+    <span class="progress-text" id="progressText"></span>
+    <div class="bar" role="progressbar" aria-label="Tiến độ" id="bar" aria-valuemin="0"><span></span></div>
+  </div>
+  <button class="icon-btn" id="helpBtn" type="button" aria-label="Hướng dẫn" title="Hướng dẫn (H)">?</button>
+</header>
+
+<div id="error" class="alert" role="alert" hidden><span id="errorText"></span><button type="button" onclick="location.reload()">Tải lại trang</button></div>
+
+<section id="welcome" class="page">
+  <div class="card">
+    <h1>Bản nào giống ảnh gốc hơn?</h1>
+    <p class="lead">Mỗi câu có hai bản nén <b>A</b> và <b>B</b> của cùng một ảnh. Bạn chọn bản có chất lượng nhìn tốt hơn khi so với ảnh gốc. Tên phương pháp được giấu.</p>
+    <ol class="steps">
+      <li><span class="n">1</span><div><strong>Nhìn tổng thể</strong><span>Hai bản hiện cạnh nhau, cùng khung nhìn.</span></div></li>
+      <li><span class="n">2</span><div><strong>Soi chi tiết</strong><span>Lăn chuột để phóng to, kéo để di chuyển. Cả hai khung luôn đi cùng nhau.</span></div></li>
+      <li><span class="n">3</span><div><strong>Đối chiếu ảnh gốc</strong><span>Giữ phím Space (hoặc giữ nút “Xem ảnh gốc”) để cả hai khung tạm hiện ảnh gốc; thả ra để quay lại.</span></div></li>
+      <li><span class="n">4</span><div><strong>Chọn</strong><span>A tốt hơn, B tốt hơn, hoặc “Như nhau” nếu không thấy khác biệt. Lựa chọn được lưu ngay và chuyển sang câu tiếp theo.</span></div></li>
+    </ol>
+    <dl class="keys keys-hint">
+      <dt><kbd>←</kbd><kbd>1</kbd></dt><dd>A tốt hơn</dd>
+      <dt><kbd>↓</kbd><kbd>2</kbd></dt><dd>Như nhau</dd>
+      <dt><kbd>→</kbd><kbd>3</kbd></dt><dd>B tốt hơn</dd>
+      <dt><kbd>Space</kbd></dt><dd>Giữ để xem ảnh gốc</dd>
+      <dt><kbd>F</kbd></dt><dd>Vừa khung · <kbd>0</kbd> 100% · <kbd>+</kbd>/<kbd>−</kbd> phóng to/thu nhỏ</dd>
+    </dl>
+    <div id="localStart">
+      <button id="start" class="primary" type="button" disabled>Bắt đầu chấm</button>
+    </div>
+    <div id="cloudStart" hidden>
+      <p id="roundStatus" role="status">Đang tải danh sách đợt chấm…</p>
+      <div id="rounds" class="rounds"></div>
+    </div>
+    <p class="fine"><a href="/results">Kết quả thí nghiệm của dự án</a> (xem sau khi chấm xong để không bị ảnh hưởng).</p>
+    <p class="fine">Không cần tên hay email. Tiến độ gắn với trình duyệt này: đóng trang rồi mở lại bằng cùng trình duyệt để chấm tiếp. Nên dùng màn hình máy tính.</p>
+  </div>
+</section>
+
+<section id="study" class="study" hidden>
+  <h2 class="question" id="question"></h2>
+  <div class="tools">
+    <div class="seg" role="group" aria-label="Phóng to">
+      <button type="button" data-zoom="fit" aria-pressed="true">Vừa khung</button>
+      <button type="button" data-zoom="1" aria-pressed="false">100%</button>
+      <button type="button" data-zoom="2" aria-pressed="false">200%</button>
+    </div>
+    <span class="zoom-value" id="zoomValue"></span>
+    <button type="button" class="hold" id="holdRef" aria-pressed="false">Giữ để xem ảnh gốc <kbd>Space</kbd></button>
+  </div>
+  <div class="stage" id="stage">
+    <div class="panel" data-side="a"><span class="tag">A</span><img class="ver" alt="Bản A"><img class="ref" alt="Ảnh gốc"><div class="loading">Đang tải ảnh…</div></div>
+    <div class="panel" data-side="b"><span class="tag">B</span><img class="ver" alt="Bản B"><img class="ref" alt="Ảnh gốc"><div class="loading">Đang tải ảnh…</div></div>
+  </div>
+  <div class="vote">
+    <button type="button" class="va" data-choice="A"><kbd>←</kbd> A tốt hơn</button>
+    <button type="button" class="vt" data-choice="tie">Như nhau <kbd>↓</kbd></button>
+    <button type="button" class="vb" data-choice="B">B tốt hơn <kbd>→</kbd></button>
+  </div>
+  <div class="subvote"><button type="button" class="link" data-choice="skip">Không đánh giá được câu này — bỏ qua<span class="key-s"> (S)</span></button></div>
+</section>
+
+<section id="finished" class="page" hidden>
+  <div class="card">
+    <h1>Xong rồi, cảm ơn bạn!</h1>
+    <p class="lead">Toàn bộ lựa chọn đã được lưu. Bạn có thể đóng trang.</p>
+    <p><a href="/">Quay lại trang đầu</a> · <a href="/results">Xem kết quả thí nghiệm</a></p>
+  </div>
+</section>
+
+<dialog id="help">
+  <h2>Cách chấm</h2>
+  <dl class="keys">
+    <dt><kbd>←</kbd><kbd>1</kbd></dt><dd>A tốt hơn</dd>
+    <dt><kbd>↓</kbd><kbd>2</kbd></dt><dd>Như nhau</dd>
+    <dt><kbd>→</kbd><kbd>3</kbd></dt><dd>B tốt hơn</dd>
+    <dt><kbd>S</kbd><kbd>4</kbd></dt><dd>Bỏ qua câu này</dd>
+    <dt><kbd>Space</kbd></dt><dd>Giữ để xem ảnh gốc</dd>
+    <dt>Chuột</dt><dd>Lăn để phóng to, kéo để di chuyển, nhấp đúp để chuyển Vừa khung ↔ 100%</dd>
+    <dt><kbd>F</kbd><kbd>0</kbd></dt><dd>Vừa khung / 100%</dd>
+  </dl>
+  <form method="dialog"><button class="primary" type="submit">Đã hiểu</button></form>
+</dialog>
+
 <script>
-const $=s=>document.querySelector(s),buttons=[...document.querySelectorAll('[data-choice]')],views=[...document.querySelectorAll('.viewport')];
-let token='',key='',trial=null,ready=false,busy=false,started=0,info;
-const flipButtons=[...document.querySelectorAll('[data-flip]')];
-const images=[...document.querySelectorAll('.viewport img')];
-const zoomControl=$('#zoom'), wheelOption=$('#wheelZoom'), reference=$('#ref');
-let wheelScale=1, referenceUrl=null;
-async function api(path,body){const headers={'Authorization':'Bearer '+token};if(body)headers['Content-Type']='application/json';const r=await fetch(path,{method:body?'POST':'GET',headers,body:body?JSON.stringify(body):undefined});const data=await r.json();if(!r.ok)throw Error(data.error||'Không kết nối được máy chủ.');return data}
-function updateCompareState(){const original=flipButtons.some(button=>button.getAttribute('aria-pressed')==='true');for(const button of buttons)button.disabled=!ready||original;$('#originalNotice').hidden=!original}
-function enable(value){ready=value;for(const button of flipButtons)button.disabled=!value;updateCompareState()}
-function showOriginal(button, show){
- const side=button.dataset.flip;
- button.setAttribute('aria-pressed',String(show));
- $(`#${side}-state`).hidden=!show;
- $(`#${side}-original`).hidden=!show;
- $(`#${side}`).style.visibility=show?'hidden':'';
- button.textContent=show?`Trở lại bản ${side.toUpperCase()}`:'Xem ảnh gốc';
- $(`#${side}-state`).textContent=' · ĐANG XEM ẢNH GỐC';
- updateCompareState();
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const ROUND_NAMES = {'clic30-v2': 'CLIC30 · Bốn phiên bản MLIC++', 'clic30-v1': 'CLIC30 · MLIC++ gốc và perceptual'};
+
+const state = {
+  cloud: false, round: null, token: '', storageKey: '',
+  trial: null, ready: false, busy: false, started: 0, refUrl: null,
+  view: {mode: 'fit', scale: 1, cx: 0, cy: 0}, natural: {w: 0, h: 0}, showRef: false,
+};
+const panels = $$('.panel');
+const voteButtons = $$('[data-choice]');
+
+function showError(message) { $('#errorText').textContent = message; $('#error').hidden = !message; }
+function show(id) { for (const s of ['welcome', 'study', 'finished']) $('#' + s).hidden = s !== id; }
+function storage(fn) { try { return fn(); } catch { return null; } }
+
+async function api(path, body) {
+  const headers = {};
+  if (!state.cloud && state.token) headers.Authorization = 'Bearer ' + state.token;
+  if (body) headers['Content-Type'] = 'application/json';
+  if (state.cloud && state.round && path !== '/api/rounds') path += '?round=' + encodeURIComponent(state.round);
+  const response = await fetch(path, {method: body ? 'POST' : 'GET', headers, body: body ? JSON.stringify(body) : undefined});
+  let data = {};
+  try { data = await response.json(); } catch {}
+  if (!response.ok) { const e = Error(data.error || 'Không kết nối được máy chủ.'); e.status = response.status; throw e; }
+  return data;
 }
-$('#restoreVersions').onclick=()=>{for(const button of flipButtons)showOriginal(button,false)};
-for(const button of flipButtons)button.onclick=()=>showOriginal(button,button.getAttribute('aria-pressed')!=='true');
-function fitScale(){return Math.min(1,...views.flatMap(view=>[view.clientWidth/reference.naturalWidth,view.clientHeight/reference.naturalHeight]))}
-function zoom(){
- if(!reference.naturalWidth||$('#study').hidden)return;
- const scale=zoomControl.value==='fit'?fitScale():zoomControl.value==='wheel'?wheelScale:Number(zoomControl.value);
- const width=Math.max(1,Math.round(reference.naturalWidth*scale));
- for(const im of images)im.style.width=`${width}px`;
+
+/* ---------- View: synced zoom & pan across both panels ---------- */
+function fitScale() {
+  const r = panels[0].getBoundingClientRect();
+  return Math.min(r.width / state.natural.w, r.height / state.natural.h);
 }
-let syncing=false;views.forEach(v=>v.addEventListener('scroll',()=>{if(syncing)return;syncing=true;for(const other of views)if(other!==v){other.scrollLeft=v.scrollLeft;other.scrollTop=v.scrollTop}requestAnimationFrame(()=>syncing=false)}));
-zoomControl.onchange=()=>{wheelOption.hidden=zoomControl.value!=='wheel';zoom()};
-window.addEventListener('resize',zoom);
-for(const view of views)view.addEventListener('wheel',event=>{
- if(!ready||!event.deltaY||event.shiftKey||event.ctrlKey||event.metaKey)return;
- event.preventDefault();
- const oldWidth=reference.clientWidth;
- const bounds=view.getBoundingClientRect();
- const x=event.clientX-bounds.left,y=event.clientY-bounds.top;
- const delta=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?view.clientHeight:1);
- const minScale=fitScale();
- const scale=oldWidth/reference.naturalWidth;
- wheelScale=Math.min(4,Math.max(minScale,scale*Math.exp(-Math.max(-140,Math.min(140,delta))/350)));
- const left=view.scrollLeft+x,top=view.scrollTop+y;
- if(wheelScale<=minScale){zoomControl.value='fit';wheelOption.hidden=true}
- else{wheelOption.textContent=`${Math.round(wheelScale*100)}%`;wheelOption.hidden=false;zoomControl.value='wheel'}
- zoom();
- const ratio=reference.clientWidth/oldWidth;
- syncing=true;
- for(const target of views){target.scrollLeft=left*ratio-x;target.scrollTop=top*ratio-y}
- requestAnimationFrame(()=>syncing=false);
-},{passive:false});
-function imageLoaded(id,url){return new Promise((resolve,reject)=>{const im=$(id);im.onload=resolve;im.onerror=()=>reject(Error('Không tải được ảnh. Tải lại trang để thử lại; lựa chọn trước vẫn được lưu.'));im.src=url})}
-async function loadReference(url){
- const response=await fetch(url);
- if(!response.ok)throw Error('Không tải được ảnh gốc. Tải lại trang để thử lại.');
- referenceUrl=URL.createObjectURL(await response.blob());
- await Promise.all(['#ref','#a-original','#b-original'].map(id=>imageLoaded(id,referenceUrl)));
+function clampView() {
+  const v = state.view, r = panels[0].getBoundingClientRect();
+  const halfW = r.width / 2 / v.scale, halfH = r.height / 2 / v.scale;
+  const {w, h} = state.natural;
+  v.cx = halfW * 2 >= w ? w / 2 : Math.min(w - halfW, Math.max(halfW, v.cx));
+  v.cy = halfH * 2 >= h ? h / 2 : Math.min(h - halfH, Math.max(halfH, v.cy));
 }
-async function next(){enable(false);for(const button of flipButtons)showOriginal(button,false);if(referenceUrl){URL.revokeObjectURL(referenceUrl);referenceUrl=null}$('#error').textContent='';trial=await api('/api/next');$('#progressText').textContent=trial.completed+' / '+trial.total+' câu đã lưu';$('#progress').max=trial.total||1;$('#progress').value=trial.completed;
- if(trial.done){$('#study').hidden=true;$('#welcome').hidden=true;$('#finished').hidden=false;return}
- $('#welcome').hidden=true;$('#study').hidden=false;$('#hint').textContent='Đang tải ảnh…';
- await Promise.all([loadReference(trial.reference),imageLoaded('#a',trial.a),imageLoaded('#b',trial.b)]);
- zoomControl.value='fit';wheelOption.hidden=true;zoom();views.forEach(v=>{v.scrollTop=0;v.scrollLeft=0});started=performance.now();enable(true);$('#hint').textContent='Muốn soi chi tiết? Lăn chuột trên ảnh để phóng to. Bấm “Xem ảnh gốc” để đối chiếu ngay trong khung A hoặc B.'}
-async function vote(choice){if(!ready||busy||flipButtons.some(button=>button.getAttribute('aria-pressed')==='true'))return;busy=true;enable(false);try{await api('/api/vote',{trial:trial.trial,choice,seconds:Math.min(604800,(performance.now()-started)/1000)});await next()}catch(e){$('#error').textContent=e.message;$('#hint').textContent='Tải lại trang để tiếp tục an toàn. Máy chủ giữ mọi lựa chọn đã nhận.'}finally{busy=false}}
-buttons.forEach(b=>b.onclick=()=>vote(b.dataset.choice));document.addEventListener('keydown',e=>{if(e.repeat||e.target.matches('input,select,textarea'))return;const choice={'1':'A','2':'tie','3':'B','4':'skip'}[e.key];if(choice){e.preventDefault();vote(choice)}});
-$('#start').onclick=async()=>{try{$('#start').disabled=true;if(!token){const s=await api('/api/start',{});token=s.token;localStorage.setItem(key,token)}await next()}catch(e){$('#error').textContent=e.message;$('#start').disabled=false}};
-(async()=>{try{info=await api('/api/info');$('#question').textContent=info.question;key='clic-blind-'+info.study;token=localStorage.getItem(key)||'';if(token)$('#start').textContent='Tiếp tục phiên chấm';$('#start').disabled=false}catch(e){$('#error').textContent=e.message;$('#start').disabled=true}})();
-</script></body></html>
+function render() {
+  if (!state.natural.w) return;
+  const v = state.view;
+  if (v.mode === 'fit') { v.scale = fitScale(); v.cx = state.natural.w / 2; v.cy = state.natural.h / 2; }
+  clampView();
+  const r = panels[0].getBoundingClientRect();
+  const tx = r.width / 2 - v.cx * v.scale, ty = r.height / 2 - v.cy * v.scale;
+  const t = `translate(${tx}px,${ty}px) scale(${v.scale})`;
+  for (const p of panels) {
+    for (const img of p.querySelectorAll('img')) { img.style.width = state.natural.w + 'px'; img.style.transform = t; }
+    // Nearest-neighbour only from 2x: below that, uneven pixel duplication would add its own artefacts.
+    p.classList.toggle('zoomed', v.scale >= 1.99);
+  }
+  $('#zoomValue').textContent = Math.round(v.scale * 100) + '%';
+  for (const b of $$('[data-zoom]')) {
+    const z = b.dataset.zoom;
+    b.setAttribute('aria-pressed', String(z === 'fit' ? v.mode === 'fit' : v.mode !== 'fit' && Math.abs(v.scale - Number(z)) < 1e-3));
+  }
+}
+function setScale(scale, px, py) {
+  // Zoom around panel point (px, py); defaults to panel centre.
+  const v = state.view, r = panels[0].getBoundingClientRect();
+  if (v.mode === 'fit') render();
+  px ??= r.width / 2; py ??= r.height / 2;
+  const min = fitScale(), next = Math.min(8, Math.max(min, scale));
+  const ix = v.cx + (px - r.width / 2) / v.scale, iy = v.cy + (py - r.height / 2) / v.scale;
+  v.mode = next <= min + 1e-6 ? 'fit' : 'free';
+  v.scale = next;
+  v.cx = ix - (px - r.width / 2) / next; v.cy = iy - (py - r.height / 2) / next;
+  render();
+}
+function setZoom(z) {
+  if (z === 'fit') { state.view.mode = 'fit'; render(); } else setScale(Number(z));
+}
+for (const b of $$('[data-zoom]')) b.onclick = () => setZoom(b.dataset.zoom);
+for (const p of panels) {
+  p.addEventListener('wheel', e => {
+    if (!state.natural.w || e.ctrlKey) return;
+    e.preventDefault();
+    const r = p.getBoundingClientRect();
+    const d = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? r.height : 1);
+    setScale(state.view.scale * Math.exp(-Math.max(-120, Math.min(120, d)) / 300), e.clientX - r.left, e.clientY - r.top);
+  }, {passive: false});
+  p.addEventListener('dblclick', e => {
+    const r = p.getBoundingClientRect();
+    if (state.view.mode === 'fit') setScale(1, e.clientX - r.left, e.clientY - r.top); else setZoom('fit');
+  });
+  let drag = null;
+  p.addEventListener('pointerdown', e => {
+    if (e.button !== 0 || state.view.mode === 'fit') return;
+    drag = {x: e.clientX, y: e.clientY, cx: state.view.cx, cy: state.view.cy};
+    p.setPointerCapture(e.pointerId); p.classList.add('dragging');
+  });
+  p.addEventListener('pointermove', e => {
+    if (!drag) return;
+    state.view.cx = drag.cx - (e.clientX - drag.x) / state.view.scale;
+    state.view.cy = drag.cy - (e.clientY - drag.y) / state.view.scale;
+    render();
+  });
+  const end = () => { drag = null; p.classList.remove('dragging'); };
+  p.addEventListener('pointerup', end); p.addEventListener('pointercancel', end);
+}
+new ResizeObserver(render).observe($('#stage'));
+
+/* ---------- Reference (hold to show) ---------- */
+function setShowRef(on) {
+  if (on && !state.ready) return;
+  state.showRef = on;
+  $('#stage').classList.toggle('showing-ref', on);
+  $('#holdRef').setAttribute('aria-pressed', String(on));
+  for (const p of panels) p.querySelector('.tag').textContent = on ? 'Ảnh gốc' : p.dataset.side.toUpperCase();
+  updateButtons();
+}
+const hold = $('#holdRef');
+hold.addEventListener('pointerdown', e => { e.preventDefault(); hold.setPointerCapture(e.pointerId); setShowRef(true); });
+for (const ev of ['pointerup', 'pointercancel', 'lostpointercapture']) hold.addEventListener(ev, () => setShowRef(false));
+hold.addEventListener('keydown', e => { if (e.key === 'Enter') setShowRef(true); });
+hold.addEventListener('keyup', e => { if (e.key === 'Enter') setShowRef(false); });
+window.addEventListener('blur', () => setShowRef(false));
+
+/* ---------- Trials ---------- */
+function updateButtons() { for (const b of voteButtons) b.disabled = !state.ready || state.busy || state.showRef; }
+function setProgress(done, total) {
+  $('#progressBox').hidden = false;
+  const current = Math.min(done + 1, total);
+  $('#progressText').textContent = done >= total ? `Đã xong ${total} câu` : `Câu ${current} / ${total}`;
+  $('#bar').firstElementChild.style.width = (total ? 100 * done / total : 0) + '%';
+  $('#bar').setAttribute('aria-valuemax', total); $('#bar').setAttribute('aria-valuenow', done);
+}
+function loadImage(img, url) {
+  return new Promise((resolve, reject) => {
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(Error('Không tải được ảnh. Tải lại trang để thử lại; các lựa chọn trước vẫn được lưu.'));
+    img.src = url;
+  });
+}
+async function next() {
+  state.ready = false; setShowRef(false); updateButtons();
+  for (const p of panels) p.querySelector('.loading').hidden = false;
+  if (state.refUrl) { URL.revokeObjectURL(state.refUrl); state.refUrl = null; }
+  const t = await api('/api/next');
+  state.trial = t;
+  setProgress(t.completed, t.total);
+  if (t.done) { show('finished'); return; }
+  show('study');
+  const response = await fetch(t.reference);
+  if (!response.ok) throw Error('Không tải được ảnh gốc. Tải lại trang để thử lại.');
+  state.refUrl = URL.createObjectURL(await response.blob());
+  const [a, b] = panels;
+  const [ref] = await Promise.all([
+    ...panels.map(p => loadImage(p.querySelector('.ref'), state.refUrl)),
+    loadImage(a.querySelector('.ver'), t.a), loadImage(b.querySelector('.ver'), t.b),
+  ]);
+  state.natural = {w: ref.naturalWidth, h: ref.naturalHeight};
+  state.view = {mode: 'fit', scale: 1, cx: 0, cy: 0};
+  render();
+  for (const p of panels) p.querySelector('.loading').hidden = true;
+  state.started = performance.now(); state.ready = true; updateButtons();
+}
+async function vote(choice) {
+  if (!state.ready || state.busy || state.showRef) return;
+  state.busy = true; updateButtons();
+  try {
+    await api('/api/vote', {trial: state.trial.trial, choice, seconds: Math.min(604800, (performance.now() - state.started) / 1000)});
+    state.busy = false;
+    await next();
+  } catch (e) { showError(e.message); }
+  finally { state.busy = false; updateButtons(); }
+}
+for (const b of voteButtons) b.onclick = () => vote(b.dataset.choice);
+
+document.addEventListener('keydown', e => {
+  if (e.target.closest?.('input,select,textarea,dialog[open]') || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === 'h' || e.key === 'H' || e.key === '?') { e.preventDefault(); $('#help').showModal(); return; }
+  if ($('#study').hidden) return;
+  if (e.key === ' ') { e.preventDefault(); if (!e.repeat) setShowRef(true); return; }
+  if (e.repeat) return;
+  const choice = {ArrowLeft: 'A', '1': 'A', ArrowDown: 'tie', '2': 'tie', ArrowRight: 'B', '3': 'B', s: 'skip', S: 'skip', '4': 'skip'}[e.key];
+  if (choice) { e.preventDefault(); vote(choice); return; }
+  if (e.key === 'f' || e.key === 'F') setZoom('fit');
+  else if (e.key === '0') setZoom('1');
+  else if (e.key === '+' || e.key === '=') setScale(state.view.scale * 1.25);
+  else if (e.key === '-' || e.key === '_') setScale(state.view.scale / 1.25);
+});
+document.addEventListener('keyup', e => { if (e.key === ' ') { e.preventDefault(); setShowRef(false); } });
+$('#helpBtn').onclick = () => $('#help').showModal();
+
+/* ---------- Start: local server (Bearer token) or cloud Worker (rounds + cookie) ---------- */
+async function begin(button, starter) {
+  showError('');
+  button.disabled = true;
+  try { await starter(); await next(); }
+  catch (e) { showError(e.message); if (!$('#welcome').hidden) button.disabled = false; }
+}
+function el(tag, text, cls) { const n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; return n; }
+
+async function initCloud(data) {
+  state.cloud = true;
+  $('#localStart').hidden = true; $('#cloudStart').hidden = false;
+  $('#question').textContent = 'So với ảnh gốc, bản nào có chất lượng thị giác tốt hơn?';
+  const {rounds, closed} = data;
+  const selected = new URLSearchParams(location.search).get('round');
+  const status = $('#roundStatus');
+  status.textContent = closed ? 'Đợt chấm hiện đã đóng.' : rounds.length ? 'Chọn một đợt để bắt đầu:' : 'Hiện chưa có đợt chấm.';
+  if (selected && !rounds.some(r => r.id === selected)) status.textContent = 'Không tìm thấy đợt trong liên kết. Bạn có thể chọn đợt khác bên dưới.';
+  rounds.sort((x, y) => Number(y.id === selected) - Number(x.id === selected));
+  for (const {id, rates, pairs, progress, questions} of rounds) {
+    const card = el('section', null, 'round');
+    card.append(el('h2', ROUND_NAMES[id] || id));
+    const done = progress && progress.completed === progress.total;
+    card.append(el('p', `${rates.map(r => r.toLocaleString('vi-VN')).join(' / ')} bpp · ` +
+      (progress ? `đã chấm ${progress.completed}/${progress.total} câu` : `${questions} câu, khoảng ${Math.max(1, Math.round(questions * 0.5))} phút`)));
+    const list = el('ul');
+    for (const pair of pairs) list.append(el('li', pair.join(' ↔ ')));
+    card.append(list);
+    const row = el('div', null, 'row');
+    const button = el('button', done ? 'Đã chấm xong' : progress ? 'Chấm tiếp' : 'Bắt đầu chấm', 'primary');
+    button.type = 'button';
+    button.disabled = closed || Boolean(done);
+    button.onclick = () => begin(button, async () => { state.round = id; await api('/api/start', {}); });
+    const link = el('a', 'Liên kết riêng của đợt này'); link.href = '/?round=' + encodeURIComponent(id);
+    row.append(button, link); card.append(row);
+    $('#rounds').append(card);
+  }
+}
+async function initLocal() {
+  const info = await api('/api/info');
+  $('#question').textContent = info.question;
+  state.storageKey = 'clic-blind-' + info.study;
+  state.token = storage(() => localStorage.getItem(state.storageKey)) || '';
+  const start = $('#start');
+  if (state.token) start.textContent = 'Chấm tiếp phiên trước';
+  start.disabled = false;
+  start.onclick = () => begin(start, async () => {
+    if (state.token) {
+      try { await api('/api/next'); return; }
+      catch (e) { if (e.status !== 401) throw e; state.token = ''; }  // study was recreated: start fresh
+    }
+    state.token = (await api('/api/start', {})).token;
+    storage(() => localStorage.setItem(state.storageKey, state.token));
+  });
+}
+(async () => {
+  try {
+    const response = await fetch('/api/rounds');
+    if (response.ok) await initCloud(await response.json()); else await initLocal();
+  } catch (e) { showError(e.message); }
+})();
+</script>
+</body>
+</html>

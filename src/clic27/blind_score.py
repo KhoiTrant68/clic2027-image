@@ -146,8 +146,24 @@ class Store:
             c.execute('INSERT INTO votes VALUES (?,?,?,?)', (trial, choice, seconds, time.time()))
 
 
-def handler(store):
+REPO = Path(__file__).resolve().parents[2]
+TRACKER = REPO / 'results/tracker/tracker.json'
+REPO_DIRS = ('reports', 'plans', 'docs', 'results')  # read-only text files the tracker links to
+TEXT_TYPES = {'.md': 'text/markdown', '.txt': 'text/plain', '.json': 'application/json',
+              '.csv': 'text/csv', '.log': 'text/plain'}
+
+
+def repo_file(rel):
+    """Resolve a tracker link to a text file under REPO_DIRS, or None (no traversal, no binaries)."""
+    path = (REPO / rel).resolve()
+    if not any(path.is_relative_to(REPO / d) for d in REPO_DIRS) or path.suffix.lower() not in TEXT_TYPES:
+        return None
+    return path if path.is_file() else None
+
+
+def handler(store, tracker=TRACKER):
     page = Path(__file__).with_name('blind_score.html').read_bytes()
+    results_page = Path(__file__).with_name('tracker.html').read_bytes()
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
             pass  # No session tokens, asset URLs or filenames in access logs.
@@ -171,7 +187,27 @@ def handler(store):
             path = urlparse(self.path).path
             try:
                 if path == '/':
+                    if store is None:  # tracker-only server
+                        self.send_response(302); self.send_header('Location', '/results'); self.end_headers(); return
                     self.respond(200, page, 'text/html; charset=utf-8')
+                elif path == '/results':
+                    self.respond(200, results_page, 'text/html; charset=utf-8')
+                elif path == '/api/results':
+                    if not Path(tracker).is_file():
+                        self.respond(404, dict(error='Chưa có dữ liệu thí nghiệm. Chạy: python tools/tracker/build.py'))
+                    else:
+                        data = json.loads(Path(tracker).read_text(encoding='utf-8'))
+                        data['local_files'] = True  # report links open through /repo/ instead of GitHub
+                        self.respond(200, data)
+                elif path.startswith('/repo/'):
+                    from urllib.parse import unquote
+                    target = repo_file(unquote(path[len('/repo/'):]))
+                    if target is None:
+                        self.respond(404, dict(error='Không tìm thấy hoặc không được phép.'))
+                    else:
+                        self.respond(200, target.read_bytes(), TEXT_TYPES[target.suffix.lower()] + '; charset=utf-8')
+                elif store is None:
+                    self.respond(404, dict(error='Server này chỉ phục vụ trang kết quả (chạy serve --study để chấm).'))
                 elif path == '/api/info':
                     self.respond(200, dict(study=store.manifest['study_id'], question=store.manifest['question']))
                 elif path == '/api/next':
@@ -189,6 +225,9 @@ def handler(store):
             origin = self.headers.get('Origin')
             if origin and urlparse(origin).netloc != self.headers.get('Host'):
                 self.respond(403, dict(error='Origin không hợp lệ.'))
+                return
+            if store is None:
+                self.respond(404, dict(error='Không có phiên chấm trên server này.'))
                 return
             try:
                 length = int(self.headers.get('Content-Length', 0))
@@ -265,7 +304,8 @@ def main():
     p = argparse.ArgumentParser(description='Chấm mù chất lượng ảnh theo cặp A/B.')
     sub = p.add_subparsers(dest='command', required=True)
     a = sub.add_parser('prepare');a.add_argument('--config', type=Path, required=True);a.add_argument('--out', type=Path, required=True)
-    a = sub.add_parser('serve');a.add_argument('--study', type=Path, required=True);a.add_argument('--host', default='127.0.0.1');a.add_argument('--port', type=int, default=8765);a.add_argument('--trials', type=int, default=0)
+    a = sub.add_parser('serve');a.add_argument('--study', type=Path, required=True);a.add_argument('--tracker', type=Path, default=TRACKER);a.add_argument('--host', default='127.0.0.1');a.add_argument('--port', type=int, default=8765);a.add_argument('--trials', type=int, default=0)
+    a = sub.add_parser('results', help='Chỉ mở trang kết quả thí nghiệm (không chấm).');a.add_argument('--tracker', type=Path, default=TRACKER);a.add_argument('--host', default='127.0.0.1');a.add_argument('--port', type=int, default=8765)
     a = sub.add_parser('export');a.add_argument('--study', type=Path, required=True);a.add_argument('--out', type=Path, required=True)
     a = sub.add_parser('demo');a.add_argument('--out', type=Path, required=True)
     args = p.parse_args()
@@ -276,8 +316,9 @@ def main():
     elif args.command == 'export':
         export(args.study, args.out);print(f'Đã xuất vào {args.out}')
     else:
-        if args.trials < 0: p.error('--trials phải >= 0')
-        server = ThreadingHTTPServer((args.host, args.port), handler(Store(args.study, args.trials)))
+        if getattr(args, 'trials', 0) < 0: p.error('--trials phải >= 0')
+        store = None if args.command == 'results' else Store(args.study, args.trials)
+        server = ThreadingHTTPServer((args.host, args.port), handler(store, args.tracker))
         print(f'Mở http://{args.host}:{server.server_port} — Ctrl+C để dừng.', flush=True)
         try: server.serve_forever()
         except KeyboardInterrupt: pass

@@ -1,0 +1,448 @@
+{
+ "version": 1,
+ "about": "Sổ đăng ký thí nghiệm của dự án. Sửa tay khi có thí nghiệm mới; tools/tracker/build.py đọc file này để dựng trang /results. status: chosen = đang dùng, rejected = loại, paused = tạm dừng, info = hạ tầng/đo đạc, running = đang chạy.",
+ "repo_url": "https://github.com/KhoiTrant68/clic2027-image/blob/main/",
+ "experiments": [
+  {
+   "id": "s1-kodak",
+   "date": "2026-10-03",
+   "area": "Codec tự xây",
+   "title": "S1: DC-AE + latent codec + residual VTM trên Kodak",
+   "dataset": "Kodak 24 ảnh",
+   "status": "rejected",
+   "decision": "Loại ngày 06/10: thấp hơn MS-ILLM khoảng 1–2,3 Q̂ ở ba rate, khoảng 9 s/ảnh trên T4.",
+   "reports": [
+    "reports/CLIC2027_tinh_hinh_repo_2026-10-14.md"
+   ],
+   "results": [
+    "results/2026-10-03",
+    "results/s1",
+    "results/parity",
+    "results/determinism"
+   ]
+  },
+  {
+   "id": "clic-b",
+   "date": "2026-10-03",
+   "area": "Codec cổ điển",
+   "title": "Nhánh B: HEVC, VTM, VTM-SCC, DC-AE + residual, có đo OCR",
+   "dataset": "CLIC30 và 7 ảnh chữ",
+   "status": "chosen",
+   "decision": "Ảnh chữ/màn hình đi VTM-SCC (giữ làm mode chuyên biệt trong mix).",
+   "reports": [
+    "reports/CLIC2027_tinh_hinh_repo_2026-10-14.md"
+   ],
+   "results": [
+    "results/clic_b"
+   ]
+  },
+  {
+   "id": "qhat-v0",
+   "date": "2026-10-06",
+   "area": "Thước đo",
+   "title": "Q̂ v0: mô hình dự đoán mức ưa thích từ 6 metric",
+   "dataset": "8.000 cặp chấm CLIC 2021–2024",
+   "status": "chosen",
+   "decision": "Dùng Q̂ v0 làm mục tiêu phân bổ byte; độ chính xác 0,812 trên test 2024.",
+   "headline": {
+    "accuracy_test2024": 0.812
+   },
+   "results": [
+    "results/2026-10-06_qhat_v0"
+   ]
+  },
+  {
+   "id": "qhat-v1",
+   "date": "2026-10-09",
+   "area": "Thước đo",
+   "title": "Q̂ v1: thêm Wasserstein distortion và MS-SSIM",
+   "dataset": "8.000 cặp chấm CLIC",
+   "status": "rejected",
+   "decision": "Bỏ sau chấm mù 11/10: quay về Q̂ v0 dù v1 đạt 0,833 trên test 2024.",
+   "headline": {
+    "accuracy_test2024": 0.833
+   },
+   "results": [
+    "results/2026-10-09_qhat_v1"
+   ],
+   "reports": [
+    "results/2026-10-09_bakeoff_comparison.md"
+   ]
+  },
+  {
+   "id": "bakeoff-prelim",
+   "date": "2026-10-06",
+   "area": "Sàng lọc codec",
+   "title": "Bake-off sơ bộ: MS-ILLM, mbt2018, S1+residual, VTM 4:2:0",
+   "dataset": "CLIC 28/30 ảnh",
+   "status": "info",
+   "decision": "MS-ILLM là base mạnh nhất ở cả ba rate; bỏ S1+residual.",
+   "reports": [
+    "results/2026-10-06_bakeoff_prelim.md"
+   ],
+   "results": [
+    "results/2026-10-06_sessiona",
+    "results/2026-10-06_sessionb"
+   ]
+  },
+  {
+   "id": "sd-turbo-refiner",
+   "date": "2026-10-08",
+   "area": "Sàng lọc codec",
+   "title": "SD-Turbo refiner trên ảnh MS-ILLM; thêm CoD-Lite",
+   "dataset": "CLIC30",
+   "status": "rejected",
+   "decision": "Refiner kém MS-ILLM (Q̂ −1,61 ở 0,075) và chậm 11 s/ảnh. CoD-Lite giữ trong pool.",
+   "results": [
+    "results/2026-10-08_run_c",
+    "results/2026-10-08_run_d",
+    "results/2026-10-08_run_e",
+    "results/2026-10-08_server_codlite",
+    "results/2026-10-08_bakeoff_merged"
+   ]
+  },
+  {
+   "id": "bakeoff-l40",
+   "date": "2026-10-09",
+   "area": "Sàng lọc codec",
+   "title": "Bake-off đủ 5 codec trên L40, so Q̂ v0 với v1",
+   "dataset": "CLIC30",
+   "status": "info",
+   "decision": "Mặc định quay về Q̂ v0.",
+   "reports": [
+    "results/2026-10-09_bakeoff_comparison.md"
+   ],
+   "results": [
+    "results/2026-10-09_server_full_gpu",
+    "results/2026-10-09_bakeoff_v0",
+    "results/2026-10-09_bakeoff_v1"
+   ]
+  },
+  {
+   "id": "coolchic",
+   "date": "2026-10-09",
+   "area": "Sàng lọc codec",
+   "title": "Thăm dò Cool-chic (decoder C trên CPU)",
+   "dataset": "1–2 ảnh",
+   "status": "paused",
+   "decision": "Tạm dừng: kém MS-ILLM 0,4–0,6 Q̂, encode khoảng 1,5 giờ/ảnh/λ.",
+   "results": [
+    "results/2026-10-09_coolchic_probe",
+    "results/2026-10-09_coolchic2025_probe"
+   ]
+  },
+  {
+   "id": "ditic-crdr",
+   "date": "2026-10-10",
+   "area": "Sàng lọc codec",
+   "title": "Thêm DiT-IC (CVPR 2026) và CRDR (WACV 2024)",
+   "dataset": "CLIC30",
+   "status": "chosen",
+   "decision": "DiT-IC hơn MS-ILLM khoảng 0,6 Q̂ ở 0,075 bpp → chọn cho ảnh tự nhiên ở 0,075. CRDR loại (kém MS-ILLM, 5 s/ảnh).",
+   "reports": [
+    "results/2026-10-10_bakeoff_ditic_crdr.md",
+    "reports/CLIC2027_quet_model_2026-10-10.md"
+   ],
+   "results": [
+    "results/2026-10-10_server_ditic_crdr",
+    "results/2026-10-10_bakeoff_v0"
+   ]
+  },
+  {
+   "id": "blind-ditic-msillm",
+   "date": "2026-10-11",
+   "area": "Chấm mù",
+   "title": "Chấm mù DiT-IC so với MS-ILLM ở 0,075 bpp",
+   "dataset": "90 cặp crop 512 + 10 cặp lặp, 1 người chấm",
+   "status": "chosen",
+   "decision": "DiT-IC được chọn 62/90 (69%, CI 59–78%); ảnh tự nhiên 73%, ảnh chữ chỉ 4/12. Q̂ v0 khớp đa số phiếu 26/30 ảnh. Đổi base 0,075 sang DiT-IC trên ảnh tự nhiên.",
+   "headline": {
+    "pairs": 90,
+    "ditic_share": 0.689,
+    "repeat_consistency": "7/10"
+   },
+   "blind": {
+    "a": "DiT-IC",
+    "b": "MS-ILLM",
+    "a_wins": 62,
+    "n": 90,
+    "raters": 1
+   },
+   "reports": [
+    "reports/CLIC2027_tinh_hinh_repo_2026-10-14.md"
+   ],
+   "results": [
+    "results/2026-10-11_rating_ditic_msillm"
+   ]
+  },
+  {
+   "id": "ditic-speed",
+   "date": "2026-10-11",
+   "area": "Tốc độ",
+   "title": "Tăng tốc DiT-IC và chưng cất decoder (ditics)",
+   "dataset": "CLIC30",
+   "status": "chosen",
+   "decision": "Nhanh 2,7× với ΔQ̂ −0,010. Decoder chưng cất kém thầy khoảng 0,16 Q̂, nhanh 1,5–1,8×: giữ làm dự phòng tốc độ.",
+   "reports": [
+    "results/2026-10-11_ditic_speed.md",
+    "results/2026-10-11_ditic_distill.md"
+   ],
+   "results": [
+    "results/2026-10-11_server_ditic_fast",
+    "results/2026-10-11_ditic_distill",
+    "results/2026-10-13_server_ditic_ditics"
+   ]
+  },
+  {
+   "id": "ditic-determinism",
+   "date": "2026-10-12",
+   "area": "Hạ tầng",
+   "title": "Tính tất định entropy coding của DiT-IC",
+   "dataset": "6 ảnh",
+   "status": "info",
+   "decision": "GPU↔GPU khớp; CPU↔GPU ở fp32 hỏng → cần entropy model số nguyên.",
+   "results": [
+    "results/2026-10-12_ditic_determinism"
+   ]
+  },
+  {
+   "id": "l4-kit",
+   "date": "2026-10-13",
+   "area": "Hạ tầng",
+   "title": "Kit đo L4 (chạy thử trên L40) và mix 13/10",
+   "dataset": "CLIC30",
+   "status": "info",
+   "decision": "Decoder gốc 17,5 s/30 ảnh, chưng cất 11,4 s/30 ảnh trên L40. Chưa đo L4 thật.",
+   "reports": [
+    "reports/CLIC2027_tinh_hinh_repo_2026-10-14.md"
+   ],
+   "results": [
+    "results/2026-10-13_bakeoff_v0",
+    "results/2026-10-13_l4_kit_l40"
+   ]
+  },
+  {
+   "id": "new-codecs-1015",
+   "date": "2026-10-15",
+   "area": "Sàng lọc codec",
+   "title": "Sàng lọc AFP-GIC, DC-VIC, PULSE, PULSE-L",
+   "dataset": "Pilot 6 ảnh + CLIC30 (PULSE-L)",
+   "status": "info",
+   "decision": "Đưa PULSE-L vào pool; tạm không train AFP-GIC/DC-VIC (chưa vượt baseline, decode 7 s).",
+   "reports": [
+    "reports/CLIC2027_new_models_2026-10-15.md"
+   ],
+   "results": [
+    "results/2026-10-15_new_codecs"
+   ]
+  },
+  {
+   "id": "pulse-integration",
+   "date": "2026-10-15",
+   "area": "Sàng lọc codec",
+   "title": "Mix tham chiếu: DiT-IC + MS-ILLM + PULSE-L + VTM-SCC + CoD-Lite",
+   "dataset": "CLIC30",
+   "status": "chosen",
+   "decision": "Mix hiện tại: Q̂ 0,1841 / 0,7891 / 1,4978 ở 0,075 / 0,15 / 0,3 bpp. Là đối chứng cho mọi thí nghiệm sau.",
+   "headline": {
+    "mix_0.075": 0.1841,
+    "mix_0.15": 0.7891,
+    "mix_0.3": 1.4978
+   },
+   "reports": [
+    "reports/CLIC2027_pulse_integration_2026-10-15.md"
+   ],
+   "results": [
+    "results/2026-10-15_pulse_integration"
+   ]
+  },
+  {
+   "id": "msillm-stream-audit",
+   "date": "2026-10-15",
+   "area": "Hạ tầng",
+   "title": "Kiểm stream MS-ILLM ở chế độ deterministic",
+   "dataset": "5 ảnh",
+   "status": "info",
+   "decision": "Khớp 5/5; chưa gán lại Q̂ cho cấu hình decoder mới.",
+   "reports": [
+    "reports/CLIC2027_msillm_stream_audit_2026-10-15.md"
+   ],
+   "results": [
+    "results/2026-10-15_msillm_stream_audit"
+   ]
+  },
+  {
+   "id": "aeic",
+   "date": "2026-10-20",
+   "area": "Sàng lọc codec",
+   "title": "AEIC (SD-Turbo, ultra-low rate) thêm vào mix",
+   "dataset": "CLIC30",
+   "status": "rejected",
+   "decision": "Không fine-tune: ΔQ̂ +0,0062 ở 0,075, dưới ngưỡng 0,02. 18 cặp chấm mù đã chuẩn bị, chưa có phiếu.",
+   "reports": [
+    "reports/CLIC2027_AEIC_full30_2026-10-20.md"
+   ],
+   "results": [
+    "results/2026-10-20_aeic_pilot",
+    "results/2026-10-20_aeic_full30"
+   ]
+  },
+  {
+   "id": "metric-comparison",
+   "date": "2026-10-20",
+   "area": "Thước đo",
+   "title": "Bảng so sánh metric giữa các phương án",
+   "dataset": "CLIC30 (tổng hợp lại)",
+   "status": "info",
+   "decision": "Tài liệu tổng hợp, không chạy model mới.",
+   "reports": [
+    "reports/CLIC2027_metrics_comparison_2026-10-20.md",
+    "reports/Metric_comparison.md"
+   ],
+   "results": [
+    "results/2026-10-20_metrics_comparison"
+   ]
+  },
+  {
+   "id": "mlicpp-full30",
+   "date": "2026-11-02",
+   "area": "Sàng lọc codec",
+   "title": "MLIC++ (MSE, 4 checkpoint legacy)",
+   "dataset": "CLIC30",
+   "status": "rejected",
+   "decision": "PSNR cao hơn mix 2,6–5 dB nhưng Q̂ thấp hơn 1,2–1,7. Thêm vào mix chỉ +0,0011 Q̂ ở 0,075 → không đưa vào gói.",
+   "reports": [
+    "reports/CLIC2027_MLICpp_full30_2026-11-02.md"
+   ],
+   "results": [
+    "results/2026-11-02_mlicpp/full30"
+   ]
+  },
+  {
+   "id": "mlicpp-research",
+   "date": "2026-11-04",
+   "area": "Nghiên cứu MLIC++",
+   "title": "Pilot nghiên cứu trên MLIC++: adapter, full synthesis, innovation, geometry, lookahead, critic",
+   "dataset": "Crop 256 DIV2K (8–160 crop)",
+   "status": "paused",
+   "decision": "Full synthesis không GAN giảm LPIPS 20%, DISTS 11% (chọn làm nền); các cơ chế mới (Risk head, conditional innovation, geometry, lookahead, critic) không qua gate. Dừng các pilot module nhỏ theo kế hoạch 19/11.",
+   "reports": [
+    "reports/MLICpp_adapter_pilot_2026-11-04.md",
+    "reports/MLICpp_full_synthesis_pilot_2026-11-05.md",
+    "reports/MLICpp_innovation_pilot_2026-11-05.md",
+    "reports/MLICpp_geometry_pilot_2026-11-05.md",
+    "reports/MLICpp_top_venue_research_2026-11-05.md"
+   ],
+   "results": [
+    "results/2026-11-04_mlicpp_adapter",
+    "results/2026-11-05_mlicpp_full_synthesis",
+    "results/2026-11-05_mlicpp_innovation",
+    "results/2026-11-05_mlicpp_geometry",
+    "results/2026-11-06_mlicpp_lookahead",
+    "results/2026-11-06_mlicpp_critic"
+   ]
+  },
+  {
+   "id": "mlicpp-decoders-clic30",
+   "date": "2026-11-11",
+   "area": "Nghiên cứu MLIC++",
+   "title": "4 decoder MLIC++ (gốc, perceptual, single, mixed) trên CLIC30, cùng bitstream",
+   "dataset": "CLIC30 (LPIPS/DISTS, chưa có Q̂)",
+   "status": "info",
+   "decision": "Mixed tốt nhất ở 0,075: LPIPS 0,183 / DISTS 0,158 (Perceptual 0,214 / 0,176). Decode 100 s/30 ảnh trên L40, CPU khác GPU. Chấm mù đã dựng, chưa có phiếu.",
+   "reports": [
+    "reports/MLICpp_clic30_decoder_comparison_2026-11-11.md",
+    "reports/MLICpp_mixed_validation_profile_2026-11-12.md",
+    "reports/MLICpp_budget_blind_2026-11-09.md"
+   ]
+  },
+  {
+   "id": "elic-full30",
+   "date": "2026-11-19",
+   "area": "Sàng lọc codec",
+   "title": "ELIC (tái lập, MSE, 5 checkpoint) so với MLIC++",
+   "dataset": "CLIC30",
+   "status": "rejected",
+   "decision": "Kém MLIC++ 8–14% BD-rate tùy metric; thêm vào mix không đổi lựa chọn nào. Ưu điểm: 34M tham số, xuống được 0,052 bpp.",
+   "reports": [
+    "reports/CLIC2027_ELIC_full30_2026-11-19.md"
+   ],
+   "results": [
+    "results/2026-11-19_elic/full30"
+   ]
+  },
+  {
+   "id": "gc-plan",
+   "date": "2026-11-20",
+   "area": "Codec tự xây",
+   "title": "GC: codec ELIC + GAN tự train theo kế hoạch thắng 19/11",
+   "dataset": "Smoke",
+   "status": "running",
+   "decision": "Pipeline end-to-end chạy được (smoke 20/11). Đã sửa 5 lỗi chặn khi mang sang máy khác (Q̂ v2 mất VGG khi nạp, thư mục dữ liệu thiếu bị bỏ qua, patch cũ không cắt lại, cần Internet lúc chạy → stage prefetch, thiếu _rans.so chỉ cảnh báo). Chuẩn bị train đầy đủ: SIGTERM/hết giờ → lưu last.pt, thoát 75, không chuyển model dở sang stage sau; checkpoint mỗi 15 phút; pipeline.init; DDP đồng bộ cờ dừng (đã thử 2 rank gloo). Bundle dist/clic27_gc_2026-11-20b.tar.gz, 15 test qua. Tốc độ train đo trên lab09 GPU 6 dùng chung (DIV2K patch 512, batch 16, crop 256, 4 worker): rd 14,7 it/s, gan 12,3 it/s, rd dùng ~4,9 GiB VRAM; rd 300k + gan 600k ≈ 19 giờ, cả 4 stage ≈ 23 giờ (chưa đo rate/align). Ablation 20/11: nên chuyển entropy model sang kiểu MLIC++. Chưa train đầy đủ, chưa đo L4, NCCL nhiều GPU chưa chạy.",
+   "reports": [
+    "plans/CLIC2027_win_plan_2026-11-19.md",
+    "docs/GC_HUONG_DAN.md"
+   ]
+  },
+  {
+   "id": "perceptual-scan-1120",
+   "date": "2026-11-20",
+   "area": "Sàng lọc codec",
+   "title": "Codec perceptual mới: OSCAR (NeurIPS 2025) và OSDiff",
+   "dataset": "CLIC30",
+   "status": "rejected",
+   "decision": "Cả hai thua mix và các codec trong pool ở mọi ngân sách; thêm vào mix không chọn ảnh nào. OSCAR ở 0,080 bpp: Q̂ −1,13 (DiT-IC 0,16 ở 0,075); OSDiff ở 0,130 bpp: Q̂ −0,30 (mix 0,79 ở 0,15). Quét tài liệu: ProGIC/Tree-VQ chưa có code; AFP-GIC đã thử 15/10; EGIC chỉ có TF2.",
+   "results": [
+    "results/2026-11-20_perceptual"
+   ],
+   "reports": [
+    "reports/CLIC2027_perceptual_OSCAR_OSDiff_2026-11-20.md"
+   ]
+  },
+  {
+   "id": "gc-backbone",
+   "date": "2026-11-20",
+   "area": "Codec tự xây",
+   "title": "Ablation backbone GC: ELIC và MLIC++ cùng công thức decoder GAN",
+   "dataset": "CLIC30",
+   "status": "info",
+   "decision": "Chọn backbone kiểu MLIC++ cho GC. BD-rate Q̂ của MLIC++ so với ELIC: −10,9% với decoder MSE, −16,9% với decoder GAN (LPIPS −20,4%). Decoder GAN trên cùng stream: ΔQ̂ +0,77 ở dải thấp, giảm dần khi bpp tăng (PSNR −1,3 đến −2 dB). Chỉ fine-tune g_s 20k bước nên vẫn thua xa mix (0,15 bpp: −0,32 so với 0,79); thêm vào pool không chọn ảnh nào.",
+   "results": [
+    "results/2026-11-20_gc_backbone"
+   ],
+   "reports": [
+    "reports/CLIC2027_GC_backbone_ablation_2026-11-20.md"
+   ]
+  },
+  {
+   "id": "gc-entropy-phase0",
+   "date": "2026-11-20",
+   "area": "Codec tự xây",
+   "title": "Pha 0 entropy kiểu MLIC++ cho GC: 6 biến thể trên latent MLIC++ cố định",
+   "dataset": "CLIC30 (latent MLIC++ q1, q2)",
+   "status": "running",
+   "decision": "Đang chạy (cập nhật 20/11 19:00 VN; 4/6 biến thể xong). Mốc R = entropy model MLIC++: 0,1175 bpp (q1), 0,1798 bpp (q2), khớp stream thật. Ở 50k bước (q1 / q2): V0 = GC hiện tại 0,1693 / 0,2481 (cao hơn R 44% / 38%, đường cong còn giảm); V0f (float) 0,1672 / 0,2474 (−1,3% / −0,3% so với V0: số nguyên hóa gần như không tốn); V1 (+ 5×5 cục bộ + mạng sâu) 0,1621 / 0,2412 (−4,3% / −2,8%, lấy lại 14% / 10% khoảng cách, forward 1,2× / 1,4×); V2 (+ attention giữa slice) 0,1616 / 0,2405 (−4,6% / −3,1%, lấy lại 15% / 11%, forward 2,0× / 1,3×): attention giữa slice gần như không thêm gì so với V1. Theo G0 gốc: R thấp hơn V0 30,6% / 27,5% (> 3%) nên không dừng; đến giờ chưa biến thể nào đạt ≥ 70% khoảng cách. V3 đang chạy (~19k/50k), còn V3s; pha 0 dự kiến xong ~22:30–23:30 VN. Sự cố 17:30: người dùng khác chiếm ~50 GB GPU 6, hàng chờ dừng ở V2; đã cho job chờ VRAM thay vì dừng và chạy tiếp. Sửa đổi G0 (mục 2.1 thiết kế, duyệt sau khi thấy V0 ở 40k): V0 và biến thể tốt nhất train tiếp tới 300k bước, tự chạy sau pha 0.",
+   "results": [
+    "results/2026-11-20_gc_entropy"
+   ],
+   "reports": [
+    "plans/GC_entropy_MLICpp_design_2026-11-20.md"
+   ]
+  },
+  {
+   "id": "tracker",
+   "date": "2026-11-20",
+   "area": "Hạ tầng",
+   "title": "Trang theo dõi thí nghiệm trong tool chấm mù",
+   "dataset": "CLIC30 (tổng hợp lại)",
+   "status": "info",
+   "decision": "Q̂ v0 tính lại thống nhất cho mọi codec; tái lập đúng mix 0,1841 / 0,7891 / 1,4978. Phát hiện: CRDR thêm vào mix hiện tại cho +0,0083 Q̂ ở 0,3 bpp (3 ảnh), chưa từng đo vì CRDR bị loại trước khi có pool này.",
+   "reports": [
+    "tools/BLIND_SCORING.md"
+   ],
+   "results": [
+    "results/tracker"
+   ]
+  }
+ ]
+}

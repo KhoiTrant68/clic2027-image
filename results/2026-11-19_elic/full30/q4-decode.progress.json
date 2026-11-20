@@ -1,0 +1,18 @@
+{
+  "completed": 30,
+  "total": 30,
+  "last": {
+    "name": "ff32adfa29d4b5de26293352f53cc983d12d3ededd71fe65ca0ef0d887be65c4",
+    "quality": 4,
+    "width": 2048,
+    "height": 1360,
+    "bytes": 40188,
+    "bpp": 0.1154296875,
+    "stream_sha256": "003607e86d5ee7bddce91db353a30fd57f9ce3763ca5b641caff50b15d3c999e",
+    "pixel_sha256": "8c55dea82f7e8e4062caf5fc8fb0c72efea635b4711aadea82189da395c87d1b",
+    "decode_s": 0.9037539921700954,
+    "write_s": 0.16575175523757935,
+    "peak_allocated_mib": 1971.1162109375,
+    "peak_reserved_mib": 7664.0
+  }
+}

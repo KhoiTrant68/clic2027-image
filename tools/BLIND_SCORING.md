@@ -57,12 +57,28 @@ Khi so codec ở cùng bitrate, người tổ chức phải chuẩn bị recon t
 
 ## Cách chấm
 
-- Lăn chuột trên ảnh để zoom quanh con trỏ, hoặc chọn Vừa khung, 100% hay 200%. Dùng thanh cuộn để di chuyển cả ba khung đồng bộ. 100% là pixel CSS, không bảo đảm một pixel màn hình vật lý trên màn hình HiDPI.
-- Bấm **Lật ảnh A** hoặc **Lật ảnh B** để hiện ảnh gốc ngay trong khung đó. Bấm lại để xem bản nén. Khung giữ nguyên vị trí và mức zoom khi lật.
-- Phím `1`: A; `2`: khó phân biệt; `3`: B; `4`: bỏ qua. Chỉ cho chọn sau khi cả ba ảnh tải xong.
+- Hai bản **A** (xanh) và **B** (cam) hiện cạnh nhau, cùng khung nhìn; trên điện thoại thì xếp dọc.
+- Lăn chuột trên ảnh để phóng to quanh con trỏ, kéo để di chuyển, nhấp đúp để chuyển Vừa khung ↔ 100%. Hai khung luôn đồng bộ. Từ 200% trở lên ảnh hiển thị theo điểm ảnh (không làm mịn) để thấy rõ lỗi nén.
+- **Giữ phím Space** (hoặc giữ nút “Giữ để xem ảnh gốc”) để cả hai khung tạm hiện ảnh gốc, khung viền vàng; thả ra để quay lại. Không thể bỏ phiếu khi đang xem ảnh gốc.
+- Phím: `←`/`1` A tốt hơn; `↓`/`2` như nhau; `→`/`3` B tốt hơn; `S`/`4` bỏ qua; `F` vừa khung; `0` 100%; `+`/`−` phóng to/thu nhỏ; `H` mở hướng dẫn. Chỉ bỏ phiếu được khi ảnh đã tải xong.
+- Cùng một trang `src/clic27/blind_score.html` dùng cho cả bản local và bản Cloudflare: trang tự nhận Worker qua `GET /api/rounds` và chuyển sang danh sách đợt chấm.
 - Phiếu được ghi vào SQLite ngay khi gửi, chống ghi trùng khi retry. Đóng/mở trang bằng cùng trình duyệt sẽ tiếp tục câu chưa chấm.
 - Mỗi người dùng một hồ sơ trình duyệt riêng. Không thu tên/email. Không có cơ chế xác minh một người chỉ dùng một phiên.
 - Nếu mất mạng sau khi gửi, tải lại trang để tiếp tục. Không xóa localStorage trong một phiên đang chấm.
+
+## Trang kết quả thí nghiệm
+
+Cùng server có trang **/results** để theo dõi toàn bộ thí nghiệm của dự án: Q̂ của mix ở 3 ngân sách, bảng xếp hạng codec theo ngân sách (một mình và khi thêm vào mix), đường rate–quality (Q̂, LPIPS, DISTS, PSNR), nhật ký thí nghiệm kèm quyết định và link báo cáo, và bảng 30 ảnh khi nhấp vào một điểm.
+
+```powershell
+python tools/tracker/build.py                 # dựng results/tracker/tracker.json
+python tools/blind_score.py results           # chỉ mở trang kết quả: http://127.0.0.1:8765/results
+```
+
+- **Thêm một thí nghiệm:** thêm một mục vào `results/experiments.json` (ngày, lĩnh vực, bộ ảnh, `status`, quyết định, link báo cáo/kết quả).
+- **Thêm một codec đo trên CLIC30:** thêm một dòng vào `CODECS` trong `tools/tracker/build.py`, trỏ tới file metric per-image (ba định dạng được hỗ trợ: bake-off `points/` + `metrics.csv`; `scores/metrics.csv`; `metrics.csv` theo `quality` của `experiments/perceptual`). Q̂ v0 được tính lại từ 6 feature của từng ảnh nên mọi codec so được trực tiếp; builder kiểm Q̂ của mix khớp số lịch sử.
+- Điểm vận hành thiếu ảnh (dưới 30/30) không đưa vào so sánh và được liệt kê ở cuối trang.
+- Trên server local, link báo cáo mở file trong `reports/`, `plans/`, `docs/`, `results/` (chỉ file văn bản, chỉ đọc). Trên bản Cloudflare, link trỏ về GitHub.
 
 ## Xuất kết quả — dành cho người tổ chức
 

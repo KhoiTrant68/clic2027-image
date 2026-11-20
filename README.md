@@ -13,6 +13,8 @@ Repo không phục vụ paper nào.
 | `results/` | Kết quả chạy trên Kaggle theo ngày. Chỉ commit `summary.md`, csv, json; zip, recon, npz và crops bị bỏ qua |
 | `refs/` | `code_notes.md` (đọc code các codec đối thủ), `README.md` (URL và commit của các repo tham khảo và devkit CLIC). Bản clone nằm trong `refs/repos/`, không commit |
 | `tools/` | `bundle.py`: đóng gói code thành một file `clic27_run.py`; `clic_notebook.py`: notebook Kaggle `clic_qhat_bakeoff.ipynb` và `run_clic.sh` (được `bundle.py` gọi) |
+| `src/clic27/gc/`, `configs/`, `scripts/gc/`, `docs/` | Codec GC: train, encode, đóng gói decoder, kiểm trên L4. Hướng dẫn: [docs/GC_HUONG_DAN.md](docs/GC_HUONG_DAN.md); việc tiếp theo: [thiết kế entropy kiểu MLIC++](plans/GC_entropy_MLICpp_design_2026-11-20.md) |
+| `tools/tracker/` | Tracker kết quả thí nghiệm: `python tools/tracker/build.py` rồi `python tools/blind_score.py results` (trang `/results`) |
 | `tests/` | Kiểm metric, entropy, dither và framing stream trên CPU. Thêm `python -m unittest discover -s tests -p test_submission.py -v` để kiểm đóng gói và điều phối bằng worker giả lập, không cần torch. |
 
 ## Quy trình
