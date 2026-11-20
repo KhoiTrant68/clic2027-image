@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kết quả thí nghiệm</title>
+<style>
+:root{
+  --bg:#f4f4f5;--surface:#ffffff;--surface-2:#f0f0f2;--line:#dcdce0;--text:#18181b;--muted:#5f5f6b;--faint:#8b8b96;
+  --chart:#fcfcfb;--grid:#e6e6e9;--ghost:#c9c9cf;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#6250d6;
+  --chosen:#15803d;--chosen-soft:#dcfce7;--rejected:#b91c1c;--rejected-soft:#fee2e2;--paused:#a16207;--paused-soft:#fef3c7;
+  --running:#1d4ed8;--running-soft:#dbeafe;--info:#52525b;--info-soft:#ececef;--focus:#2563eb;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--text);background:var(--bg);color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121214;--surface:#1c1c1f;--surface-2:#26262a;--line:#34343a;--text:#ececef;--muted:#a1a1aa;--faint:#71717a;
+  --chart:#1a1a19;--grid:#2c2c30;--ghost:#4a4a52;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#9085e9;
+  --chosen:#4ade80;--chosen-soft:#14301d;--rejected:#f87171;--rejected-soft:#3b1414;--paused:#facc15;--paused-soft:#3a300b;
+  --running:#93c5fd;--running-soft:#172554;--info:#a1a1aa;--info-soft:#27272a;--focus:#8fb2ff;color-scheme:dark;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-size:15px;line-height:1.5}
+a{color:var(--focus)}
+button,select,input{font:inherit;color:inherit;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px}
+button{cursor:pointer}button:hover{background:var(--surface-2)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+[hidden]{display:none!important}
+.top{display:flex;align-items:center;gap:20px;padding:10px 24px;background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.brand{font-weight:650}
+.top nav{display:flex;gap:4px;margin-left:auto}
+.top nav a{padding:6px 12px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.top nav a[aria-current]{background:var(--surface-2);color:var(--text);font-weight:600}
+main{max-width:1280px;margin:0 auto;padding:24px}
+h1{font-size:24px;margin:0 0 4px}
+h2{font-size:18px;margin:0}
+.sub{color:var(--muted);margin:0 0 20px}
+section.block{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;margin:0 0 20px}
+.block-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.block-head .grow{flex:1}
+.hint{color:var(--muted);font-size:13px;margin:6px 0 0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;border-radius:0;padding:6px 12px}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .label{color:var(--muted);font-size:13px}
+.card .value{font-size:28px;font-weight:650;font-variant-numeric:tabular-nums;line-height:1.2}
+.comp{display:flex;height:10px;border-radius:5px;overflow:hidden;margin:10px 0 6px;gap:2px}
+.comp span{display:block;height:100%}
+.comp-legend{font-size:12px;color:var(--muted)}
+.table-wrap{overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{color:var(--muted);font-weight:600;font-size:13px;position:sticky;top:0;background:var(--surface)}
+th button{border:0;background:none;padding:0;color:inherit;font-weight:inherit}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr.click{cursor:pointer}
+tbody tr.click:hover{background:var(--surface-2)}
+tr.mix td{font-weight:650;background:var(--surface-2)}
+.pos{color:var(--chosen);font-weight:600}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:1px 9px;border-radius:99px;white-space:nowrap}
+.st-chosen{background:var(--chosen-soft);color:var(--chosen)}
+.st-rejected{background:var(--rejected-soft);color:var(--rejected)}
+.st-paused{background:var(--paused-soft);color:var(--paused)}
+.st-running{background:var(--running-soft);color:var(--running)}
+.st-info{background:var(--info-soft);color:var(--info)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:3px 10px;font-size:13px}
+.chip[aria-pressed="true"]{border-color:var(--text);font-weight:600}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--ghost);display:inline-block}
+.chart-box{position:relative;background:var(--chart);border:1px solid var(--line);border-radius:10px}
+svg text{fill:var(--muted);font-size:12px}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;box-shadow:0 4px 14px #0002;white-space:nowrap;z-index:3}
+.tip b{display:block}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted);margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:16px;height:3px;border-radius:2px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.exps{display:grid;gap:10px}
+.exp{border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:110px 1fr;gap:4px 16px}
+.exp .date{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.exp h3{margin:0;font-size:15px}
+.exp .meta{font-size:13px;color:var(--muted)}
+.exp .decision{margin:4px 0 0}
+.exp .links{font-size:13px;display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:4px}
+.exp .links button{font-size:13px;padding:2px 8px}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--text);padding:20px;width:min(860px,calc(100% - 24px));max-height:86vh}
+dialog::backdrop{background:#0008}
+.dialog-head{display:flex;align-items:start;gap:12px;margin-bottom:10px}
+.dialog-head h2{flex:1}
+.warn{font-size:13px;color:var(--muted)}
+.warn summary{cursor:pointer}
+#error{color:var(--rejected)}
+@media (max-width:760px){
+  main{padding:14px}.top{padding:8px 12px;gap:10px}
+  .cards{grid-template-columns:1fr}
+  .exp{grid-template-columns:1fr}
+  section.block{padding:14px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">CLIC 2027</div>
+  <nav><a href="/">Chấm mù</a><a href="/results" aria-current="page">Kết quả thí nghiệm</a></nav>
+</header>
+<main>
+  <h1>Kết quả thí nghiệm</h1>
+  <p class="sub" id="subtitle">Đang tải…</p>
+  <p id="error" role="alert"></p>
+
+  <section class="block" id="overview" hidden>
+    <div class="block-head"><h2 class="grow">Mix hiện tại theo ngân sách</h2></div>
+    <div class="cards" id="mixCards"></div>
+    <p class="hint">Mix = phân bổ byte theo từng ảnh trên pool tham chiếu để tối đa Q̂ trung bình, không vượt ngân sách byte toàn tập. Thanh màu cho biết codec được chọn cho bao nhiêu ảnh.</p>
+  </section>
+
+  <section class="block" id="board" hidden>
+    <div class="block-head">
+      <h2 class="grow">Codec ở cùng ngân sách</h2>
+      <div class="seg" role="group" aria-label="Ngân sách" id="budgetSeg"></div>
+    </div>
+    <div class="table-wrap"><table id="boardTable"></table></div>
+    <p class="hint">“Một mình” = chỉ dùng codec đó, chọn điểm vận hành riêng cho từng ảnh. “Thêm vào mix” = Q̂ tăng bao nhiêu khi cho phép bộ phân bổ chọn thêm codec này (0 nghĩa là không ảnh nào đổi). Nhấp một dòng để xem 30 ảnh.</p>
+  </section>
+
+  <section class="block" id="rd" hidden>
+    <div class="block-head">
+      <h2 class="grow">Đường rate–quality</h2>
+      <div class="seg" role="group" aria-label="Thước đo" id="metricSeg"></div>
+    </div>
+    <div class="chips" id="chips" aria-label="Chọn codec để tô màu (tối đa 4)"></div>
+    <div class="chart-box" id="chartBox"><svg id="chart" role="img" aria-labelledby="chartTitle"><title id="chartTitle">Chất lượng theo bitrate</title></svg><div class="tip" id="tip" hidden></div></div>
+    <div class="legend" id="legend"></div>
+    <p class="hint">Mỗi điểm là một điểm vận hành dùng cho cả 30 ảnh. Đường đứt là ba ngân sách. Chọn tối đa 4 codec để tô màu; các codec còn lại hiện mờ. Nhấp một điểm để xem 30 ảnh.</p>
+  </section>
+
+  <section class="block" id="log" hidden>
+    <div class="block-head">
+      <h2 class="grow">Nhật ký thí nghiệm</h2>
+      <div class="filters">
+        <select id="fStatus" aria-label="Lọc trạng thái"><option value="">Mọi trạng thái</option></select>
+        <select id="fArea" aria-label="Lọc lĩnh vực"><option value="">Mọi lĩnh vực</option></select>
+        <input id="fText" type="search" placeholder="Tìm…" aria-label="Tìm thí nghiệm">
+      </div>
+    </div>
+    <div class="exps" id="exps"></div>
+  </section>
+
+  <details class="warn" id="warnBox" hidden><summary>Ghi chú về dữ liệu (thiếu hoặc chưa đủ ảnh)</summary><ul id="warnList"></ul></details>
+</main>
+
+<dialog id="detail">
+  <div class="dialog-head"><h2 id="detailTitle"></h2><form method="dialog"><button>Đóng</button></form></div>
+  <p class="hint" id="detailSub"></p>
+  <div class="table-wrap"><table id="detailTable"></table></div>
+</dialog>
+
+<script>
+const $ = s => document.querySelector(s);
+const STATUS = {chosen: 'Đang dùng', rejected: 'Loại', paused: 'Tạm dừng', running: 'Đang chạy', info: 'Hạ tầng / đo đạc'};
+const METRICS = {
+  qhat: {label: 'Q̂ v0', better: 'up', fmt: v => v.toFixed(3)},
+  lpips: {label: 'LPIPS-Alex', better: 'down', fmt: v => v.toFixed(4)},
+  dists: {label: 'DISTS', better: 'down', fmt: v => v.toFixed(4)},
+  psnr: {label: 'PSNR gộp (dB)', better: 'up', fmt: v => v.toFixed(2)},
+};
+const SLOTS = ['--s1', '--s2', '--s3', '--s4'];
+const MIX_COLOR = {ditic: '--s1', pulse: '--s2', msillm: '--s3', vtmscc: '--s4'};  // others: --ghost
+let T, budget = 0.075, metric = 'qhat';
+const highlight = new Map();  // codec id -> slot, kept while selected (colour follows the codec)
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const el = (tag, attrs = {}, text) => { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); if (text != null) n.textContent = text; return n; };
+const codec = id => T.codecs.find(c => c.id === id);
+const exp = id => T.registry.experiments.find(e => e.id === id);
+const fmtBpp = v => v.toFixed(4);
+const pill = s => el('span', {class: 'pill st-' + s}, STATUS[s] || s);
+
+function fileLink(path) {
+  const a = el('a', {target: '_blank', rel: 'noopener'}, path.split('/').slice(-2).join('/'));
+  a.href = T.local_files ? '/repo/' + path : (T.registry.repo_url || '') + path;
+  a.title = path;
+  return a;
+}
+
+/* ---------- Overview ---------- */
+function renderOverview() {
+  const box = $('#mixCards'); box.textContent = '';
+  for (const b of T.budgets) {
+    const card = el('div', {class: 'card'});
+    card.append(el('div', {class: 'label'}, `Ngân sách ${b.budget} bpp`), el('div', {class: 'value'}, b.mix.qhat.toFixed(4)),
+      el('div', {class: 'label'}, `Q̂ v0 · ${fmtBpp(b.mix.bpp)} bpp thực`));
+    const used = Object.entries(b.mix.used).sort((x, y) => y[1] - x[1]);
+    const comp = el('div', {class: 'comp', role: 'img', 'aria-label': used.map(([c, n]) => `${codec(c).label} ${n} ảnh`).join(', ')});
+    used.forEach(([c, n]) => { const s = el('span'); s.style.width = (100 * n / 30) + '%'; s.style.background = css(MIX_COLOR[c] || '--ghost'); s.title = `${codec(c).label}: ${n} ảnh`; comp.append(s); });
+    card.append(comp, el('div', {class: 'comp-legend'}, used.map(([c, n]) => `${codec(c).label} ${n}`).join(' · ')));
+    box.append(card);
+  }
+}
+
+/* ---------- Leaderboard ---------- */
+function renderBudgetSeg() {
+  const seg = $('#budgetSeg'); seg.textContent = '';
+  for (const b of T.budgets) {
+    const btn = el('button', {type: 'button', 'aria-pressed': String(b.budget === budget)}, b.budget + ' bpp');
+    btn.onclick = () => { budget = b.budget; renderBudgetSeg(); renderBoard(); };
+    seg.append(btn);
+  }
+}
+let boardSort = {key: 'qhat', dir: -1};
+function renderBoard() {
+  const b = T.budgets.find(x => x.budget === budget);
+  const rows = T.codecs.map(c => {
+    const r = b.codecs[c.id];
+    return {c, a: r.alone, w: r.with_mix, status: c.status};
+  });
+  const value = r => {
+    if (boardSort.key === 'name') return r.c.label;
+    if (!r.a) return null;
+    return {qhat: r.a.qhat, lpips: -r.a.lpips, dists: -r.a.dists, gain: r.w ? r.w.delta_qhat : null}[boardSort.key];
+  };
+  // dir -1 = best first; codecs without a feasible allocation always go last.
+  rows.sort((x, y) => {
+    const a = value(x), b = value(y);
+    if (a == null || b == null) return (a == null) - (b == null);
+    return (typeof a === 'string' ? a.localeCompare(b) : b - a) * -boardSort.dir;  // names A→Z, numbers best first
+  });
+  const t = $('#boardTable'); t.textContent = '';
+  const head = el('tr');
+  const cols = [['name', 'Codec', ''], [null, 'Nhóm', ''], [null, 'Trạng thái', ''], ['qhat', 'Q̂ một mình', 'num'], [null, 'bpp thực', 'num'],
+                ['lpips', 'LPIPS ↓', 'num'], ['dists', 'DISTS ↓', 'num'], ['gain', 'Thêm vào mix', 'num']];
+  for (const [k, label, cls] of cols) {
+    const th = el('th', {class: cls, scope: 'col'});
+    if (k) { const btn = el('button', {type: 'button'}, label + (boardSort.key === k ? (boardSort.dir < 0 ? ' ▾' : ' ▴') : '')); btn.onclick = () => { boardSort = {key: k, dir: boardSort.key === k ? -boardSort.dir : -1}; renderBoard(); }; th.append(btn); if (boardSort.key === k) th.setAttribute('aria-sort', boardSort.dir < 0 ? 'descending' : 'ascending'); }
+    else th.textContent = label;
+    head.append(th);
+  }
+  const thead = el('thead'); thead.append(head);
+  const tbody = el('tbody');
+  const mix = el('tr', {class: 'mix click', tabindex: '0'});
+  mix.append(el('td', {}, 'Mix hiện tại'), el('td', {}, 'Tham chiếu'), el('td'), el('td', {class: 'num'}, b.mix.qhat.toFixed(4)), el('td', {class: 'num'}, fmtBpp(b.mix.bpp)),
+    el('td', {class: 'num'}, b.mix.lpips.toFixed(4)), el('td', {class: 'num'}, b.mix.dists.toFixed(4)), el('td', {class: 'num muted'}, '—'));
+  mix.onclick = mix.onkeydown = ev => { if (ev.type === 'click' || ev.key === 'Enter') openMix(b); };
+  mix.firstChild.style.paddingLeft = '10px';
+  tbody.append(mix);
+  for (const r of rows) {
+    const tr = el('tr', r.a ? {class: 'click', tabindex: '0'} : {});
+    const st = el('td'); st.append(pill(r.status));
+    const gain = el('td', {class: 'num'});
+    if (r.c.in_pool) gain.append(el('span', {class: 'muted'}, 'đã trong pool'));
+    else if (r.w) { gain.textContent = r.w.delta_qhat > 0 ? `+${r.w.delta_qhat.toFixed(4)} (${r.w.images} ảnh)` : '0'; if (r.w.delta_qhat > 0) gain.className = 'num pos'; }
+    tr.append(el('td', {}, r.c.label), el('td', {class: 'muted'}, r.c.family), st);
+    if (r.a) tr.append(el('td', {class: 'num'}, r.a.qhat.toFixed(4)), el('td', {class: 'num'}, fmtBpp(r.a.bpp)), el('td', {class: 'num'}, r.a.lpips.toFixed(4)), el('td', {class: 'num'}, r.a.dists.toFixed(4)));
+    else { const td = el('td', {class: 'num muted', colspan: '4'}, r.c.partial ? `chỉ đo ${r.c.points[0].images}/30 ảnh: xem trên biểu đồ` : 'không đạt ngân sách (điểm thấp nhất vẫn quá nhiều byte)'); if (r.c.note) td.title = r.c.note; tr.append(td); }
+    tr.append(gain);
+    if (r.a) tr.onclick = tr.onkeydown = ev => { if (ev.type === 'click' || ev.key === 'Enter') openAllocation(r.c, r.a, b.budget); };
+    tbody.append(tr);
+  }
+  t.append(thead, tbody);
+}
+
+/* ---------- RD chart ---------- */
+function renderMetricSeg() {
+  const seg = $('#metricSeg'); seg.textContent = '';
+  for (const [k, m] of Object.entries(METRICS)) {
+    const btn = el('button', {type: 'button', 'aria-pressed': String(k === metric)}, m.label);
+    btn.onclick = () => { metric = k; renderMetricSeg(); renderChart(); };
+    seg.append(btn);
+  }
+}
+function renderChips() {
+  const box = $('#chips'); box.textContent = '';
+  for (const c of T.codecs) {
+    const on = highlight.has(c.id);
+    const btn = el('button', {type: 'button', class: 'chip', 'aria-pressed': String(on)});
+    const dot = el('i'); if (on) dot.style.background = css(highlight.get(c.id));
+    btn.append(dot, document.createTextNode(c.label));
+    btn.onclick = () => {
+      if (highlight.has(c.id)) highlight.delete(c.id);
+      else {
+        const free = SLOTS.find(s => ![...highlight.values()].includes(s));
+        if (!free) { $('#error').textContent = 'Tối đa 4 codec được tô màu cùng lúc. Bỏ chọn một codec trước.'; return; }
+        highlight.set(c.id, free);
+      }
+      $('#error').textContent = '';
+      renderChips(); renderChart();
+    };
+    box.append(btn);
+  }
+}
+function renderChart() {
+  const svg = $('#chart'), box = $('#chartBox');
+  const W = box.clientWidth, H = Math.max(300, Math.min(440, W * 0.5));
+  const m = {l: 56, r: 16, t: 14, b: 40};
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
+  while (svg.childNodes.length > 1) svg.lastChild.remove();
+  const ns = 'http://www.w3.org/2000/svg';
+  const mk = (tag, a) => { const n = document.createElementNS(ns, tag); for (const [k, v] of Object.entries(a)) n.setAttribute(k, v); return n; };
+  const pts = T.codecs.flatMap(c => c.points.map(p => ({c, p})));
+  const xMax = 0.45;
+  const vals = pts.filter(o => o.p.bpp <= xMax).map(o => o.p[metric]);
+  for (const b of T.budgets) vals.push(b.mix[metric]);
+  let yMin = Math.min(...vals), yMax = Math.max(...vals);
+  const raw = (yMax - yMin) / 5, mag = 10 ** Math.floor(Math.log10(raw));
+  const step = [1, 2, 2.5, 5, 10].map(f => f * mag).find(v => v >= raw);
+  yMin = Math.floor(yMin / step) * step; yMax = Math.ceil(yMax / step) * step;
+  const X = v => m.l + (v / xMax) * (W - m.l - m.r);
+  const Y = v => METRICS[metric].better === 'down' ? m.t + (v - yMin) / (yMax - yMin) * (H - m.t - m.b) : H - m.b - (v - yMin) / (yMax - yMin) * (H - m.t - m.b);
+  // grid + axes
+  const digits = Math.max(0, -Math.floor(Math.log10(step) + 1e-9));
+  for (let v = yMin; v <= yMax + step / 2; v += step) {
+    const y = Y(v);
+    svg.append(mk('line', {x1: m.l, x2: W - m.r, y1: y, y2: y, stroke: css('--grid'), 'stroke-width': 1}));
+    const t = mk('text', {x: m.l - 8, y: y + 4, 'text-anchor': 'end'}); t.textContent = v.toFixed(digits); svg.append(t);
+  }
+  for (let v = 0; v <= xMax + 1e-9; v += 0.05) {
+    const t = mk('text', {x: X(v), y: H - m.b + 18, 'text-anchor': 'middle'}); t.textContent = v.toFixed(2); svg.append(t);
+  }
+  const xl = mk('text', {x: (m.l + W - m.r) / 2, y: H - 6, 'text-anchor': 'middle'}); xl.textContent = 'bpp thực (cả 30 ảnh)'; svg.append(xl);
+  const yl = mk('text', {x: 14, y: (m.t + H - m.b) / 2, 'text-anchor': 'middle', transform: `rotate(-90 14 ${(m.t + H - m.b) / 2})`});
+  yl.textContent = METRICS[metric].label + (METRICS[metric].better === 'down' ? ' (thấp hơn ở trên = tốt)' : ''); svg.append(yl);
+  for (const b of T.budgets) svg.append(mk('line', {x1: X(b.budget), x2: X(b.budget), y1: m.t, y2: H - m.b, stroke: css('--faint'), 'stroke-dasharray': '4 4', 'stroke-width': 1}));
+  const hits = [];
+  const draw = (c, color, width, r) => {
+    const ps = c.points.filter(p => p.bpp <= xMax);
+    if (!ps.length) return;
+    if (ps.length > 1) svg.append(mk('polyline', {points: ps.map(p => `${X(p.bpp)},${Y(p[metric])}`).join(' '), fill: 'none', stroke: color, 'stroke-width': width, 'stroke-linejoin': 'round', 'stroke-linecap': 'round'}));
+    for (const p of ps) {
+      // Hollow marker = measured on a subset of the images (not comparable on the whole-set budget).
+      svg.append(p.partial ? mk('circle', {cx: X(p.bpp), cy: Y(p[metric]), r: r - 0.5, fill: css('--chart'), stroke: color, 'stroke-width': 2})
+                           : mk('circle', {cx: X(p.bpp), cy: Y(p[metric]), r, fill: color, stroke: css('--chart'), 'stroke-width': 2}));
+      hits.push({x: X(p.bpp), y: Y(p[metric]), c, p});
+    }
+  };
+  for (const c of T.codecs) if (!highlight.has(c.id)) draw(c, css('--ghost'), 1.5, 3.5);
+  for (const c of T.codecs) if (highlight.has(c.id)) draw(c, css(highlight.get(c.id)), 2, 4.5);
+  // mix: one marker per budget (it is an allocation, not a curve)
+  for (const b of T.budgets) {
+    const v = b.mix[metric]; if (v == null) continue;
+    const x = X(b.mix.bpp), y = Y(v), s = 6;
+    svg.append(mk('path', {d: `M${x} ${y - s}L${x + s} ${y}L${x} ${y + s}L${x - s} ${y}Z`, fill: css('--text'), stroke: css('--chart'), 'stroke-width': 2}));
+    hits.push({x, y, mix: b});
+  }
+  // direct labels at the right end of highlighted lines (selective)
+  const labels = [];
+  for (const id of highlight.keys()) {
+    const c = codec(id), ps = c.points.filter(p => p.bpp <= xMax); if (!ps.length) continue;
+    const p = ps[ps.length - 1];
+    labels.push({c, x: X(p.bpp), y: Y(p[metric]) - 8});
+  }
+  labels.sort((a, b) => a.y - b.y);
+  for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < 15 && Math.abs(labels[i].x - labels[i - 1].x) < 160) labels[i].y = labels[i - 1].y + 15;
+  for (const L of labels) {
+    const right = L.x > W - 140;
+    const t = mk('text', {x: right ? L.x - 8 : L.x + 8, y: Math.min(L.y, H - m.b - 4), 'text-anchor': right ? 'end' : 'start'});
+    t.textContent = L.c.label; t.style.fill = css('--text'); svg.append(t);
+  }
+  // legend
+  const lg = $('#legend'); lg.textContent = '';
+  for (const [id, slot] of highlight) { const s = el('span'); const i = el('i'); i.style.background = css(slot); s.append(i, document.createTextNode(codec(id).label)); lg.append(s); }
+  const ms = el('span'); const mi = el('i'); mi.style.cssText = `width:10px;height:10px;transform:rotate(45deg);background:${css('--text')}`; ms.append(mi, document.createTextNode('Mix hiện tại (ở 3 ngân sách)')); lg.append(ms);
+  const gs = el('span'); const gi = el('i'); gi.style.background = css('--ghost'); gs.append(gi, document.createTextNode('Codec khác')); lg.append(gs);
+  if (T.codecs.some(c => c.partial)) { const ps = el('span'); const pi = el('i'); pi.style.cssText = `width:10px;height:10px;border-radius:50%;border:2px solid ${css('--faint')};background:none`; ps.append(pi, document.createTextNode('Điểm rỗng: chỉ đo trên một phần bộ ảnh')); lg.append(ps); }
+  // hover + click: nearest point within 18 px
+  const tip = $('#tip');
+  const near = ev => { const r = svg.getBoundingClientRect(); const x = ev.clientX - r.left, y = ev.clientY - r.top; let best = null, d = 18 * 18; for (const h of hits) { const dd = (h.x - x) ** 2 + (h.y - y) ** 2; if (dd < d) { d = dd; best = h; } } return best; };
+  svg.onmousemove = ev => {
+    const h = near(ev); if (!h) { tip.hidden = true; svg.style.cursor = ''; return; }
+    svg.style.cursor = 'pointer';
+    tip.textContent = '';
+    if (h.mix) tip.append(el('b', {}, `Mix ở ${h.mix.budget} bpp`), document.createTextNode(`${METRICS[metric].label}: ${METRICS[metric].fmt(h.mix[metric])} · ${fmtBpp(h.mix.bpp)} bpp`));
+    else tip.append(el('b', {}, `${h.c.label} · ${h.p.key}`), document.createTextNode(`${METRICS[metric].label}: ${METRICS[metric].fmt(h.p[metric])} · ${fmtBpp(h.p.bpp)} bpp` + (h.p.partial ? ` · chỉ ${h.p.images}/30 ảnh` : '')));
+    tip.hidden = false;
+    const bx = box.getBoundingClientRect();
+    tip.style.left = Math.min(h.x + 12, bx.width - tip.offsetWidth - 8) + 'px'; tip.style.top = Math.max(h.y - tip.offsetHeight - 10, 4) + 'px';
+  };
+  svg.onmouseleave = () => { tip.hidden = true; };
+  svg.onclick = ev => { const h = near(ev); if (!h) return; if (h.mix) openMix(h.mix); else openPoint(h.c, h.p); };
+}
+
+/* ---------- Experiment log ---------- */
+function renderLog() {
+  const st = $('#fStatus').value, ar = $('#fArea').value, q = $('#fText').value.trim().toLowerCase();
+  const box = $('#exps'); box.textContent = '';
+  const list = [...T.registry.experiments].sort((a, b) => b.date.localeCompare(a.date))
+    .filter(e => (!st || e.status === st) && (!ar || e.area === ar) && (!q || JSON.stringify(e).toLowerCase().includes(q)));
+  for (const e of list) {
+    const card = el('article', {class: 'exp'});
+    const left = el('div'); left.append(el('div', {class: 'date'}, e.date), pill(e.status));
+    const right = el('div');
+    right.append(el('h3', {}, e.title), el('div', {class: 'meta'}, `${e.area} · ${e.dataset}`), el('p', {class: 'decision'}, e.decision));
+    const links = el('div', {class: 'links'});
+    for (const c of T.codecs.filter(c => c.experiment === e.id)) {
+      const b = el('button', {type: 'button'}, `Xem ${c.label} trên biểu đồ`);
+      b.onclick = () => { if (!highlight.has(c.id)) { const free = SLOTS.find(s => ![...highlight.values()].includes(s)); if (free) highlight.set(c.id, free); } renderChips(); renderChart(); $('#rd').scrollIntoView({behavior: 'smooth'}); };
+      links.append(b);
+    }
+    for (const p of e.reports || []) links.append(fileLink(p));
+    for (const p of e.results || []) links.append(fileLink(p));
+    if (links.childNodes.length) right.append(links);
+    card.append(left, right);
+    box.append(card);
+  }
+  if (!list.length) box.append(el('p', {class: 'muted'}, 'Không có thí nghiệm nào khớp bộ lọc.'));
+}
+
+/* ---------- Per-image detail ---------- */
+function showDetail(title, sub, rows) {
+  $('#detailTitle').textContent = title; $('#detailSub').textContent = sub;
+  const t = $('#detailTable'); t.textContent = '';
+  const kinds = Object.fromEntries(T.dataset.images.map(i => [i.name, i]));
+  const cols = [['short', 'Ảnh'], ['kind', 'Loại'], ['codec', 'Codec'], ['bpp', 'bpp'], ['qhat', 'Q̂'], ['lpips', 'LPIPS'], ['dists', 'DISTS'], ['psnr', 'PSNR']];
+  let sort = 'qhat', dir = 1;
+  const draw = () => {
+    t.textContent = '';
+    const tr = el('tr');
+    for (const [k, label] of cols) { const th = el('th', {class: k === 'short' || k === 'kind' || k === 'codec' ? '' : 'num'}); const b = el('button', {type: 'button'}, label + (sort === k ? (dir > 0 ? ' ▴' : ' ▾') : '')); b.onclick = () => { dir = sort === k ? -dir : 1; sort = k; draw(); }; th.append(b); tr.append(th); }
+    const thead = el('thead'); thead.append(tr);
+    const tbody = el('tbody');
+    const data = rows.map(r => ({...r, short: kinds[r.name].short, kind: kinds[r.name].kind === 'screen' ? 'chữ / màn hình' : 'tự nhiên'}))
+      .sort((a, b) => (typeof a[sort] === 'number' ? a[sort] - b[sort] : String(a[sort]).localeCompare(String(b[sort]))) * dir);
+    for (const r of data) {
+      const row = el('tr');
+      row.append(el('td', {}, r.short), el('td', {class: 'muted'}, r.kind), el('td', {class: 'muted'}, r.codec || ''), el('td', {class: 'num'}, r.bpp.toFixed(4)),
+        el('td', {class: 'num'}, r.qhat.toFixed(3)), el('td', {class: 'num'}, r.lpips.toFixed(4)), el('td', {class: 'num'}, r.dists.toFixed(4)), el('td', {class: 'num'}, r.psnr.toFixed(2)));
+      tbody.append(row);
+    }
+    t.append(thead, tbody);
+  };
+  draw();
+  $('#detail').showModal();
+}
+function openPoint(c, p) {
+  showDetail(`${c.label} · ${p.key}`, `${fmtBpp(p.bpp)} bpp · Q̂ ${p.qhat.toFixed(4)} · nguồn ${c.source}`, T.per_image[p.id].map(r => ({...r, codec: p.key})));
+}
+function fromChoice(choice) {
+  return Object.entries(choice).map(([name, pid]) => ({...T.per_image[pid].find(r => r.name === name), codec: codec(pid.split('/')[0]).label + ' ' + pid.split('/')[1]}));
+}
+function openAllocation(c, a, b) { showDetail(`${c.label} · phân bổ ở ${b} bpp`, `${fmtBpp(a.bpp)} bpp thực · Q̂ ${a.qhat.toFixed(4)}`, fromChoice(a.choice)); }
+function openMix(b) { showDetail(`Mix hiện tại · ${b.budget} bpp`, `${fmtBpp(b.mix.bpp)} bpp thực · Q̂ ${b.mix.qhat.toFixed(4)}`, fromChoice(b.mix.choice)); }
+
+/* ---------- Boot ---------- */
+(async () => {
+  try {
+    const r = await fetch('/api/results');
+    if (!r.ok) throw Error('Chưa có dữ liệu thí nghiệm. Chạy: python tools/tracker/build.py');
+    T = await r.json();
+    if (T.version !== 2) throw Error('Dữ liệu ở định dạng cũ. Chạy lại: python tools/tracker/build.py');
+    const n = T.registry.experiments.length;
+    $('#subtitle').textContent = `${n} thí nghiệm · ${T.codecs.length} codec đo trên CLIC30 (30 ảnh, ${T.dataset.pixels.toLocaleString('vi-VN')} px) · bitrate tính từ byte stream thật · ${T.qhat}`;
+    for (const [k, v] of Object.entries(STATUS)) $('#fStatus').append(el('option', {value: k}, v));
+    for (const a of [...new Set(T.registry.experiments.map(e => e.area))].sort()) $('#fArea').append(el('option', {value: a}, a));
+    for (const id of ['#fStatus', '#fArea']) $(id).onchange = renderLog;
+    $('#fText').oninput = renderLog;
+    for (const id of ['ditic', 'msillm', 'pulse']) if (codec(id)) highlight.set(id, SLOTS[highlight.size]);
+    renderOverview(); renderBudgetSeg(); renderBoard(); renderMetricSeg(); renderChips(); renderChart(); renderLog();
+    for (const id of ['#overview', '#board', '#rd', '#log']) $(id).hidden = false;
+    if (T.warnings.length) { $('#warnBox').hidden = false; for (const w of T.warnings) $('#warnList').append(el('li', {}, w)); }
+    new ResizeObserver(() => renderChart()).observe($('#chartBox'));
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { renderOverview(); renderChips(); renderChart(); });
+  } catch (e) { $('#error').textContent = e.message; $('#subtitle').textContent = ''; }
+})();
+</script>
+</body>
+</html>

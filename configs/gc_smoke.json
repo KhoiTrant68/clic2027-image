@@ -1,0 +1,18 @@
+{
+  "_comment": "Smoke test: tiny model, a few steps per stage, trains on the CLIC validation images themselves (code check only, numbers meaningless).",
+  "model": {"N": 64, "M": 96, "Z": 64, "slices": [8, 8, 16, 64], "hyper_hidden": 64, "ctx_hidden": 48,
+            "gs_width": 64, "gs_blocks": [1, 1, 1, 1], "ga_blocks": 1},
+  "data": {"train_dirs": ["@data_root/clic_valid"], "crop": 128, "min_side": 128, "workers": 2},
+  "stages": {
+    "rd": {"steps": 200, "batch": 4},
+    "gan": {"steps": 40, "batch": 4},
+    "rate": {"steps": 20, "batch": 4},
+    "align": {"steps": 20, "batch": 2}
+  },
+  "loss": {"k_wd": 0.05, "k_reward": 1.0},
+  "rate": {"lambda_hi": 60.0, "lambda_lo": 2.0},
+  "train": {"log_every": 10, "ckpt_every": 50, "eval_every": 50, "eval_images": 2},
+  "reward": {"sets_train": ["2021t"], "sets_test": ["2024t"], "n_per_set": 24, "steps": 30, "batch": 4, "crop": 128},
+  "alloc": {"qmap_iters": 2, "refine_steps": 3},
+  "pipeline": {"train_stages": ["rd", "gan", "rate", "align"], "max_images": 4, "use_reward": true}
+}

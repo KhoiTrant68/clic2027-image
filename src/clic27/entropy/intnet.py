@@ -16,9 +16,28 @@ Training uses the same quantisers with straight-through gradients (`forward`); d
 """
 from __future__ import annotations
 
+import math
+from contextlib import contextmanager
+
 import torch
 import torch.nn.functional as F
 from torch import nn
+
+EXACT_MODE = {"f32": False}  # set by exact_f32_context()
+
+
+@contextmanager
+def exact_f32_context(enabled: bool = True):
+    """Run forward_int with the exact fp32-split convolution: TF32 off, cuDNN off (no Winograd/FFT)."""
+    old = (EXACT_MODE["f32"], torch.backends.cuda.matmul.allow_tf32, torch.backends.cudnn.allow_tf32)
+    EXACT_MODE["f32"] = enabled
+    torch.backends.cuda.matmul.allow_tf32 = False
+    torch.backends.cudnn.allow_tf32 = False
+    try:  # oneDNN (CPU) may also pick Winograd for fp32: use the plain im2col + GEMM path there too
+        with torch.backends.cudnn.flags(enabled=False), torch.backends.mkldnn.flags(enabled=False):
+            yield
+    finally:
+        EXACT_MODE["f32"], torch.backends.cuda.matmul.allow_tf32, torch.backends.cudnn.allow_tf32 = old
 
 
 def ste(x_q: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
@@ -59,16 +78,41 @@ class QConv2d(nn.Conv2d):
         y = F.conv2d(x, w, None, self.stride, self.padding, 1, self.groups) + b[:, :, None, None]
         if self.act is None:
             return y
-        y = F.relu(y)
-        q = torch.clamp(torch.floor(y * 2 ** self.out_frac), 0, 2 ** self.a_bits - 1) / 2 ** self.out_frac
+        # clamp with its true gradient (zero outside the range), then floor with a straight-through gradient;
+        # the values are identical to forward_int's clamp(floor(.)) since floor is monotone
+        y = torch.clamp(F.relu(y), max=(2 ** self.a_bits - 1) / 2 ** self.out_frac)
+        q = torch.floor(y * 2 ** self.out_frac) / 2 ** self.out_frac
         return ste(q, y)
+
+    def _conv_exact_f32(self, x_int: torch.Tensor, w: torch.Tensor) -> torch.Tensor:
+        """Exact integer conv with fp32 arithmetic: |x| is split into chunks of s bits so that every partial sum of
+        a chunk conv is an integer below 2**24 (exact in fp32 whatever the summation order); chunk results are
+        recombined in float64. Same result as the float64 conv, at fp32 speed (FP64 is ~1/64 rate on an L4).
+        Needs TF32 off and no Winograd/FFT (cuDNN disabled), see `exact_f32_context`."""
+        fan_in = self.in_channels // self.groups * self.kernel_size[0] * self.kernel_size[1]
+        s = int(math.floor(math.log2((2 ** 24 - 1) / (self.w_max * fan_in))))
+        assert s >= 1, "fan-in too large for the fp32 split"
+        sign = torch.sign(x_int)
+        mag = x_int.abs()
+        top = float(mag.max()) if mag.numel() else 0.0
+        n = max(1, math.ceil(math.log2(top + 1) / s))
+        wf = w.float()
+        acc = None
+        for i in range(n):
+            chunk = (torch.floor(mag / 2 ** (s * i)) % 2 ** s) * sign
+            part = F.conv2d(chunk.float(), wf, None, self.stride, self.padding, 1, self.groups).double() * 2 ** (s * i)
+            acc = part if acc is None else acc + part
+        return acc
 
     @torch.no_grad()
     def forward_int(self, x_int: torch.Tensor, cond=None) -> torch.Tensor:  # float64 tensors holding integers
         dev = x_int.device
         w = self._wq().to(torch.float64).to(dev)
         b = torch.round(self._bias(cond, x_int.shape[0]).double() * 2 ** self.acc_frac).to(dev)
-        acc = F.conv2d(x_int.to(torch.float64), w, None, self.stride, self.padding, 1, self.groups) + b[:, :, None, None]
+        if EXACT_MODE["f32"]:
+            acc = self._conv_exact_f32(x_int.to(torch.float64), w) + b[:, :, None, None]
+        else:
+            acc = F.conv2d(x_int.to(torch.float64), w, None, self.stride, self.padding, 1, self.groups) + b[:, :, None, None]
         if self.act is None:
             return acc
         shift = self.acc_frac - self.out_frac

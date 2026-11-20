@@ -1,0 +1,32 @@
+{
+ "arm": "elic",
+ "quality": 5,
+ "steps": 20000,
+ "batch": 8,
+ "crop": 256,
+ "data": "/mnt/data/khoitm8/clic2027/data/div2k_train",
+ "tf32": true,
+ "latent_pool": 32768,
+ "pool_seed": 12345,
+ "loss": {
+  "k_mse": 152.40234375,
+  "k_lpips": 1.0,
+  "k_gan": 0.15
+ },
+ "lr": 0.0001,
+ "lr_d": 0.0001,
+ "ema": 0.999,
+ "grad_clip": 1.0,
+ "codec": {
+  "quality": 5,
+  "lambda_mse": 0.15,
+  "checkpoint": "/mnt/data/khoitm8/clic2027/elic/weights/elic-mse-0.15.pth.tar",
+  "checkpoint_sha256": "4ae38a952a4505e47eed831ecf1fa7370aa66e1dc69a00861f7943feb5590871",
+  "upstream_sha": "92a9ece1e6e1a188a12dfd7a58f9b51c554f9f2d",
+  "entropy_tables_recomputed": false,
+  "cudnn_v8_api_disabled": "1",
+  "parameters": 33792771,
+  "load_s": 0.6661776155233383
+ },
+ "gs_params": 7337475
+}

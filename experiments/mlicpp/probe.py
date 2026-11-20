@@ -104,6 +104,16 @@ def gpu_stage(a):
     qdir = a.out / f'q{a.quality}'
     start = time.perf_counter()
     model, meta = load(a, a.quality)
+    if getattr(a, 'synthesis', None):
+        # GC backbone ablation: same streams, decoder g_s replaced (experiments/gc_backbone/train_gs.py).
+        if a.stage != 'decode':
+            raise ValueError('--synthesis only applies to the decode stage')
+        ck = torch.load(a.synthesis, map_location='cpu')
+        if ck['quality'] != a.quality:
+            raise ValueError('synthesis trained for another quality')
+        model.g_s.load_state_dict(ck['g_s'])
+        model.g_s.cuda().eval()
+        meta.update(synthesis=str(a.synthesis), synthesis_sha256=sha(a.synthesis))
     records = []
     if a.stage == 'encode':
         (qdir / 'streams').mkdir(parents=True, exist_ok=False)
@@ -291,6 +301,7 @@ def main():
     p.add_argument('--legacy', action='store_true', required=True)
     p.add_argument('--limit', type=int)
     p.add_argument('--skip-metrics', action='store_true')
+    p.add_argument('--synthesis', type=Path, help='decode only: g_s weights from gc_backbone/train_gs.py')
     a = p.parse_args()
     if a.limit is not None and a.limit <= 0:
         p.error('--limit must be positive')

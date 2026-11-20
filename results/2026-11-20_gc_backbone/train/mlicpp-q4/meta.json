@@ -1,0 +1,32 @@
+{
+ "arm": "mlicpp",
+ "quality": 4,
+ "steps": 20000,
+ "batch": 8,
+ "crop": 256,
+ "data": "/mnt/data/khoitm8/clic2027/data/div2k_train",
+ "tf32": true,
+ "latent_pool": 32768,
+ "pool_seed": 12345,
+ "loss": {
+  "k_mse": 152.40234375,
+  "k_lpips": 1.0,
+  "k_gan": 0.15
+ },
+ "lr": 0.0001,
+ "lr_d": 0.0001,
+ "ema": 0.999,
+ "grad_clip": 1.0,
+ "codec": {
+  "quality": 4,
+  "lambda_mse": 0.013,
+  "legacy": true,
+  "checkpoint": "/mnt/data/khoitm8/clic2027/mlicpp/weights/mlicpp-mse-q4-legacy.pth.tar",
+  "checkpoint_sha256": "32b9be7434545b5414e0ce3509bc0820e550c770178de6a70df8249dbaf3ac4a",
+  "upstream_sha": "4aa9d2a512eb9db382172058e6c278fb0d376e17",
+  "cudnn_v8_api_disabled": "1",
+  "parameters": 116716928,
+  "load_s": 5.739936538040638
+ },
+ "gs_params": 12033612
+}

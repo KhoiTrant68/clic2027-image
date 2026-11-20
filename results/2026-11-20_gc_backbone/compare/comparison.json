@@ -1,0 +1,806 @@
+[
+  {
+    "method": "elic_q1",
+    "budget_bpp": null,
+    "bytes": 560132,
+    "actual_bpp": 0.05195705796447568,
+    "qhat_v0": -3.5757380719795786,
+    "psnr_pooled": 25.586277171664026,
+    "used": {
+      "elic": 30
+    },
+    "msssim": 0.9033043523629506,
+    "lpips_alex": 0.3455103676488792,
+    "lpips_vgg": 0.41863602326689736,
+    "dists": 0.22716617510915446,
+    "clipiqa": 0.4582919657230377
+  },
+  {
+    "method": "elic_q2",
+    "budget_bpp": null,
+    "bytes": 902001,
+    "actual_bpp": 0.08366834646300342,
+    "qhat_v0": -2.6291482719990498,
+    "psnr_pooled": 27.076494399636925,
+    "used": {
+      "elic": 30
+    },
+    "msssim": 0.9322360356648763,
+    "lpips_alex": 0.2890049635553877,
+    "lpips_vgg": 0.37899565872976104,
+    "dists": 0.19456705766241245,
+    "clipiqa": 0.5303461919228236
+  },
+  {
+    "method": "elic_q3",
+    "budget_bpp": null,
+    "bytes": 1397090,
+    "actual_bpp": 0.12959210705974544,
+    "qhat_v0": -1.740677235263818,
+    "psnr_pooled": 28.690677239124476,
+    "used": {
+      "elic": 30
+    },
+    "msssim": 0.9525834004084269,
+    "lpips_alex": 0.2380520645745965,
+    "lpips_vgg": 0.341119476379588,
+    "dists": 0.16274713263475252,
+    "clipiqa": 0.5876077383756637
+  },
+  {
+    "method": "elic_q4",
+    "budget_bpp": null,
+    "bytes": 2124037,
+    "actual_bpp": 0.19702269023674962,
+    "qhat_v0": -0.9709224589072786,
+    "psnr_pooled": 30.45149592678211,
+    "used": {
+      "elic": 30
+    },
+    "msssim": 0.9664829432964325,
+    "lpips_alex": 0.19427519576859956,
+    "lpips_vgg": 0.3035985110738814,
+    "dists": 0.13617545840430126,
+    "clipiqa": 0.6271600713332494
+  },
+  {
+    "method": "elic_q5",
+    "budget_bpp": null,
+    "bytes": 4847582,
+    "actual_bpp": 0.449654900918978,
+    "qhat_v0": 0.6415543134952755,
+    "psnr_pooled": 34.381623817480566,
+    "used": {
+      "elic": 30
+    },
+    "msssim": 0.9845087051391601,
+    "lpips_alex": 0.11575826919029547,
+    "lpips_vgg": 0.22240573207985323,
+    "dists": 0.08181555906527867,
+    "clipiqa": 0.718695393204689
+  },
+  {
+    "method": "elic_gc_q2",
+    "budget_bpp": null,
+    "bytes": 902001,
+    "actual_bpp": 0.08366834646300342,
+    "qhat_v0": -1.859838668233599,
+    "psnr_pooled": 25.804494928299803,
+    "used": {
+      "elic_gc": 30
+    },
+    "msssim": 0.9083338836828868,
+    "lpips_alex": 0.1958826357672856,
+    "lpips_vgg": 0.37120841096338497,
+    "dists": 0.15550945384383869,
+    "clipiqa": 0.6180521925290425
+  },
+  {
+    "method": "elic_gc_q3",
+    "budget_bpp": null,
+    "bytes": 1397090,
+    "actual_bpp": 0.12959210705974544,
+    "qhat_v0": -1.1279666373502666,
+    "psnr_pooled": 27.341876494960044,
+    "used": {
+      "elic_gc": 30
+    },
+    "msssim": 0.9353879312674205,
+    "lpips_alex": 0.15626259945946513,
+    "lpips_vgg": 0.33301032201856556,
+    "dists": 0.13157414794332806,
+    "clipiqa": 0.6649009476105372
+  },
+  {
+    "method": "elic_gc_q4",
+    "budget_bpp": null,
+    "bytes": 2124037,
+    "actual_bpp": 0.19702269023674962,
+    "qhat_v0": -0.4643065929813413,
+    "psnr_pooled": 29.080496140089206,
+    "used": {
+      "elic_gc": 30
+    },
+    "msssim": 0.9540343582630157,
+    "lpips_alex": 0.1267932486862565,
+    "lpips_vgg": 0.29032180163636767,
+    "dists": 0.11006477599613972,
+    "clipiqa": 0.7009259134531021
+  },
+  {
+    "method": "elic_gc_q5",
+    "budget_bpp": null,
+    "bytes": 4847582,
+    "actual_bpp": 0.449654900918978,
+    "qhat_v0": 0.6964833048575901,
+    "psnr_pooled": 32.81879497718552,
+    "used": {
+      "elic_gc": 30
+    },
+    "msssim": 0.979352992773056,
+    "lpips_alex": 0.07675869764444877,
+    "lpips_vgg": 0.21335320676686156,
+    "dists": 0.07155261886542015,
+    "clipiqa": 0.6979324330886205
+  },
+  {
+    "method": "mlicpp_q1",
+    "budget_bpp": null,
+    "bytes": 1264730,
+    "actual_bpp": 0.11731457927669073,
+    "qhat_v0": -1.7156174480363235,
+    "psnr_pooled": 29.06718778113849,
+    "used": {
+      "mlicpp": 30
+    },
+    "msssim": 0.953259927034378,
+    "lpips_alex": 0.23551125075624768,
+    "lpips_vgg": 0.33638192383103205,
+    "dists": 0.16437087598312225,
+    "clipiqa": 0.6011313776175181
+  },
+  {
+    "method": "mlicpp_q2",
+    "budget_bpp": null,
+    "bytes": 1933902,
+    "actual_bpp": 0.179386034562595,
+    "qhat_v0": -0.9372050552112052,
+    "psnr_pooled": 30.702002075452185,
+    "used": {
+      "mlicpp": 30
+    },
+    "msssim": 0.9670138021310171,
+    "lpips_alex": 0.19044323369604402,
+    "lpips_vgg": 0.3006610620578173,
+    "dists": 0.13740341611352574,
+    "clipiqa": 0.6450663059949875
+  },
+  {
+    "method": "mlicpp_q3",
+    "budget_bpp": null,
+    "bytes": 2814246,
+    "actual_bpp": 0.26104550810932753,
+    "qhat_v0": -0.21995552974097798,
+    "psnr_pooled": 32.32923582252607,
+    "used": {
+      "mlicpp": 30
+    },
+    "msssim": 0.9763822178045909,
+    "lpips_alex": 0.1532418615129383,
+    "lpips_vgg": 0.2658876464548127,
+    "dists": 0.11240282411731152,
+    "clipiqa": 0.68011647661527
+  },
+  {
+    "method": "mlicpp_q4",
+    "budget_bpp": null,
+    "bytes": 4242022,
+    "actual_bpp": 0.39348400544975304,
+    "qhat_v0": 0.5535458394862938,
+    "psnr_pooled": 34.1271836879,
+    "used": {
+      "mlicpp": 30
+    },
+    "msssim": 0.9834271530310313,
+    "lpips_alex": 0.11839532617544658,
+    "lpips_vgg": 0.2273677212566901,
+    "dists": 0.08529371761805557,
+    "clipiqa": 0.7206187347571055
+  },
+  {
+    "method": "mlicpp_gc_q1",
+    "budget_bpp": null,
+    "bytes": 1264730,
+    "actual_bpp": 0.11731457927669073,
+    "qhat_v0": -0.9428624456129262,
+    "psnr_pooled": 27.167854794755154,
+    "used": {
+      "mlicpp_gc": 30
+    },
+    "msssim": 0.9360291620095571,
+    "lpips_alex": 0.14864158635687516,
+    "lpips_vgg": 0.3227610497809161,
+    "dists": 0.1237733656685472,
+    "clipiqa": 0.6748306572437286
+  },
+  {
+    "method": "mlicpp_gc_q2",
+    "budget_bpp": null,
+    "bytes": 1933902,
+    "actual_bpp": 0.179386034562595,
+    "qhat_v0": -0.2766538804481352,
+    "psnr_pooled": 29.196293683599134,
+    "used": {
+      "mlicpp_gc": 30
+    },
+    "msssim": 0.9555129289627076,
+    "lpips_alex": 0.11520112819894712,
+    "lpips_vgg": 0.2788586927099039,
+    "dists": 0.10309005874947416,
+    "clipiqa": 0.7107809484004974
+  },
+  {
+    "method": "mlicpp_gc_q3",
+    "budget_bpp": null,
+    "bytes": 2814246,
+    "actual_bpp": 0.26104550810932753,
+    "qhat_v0": 0.14377721741731378,
+    "psnr_pooled": 30.605270417358877,
+    "used": {
+      "mlicpp_gc": 30
+    },
+    "msssim": 0.9677629113197327,
+    "lpips_alex": 0.09989798879804881,
+    "lpips_vgg": 0.24751900037219463,
+    "dists": 0.090982615380128,
+    "clipiqa": 0.7133012930552165
+  },
+  {
+    "method": "mlicpp_gc_q4",
+    "budget_bpp": null,
+    "bytes": 4242022,
+    "actual_bpp": 0.39348400544975304,
+    "qhat_v0": 0.7395763708180528,
+    "psnr_pooled": 32.16604912838507,
+    "used": {
+      "mlicpp_gc": 30
+    },
+    "msssim": 0.9772985736529033,
+    "lpips_alex": 0.07163245248263421,
+    "lpips_vgg": 0.2080294667803293,
+    "dists": 0.06986917947989243,
+    "clipiqa": 0.7114308247963588
+  },
+  {
+    "method": "frozen_pulse_mix",
+    "budget_bpp": 0.075,
+    "bytes": 807641,
+    "actual_bpp": 0.07491564533268427,
+    "qhat_v0": 0.18414234756223938,
+    "psnr_pooled": 22.375749888881362,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.8757607877254486,
+    "lpips_alex": 0.08470881184683944,
+    "lpips_vgg": 0.20775949732457685,
+    "dists": 0.07107270321000204,
+    "clipiqa": 0.7260915358861287
+  },
+  {
+    "method": "reoptimized_reference_pool",
+    "budget_bpp": 0.075,
+    "bytes": 807641,
+    "actual_bpp": 0.07491564533268427,
+    "qhat_v0": 0.18414234756223938,
+    "psnr_pooled": 22.375749888881362,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.8757607877254486,
+    "lpips_alex": 0.08470881184683944,
+    "lpips_vgg": 0.20775949732457685,
+    "dists": 0.07107270321000204,
+    "clipiqa": 0.7260915358861287
+  },
+  {
+    "method": "elic_alone",
+    "budget_bpp": 0.075,
+    "bytes": 807772,
+    "actual_bpp": 0.0749277967087766,
+    "qhat_v0": -2.498653014164444,
+    "psnr_pooled": 26.1949540093612,
+    "used": {
+      "elic": 30
+    },
+    "msssim": 0.9259996354579926,
+    "lpips_alex": 0.2959257638684132,
+    "lpips_vgg": 0.3802614025175001,
+    "dists": 0.18872987118768028,
+    "clipiqa": 0.5500440994898478
+  },
+  {
+    "method": "mix_plus_elic",
+    "budget_bpp": 0.075,
+    "bytes": 807641,
+    "actual_bpp": 0.07491564533268427,
+    "qhat_v0": 0.18414234756223938,
+    "psnr_pooled": 22.375749888881362,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.8757607877254486,
+    "lpips_alex": 0.08470881184683944,
+    "lpips_vgg": 0.20775949732457685,
+    "dists": 0.07107270321000204,
+    "clipiqa": 0.7260915358861287,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "elic_gc_alone",
+    "budget_bpp": 0.075,
+    "infeasible": true
+  },
+  {
+    "method": "mix_plus_elic_gc",
+    "budget_bpp": 0.075,
+    "bytes": 807641,
+    "actual_bpp": 0.07491564533268427,
+    "qhat_v0": 0.18414234756223938,
+    "psnr_pooled": 22.375749888881362,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.8757607877254486,
+    "lpips_alex": 0.08470881184683944,
+    "lpips_vgg": 0.20775949732457685,
+    "dists": 0.07107270321000204,
+    "clipiqa": 0.7260915358861287,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "mlicpp_alone",
+    "budget_bpp": 0.075,
+    "infeasible": true
+  },
+  {
+    "method": "mix_plus_mlicpp",
+    "budget_bpp": 0.075,
+    "bytes": 807687,
+    "actual_bpp": 0.074919912228106,
+    "qhat_v0": 0.1852878987068855,
+    "psnr_pooled": 22.396641464975502,
+    "used": {
+      "reference/ditic": 28,
+      "reference/vtmscc": 1,
+      "mlicpp": 1
+    },
+    "msssim": 0.8768674552440643,
+    "lpips_alex": 0.0843881061706659,
+    "lpips_vgg": 0.2073381417956037,
+    "dists": 0.07087831731660477,
+    "clipiqa": 0.7202551345030467,
+    "delta_qhat": 0.001145551144646123
+  },
+  {
+    "method": "mlicpp_gc_alone",
+    "budget_bpp": 0.075,
+    "infeasible": true
+  },
+  {
+    "method": "mix_plus_mlicpp_gc",
+    "budget_bpp": 0.075,
+    "bytes": 807641,
+    "actual_bpp": 0.07491564533268427,
+    "qhat_v0": 0.18414234756223938,
+    "psnr_pooled": 22.375749888881362,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.8757607877254486,
+    "lpips_alex": 0.08470881184683944,
+    "lpips_vgg": 0.20775949732457685,
+    "dists": 0.07107270321000204,
+    "clipiqa": 0.7260915358861287,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "mix_plus_ALL",
+    "budget_bpp": 0.075,
+    "bytes": 807687,
+    "actual_bpp": 0.074919912228106,
+    "qhat_v0": 0.1852878987068855,
+    "psnr_pooled": 22.396641464975502,
+    "used": {
+      "reference/ditic": 28,
+      "reference/vtmscc": 1,
+      "mlicpp": 1
+    },
+    "msssim": 0.8768674552440643,
+    "lpips_alex": 0.0843881061706659,
+    "lpips_vgg": 0.2073381417956037,
+    "dists": 0.07087831731660477,
+    "clipiqa": 0.7202551345030467,
+    "delta_qhat": 0.001145551144646123
+  },
+  {
+    "method": "frozen_pulse_mix",
+    "budget_bpp": 0.15,
+    "bytes": 1616109,
+    "actual_bpp": 0.1499080020243636,
+    "qhat_v0": 0.7891367311966363,
+    "psnr_pooled": 24.585456401973325,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.9256989022095998,
+    "lpips_alex": 0.06530106173057275,
+    "lpips_vgg": 0.17743152062367573,
+    "dists": 0.05364000109357314,
+    "clipiqa": 0.7170290311177572
+  },
+  {
+    "method": "reoptimized_reference_pool",
+    "budget_bpp": 0.15,
+    "bytes": 1616109,
+    "actual_bpp": 0.1499080020243636,
+    "qhat_v0": 0.7891367311966363,
+    "psnr_pooled": 24.585456401973325,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.9256989022095998,
+    "lpips_alex": 0.06530106173057275,
+    "lpips_vgg": 0.17743152062367573,
+    "dists": 0.05364000109357314,
+    "clipiqa": 0.7170290311177572
+  },
+  {
+    "method": "elic_alone",
+    "budget_bpp": 0.15,
+    "bytes": 1614916,
+    "actual_bpp": 0.14979734101918693,
+    "qhat_v0": -1.1107971842278317,
+    "psnr_pooled": 28.00779938322136,
+    "used": {
+      "elic": 30
+    },
+    "msssim": 0.9554475625356038,
+    "lpips_alex": 0.2171000362107022,
+    "lpips_vgg": 0.3173706916038279,
+    "dists": 0.13971203658639225,
+    "clipiqa": 0.6386976649363836
+  },
+  {
+    "method": "mix_plus_elic",
+    "budget_bpp": 0.15,
+    "bytes": 1616109,
+    "actual_bpp": 0.1499080020243636,
+    "qhat_v0": 0.7891367311966363,
+    "psnr_pooled": 24.585456401973325,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.9256989022095998,
+    "lpips_alex": 0.06530106173057275,
+    "lpips_vgg": 0.17743152062367573,
+    "dists": 0.05364000109357314,
+    "clipiqa": 0.7170290311177572,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "elic_gc_alone",
+    "budget_bpp": 0.15,
+    "bytes": 1614180,
+    "actual_bpp": 0.1497290706924392,
+    "qhat_v0": -0.5705466442659688,
+    "psnr_pooled": 27.27167800023656,
+    "used": {
+      "elic_gc": 30
+    },
+    "msssim": 0.9430150508880615,
+    "lpips_alex": 0.13565664700892752,
+    "lpips_vgg": 0.30227435592167323,
+    "dists": 0.10955841157749573,
+    "clipiqa": 0.6762705127398173
+  },
+  {
+    "method": "mix_plus_elic_gc",
+    "budget_bpp": 0.15,
+    "bytes": 1616109,
+    "actual_bpp": 0.1499080020243636,
+    "qhat_v0": 0.7891367311966363,
+    "psnr_pooled": 24.585456401973325,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.9256989022095998,
+    "lpips_alex": 0.06530106173057275,
+    "lpips_vgg": 0.17743152062367573,
+    "dists": 0.05364000109357314,
+    "clipiqa": 0.7170290311177572,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "mlicpp_alone",
+    "budget_bpp": 0.15,
+    "bytes": 1615134,
+    "actual_bpp": 0.1498175623931421,
+    "qhat_v0": -0.9475333386762449,
+    "psnr_pooled": 29.548372960961697,
+    "used": {
+      "mlicpp": 30
+    },
+    "msssim": 0.9635476708412171,
+    "lpips_alex": 0.1992540250274839,
+    "lpips_vgg": 0.3072463401263784,
+    "dists": 0.1358992033741909,
+    "clipiqa": 0.6492985477050145
+  },
+  {
+    "method": "mix_plus_mlicpp",
+    "budget_bpp": 0.15,
+    "bytes": 1616109,
+    "actual_bpp": 0.1499080020243636,
+    "qhat_v0": 0.7891367311966363,
+    "psnr_pooled": 24.585456401973325,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.9256989022095998,
+    "lpips_alex": 0.06530106173057275,
+    "lpips_vgg": 0.17743152062367573,
+    "dists": 0.05364000109357314,
+    "clipiqa": 0.7170290311177572,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "mlicpp_gc_alone",
+    "budget_bpp": 0.15,
+    "bytes": 1615490,
+    "actual_bpp": 0.14985058445336247,
+    "qhat_v0": -0.3218998065869144,
+    "psnr_pooled": 27.65008007793834,
+    "used": {
+      "mlicpp_gc": 30
+    },
+    "msssim": 0.9490231692790985,
+    "lpips_alex": 0.12204168319968747,
+    "lpips_vgg": 0.28487527328708057,
+    "dists": 0.10194198410610175,
+    "clipiqa": 0.6952346652746201
+  },
+  {
+    "method": "mix_plus_mlicpp_gc",
+    "budget_bpp": 0.15,
+    "bytes": 1616109,
+    "actual_bpp": 0.1499080020243636,
+    "qhat_v0": 0.7891367311966363,
+    "psnr_pooled": 24.585456401973325,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.9256989022095998,
+    "lpips_alex": 0.06530106173057275,
+    "lpips_vgg": 0.17743152062367573,
+    "dists": 0.05364000109357314,
+    "clipiqa": 0.7170290311177572,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "mix_plus_ALL",
+    "budget_bpp": 0.15,
+    "bytes": 1616109,
+    "actual_bpp": 0.1499080020243636,
+    "qhat_v0": 0.7891367311966363,
+    "psnr_pooled": 24.585456401973325,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.9256989022095998,
+    "lpips_alex": 0.06530106173057275,
+    "lpips_vgg": 0.17743152062367573,
+    "dists": 0.05364000109357314,
+    "clipiqa": 0.7170290311177572,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "frozen_pulse_mix",
+    "budget_bpp": 0.3,
+    "bytes": 3231292,
+    "actual_bpp": 0.2997301095887158,
+    "qhat_v0": 1.4978110237684272,
+    "psnr_pooled": 29.34111814845144,
+    "used": {
+      "baseline": 30
+    },
+    "msssim": 0.9706811587015788,
+    "lpips_alex": 0.0364380684371149,
+    "lpips_vgg": 0.12805449034270097,
+    "dists": 0.03375686955278542,
+    "clipiqa": 0.6932133396466573
+  },
+  {
+    "method": "reoptimized_reference_pool",
+    "budget_bpp": 0.3,
+    "bytes": 3231292,
+    "actual_bpp": 0.2997301095887158,
+    "qhat_v0": 1.4978110237684272,
+    "psnr_pooled": 29.34111814845144,
+    "used": {
+      "reference/pulse": 22,
+      "reference/ditic": 1,
+      "reference/vtmscc": 2,
+      "reference/msillm": 5
+    },
+    "msssim": 0.9706811587015788,
+    "lpips_alex": 0.0364380684371149,
+    "lpips_vgg": 0.12805449034270097,
+    "dists": 0.03375686955278542,
+    "clipiqa": 0.6932133396466573
+  },
+  {
+    "method": "elic_alone",
+    "budget_bpp": 0.3,
+    "bytes": 3220570,
+    "actual_bpp": 0.29873555192106765,
+    "qhat_v0": 0.13207687052668382,
+    "psnr_pooled": 31.09136734535781,
+    "used": {
+      "elic": 30
+    },
+    "msssim": 0.9770170032978058,
+    "lpips_alex": 0.1431881077509468,
+    "lpips_vgg": 0.25438153455327056,
+    "dists": 0.0972915197118581,
+    "clipiqa": 0.7006485213836035
+  },
+  {
+    "method": "mix_plus_elic",
+    "budget_bpp": 0.3,
+    "bytes": 3231292,
+    "actual_bpp": 0.2997301095887158,
+    "qhat_v0": 1.4978110237684272,
+    "psnr_pooled": 29.34111814845144,
+    "used": {
+      "reference/pulse": 22,
+      "reference/ditic": 1,
+      "reference/vtmscc": 2,
+      "reference/msillm": 5
+    },
+    "msssim": 0.9706811587015788,
+    "lpips_alex": 0.0364380684371149,
+    "lpips_vgg": 0.12805449034270097,
+    "dists": 0.03375686955278542,
+    "clipiqa": 0.6932133396466573,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "elic_gc_alone",
+    "budget_bpp": 0.3,
+    "bytes": 3217811,
+    "actual_bpp": 0.2984796309543598,
+    "qhat_v0": 0.35937236640946113,
+    "psnr_pooled": 29.879968228494448,
+    "used": {
+      "elic_gc": 30
+    },
+    "msssim": 0.9692544241746267,
+    "lpips_alex": 0.09293843464658018,
+    "lpips_vgg": 0.23845260520475767,
+    "dists": 0.08052719325505588,
+    "clipiqa": 0.6965502053499222
+  },
+  {
+    "method": "mix_plus_elic_gc",
+    "budget_bpp": 0.3,
+    "bytes": 3231292,
+    "actual_bpp": 0.2997301095887158,
+    "qhat_v0": 1.4978110237684272,
+    "psnr_pooled": 29.34111814845144,
+    "used": {
+      "reference/pulse": 22,
+      "reference/ditic": 1,
+      "reference/vtmscc": 2,
+      "reference/msillm": 5
+    },
+    "msssim": 0.9706811587015788,
+    "lpips_alex": 0.0364380684371149,
+    "lpips_vgg": 0.12805449034270097,
+    "dists": 0.03375686955278542,
+    "clipiqa": 0.6932133396466573,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "mlicpp_alone",
+    "budget_bpp": 0.3,
+    "bytes": 3224838,
+    "actual_bpp": 0.29913144560932753,
+    "qhat_v0": 0.2566391365615324,
+    "psnr_pooled": 31.959109358695517,
+    "used": {
+      "mlicpp": 30
+    },
+    "msssim": 0.9792453269163768,
+    "lpips_alex": 0.13273523069796073,
+    "lpips_vgg": 0.245676644954471,
+    "dists": 0.09459001984858512,
+    "clipiqa": 0.712606190641721
+  },
+  {
+    "method": "mix_plus_mlicpp",
+    "budget_bpp": 0.3,
+    "bytes": 3231292,
+    "actual_bpp": 0.2997301095887158,
+    "qhat_v0": 1.4978110237684272,
+    "psnr_pooled": 29.34111814845144,
+    "used": {
+      "reference/pulse": 22,
+      "reference/ditic": 1,
+      "reference/vtmscc": 2,
+      "reference/msillm": 5
+    },
+    "msssim": 0.9706811587015788,
+    "lpips_alex": 0.0364380684371149,
+    "lpips_vgg": 0.12805449034270097,
+    "dists": 0.03375686955278542,
+    "clipiqa": 0.6932133396466573,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "mlicpp_gc_alone",
+    "budget_bpp": 0.3,
+    "bytes": 3226118,
+    "actual_bpp": 0.299250176612367,
+    "qhat_v0": 0.5546358312756168,
+    "psnr_pooled": 30.498473789097535,
+    "used": {
+      "mlicpp_gc": 30
+    },
+    "msssim": 0.9711439669132232,
+    "lpips_alex": 0.08101094246576228,
+    "lpips_vgg": 0.22506623379793692,
+    "dists": 0.07431648607509947,
+    "clipiqa": 0.7141207794348399
+  },
+  {
+    "method": "mix_plus_mlicpp_gc",
+    "budget_bpp": 0.3,
+    "bytes": 3231292,
+    "actual_bpp": 0.2997301095887158,
+    "qhat_v0": 1.4978110237684272,
+    "psnr_pooled": 29.34111814845144,
+    "used": {
+      "reference/pulse": 22,
+      "reference/ditic": 1,
+      "reference/vtmscc": 2,
+      "reference/msillm": 5
+    },
+    "msssim": 0.9706811587015788,
+    "lpips_alex": 0.0364380684371149,
+    "lpips_vgg": 0.12805449034270097,
+    "dists": 0.03375686955278542,
+    "clipiqa": 0.6932133396466573,
+    "delta_qhat": 0.0
+  },
+  {
+    "method": "mix_plus_ALL",
+    "budget_bpp": 0.3,
+    "bytes": 3231292,
+    "actual_bpp": 0.2997301095887158,
+    "qhat_v0": 1.4978110237684272,
+    "psnr_pooled": 29.34111814845144,
+    "used": {
+      "reference/pulse": 22,
+      "reference/ditic": 1,
+      "reference/vtmscc": 2,
+      "reference/msillm": 5
+    },
+    "msssim": 0.9706811587015788,
+    "lpips_alex": 0.0364380684371149,
+    "lpips_vgg": 0.12805449034270097,
+    "dists": 0.03375686955278542,
+    "clipiqa": 0.6932133396466573,
+    "delta_qhat": 0.0
+  }
+]

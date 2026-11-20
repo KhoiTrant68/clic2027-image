@@ -1,0 +1,22 @@
+{
+  "_comment": "Full training. Set data.train_dirs / screen_dirs to the training images on the training machine (folders or .txt lists). Steps assume ~1M total iterations; scale to the compute you have. Set pipeline.nproc to the number of GPUs (DDP).",
+  "data": {
+    "train_dirs": ["@data_root/div2k_train", "@data_root/openimages", "@data_root/lsdir"],
+    "screen_dirs": ["@data_root/screen"],
+    "screen_prob": 0.1,
+    "crop": 256,
+    "workers": 12
+  },
+  "stages": {
+    "rd": {"steps": 300000, "batch": 16},
+    "gan": {"steps": 600000, "batch": 16},
+    "rate": {"steps": 100000, "batch": 16, "levels": [1, 2, 3, 4, 5, 6]},
+    "align": {"steps": 50000, "batch": 8}
+  },
+  "loss": {"k_reward": 0.5},
+  "train": {"eval_every": 20000, "eval_images": 6},
+  "alloc": {"qmap_iters": 6, "betas": [0.5, 1.0], "refine_steps": 0},
+  "pipeline": {"train_stages": ["rd", "gan", "rate", "align"], "download": ["div2k_train"], "nproc": 1,
+               "use_reward": true,
+               "prep_patches": {"out": "@data_root/patches512", "per_image": 4, "size": 512, "workers": 32}}
+}
