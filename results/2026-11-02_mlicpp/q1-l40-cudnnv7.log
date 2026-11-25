@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/jovyan/clic2027-image/experiments/mlicpp/probe.py", line 313, in <module>
+    main()
+  File "/home/jovyan/clic2027-image/experiments/mlicpp/probe.py", line 301, in main
+    run(a)
+  File "/home/jovyan/clic2027-image/experiments/mlicpp/probe.py", line 262, in run
+    subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT, check=True)
+  File "/home/jovyan/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/home/jovyan/clic2027-envs/mlicpp/bin/python', '/home/jovyan/clic2027-image/experiments/mlicpp/probe.py', '--upstream', '/home/jovyan/clic2027-image/refs/repos/MLIC', '--weights', '/home/jovyan/clic2027-artifacts/mlicpp/weights', '--out', '/home/jovyan/clic2027-artifacts/mlicpp/q1_l40_cudnnv7_20261102', '--legacy', '--stage', 'encode', '--quality', '1', '--data', '/home/jovyan/clic2027-artifacts/data/valid30']' died with <Signals.SIGABRT: 6>.

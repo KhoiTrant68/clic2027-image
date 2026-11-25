@@ -1,0 +1,20 @@
+Using Python 3.10.22 environment at: clic2027-envs/mlicpp
+Checked 2 packages in 2ms
+Using Python 3.10.22 environment at: clic2027-envs/mlicpp
+Checked 3 packages in 1ms
+x86_64-conda-linux-gnu-c++ (conda-forge gcc 12.4.0-2) 12.4.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Using Python 3.10.22 environment at: clic2027-envs/mlicpp
+Resolved 53 packages in 1.21s
+   Building compressai==1.2.0b3
+      Built compressai==1.2.0b3
+Prepared 1 package in 17.68s
+Uninstalled 1 package in 2ms
+Installed 1 package in 7ms
+ - compressai==1.2.4
+ + compressai==1.2.0b3
+Using Python 3.10.22 environment at: clic2027-envs/mlicpp
+2.0.1+cu118 1.2.0b3 True
