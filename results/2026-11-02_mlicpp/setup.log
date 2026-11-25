@@ -1,0 +1,229 @@
+Using Python 3.10.22 environment at: clic2027-envs/mlicpp
+Resolved 19 packages in 13.91s
+   Building lit==15.0.7
+Downloading triton (60.3MiB)
+Downloading torchvision (5.8MiB)
+Downloading torch (2.1GiB)
+Downloading pillow (6.6MiB)
+Downloading sympy (6.0MiB)
+Downloading numpy (16.0MiB)
+Downloading cmake (22.6MiB)
+Downloading networkx (1.6MiB)
+      Built lit==15.0.7
+ Downloaded torchvision
+ Downloaded networkx
+Downloading cmake (22.6MiB)
+ Downloaded cmake
+ Downloaded triton
+ Downloaded sympy
+ Downloaded pillow
+ Downloaded numpy
+Downloading torch (2.1GiB)
+ Downloaded torch
+Prepared 19 packages in 5m 56s
+Installed 19 packages in 623ms
+ + certifi==2022.12.7
+ + charset-normalizer==2.1.1
+ + cmake==3.25.0
+ + filelock==4.1.0
+ + idna==3.4
+ + jinja2==3.1.6
+ + lit==15.0.7
+ + markupsafe==3.0.3
+ + mpmath==1.3.0
+ + networkx==3.4.2
+ + numpy==2.2.6
+ + pillow==12.3.0
+ + requests==2.28.1
+ + sympy==1.14.0
+ + torch==2.0.1+cu118
+ + torchvision==0.15.2+cu118
+ + triton==2.0.0
+ + typing-extensions==4.16.0
+ + urllib3==1.26.13
+Using Python 3.10.22 environment at: clic2027-envs/mlicpp
+Resolved 4 packages in 977ms
+Downloading numpy (17.4MiB)
+Downloading setuptools (1.0MiB)
+ Downloaded setuptools
+ Downloaded numpy
+Prepared 2 packages in 1.23s
+Uninstalled 1 package in 57ms
+Installed 4 packages in 167ms
+ - numpy==2.2.6
+ + numpy==1.26.4
+ + packaging==26.3
+ + setuptools==80.10.2
+ + wheel==0.48.0
+Using Python 3.10.22 environment at: clic2027-envs/mlicpp
+Resolved 53 packages in 2.00s
+Downloading kiwisolver (1.6MiB)
+Downloading scipy (35.9MiB)
+Downloading fonttools (5.0MiB)
+Downloading matplotlib (8.4MiB)
+   Building compressai==1.2.4
+ Downloaded kiwisolver
+ Downloaded fonttools
+ Downloaded matplotlib
+error: Failed to build `compressai==1.2.4`
+  cause: The build backend returned an error
+  cause: Call to `setuptools.build_meta.build_wheel` failed (exit status: 1)
+
+         [stdout]
+         running bdist_wheel
+         running build
+         running build_py
+         creating build/lib.linux-x86_64-cpython-310/compressai
+         copying compressai/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai
+         copying compressai/version.py -> build/lib.linux-x86_64-cpython-310/compressai
+         creating build/lib.linux-x86_64-cpython-310/compressai/datasets
+         copying compressai/datasets/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/datasets
+         copying compressai/datasets/image.py -> build/lib.linux-x86_64-cpython-310/compressai/datasets
+         copying compressai/datasets/pregenerated.py -> build/lib.linux-x86_64-cpython-310/compressai/datasets
+         copying compressai/datasets/rawvideo.py -> build/lib.linux-x86_64-cpython-310/compressai/datasets
+         copying compressai/datasets/video.py -> build/lib.linux-x86_64-cpython-310/compressai/datasets
+         copying compressai/datasets/vimeo90k.py -> build/lib.linux-x86_64-cpython-310/compressai/datasets
+         creating build/lib.linux-x86_64-cpython-310/compressai/entropy_models
+         copying compressai/entropy_models/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/entropy_models
+         copying compressai/entropy_models/entropy_models.py -> build/lib.linux-x86_64-cpython-310/compressai/entropy_models
+         creating build/lib.linux-x86_64-cpython-310/compressai/layers
+         copying compressai/layers/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/layers
+         copying compressai/layers/gdn.py -> build/lib.linux-x86_64-cpython-310/compressai/layers
+         copying compressai/layers/layers.py -> build/lib.linux-x86_64-cpython-310/compressai/layers
+         creating build/lib.linux-x86_64-cpython-310/compressai/losses
+         copying compressai/losses/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/losses
+         copying compressai/losses/rate_distortion.py -> build/lib.linux-x86_64-cpython-310/compressai/losses
+         creating build/lib.linux-x86_64-cpython-310/compressai/models
+         copying compressai/models/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/models
+         copying compressai/models/base.py -> build/lib.linux-x86_64-cpython-310/compressai/models
+         copying compressai/models/google.py -> build/lib.linux-x86_64-cpython-310/compressai/models
+         copying compressai/models/priors.py -> build/lib.linux-x86_64-cpython-310/compressai/models
+         copying compressai/models/utils.py -> build/lib.linux-x86_64-cpython-310/compressai/models
+         copying compressai/models/waseda.py -> build/lib.linux-x86_64-cpython-310/compressai/models
+         creating build/lib.linux-x86_64-cpython-310/compressai/ops
+         copying compressai/ops/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/ops
+         copying compressai/ops/bound_ops.py -> build/lib.linux-x86_64-cpython-310/compressai/ops
+         copying compressai/ops/ops.py -> build/lib.linux-x86_64-cpython-310/compressai/ops
+         copying compressai/ops/parametrizers.py -> build/lib.linux-x86_64-cpython-310/compressai/ops
+         creating build/lib.linux-x86_64-cpython-310/compressai/optimizers
+         copying compressai/optimizers/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/optimizers
+         copying compressai/optimizers/net_aux.py -> build/lib.linux-x86_64-cpython-310/compressai/optimizers
+         creating build/lib.linux-x86_64-cpython-310/compressai/registry
+         copying compressai/registry/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/registry
+         copying compressai/registry/torch.py -> build/lib.linux-x86_64-cpython-310/compressai/registry
+         copying compressai/registry/torchvision.py -> build/lib.linux-x86_64-cpython-310/compressai/registry
+         creating build/lib.linux-x86_64-cpython-310/compressai/transforms
+         copying compressai/transforms/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/transforms
+         copying compressai/transforms/functional.py -> build/lib.linux-x86_64-cpython-310/compressai/transforms
+         copying compressai/transforms/transforms.py -> build/lib.linux-x86_64-cpython-310/compressai/transforms
+         creating build/lib.linux-x86_64-cpython-310/compressai/typing
+         copying compressai/typing/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/typing
+         copying compressai/typing/torch.py -> build/lib.linux-x86_64-cpython-310/compressai/typing
+         creating build/lib.linux-x86_64-cpython-310/compressai/utils
+         copying compressai/utils/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils
+         creating build/lib.linux-x86_64-cpython-310/compressai/zoo
+         copying compressai/zoo/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/zoo
+         copying compressai/zoo/image.py -> build/lib.linux-x86_64-cpython-310/compressai/zoo
+         copying compressai/zoo/pretrained.py -> build/lib.linux-x86_64-cpython-310/compressai/zoo
+         copying compressai/zoo/video.py -> build/lib.linux-x86_64-cpython-310/compressai/zoo
+         creating build/lib.linux-x86_64-cpython-310/compressai/models/video
+         copying compressai/models/video/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/models/video
+         copying compressai/models/video/google.py -> build/lib.linux-x86_64-cpython-310/compressai/models/video
+         creating build/lib.linux-x86_64-cpython-310/compressai/utils/bench
+         copying compressai/utils/bench/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/bench
+         copying compressai/utils/bench/__main__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/bench
+         copying compressai/utils/bench/codecs.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/bench
+         creating build/lib.linux-x86_64-cpython-310/compressai/utils/eval_model
+         copying compressai/utils/eval_model/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/eval_model
+         copying compressai/utils/eval_model/__main__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/eval_model
+         creating build/lib.linux-x86_64-cpython-310/compressai/utils/find_close
+         copying compressai/utils/find_close/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/find_close
+         copying compressai/utils/find_close/__main__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/find_close
+         creating build/lib.linux-x86_64-cpython-310/compressai/utils/plot
+         copying compressai/utils/plot/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/plot
+         copying compressai/utils/plot/__main__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/plot
+         creating build/lib.linux-x86_64-cpython-310/compressai/utils/update_model
+         copying compressai/utils/update_model/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/update_model
+         copying compressai/utils/update_model/__main__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/update_model
+         creating build/lib.linux-x86_64-cpython-310/compressai/utils/video
+         copying compressai/utils/video/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/video
+         creating build/lib.linux-x86_64-cpython-310/compressai/utils/video/bench
+         copying compressai/utils/video/bench/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/video/bench
+         copying compressai/utils/video/bench/__main__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/video/bench
+         copying compressai/utils/video/bench/codecs.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/video/bench
+         creating build/lib.linux-x86_64-cpython-310/compressai/utils/video/eval_model
+         copying compressai/utils/video/eval_model/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/video/eval_model
+         copying compressai/utils/video/eval_model/__main__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/video/eval_model
+         creating build/lib.linux-x86_64-cpython-310/compressai/utils/video/plot
+         copying compressai/utils/video/plot/__init__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/video/plot
+         copying compressai/utils/video/plot/__main__.py -> build/lib.linux-x86_64-cpython-310/compressai/utils/video/plot
+         running build_ext
+         c++ -pthread -Wno-unused-result -Wsign-compare -Wunreachable-code -DNDEBUG -g -fwrapv -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC -fPIC -I/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/include -I/home/jovyan/.local/share/uv/python/cpython-3.10.22-linux-x86_64-gnu/include/python3.10 -c flagcheck.cpp -o flagcheck.o -std=c++17
+         c++ -pthread -Wno-unused-result -Wsign-compare -Wunreachable-code -DNDEBUG -g -fwrapv -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC -fPIC -I/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/include -I/home/jovyan/.local/share/uv/python/cpython-3.10.22-linux-x86_64-gnu/include/python3.10 -c flagcheck.cpp -o flagcheck.o -std=c++14
+         c++ -pthread -Wno-unused-result -Wsign-compare -Wunreachable-code -DNDEBUG -g -fwrapv -O3 -Wall -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC -fPIC -I/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/include -I/home/jovyan/.local/share/uv/python/cpython-3.10.22-linux-x86_64-gnu/include/python3.10 -c flagcheck.cpp -o flagcheck.o -std=c++11
+
+         [stderr]
+         fatal: invalid gitfile format: /home/jovyan/.cache/uv/sdists-v10/.git
+         /home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/dist.py:765: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+         !!
+
+                 ********************************************************************************
+                 Please consider removing the following classifiers in favor of a SPDX license expression:
+
+                 License :: OSI Approved :: BSD License
+
+                 See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+                 ********************************************************************************
+
+         !!
+           self._finalize_license_expression()
+         Traceback (most recent call last):
+           File "<string>", line 11, in <module>
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/build_meta.py", line 438, in build_wheel
+             return _build(['bdist_wheel'])
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/build_meta.py", line 429, in _build
+             return self._build_with_temp_dir(
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/build_meta.py", line 410, in _build_with_temp_dir
+             self.run_setup()
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/build_meta.py", line 317, in run_setup
+             exec(code, locals())  # noqa: S102 # exec is intentional here
+           File "<string>", line 122, in <module>
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/__init__.py", line 117, in setup
+             return distutils.core.setup(**attrs)  # type: ignore[return-value]
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/_distutils/core.py", line 168, in setup
+             return run_commands(dist)
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/_distutils/core.py", line 184, in run_commands
+             dist.run_commands()
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/_distutils/dist.py", line 1028, in run_commands
+             self.run_command(cmd)
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/dist.py", line 1106, in run_command
+             super().run_command(command)
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/_distutils/dist.py", line 1047, in run_command
+             cmd_obj.run()
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/command/bdist_wheel.py", line 454, in run
+             self.run_command("build")
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/_distutils/cmd.py", line 342, in run_command
+             self.distribution.run_command(command)
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/dist.py", line 1106, in run_command
+             super().run_command(command)
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/_distutils/dist.py", line 1047, in run_command
+             cmd_obj.run()
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/_distutils/command/build.py", line 137, in run
+             self.run_command(cmd_name)
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/_distutils/cmd.py", line 342, in run_command
+             self.distribution.run_command(command)
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/dist.py", line 1106, in run_command
+             super().run_command(command)
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/_distutils/dist.py", line 1047, in run_command
+             cmd_obj.run()
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/command/build_ext.py", line 108, in run
+             _build_ext.run(self)
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/setuptools/_distutils/command/build_ext.py", line 382, in run
+             self.build_extensions()
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/pybind11/setup_helpers.py", line 280, in build_extensions
+             ext.cxx_std = auto_cpp_level(self.compiler)
+           File "/home/jovyan/.cache/uv/builds-v0/.tmp9gzLnn/lib/python3.10/site-packages/pybind11/setup_helpers.py", line 263, in auto_cpp_level
+             raise RuntimeError(msg)
+         RuntimeError: Unsupported compiler -- at least C++11 support is needed!
+
+hint: Build failures usually indicate a problem with the package or the build environment

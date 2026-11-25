@@ -1,0 +1,8 @@
+{
+  "data": "/home/jovyan/clic2027-artifacts/data/div2k/pilot224",
+  "upstream": "/home/jovyan/clic2027-image/refs/repos/MLIC",
+  "weights": "/home/jovyan/clic2027-artifacts/mlicpp/weights",
+  "synthesis": "/home/jovyan/clic2027-artifacts/mlicpp/full-synthesis-20261105/div2k-q2-full-synthesis-conditional-gan/reconstruction/last.pt",
+  "gpu_index": 1,
+  "eval_memory_mib": 8192
+}

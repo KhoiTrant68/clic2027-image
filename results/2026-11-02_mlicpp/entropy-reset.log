@@ -1,0 +1,61 @@
+VRAM guard {'total_mib': 24576, 'initial_used_mib': 0, 'allocator_cap_mib': 10240, 'device_limit_mib': 12288.0, 'physical_gpu': '1', 'shared_small': False, 'process_limit_mib': None}
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3483.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+/home/jovyan/clic2027-envs/mlicpp/lib/python3.10/site-packages/torch/nn/modules/conv.py:459: UserWarning: Applied workaround for CuDNN issue, install nvrtc.so (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:80.)
+  return F.conv2d(input, weight, bias, self.stride,
+{"warmup": "02809272b4ca9b08af45771501b741296187c7e26907efb44abbbfcb6cd804f7", "finite": true}
+{"warmup": "0369d229ba4c9965d5caeb38c359a027a810968eee930b81520b604e76b4df14", "finite": true}
+{"warmup": "07b9f93f170a0381836bdf301280a5b80b2c4be6e66f793a3c335dc200fb4e5b", "finite": true}
+{"warmup": "0d154749c7771f58e89ad343653ec4e20d6f037da829f47f5598e5d0a4ab61f0", "finite": true}
+{"warmup": "1b4ad095795ac552b38a21d51be7bfaee8e7d0a70619d84767814321df4ed062", "finite": true}
+{"warmup": "1cba10ad9bb4ced57e42f7656c5f2a58d32dc6bad084957d2f8d1c78e0fcd224", "finite": true}
+{"warmup": "2397c73f8feeb8f630fe055da5551c671794afae80528e8612dc62fc0cf61294", "finite": true}
+{"warmup": "2684452db505ddbbb53f42a3f3bcfe86fdd0d6d8d98c029db4b4c6fc1f55b750", "finite": true}
+{"warmup": "2a760bf1ccea6998be3890dcc2371b23f35fe3006562884b45bc534a621d5c12", "finite": true}
+{"warmup": "4ebc0e6c463bcf8ada38673c268aae56d44864347fd74b81a9fb5659bf96a010", "finite": true}
+{"warmup": "50d13125b665e0c4c1673264807bfc3cc7a217819329696843fea4c69aff8b91", "finite": true}
+{"warmup": "50fe4c3d47d864858e1aaa60fecef5c453b4e18d2b368718eeb5c1e249e0c902", "finite": true}
+{"warmup": "581048154e3c4b579c79155742dcf643c18b9bb47782aca7f0768eff185bc32e", "finite": true}
+{"warmup": "608cb09e6ffc66d4bc838d4088bf4c0ab889d7e83d4f5d78805cbc4497e432a1", "finite": true}
+{"warmup": "79b1bb29124f590c2e99e6c71c18affe25115d594a821cadc58bf24bf94dae8d", "finite": true}
+{"phase": "encode", "function": "compress_anchor", "index_sha256": "9ca5a58f0311a0e0ba5c611313967dd81d1397546b014e970d20ce50c81e6a76", "index_count": 262144, "finite": true, "max_abs": 9.10603141784668}
+{"phase": "encode", "function": "compress_nonanchor", "index_sha256": "af4ea0490c1d4fe8573d21a34d0318997b7df5284edd23606929514171054453", "index_count": 262144, "finite": true, "max_abs": 7.888117790222168}
+{"phase": "encode", "function": "compress_anchor", "index_sha256": "9a9564289dbedfb5defab5f90f0e8b7eef9fe99ad104f877bbcd14e3d307ded3", "index_count": 262144, "finite": true, "max_abs": 6.717203140258789}
+{"phase": "encode", "function": "compress_nonanchor", "index_sha256": "afca6a3070f613c0c1bce58e914dae770d296496a50623b5266bfe66c09b4cee", "index_count": 262144, "finite": true, "max_abs": 4.091798782348633}
+{"phase": "encode", "function": "compress_anchor", "index_sha256": "f24f20179b34ce263a5512485ddf2b25a9c6189123942d221726cb70036282ee", "index_count": 262144, "finite": true, "max_abs": 6.896009922027588}
+{"phase": "encode", "function": "compress_nonanchor", "index_sha256": "441ab6da954b08227d8ebc88f91a2bbada49f54b2173278492edf1db42b7c022", "index_count": 262144, "finite": true, "max_abs": 7.928393840789795}
+{"phase": "encode", "function": "compress_anchor", "index_sha256": "d1baf63d097aa4a4b09b50541809dc316f6352f45e14f97f519a76b2e514e0d6", "index_count": 262144, "finite": true, "max_abs": 1.0809805393218994}
+{"phase": "encode", "function": "compress_nonanchor", "index_sha256": "8c3a48d861e3d58dada4b9d6c3918fba3fc11ca51b13200603dec1c46876de99", "index_count": 262144, "finite": true, "max_abs": 1.6987156867980957}
+{"phase": "encode", "function": "compress_anchor", "index_sha256": "9690ce377815772771e1010756882e4623c5d5ce1a302e28e3260d6cf0d6c9df", "index_count": 262144, "finite": true, "max_abs": 5.047979354858398}
+{"phase": "encode", "function": "compress_nonanchor", "index_sha256": "cb446483105062868f34591d34398000d8edf8e1bd895034fae82ebbc42e287a", "index_count": 262144, "finite": true, "max_abs": 6.267621040344238}
+{"phase": "encode", "function": "compress_anchor", "index_sha256": "2c71284a68400599d1c9479a52c6f0a0530f93ef5d3294e117f5675c7fc40e44", "index_count": 262144, "finite": true, "max_abs": 1.6168482303619385}
+{"phase": "encode", "function": "compress_nonanchor", "index_sha256": "d42267c733277fba6e0bd72881e0573d29757106e57a80bf3e03981ff57a5eac", "index_count": 262144, "finite": true, "max_abs": 1.5192530155181885}
+{"phase": "encode", "function": "compress_anchor", "index_sha256": "cea3c15f4b6637da24b522470a14ed0b66dec13e0bc4da5e119c88ae98c96a6d", "index_count": 262144, "finite": true, "max_abs": 23.891191482543945}
+{"phase": "encode", "function": "compress_nonanchor", "index_sha256": "036d9a5257ca0d78f659a2c0cec9dbfdae9c309ad29b6de492c133c35028cf1f", "index_count": 262144, "finite": true, "max_abs": 24.454870223999023}
+{"phase": "encode", "function": "compress_anchor", "index_sha256": "7500194b3b828c313dae89923b312ecdd770625f2ac5fbad2c023f4913fda936", "index_count": 262144, "finite": true, "max_abs": 6.855534076690674}
+{"phase": "encode", "function": "compress_nonanchor", "index_sha256": "f27ff9db172d2e539e32266f2462c78f526bd081a481919e9d9b500e3c34ec47", "index_count": 262144, "finite": true, "max_abs": 6.796978950500488}
+{"phase": "encode", "function": "compress_anchor", "index_sha256": "f23bffb60b4904d1ee9186502c3f632be191132333f053c96b8e7dafb1092392", "index_count": 262144, "finite": true, "max_abs": 2.4893908500671387}
+{"phase": "encode", "function": "compress_nonanchor", "index_sha256": "5d7fa17ba5b4c6d14985d94078af6ce6ad1a9c7b5ffb819cffaf4cd6ba109819", "index_count": 262144, "finite": true, "max_abs": 2.557330369949341}
+{"phase": "encode", "function": "compress_anchor", "index_sha256": "18d452e052f35bcc0e122034d368c42cd05e81a225736bdba651917c702f5532", "index_count": 262144, "finite": true, "max_abs": 3.7279441356658936}
+{"phase": "encode", "function": "compress_nonanchor", "index_sha256": "15511cccc71962e0bc0ba1705766f023a7e73c155ab2cad20824803a321a612f", "index_count": 262144, "finite": true, "max_abs": 3.675727605819702}
+{"phase": "decode", "function": "decompress_anchor", "index_sha256": "9ca5a58f0311a0e0ba5c611313967dd81d1397546b014e970d20ce50c81e6a76", "index_count": 262144, "finite": true, "max_abs": 9.10603141784668}
+{"phase": "decode", "function": "decompress_nonanchor", "index_sha256": "b848ad5bfa1feef9ce1d748adc1ad1cc4c846f7af422cff03295e2aea715095d", "index_count": 262144, "finite": true, "max_abs": 1005517824.0}
+{"phase": "decode", "function": "decompress_anchor", "index_sha256": "247cfee3cc20513594a74592d1d97615bbc140b6a85a812c43b9c2ba760aa4c4", "index_count": 262144, "finite": true, "max_abs": 1029876224.0}
+{"phase": "decode", "function": "decompress_nonanchor", "index_sha256": "be4d0aac52c3179931212bebd3433b19434cca7a48c3247843bd66013bf01c21", "index_count": 262144, "finite": true, "max_abs": 939026752.0}
+{"phase": "decode", "function": "decompress_anchor", "index_sha256": "e91a8ac0f0a25b98dd16c4ff4bc5dff826b3160c540a095d0de3ed3e77fb375e", "index_count": 262144, "finite": true, "max_abs": 7343524352.0}
+{"phase": "decode", "function": "decompress_nonanchor", "index_sha256": "dd5e0dc256554993c6b8eae2353bcb4c0f10ebf35a821e22d27dc67c1db53bd5", "index_count": 262144, "finite": true, "max_abs": 2907381760.0}
+{"phase": "decode", "function": "decompress_anchor", "index_sha256": "22e597ef1f07572fa902f5e377cbf0e386d9cca4a69704f1c60af6eba593c2b9", "index_count": 262144, "finite": true, "max_abs": 7738824704.0}
+{"phase": "decode", "function": "decompress_nonanchor", "index_sha256": "2dbe5c2ca36e459bb5a8bf7f226dd370b4550a4c11a3dc6def95aa94500184a1", "index_count": 262144, "finite": true, "max_abs": 12653433856.0}
+{"phase": "decode", "function": "decompress_anchor", "index_sha256": "108fc96c5fc6e69f12ce53d96e577d8377d7c9ae06a2b12401658af25d547f1d", "index_count": 262144, "finite": true, "max_abs": 34735349760.0}
+{"phase": "decode", "function": "decompress_nonanchor", "index_sha256": "bddeecb6d14f45a6c9b5e029d24d2ecf394061f66cf9836576e2ecf291b31616", "index_count": 262144, "finite": true, "max_abs": 21734006784.0}
+{"phase": "decode", "function": "decompress_anchor", "index_sha256": "3a673c6428e1803724f5bade8e092b14ea0bedfeff7b6e2cc5b4a3cbedfb220f", "index_count": 262144, "finite": true, "max_abs": 1140233207808.0}
+{"phase": "decode", "function": "decompress_nonanchor", "index_sha256": "d57d79bd8b582133df085fe4482fc8096f99f33b050358bca030bf18bc944479", "index_count": 262144, "finite": true, "max_abs": 9301756215296.0}
+{"phase": "decode", "function": "decompress_anchor", "index_sha256": "bbfa25823bc87a3e1fd0f6cb17b66b15d9b05982f340a2e4bffc7db15ecda3b3", "index_count": 262144, "finite": true, "max_abs": 270606226423808.0}
+{"phase": "decode", "function": "decompress_nonanchor", "index_sha256": "539963a46085117791141c4d3136eda87cdbf6a18797acadd07df34956c521fc", "index_count": 262144, "finite": true, "max_abs": 2330740238843904.0}
+{"phase": "decode", "function": "decompress_anchor", "index_sha256": "64f72e23217f03ea36409527cc45fa26e321d82caa2cae696d99bd35b498a967", "index_count": 262144, "finite": true, "max_abs": 2.1828265043820544e+16}
+{"phase": "decode", "function": "decompress_nonanchor", "index_sha256": "4173b7a514410ba0c09b79577baf1b1fd180e09536ab0abf643af955cf5cb3be", "index_count": 262144, "finite": true, "max_abs": 2.23665253777408e+16}
+{"phase": "decode", "function": "decompress_anchor", "index_sha256": "860fdf735ce0f4f0107fd43a1c46b44662e77e954a547ceae024e73ab77a1977", "index_count": 262144, "finite": true, "max_abs": 1.2690659415058022e+17}
+{"phase": "decode", "function": "decompress_nonanchor", "index_sha256": "cbc70101c3df746491aee111dedd9dcb64357d4568fb51d0de37093ae87e05f5", "index_count": 262144, "finite": true, "max_abs": 8.800843256037376e+16}
+{"phase": "decode", "function": "decompress_anchor", "index_sha256": "af2e1f20de95272b459f9e635e7ee962d7da2cf556c4fb5cc9231903316c0543", "index_count": 262144, "finite": true, "max_abs": 7.254083627028316e+17}
+{"phase": "decode", "function": "decompress_nonanchor", "index_sha256": "09fa720ca52e4c141277553d1157cd2a901d437acfa0d4fa801a0a8d27265554", "index_count": 262144, "finite": true, "max_abs": 3.050334701886636e+18}
+{"entropy_no_cudnn": false, "reset_before_encode": true, "stream_sha256": "ac51602218a5b489dadcf1f0d6ff6a5f9f358fce603236526e620a752fcf4eb2", "first_index_mismatch": 1, "index_mismatches": 19, "decoded_finite": false, "decoded_shape": [1, 3, 2048, 2048]}
