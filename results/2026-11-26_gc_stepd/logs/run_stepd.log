@@ -1,0 +1,30 @@
+D0.json {} {'lambdas': [16, 8, 4, 2, 1, 0.5, 0.25, 0.12]}
+D1.json {'e1': True, 'e2': True} {'lambdas': [16, 8, 4, 2, 1, 0.5, 0.25, 0.12]}
+D2.json {'e1': True, 'e2': True, 'cca': 0.3} {'lambdas': [16, 8, 4, 2, 1, 0.5, 0.25, 0.12]}
+D3.json {'e1': True, 'e2': True, 'cca': 0.3, 'slices': [32, 32, 32, 32, 32, 32, 32, 32, 32, 32]} {'lambdas': [16, 8, 4, 2, 1, 0.5, 0.25, 0.12]}
+D4.json {'e1': True, 'e2': True, 'cca': 0.3, 'slices': [32, 32, 32, 32, 32, 32, 32, 32, 32, 32], 'split': 'q'} {'lambdas': [16, 8, 4, 2, 1, 0.5, 0.25, 0.12]}
+D5.json {'e1': True, 'e2': True, 'cca': 0.3, 'slices': [32, 32, 32, 32, 32, 32, 32, 32, 32, 32], 'split': 'q', 'gs_version': 2} {'lambdas': [16, 8, 4, 2, 1, 0.5, 0.25, 0.12]}
+[stepd] D0 resumes from lab09 checkpoint
+[stepd] D1 resumes from lab09 checkpoint
+index, name, memory.total [MiB]
+2, NVIDIA A30, 24576 MiB
+torch 2.6.0+cu124 NVIDIA A30
+[stepd] D0 train Tue Nov 24 17:01:41 UTC 2026
+[stepd] D0 eval Tue Nov 24 20:21:48 UTC 2026
+[stepd] D0 done Tue Nov 24 20:30:48 UTC 2026
+[stepd] D1 train Tue Nov 24 20:30:48 UTC 2026
+[stepd] D1 eval Wed Nov 25 00:02:41 UTC 2026
+[stepd] D1 done Wed Nov 25 00:11:24 UTC 2026
+[stepd] D2 train Wed Nov 25 00:11:25 UTC 2026
+[stepd] D2 eval Wed Nov 25 05:07:21 UTC 2026
+[stepd] D2 done Wed Nov 25 05:16:02 UTC 2026
+[stepd] D3 train Wed Nov 25 05:16:03 UTC 2026
+[stepd] D3 eval Wed Nov 25 12:19:57 UTC 2026
+[stepd] D3 done Wed Nov 25 12:29:28 UTC 2026
+[stepd] D4 train Wed Nov 25 12:29:28 UTC 2026
+[stepd] D4 eval Wed Nov 25 21:44:18 UTC 2026
+[stepd] D4 done Wed Nov 25 21:54:04 UTC 2026
+[stepd] D5 train Wed Nov 25 21:54:05 UTC 2026
+[stepd] D5 eval Thu Nov 26 08:34:05 UTC 2026
+[stepd] D5 done Thu Nov 26 08:43:26 UTC 2026
+STEPD_DONE

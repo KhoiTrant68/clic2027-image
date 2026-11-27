@@ -1,0 +1,12 @@
+/home/jovyan/stepd/stepd_a30/repo/experiments/gc_v2/stepd_eval.py:68: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+  xt = torch.from_numpy(x).permute(2, 0, 1)[None].float().cuda() / 255
+/home/jovyan/stepd/stepd_a30/repo/src/clic27/entropy/models.py:120: UserWarning: torch.searchsorted(): input value tensor is non-contiguous, this will lower the performance due to extra data copy when converting non-contiguous tensor to contiguous, please use contiguous input value tensor if possible. This message will only appear once per program. (Triggered internally at /pytorch/aten/src/ATen/native/BucketizationUtils.h:32.)
+  idx = torch.bucketize(a_s, self.thr.to(a_s.device).to(torch.float64), right=True)
+level 0: 0.0338 bpp
+level 1: 0.0535 bpp
+level 2: 0.0811 bpp
+level 3: 0.1173 bpp
+level 4: 0.1604 bpp
+level 5: 0.2103 bpp
+level 6: 0.2671 bpp
+level 7: 0.3344 bpp
