@@ -1,0 +1,46 @@
+{
+ "ckpt": "work/D0/rd/model.pt",
+ "stage": "rd",
+ "step": 100000,
+ "model": {
+  "N": 192,
+  "M": 320,
+  "Z": 192,
+  "slices": [
+   16,
+   16,
+   32,
+   64,
+   192
+  ],
+  "hyper_hidden": 192,
+  "ctx_hidden": 160,
+  "gs_width": 192,
+  "gs_blocks": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "ga_blocks": 2,
+  "n_levels": 8,
+  "qmap_block": 128,
+  "qmap_range": 4,
+  "beta_levels": 16,
+  "e1": false,
+  "e2": false,
+  "split": null,
+  "cca": 0.0,
+  "gs_version": 1,
+  "gs2_blocks": [
+   6,
+   4,
+   2,
+   2
+  ],
+  "gs2_attn": 2,
+  "gs2_window": 8,
+  "gs2_up": "shuffle"
+ },
+ "beta": 0
+}
